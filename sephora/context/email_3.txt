@@ -1,0 +1,87 @@
+Hi Colin,
+Thanks for the detailed breakdown; this is very helpful!
+After discussing internally with the team, we’d like to move forward with Track B (ETL/DataStage Demo) for the demonstration. Sergey has already shared a folder containing the relevant artifacts (DataStage XML, stored procedures, views, and the file ETL Migration Use Cases_description.docx), which should give your team the context needed for the workflow.
+Regarding the output format clarification, the expectation is that the generated output should include both components:
+•	Spark SQL transformations where the core transformation logic is implemented
+•	YAML configuration and deployment artifacts that integrate with the existing AggregationApplication framework
+In our current framework, the business logic sits within the Spark SQL layer, while the pipeline configuration and deployment setup are managed through YAML files, so both pieces are required for the migrated pipeline to be executable.
+Sergey has included examples of this structure in the shared folder Target, including the target project structure and deployment artifacts, which should help illustrate the expected output format.
+For the remaining prerequisite items you mentioned, PFA the Databricks source table schemas for the relevant tables (e.g., edwlib_whintr, retfl030_skuloc , smt_location and smt_product).
+Please let us know if anything else would help your team prepare the demo.
+Thanks again, and we’re looking forward to seeing the workflow in action.
+Best regards,
+Malika.
+From: Colin Moore <cmoore@bayone.com>
+Date: Monday, March 9, 2026 at 6:55 PM
+To: Seth, Malika <Malika.Seth@sephora.com>, Chakrabarty, Gariashi <gariashi.chakrabarty@sephora.com>, Ho, Andrew <andrew.ho@sephora.com>
+Cc: Shtypuliak, Sergey - Consultant <Sergey.Shtypuliak@sephora.com>, Zahra Syed <zsyed@bayone.com>, Neha Malhotra <nmalhotra@bayone.com>, Rahul Bobbili <rbobbili@bayone.com>, Burhan, Maher - Consultant <Maher.Burhan@sephora.com>, Saurav Kumar Mishra <smishra@bayonesolutions.com>
+Subject: [EXTERNAL] RE: EDW Modernization Technical Discussion
+Hi Malika, Andrew, Gariashi,
+Thank you for sharing this!
+
+I want to make sure we're on the same page before we start building anything because it looks like a few things have shifted from the call last week.
+ 
+The demo scope we landed on during the call was Cognos lift-and-shift with agent-based orchestration and MCP integration. DataStage came up towards the end as an interesting area but wasn't the primary focus. It sounds like your team has been thinking more about this since then and is now leaning towards ETL migration/ DataStage as the lead use case.
+The good news is that both tracks are extensions of the same underlying architecture. For the demo, we'd build out one of the two tracks to demonstrate the capability, as covering both would extend into paid engagement territory. If you would decide to move forward after the demo, that scope would be yours to define. I've attached scoping documents for both tracks so you can see exactly what each involves.
+Track A, Cognos MCP Demo
+•	MCP connector for Cognos that extracts report metadata and SQL programmatically
+•	Agent-based conversion with orchestration from Cognos/SQL Server to Databricks-compatible output
+•	Remapping to your target schema
+One thing to flag on this track A is that we can build the MCP connector, but live demonstration for MCP requires access to your Cognos environment. Cognos is proprietary and there's no way for us to spin one up independently. Without that access, we'd demonstrate the full workflow using exported report XML. In production, the MCP connector would replace those manual exports. Full details are in the attached scoping doc.
+For track A, we'd need:
+•	Cognos report XML
+•	Target Databricks schema
+
+Track B, ETL/DataStage Demo
+•	This is the one that aligns with Malika’s email
+•	Parsing DataStage job XML and extracting transformation logic
+•	Interpreting SQL Server stored procedures and views
+•	Agent orchestration across parsing, interpretation, and generation steps
+•	Generating output compatible with your existing framework
+We already have the DataStage XML, stored procs, views, and examples of your target YAML and Scala framework. The one item we'd still need for track B is Databricks source table schemas for tables like edwlib_whintr, smt_location, and smt_product. We have the legacy SQL Server DDL but need to know what those source tables look like on your Databricks side to generate accurate output.
+
+Also, on the call, Sergey explained that your team already has the AggregationApplication framework in place and that developers prefer work with YAML configuration files rather than writing Scala directly. Your email referenced Spark SQL / Scala as the expected output. Could you confirm which direction your team is aligned on?
+Which track matters most? Both scoping docs are attached with the full breakdown of what we'd deliver, what we have, and what we'd still need. It looked like the ETL track B is the one of interest here but wanted to confirm as it was different than on the call.
+Looking forward to hearing back and getting this moving for you!
+
+
+All my best,
+
+Colin
+ 
+ 
+Colin Moore
+Director of AI | BAYONE Solutions
++1 925-804-1863
+cmoore@bayone.com
+bayone.com
+ 
+From: Seth, Malika <Malika.Seth@sephora.com>
+Sent: Friday, March 6, 2026 4:46 PM
+To: Zahra Syed <zsyed@bayone.com>; Neha Malhotra <nmalhotra@bayone.com>; Colin Moore <cmoore@bayone.com>; Rahul Bobbili <rbobbili@bayone.com>
+Cc: Shtypuliak, Sergey - Consultant <Sergey.Shtypuliak@sephora.com>; Burhan, Maher - Consultant <Maher.Burhan@sephora.com>; Chakrabarty, Gariashi <gariashi.chakrabarty@sephora.com>; Ho, Andrew <andrew.ho@sephora.com>
+Subject: Re: EDW Modernization Technical Discussion
+ 
+	Some people who received this message don't often get email from malika.seth@sephora.com. Learn why this is important
+
+Hello All,
+Thank you for meeting with us yesterday.
+We wanted to clarify the scope of what would be most valuable for us to see. While the initial expectation was to provide a Cognos report XML and demonstrate code translation to Databricks SQL, we should note that our team is already performing report logic extraction and SQL conversion using our internal enterprise AI tooling and LLM-assisted workflows.
+As such, code translation alone would not be the primary area we are looking to evaluate.
+Instead, we are particularly interested in understanding how your solution enables agent-driven orchestration and integration across tools in an end-to-end workflow. Specifically, it would be helpful if the demo could showcase capabilities such as:
+•	Demonstration of the MCP server or integration layer for Cognos that you previously mentioned
+•	Automated extraction of report metadata or XML from Cognos  
+•	Agent orchestration across multiple tools (e.g., Cognos, Databricks)
+•	End-to-end workflow automation, where the agent coordinates the extraction, interpretation, and downstream execution steps
+•	How the agent manages tool communication, task sequencing, and dependency handling across the migration process
+Additionally, we would also like to include an ETL migration use case (attached) to understand how the agent handles legacy data pipeline modernization. It would be helpful to see how the agent can:
+•	Parse DataStage job XML, SQL Server DDL, stored procedures, and views
+•	Extract transformation logic and business rules
+•	Map those patterns to Spark-based transformations
+•	Generate Databricks-compatible pipelines (Spark SQL / Scala) along with supporting deployment artifacts and documentation
+It may be easier if the demo is performed using your setup as the goal of this evaluation is to understand how the agent could coordinate multiple tools and automate the migration workflow, rather than focusing only on isolated code conversion.
+Please let us know if this aligns with your preparation plans.
+Thanks again, and we look forward to the demo!
+Regards,
+Malika.
+ 

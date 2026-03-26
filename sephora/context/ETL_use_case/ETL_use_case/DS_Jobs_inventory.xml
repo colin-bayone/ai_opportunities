@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DSExport>
+   <Header CharacterSet="CP1252" ExportingTool="IBM InfoSphere DataStage Export" ToolVersion="8" ServerName="VAEUVAQEDW02" ToolInstanceID="Sephora_EDW_QA" Date="2026-03-06" Time="11.30.35" ServerVersion="11.7"/>
+   <Job Identifier="lod_F_Inventory_Periodic_Daily_opt_poc" DateModified="2026-03-06" TimeModified="11.29.48">
+      <Record Identifier="ROOT" Type="JobDefn" Readonly="0">
+         <Property Name="Name">lod_F_Inventory_Periodic_Daily_opt_poc</Property>
+         <Property Name="NextID">130</Property>
+         <Property Name="Container">V0</Property>
+         <Property Name="FullDescription" PreFormatted="1">* VC LOGS *
+^1_2 01/11/13 11:15:58 Batch  16448_40606 INIT pd0sp-wag018 Sephora_EDW_PRD hmadatanapalli EDW_Full_Back_Up_2013_Jan_11
+^1_1 10/30/12 09:19:42 Batch  16375_33603 INIT pd0sp-wag018 Sephora_EDW_PRD rkhan Inv_Periodic_Opt
+^1_1 10/24/12 16:08:43 Batch  16369_58130 PROMOTE localhost Sephora_EDW_PRD hmadatanapalli op
+^1_1 10/24/12 16:05:31 Batch  16369_57935 INIT pd0sp-wag011 Sephora_EDW_DEV hmadatanapalli tf
+^1_1 06/02/10 09:33:24 Batch  15494_34462 INIT pd0sp-wag018 Sephora_EDW_PRD jbryant Sephora_EDW_PRD_20100602
+
+Change Log:
+
+    Version             Date                       Author                           Jira-Task                  Description
+--------------------  ---------------------    --------------------------------------      -----------------------------     ---------------------------------------------------------------------------------------------                     
+    2018.2        2018-02-05            Dmytro Ilkov                     ILLUPH-100893      hardcoded Dotcom locations were removed
+    2025.13      2025-06-25          Dmitry Myshkovets               RE-5005               add Split Logic for Purchase Order Values for Dual Inventory locations
+    2025.14      2025-06-30          Dmitry Myshkovets               RE-5050             Replace PURCHASE_ORDER Ship_To_Location_SK with Distribution_Location_SK
+    2025.18      2025-08-28          Dmitry Myshkovets               RE-5383             Add Ending_Invetory_Fin columns For finance reporting
+
+
+
+
+
+
+</Property>
+         <Property Name="JobVersion">56.1.1</Property>
+         <Property Name="ControlAfterSubr">0</Property>
+         <Collection Name="Parameters" Type="Parameters">
+            <SubRecord>
+               <Property Name="Name">$EDW_TARGET</Property>
+               <Property Name="Prompt">EDW Target</Property>
+               <Property Name="Default">$PROJDEF</Property>
+               <Property Name="ParamType">0</Property>
+               <Property Name="ParamLength">0</Property>
+               <Property Name="ParamScale">0</Property>
+            </SubRecord>
+            <SubRecord>
+               <Property Name="Name">$EDW_USERNAME</Property>
+               <Property Name="Prompt">EDW SMART Username</Property>
+               <Property Name="Default">$PROJDEF</Property>
+               <Property Name="ParamType">0</Property>
+               <Property Name="ParamLength">0</Property>
+               <Property Name="ParamScale">0</Property>
+            </SubRecord>
+            <SubRecord>
+               <Property Name="Name">$EDW_PASSWORD</Property>
+               <Property Name="Prompt">EDW SMART Password</Property>
+               <Property Name="Default">{iisenc}eHG47YUwCsilbsYLdMUwUw==</Property>
+               <Property Name="ParamType">1</Property>
+               <Property Name="ParamLength">0</Property>
+               <Property Name="ParamScale">0</Property>
+            </SubRecord>
+            <SubRecord>
+               <Property Name="Name">pDate</Property>
+               <Property Name="Prompt">process date</Property>
+               <Property Name="Default">2024-10-28</Property>
+               <Property Name="ParamType">0</Property>
+               <Property Name="ParamLength">0</Property>
+               <Property Name="ParamScale">0</Property>
+            </SubRecord>
+         </Collection>
+         <Collection Name="MetaBag" Type="MetaProperty">
+            <SubRecord>
+               <Property Name="Owner">APT</Property>
+               <Property Name="Name">AdvancedRuntimeOptions</Property>
+               <Property Name="Value">#DSProjectARTOptions#</Property>
+            </SubRecord>
+         </Collection>
+         <Property Name="NULLIndicatorPosition">0</Property>
+         <Property Name="IsTemplate">0</Property>
+         <Property Name="NLSLocale">,,,,</Property>
+         <Property Name="JobType">0</Property>
+         <Property Name="Category">\Jobs\EDW\Sephora_EDW\Fact_Tables</Property>
+         <Property Name="CenturyBreakYear">30</Property>
+         <Property Name="NextAliasID">2</Property>
+         <Property Name="ParameterFileDDName">DD00001</Property>
+         <Property Name="ReservedWordCheck">1</Property>
+         <Property Name="TransactionSize">0</Property>
+         <Property Name="ValidationStatus">0</Property>
+         <Property Name="Uploadable">0</Property>
+         <Property Name="PgmCustomizationFlag">0</Property>
+         <Property Name="JobReportFlag">0</Property>
+         <Property Name="AllowMultipleInvocations">0</Property>
+         <Property Name="Act2ActOverideDefaults">0</Property>
+         <Property Name="Act2ActEnableRowBuffer">0</Property>
+         <Property Name="Act2ActUseIPC">0</Property>
+         <Property Name="Act2ActBufferSize">0</Property>
+         <Property Name="Act2ActIPCTimeout">0</Property>
+         <Property Name="ExpressionSemanticCheckFlag">0</Property>
+         <Property Name="TraceOption">0</Property>
+         <Property Name="EnableCacheSharing">0</Property>
+         <Property Name="RuntimeColumnPropagation">0</Property>
+         <Property Name="RelStagesInJobStatus">-1</Property>
+         <Property Name="WebServiceEnabled">0</Property>
+         <Property Name="MFProcessMetaData">0</Property>
+         <Property Name="MFProcessMetaDataXMLFileExchangeMethod">0</Property>
+         <Property Name="IMSProgType">0</Property>
+         <Property Name="CopyLibPrefix">ARDT</Property>
+         <Property Name="RecordPerformanceResults">0</Property>
+      </Record>
+      <Record Identifier="V0" Type="ContainerView" Readonly="0">
+         <Property Name="Name">Job</Property>
+         <Property Name="NextID">1</Property>
+         <Property Name="IsTopLevel">0</Property>
+         <Property Name="StageList">V0S1|V1S0|V129A0</Property>
+         <Property Name="StageXPos">384|144|1</Property>
+         <Property Name="StageYPos">264|264|1</Property>
+         <Property Name="StageTypes">CODBCStage|CTransformerStage|ID_PALETTEANNOTATION</Property>
+         <Property Name="NextStageID">7</Property>
+         <Property Name="SnapToGrid">1</Property>
+         <Property Name="GridLines">0</Property>
+         <Property Name="ZoomValue">100</Property>
+         <Property Name="StageXSize">48|48|190</Property>
+         <Property Name="StageYSize">48|48|202</Property>
+         <Property Name="ContainerViewSizing">0031 0013 0711 0604 0000 0001 0000 0048</Property>
+         <Property Name="StageNames">IP_daily|X|\(20)</Property>
+         <Property Name="StageTypeIDs">CODBCStage|CTransformerStage|\(20)</Property>
+         <Property Name="LinkNames">\(20)|trigger|\(20)</Property>
+         <Property Name="LinkHasMetaDatas">\(20)|True|\(20)</Property>
+         <Property Name="LinkTypes">\(20)|1|\(20)</Property>
+         <Property Name="LinkNamePositionXs">\(20)|272|\(20)</Property>
+         <Property Name="LinkNamePositionYs">\(20)|275|\(20)</Property>
+         <Property Name="TargetStageIDs">\(20)|V0S1|\(20)</Property>
+         <Property Name="SourceStageEffectiveExecutionModes">\(20)|0|\(20)</Property>
+         <Property Name="SourceStageRuntimeExecutionModes">\(20)|0|\(20)</Property>
+         <Property Name="TargetStageEffectiveExecutionModes">\(20)|0|\(20)</Property>
+         <Property Name="TargetStageRuntimeExecutionModes">\(20)|0|\(20)</Property>
+         <Property Name="LinkIsSingleOperatorLookup">\(20)|False|\(20)</Property>
+         <Property Name="LinkIsSortSequential">\(20)|False|\(20)</Property>
+         <Property Name="LinkSortMode">\(20)|0|\(20)</Property>
+         <Property Name="LinkPartColMode">\(20)|0|\(20)</Property>
+         <Property Name="LinkSourcePinIDs">\(20)|V1S0P1|\(20)</Property>
+      </Record>
+      <Record Identifier="V0S1" Type="ODBCStage" Readonly="0">
+         <Property Name="Name">IP_daily</Property>
+         <Property Name="Description" PreFormatted="1">#$EDW_TARGET#
+#$EDW_USERNAME#
+#$EDW_PASSWORD#</Property>
+         <Property Name="NextID">3</Property>
+         <Property Name="InputPins">V0S1P2</Property>
+         <Property Name="DSN">#$EDW_TARGET#</Property>
+         <Property Name="UserName">#$EDW_USERNAME#</Property>
+         <Property Name="Password">{iisenc}yky9UxiHizbibf4qIT318g==</Property>
+         <Property Name="UvFlag">0</Property>
+         <Property Name="Isolation">0</Property>
+         <Property Name="TransactionSize">0</Property>
+         <Property Name="ArraySize">1</Property>
+         <Property Name="QuoteChar">000</Property>
+         <Property Name="AllowColumnMapping">0</Property>
+         <Property Name="SepString">.</Property>
+         <Property Name="StageType">CODBCStage</Property>
+      </Record>
+      <Record Identifier="V0S1P2" Type="ODBCInput" Readonly="0">
+         <Property Name="Name">trigger</Property>
+         <Property Name="Partner">V1S0|V1S0P1</Property>
+         <Property Name="Action">7</Property>
+         <Property Name="SqlInsert" PreFormatted="1">truncate table STG_INVENTORY_PERIODIC_DAILY
+
+insert into STG_INVENTORY_PERIODIC_DAILY(Date_SK, Location_SK, Product_SK, 
+Available_Sales_Units, Damaged_RTV_Units, Ending_Inventory_Cost, Ending_Inventory_Retail, Ending_Inventory_Units, In_Transit_Quantity, 
+Lost_Found_Units, Net_Vendor_Cost, On_Order_Units, On_Order_Cost,On_Order_Cost_Retail,
+Reserve_Units_Merchandise, Reserve_Units_Picking, Sell_Unit_Cost, Sell_Unit_Retail, Store_Order_Quantity, Transfer_Quantity, Create_Date, Ending_Inventory_Cost_Fin, Ending_Inventory_Retail_Fin, Ending_Inventory_Units_Fin)
+select 
+	D.Date_SK, L.Location_SK, P.Product_SK, 
+	(case when isnull(l_dc.Is_Inv,&apos;n/a&apos;)=&apos;Y&apos; and isnull(l_dc.Country,&apos;n/a&apos;)=&apos;US&apos; and isnull(Is_Sales,&apos;n/a&apos;)=&apos;N&apos; and isnull(l_dc.Is_DmgDC,&apos;n/a&apos;)=&apos;N&apos; Then s.SSOHU - (s.SSDMG + s.SSLOST + s.SSROHM + s.SSROHP) Else s.SSOHU - (s.SSDMG + s.SSLOST) end) as Available_Sales_Units, 
+	S.SSDMG Damaged_RTV_Units, 
+	S.SSECD Ending_Inventory_Cost, 
+	S.SSOHU * S.SSSUR Ending_Inventory_Retail, 
+	S.SSOHU Ending_Inventory_Units, 
+	ISNULL(w08.QTY,0) as In_Transit_Quantity, 
+	S.SSLOST Lost_Found_Units, 
+	isNull(s.SSOHU,0) * ( (1 - (isNull((VN.DSC1 + VN.DSC2 + VN.DSC3),0)/100)) * ISNull(VN.CUC,0)) AS Net_Vendor_Cost, 
+	PO.OOU AS On_Order_Units, 
+	PO.On_Order_Cost, 
+	PO.On_Order_Cost_Retail, 
+	S.SSROHM Reserve_Units_Merchandise, 
+	S.SSROHP Reserve_Units_Picking, 
+	VN.CUC AS Sell_Unit_Cost, 
+	S.SSSUR Sell_Unit_Retail, 
+	IsNull(WHCTRL.QOSU,0) AS Store_Order_Quantity, 
+	ISNULL(wXX.QTY,0) AS Transfer_Quantity, 
+	GETDATE() CREATE_DATE,
+	S.SSECD Ending_Inventory_Cost_Fin,
+   	S.SSOHU * S.SSSUR Ending_Inventory_Retail_Fin,
+   	S.SSOHU Ending_Inventory_Units_Fin
+from Sephora_EDW_replication.dbo.SKULOC s -- 6872564
+inner join Sephora_EDW.dbo.location l on l.Location_Number = s.SSSTRE
+inner join Sephora_EDW.dbo.product p on p.SKU_Number = s.SSSKU
+inner join Sephora_EDW.dbo.date d on d.Short_Date = &apos;#pDate#&apos; -- set it to variable 
+left outer join sephora_edw.dbo.location_dc l_dc on l.location_sk = l_dc.location_sk
+LEFT OUTER join (SELECT WZCO, WZSTRE, WZSKU, WZTYPE, SUM(isnull(WZSQTY,0)) QTY FROM Sephora_EDW_replication.dbo.WHINTR WHERE WZSTAT = &apos;2&apos; and WZTYPE = &apos;08&apos; GROUP BY WZCO, WZSTRE, WZSKU,WZTYPE) AS w08 on w08.WZCO= SSCO AND w08.WZSTRE = SSSTRE AND w08.WZSKU = SSSKU
+LEFT OUTER join (SELECT WZCO, WZSTRE, WZSKU, WZTYPE, SUM(isnull(WZSQTY,0)) QTY FROM Sephora_EDW_replication.dbo.WHINTR WHERE WZSTAT = &apos;2&apos; and WZTYPE &lt;&gt; &apos;08&apos; GROUP BY WZCO, WZSTRE, WZSKU,WZTYPE) AS wXX on wXX.WZCO= SSCO AND wXX.WZSTRE = SSSTRE AND wXX.WZSKU = SSSKU
+LEFT OUTER JOIN (SELECT WD.WDCO, WD.WDSTRE, WD.WDSKU, SUM(isnull(WD.WDQOSU,0)) QOSU FROM Sephora_EDW_replication.dbo.WHDET WD LEFT OUTER JOIN Sephora_EDW_replication.dbo.WHCTL WC ON WD.WDCO = WC.WCCO AND WD.WDSTRE = WC.WCSTRE AND WD.WDINV = WC.WCINV WHERE WC.WCSTAT &lt; 5 GROUP BY WD.WDCO, WD.WDSTRE, WD.WDSKU) WHCTRL on WHCTRL.WDCO= SSCO AND WHCTRL.WDSTRE = SSSTRE AND WHCTRL.WDSKU = SSSKU 
+LEFT OUTER JOIN (SELECT SL.SSCO, SL.SSSKU, SL.SSSTRE, SUM(isnull(SK.SRCUC,0)) CUC, SUM(isnull(VB.VBDSC1,0)) DSC1, SUM(isnull(VB.VBDSC2,0)) DSC2, SUM(isnull(VB.VBDSC3,0)) DSC3 FROM Sephora_EDW_replication.dbo.SKULOC SL
+		LEFT OUTER JOIN Sephora_EDW_replication.dbo.SKURT SK ON SL.SSCO = SK.SRCO AND SL.SSSKU = SK.SRSKU
+		LEFT OUTER JOIN Sephora_EDW_replication.dbo.VNBUYR VB ON SK.SRCO = VB.VBCO AND SK.SRBUY = VB.VBBUY AND SK.SRVN = VB.VBVN
+		GROUP BY SL.SSCO, SL.SSSKU, SL.SSSTRE) VN ON VN.SSCO = S.SSCO AND VN.SSSKU = S.SSSKU AND VN.SSSTRE = S.SSSTRE
+LEFT OUTER JOIN (SELECT Product_SK,Distribution_Location_SK,SUM(isnull(On_Order_Units,0)) OOU, SUM(isnull(On_Order_Cost,0)) as On_Order_Cost, SUM(isnull(On_Order_Cost_Retail,0)) AS On_Order_Cost_Retail 
+		 FROM SEPHORA_EDW.DBO.PURCHASE_ORDER WHERE Approval_Code = 3 
+		 and Distribution_Location_SK not in (select location_sk from Sephora_EDW..location_dc where is_dotcom = &apos;Y&apos; and is_retail = &apos;Y&apos; 
+						union all 
+						select Sales_Location_SK from Sephora_EDW..location_dc where is_dotcom = &apos;Y&apos; and is_retail = &apos;Y&apos; )
+		 GROUP BY Product_SK,Distribution_Location_SK) 
+		 AS PO ON PO.Product_SK = P.Product_SK AND PO.Distribution_Location_SK = L.Location_SK
+
+
+
+-- Updating Split Purchase Order Values for Dual-Inventory locations  --RE-5005
+Update STG
+Set
+	stg.On_Order_Units		=POX.On_Order_Units,
+	stg.On_Order_Cost		=POX.On_Order_Cost,
+	stg.On_Order_Cost_Retail	=POX.On_Order_Cost_Retail
+From Sephora_EDW.dbo.STG_INVENTORY_PERIODIC_DAILY stg
+join (Select distinct  
+		(case when  p_ex.PREXCHL=&apos;D&apos; then ldc.Sales_Location_SK else ldc.Location_sk end )as Location_sk,
+		po.product_SK,
+		SUM(isnull(On_Order_Units,0))		as On_Order_Units, 
+		SUM(isnull(On_Order_Cost,0))		as On_Order_Cost, 
+		SUM(isnull(On_Order_Cost_Retail,0)) as On_Order_Cost_Retail 
+		from Sephora_EDW.dbo.PURCHASE_ORDER PO
+		Join Sephora_EDW_Replication.dbo.porootex P_EX on po.Purchase_Order=p_ex.PREXPO
+		Join Sephora_EDW..LOCATION_dc LDC on po.Distribution_Location_SK= ldc.Location_sk
+		where  po.Distribution_Location_SK in (select location_sk from Sephora_EDW..location_dc where is_dotcom = &apos;Y&apos; and is_retail = &apos;Y&apos; 
+						union all 
+						select Sales_Location_SK from Sephora_EDW..location_dc where is_dotcom = &apos;Y&apos; and is_retail = &apos;Y&apos; )
+			and Approval_Code = 3
+		Group by po.product_SK, (case when  p_ex.PREXCHL=&apos;D&apos; then ldc.Sales_Location_SK else ldc.Location_sk end )
+	)AS POx ON POx.Product_SK = stg.Product_SK AND POx.Location_SK = stg.Location_SK
+
+
+
+
+--Update Begin Inv with Ending Inv from previous day
+DECLARE @intdate_sk int
+SELECT @intdate_sk=max(date_sk) FROM STG_INVENTORY_PERIODIC_DAILY
+
+
+UPDATE a
+SET a.Begin_Inventory_Cost=b.Ending_Inventory_Cost,
+      a.Begin_Inventory_Retail=b.Ending_Inventory_Retail,
+      a.Begin_Inventory_Units=b.Ending_Inventory_Units
+--select b.Date_SK,b.Location_SK,b.Product_SK,b.Ending_Inventory_Cost,b.Ending_Inventory_Retail,b.Ending_Inventory_Units
+FROM 
+      sephora_edw.dbo.STG_INVENTORY_PERIODIC_DAILY a,
+      sephora_edw.dbo.INVENTORY_PERIODIC_DAILY_GT_042015 b
+WHERE 
+      b.Date_SK =@intdate_sk -1
+and a.Date_SK = @intdate_sk 
+and a.Location_SK=b.Location_SK
+and a.Product_SK=b.Product_SK
+
+update s
+set s.SKU_Behavior_Code= r.SKU_Behavior_Code,
+s.DC_SKU_Behavior_Code=r.DC_SKU_Behavior_Code,
+s.E3_Source_Code= r.E3_Source_Code
+from STG_INVENTORY_PERIODIC_DAILY s
+inner join mini_raq2 r on r.Location_SK = s.Location_SK
+and  r.Product_SK = s.Product_SK
+
+update iv set 
+SKU_Behavior_Code = SLTATRCD
+from STG_INVENTORY_PERIODIC_DAILY iv
+ join location l on l.location_sk = iv.location_sk 
+ join product p on p.Product_SK = iv.Product_SK
+ join Sephora_EDW_Replication.dbo.skulocat s on s.SLTSKU = p.SKU_Number  and s.SLTSTRE = l.Location_number
+where SLTCO = 30 and SLTATRCD &lt;&gt; SKU_Behavior_Code 
+
+
+
+INSERT INTO INVENTORY_PERIODIC_DAILY_GT_042015 (Date_SK, Location_SK, Product_SK, Available_Sales_Units, Damaged_RTV_Units, Ending_Inventory_Cost, Ending_Inventory_Retail, Ending_Inventory_Units, In_Transit_Quantity, Lost_Found_Units, Net_Vendor_Cost, On_Order_Units, Reserve_Units_Merchandise, Reserve_Units_Picking, Sell_Unit_Retail, Store_Order_Quantity, Transfer_Quantity, Active_Store_Flag, Store_With_Inv_Flag, Store_With_Sales_Flag, Create_Date, On_Order_Cost, On_Order_Cost_Retail, Begin_Inventory_Cost, Begin_Inventory_Retail, Begin_Inventory_Units, Sell_Unit_Cost, In_Transit_Inventory_Cost, In_Transit_Inventory_Retail,SKU_Behavior_Code,DC_SKU_Behavior_Code,E3_Source_Code,Ending_Inventory_Cost_Fin, Ending_Inventory_Retail_Fin, Ending_Inventory_Units_Fin)
+SELECT  Date_SK, Location_SK, Product_SK, Available_Sales_Units, Damaged_RTV_Units, Ending_Inventory_Cost, Ending_Inventory_Retail, Ending_Inventory_Units, In_Transit_Quantity, Lost_Found_Units, Net_Vendor_Cost, On_Order_Units, Reserve_Units_Merchandise, Reserve_Units_Picking, Sell_Unit_Retail, Store_Order_Quantity, Transfer_Quantity, Active_Store_Flag, Store_With_Inv_Flag, Store_With_Sales_Flag, Create_Date, On_Order_Cost, On_Order_Cost_Retail, Begin_Inventory_Cost, Begin_Inventory_Retail, Begin_Inventory_Units, Sell_Unit_Cost, In_Transit_Inventory_Cost, In_Transit_Inventory_Retail,SKU_Behavior_Code,DC_SKU_Behavior_Code,E3_Source_Code,Ending_Inventory_Cost_Fin, Ending_Inventory_Retail_Fin, Ending_Inventory_Units_Fin
+FROM STG_INVENTORY_PERIODIC_DAILY  s
+where not exists
+(select 1
+from INVENTORY_PERIODIC_DAILY_GT_042015 i 
+where i.date_sk = @intdate_sk
+and i.Date_SK=s.date_sk
+and i.Location_SK=s.Location_SK
+and i.Product_SK=s.Product_SK)
+;
+exec usp_Update_Inv_Periodic;
+exec usp_Populate_Stock_Continuity;</Property>
+         <Property Name="Isolation">-1</Property>
+         <Property Name="TransactionSize">1</Property>
+         <Property Name="ArraySize">1</Property>
+         <Property Name="TXNBehaviour">40</Property>
+         <Property Name="EnableTxGroup">0</Property>
+      </Record>
+      <Record Identifier="V129A0" Type="Annotation" Readonly="0">
+         <Property Name="Name">V129A0</Property>
+         <Property Name="NextID">0</Property>
+         <Property Name="AnnotationType">0</Property>
+         <Property Name="AnnotationText" PreFormatted="1">Migration:
+2015-09-09 ODBC &quot;;;&quot; deleted on sql statment</Property>
+         <Property Name="TextFont">MS Shell Dlg\10\0\0\0\400\0</Property>
+         <Property Name="TextHorizontalJustification">0</Property>
+         <Property Name="TextVerticalJustification">0</Property>
+         <Property Name="TextColor">0</Property>
+         <Property Name="BackgroundColor">12713983</Property>
+         <Property Name="BackgroundTransparent">0</Property>
+         <Property Name="BorderVisible">1</Property>
+      </Record>
+      <Record Identifier="V1S0" Type="TransformerStage" Readonly="0">
+         <Property Name="Name">X</Property>
+         <Property Name="NextID">3</Property>
+         <Property Name="OutputPins">V1S0P1</Property>
+         <Property Name="ValidationStatus">0</Property>
+         <Property Name="StageType">CTransformerStage</Property>
+         <Property Name="BlockSize">0</Property>
+         <Collection Name="StageVars" Type="StageVar">
+            <SubRecord>
+               <Property Name="Name">svTrigger</Property>
+               <Property Name="Expression">1</Property>
+               <Property Name="SqlType">3</Property>
+               <Property Name="ParsedExpression">1</Property>
+               <Property Name="Precision">0</Property>
+               <Property Name="ColScale">0</Property>
+               <Property Name="ExtendedPrecision">0</Property>
+            </SubRecord>
+         </Collection>
+         <Property Name="StageVarsMinimised">0</Property>
+         <Property Name="LoopVarsMaximised">0</Property>
+         <Property Name="MaxLoopIterations">0</Property>
+      </Record>
+      <Record Identifier="V1S0P1" Type="TrxOutput" Readonly="0">
+         <Property Name="Name">trigger</Property>
+         <Property Name="Partner">V0S1|V0S1P2</Property>
+         <Property Name="Constraint">@OUTROWNUM = 1</Property>
+         <Property Name="Reject">0</Property>
+         <Property Name="ErrorPin">0</Property>
+         <Property Name="RowLimit">0</Property>
+         <Property Name="ParsedConstraint">@OUTROWNUM = 1</Property>
+         <Collection Name="Columns" Type="OutputColumn">
+            <SubRecord>
+               <Property Name="Name">DUMMY</Property>
+               <Property Name="SqlType">4</Property>
+               <Property Name="Precision">1</Property>
+               <Property Name="Scale">0</Property>
+               <Property Name="Nullable">0</Property>
+               <Property Name="KeyPosition">0</Property>
+               <Property Name="DisplaySize">0</Property>
+               <Property Name="Derivation">svTrigger</Property>
+               <Property Name="Group">0</Property>
+               <Property Name="ParsedDerivation">svTrigger</Property>
+               <Property Name="SortKey">0</Property>
+               <Property Name="SortType">0</Property>
+               <Property Name="AllowCRLF">0</Property>
+               <Property Name="LevelNo">0</Property>
+               <Property Name="Occurs">0</Property>
+               <Property Name="PadNulls">0</Property>
+               <Property Name="SignOption">0</Property>
+               <Property Name="SortingOrder">0</Property>
+               <Property Name="StageVars">svTrigger</Property>
+               <Property Name="ArrayHandling">0</Property>
+               <Property Name="SyncIndicator">0</Property>
+               <Property Name="PadChar"/>
+               <Property Name="ExtendedPrecision">0</Property>
+               <Property Name="TaggedSubrec">0</Property>
+               <Property Name="OccursVarying">0</Property>
+               <Property Name="PKeyIsCaseless">0</Property>
+               <Property Name="SCDPurpose">0</Property>
+            </SubRecord>
+         </Collection>
+         <Property Name="LeftTextPos">272</Property>
+         <Property Name="TopTextPos">275</Property>
+         <Property Name="LinkMinimised">0</Property>
+      </Record>
+   </Job>
+   <Job Identifier="lod_F_Inventory_Periodic_Weekly_opt" DateModified="2025-08-28" TimeModified="05.55.51">
+      <Record Identifier="ROOT" Type="JobDefn" Readonly="0">
+         <Property Name="Name">lod_F_Inventory_Periodic_Weekly_opt</Property>
+         <Property Name="NextID">132</Property>
+         <Property Name="Container">V0</Property>
+         <Property Name="FullDescription" PreFormatted="1">* VC LOGS *
+^1_2 01/11/13 11:15:58 Batch  16448_40606 INIT pd0sp-wag018 Sephora_EDW_PRD hmadatanapalli EDW_Full_Back_Up_2013_Jan_11
+^1_1 10/30/12 09:19:42 Batch  16375_33603 INIT pd0sp-wag018 Sephora_EDW_PRD rkhan Inv_Periodic_Opt
+^1_1 10/24/12 16:08:43 Batch  16369_58130 PROMOTE localhost Sephora_EDW_PRD hmadatanapalli op
+^1_1 10/24/12 16:05:31 Batch  16369_57935 INIT pd0sp-wag011 Sephora_EDW_DEV hmadatanapalli tf
+^1_1 06/02/10 09:33:24 Batch  15494_34462 INIT pd0sp-wag018 Sephora_EDW_PRD jbryant Sephora_EDW_PRD_20100602
+
+Change Log:
+
+    Version             Date                       Author                           Jira-Task                  Description
+--------------------  ---------------------    --------------------------------------      -----------------------------     ---------------------------------------------------------------------------------------------      
+ 2025.18      2025-08-28          Dmitry Myshkovets               RE-5383             Add Ending_Invetory_Fin columns For finance reporting
+
+
+
+
+
+
+
+
+
+</Property>
+         <Property Name="JobVersion">56.0.0</Property>
+         <Property Name="ControlAfterSubr">0</Property>
+         <Collection Name="Parameters" Type="Parameters">
+            <SubRecord>
+               <Property Name="Name">$EDW_TARGET</Property>
+               <Property Name="Prompt">EDW Target</Property>
+               <Property Name="Default">$PROJDEF</Property>
+               <Property Name="ParamType">0</Property>
+               <Property Name="ParamLength">0</Property>
+               <Property Name="ParamScale">0</Property>
+            </SubRecord>
+            <SubRecord>
+               <Property Name="Name">$EDW_USERNAME</Property>
+               <Property Name="Prompt">EDW SMART Username</Property>
+               <Property Name="Default">$PROJDEF</Property>
+               <Property Name="ParamType">0</Property>
+               <Property Name="ParamLength">0</Property>
+               <Property Name="ParamScale">0</Property>
+            </SubRecord>
+            <SubRecord>
+               <Property Name="Name">$EDW_PASSWORD</Property>
+               <Property Name="Prompt">EDW SMART Password</Property>
+               <Property Name="Default">HDI@IJV8O9JN064IL:JD1K95</Property>
+               <Property Name="ParamType">1</Property>
+               <Property Name="ParamLength">0</Property>
+               <Property Name="ParamScale">0</Property>
+            </SubRecord>
+            <SubRecord>
+               <Property Name="Name">pDate</Property>
+               <Property Name="Prompt">process date</Property>
+               <Property Name="Default">2010-08-15</Property>
+               <Property Name="ParamType">0</Property>
+               <Property Name="ParamLength">0</Property>
+               <Property Name="ParamScale">0</Property>
+            </SubRecord>
+         </Collection>
+         <Collection Name="MetaBag" Type="MetaProperty">
+            <SubRecord>
+               <Property Name="Owner">APT</Property>
+               <Property Name="Name">AdvancedRuntimeOptions</Property>
+               <Property Name="Value">#DSProjectARTOptions#</Property>
+            </SubRecord>
+         </Collection>
+         <Property Name="NULLIndicatorPosition">0</Property>
+         <Property Name="IsTemplate">0</Property>
+         <Property Name="NLSLocale">,,,,</Property>
+         <Property Name="JobType">0</Property>
+         <Property Name="Category">\Jobs\EDW\Sephora_EDW\Fact_Tables</Property>
+         <Property Name="CenturyBreakYear">30</Property>
+         <Property Name="NextAliasID">2</Property>
+         <Property Name="ParameterFileDDName">DD00001</Property>
+         <Property Name="ReservedWordCheck">1</Property>
+         <Property Name="TransactionSize">0</Property>
+         <Property Name="ValidationStatus">0</Property>
+         <Property Name="Uploadable">0</Property>
+         <Property Name="PgmCustomizationFlag">0</Property>
+         <Property Name="JobReportFlag">0</Property>
+         <Property Name="AllowMultipleInvocations">0</Property>
+         <Property Name="Act2ActOverideDefaults">0</Property>
+         <Property Name="Act2ActEnableRowBuffer">0</Property>
+         <Property Name="Act2ActUseIPC">0</Property>
+         <Property Name="Act2ActBufferSize">0</Property>
+         <Property Name="Act2ActIPCTimeout">0</Property>
+         <Property Name="ExpressionSemanticCheckFlag">0</Property>
+         <Property Name="TraceOption">0</Property>
+         <Property Name="EnableCacheSharing">0</Property>
+         <Property Name="RuntimeColumnPropagation">0</Property>
+         <Property Name="RelStagesInJobStatus">-1</Property>
+         <Property Name="WebServiceEnabled">0</Property>
+         <Property Name="MFProcessMetaData">0</Property>
+         <Property Name="MFProcessMetaDataXMLFileExchangeMethod">0</Property>
+         <Property Name="IMSProgType">0</Property>
+         <Property Name="CopyLibPrefix">ARDT</Property>
+         <Property Name="RecordPerformanceResults">0</Property>
+      </Record>
+      <Record Identifier="V0" Type="ContainerView" Readonly="0">
+         <Property Name="Name">Job</Property>
+         <Property Name="NextID">1</Property>
+         <Property Name="IsTopLevel">0</Property>
+         <Property Name="StageList">V0S1|V1S0|V131A0</Property>
+         <Property Name="StageXPos">384|144|1</Property>
+         <Property Name="StageYPos">264|264|1</Property>
+         <Property Name="StageTypes">CODBCStage|CTransformerStage|ID_PALETTEANNOTATION</Property>
+         <Property Name="NextStageID">7</Property>
+         <Property Name="SnapToGrid">1</Property>
+         <Property Name="GridLines">0</Property>
+         <Property Name="ZoomValue">100</Property>
+         <Property Name="StageXSize">48|48|190</Property>
+         <Property Name="StageYSize">48|48|202</Property>
+         <Property Name="ContainerViewSizing">0031 0013 0711 0604 0000 0001 0000 0000</Property>
+         <Property Name="StageNames">IP_weekly|X|\(20)</Property>
+         <Property Name="StageTypeIDs">CODBCStage|CTransformerStage|\(20)</Property>
+         <Property Name="LinkNames">\(20)|trigger|\(20)</Property>
+         <Property Name="LinkHasMetaDatas">\(20)|True|\(20)</Property>
+         <Property Name="LinkTypes">\(20)|1|\(20)</Property>
+         <Property Name="LinkNamePositionXs">\(20)|272|\(20)</Property>
+         <Property Name="LinkNamePositionYs">\(20)|275|\(20)</Property>
+         <Property Name="TargetStageIDs">\(20)|V0S1|\(20)</Property>
+         <Property Name="SourceStageEffectiveExecutionModes">\(20)|0|\(20)</Property>
+         <Property Name="SourceStageRuntimeExecutionModes">\(20)|0|\(20)</Property>
+         <Property Name="TargetStageEffectiveExecutionModes">\(20)|0|\(20)</Property>
+         <Property Name="TargetStageRuntimeExecutionModes">\(20)|0|\(20)</Property>
+         <Property Name="LinkIsSingleOperatorLookup">\(20)|False|\(20)</Property>
+         <Property Name="LinkIsSortSequential">\(20)|False|\(20)</Property>
+         <Property Name="LinkSortMode">\(20)|0|\(20)</Property>
+         <Property Name="LinkPartColMode">\(20)|0|\(20)</Property>
+         <Property Name="LinkSourcePinIDs">\(20)|V1S0P1|\(20)</Property>
+      </Record>
+      <Record Identifier="V0S1" Type="ODBCStage" Readonly="0">
+         <Property Name="Name">IP_weekly</Property>
+         <Property Name="Description" PreFormatted="1">#$EDW_TARGET#
+#$EDW_USERNAME#
+#$EDW_PASSWORD#</Property>
+         <Property Name="NextID">3</Property>
+         <Property Name="InputPins">V0S1P2</Property>
+         <Property Name="DSN">#$EDW_TARGET#</Property>
+         <Property Name="UserName">#$EDW_USERNAME#</Property>
+         <Property Name="Password">{iisenc}yky9UxiHizbibf4qIT318g==</Property>
+         <Property Name="UvFlag">0</Property>
+         <Property Name="Isolation">0</Property>
+         <Property Name="TransactionSize">0</Property>
+         <Property Name="ArraySize">1</Property>
+         <Property Name="QuoteChar">000</Property>
+         <Property Name="AllowColumnMapping">0</Property>
+         <Property Name="SepString">.</Property>
+         <Property Name="StageType">CODBCStage</Property>
+      </Record>
+      <Record Identifier="V0S1P2" Type="ODBCInput" Readonly="0">
+         <Property Name="Name">trigger</Property>
+         <Property Name="Partner">V1S0|V1S0P1</Property>
+         <Property Name="Action">7</Property>
+         <Property Name="SqlInsert" PreFormatted="1">--Update Begin Inv with Ending Inv from previous day
+DECLARE @intdate_sk int
+SELECT @intdate_sk=max(date_sk) FROM STG_INVENTORY_PERIODIC_DAILY
+
+
+
+-- WEEKLY 
+DECLARE @Wkly_date_sk int
+
+
+SELECT @Wkly_date_sk= 
+(select date_sk from date where short_date =(select week_begin_date-1 FROM date where short_date = convert(varchar(10),getdate(),120))
+)
+
+
+UPDATE a
+SET a.Begin_Inventory_Cost_Wkly=b.Ending_Inventory_Cost,
+      a.Begin_Inventory_Retail_Wkly=b.Ending_Inventory_Retail,
+      a.Begin_Inventory_Units_Wkly=b.Ending_Inventory_Units
+FROM 
+      sephora_edw.dbo.STG_INVENTORY_PERIODIC_DAILY a,
+      sephora_edw.dbo.STG_INVENTORY_PERIODIC_WEEKLY_SS b
+WHERE 
+       a.Date_SK = @intdate_sk -- this is not required as there is always one days data
+and a.Location_SK=b.Location_SK
+and a.Product_SK=b.Product_SK
+
+
+
+INSERT INTO INVENTORY_PERIODIC_WEEKLY_GT_042015 (Date_SK, Location_SK, Product_SK, Available_Sales_Units, Damaged_RTV_Units, Ending_Inventory_Cost, Ending_Inventory_Retail, Ending_Inventory_Units, In_Transit_Quantity, Lost_Found_Units, Net_Vendor_Cost, On_Order_Units, Reserve_Units_Merchandise, Reserve_Units_Picking, Sell_Unit_Retail, Store_Order_Quantity, Transfer_Quantity, Active_Store_Flag, Store_With_Inv_Flag, Store_With_Sales_Flag, Create_Date, On_Order_Cost, On_Order_Cost_Retail, Begin_Inventory_Cost, Begin_Inventory_Retail, Begin_Inventory_Units, Sell_Unit_Cost, In_Transit_Inventory_Cost, In_Transit_Inventory_Retail, Ending_Inventory_Cost_Fin, Ending_Inventory_Retail_Fin, Ending_Inventory_Units_Fin)
+SELECT  Date_SK, Location_SK, Product_SK, Available_Sales_Units, Damaged_RTV_Units, Ending_Inventory_Cost, Ending_Inventory_Retail, Ending_Inventory_Units, In_Transit_Quantity, Lost_Found_Units, Net_Vendor_Cost, On_Order_Units, Reserve_Units_Merchandise, Reserve_Units_Picking, Sell_Unit_Retail, Store_Order_Quantity, Transfer_Quantity, Active_Store_Flag, Store_With_Inv_Flag, Store_With_Sales_Flag, Create_Date, On_Order_Cost,  On_Order_Cost_Retail, Begin_Inventory_Cost_Wkly, Begin_Inventory_Retail_Wkly, Begin_Inventory_Units_Wkly, Sell_Unit_Cost, In_Transit_Inventory_Cost, In_Transit_Inventory_Retail,Ending_Inventory_Cost_Fin, Ending_Inventory_Retail_Fin, Ending_Inventory_Units_Fin
+FROM STG_INVENTORY_PERIODIC_DAILY  s
+where not exists
+(select 1
+from INVENTORY_PERIODIC_WEEKLY_GT_042015 i 
+where i.date_sk = @intdate_sk 
+and i.Date_SK=s.date_sk
+and i.Location_SK=s.Location_SK
+and i.Product_SK=s.Product_SK);;</Property>
+         <Property Name="Isolation">-1</Property>
+         <Property Name="TransactionSize">1</Property>
+         <Property Name="ArraySize">1</Property>
+         <Property Name="TXNBehaviour">40</Property>
+         <Property Name="EnableTxGroup">0</Property>
+      </Record>
+      <Record Identifier="V131A0" Type="Annotation" Readonly="0">
+         <Property Name="Name">V131A0</Property>
+         <Property Name="NextID">0</Property>
+         <Property Name="AnnotationType">0</Property>
+         <Property Name="AnnotationText" PreFormatted="1">Migration:
+2015-09-09 ODBC &quot;;;&quot; deleted on sql statment</Property>
+         <Property Name="TextFont">MS Shell Dlg\10\0\0\0\400\0</Property>
+         <Property Name="TextHorizontalJustification">0</Property>
+         <Property Name="TextVerticalJustification">0</Property>
+         <Property Name="TextColor">0</Property>
+         <Property Name="BackgroundColor">12713983</Property>
+         <Property Name="BackgroundTransparent">0</Property>
+         <Property Name="BorderVisible">1</Property>
+      </Record>
+      <Record Identifier="V1S0" Type="TransformerStage" Readonly="0">
+         <Property Name="Name">X</Property>
+         <Property Name="NextID">3</Property>
+         <Property Name="OutputPins">V1S0P1</Property>
+         <Property Name="ValidationStatus">0</Property>
+         <Property Name="StageType">CTransformerStage</Property>
+         <Property Name="BlockSize">0</Property>
+         <Collection Name="StageVars" Type="StageVar">
+            <SubRecord>
+               <Property Name="Name">svTrigger</Property>
+               <Property Name="Expression">1</Property>
+               <Property Name="SqlType">3</Property>
+               <Property Name="ParsedExpression">1</Property>
+               <Property Name="Precision">0</Property>
+               <Property Name="ColScale">0</Property>
+               <Property Name="ExtendedPrecision">0</Property>
+            </SubRecord>
+         </Collection>
+         <Property Name="StageVarsMinimised">0</Property>
+         <Property Name="LoopVarsMaximised">0</Property>
+         <Property Name="MaxLoopIterations">0</Property>
+      </Record>
+      <Record Identifier="V1S0P1" Type="TrxOutput" Readonly="0">
+         <Property Name="Name">trigger</Property>
+         <Property Name="Partner">V0S1|V0S1P2</Property>
+         <Property Name="Constraint">@OUTROWNUM = 1</Property>
+         <Property Name="Reject">0</Property>
+         <Property Name="ErrorPin">0</Property>
+         <Property Name="RowLimit">0</Property>
+         <Property Name="ParsedConstraint">@OUTROWNUM = 1</Property>
+         <Collection Name="Columns" Type="OutputColumn">
+            <SubRecord>
+               <Property Name="Name">DUMMY</Property>
+               <Property Name="SqlType">4</Property>
+               <Property Name="Precision">1</Property>
+               <Property Name="Scale">0</Property>
+               <Property Name="Nullable">0</Property>
+               <Property Name="KeyPosition">0</Property>
+               <Property Name="DisplaySize">0</Property>
+               <Property Name="Derivation">svTrigger</Property>
+               <Property Name="Group">0</Property>
+               <Property Name="ParsedDerivation">svTrigger</Property>
+               <Property Name="SortKey">0</Property>
+               <Property Name="SortType">0</Property>
+               <Property Name="AllowCRLF">0</Property>
+               <Property Name="LevelNo">0</Property>
+               <Property Name="Occurs">0</Property>
+               <Property Name="PadNulls">0</Property>
+               <Property Name="SignOption">0</Property>
+               <Property Name="SortingOrder">0</Property>
+               <Property Name="StageVars">svTrigger</Property>
+               <Property Name="ArrayHandling">0</Property>
+               <Property Name="SyncIndicator">0</Property>
+               <Property Name="PadChar"/>
+               <Property Name="ExtendedPrecision">0</Property>
+               <Property Name="TaggedSubrec">0</Property>
+               <Property Name="OccursVarying">0</Property>
+               <Property Name="PKeyIsCaseless">0</Property>
+               <Property Name="SCDPurpose">0</Property>
+            </SubRecord>
+         </Collection>
+         <Property Name="LeftTextPos">272</Property>
+         <Property Name="TopTextPos">275</Property>
+         <Property Name="LinkMinimised">0</Property>
+      </Record>
+   </Job>
+</DSExport>

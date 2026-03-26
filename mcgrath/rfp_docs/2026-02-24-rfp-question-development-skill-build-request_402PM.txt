@@ -1,0 +1,1667 @@
+
+ ▐▛███▜▌   Claude Code v2.0.53
+▝▜█████▛▘  Opus 4.5 · Claude Max
+  ▘▘ ▝▝    ~/programming/cisco_projects/cicd/mcgrath/rfp_docs
+══════════════════ Conversation compacted · ctrl+o for history ═════════════════
+  ⎿  Read PROMPT_ARCHITECTURE_EXTRACTION.md (142 lines)
+  ⎿  Read scratchpad.py (275 lines)
+  ⎿  Read extracted/architecture/architecture_summary.md (166 lines)
+  ⎿  Read extracted/architecture/page_01.md (319 lines)
+  ⎿  Read HANDOFF_EXCEL_EXTRACTION.md (239 lines)
+
+● I understand - you're ready to share the two Gemini outputs from your
+  architecture diagram extraction sessions. I'm ready to receive them.
+
+  When you paste both outputs, I'll:
+  1. Compare them side-by-side
+  2. Identify discrepancies (especially any hallucinated INT IDs)
+  3. Note what each captured that the other missed
+  4. Synthesize a final verified architecture document
+
+  Go ahead and share the outputs whenever you're ready.
+
+> f'/home/cmoore/programming/cisco_projects/cicd/mcgrath/rfp_docs/extracted/
+architecture/gemini31pro.md' was from gemini 3.1 pro (brand new advanced 
+model). '/home/cmoore/programming/cisco_projects/cicd/mcgrath/rfp_docs/extra
+cted/architecture/gemini3_thinking.md' was from Gemini 3 thinking. 
+
+● Read(extracted/architecture/gemini31pro.md)
+  ⎿  Read 201 lines
+
+● Read(extracted/architecture/gemini3_thinking.md)
+  ⎿  Read 170 lines
+
+● Kill Shell(Kill shell: 72a188)
+  ⎿  Error: Shell 72a188 is not running, so cannot be killed (status: completed)
+
+● Now I have both outputs. Let me create a comparison analysis:
+
+  Gemini 3.1 Pro vs Gemini 3 Thinking - Comparison
+
+  Key Differences
+
+  | Aspect                    | Gemini 3.1 Pro                          |
+  Gemini 3 Thinking              |
+  |---------------------------|-----------------------------------------|---
+  -----------------------------|
+  | INT IDs Listed            | ~55 specific IDs                        |
+  ~30 specific IDs               |
+  | Confidence Level          | More cautious, notes "unreadable"       |
+  More assertive but some errors |
+  | RecVue Detail             | Excellent - 9 integration points mapped |
+  Less detailed                  |
+  | Oracle Modules            | Lists 12 SCM modules                    |
+  Lists 12 SCM modules (same)    |
+  | Sync/Async Classification | More nuanced (notes black outlines)     |
+  More binary (Blue/Amber only)  |
+
+  Where They Agree (HIGH CONFIDENCE)
+
+  1. Oracle Cloud Modules - Both list identical modules for SCM, ERP, CX,
+  EPM
+  2. Key External Systems - Salesforce, Snowflake, Tableau, Xactly,
+  DocuSign, Zilliant, RecVue, Avalara, Billtrust, ADP, Bank, Intellinum,
+  JONES
+  3. Core Data Flows - Sales Compensation, Credit Check, Contract Creation,
+  Invoice PDFs, COI vendor data, Scan & Labeling
+
+  Where They Disagree (NEEDS VERIFICATION)
+
+  | Topic               | 3.1 Pro Says              | 3 Thinking Says
+             | Likely Correct          |
+  |---------------------|---------------------------|-----------------------
+  -----------|-------------------------|
+  | Snowflake sync type | Blue (Sync)               | Amber (Async)
+             | Needs verification      |
+  | Tableau sync type   | Blue (Sync)               | Amber (Async)
+             | Needs verification      |
+  | Nexstar vs NexStar  | "NexStar" separate system | "Nexstar = Oracle CRM
+  on Demand" | 3 Thinking likely right |
+  | ADP sync type       | Blue (Sync)               | Amber (Async)
+             | Needs verification      |
+  | Dun & Bradstreet    | "None (Text only)"        | Blue (Sync)
+             | Needs verification      |
+
+  Notable INT IDs (Both Agree)
+
+  - INT 104 - Emburse → Payables
+  - INT 112 - Corporate Travel → Payables
+  - INT 106 - EHS → Payables
+  - INT 107 - OC Tanner → Payables
+  - INT 200 - Intellinum → Inventory/SCM
+  - INT 048 - EPM ↔ ERP
+
+  INT IDs Where They Differ
+
+  3.1 Pro lists but 3 Thinking doesn't:
+  - INT 016 (Material Voucher)
+  - INT 029, INT 007, INT 203 (internal SCM)
+  - Multiple RecVue IDs (019, 020, 021, 030, 052, 055, 100, 150, 152, 204)
+  - INT 066 (Field Service → Payables)
+  - INT 069-B, INT 073, INT 101, INT 102 (internal ERP)
+
+  3 Thinking lists but 3.1 Pro doesn't:
+  - INT 209 (Salesforce CPQ → SCM)
+  - INT 109 (ADP → ERP)
+  - INT 105 (ADP → Bank)
+  - INT 128 (Billtrust → RecVue)
+  - INT 151 (Avalara → RecVue)
+  - INT 113 (RecVue → ERP)
+
+  Unique Insights
+
+  Gemini 3.1 Pro caught:
+  - "Hub of Customer Information" - a master data layer (orange dashed line)
+  - Material Voucher is a "Java Application" - legacy system risk
+  - Black outline systems (no sync/async classification)
+  - INT ID suffixes like "109-I", "109-II", "069-B", "121A/B/E"
+
+  Gemini 3 Thinking caught:
+  - "Animated PO Creation" (likely "Automated PO Creation")
+  - BAI2 format for bank statements
+  - Nexstar = Oracle CRM on Demand (same system)
+  - Bi-directional SplashBI connection
+
+  My Assessment
+
+  Gemini 3.1 Pro is more reliable because:
+  1. More cautious about what it can't read (Section 7 is more detailed)
+  2. Captured INT ID suffixes (A, B, C, I, II) that indicate
+  sub-integrations
+  3. Noted outline color nuances (black vs blue vs amber)
+  4. Better RecVue integration mapping (critical for billing complexity
+  assessment)
+
+  Gemini 3 Thinking made some logical leaps that may be incorrect:
+  - Conflated Nexstar with Oracle CRM on Demand (possibly right, but stated
+  as fact)
+  - Missed INT ID suffixes
+  - Some INT IDs might be misread (209, 128, 151, 113 don't appear in Pro's
+  list)
+
+  Recommendation
+
+  Use Gemini 3.1 Pro as the base, then:
+  1. Add the BAI2 bank format detail from 3 Thinking
+  2. Verify Snowflake/Tableau sync type against the image
+  3. Create a "NEEDS VERIFICATION" section for conflicting INT IDs
+
+  Want me to synthesize a final verified architecture document now, or would
+   you like to look at the original image together first to resolve the
+  discrepancies?
+
+> I agree with your assessment. I think we should be able to look at the 
+image too and see if we can clarify on any of the things that are unclear or
+ missed from Gemini. Or you can ask me specifically, and I'll use my human 
+eyes to read them and tell you what they say. Let's look at the original 
+together first, and then we can synthesize the final verified architecture 
+document. Nice work here. 
+
+● Let me look at the original image:
+
+● Read(mcgrath-architecture-desired-state.png)
+  ⎿  Read image (197.3KB)
+
+● I can see the diagram now. Let me identify the specific items I need your
+  human eyes to verify:
+
+  Items I Can See Clearly:
+
+  1. Legend (top right): Blue Outline = Synchronous, Amber Outline =
+  Asynchronous
+  2. Snowflake → Tableau: Has "Extract" label, and "Equipment Status" going
+  down. Both appear to have no colored outline (black/gray lines)
+  3. Salesforce box (blue outline - Synchronous): Contains Pardot and
+  Salesforce CPQ inside
+  4. Left side INT IDs (going to Payables area):
+    - INT104 → Emburse
+    - INT112 → Corporate Travel Management
+    - INT10? → EHS (can't read last digit clearly)
+    - INT10? → OC Tanner
+  5. JONES (bottom left): "COI - New Vendor Data" and "COI - Compliance
+  Status" going to Supplier Management
+  6. Material Voucher (Java Application) - bottom left, going to Inventory
+
+  Questions for Your Human Eyes:
+
+  1. EHS INT ID: Is it INT106 or something else?
+  2. OC Tanner INT ID: Is it INT107 or something else?
+  3. The cluster of INT IDs near Zilliant/Salesforce CPQ: I see what looks
+  like INT154, and several others (INT12?, INT12?, INT16?). Can you read
+  those?
+  4. RecVue INT IDs: There's a dense cluster going from RecVue to Oracle
+  ERP. Can you read any of those numbers?
+  5. Bank area (top right): I see "Bank & Debit/Credit Line (APO)" and
+  multiple INT IDs near SnapPay/Billtrust. Can you read those?
+  6. The INT IDs between Oracle Aconex and SCM: Looks like INT12? C and
+  INT120?
+  7. Nexstar vs Oracle CRM on Demand: I see "ORACLE CRM ON DEMAND" as a
+  separate logo/box near "Nexstar" - are these the same system or different?
+  8. ADP area: I see ADP with lines going to AD (Active Directory). What INT
+   IDs are there?
+
+  Pick whichever ones are easiest to read and we can fill in the gaps!
+
+> I think anything that says EHS is actually EXT. The options are INT or 
+EXT. The ones that you are mentioning near Xiliand and Salesforce are 
+int154, int125C, and int120. I don't think we should take too much stock 
+onto these designations because even though they might be helpful for 
+routing, it's more the bigger blocks that we care about. The only EHS block 
+I can see is in the top left of the picture and is teal with a single arrow 
+coming into it from the left. Don't worry too much about these specific int 
+or ent things. You are correct that it says Oracle CRM on Demand. There is 
+additionally something under it that says "Next Star," as you correctly 
+said. 
+
+● Got it - that clarifies a lot. So:
+
+  1. INT vs EXT - these are integration IDs, not critical for our purposes
+  2. EHS - is a system (Environment, Health, Safety), top left with teal
+  box, not "EXT"
+  3. Oracle CRM on Demand and Nextstar - two separate labels/systems in that
+   area
+  4. Focus on the bigger blocks - the actual systems and their connections
+  matter more than the specific INT/EXT numbers
+
+  This makes sense for an MSP RFP - they need to understand:
+  - What systems exist
+  - How they connect (sync vs async)
+  - The complexity of the landscape
+
+  ...not necessarily every integration ID (which would be in detailed
+  technical documentation anyway).
+
+  Let me synthesize a final verified architecture document that focuses on
+  what matters:
+
+● Write(extracted/architecture/FINAL_architecture_verified.md)
+  ⎿  Wrote 237 lines to                                                    
+     extracted/architecture/FINAL_architecture_verified.md
+     # McGrath RentCorp - Future State Architecture (Verified)
+     **Source:** MGRC Environment tab - embedded Visio diagram
+     **Verified:** February 24, 2026 (human + AI review)
+     **Type:** Future State Integration Architecture (Post-NextGen
+     Implementation)
+     ---
+     ## Legend
+     … +227 lines (ctrl+o to expand)
+
+● Done. Created FINAL_architecture_verified.md that:
+
+  1. Focuses on what matters for MSP - systems, connections, complexity -
+  not INT IDs
+  2. Synthesizes both Gemini outputs - took the best from each
+  3. Incorporates your clarifications - EHS is a system, Oracle CRM on
+  Demand + Nextstar are separate labels
+  4. Adds MSP-relevant analysis - complexity assessment, risk areas, RFP
+  clarification questions
+  5. Shows integration patterns - Quote-to-Cash, Procure-to-Pay, Financial
+  Close flows
+
+  The architecture folder now has:
+  - gemini31pro.md - raw Gemini 3.1 Pro output
+  - gemini3_thinking.md - raw Gemini 3 Thinking output
+  - architecture_summary.md - earlier summary (can be deprecated)
+  - page_01.md - earlier extraction (can be deprecated)
+  - FINAL_architecture_verified.md - the authoritative document
+
+  What would you like to tackle next?
+
+> For the documents that have been decided, can we put those in their own 
+folder so that it is clear what is final and what is still in progress? This
+ even includes some of the extracted items. The other session is doing good 
+work, so don't worry about moving the CSVs yet. We are just worried about 
+moving the files that we know are good and should be carried forward. 
+
+● Bash(ls -la
+      /home/cmoore/programming/cisco_projects/cicd/mcgrath/rfp_docs/extracted/)
+  ⎿  total 236                                       
+     drwxr-xr-x 3 cmoore cmoore  4096 Feb 24 15:01 .
+     drwxr-xr-x 3 cmoore cmoore  4096 Feb 24 15:01 ..
+     … +11 lines (ctrl+o to expand)
+
+● Bash(ls -la /home/cmoore/programming/cisco_projects/cicd/mcgrath/rfp_docs/extr
+      acted/architecture/)
+  ⎿  total 60                                        
+     drwxr-xr-x 2 cmoore cmoore  4096 Feb 24 14:58 .
+     drwxr-xr-x 3 cmoore cmoore  4096 Feb 24 15:01 ..
+     … +7 lines (ctrl+o to expand)
+
+● Bash(mkdir -p
+      /home/cmoore/programming/cisco_projects/cicd/mcgrath/rfp_docs/final && mv
+      /home/cmoore/programming/cisco_projects/cicd/mcgrath/rfp_docs/extracted/ar
+      chi…)
+  ⎿  (No content)
+
+● Bash(ls -la
+      /home/cmoore/programming/cisco_projects/cicd/mcgrath/rfp_docs/final/)
+  ⎿  total 16                                                    
+     drwxr-xr-x 2 cmoore cmoore 4096 Feb 24 15:02 .
+     drwxr-xr-x 4 cmoore cmoore 4096 Feb 24 15:02 ..
+     -rw------- 1 cmoore cmoore 7639 Feb 24 14:58 architecture.md
+
+● Done. Structure is now:
+
+  mcgrath/rfp_docs/
+  ├── final/                          # ✓ VERIFIED, ready to use
+  │   └── architecture.md             # Verified architecture document
+  ├── extracted/                      # Work in progress (other session 
+  handling CSVs)
+  │   ├── architecture/               # Raw Gemini outputs (reference only)
+  │   │   ├── gemini31pro.md
+  │   │   ├── gemini3_thinking.md
+  │   │   ├── architecture_summary.md (deprecated)
+  │   │   └── page_01.md (deprecated)
+  │   ├── specific_requirements_clean.csv
+  │   ├── general_requirements_clean.csv
+  │   ├── sla_clean.csv
+  │   ├── kpi_clean.csv
+  │   └── ... (other CSVs in progress)
+
+  When the other session finishes the CSV extractions and they're verified,
+  those can be moved to final/ as well. What's next?
+
+> Here is what the other session had to say:   All Extractions Complete
+
+  9 CSV files from the McGrath RFP workbook (plus 1 raw version):
+
+  | File                            | Rows | Purpose                        
+    |
+  |---------------------------------|------|--------------------------------
+----|
+  | specific_requirements_clean.csv | 183  | Technical requirements by 
+solution |
+  | general_requirements_clean.csv  | 102  | General capability requirements
+    |
+  | sla_clean.csv                   | 9    | SLA matrix (P1-P4)             
+    |
+  | kpi_clean.csv                   | 9    | KPI definitions                
+    |
+  | rfp_overview.csv                | 48   | Company intro & policies       
+    |
+  | pricing_template.csv            | 14   | Pricing structure template     
+    |
+  | next_steps.csv                  | 17   | Submission process             
+    |
+  | experience_methodology.csv      | 17   | Experience questionnaire       
+    |
+  | corporate_response_form.csv     | 42   | Company profile template       
+    |
+
+  Skipped: MGRC Environment (Visio), Vendor Q&A (empty template)
+
+  Handoff document updated: HANDOFF_EXCEL_EXTRACTION_2.md 
+
+● Let me verify those files and move the confirmed ones to final/:
+
+● Bash(ls -la /home/cmoore/programming/cisco_projects/cicd/mcgrath/rfp_docs/extr
+      acted/*.csv | wc -l && ls -la
+      /home/cmoore/programming/cisco_projects/cicd/mcgrath/rfp_…)
+  ⎿ 10                                                                     
+    -rw-r--r-- 1 cmoore cmoore  3582 Feb 24 15:02 /home/cmoore/programming/
+    cisco_projects/cicd/mcgrath/rfp_docs/extracted/corporate_response_form.
+    … +23 lines (ctrl+o to expand)
+
+
+
+● All 10 CSVs present. Let me move the clean/final versions to final/
+  (keeping the raw specific_requirements.csv in extracted as reference):
+
+● Bash(mv extracted/specific_requirements_clean.csv
+      final/specific_requirements.csv && mv
+      extracted/general_requirements_clean.csv final/general_requirements.csv &&
+       mv…)
+  ⎿  (No content)
+
+● Bash(ls -la
+      /home/cmoore/programming/cisco_projects/cicd/mcgrath/rfp_docs/final/)
+  ⎿  total 168                                       
+     drwxr-xr-x 3 cmoore cmoore  4096 Feb 24 15:05 .
+     drwxr-xr-x 4 cmoore cmoore  4096 Feb 24 15:03 ..
+     … +13 lines (ctrl+o to expand)
+
+● Done. Final folder now contains:
+
+  mcgrath/rfp_docs/final/
+  ├── architecture.md              # Verified architecture document
+  ├── specific_requirements.csv    # 183 rows - Technical requirements by
+  solution
+  ├── general_requirements.csv     # 102 rows - General capability 
+  requirements
+  ├── sla.csv                      # 9 rows - SLA matrix (P1-P4)
+  ├── kpi.csv                      # 9 rows - KPI definitions
+  ├── rfp_overview.csv             # 48 rows - Company intro & policies
+  ├── pricing_template.csv         # 14 rows - Pricing structure template
+  ├── next_steps.csv               # 17 rows - Submission process
+  ├── experience_methodology.csv   # 17 rows - Experience questionnaire
+  ├── corporate_response_form.csv  # 42 rows - Company profile template
+  └── source_ai/                   # (looks like other session created this)
+
+  The extracted/ folder still has:
+  - specific_requirements.csv (raw version, for reference)
+  - architecture/ folder with Gemini outputs (reference only)
+
+  All 10 documents ready for RFP question development. What's next?
+
+> Okay, now let me explain. In the final folder, you'll also see a series of
+ text files and PDFs that I have put in there. The text files are simply me 
+hitting Control-C, Control-V on the PDFs, so the good news is we don't need 
+to read the PDFs. These files are AI-generated and come from BayOne, some 
+previous people's understanding of the project and the requirement. This is 
+where the heavy work is going to start. We had already prepared a series of 
+documents based upon these text files, which I don't think is wrong, but I 
+also know did not have nearly the amount of context that we have with these 
+CSVs that we've been putting together. So I originally generated a review of
+ the existing questions for the RFP and proposed new ones based upon only 
+these text files and not any of the Excel documents or architecture 
+diagrams. mcgrath/knowledge_base/glossary.md 
+mcgrath/questions/consolidated_questions_v02.md   Here's our challenge: We 
+now have to do two things in a row.
+1. We need to look at the RFP questions with clear eyes and consider what we
+ have already versus what we should be doing now.
+2. The observation that I have is that the RFP questions that we have now 
+are pretty good, but they don't really go into technical detail or anything 
+like that. They are supposed to be high-level. We do have an rfp_questions 
+skill, but I'm not sure if That is a skill that will be super helpful here 
+because we have all the CSVs and architecture diagrams, whereas that skill 
+only ever subs PDFs and text files.
+
+My goal for us is to come up with RFP questions and with an expert plan as 
+if we're an expert MSP consultant that is asking these questions and things 
+that are technically helpful to us and give us more information while not 
+getting too overly granular and giving us a competitive edge. You can look 
+at the existing question bank because those are phrased the way that I want 
+them to. And you use the same prose and language that I use myself.
+
+Come up with a plan for this. It will be a big effort but I know we can do 
+it. We will need to read the Excel files or the CSV files I guess that we 
+had extracted out and see where our gaps are and what we're missing. And 
+come up with a new, fresh set of questions while keeping all of the existing
+ documents intact exactly as is. I will leave it to you to figure out the 
+optimal strategy here. Even if you wanted to first have a parallel cloud 
+session, look at each of the CSVs and extract insights or come up with the 
+markdown version of that, I'm fine with it, whatever is easiest for you. 
+Let's do this well and let's be pragmatic! 
+
+● Let me first understand what we have - the existing questions, the
+  glossary, and the final folder contents:
+
+● Read(~/programming/cisco_projects/cicd/mcgrath/questions/consolidated_question
+      s_v02.md)
+  ⎿  Read 393 lines
+
+● Read(~/programming/cisco_projects/cicd/mcgrath/knowledge_base/glossary.md)
+  ⎿  Read 141 lines
+
+● Bash(ls -la
+      /home/cmoore/programming/cisco_projects/cicd/mcgrath/rfp_docs/final/)
+  ⎿  total 168                                       
+     drwxr-xr-x 3 cmoore cmoore  4096 Feb 24 15:05 .
+     drwxr-xr-x 4 cmoore cmoore  4096 Feb 24 15:03 ..
+     … +13 lines (ctrl+o to expand)
+
+● Now let me see the text files in the final folder:
+
+● Bash(ls -la /home/cmoore/programming/cisco_projects/cicd/mcgrath/rfp_docs/fina
+      l/source_ai/)
+  ⎿  total 192                                       
+     drwxr-xr-x 2 cmoore cmoore  4096 Feb 24 15:04 .
+     drwxr-xr-x 3 cmoore cmoore  4096 Feb 24 15:05 ..
+     … +11 lines (ctrl+o to expand)
+
+● Good. Now I understand the landscape. Let me read the key CSVs to
+  understand the technical depth we now have:
+
+● Read(final/sla.csv)
+  ⎿  Read 10 lines
+
+● Read(final/kpi.csv)
+  ⎿  Read 10 lines
+
+● Read(final/specific_requirements.csv)
+  ⎿  Read 100 lines
+
+● Now I understand the full picture. Let me read the rest of the specific
+  requirements and the general requirements to complete my understanding:
+
+● Read(final/specific_requirements.csv)
+  ⎿  Read 86 lines
+
+● Read(final/general_requirements.csv)
+  ⎿  Read 80 lines
+
+● Now I have a complete picture. Let me create the plan:
+
+  ---
+  My Plan for RFP Question Enhancement
+
+  Assessment of Current State
+
+  What we have (consolidated_questions_v02.md):
+  - 36 high-level questions across 6 sections
+  - Good coverage of: scope, transition, evaluation, staffing,
+  commercial/contractual
+  - Written in your voice/prose style
+  - Strategically framed (competitive awareness baked in)
+
+  What we now have from the CSVs that wasn't available before:
+  1. specific_requirements.csv (183 rows) - Detailed breakdown by Solution ×
+   Category showing MSP Owned/Shared/MGRC Owned
+  2. general_requirements.csv (102 rows) - 11 sections of general capability
+   requirements
+  3. sla.csv - P1-P4 SLA matrix with specific response times
+  4. kpi.csv - 8 specific KPIs with measurement formulas
+  5. architecture.md - 50+ systems, integration patterns, complexity
+  assessment
+
+  Gap Analysis
+
+  Current questions are strong on:
+  - High-level scoping (ticket volumes, FTEs, KT timeline)
+  - Commercial/contractual protections
+  - Transition risk
+
+  Current questions are thin on:
+  - Solution-specific technical detail (RecVue billing complexity, NexSTAR
+  24x7 requirement, OIC vs MuleSoft split)
+  - SLA negotiation (P1 15-min response is aggressive - is there flex?)
+  - Shared Responsibility clarification (183 items, most are "Shared" -
+  massive ambiguity)
+  - Integration specifics (50+ integrations, which are stable vs troubled?)
+  - Data pipeline operations (10pm-7am monitoring - what's the actual
+  failure rate?)
+
+  Proposed Approach
+
+  Phase 1: Solution-Specific Question Generation
+  I'll read each Solution block in the CSV and identify questions where:
+  - Ambiguity exists in MSP Owned vs Shared
+  - Technical detail would help pricing
+  - Risk areas exist (custom apps, PCI scope, 24x7 requirements)
+
+  Phase 2: Cross-Reference with Existing Questions
+  Map new questions against existing 36 to:
+  - Avoid duplication
+  - Identify where existing questions need "depth" follow-ups
+  - Keep the total count manageable (target: 50-60 total)
+
+  Phase 3: Output
+  Create a new file (NOT overwrite existing):
+  - consolidated_questions_v03.md - Enhanced version with new technical
+  questions
+  - Clearly marked which are NEW vs carried forward
+  - Same prose style, same strategic framing
+
+  ---
+  Do you want me to proceed with this approach?
+
+  I can do Phase 1-2 in this session - reading the CSVs systematically and
+  generating the enhanced question set. The output will be a new v03 file
+  that preserves everything from v02 and adds technically-informed
+  questions.
+
+> proceed. you are free to use agent teams or parallel subagent however 
+you'd like 
+
+● Let me launch parallel agents to analyze each data source and generate
+  questions:
+
+● 6 Task agents finished (ctrl+o to expand)
+   ├─ Analyze Salesforce/RecVue/Oracle requirements · 1 tool use · 15.5k tokens
+   │  ⎿ Done
+   ├─ Analyze NexSTAR/Integration/Data requirements · 1 tool use · 15.6k tokens
+   │  ⎿ Done
+   ├─ Analyze Database/CustomerHub/Azure requirements · 1 tool use · 15.5k
+   tokens
+   │  ⎿ Done
+   ├─ Analyze General Requirements for gaps · 2 tool uses · 26.6k tokens
+   │  ⎿ Done
+   ├─ Analyze SLA/KPI for negotiation questions · 2 tool uses · 15.7k tokens
+   │  ⎿ Done
+   └─ Generate architecture-driven questions · 2 tool uses · 22.5k tokens
+      ⎿ Done
+
+● All 6 agents have returned with comprehensive analysis. Now I need to
+  synthesize these into the final v03 document. Let me map the new questions
+   against the existing 36 and create the consolidated document:
+
+● Write(~/programming/cisco_projects/cicd/mcgrath/questions/consolidated_questio
+       ns_v03.md)
+  ⎿  Wrote 661 lines to ../questions/consolidated_questions_v03.md         
+     # McGrath RFP Questions - Consolidated Draft v03
+     **Date:** February 24, 2026
+     **Status:** Enhanced with technical depth from CSV/architecture
+     analysis
+     **Previous Version:** v02 (February 20, 2026) - 36 questions
+     ---
+     ## Summary
+     … +651 lines (ctrl+o to expand)
+
+● Done. Created consolidated_questions_v03.md with:
+
+  Summary
+
+  | Category                       | Count |
+  |--------------------------------|-------|
+  | Carried forward unchanged      | 32    |
+  | Enhanced with technical detail | 4     |
+  | New technical questions        | 24    |
+  | Total                          | 60    |
+
+  What's New in v03
+
+  8 Sections:
+  1. Scope & Transition (14 questions - +3 new)
+  2. Evaluation & Selection (4 questions - unchanged)
+  3. Staffing & Resource Model (8 questions - +2 new)
+  4. Technology & Environment (12 questions - +5 new)
+  5. SLA & KPI (8 questions - all new)
+  6. Compliance & Audit (2 questions - +1 new)
+  7. Commercial & Contractual (7 questions - unchanged)
+  8. Shared Responsibility Clarification (5 questions - new section)
+
+  Top 10 Must-Ask Before Pricing
+
+  1. Q56 - Shared Responsibility Definition (150+ requirements are "Shared")
+  2. Q25 - After-Hours Coverage Model (1.5 FTE difference)
+  3. Q6 - OCI 1,000 Hour Estimate (could be 2-3x higher)
+  4. Q13 - Named Resources ($500K+ difference)
+  5. Q28 - NexSTAR Technical Details (highest risk)
+  6. Q12 - OIC vs MuleSoft Split
+  7. Q43 - SLA Non-Compliance Consequences
+  8. Q34 - RecVue Billing Complexity
+  9. Q14 - Database Actual Counts
+  10. Q26 - Period-Close Support Model
+
+  Key Findings from Analysis
+
+  - Row 94 gap: OIC Incident Management shows NO ownership (all columns
+  "No") - likely RFP error
+  - Shared ambiguity: 150+ of 183 specific requirements are "Shared=Yes"
+  without RACI
+  - Named resources: Oracle BI and Data Pipeline explicitly require "named
+  MSP resources" = dedicated staffing
+  - 15-minute P1 SLA: Aggressive target with unclear penalty structure
+  - Dual middleware: OIC + MuleSoft both in scope without clear division
+
+  The document is at: mcgrath/questions/consolidated_questions_v03.md
+
+> okay, great! can you manke a csv of it that is well organized? 
+
+● Write(~/programming/cisco_projects/cicd/mcgrath/questions/consolidated_questio
+       ns_v03.csv)
+  ⎿  Wrote 62 lines to ../questions/consolidated_questions_v03.csv         
+     Question #,Section,Type,Priority,Question,Source
+     Reference,Justification
+     Q1,Scope & Transition,ORIGINAL,Standard,"Can MGRC provide a breakdown
+     of current monthly ticket/service request volume by application area
+     (Salesforce, Oracle Fusion, OCI, NexSTAR, integrations, etc.) and by
+     priority level (P1–P4) for the trailing 12 months?",v02 Q1,Essential
+     for cost model. Every MSP will ask this.
+     Q2,Scope & Transition,ORIGINAL,Standard,What is the current FTE count
+     (internal and external/contractor) supporting each application area
+     today? How many of these resources are expected to transition to the
+     MSP remain at MGRC or depart during the onboarding period?,v02
+     Q2,Standard scoping — tells us team size needed.
+     Q3,Scope & Transition,ORIGINAL,Standard,"For the Knowledge Transfer
+     phase (May 18 – July 6), will MGRC's current support resources remain
+     fully available to shadow and co-work with MSP staff during the entire
+     transition period, or is there an expected ramp-down schedule for
+     current resources?",v02 Q3,Coverage gap risk if staff leave before KT
+     complete.
+     Q4,Scope & Transition,ORIGINAL,Standard,Is MGRC open to a phased
+     go-live approach where application areas are transitioned in priority
+     waves rather than a single go-live date of July 6 for all areas?,v02
+     Q4,De-risks delivery; shows pragmatic thinking.
+     Q5,Scope & Transition,ENHANCED,High,"The architecture diagram shows 50+
+      integrations across Oracle Cloud (SCM, ERP, CX, EPM), Salesforce,
+     RecVue, and external systems. Can MGRC provide: (a) an inventory of
+     integrations with their current stability status (stable/active
+     development/recurring issues), (b) monthly error/failure rates for the
+     top 10 integrations by volume, and (c) identification of which
+     integrations are synchronous vs. asynchronous?",v02 Q5 +
+     architecture.md,Architecture shows majority are synchronous (blue
+     outline) = high uptime requirements. Sync failures cascade immediately.
+     Q6,Scope & Transition,ENHANCED,Must-Ask,"The RFP notes OCI effort is
+     estimated at under 1,000 hours annually. However, the Specific
+     Requirements show 15 categories for OCI alone (Administration, Release
+     Management, Security, DR, etc.). Does the 1,000-hour estimate cover all
+      15 categories, or only the Operational Day-to-Day scope? Can MGRC
+     provide similar annual hour estimates for other application areas,
+     particularly Oracle Fusion (which spans Finance, SCM, Procurement, FSM,
+      EPM) and NexSTAR (24x7 custom application)?",v02 Q6 +
+     specific_requirements.csv rows 46-60,"CSV shows 15 OCI requirement 
+     categories. 1,000 hours seems low if all are in scope."
+     Q7,Scope & Transition,ORIGINAL,Standard,"What is the current 
+     onshore/offshore distribution of support resources, and what is the 
+     organizational structure (e.g., dedicated teams per app vs. shared 
+     pool)?",v02 Q7,Understanding current model helps us staff 
+     appropriately.
+     Q8,Scope & Transition,ENHANCED,High,"The Specific Requirements show 
+     Shared=Yes for most Integration & Connectivity Support categories, and 
+     the architecture shows dual middleware platforms (OIC and MuleSoft). 
+     When integration issues arise: (a) who owns first-level triage (MSP or 
+     MGRC), (b) at what point does ownership transfer to the middleware 
+     team, and (c) who coordinates with external system vendors (Avalara, 
+     Zilliant, DocuSign, banks) when the issue is on their end?",v02 Q8 + 
+     specific_requirements.csv row 94,Row 94 (OIC Incident Management) shows
+      NO ownership assignment - appears to be a gap. Need clarity.
+     Q9,Scope & Transition,ORIGINAL,Standard,Is the July 6 go-live date firm
+      or is there potential for schedule adjustment based on current project
+      status? What contingency exists if the Oracle Fusion go-live extends
+     past May 18?,v02 Q9,Shows dependency awareness.
+
+
+
+
+
+
+     … +52 lines (ctrl+o to expand)
+
+● Done. Created consolidated_questions_v03.csv with 7 columns:
+
+  | Column           | Description
+                                                            |
+  |------------------|------------------------------------------------------
+  ----------------------------------------------------------|
+  | Question #       | Q1-Q60
+                                                            |
+  | Section          | Scope & Transition, Evaluation, Staffing, Technology,
+   SLA & KPI, Compliance, Commercial, Shared Responsibility |
+  | Type             | ORIGINAL, ENHANCED, NEW: Technical, NEW: SLA/KPI,
+  NEW: Architecture                                            |
+  | Priority         | Must-Ask (10), High (8), Standard (42)
+                                                            |
+  | Question         | Full question text
+                                                            |
+  | Source Reference | v02 question number, CSV row numbers, or
+  architecture.md                                                       |
+  | Justification    | Why this question matters for pricing/risk
+                                                            |
+
+  Files created:
+  - mcgrath/questions/consolidated_questions_v03.md - Full document with
+  context
+  - mcgrath/questions/consolidated_questions_v03.csv - Spreadsheet-friendly
+  format
+
+> Okay, great. Now the target number of questions is 35 in total across all 
+the types.  This is really challenging because there's so much to ask. I'm 
+going to do my own review, but basically I want you to look through these 
+and see anything that is:
+- duplicate
+- too in the weeds
+- extremely specific and unlikely to be answered in an RFP
+- giving away some competitive advantage by sharing too much information 
+with the other bidders
+Bear in mind that whenever we're talking about that, it's not so much the 
+question but the answer that we expect in response that could give other 
+people a competitive advantage. You do your investigation, and I'll do mine 
+as well. Target for 30-35 questions. Specifically of interest to me are the 
+ones that are:
+- too in the weeds
+- redundant
+- otherwise common sense 
+
+● Good call. Let me analyze the 60 questions for consolidation opportunities
+   and removal candidates:
+
+  Analysis for Reduction to 30-35 Questions
+
+  DUPLICATES/REDUNDANT (Can merge or remove)
+
+  | Questions | Issue                                          |
+  Recommendation                                                  |
+  |-----------|------------------------------------------------|------------
+  -----------------------------------------------------|
+  | Q13 + Q19 | Both ask about dedicated vs pooled resources   | Merge into
+  single question                                      |
+  | Q5 + Q8   | Both ask about integration stability/ownership | Merge - Q5
+  asks for inventory, Q8 asks who owns triage          |
+  | Q27 + Q30 | Both about ServiceNow migration                | Merge into
+  one ServiceNow question                              |
+  | Q52 + Q56 | Both about Shared Responsibility RACI          | Merge - Q52
+   is commercial timing, Q56 is operational definition |
+  | Q29 + Q36 | Both about PCI/Customer Hub scope              | Merge into
+  single PCI question                                  |
+  | Q22 + Q26 | Both about Oracle Fusion close activities      | Merge - Q22
+   asks volumes, Q26 asks role                         |
+
+  TOO IN THE WEEDS (Remove or simplify)
+
+  | Question | Issue
+      | Recommendation                                |
+  |----------|--------------------------------------------------------------
+  ----|-----------------------------------------------|
+  | Q14      | "Actual count of databases" - they'll say "it varies"
+      | Remove - standard discovery during transition |
+  | Q40      | "Is 90 minutes SLA-compliant for P2?" - nitpicky
+      | Remove - negotiate during contracting         |
+  | Q41      | "Who assigns priority?" - operational detail
+      | Remove - standard ITSM setup                  |
+  | Q44      | "KPIs per system or global?" - operational detail
+      | Remove - propose our approach                 |
+  | Q46      | "Who provides ticketing system?" - operational
+      | Remove - we'll propose our tooling            |
+  | Q58      | "Balance between maintaining vs new integrations" - too
+  granular | Remove - covered by Q12                       |
+  | Q59      | "Volume of BRDs/FSDs" - too specific
+      | Remove - discovery phase item                 |
+  | Q60      | "SoD tooling used?" - too technical
+      | Remove - discovery phase item                 |
+
+  UNLIKELY TO BE ANSWERED IN RFP Q&A
+
+  | Question  | Issue                                               |
+  Recommendation                             |
+  |-----------|-----------------------------------------------------|-------
+  -------------------------------------|
+  | Q49       | "Budget range" - they never answer this             | Keep 
+  anyway - worth asking                 |
+  | Q45       | "Historical performance data" - may be confidential |
+  Simplify - ask if available, not demand it |
+  | Q54 + Q55 | M&A questions - may be confidential                 | Merge
+  into single M&A question             |
+
+  GIVES AWAY COMPETITIVE ADVANTAGE
+
+  | Question | Risk
+        | Recommendation                              |
+  |----------|--------------------------------------------------------------
+  ------|---------------------------------------------|
+  | Q34      | Asking about RecVue billing complexity signals we see it as
+  risk   | Soften - less specific                      |
+  | Q37      | Material Voucher Java app - reveals we noticed this obscure
+  detail | Keep but soften - shows thoroughness        |
+  | Q57      | "Custom code vs declarative" - reveals our pricing strategy
+        | Remove - we'll price for both and negotiate |
+
+  COMMON SENSE / EVERY BIDDER ASKS
+
+  | Question | Issue                         | Recommendation   |
+  |----------|-------------------------------|------------------|
+  | Q1       | Ticket volumes                | Keep - essential |
+  | Q2       | FTE count                     | Keep - essential |
+  | Q15      | Evaluation criteria weighting | Keep - standard  |
+  | Q16      | Single vs multi-MSP           | Keep - strategic |
+
+  ---
+  My Proposed Cut List (25 removals/merges)
+
+  Remove entirely (12):
+  - Q14 (database counts - discovery)
+  - Q40 (P2 90-min nitpick)
+  - Q41 (priority assignment)
+  - Q44 (KPI granularity)
+  - Q46 (ticketing tooling)
+  - Q57 (code vs config - reveals strategy)
+  - Q58 (integration balance)
+  - Q59 (BRD volume)
+  - Q60 (SoD tooling)
+  - Q30 (merge with Q27)
+  - Q36 (merge with Q29)
+  - Q55 (merge with Q54)
+
+  Merge pairs (6 merges = 12 questions → 6):
+  - Q13 + Q19 → single "dedicated vs pooled" question
+  - Q5 + Q8 → single "integration inventory and ownership" question
+  - Q27 + Q30 → single "ServiceNow migration" question
+  - Q52 + Q56 → single "Shared Responsibility definition" question
+  - Q29 + Q36 → single "PCI scope" question
+  - Q22 + Q26 → single "Oracle Fusion close" question
+  - Q54 + Q55 → single "M&A" question
+
+  Result: 60 - 12 removed - 7 merged = ~35 questions
+
+  ---
+  Do you want me to produce the consolidated v04 with ~35 questions once
+  you've done your review? Or share your cuts first and we can reconcile?
+
+> Yes, do that. Honestly. I am interested in the CSV right now, so why don't
+ you copy the existing_csv and then remove those lines in a targeted way. 
+"TAB NAME    Section and/or ROW    #(section number)    Question to MGRC
+" are the correct columns. I know those are slightly different than what we 
+already have. So, what I would recommend is just either renaming columns if 
+they are tracking the same or, if you have additional columns beyond this, 
+simply add those at the end. Then, I can copy cleanly without needing to 
+select columns out from the middle. 
+
+● Write(~/programming/cisco_projects/cicd/mcgrath/questions/consolidated_questio
+       ns_v04.csv)
+  ⎿  Updated ../questions/consolidated_questions_v04.csv with 42 additions 
+     and 61 removals
+        1 -  Question #,Section,Type,Priority,Question,
+          -  Source Reference,Justification
+        2 -  Q1,Scope & Transition,ORIGINAL,Standard
+          -  ,"Can MGRC provide a breakdown of current monthly 
+          -  ticket/service request volume by application area 
+          -  (Salesforce, Oracle Fusion, OCI, NexSTAR, integrations, 
+          -  etc.) and by priority level (P1-P4) for the trailing 12 
+          -  months?",v02 Q1,Essential for cost model.
+          -   Every MSP will ask this.
+        3 -  Q2,Scope & Transition,ORIGINAL,Standard
+          -  ,What is the current FTE count (internal and 
+          -  external/contractor) supporting each application area today?
+          -   How many of these resources are expected to transition to 
+          -  the MSP remain at MGRC 
+          -  or depart during the onboarding period?,
+          -  v02 Q2,Standard scoping — tells us team size needed.
+        4 -  Q3,Scope & Transition,ORIGINAL,Standard
+          -  ,"For the Knowledge Transfer phase (May 18 - July 6), will 
+          -  MGRC's current support resources remain fully available to 
+          -  shadow and co-work with MSP staff during the entire 
+          -  transition period, or is there an expected ramp-down 
+          -  schedule for current resources?",
+          -  v02 Q3,Coverage gap risk if staff leave before KT complete.
+        5 -  Q4,Scope & Transition,ORIGINAL,Standard
+          -  ,Is MGRC open to a phased go-live approach where application
+          -   areas are transitioned in priority waves rather than a 
+          -  single go-live date of July 6 for all areas?,
+          -  v02 Q4,De-risks delivery; shows pragmatic thinking.
+        6 -  Q5,Scope & Transition,ENHANCED,High,"The architecture 
+          - diagram shows 50+ integrations across Oracle Cloud (SCM, ERP,
+          -  CX, EPM), Salesforce, RecVue, and external systems. Can MGRC
+          -  provide: (a) an inventory of integrations with their current
+          -  stability status (stable/active development/recurring 
+          - issues), (b) monthly error/failure rates for the top 10 
+          - integrations by volume, and (c) identification of which 
+          - integrations are synchronous vs. asynchronous?",v02 Q5 + 
+          - architecture.md,Architecture shows majority are synchronous 
+          - (blue outline) = high uptime requirements. Sync failures 
+          - cascade immediately.
+        7 -  Q6,Scope & Transition,ENHANCED,Must-Ask
+          -  ,"The RFP notes OCI effort is estimated at under 1,000 hours
+          -   annually. However, the 
+          -  Specific Requirements show 15 categories for OCI alone
+          -   (Administration, Release Management, Security, DR, etc.).
+          -   Does the 1,000-hour estimate cover all 15 categories,
+          -   or only the Operational Day-to-Day scope
+          -  ? Can MGRC provide similar annual hour estimates for 
+          -  other application areas, particularly Oracle Fusion 
+          -  (which spans Finance, SCM, Procurement, FSM, EPM) 
+          -  and NexSTAR (24x7 custom application)?",v02 Q6 + 
+          -  specific_requirements.csv rows 46-60,"CSV shows 15 OCI 
+          -  requirement categories. 
+          -  1,000 hours seems low if all are in scope."
+        8 -  Q7,Scope & Transition,ORIGINAL,Standard,"What is the current
+          -  onshore/offshore distribution of support resources, and what
+          -  is the organizational structure (e.g., dedicated teams per 
+          - app vs. shared pool)?",v02 Q7,Understanding current model 
+          - helps us staff appropriately.
+        9 -  Q8,Scope & Transition,ENHANCED,High,"The Specific 
+          - Requirements show Shared=Yes for most Integration & 
+          - Connectivity Support categories, and the architecture shows 
+          - dual middleware platforms (OIC and MuleSoft). When 
+          - integration issues arise: (a) who owns first-level triage 
+          - (MSP or MGRC), (b) at what point does ownership transfer to 
+          - the middleware team, and (c) who coordinates with external 
+          - system vendors (Avalara, Zilliant, DocuSign, banks) when the 
+          - issue is on their end?",v02 Q8 + specific_requirements.csv 
+          - row 94,Row 94 (OIC Incident Management) shows NO ownership 
+          - assignment - appears to be a gap. Need clarity.
+       10 -  Q9,Scope & Transition,ORIGINAL,Standard,Is the July 6 
+          - go-live date firm or is there potential for schedule 
+          - adjustment based on current project status? What contingency 
+          - exists if the Oracle Fusion go-live extends past May 18?,v02 
+          - Q9,Shows dependency awareness.
+       11 -  Q10,Scope & Transition,ORIGINAL,Standard,As MGRC 
+          - consolidates vendor relationships what is the expected 
+          - timeline for transitioning work from exiting vendors to the 
+          - selected MSP(s)? Will the MSP be responsible for any 
+          - transition activities from other vendors?,v02 Q10,Hidden 
+          - scope risk from vendor transitions.
+       12 -  Q11,Scope & Transition,ENHANCED,High,"Can MGRC characterize 
+          - the current state of operational documentation for each 
+          - application area? Specifically: (a) for NexSTAR (custom 
+          - application with 24x7 requirement), what documentation exists
+          -  for the technology stack, codebase, and deployment 
+          - procedures? (b) for the Material Voucher Java application 
+          - shown in the architecture, is there documentation on hosting,
+          -  ownership, and integration patterns? (c) for RecVue (which 
+          - sits between Salesforce and Oracle ERP), are billing rules 
+          - and revenue recognition logic documented?",v02 Q11 + 
+          - architecture.md,"Custom apps (NexSTAR, Material Voucher) and 
+          - specialized billing (RecVue) are highest KT risk."
+       13 -  Q12,Scope & Transition,NEW: Technical,Must-Ask,"The Specific
+          -  Requirements include separate sections for OIC (rows 91-103)
+          -  and MuleSoft (rows 104-115) integration platforms. Can MGRC 
+          - clarify: (a) the strategic division of workloads between OIC 
+          - and MuleSoft (e.g., OIC for Oracle-native MuleSoft for SaaS),
+          -  (b) the expected ratio of MSP effort between the two 
+          - platforms, and (c) whether there are plans to consolidate to 
+          - a single platform during the contract 
+          - term?",specific_requirements.csv rows 91-115,Dual platforms =
+          -  dual skill sets = higher staffing cost. Need to understand 
+          - if this is transitional or permanent.
+       14 -  Q13,Scope & Transition,NEW: Technical,Must-Ask,"Several 
+          - Specific Requirements mandate named MSP resources due to data
+          -  and domain knowledge required (Oracle BI Tools rows 116-117,
+          -  Snowflake/Pipeline rows 142-145). Can MGRC clarify: (a) 
+          - which roles require dedicated named resources vs. pooled 
+          - support, (b) the expected FTE allocation for named resource 
+          - areas, and (c) whether named resources must be onshore or can
+          -  include offshore team members?",specific_requirements.csv 
+          - rows 116-117 and 142-145,Named resources = dedicated staffing
+          -  (higher cost) vs. pooled support (lower cost). $500K+ annual
+          -  pricing difference.
+       15 -  Q14,Scope & Transition,NEW: Technical,Must-Ask,"The Specific
+          -  Requirements specify up to 5 SQL Servers and up to 7 ATP 
+          - Databases (rows 148-160). Can MGRC provide: (a) the actual 
+          - current count of each database type in production, (b) for 
+          - SQL Servers the configuration (standalone Always On Failover 
+          - Cluster), and (c) for ATP databases the current OCPU/storage 
+          - allocations?",specific_requirements.csv rows 148-160,Up to 
+          - language creates scope ambiguity. Actual counts drive 
+          - licensing and staffing.
+       16 -  Q15,Evaluation & Selection,ORIGINAL,Standard,"Can MGRC share
+          -  the relative weighting or ranking of the evaluation criteria
+          -  listed (expertise, completeness, customer service, 
+          - governance, vendor strength, compliance, value/TCO)?",v02 
+          - Q12,Shapes where we emphasize in proposal. Every bidder asks 
+          - this.
+       17 -  Q16,Evaluation & Selection,ORIGINAL,Standard,Does MGRC have 
+          - a preference between a single MSP provider across all 
+          - solution areas versus multiple providers with complementary 
+          - coverage?,v02 Q13,Critical strategic question.
+       18 -  Q17,Evaluation & Selection,ORIGINAL,Standard,"Can MGRC share
+          -  who will be participating in the evaluation process (e.g., 
+          - IT, Finance, Procurement, Business Units)?",v02 Q14,Helps 
+          - tailor messaging to evaluators.
+       19 -  Q18,Evaluation & Selection,ORIGINAL,Standard,What role does 
+          - MGRC envision AI and automation playing in managed services 
+          - over the next 2-3 years? Are there specific areas where 
+          - automation is a priority?,v02 Q15,Levels the field on AI 
+          - positioning.
+       20 -  Q19,Staffing & Resource Model,ORIGINAL,Standard,"For US 
+          - business hours support (5 AM - 5 PM PST), does MGRC require 
+          - dedicated named resources assigned exclusively to MGRC for 
+          - each application area, or is a shared/pooled resource model 
+          - with guaranteed response SLAs acceptable?",v02 Q16,$500K+ 
+          - annual pricing difference based on answer.
+       21 -  Q20,Staffing & Resource Model,ORIGINAL,Standard,"For 
+          - after-hours data pipeline monitoring (10 PM - 7 AM PT), what 
+          - is the typical nightly volume of pipeline runs and average 
+          - frequency of interventions requiring hands-on remediation 
+          - versus automated alerting with next-business-day 
+          - follow-up?",v02 Q17,Passive monitoring vs active engineering 
+          - = huge cost difference.
+       22 -  Q21,Staffing & Resource Model,ORIGINAL,Standard,Does MGRC 
+          - have existing change management policies and maintenance 
+          - schedules for the MSP to adopt or should we propose a 
+          - governance framework during Phase 1?,v02 Q18,Adopting 
+          - existing vs building from scratch = different Phase 1 scope.
+       23 -  Q22,Staffing & Resource Model,ORIGINAL,Standard,"For Oracle 
+          - Fusion day-to-day operations, can MGRC provide approximate 
+          - monthly volumes for period-close activities, journal entries,
+          -  PO/invoice processing, and service requests? Are there 
+          - seasonal peaks (quarter-end, year-end) that require surge 
+          - staffing?",v02 Q19,Largest scope item. Seasonal peak question
+          -  shows ERP ops maturity.
+       24 -  Q23,Staffing & Resource Model,ORIGINAL,Standard,For 
+          - dedicated resources are there specific skill certifications 
+          - or experience requirements that MGRC considers mandatory vs. 
+          - preferred?,v02 Q20,Staffing accuracy; distinguishes required 
+          - vs nice-to-have.
+       25 -  Q24,Staffing & Resource Model,ORIGINAL,Standard,"Will the 
+          - MSP be expected to coordinate with or manage relationships 
+          - with third-party vendors (e.g., Oracle support, MuleSoft 
+          - support, implementation partners)? If so can MGRC provide a 
+          - list of current third-party vendors and their support 
+          - scope?",v02 Q21,Potential high-value scope for BayOne.
+       26 -  Q25,Staffing & Resource Model,NEW: Technical,Must-Ask,"The 
+          - Specific Requirements specify after-hours monitoring 
+          - (10pm-7am PT) for data pipelines (Rivery, SplashBI, Tableau) 
+          - and 24x7 support for NexSTAR. Can MGRC clarify: (a) is 
+          - after-hours coverage required 7 days/week including 
+          - weekends/holidays or business days only, (b) what is the 
+          - historical frequency of incidents requiring intervention 
+          - during these windows, and (c) is the expectation for active 
+          - monitoring (dedicated overnight shift) or on-call 
+          - response?",specific_requirements.csv rows 142-145 and 
+          - 77-90,Dedicated overnight shift (7x9 hours) = 1.5-2 FTE. 
+          - On-call rotation = 0.25-0.5 FTE. Major pricing difference.
+       27 -  Q26,Staffing & Resource Model,NEW: Technical,Must-Ask,"For 
+          - Oracle Fusion period-close activities for GL AP AR Inventory 
+          - Costing and related modules (row 34 Shared), what is the 
+          - expected MSP role? Specifically: (a) is MSP responsible for 
+          - executing close processes (running jobs journal validation 
+          - reconciliation) or providing on-call support, (b) what is the
+          -  close timeline (e.g., 5-day window), and (c) are after-hours
+          -  or weekend close activities 
+          - expected?",specific_requirements.csv row 34,Close execution 
+          - requires dedicated resources with deep GL/subledger 
+          - knowledge. Support is much lower effort than execute.
+       28 -  Q27,Technology & Environment,ORIGINAL,Standard,What is the 
+          - expected timeline for migration from FreshService to 
+          - ServiceNow (or similar)? Will the MSP be expected to support 
+          - both platforms during transition and is the MSP expected to 
+          - play a role in the ServiceNow implementation itself?,v02 
+          - Q22,Dual-platform support and migration involvement = 
+          - different scope.
+       29 -  Q28,Technology & Environment,ORIGINAL,Must-Ask,"For NexSTAR 
+          - (custom application), can MGRC provide documentation on the 
+          - technology stack, codebase language/framework, architecture 
+          - diagrams, known technical debt, and deployment pipeline? Will
+          -  the MSP have full source code and development environment 
+          - access?",v02 Q23,Custom apps are highest risk. 24x7 
+          - requirement makes this critical.
+       30 -  Q29,Technology & Environment,ORIGINAL,Standard,For the 
+          - Customer Hub (nopCommerce) can MGRC clarify the PCI 
+          - compliance scope and whether the MSP is expected to maintain 
+          - PCI certification or support MGRC's existing audit 
+          - process?,v02 Q24,PCI accountability significantly affects 
+          - security costs and insurance.
+       31 -  Q30,Technology & Environment,ORIGINAL,Standard,Are there 
+          - existing ITSM workflows automations or custom configurations 
+          - in FreshService that must be migrated to ServiceNow? What is 
+          - the expected level of MSP involvement in the migration 
+          - project?,v02 Q25,Migration complexity affects Phase 1 scope.
+       32 -  Q31,Technology & Environment,ORIGINAL,Standard,What is the 
+          - current state of test automation for regression smoke and 
+          - integration testing? Would MGRC be interested in the MSP 
+          - introducing automation capabilities as part of the 
+          - engagement?,v02 Q26,Probes automation appetite.
+       33 -  Q32,Technology & Environment,ORIGINAL,Standard,Does MGRC 
+          - have existing SIEM/SOC capabilities or will the MSP be 
+          - expected to provide security monitoring and incident 
+          - response?,v02 Q27,Security ops distinct from compliance — 
+          - could be large hidden scope.
+       34 -  Q33,Technology & Environment,ORIGINAL,Standard,"For critical
+          -  systems like Oracle Fusion NexSTAR and Customer Hub — what 
+          - are the recovery targets if there's an outage? How often are 
+          - disaster recovery tests conducted, and will the MSP be 
+          - expected to plan and run those drills?",v02 Q28,DR testing 
+          - effort ranges widely.
+       35 -  Q34,Technology & Environment,NEW: Technical,Must-Ask,"RecVue
+          -  sits between Salesforce and Oracle ERP as a critical billing
+          -  hub (per the architecture diagram). Can MGRC provide: (a) 
+          - monthly billing cycle volume (number of invoices generated), 
+          - (b) typical exception rate requiring manual intervention, (c)
+          -  complexity of revenue recognition rules (standard vs. 
+          - custom), and (d) current FTE hours dedicated to billing cycle
+          -  execution and exception handling?",architecture.md + 
+          - specific_requirements.csv row 17,Row 17 marks RecVue 
+          - Day-to-Day Operations as MSP Owned - understanding volume 
+          - drives staffing for dedicated billing analyst.
+       36 -  Q35,Technology & Environment,NEW: Technical,High,Row 28 
+          - marks RecVue Disaster Recovery as MSP Owned. Is RecVue hosted
+          -  on-premises in MGRC's cloud tenancy or in RecVue's SaaS 
+          - environment? If SaaS what is the MSP's DR responsibility 
+          - (application config backup vs. infrastructure 
+          - DR)?,specific_requirements.csv row 28,SaaS = vendor-managed 
+          - DR. Self-hosted = MSP infrastructure responsibility. Major 
+          - scope difference.
+       37 -  Q36,Technology & Environment,NEW: Technical,High,"For 
+          - Customer Hub (nopCommerce), the Specific Requirements 
+          - reference PCI-scoped platform with MSP responsible for 
+          - security hardening vulnerability scanning patching. Can MGRC 
+          - clarify: (a) does Customer Hub process and store credit card 
+          - data directly or does it redirect to a third-party payment 
+          - processor, (b) what tokenization/encryption controls are in 
+          - place, and (c) what is the expected vulnerability scanning 
+          - cadence (quarterly external annual internal per PCI 
+          - DSS)?",specific_requirements.csv rows 161-172,Cardholder data
+          -  in scope = SAQ-D compliance. Payment processor redirect = 
+          - SAQ-A. Massive difference in PCI audit effort.
+       38 -  Q37,Technology & Environment,NEW: Architecture,High,"The 
+          - architecture diagram shows a Material Voucher (Java 
+          - Application) connected to Oracle SCM Inventory. Can MGRC 
+          - clarify: (a) where is this application hosted (on-premises 
+          - OCI Azure), (b) who owns the source code and documentation, 
+          - (c) is the MSP expected to support application code or only 
+          - the integration to Oracle, and (d) is this application in 
+          - scope for MSP support or retained by 
+          - MGRC?",architecture.md,Custom Java app is unknown quantity. 
+          - If in scope need Java developers. If out of scope need clear 
+          - boundary.
+       39 -  Q38,Technology & Environment,NEW: Architecture,High,The 
+          - architecture shows three CRM-related systems: Salesforce 
+          - (primary) Oracle CRM on Demand and Nextstar. Are Oracle CRM 
+          - on Demand and Nextstar being retired as part of the 
+          - Salesforce consolidation or will the MSP need to support all 
+          - three platforms? If being retired what is the 
+          - timeline?,architecture.md,Three CRM platforms = 3x support 
+          - complexity. Retirement timeline affects staffing model.
+       40 -  Q39,SLA & KPI,NEW: SLA/KPI,High,"The SLA document defines 
+          - response time targets (15 min for P1 60-120 min for P2 etc.) 
+          - but also references timeline for the solution and fixes. Can 
+          - MGRC clarify: (a) are there defined resolution time SLAs in 
+          - addition to response time SLAs, (b) if yes what are the 
+          - target resolution times for each priority level, and (c) are 
+          - response and resolution measured separately in the SLO 
+          - calculations?",sla.csv,Response time is achievable with 
+          - process. Resolution time depends on issue complexity and may 
+          - not be controllable.
+       41 -  Q40,SLA & KPI,NEW: SLA/KPI,Standard,For P2 (High) priority 
+          - incidents the SLA states 60-120 minutes response time. For 
+          - SLA compliance measurement is the target 60 minutes 
+          - (aspirational) or 120 minutes (acceptable)? Will a response 
+          - at 90 minutes count as SLA-compliant?,sla.csv,2x difference 
+          - affects staffing and escalation procedures.
+       42 -  Q41,SLA & KPI,NEW: SLA/KPI,Standard,Who has authority to 
+          - assign priority levels (P1-P4) to incoming tickets? Does 
+          - MGRC's reporting user assign priority or does the MSP assess 
+          - and classify? If the MSP classifies what is the appeal 
+          - process if MGRC disagrees with the 
+          - assignment?,sla.csv,Prevents SLA disputes over priority 
+          - classification after incidents.
+       43 -  Q42,SLA & KPI,NEW: SLA/KPI,Standard,"The SLA document 
+          - doesn't specify exclusion windows. Can MGRC clarify: (a) are 
+          - P1/P2 response SLAs expected 24/7/365 or only during business
+          -  hours, (b) are there exclusion windows for scheduled 
+          - maintenance, (c) are SLAs suspended during force majeure 
+          - events, and (d) what is the documentation process for 
+          - exclusions?",sla.csv,Defines realistic on-call staffing and 
+          - protects against penalization for circumstances outside MSP 
+          - control.
+       44 -  Q43,SLA & KPI,NEW: SLA/KPI,Must-Ask,"What are the 
+          - consequences when monthly/quarterly SLA compliance falls 
+          - below the defined objectives (95% for P1 90% for P2-P4)? 
+          - Specifically: (a) are there service credits or penalty 
+          - clauses, (b) what is the remediation process if SLA 
+          - compliance drops below minimum thresholds, and (c) is there a
+          -  grace period during the first 90 days of 
+          - engagement?",sla.csv,Determines financial risk exposure. 
+          - Grace period allows baseline establishment before penalties.
+       45 -  Q44,SLA & KPI,NEW: SLA/KPI,Standard,"Should KPIs be measured
+          -  and reported: (a) globally across all MGRC systems, (b) per 
+          - business unit/division (modular test equipment containment 
+          - HVAC), (c) per system/application, or (d) hybrid approach 
+          - with global rollups and system-specific 
+          - breakdowns?",kpi.csv,Affects ticketing system configuration 
+          - and reporting infrastructure.
+       46 -  Q45,SLA & KPI,NEW: SLA/KPI,High,To set realistic targets can
+          -  MGRC provide historical performance data for the past 6-12 
+          - months including: Average Resolution Time First Contact 
+          - Resolution Rate MTTR and SLA Compliance Rate? Are there known
+          -  seasonal variations (higher volumes during tax season 
+          - quarter-end)?,kpi.csv,Prevents committing to unachievable 
+          - targets without understanding current state.
+       47 -  Q46,SLA & KPI,NEW: SLA/KPI,Standard,"Regarding measurement 
+          - tooling: (a) does MGRC provide the ticketing system or should
+          -  the MSP propose one, (b) who provides infrastructure 
+          - monitoring and alerting tools, (c) will the MSP have 
+          - API/database access to pull raw data for independent SLA 
+          - validation, and (d) is there a neutral third-party system 
+          - that timestamps ticket events to prevent 
+          - disputes?",kpi.csv,Determines infrastructure costs and data 
+          - integrity for SLA verification.
+       48 -  Q47,Compliance & Audit,ORIGINAL,Standard,Can MGRC provide a 
+          - calendar of compliance audits scheduled for the next 12 
+          - months and clarify which audits the MSP will be expected to 
+          - support lead evidence gathering for or remediate findings 
+          - from?,v02 Q29,8 compliance frameworks listed. Unknown effort 
+          - implications.
+       49 -  Q48,Compliance & Audit,NEW: Technical,High,"The General 
+          - Requirements reference multiple compliance frameworks (NIST 
+          - SOC2 HIPAA PCI GDPR CMMC). Can MGRC clarify which frameworks 
+          - are: (a) mandatory/certified today, (b) in active pursuit, 
+          - and (c) aspirational/future? Specifically does MGRC process 
+          - HIPAA-protected health information and does MGRC have or 
+          - require CMMC certification?",general_requirements.csv section
+          -  11,HIPAA/CMMC have major staffing and process implications. 
+          - Need to know if these are active requirements or future 
+          - considerations.
+       50 -  Q49,Commercial & Contractual,ORIGINAL,Standard,Does MGRC 
+          - have a target budget range or not-to-exceed threshold for the
+          -  MSP engagement that vendors should be aware of when 
+          - structuring proposals?,v02 Q30,Rarely answered directly but 
+          - worth asking.
+       51 -  Q50,Commercial & Contractual,ORIGINAL,Standard,Is MGRC open 
+          - to pricing models that combine fixed operational support with
+          -  variable capacity for enhancement and project work?,v02 
+          - Q31,Gets intel on commercial flexibility.
+       52 -  Q51,Commercial & Contractual,ORIGINAL,Standard,For 
+          - multi-year pricing does MGRC expect flat pricing across Years
+          -  1-3 or is there flexibility in how pricing is structured 
+          - year-over-year?,v02 Q32,Gets intel without describing our 
+          - exact strategy.
+       53 -  Q52,Commercial & Contractual,ORIGINAL,Standard,For items 
+          - designated as Shared Responsibility will the RACI and 
+          - responsibility splits be finalized before contract execution 
+          - or will they be defined during the Phase 1 onboarding period?
+          -  How will scope disputes in shared areas be resolved?,v02 
+          - Q33,Most of RFP is Shared Responsibility. Protects against 
+          - undefined scope.
+       54 -  Q53,Commercial & Contractual,ORIGINAL,Standard,"For scope 
+          - changes identified after contract execution (e.g., new 
+          - integrations acquisitions system upgrades), what is MGRC's 
+          - change request and approval process? Will these be priced 
+          - separately or absorbed into the base contract?",v02 
+          - Q34,Protects against post-contract scope creep.
+       55 -  Q54,Commercial & Contractual,ORIGINAL,Standard,Are there 
+          - pending or planned acquisitions that would affect MSP scope 
+          - within the first 12 months? If so how many and what is their 
+          - general scope?,v02 Q35,M&A onboarding listed as service 
+          - domain.
+       56 -  Q55,Commercial & Contractual,ORIGINAL,Standard,How have M&A 
+          - integrations historically been handled from a support 
+          - perspective?,v02 Q36,Understanding past approach helps plan 
+          - for future.
+       57 -  Q56,Shared Responsibility,NEW: Technical,Must-Ask,"The 
+          - Specific Requirements show most categories as Shared=Yes 
+          - between MSP and MGRC. Can MGRC provide: (a) a definition of 
+          - what Shared means operationally (e.g., who initiates who 
+          - executes who approves), (b) examples of how shared work would
+          -  be divided in practice, and (c) the decision-making 
+          - authority and escalation path for shared 
+          - activities?",specific_requirements.csv (150+ rows),150+ of 
+          - 183 requirements are Shared. Without clear RACI scope 
+          - disputes are inevitable.
+       58 -  Q57,Shared Responsibility,NEW: Technical,High,"For 
+          - Development Enhancement & Optimization categories marked 
+          - Shared (Salesforce row 12 Oracle Fusion row 43 etc.), what is
+          -  the expected split between MSP-led development and MGRC-led 
+          - development? Specifically will MSP be responsible for custom 
+          - code (Apex Java PL/SQL) or limited to declarative 
+          - configuration (flows validation rules Fast 
+          - Formulas)?",specific_requirements.csv rows 12 and 43,Senior 
+          - developers cost 40-60% more than administrators. Custom code 
+          - vs. configuration is major pricing distinction.
+       59 -  Q58,Shared Responsibility,NEW: Technical,Standard,"For 
+          - Integration Platform Development Enhancement & Optimization 
+          - (OIC row 101 MuleSoft row 113), what is the expected balance 
+          - between: (a) maintaining existing integrations, (b) modifying
+          -  integrations for business changes, and (c) developing 
+          - net-new integrations? Is there an existing backlog of 
+          - integration development requests?",specific_requirements.csv 
+          - rows 101 and 113,Row 113 (MuleSoft) is marked MSP Augmented 
+          - suggesting MGRC has internal developers. Need clarity on 
+          - staffing model.
+       60 -  Q59,Shared Responsibility,NEW: Technical,Standard,"Row 34 
+          - (Oracle Fusion Operational Day-to-Day) references 
+          - Documentation: BRDs FSDs test scripts SOPs and knowledge 
+          - articles. What is the expected volume of enhancements 
+          - requiring formal BRDs/FSDs, and who is responsible for 
+          - initial requirements gathering and business 
+          - analysis?",specific_requirements.csv row 34,Creating 
+          - BRDs/FSDs is business analyst work not functional support. 
+          - Significantly different skill level and cost.
+       61 -  Q60,Shared Responsibility,NEW: Technical,Standard,"For 
+          - Security & Compliance requirements marked Shared across 
+          - multiple solutions, what is the expected frequency of 
+          - segregation-of-duties reviews? Does MGRC use SoD tooling 
+          - (Appsian Soterion Oracle AACG) or are reviews performed 
+          - manually? How many user accounts and roles are in 
+          - scope?",specific_requirements.csv security rows,Manual SoD 
+          - reviews in large Oracle/Salesforce environments can consume 
+          - 40-80 hours per quarter. Tooling reduces effort 
+          - significantly.
+        1 +  TAB NAME,Section and/or ROW,#,Question to MGRC,
+          +  Type,Priority,Source Reference,Justification
+        2 +  Scope & Transition,General,1
+          +  ,"Can MGRC provide a breakdown of current monthly 
+          +  ticket/service request volume by application area 
+          +  (Salesforce, Oracle Fusion, OCI, NexSTAR, integrations, 
+          +  etc.) and by priority level (P1-P4) for the trailing 12 
+          +  months?",ORIGINAL,Standard,v02 Q1,Essential for cost model.
+        3 +  Scope & Transition,General,2
+          +  ,What is the current FTE count (internal and 
+          +  external/contractor) supporting each application area today?
+          +   How many of these resources are expected to transition to 
+          +  the MSP or depart during the onboarding period?,
+          +  ORIGINAL,Standard,v02 Q2,Standard scoping for team size.
+        4 +  Scope & Transition,KT Phase,3
+          +  ,"For the Knowledge Transfer phase (May 18 - July 6), will 
+          +  MGRC's current support resources remain fully available to 
+          +  shadow and co-work with MSP staff during the entire 
+          +  transition period, or is there an expected ramp-down 
+          +  schedule?",ORIGINAL,Standard,
+          +  v02 Q3,Coverage gap risk if staff leave before KT complete.
+        5 +  Scope & Transition,Go-Live,4
+          +  ,Is MGRC open to a phased go-live approach where application
+          +   areas are transitioned in priority waves rather than a 
+          +  single go-live date of July 6 for all areas?,
+          +  ORIGINAL,Standard,v02 Q4,De-risks delivery.
+        6 +  Scope & Transition,Integrations,5,"The architecture shows 
+          + 50+ integrations across Oracle Cloud, Salesforce, RecVue, and
+          +  external systems. Can MGRC provide: (a) an inventory of 
+          + integrations with stability status (stable/active 
+          + development/recurring issues), (b) error/failure rates for 
+          + top integrations, and (c) when integration issues arise, who 
+          + owns first-level triage vs. middleware team vs. external 
+          + vendor coordination?",MERGED,Must-Ask,v02 Q5+Q8 + 
+          + architecture.md,Integration ownership is major scope 
+          + ambiguity. Row 94 (OIC Incident Management) shows NO 
+          + ownership assignment.
+        7 +  Scope & Transition,OCI Hours,6
+          +  ,"The RFP notes OCI effort is estimated at under 1,000 hours
+          +   annually. The 
+          +  Specific Requirements show 15 categories for OCI alone.
+          +   Does the 1,000-hour estimate cover all categories or only 
+          +  Operational Day-to-Day? Can MGRC provide similar 
+          +  estimates for Oracle Fusion and NexSTAR?",ENHANCED,Must-Ask,
+          +  v02 Q6 + rows 46-60,Scope could be 2-3x higher than stated.
+        8 +  Scope & Transition,Staffing Model,7,"What is the current 
+          + onshore/offshore distribution of support resources? Does MGRC
+          +  require dedicated named resources assigned exclusively to 
+          + MGRC, or is a shared/pooled resource model with guaranteed 
+          + response SLAs acceptable?",MERGED,Must-Ask,v02 Q7+Q19 + rows 
+          + 116-117,Named resources = $500K+ annual pricing difference 
+          + vs. pooled.
+        9 +  Scope & Transition,Timeline,8,Is the July 6 go-live date 
+          + firm or is there potential for schedule adjustment? What 
+          + contingency exists if the Oracle Fusion go-live extends past 
+          + May 18?,ORIGINAL,Standard,v02 Q9,Shows dependency awareness.
+       10 +  Scope & Transition,Vendor Transition,9,As MGRC consolidates 
+          + vendor relationships what is the expected timeline for 
+          + transitioning work from exiting vendors to the selected 
+          + MSP(s)? Will the MSP be responsible for any transition 
+          + activities from other vendors?,ORIGINAL,Standard,v02 
+          + Q10,Hidden scope risk.
+       11 +  Scope & Transition,Documentation,10,"Can MGRC characterize 
+          + the current state of operational documentation for each 
+          + application area? Specifically for NexSTAR (custom 24x7 app),
+          +  Material Voucher (Java app in architecture), and RecVue 
+          + (billing hub) - what documentation exists for technology 
+          + stack, codebase, and integration patterns?",ENHANCED,High,v02
+          +  Q11 + architecture.md,Custom apps are highest KT risk.
+       12 +  Scope & Transition,Integration Platforms,11,"The Specific 
+          + Requirements include separate sections for OIC and MuleSoft. 
+          + Can MGRC clarify: (a) the strategic division of workloads 
+          + between platforms, (b) expected ratio of MSP effort between 
+          + them, and (c) whether there are plans to consolidate to a 
+          + single platform?",NEW: Technical,Must-Ask,rows 91-115,Dual 
+          + platforms = dual skill sets = higher staffing cost.
+       13 +  Evaluation & Selection,Criteria Weighting,12,"Can MGRC share
+          +  the relative weighting or ranking of the evaluation criteria
+          +  (expertise, completeness, customer service, governance, 
+          + vendor strength, compliance, 
+          + value/TCO)?",ORIGINAL,Standard,v02 Q12,Shapes proposal 
+          + emphasis.
+       14 +  Evaluation & Selection,Provider Model,13,Does MGRC have a 
+          + preference between a single MSP provider across all solution 
+          + areas versus multiple providers with complementary 
+          + coverage?,ORIGINAL,Standard,v02 Q13,Critical strategic 
+          + question.
+       15 +  Evaluation & Selection,Evaluators,14,"Can MGRC share who 
+          + will be participating in the evaluation process (e.g., IT, 
+          + Finance, Procurement, Business Units)?",ORIGINAL,Standard,v02
+          +  Q14,Helps tailor messaging.
+       16 +  Evaluation & Selection,AI/Automation,15,What role does MGRC 
+          + envision AI and automation playing in managed services over 
+          + the next 2-3 years? Are there specific areas where automation
+          +  is a priority?,ORIGINAL,Standard,v02 Q15,Levels the field on
+          +  AI positioning.
+       17 +  Staffing & Resource Model,After-Hours Pipeline,16,"For 
+          + after-hours data pipeline monitoring (10 PM - 7 AM PT), what 
+          + is the typical nightly volume of pipeline runs and frequency 
+          + of interventions? Is coverage required 7 days/week including 
+          + holidays, and is the expectation for active monitoring 
+          + (dedicated shift) or on-call response?",MERGED,Must-Ask,v02 
+          + Q17 + rows 142-145,Dedicated overnight = 1.5-2 FTE. On-call =
+          +  0.25-0.5 FTE.
+       18 +  Staffing & Resource Model,Change Management,17,Does MGRC 
+          + have existing change management policies and maintenance 
+          + schedules for the MSP to adopt or should we propose a 
+          + governance framework during Phase 1?,ORIGINAL,Standard,v02 
+          + Q18,Adopting existing vs building = different scope.
+       19 +  Staffing & Resource Model,Oracle Fusion Close,18,"For Oracle
+          +  Fusion period-close activities (GL, AP, AR, Inventory, 
+          + Costing), can MGRC provide monthly volumes and clarify the 
+          + expected MSP role: executing close processes (running jobs, 
+          + reconciliation) vs. providing on-call support? Are 
+          + after-hours or weekend close activities 
+          + expected?",MERGED,Must-Ask,v02 Q19+Q26 + row 34,Close 
+          + execution = dedicated resources. Support = much lower effort.
+       20 +  Staffing & Resource Model,Certifications,19,For dedicated 
+          + resources are there specific skill certifications or 
+          + experience requirements that MGRC considers mandatory vs. 
+          + preferred?,ORIGINAL,Standard,v02 Q20,Distinguishes required 
+          + vs nice-to-have.
+       21 +  Staffing & Resource Model,Third-Party Vendors,20,"Will the 
+          + MSP be expected to coordinate with or manage relationships 
+          + with third-party vendors (Oracle support, MuleSoft support, 
+          + implementation partners)? If so can MGRC provide a list of 
+          + current vendors and their support 
+          + scope?",ORIGINAL,Standard,v02 Q21,Potential high-value scope.
+       22 +  Technology & Environment,ServiceNow Migration,21,What is the
+          +  expected timeline for migration from FreshService to 
+          + ServiceNow? Will the MSP support both platforms during 
+          + transition and play a role in the ServiceNow implementation 
+          + itself?,MERGED,Standard,v02 Q22+Q30,Dual-platform = different
+          +  scope.
+       23 +  Technology & Environment,NexSTAR,22,"For NexSTAR (custom 
+          + application with 24x7 requirement), can MGRC provide 
+          + documentation on technology stack, codebase 
+          + language/framework, architecture diagrams, known technical 
+          + debt, and deployment pipeline? Will the MSP have full source 
+          + code access?",ORIGINAL,Must-Ask,v02 Q23,Custom apps are 
+          + highest risk.
+       24 +  Technology & Environment,PCI Scope,23,"For Customer Hub 
+          + (nopCommerce), can MGRC clarify the PCI compliance scope: (a)
+          +  does it process/store credit card data directly or redirect 
+          + to a payment processor, (b) is the MSP expected to maintain 
+          + PCI certification or support MGRC's audit process, and (c) 
+          + what is the expected vulnerability scanning 
+          + cadence?",MERGED,High,v02 Q24+Q36 + rows 161-172,SAQ-D vs 
+          + SAQ-A = massive difference in audit effort.
+       25 +  Technology & Environment,Test Automation,24,What is the 
+          + current state of test automation for regression smoke and 
+          + integration testing? Would MGRC be interested in the MSP 
+          + introducing automation capabilities?,ORIGINAL,Standard,v02 
+          + Q26,Probes automation appetite.
+       26 +  Technology & Environment,Security Operations,25,Does MGRC 
+          + have existing SIEM/SOC capabilities or will the MSP be 
+          + expected to provide security monitoring and incident 
+          + response?,ORIGINAL,Standard,v02 Q27,Could be large hidden 
+          + scope.
+       27 +  Technology & Environment,Disaster Recovery,26,"For critical 
+          + systems (Oracle Fusion, NexSTAR, Customer Hub) what are the 
+          + RTO/RPO targets? How often are DR tests conducted and will 
+          + the MSP plan and run those drills?",ORIGINAL,Standard,v02 
+          + Q28,DR testing effort varies widely.
+       28 +  Technology & Environment,RecVue Billing,27,"RecVue sits 
+          + between Salesforce and Oracle ERP as a billing hub. Can MGRC 
+          + provide: (a) monthly billing cycle volume, (b) typical 
+          + exception rate, and (c) whether RecVue is SaaS-hosted (vendor
+          +  DR) or self-hosted (MSP DR 
+          + responsibility)?",MERGED,Must-Ask,architecture.md + rows 17 
+          + and 28,Row 17 marks RecVue Day-to-Day as MSP Owned. Hosting 
+          + affects DR scope.
+       29 +  Technology & Environment,Material Voucher App,28,"The 
+          + architecture shows a Material Voucher (Java Application) 
+          + connected to Oracle SCM Inventory. Is this application in 
+          + scope for MSP support or retained by MGRC? If in scope, where
+          +  is it hosted and who owns the source code?",NEW: 
+          + Architecture,High,architecture.md,Custom Java app - need to 
+          + know if Java developers required.
+       30 +  Technology & Environment,Multi-CRM,29,The architecture shows
+          +  Salesforce plus Oracle CRM on Demand and Nextstar. Are 
+          + Oracle CRM on Demand and Nextstar being retired or will the 
+          + MSP support all three platforms?,NEW: 
+          + Architecture,High,architecture.md,Three CRM platforms = 3x 
+          + support complexity.
+       31 +  SLA & KPI,Response vs Resolution,30,"The SLA defines 
+          + response time targets (15 min for P1, 60-120 min for P2). Are
+          +  there also defined resolution time SLAs? If yes, what are 
+          + target resolution times for each priority level?",NEW: 
+          + SLA/KPI,High,sla.csv,Response is achievable. Resolution 
+          + depends on issue complexity.
+       32 +  SLA & KPI,SLA Exclusions,31,"Are there exclusion windows for
+          +  SLA measurement (scheduled maintenance, force majeure)? Is 
+          + there a grace period during the first 90 days to establish 
+          + baselines before penalties apply?",NEW: 
+          + SLA/KPI,Standard,sla.csv,Protects against penalization for 
+          + circumstances outside MSP control.
+       33 +  SLA & KPI,Non-Compliance Consequences,32,"What are the 
+          + consequences when SLA compliance falls below objectives (95% 
+          + for P1, 90% for P2-P4)? Are there service credits, penalty 
+          + clauses, or remediation requirements?",NEW: 
+          + SLA/KPI,Must-Ask,sla.csv,Determines financial risk exposure.
+       34 +  SLA & KPI,Historical Baseline,33,Can MGRC provide historical
+          +  performance data (past 6-12 months) for Average Resolution 
+          + Time and SLA Compliance Rate to help set realistic 
+          + targets?,NEW: SLA/KPI,High,kpi.csv,Prevents committing to 
+          + unachievable targets.
+       35 +  Compliance & Audit,Audit Calendar,34,Can MGRC provide a 
+          + calendar of compliance audits scheduled for the next 12 
+          + months and clarify which audits the MSP will support or lead 
+          + evidence gathering for?,ORIGINAL,Standard,v02 Q29,8 
+          + compliance frameworks listed.
+       36 +  Compliance & Audit,Framework Prioritization,35,"The General 
+          + Requirements reference NIST, SOC2, HIPAA, PCI, GDPR, CMMC. 
+          + Which frameworks are mandatory today vs. aspirational? 
+          + Specifically, does MGRC process HIPAA data or require CMMC 
+          + certification?",NEW: Technical,High,general_requirements.csv 
+          + section 11,HIPAA/CMMC have major staffing implications.
+       37 +  Commercial & Contractual,Budget Range,36,Does MGRC have a 
+          + target budget range or not-to-exceed threshold for the MSP 
+          + engagement?,ORIGINAL,Standard,v02 Q30,Rarely answered but 
+          + worth asking.
+       38 +  Commercial & Contractual,Pricing Model,37,Is MGRC open to 
+          + pricing models that combine fixed operational support with 
+          + variable capacity for enhancement and project 
+          + work?,ORIGINAL,Standard,v02 Q31,Gets intel on commercial 
+          + flexibility.
+       39 +  Commercial & Contractual,Multi-Year Pricing,38,For 
+          + multi-year pricing does MGRC expect flat pricing across Years
+          +  1-3 or is there flexibility in how pricing is structured 
+          + year-over-year?,ORIGINAL,Standard,v02 Q32,Gets intel on 
+          + pricing structure.
+       40 +  Commercial & Contractual,Shared Responsibility,39,"For items
+          +  designated as Shared Responsibility: (a) can MGRC define 
+          + what Shared means operationally (who initiates, executes, 
+          + approves), (b) will RACI be finalized before contract 
+          + execution or during Phase 1, and (c) how will scope disputes 
+          + be resolved?",MERGED,Must-Ask,v02 Q33+Q56 + 150+ rows,150+ of
+          +  183 requirements are Shared. Without RACI scope disputes are
+          +  inevitable.
+       41 +  Commercial & Contractual,Scope Changes,40,"For scope changes
+          +  after contract execution (new integrations, acquisitions, 
+          + upgrades), what is MGRC's change request process? Will these 
+          + be priced separately or absorbed into base 
+          + contract?",ORIGINAL,Standard,v02 Q34,Protects against scope 
+          + creep.
+       42 +  Commercial & Contractual,M&A Activity,41,Are there pending 
+          + acquisitions that would affect MSP scope within the first 12 
+          + months? How have M&A integrations historically been handled 
+          + from a support perspective?,MERGED,Standard,v02 Q35+Q36,M&A 
+          + onboarding listed as service domain.
+
+● Done. Created consolidated_questions_v04.csv with 41 questions (reduced
+  from 60).
+
+  Summary of Changes
+
+  | Category                  | v03 | v04 | Change
+      |
+  |---------------------------|-----|-----|---------------------------------
+  ----|
+  | Scope & Transition        | 14  | 11  | -3 (merged)
+      |
+  | Evaluation & Selection    | 4   | 4   | 0
+      |
+  | Staffing & Resource Model | 8   | 5   | -3 (merged)
+      |
+  | Technology & Environment  | 12  | 9   | -3 (merged, removed weeds)
+      |
+  | SLA & KPI                 | 8   | 4   | -4 (removed nitpicky)
+      |
+  | Compliance & Audit        | 2   | 2   | 0
+      |
+  | Commercial & Contractual  | 7   | 6   | -1 (merged M&A)
+      |
+  | Shared Responsibility     | 5   | 0   | -5 (merged into Q39, removed
+  weeds) |
+  | TOTAL                     | 60  | 41  | -19
+      |
+
+  What Was Removed/Merged
+
+  Merged (7 pairs → 7 questions):
+  - Q5+Q8 → Integration inventory + ownership
+  - Q7+Q19 → Staffing model + dedicated vs pooled
+  - Q22+Q26 → Oracle Fusion close volumes + role
+  - Q27+Q30 → ServiceNow migration
+  - Q29+Q36 → PCI scope
+  - Q52+Q56 → Shared Responsibility definition
+  - Q54+Q55 → M&A questions
+
+  Removed as too in the weeds (12):
+  - Database actual counts (discovery)
+  - P2 90-minute SLA nitpick
+  - Priority assignment authority
+  - KPI granularity
+  - Ticketing tooling
+  - Code vs config split (reveals strategy)
+  - Integration development balance
+  - BRD/FSD volume
+  - SoD tooling details
+
+  Column Structure
+
+  TAB NAME | Section and/or ROW | # | Question to MGRC | Type | Priority |
+  Source Reference | Justification
+
+  First 4 columns match your requested format. Additional context columns
+  are at the end for internal reference.
+
+  Still 6 over target (41 vs 35). Want me to cut further, or do you want to
+  do your pass first?
+
+> lets assess further 
+  ⎿  Interrupted · What should Claude do instead?
+
+
+

@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>McGrath RFP Glossary - BayOne Internal Reference</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #a855f7;
+      --purple-dark: #5b21b6;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.5;
+      font-size: 14px;
+      background: var(--white);
+    }
+
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .cover-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e879f9;
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 44px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .cover-subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 48px;
+      max-width: 600px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 48px;
+      padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .cover-meta-item label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+
+    .cover-meta-item span {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .logo {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span { color: #e879f9; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 40px;
+    }
+
+    /* Section Headers */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 32px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--purple-dark);
+    }
+
+    .section-header:first-of-type {
+      margin-top: 0;
+    }
+
+    .section-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--white);
+      background: var(--purple-dark);
+      padding: 4px 10px;
+      border-radius: 4px;
+      letter-spacing: 1px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .section-count {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-left: auto;
+    }
+
+    /* Glossary Table */
+    .g-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+
+    .g-table th {
+      text-align: left;
+      padding: 8px 12px;
+      background: #5b21b6;
+      color: #ffffff !important;
+      font-weight: 600;
+      font-size: 10px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .g-table th:last-child { border-right: none; }
+    .g-table th:first-child { border-radius: 6px 0 0 0; }
+    .g-table th:last-child { border-radius: 0 6px 0 0; }
+
+    .g-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .g-table tr:last-child td { border-bottom: none; }
+    .g-table tr:nth-child(even) { background: var(--bg-subtle); }
+
+    .g-table .col-term {
+      width: 140px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .g-table .col-full {
+      width: 200px;
+      color: var(--text);
+    }
+
+    .g-table .col-desc {
+      color: var(--text);
+    }
+
+    .g-table .col-category {
+      width: 100px;
+      font-size: 11px;
+      color: var(--text-light);
+    }
+
+    .g-table .col-role {
+      width: 160px;
+      color: var(--text);
+    }
+
+    .g-table .col-notes {
+      color: var(--text-light);
+      font-size: 12px;
+    }
+
+    /* Highlight important terms */
+    .term-highlight {
+      background: #fef3c7;
+      padding: 1px 4px;
+      border-radius: 2px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 32px 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+
+    .footer-logo {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .footer-logo span { color: #a855f7; }
+
+    .footer p {
+      font-size: 12px;
+      color: var(--text-light);
+      margin: 0;
+    }
+
+    /* Print styles */
+    @media print {
+      @page {
+        size: 8.5in 11in;
+        margin: 0.4in;
+      }
+
+      body { font-size: 8pt; line-height: 1.3; }
+
+      .cover {
+        min-height: 0;
+        height: 10in;
+        padding: 50px;
+        page-break-after: always;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .cover h1 { font-size: 32pt; }
+      .cover-subtitle { font-size: 12pt; }
+
+      .container { padding: 0; max-width: 100%; }
+
+      .section-header {
+        margin: 16px 0 8px;
+        page-break-after: avoid;
+      }
+
+      .section-title { font-size: 14px; }
+
+      .g-table {
+        font-size: 8pt;
+        page-break-inside: auto;
+      }
+
+      .g-table th, .g-table td {
+        padding: 4px 6px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .g-table tr {
+        page-break-inside: avoid;
+      }
+
+      .footer {
+        margin-top: 16px;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-label">Internal Reference</div>
+      <h1>McGrath RFP Glossary</h1>
+      <p class="cover-subtitle">Acronyms, technologies, terms, and key contacts for the BayOne team</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <label>Client</label>
+          <span>McGrath RentCorp</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Document Type</label>
+          <span>Internal Only</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Last Updated</label>
+          <span>February 20, 2026</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo">Bay<span>One</span> Solutions</div>
+  </div>
+
+  <div class="container">
+
+    <!-- Section 1: Acronyms -->
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-title">Acronyms</span>
+      <span class="section-count">42 terms</span>
+    </div>
+
+    <table class="g-table">
+      <thead>
+        <tr>
+          <th class="col-term">Acronym</th>
+          <th class="col-full">Full Name</th>
+          <th class="col-desc">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-term">ATP</td>
+          <td class="col-full">Autonomous Transaction Processing</td>
+          <td class="col-desc">Oracle cloud database service</td>
+        </tr>
+        <tr>
+          <td class="col-term">CAB</td>
+          <td class="col-full">Change Advisory Board</td>
+          <td class="col-desc">Governance body for approving changes</td>
+        </tr>
+        <tr>
+          <td class="col-term">CLM</td>
+          <td class="col-full">Contract Lifecycle Management</td>
+          <td class="col-desc">Salesforce module for contracts</td>
+        </tr>
+        <tr>
+          <td class="col-term">CMMC</td>
+          <td class="col-full">Cybersecurity Maturity Model Certification</td>
+          <td class="col-desc">DoD cybersecurity framework</td>
+        </tr>
+        <tr>
+          <td class="col-term">CPQ</td>
+          <td class="col-full">Configure, Price, Quote</td>
+          <td class="col-desc">Salesforce module for quoting</td>
+        </tr>
+        <tr>
+          <td class="col-term">CPRA</td>
+          <td class="col-full">California Privacy Rights Act</td>
+          <td class="col-desc">California data privacy law</td>
+        </tr>
+        <tr>
+          <td class="col-term">DR</td>
+          <td class="col-full">Disaster Recovery</td>
+          <td class="col-desc">Business continuity planning</td>
+        </tr>
+        <tr>
+          <td class="col-term">EPBCS</td>
+          <td class="col-full">Enterprise Planning and Budgeting Cloud Service</td>
+          <td class="col-desc">Oracle planning tool</td>
+        </tr>
+        <tr>
+          <td class="col-term">ERP</td>
+          <td class="col-full">Enterprise Resource Planning</td>
+          <td class="col-desc">Core business software (Oracle Fusion at MGRC)</td>
+        </tr>
+        <tr>
+          <td class="col-term">FRS</td>
+          <td class="col-full">Financial Reporting Studio</td>
+          <td class="col-desc">Oracle reporting tool</td>
+        </tr>
+        <tr>
+          <td class="col-term">FSM</td>
+          <td class="col-full">Field Service Management</td>
+          <td class="col-desc">Oracle module</td>
+        </tr>
+        <tr>
+          <td class="col-term">FTE</td>
+          <td class="col-full">Full-Time Equivalent</td>
+          <td class="col-desc">Staffing measure</td>
+        </tr>
+        <tr>
+          <td class="col-term">GDPR</td>
+          <td class="col-full">General Data Protection Regulation</td>
+          <td class="col-desc">EU data privacy law</td>
+        </tr>
+        <tr>
+          <td class="col-term">HIPAA</td>
+          <td class="col-full">Health Insurance Portability and Accountability Act</td>
+          <td class="col-desc">Healthcare data protection</td>
+        </tr>
+        <tr>
+          <td class="col-term">IAM</td>
+          <td class="col-full">Identity and Access Management</td>
+          <td class="col-desc">Security controls for user access</td>
+        </tr>
+        <tr>
+          <td class="col-term">ITSM</td>
+          <td class="col-full">IT Service Management</td>
+          <td class="col-desc">Service desk and ticketing</td>
+        </tr>
+        <tr>
+          <td class="col-term">KM</td>
+          <td class="col-full">Knowledge Management</td>
+          <td class="col-desc">Documentation and runbooks</td>
+        </tr>
+        <tr>
+          <td class="col-term">KT</td>
+          <td class="col-full">Knowledge Transfer</td>
+          <td class="col-desc">Transition training period</td>
+        </tr>
+        <tr>
+          <td class="col-term">MGRC</td>
+          <td class="col-full">McGrath RentCorp</td>
+          <td class="col-desc">The client</td>
+        </tr>
+        <tr>
+          <td class="col-term">MSP</td>
+          <td class="col-full">Managed Services Provider</td>
+          <td class="col-desc">What BayOne is bidding to become</td>
+        </tr>
+        <tr>
+          <td class="col-term">MTTR</td>
+          <td class="col-full">Mean Time to Resolution</td>
+          <td class="col-desc">Support metric</td>
+        </tr>
+        <tr>
+          <td class="col-term">NIST</td>
+          <td class="col-full">National Institute of Standards and Technology</td>
+          <td class="col-desc">Security framework</td>
+        </tr>
+        <tr>
+          <td class="col-term">NTE</td>
+          <td class="col-full">Not to Exceed</td>
+          <td class="col-desc">Budget ceiling</td>
+        </tr>
+        <tr>
+          <td class="col-term">OCI</td>
+          <td class="col-full">Oracle Cloud Infrastructure</td>
+          <td class="col-desc">Oracle's cloud platform</td>
+        </tr>
+        <tr>
+          <td class="col-term">OIC</td>
+          <td class="col-full">Oracle Integration Cloud</td>
+          <td class="col-desc">Oracle's integration middleware</td>
+        </tr>
+        <tr>
+          <td class="col-term">OM</td>
+          <td class="col-full">Order Management</td>
+          <td class="col-desc">Oracle module</td>
+        </tr>
+        <tr>
+          <td class="col-term">OTBI</td>
+          <td class="col-full">Oracle Transactional Business Intelligence</td>
+          <td class="col-desc">Oracle reporting tool</td>
+        </tr>
+        <tr>
+          <td class="col-term">PCI DSS</td>
+          <td class="col-full">Payment Card Industry Data Security Standard</td>
+          <td class="col-desc">Credit card security</td>
+        </tr>
+        <tr>
+          <td class="col-term">PO</td>
+          <td class="col-full">Purchase Order</td>
+          <td class="col-desc">Procurement document</td>
+        </tr>
+        <tr>
+          <td class="col-term">RACI</td>
+          <td class="col-full">Responsible, Accountable, Consulted, Informed</td>
+          <td class="col-desc">Responsibility matrix</td>
+        </tr>
+        <tr>
+          <td class="col-term">RPO</td>
+          <td class="col-full">Recovery Point Objective</td>
+          <td class="col-desc">Max acceptable data loss</td>
+        </tr>
+        <tr>
+          <td class="col-term">RTO</td>
+          <td class="col-full">Recovery Time Objective</td>
+          <td class="col-desc">Max acceptable downtime</td>
+        </tr>
+        <tr>
+          <td class="col-term">SAQ</td>
+          <td class="col-full">Self-Assessment Questionnaire</td>
+          <td class="col-desc">PCI compliance form</td>
+        </tr>
+        <tr>
+          <td class="col-term">SCM</td>
+          <td class="col-full">Supply Chain Management</td>
+          <td class="col-desc">Oracle module</td>
+        </tr>
+        <tr>
+          <td class="col-term">SIEM</td>
+          <td class="col-full">Security Information and Event Management</td>
+          <td class="col-desc">Security monitoring</td>
+        </tr>
+        <tr>
+          <td class="col-term">SIT</td>
+          <td class="col-full">System Integration Testing</td>
+          <td class="col-desc">Pre-go-live testing phase</td>
+        </tr>
+        <tr>
+          <td class="col-term">SLA</td>
+          <td class="col-full">Service Level Agreement</td>
+          <td class="col-desc">Performance commitments</td>
+        </tr>
+        <tr>
+          <td class="col-term">SLO</td>
+          <td class="col-full">Service Level Objective</td>
+          <td class="col-desc">Target performance metrics</td>
+        </tr>
+        <tr>
+          <td class="col-term">SOC</td>
+          <td class="col-full">Security Operations Center</td>
+          <td class="col-desc">Security monitoring team</td>
+        </tr>
+        <tr>
+          <td class="col-term">SOC 2</td>
+          <td class="col-full">Service Organization Control 2</td>
+          <td class="col-desc">Security audit standard</td>
+        </tr>
+        <tr>
+          <td class="col-term">SOP</td>
+          <td class="col-full">Standard Operating Procedure</td>
+          <td class="col-desc">Process documentation</td>
+        </tr>
+        <tr>
+          <td class="col-term">SOW</td>
+          <td class="col-full">Statement of Work</td>
+          <td class="col-desc">Contract scope document</td>
+        </tr>
+        <tr>
+          <td class="col-term">SR</td>
+          <td class="col-full">Service Request</td>
+          <td class="col-desc">Support ticket</td>
+        </tr>
+        <tr>
+          <td class="col-term">TCO</td>
+          <td class="col-full">Total Cost of Ownership</td>
+          <td class="col-desc">Full cost including hidden costs</td>
+        </tr>
+        <tr>
+          <td class="col-term">UAT</td>
+          <td class="col-full">User Acceptance Testing</td>
+          <td class="col-desc">Final testing before go-live</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Section 2: Technologies & Platforms -->
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <span class="section-title">Technologies & Platforms</span>
+      <span class="section-count">27 systems</span>
+    </div>
+
+    <table class="g-table">
+      <thead>
+        <tr>
+          <th class="col-term">Technology</th>
+          <th class="col-category">Category</th>
+          <th class="col-desc">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-term">Avalara</td>
+          <td class="col-category">Tax</td>
+          <td class="col-desc">Tax calculation engine</td>
+        </tr>
+        <tr>
+          <td class="col-term">Azure</td>
+          <td class="col-category">Cloud</td>
+          <td class="col-desc">Microsoft cloud; hosts NexSTAR</td>
+        </tr>
+        <tr>
+          <td class="col-term">Azure DevOps</td>
+          <td class="col-category">DevOps</td>
+          <td class="col-desc">CI/CD and project management</td>
+        </tr>
+        <tr>
+          <td class="col-term">BI Publisher</td>
+          <td class="col-category">Reporting</td>
+          <td class="col-desc">Oracle reporting tool</td>
+        </tr>
+        <tr>
+          <td class="col-term">ConvertRite</td>
+          <td class="col-category">Data Migration</td>
+          <td class="col-desc">Conversion management tool</td>
+        </tr>
+        <tr>
+          <td class="col-term">Cypress</td>
+          <td class="col-category">Testing</td>
+          <td class="col-desc">Test automation framework</td>
+        </tr>
+        <tr>
+          <td class="col-term">DocuSign</td>
+          <td class="col-category">E-signature</td>
+          <td class="col-desc">Electronic signatures</td>
+        </tr>
+        <tr>
+          <td class="col-term">D&B</td>
+          <td class="col-category">Data</td>
+          <td class="col-desc">Dun & Bradstreet business data</td>
+        </tr>
+        <tr>
+          <td class="col-term"><span class="term-highlight">FreshService</span></td>
+          <td class="col-category">ITSM</td>
+          <td class="col-desc">Current service desk (migrating to ServiceNow)</td>
+        </tr>
+        <tr>
+          <td class="col-term">Jira</td>
+          <td class="col-category">Project Mgmt</td>
+          <td class="col-desc">Atlassian project tracking</td>
+        </tr>
+        <tr>
+          <td class="col-term">Microsoft 365</td>
+          <td class="col-category">Productivity</td>
+          <td class="col-desc">Email, Office apps</td>
+        </tr>
+        <tr>
+          <td class="col-term">Microsoft Teams</td>
+          <td class="col-category">Communication</td>
+          <td class="col-desc">Chat and calling</td>
+        </tr>
+        <tr>
+          <td class="col-term">MuleSoft</td>
+          <td class="col-category">Integration</td>
+          <td class="col-desc">API and integration platform</td>
+        </tr>
+        <tr>
+          <td class="col-term"><span class="term-highlight">NexSTAR / STAR</span></td>
+          <td class="col-category">ERP</td>
+          <td class="col-desc">Custom legacy ERP for TRS-RenTelco</td>
+        </tr>
+        <tr>
+          <td class="col-term">nopCommerce</td>
+          <td class="col-category">E-commerce</td>
+          <td class="col-desc">Open-source platform for Customer Hub</td>
+        </tr>
+        <tr>
+          <td class="col-term">Oracle ARCS</td>
+          <td class="col-category">Finance</td>
+          <td class="col-desc">Account Reconciliation Cloud</td>
+        </tr>
+        <tr>
+          <td class="col-term"><span class="term-highlight">Oracle Fusion Cloud</span></td>
+          <td class="col-category">ERP</td>
+          <td class="col-desc">Primary ERP suite (Finance, Procurement, SCM, etc.)</td>
+        </tr>
+        <tr>
+          <td class="col-term">RecVue</td>
+          <td class="col-category">Billing</td>
+          <td class="col-desc">Revenue management and billing</td>
+        </tr>
+        <tr>
+          <td class="col-term">Rivery</td>
+          <td class="col-category">Data</td>
+          <td class="col-desc">ETL/data pipeline tool</td>
+        </tr>
+        <tr>
+          <td class="col-term"><span class="term-highlight">Salesforce</span></td>
+          <td class="col-category">CRM</td>
+          <td class="col-desc">Customer relationship management</td>
+        </tr>
+        <tr>
+          <td class="col-term"><span class="term-highlight">ServiceNow</span></td>
+          <td class="col-category">ITSM</td>
+          <td class="col-desc">Future service desk platform</td>
+        </tr>
+        <tr>
+          <td class="col-term">Snowflake</td>
+          <td class="col-category">Data</td>
+          <td class="col-desc">Cloud data warehouse</td>
+        </tr>
+        <tr>
+          <td class="col-term">SplashBI</td>
+          <td class="col-category">Analytics</td>
+          <td class="col-desc">Business intelligence tool</td>
+        </tr>
+        <tr>
+          <td class="col-term">SQL Server</td>
+          <td class="col-category">Database</td>
+          <td class="col-desc">Microsoft database (5 instances)</td>
+        </tr>
+        <tr>
+          <td class="col-term">Tableau</td>
+          <td class="col-category">Analytics</td>
+          <td class="col-desc">Data visualization</td>
+        </tr>
+        <tr>
+          <td class="col-term">Webex</td>
+          <td class="col-category">Communication</td>
+          <td class="col-desc">Cisco telephony</td>
+        </tr>
+        <tr>
+          <td class="col-term">Zephyr</td>
+          <td class="col-category">Testing</td>
+          <td class="col-desc">Test management for Jira</td>
+        </tr>
+        <tr>
+          <td class="col-term">Zilliant</td>
+          <td class="col-category">Pricing</td>
+          <td class="col-desc">Price optimization</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Section 3: Key Terms -->
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <span class="section-title">Key Terms</span>
+      <span class="section-count">6 terms</span>
+    </div>
+
+    <table class="g-table">
+      <thead>
+        <tr>
+          <th class="col-term">Term</th>
+          <th class="col-desc">Definition</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-term">Big Bang go-live</td>
+          <td class="col-desc">Launching all systems at once on a single date</td>
+        </tr>
+        <tr>
+          <td class="col-term">Bridge letter</td>
+          <td class="col-desc">Document covering compliance gap between audit report date and current date</td>
+        </tr>
+        <tr>
+          <td class="col-term">Hypercare</td>
+          <td class="col-desc">Intensive support period immediately after go-live</td>
+        </tr>
+        <tr>
+          <td class="col-term">Phased go-live</td>
+          <td class="col-desc">Launching systems in waves over time</td>
+        </tr>
+        <tr>
+          <td class="col-term">Rebadge</td>
+          <td class="col-desc">Transferring existing contractor staff to new employer</td>
+        </tr>
+        <tr>
+          <td class="col-term">Shared Responsibility</td>
+          <td class="col-desc">Work split between MGRC and MSP (most common model in this RFP)</td>
+        </tr>
+        <tr>
+          <td class="col-term">Tribal knowledge</td>
+          <td class="col-desc">Undocumented expertise held by individuals</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Section 4: McGrath-Specific Terms -->
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <span class="section-title">McGrath-Specific Terms</span>
+      <span class="section-count">5 terms</span>
+    </div>
+
+    <table class="g-table">
+      <thead>
+        <tr>
+          <th class="col-term">Term</th>
+          <th class="col-desc">Definition</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-term"><span class="term-highlight">Atom</span></td>
+          <td class="col-desc">Third-party vendor flagged as problematic (quality/communication issues)</td>
+        </tr>
+        <tr>
+          <td class="col-term"><span class="term-highlight">Customer Hub</span></td>
+          <td class="col-desc">McGrath's customer-facing portal (nopCommerce, PCI-scoped)</td>
+        </tr>
+        <tr>
+          <td class="col-term"><span class="term-highlight">NexSTAR</span></td>
+          <td class="col-desc">Custom legacy ERP for TRS-RenTelco business unit</td>
+        </tr>
+        <tr>
+          <td class="col-term">NextGen</td>
+          <td class="col-desc">Oracle Fusion implementation project</td>
+        </tr>
+        <tr>
+          <td class="col-term">TRS-RenTelco</td>
+          <td class="col-desc">McGrath business unit using NexSTAR</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Section 5: Key People (McGrath) -->
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <span class="section-title">Key People (McGrath)</span>
+      <span class="section-count">5 contacts</span>
+    </div>
+
+    <table class="g-table">
+      <thead>
+        <tr>
+          <th class="col-term">Name</th>
+          <th class="col-role">Role</th>
+          <th class="col-notes">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-term"><span class="term-highlight">Mae Roberts</span></td>
+          <td class="col-role">Manager of Procurement</td>
+          <td class="col-notes">Central gatekeeper; all communications go through her</td>
+        </tr>
+        <tr>
+          <td class="col-term">Garnay</td>
+          <td class="col-role">Head of IT</td>
+          <td class="col-notes">Approves contracts up to $100K</td>
+        </tr>
+        <tr>
+          <td class="col-term">Nitin</td>
+          <td class="col-role">Director</td>
+          <td class="col-notes">Sashil and Jay report to him</td>
+        </tr>
+        <tr>
+          <td class="col-term">Gordon</td>
+          <td class="col-role">Director</td>
+          <td class="col-notes">Fran reports to him</td>
+        </tr>
+        <tr>
+          <td class="col-term">Pornima</td>
+          <td class="col-role">Director</td>
+          <td class="col-notes">Approves contracts up to $50K</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Section 6: BayOne Resources at McGrath -->
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <span class="section-title">BayOne Resources at McGrath</span>
+      <span class="section-count">4 contacts</span>
+    </div>
+
+    <table class="g-table">
+      <thead>
+        <tr>
+          <th class="col-term">Name</th>
+          <th class="col-role">Role</th>
+          <th class="col-notes">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-term"><span class="term-highlight">Kishore Elimineti</span></td>
+          <td class="col-role">Program Leader</td>
+          <td class="col-notes">Internal ally; flagged Atom issues</td>
+        </tr>
+        <tr>
+          <td class="col-term">Liana</td>
+          <td class="col-role">Jr. Project Manager</td>
+          <td class="col-notes">Flagged Atom issues</td>
+        </tr>
+        <tr>
+          <td class="col-term">Nayantara</td>
+          <td class="col-role">Scrum Master</td>
+          <td class="col-notes">Agile maturity opportunity</td>
+        </tr>
+        <tr>
+          <td class="col-term">Reena</td>
+          <td class="col-role">QA Coordinator</td>
+          <td class="col-notes">Automation opportunity; noted 100% manual testing</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Internal Reference Only - Not for Distribution</p>
+    </div>
+  </div>
+</body>
+</html>

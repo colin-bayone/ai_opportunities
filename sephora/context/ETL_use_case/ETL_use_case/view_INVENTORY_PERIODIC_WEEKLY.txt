@@ -1,0 +1,49 @@
+USE [Sephora_EDW]
+GO
+
+/****** Object:  View [dbo].[INVENTORY_PERIODIC_WEEKLY]    Script Date: 3/6/2026 11:18:15 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE VIEW [dbo].[INVENTORY_PERIODIC_WEEKLY]
+as
+SELECT [Date_SK]
+      ,[Location_SK]
+      ,[Product_SK]
+      ,[Available_Sales_Units]
+      ,[Damaged_RTV_Units]
+      ,[Ending_Inventory_Cost]
+      ,[Ending_Inventory_Retail]
+      ,[Ending_Inventory_Units]
+      ,[In_Transit_Quantity]
+      ,[Lost_Found_Units]
+      ,[Net_Vendor_Cost]
+      ,[On_Order_Units]
+      ,[Reserve_Units_Merchandise]
+      ,[Reserve_Units_Picking]
+      ,[Sell_Unit_Retail]
+      ,[Store_Order_Quantity]
+      ,[Transfer_Quantity]
+      ,[Active_Store_Flag]
+      ,[Store_With_Inv_Flag]
+      ,[Store_With_Sales_Flag]
+      ,[Create_Date]
+      ,[On_Order_Cost]
+      ,[On_Order_Cost_Retail]
+      ,[Begin_Inventory_Cost]
+      ,[Begin_Inventory_Retail]
+      ,[Begin_Inventory_Units]
+      ,[Sell_Unit_Cost]
+      ,[In_Transit_Inventory_Cost]
+      ,[In_Transit_Inventory_Retail]
+	  ,Ending_Inventory_Cost_Fin
+	  ,Ending_Inventory_Retail_Fin
+	  ,Ending_Inventory_Units_Fin
+  FROM [Sephora_EDW].[dbo].[INVENTORY_PERIODIC_WEEKLY_GT_042015]
+GO
+

@@ -1,0 +1,95 @@
+USE [Sephora_EDW]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_Populate_Stock_Continuity]    Script Date: 3/6/2026 11:22:18 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+CREATE  PROCEDURE [dbo].[usp_Populate_Stock_Continuity] 
+AS
+BEGIN
+
+DECLARE @Date_Sk as INT
+DECLARE @Date as DATETIME
+DECLARE @vchweekday_long_name varchar(30)
+SELECT @vchweekday_long_name= weekday_long_name ,@Date_Sk = DATE_SK,@Date = SHORT_DATE FROM DATE WHERE SHORT_DATE = CONVERT(VARCHAR(10),DATEADD(dd,-1,GETDATE()),110)
+
+--prepared by AlexP 11/17/2020, deployed 1/13/2021:
+
+/*  --old code
+	INSERT INTO dbo.STOCK_CONTINUITY(Date_SK, Location_SK, Product_SK, SkuLocations, Store_With_Inv_Flag, Store_With_Sales_Flag, In_Transit,Create_Date)
+	SELECT IP.Date_SK, L.Location_SK, P.Product_SK, 
+	1 AS SkuLocations, IP.Store_With_Inv_Flag AS InStock, IP.Store_With_Sales_Flag AS InWithIT, 
+	CASE WHEN In_Transit_Quantity > 0 THEN 1 ELSE 0 END,GETDATE()
+	FROM dbo.LOCATION_PRODUCT LP 
+	INNER JOIN dbo.LOCATION L ON LP.Location_SK = L.Location_SK 
+	--INNER JOIN dbo.REPLENISHMENT R ON L.Location_SK = R.E3_Location_SK 
+	INNER JOIN dbo.PRODUCT P ON LP.Product_SK = P.Product_SK --AND R.Product_SK = P.Product_SK 
+	INNER JOIN dbo.INVENTORY_PERIODIC IP ON L.Location_SK = IP.Location_SK AND P.Product_SK = IP.Product_SK 
+	--INNER JOIN dbo.STG_STOCK_CONTINUITY TR 	ON P.Brand_Number = TR.Brand_Number AND L.Location_SK = TR.Location_SK 
+	WHERE (LP.Buyer_Class IN ('R', 'W'))
+    AND (IP.Active_Store_Flag = 1)  
+	AND (P.Status_Flag = 'A') 
+	AND (P.Department_Number < 60) 
+    AND (P.SKU_Type='1') 
+	AND ((LP.Start_Date is NULL) OR (DATEADD(DD,21,LP.Start_Date))<=DATEADD(dd,0,getdate()))
+	AND (IP.Date_SK = @Date_Sk)    
+*/
+
+select Date_SK,Location_SK,Product_SK,Store_With_Inv_Flag,Store_With_Sales_Flag,In_Transit_Quantity 
+into #ip
+from INVENTORY_PERIODIC IP
+where IP.Date_SK = @Date_Sk
+AND (IP.Active_Store_Flag = 1)
+
+SELECT IP.Date_SK, L.Location_SK, P.Product_SK, 
+1 AS SkuLocations, IP.Store_With_Inv_Flag AS InStock, IP.Store_With_Sales_Flag AS InWithIT, 
+CASE WHEN IP.In_Transit_Quantity > 0 THEN 1 ELSE 0 END as In_Transit,GETDATE() as Create_Date
+into #inv
+FROM dbo.LOCATION_PRODUCT LP 
+INNER JOIN dbo.LOCATION L ON LP.Location_SK = L.Location_SK 
+--INNER JOIN dbo.REPLENISHMENT R ON L.Location_SK = R.E3_Location_SK 
+INNER JOIN dbo.PRODUCT P ON LP.Product_SK = P.Product_SK --AND R.Product_SK = P.Product_SK 
+INNER JOIN #ip IP ON L.Location_SK = IP.Location_SK AND P.Product_SK = IP.Product_SK 
+--INNER JOIN dbo.STG_STOCK_CONTINUITY TR 	ON P.Brand_Number = TR.Brand_Number AND L.Location_SK = TR.Location_SK 
+WHERE (LP.Buyer_Class IN ('R', 'W')) 
+AND (P.Status_Flag = 'A') 
+AND (P.Department_Number < 60) 
+AND (P.SKU_Type='1') 
+AND ((LP.Start_Date is NULL) OR (DATEADD(DD,21,LP.Start_Date))<=DATEADD(dd,0,getdate()))  
+
+INSERT INTO dbo.STOCK_CONTINUITY(Date_SK, Location_SK, Product_SK, SkuLocations, Store_With_Inv_Flag, Store_With_Sales_Flag, In_Transit,Create_Date)
+select Date_SK,Location_SK,Product_SK,SkuLocations,InStock,InWithIT,In_Transit,Create_Date
+from #inv
+
+	--Load Sunday data into Weekly  
+	IF @vchweekday_long_name='Sunday'
+	BEGIN
+		INSERT INTO dbo.STOCK_CONTINUITY_WEEKLY
+		SELECT * FROM dbo.STOCK_CONTINUITY
+		WHERE date_sk=@Date_Sk
+	END
+
+--Populate Test Stock cont, with A & D SKUs
+exec usp_Populate_Stock_Continuity_All_SKU;
+exec usp_Daily_Stock_Continuity_Class_All_SKU;
+exec usp_Daily_Stock_Continuity_Brand_All_SKU;
+exec usp_Daily_Stock_Continuity_Skus_Out_All_SKU;
+
+
+
+
+END
+
+
+
+
+
+GO
+

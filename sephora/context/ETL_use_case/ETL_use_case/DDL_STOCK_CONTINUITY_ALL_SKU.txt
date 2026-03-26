@@ -1,0 +1,32 @@
+USE [Sephora_EDW]
+GO
+
+/****** Object:  Table [dbo].[STOCK_CONTINUITY_ALL_SKU]    Script Date: 3/6/2026 11:20:39 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[STOCK_CONTINUITY_ALL_SKU](
+	[Date_SK] [int] NOT NULL,
+	[Location_SK] [int] NOT NULL,
+	[Product_SK] [int] NOT NULL,
+	[SkuLocations] [int] NULL,
+	[Store_With_Inv_Flag] [int] NULL,
+	[Store_With_Sales_Flag] [int] NULL,
+	[In_Transit] [smallint] NULL,
+	[Create_Date] [datetime] NOT NULL,
+	[Status_Flag] [varchar](1) NULL,
+	[SKU_Behavior_Code] [char](1) NULL,
+	[DC_SKU_Behavior_Code] [char](1) NULL,
+	[E3_Source_Code] [char](1) NULL,
+ CONSTRAINT [PK_STOCK_CONTINUITY_PART] PRIMARY KEY CLUSTERED 
+(
+	[Date_SK] ASC,
+	[Location_SK] ASC,
+	[Product_SK] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 80, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF)
+)
+GO
+

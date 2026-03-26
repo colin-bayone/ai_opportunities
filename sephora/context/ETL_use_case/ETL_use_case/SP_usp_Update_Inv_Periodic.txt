@@ -1,0 +1,303 @@
+USE [Sephora_EDW]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_Update_Inv_Periodic]    Script Date: 3/6/2026 11:14:04 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+
+
+
+CREATE  PROCEDURE [dbo].[usp_Update_Inv_Periodic]
+AS
+BEGIN
+      -- Comments: This is to populate summary of on_order_units and sell_unit_retail by product and ditribution location
+      -- Month0 = month <= current month 
+      -- Month1 = month =  current month ... Month5+ = month >=  current month + 5
+      -- Updated BY : SK on 4/24/2006 removed OR (B.Available_Sales_Units + B.In_Transit_Quantity) < 0) from store_with_sales_flag update
+      -- Updated by : SK on 9/7/2006 TRANSACTION_TYPE = '01' logic added
+      -- updated by : SK on 2/13/2006 add sales verification logic prior 7 days
+      SET NOCOUNT ON
+      DECLARE @intDATE_SK int
+      DECLARE @vchSQLstr varchar(4000)
+      DECLARE @vchTableName varchar(80)
+      DECLARE @intDayType smallint
+      DECLARE @intSDATE_SK int
+      DECLARE @intEDATE_SK int
+	  declare @CurrentDate  varchar(10)
+	  declare @DateSK integer
+	  declare @WeekEndDateSK integer
+      declare @MonthEndDateSK integer
+
+      --DECLARE @Upd_date  varchar(20)
+      --SET @intDATE_SK = 1
+
+      SELECT TOP 1
+            @intDATE_SK = DATE_SK,
+            @intSDATE_SK = DATE_SK - 7,
+            @intEDATE_SK = DATE_SK - 1
+      FROM DATE
+      WHERE CONVERT(varchar(10), short_date, 110) = CONVERT(varchar(10), DATEADD(DD, -1, GETDATE()), 110)
+	  
+	  select @CurrentDate = convert(varchar(10),short_date,120) from date where short_date = convert(varchar(10),getdate()-1,120)
+      select @DateSK = Date_SK from date where short_date = @CurrentDate
+      select @WeekEndDateSK = Week_End_Date_SK from date where date_sk = @DateSK
+      select @MonthEndDateSK = month_end_date_sk from date where date_sk = @DateSK
+
+	  	  
+	
+
+
+      --SET @vchTableName = 'INVENTORY_PERIODIC'
+      --select @Upd_date
+      --SELECT  TOP 1  @intDATE_SK  = DATE_SK  FROM DATE WHERE DATE = replace(substring(@Upd_date,1,10),'-','')
+      --SElECT replace(substring(@Upd_date,1,10),'-','')
+      IF @intDATE_SK > 0
+      BEGIN
+
+	update s
+		set s.SKU_Behavior_Code= r.SKU_Behavior_Code,
+		s.DC_SKU_Behavior_Code=r.DC_SKU_Behavior_Code,
+		s.E3_Source_Code= r.E3_Source_Code
+		from INVENTORY_PERIODIC_DAILY_GT_042015 s
+		inner join mini_raq2 r on r.Location_SK = s.Location_SK
+		and  r.Product_SK = s.Product_SK
+		and s.Date_SK = r.Date_SK
+		where s.Date_SK = @intDATE_SK and r.Date_SK = @intDATE_SK
+
+
+      BEGIN
+            SET @vchTableName = 'INVENTORY_PERIODIC_MONTHLY_GT_042015'
+
+            UPDATE A
+            SET Active_Store_Flag = 1,
+                Store_With_Inv_Flag = (CASE
+                      WHEN (Available_Sales_Units >= 2) THEN 1
+                      ELSE 0
+                END), --Removed  'OR Available_Sales_Units < 0' 1/23/2006 BW
+                Store_With_Sales_Flag = (CASE
+                      WHEN (Available_Sales_Units + In_Transit_Quantity) >= 2 THEN 1
+                      ELSE 0
+                END)-- removed OR (B.Available_Sales_Units + B.In_Transit_Quantity) < 0) 4/24/2006 SK
+            FROM DBO.INVENTORY_PERIODIC_MONTHLY_GT_042015 A
+            INNER JOIN DBo.VW_ACTIVE_STORE_PRODUCT_LOCATION B
+                  ON A.Location_SK = b.Location_SK
+                  AND A.Product_SK = B.Product_SK
+            WHERE A.Date_SK = @intDATE_SK
+            AND EXISTS (SELECT
+                  1
+            FROM SALES_TY C (NOLOCK)
+            WHERE C.LOCATION_SK = B.LOCATION_SK
+            AND C.TRANSACTION_TYPE = '01'
+            AND C.PROCESSING_DATE_SK BETWEEN @intSDATE_SK AND @intEDATE_SK)
+
+            --Insert dotcom inventory and sale are same loaction
+            SELECT
+                  A.Date_SK,
+                  A.Product_SK,
+				  ldc.DC_Name,
+                  MIN(ldc.Sales_Location_SK) AS Location_SK,
+                  SUM(Available_Sales_Units) AS Available_Sales_Units,
+                  SUM(In_Transit_Quantity) AS In_Transit_Quantity
+				  INTO #TEMP_IP_MONTHLY_ACTIVE_FLAG
+            FROM DBO.INVENTORY_PERIODIC_MONTHLY_GT_042015 A (NOLOCK)
+			INNER JOIN Location_DC ldc on ldc.Location_sk=A.location_sk
+            WHERE A.Date_SK = @intDATE_SK
+            AND ldc.Is_Dotcom='Y' and ldc.Is_DmgDC='N' and ldc.DC_Name is not null-- for dot com inventory and sale are same loaction
+            GROUP BY A.Date_SK,
+                     A.Product_SK,
+					 ldc.DC_Name
+
+            --Update for dotcom inventory and sale are same loaction
+            UPDATE A
+            SET A.Store_With_Inv_Flag = (CASE
+                      WHEN (B.Available_Sales_Units >= 2) THEN 1
+                      ELSE 0
+                END), --Removed  'OR B.Available_Sales_Units < 0' 1/23/2006 BW
+                A.Store_With_Sales_Flag = (CASE
+                      WHEN (B.Available_Sales_Units + B.In_Transit_Quantity) >= 2 THEN 1
+                      ELSE 0
+                END)
+            FROM DBO.INVENTORY_PERIODIC_MONTHLY_GT_042015 A
+            INNER JOIN #TEMP_IP_MONTHLY_ACTIVE_FLAG B
+                  ON A.Date_SK = b.Date_SK
+                  AND A.Location_SK = b.Location_SK
+                  AND A.Product_SK = B.Product_SK
+
+      END
+      --ELSE IF @intDayType = 3
+      BEGIN
+            SET @vchTableName = 'INVENTORY_PERIODIC_WEEKLY_GT_042015'
+            UPDATE A
+            SET Active_Store_Flag = 1,
+                Store_With_Inv_Flag = (CASE
+                      WHEN (Available_Sales_Units >= 2) THEN 1
+                      ELSE 0
+                END), --Removed  'OR Available_Sales_Units < 0' 1/23/2006 BW
+                Store_With_Sales_Flag = (CASE
+                      WHEN (Available_Sales_Units + In_Transit_Quantity) >= 2 THEN 1
+                      ELSE 0
+                END)-- removed OR (B.Available_Sales_Units + B.In_Transit_Quantity) < 0) 4/24/2006 SK
+            FROM DBO.INVENTORY_PERIODIC_WEEKLY_GT_042015 A
+            INNER JOIN DBo.VW_ACTIVE_STORE_PRODUCT_LOCATION B
+                  ON A.Location_SK = b.Location_SK
+                  AND A.Product_SK = B.Product_SK
+            WHERE A.Date_SK = @intDATE_SK
+            AND EXISTS (SELECT
+                  1
+            FROM SALES_TY C (NOLOCK)
+            WHERE C.LOCATION_SK = B.LOCATION_SK
+            AND C.TRANSACTION_TYPE = '01'
+            AND C.PROCESSING_DATE_SK BETWEEN @intSDATE_SK AND @intEDATE_SK)
+
+
+            --Insert dotcom inventory and sale are same loaction
+            SELECT
+                  A.Date_SK,
+                  A.Product_SK,
+				  ldc.DC_Name,
+                  MIN(ldc.Sales_Location_SK) AS Location_SK,
+                  SUM(Available_Sales_Units) AS Available_Sales_Units,
+                  SUM(In_Transit_Quantity) AS In_Transit_Quantity
+			INTO #TEMP_IP_WEEKLY_ACTIVE_FLAG
+            FROM DBO.INVENTORY_PERIODIC_WEEKLY_GT_042015 A (NOLOCK)
+			INNER JOIN Location_DC ldc on ldc.Location_sk=A.location_sk
+            WHERE A.Date_SK = @intDATE_SK
+            AND ldc.Is_Dotcom='Y' and ldc.Is_DmgDC='N' and ldc.DC_Name is not null-- for dot com inventory and sale are same loaction
+            GROUP BY A.Date_SK,
+                     A.Product_SK,
+					 ldc.DC_Name
+
+            --Update for dotcom inventory and sale are same loaction
+            UPDATE A
+            SET A.Store_With_Inv_Flag = (CASE
+                      WHEN (B.Available_Sales_Units >= 2) THEN 1
+                      ELSE 0
+                END), --Removed  'OR B.Available_Sales_Units < 0' 1/23/2006 BW
+                A.Store_With_Sales_Flag = (CASE
+                      WHEN (B.Available_Sales_Units + B.In_Transit_Quantity) >= 2 THEN 1
+                      ELSE 0
+                END)
+            FROM DBO.INVENTORY_PERIODIC_WEEKLY_GT_042015 A
+            INNER JOIN #TEMP_IP_WEEKLY_ACTIVE_FLAG B
+                  ON A.Date_SK = b.Date_SK
+                  AND A.Location_SK = b.Location_SK
+                  AND A.Product_SK = B.Product_SK
+
+      END
+      --ELSE IF @intDayType = 0
+      BEGIN
+            SET @vchTableName = 'INVENTORY_PERIODIC_DAILY_GT_042015'
+
+            UPDATE A
+            SET Active_Store_Flag = 1,
+                Store_With_Inv_Flag = (CASE
+                      WHEN ((Available_Sales_Units >= 2) AND
+                            (SKU_Behavior_Code <> '9')) OR
+                            ((Available_Sales_Units >= 1) AND
+                            (SKU_Behavior_Code = '9')) THEN 1
+                      ELSE 0
+                END),
+                Store_With_Sales_Flag = (CASE
+                      WHEN ((Available_Sales_Units + In_Transit_Quantity) >= 2 AND
+                            (SKU_Behavior_Code <> '9')) OR
+                            ((Available_Sales_Units + In_Transit_Quantity) >= 1 AND
+                            (SKU_Behavior_Code = '9')) THEN 1
+                      ELSE 0
+                END)
+            FROM DBO.INVENTORY_PERIODIC_DAILY_GT_042015 A
+            INNER JOIN DBo.VW_ACTIVE_STORE_PRODUCT_LOCATION B
+                  ON A.Location_SK = b.Location_SK
+                  AND A.Product_SK = B.Product_SK
+            WHERE A.Date_SK = @intDATE_SK
+            AND EXISTS (SELECT
+                  1
+            FROM SALES_TY C (NOLOCK)
+            WHERE C.LOCATION_SK = B.LOCATION_SK
+            AND C.TRANSACTION_TYPE = '01'
+            AND C.PROCESSING_DATE_SK BETWEEN @intSDATE_SK AND @intEDATE_SK)
+
+            --Insert dotcom inventory and sale are same loaction
+            SELECT
+                  A.Date_SK,
+                  A.Product_SK,
+				  ldc.DC_Name,
+                  MIN(ldc.Sales_Location_SK) AS Location_SK,
+                  SUM(Available_Sales_Units) AS Available_Sales_Units,
+                  SUM(In_Transit_Quantity) AS In_Transit_Quantity 
+			INTO #TEMP_IP_DAILY_ACTIVE_FLAG
+            FROM DBO.INVENTORY_PERIODIC_DAILY_GT_042015 A (NOLOCK)
+			INNER JOIN Location_DC ldc on ldc.Location_sk=A.location_sk
+            WHERE A.Date_SK = @intDATE_SK
+            AND ldc.Is_Dotcom='Y' and ldc.Is_DmgDC='N' and ldc.DC_Name is not null-- for dot com inventory and sale are same loaction
+            GROUP BY A.Date_SK,
+                     A.Product_SK,
+					 ldc.DC_Name
+            ;
+            
+            --Update for dotcom inventory and sale are same loaction
+            UPDATE A
+            SET A.Store_With_Inv_Flag = (CASE
+                      WHEN ((B.Available_Sales_Units >= 2) AND
+                            (SKU_Behavior_Code <> '9')) OR
+                            ((B.Available_Sales_Units >= 1) AND
+                            (SKU_Behavior_Code = '9')) THEN 1
+                      ELSE 0
+                END),
+                A.Store_With_Sales_Flag = (CASE
+                      WHEN ((B.Available_Sales_Units + B.In_Transit_Quantity) >= 2 AND
+                            (SKU_Behavior_Code <> '9')) OR
+                            ((B.Available_Sales_Units + B.In_Transit_Quantity) >= 1 AND
+                            (SKU_Behavior_Code = '9')) THEN 1
+                      ELSE 0
+                END)
+            FROM DBO.INVENTORY_PERIODIC_DAILY_GT_042015 A
+            INNER JOIN #TEMP_IP_DAILY_ACTIVE_FLAG B
+                  ON A.Date_SK = b.Date_SK
+                  AND A.Location_SK = b.Location_SK
+                  AND A.Product_SK = B.Product_SK
+
+UPDATE A
+SET A.Store_With_Inv_Flag = B.Store_With_Inv_Flag,
+    A.Store_With_Sales_Flag = B.Store_With_Sales_Flag
+FROM DBO.INVENTORY_PERIODIC_WEEKLY_GT_042015 A
+INNER JOIN DBO.INVENTORY_PERIODIC_DAILY_GT_042015 B
+      ON A.Date_SK = b.Date_SK
+      AND A.Location_SK = b.Location_SK
+      AND A.Product_SK = B.Product_SK
+	  AND A.Date_sk=@WeekEndDateSK
+
+;
+
+UPDATE A
+SET A.Store_With_Inv_Flag = B.Store_With_Inv_Flag,
+    A.Store_With_Sales_Flag = B.Store_With_Sales_Flag
+FROM DBO.INVENTORY_PERIODIC_MONTHLY_GT_042015 A
+INNER JOIN DBO.INVENTORY_PERIODIC_DAILY_GT_042015 B
+      ON A.Date_SK = b.Date_SK
+      AND A.Location_SK = b.Location_SK
+      AND A.Product_SK = B.Product_SK
+	  AND A.Date_sk=@MonthEndDateSK
+
+;
+            DROP TABLE #TEMP_IP_DAILY_ACTIVE_FLAG;
+            DROP TABLE #TEMP_IP_WEEKLY_ACTIVE_FLAG;
+            DROP TABLE #TEMP_IP_MONTHLY_ACTIVE_FLAG;
+      END
+
+      END -- date_sk null check
+      ELSE
+      BEGIN
+            RAISERROR ('Invalid date or null ', 16, 1)
+      END
+
+END
+
+GO
+

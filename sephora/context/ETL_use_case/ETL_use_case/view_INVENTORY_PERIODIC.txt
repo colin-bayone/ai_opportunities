@@ -1,0 +1,55 @@
+USE [Sephora_EDW]
+GO
+
+/****** Object:  View [dbo].[INVENTORY_PERIODIC]    Script Date: 3/6/2026 11:17:16 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE VIEW [dbo].[INVENTORY_PERIODIC]
+AS
+SELECT     
+	IP.Date_SK, 
+	IP.Location_SK, 
+	IP.Product_SK, 
+	IP.Available_Sales_Units, 
+	IP.Damaged_RTV_Units, 
+	IP.Ending_Inventory_Cost, 
+	IP.Ending_Inventory_Retail, 
+	IP.Ending_Inventory_Units,
+	IP.In_Transit_Quantity ,
+	IP.In_Transit_Inventory_Cost,
+	IP.In_Transit_Inventory_Retail, 
+	IP.Lost_Found_Units, 
+	IP.Net_Vendor_Cost, 
+	IP.On_Order_Units, 
+	IP.Reserve_Units_Merchandise, 
+	IP.Reserve_Units_Picking, 
+	IP.Sell_Unit_Retail, 
+	IP.Store_Order_Quantity, 
+	IP.Transfer_Quantity, 
+	IP.Active_Store_Flag, 
+	IP.Store_With_Inv_Flag, 
+	IP.Store_With_Sales_Flag, 
+	IP.Create_Date, 
+	IP.On_Order_Cost, 
+	IP.On_Order_Cost_Retail, 
+	IP.Begin_Inventory_Cost, 
+	IP.Begin_Inventory_Retail, 
+	IP.Begin_Inventory_Units, 
+	IP.Sell_Unit_Cost, 
+	CAST(IP.Location_SK AS VARCHAR(25)) + CAST(IP.Product_SK AS VARCHAR(25)) AS LOC_PROD_SK, 
+	LoP.Sku_Behavior, 
+	LoP.Sku_Behavior_Code
+FROM dbo.INVENTORY_PERIODIC_DAILY IP WITH (NOLOCK) 
+--dbo.INVENTORY_PERIODIC_DAILY_GT_042015 IP WITH (NOLOCK) 
+LEFT OUTER JOIN dbo.VW_LOC_PROD LoP ON IP.Location_SK = LoP.Location_SK AND 
+          IP.Product_SK = LoP.Product_SK
+
+
+
+GO
+

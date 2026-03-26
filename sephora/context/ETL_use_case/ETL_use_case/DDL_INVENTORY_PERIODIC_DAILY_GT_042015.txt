@@ -1,0 +1,55 @@
+USE [Sephora_EDW]
+GO
+
+/****** Object:  Table [dbo].[INVENTORY_PERIODIC_DAILY_GT_042015]    Script Date: 3/6/2026 11:09:16 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[INVENTORY_PERIODIC_DAILY_GT_042015](
+	[Date_SK] [int] NOT NULL,
+	[Location_SK] [int] NOT NULL,
+	[Product_SK] [int] NOT NULL,
+	[Available_Sales_Units] [decimal](13, 3) NULL,
+	[Damaged_RTV_Units] [decimal](7, 0) NULL,
+	[Ending_Inventory_Cost] [decimal](15, 3) NULL,
+	[Ending_Inventory_Retail] [decimal](15, 3) NULL,
+	[Ending_Inventory_Units] [decimal](13, 3) NULL,
+	[In_Transit_Quantity] [decimal](15, 3) NULL,
+	[Lost_Found_Units] [decimal](9, 0) NULL,
+	[Net_Vendor_Cost] [decimal](15, 3) NULL,
+	[On_Order_Units] [decimal](9, 0) NULL,
+	[Reserve_Units_Merchandise] [decimal](9, 0) NULL,
+	[Reserve_Units_Picking] [decimal](9, 0) NULL,
+	[Sell_Unit_Retail] [decimal](15, 2) NULL,
+	[Store_Order_Quantity] [decimal](13, 3) NULL,
+	[Transfer_Quantity] [decimal](15, 3) NULL,
+	[Active_Store_Flag] [smallint] NULL,
+	[Store_With_Inv_Flag] [smallint] NULL,
+	[Store_With_Sales_Flag] [smallint] NULL,
+	[Create_Date] [datetime] NULL,
+	[On_Order_Cost] [decimal](15, 3) NULL,
+	[On_Order_Cost_Retail] [decimal](15, 3) NULL,
+	[Begin_Inventory_Cost] [decimal](15, 3) NULL,
+	[Begin_Inventory_Retail] [decimal](15, 3) NULL,
+	[Begin_Inventory_Units] [decimal](13, 3) NULL,
+	[Sell_Unit_Cost] [decimal](15, 3) NULL,
+	[In_Transit_Inventory_Cost] [decimal](15, 3) NULL,
+	[In_Transit_Inventory_Retail] [decimal](15, 3) NULL,
+	[SKU_Behavior_Code] [char](1) NULL,
+	[DC_SKU_Behavior_Code] [char](1) NULL,
+	[E3_Source_Code] [char](1) NULL,
+	[Ending_Inventory_Cost_Fin] [decimal](15, 3) NULL,
+	[Ending_Inventory_Retail_Fin] [decimal](15, 3) NULL,
+	[Ending_Inventory_Units_Fin] [decimal](13, 3) NULL,
+ CONSTRAINT [PK_INVENTORY_PERIODIC_DAILY_PART] PRIMARY KEY CLUSTERED 
+(
+	[Date_SK] ASC,
+	[Location_SK] ASC,
+	[Product_SK] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = ON, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 80, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF)
+)
+GO
+

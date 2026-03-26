@@ -1,0 +1,21 @@
+CREATE TABLE sephora_prod.mcs.retfl030_skuloc (
+  Business_Date DATE,
+  SSCO DECIMAL(3,0),
+  SSSKU DECIMAL(9,0),
+  SSSTRE DECIMAL(4,0),
+  SSFDWO STRING,
+  SSDDT DECIMAL(6,0),
+  SSDFR DECIMAL(6,0),
+  SSDLR DECIMAL(6,0),
+  SSSUR DECIMAL(9,2),
+  SSSTPK DECIMAL(5,0),
+  SSERD DECIMAL(13,2),
+  SSECD DECIMAL(13,2),
+  SSOHU DECIMAL(7,0),
+  SSROHM DECIMAL(7,0),
+  SSROHP DECIMAL(7,0),
+  SSDMG DECIMAL(7,0),
+  SSLOST DECIMAL(7,0),
+  CREATE_DATE TIMESTAMP)
+USING parquet
+LOCATION 'abfss://ptcxdb@sepeus1proddp005.dfs.core.windows.net/MCS.DB/retfl030_skuloc.snappy.parquet'

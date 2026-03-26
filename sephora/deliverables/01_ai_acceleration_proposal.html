@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Assisted EDW Modernization - Sephora</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #334155;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .cover-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e879f9;
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .cover-subtitle {
+      font-size: 22px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 48px;
+      max-width: 600px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 48px;
+      padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .cover-meta-item label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+
+    .cover-meta-item span {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .logo {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .logo span { color: #e879f9; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .section { margin-bottom: 64px; }
+
+    .section-number {
+      font-size: 12px;
+      font-weight: 600;
+      color: #a855f7;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #0f172a;
+      margin: 32px 0 16px;
+    }
+
+    p { margin-bottom: 16px; }
+
+    .lead {
+      font-size: 18px;
+      color: #64748b;
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border-left: 4px solid #a855f7;
+      padding: 24px 28px;
+      margin: 32px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      padding: 14px 16px;
+      background: #5b21b6;
+      color: #fff;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+
+    th:last-child { border-right: none; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: #f8fafc; }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin: 32px 0;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, rgba(124,58,237,0.06) 0%, rgba(168,85,247,0.04) 100%);
+      border: 1px solid rgba(124,58,237,0.1);
+      padding: 24px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: #7c3aed;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      padding: 28px;
+      margin: 24px 0;
+      box-shadow: 0 1px 3px rgba(124,58,237,0.06);
+    }
+
+    .phase-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .phase-number {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: #fff;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .phase-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .phase-duration {
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 48px 40px;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 64px;
+    }
+
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 12px;
+    }
+
+    .footer-logo span { color: #a855f7; }
+
+    .footer p {
+      font-size: 13px;
+      color: #64748b;
+      margin: 0;
+    }
+
+    @media print {
+      @page {
+        size: 8.5in 11in;
+        margin: 0.4in;
+      }
+
+      body { font-size: 9pt; line-height: 1.4; }
+
+      .cover {
+        min-height: 0;
+        height: 10in;
+        padding: 50px;
+        page-break-after: always;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .cover h1 { font-size: 36pt; }
+      .cover-subtitle { font-size: 14pt; }
+
+      .container { padding: 0; max-width: 100%; }
+
+      .section { margin-bottom: 20px; }
+
+      h2 { font-size: 18pt; margin-bottom: 12px; }
+      h3 { font-size: 12pt; margin: 16px 0 8px; }
+      p { margin-bottom: 8px; }
+      .lead { font-size: 11pt; margin-bottom: 16px; }
+
+      table { font-size: 8pt; margin: 12px 0; }
+      th, td { padding: 8px 10px; }
+
+      th, .cover, .highlight-box, .stat-card {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .section-number { break-after: avoid; page-break-after: avoid; }
+      h1, h2, h3, h4, h5, h6 { break-after: avoid; page-break-after: avoid; break-inside: avoid; page-break-inside: avoid; }
+      table { break-inside: avoid; page-break-inside: avoid; }
+      tr { break-inside: avoid; page-break-inside: avoid; }
+      .card, .stat-card, .highlight-box { break-inside: avoid; page-break-inside: avoid; }
+      .stat-grid { break-inside: avoid; page-break-inside: avoid; }
+      p { orphans: 3; widows: 3; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-label">Strategic Proposal</div>
+      <h1>AI-Assisted EDW Modernization</h1>
+      <p class="cover-subtitle">Accelerating Cognos-to-Databricks migration through intelligent automation and pattern-based analysis</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <label>Prepared For</label>
+          <span>Sephora</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Date</label>
+          <span>February 2026</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Classification</label>
+          <span>Confidential</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo">Bay<span>One</span> Solutions</div>
+  </div>
+
+  <div class="container">
+
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>The Challenge</h2>
+      <p class="lead">Sephora is undertaking a 3-year modernization of its enterprise data warehouse, migrating from a legacy SQL/ Cognos environment to Databricks. The scale and complexity make traditional report-by-report migration impractical.</p>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-value">6,000</div>
+          <div class="stat-label">Reports to Migrate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">800+</div>
+          <div class="stat-label">KPIs</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">8</div>
+          <div class="stat-label">SSAS Cubes</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">20+</div>
+          <div class="stat-label">Source Systems</div>
+        </div>
+      </div>
+
+      <p>The legacy EDW represents 15-20 years of accumulated business logic, with queries buried in old Cognos reports and thousands of DataStage ETL pipelines. Manual review of each component creates a multi-year timeline that delays business value realization.</p>
+
+      <div class="highlight-box">
+        <p><strong>Core bottleneck:</strong> Report-by-report migration is too slow. The current approach requires manual analysis, mapping validation, and re-engineering for each of the 6,000 reports, creating a timeline that stretches through 2028.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>Our Approach: AI-Assisted Acceleration</h2>
+      <p class="lead">We propose an AI-assisted methodology that shifts from individual report migration to pattern-based batch processing, reducing manual review through intelligent automation.</p>
+
+      <h3>Pattern Detection and Clustering</h3>
+      <p>Rather than treating each report as unique, our approach identifies common structures across the 6,000-report portfolio. Reports sharing similar schemas, query patterns, or business logic can be grouped and migrated together, with AI generating migration templates validated once per cluster rather than per report.</p>
+
+      <h3>Intelligent Codebase Analysis</h3>
+      <p>AI scans legacy Cognos and SQL code to surface buried dependencies, hidden business logic, and potential migration risks before they become blockers. This proactive identification replaces reactive discovery during execution, reducing rework and timeline surprises.</p>
+
+      <h3>Automated Mapping and Validation</h3>
+      <p>Current mapping validation remains heavily manual despite AI-assisted suggestions. We focus on reducing the last mile, using AI to validate mappings against historical patterns, flag anomalies for human review, and auto-approve low-risk transformations that match established templates.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>Capabilities Aligned to Your Needs</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Your Challenge</th>
+            <th>Our Capability</th>
+            <th>Expected Impact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Report-by-report is too slow</td>
+            <td>Pattern detection and batch migration</td>
+            <td>Migrate similar reports in clusters, not individually</td>
+          </tr>
+          <tr>
+            <td>Buried logic in legacy code</td>
+            <td>AI codebase scanning</td>
+            <td>Surface dependencies before they become blockers</td>
+          </tr>
+          <tr>
+            <td>Manual mapping validation</td>
+            <td>Automated validation with anomaly flagging</td>
+            <td>Focus human review on high-risk items only</td>
+          </tr>
+          <tr>
+            <td>Embedded SQL breaks on migration</td>
+            <td>SQL analysis and rewrite suggestions</td>
+            <td>Detect and address syntax issues proactively</td>
+          </tr>
+          <tr>
+            <td>Schema dependency complexity</td>
+            <td>Lineage discovery and impact analysis</td>
+            <td>Understand downstream effects of changes</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">04</div>
+      <h2>Proposed Engagement</h2>
+      <p class="lead">We recommend a phased approach starting with a focused pilot, allowing Sephora to validate the methodology with minimal risk before broader application.</p>
+
+      <div class="card">
+        <div class="phase-header">
+          <div class="phase-number">1</div>
+          <div>
+            <div class="phase-title">Pilot: Finance Business Planning Reports</div>
+            <div class="phase-duration">Defined scope with measurable outcomes</div>
+          </div>
+        </div>
+        <p>Apply AI-assisted methodology to a defined subset of Finance reports. Demonstrate pattern detection, batch migration feasibility, and time savings against baseline. Deliverables include migrated reports, documented methodology, and measured acceleration metrics.</p>
+      </div>
+
+      <div class="card">
+        <div class="phase-header">
+          <div class="phase-number">2</div>
+          <div>
+            <div class="phase-title">Expand to Migration Track</div>
+            <div class="phase-duration">Scale validated approach</div>
+          </div>
+        </div>
+        <p>Based on pilot results, extend methodology to a full migration track (Finance, Digital, or other). Refine tooling based on pilot learnings, establish repeatable processes for internal teams, and integrate with existing Databricks workflows.</p>
+      </div>
+
+      <div class="card">
+        <div class="phase-header">
+          <div class="phase-number">3</div>
+          <div>
+            <div class="phase-title">Enterprise Acceleration</div>
+            <div class="phase-duration">Full program integration</div>
+          </div>
+        </div>
+        <p>Deploy AI-assisted methodology across remaining migration tracks. Transfer knowledge to internal teams for sustainable execution. Target outcome: measurable reduction in overall program timeline against current 2028 projection.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">05</div>
+      <h2>Why BayOne</h2>
+      <p class="lead">BayOne brings direct experience in enterprise BI migration combined with practical AI implementation capability.</p>
+
+      <p>Our team has led BI reporting and migration programs where business intelligence naturally intersected with AI and data engineering. This experience means we understand both the technical complexity of Cognos-to-Databricks migration and the organizational dynamics that determine whether modernization programs succeed.</p>
+
+      <p>We are not a platform vendor. Our approach is tool-agnostic, focused on acceleration strategy rather than pushing specific technologies. This independence allows us to evaluate options objectively, whether that means extending your existing Databricks tooling or introducing complementary capabilities where gaps exist.</p>
+
+      <div class="highlight-box">
+        <p>We come prepared with context. This proposal reflects understanding of your current environment, pain points, and organizational structure gathered through collaborative discussion, not a generic pitch applied to your company name.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">06</div>
+      <h2>Next Steps</h2>
+      <p>We recommend a working session to define pilot scope and success criteria. This would include identifying the specific Finance Business Planning reports for initial focus, establishing baseline metrics for comparison, and aligning on deliverables and timeline.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Participants</th>
+            <th>Outcome</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pilot scoping session</td>
+            <td>BayOne, Sephora technical leads</td>
+            <td>Defined report subset, success criteria</td>
+          </tr>
+          <tr>
+            <td>Sample report review</td>
+            <td>BayOne technical team</td>
+            <td>Complexity assessment, pattern identification</td>
+          </tr>
+          <tr>
+            <td>Pilot kickoff</td>
+            <td>Joint team</td>
+            <td>Execution begins</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Confidential — Prepared for Sephora</p>
+    </div>
+  </div>
+</body>
+</html>
