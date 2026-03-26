@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meeting 1: CI/CD Kickoff with Anand, Srinivas, and Divakar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --primary: #0f172a;
+  --accent: #a855f7;
+  --purple-dark: #5b21b6;
+  --text: #334155;
+  --text-light: #64748b;
+  --border: #e2e8f0;
+  --bg-subtle: #f8fafc;
+  --white: #ffffff;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 15px;
+  background: var(--white);
+}
+
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px;
+  background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 80%;
+  height: 200%;
+  background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+  transform: rotate(-12deg);
+}
+
+.cover::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 60%;
+  height: 80%;
+  background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+.cover-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #e879f9;
+  margin-bottom: 24px;
+}
+
+.cover h1 {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+}
+
+.cover-subtitle {
+  font-size: 20px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 48px;
+  max-width: 600px;
+}
+
+.cover-meta {
+  display: flex;
+  gap: 48px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.cover-meta-item label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 8px;
+}
+
+.cover-meta-item span {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.logo {
+  position: absolute;
+  bottom: 80px;
+  right: 80px;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.5px;
+}
+
+.logo span { color: #e879f9; }
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+
+.section { margin-bottom: 44px; }
+
+.section-number {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--purple-dark);
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  padding: 6px 14px;
+  background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%);
+  border-radius: 4px;
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 28px 0 14px;
+}
+
+h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 16px; }
+
+.lead {
+  font-size: 17px;
+  color: var(--text-light);
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 14px;
+}
+
+th {
+  text-align: left;
+  padding: 10px 14px;
+  background: #5b21b6;
+  color: var(--white);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-right: 1px solid rgba(255,255,255,0.15);
+}
+
+th:last-child { border-right: none; }
+th:first-child { border-radius: 8px 0 0 0; }
+th:last-child { border-radius: 0 8px 0 0; }
+
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+tr:last-child td { border-bottom: none; }
+tr:nth-child(even) { background: var(--bg-subtle); }
+
+.highlight-box {
+  background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+  border-left: 4px solid #a855f7;
+  padding: 20px 24px;
+  margin: 24px 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.highlight-box p:last-child { margin-bottom: 0; }
+
+.quote-block {
+  background: var(--bg-subtle);
+  border-left: 3px solid var(--accent);
+  padding: 12px 16px;
+  margin: 10px 0;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+}
+
+.priority-high {
+  background: #fef9c3;
+  color: #854d0e;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.priority-medium {
+  background: #e0e7ff;
+  color: #3730a3;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.priority-immediate {
+  background: #fef2f2;
+  color: #991b1b;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.insight-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin: 24px 0;
+}
+
+.insight-card {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.insight-card h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  color: var(--accent);
+}
+
+.footer {
+  text-align: center;
+  padding: 48px 40px;
+  border-top: 1px solid var(--border);
+  margin-top: 64px;
+}
+
+.footer-logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+.footer-logo span { color: #a855f7; }
+
+.footer p {
+  font-size: 13px;
+  color: var(--text-light);
+  margin: 0;
+}
+
+@media print {
+  @page { size: 8.5in 11in; margin: 0.5in; }
+  body { font-size: 9pt; line-height: 1.4; }
+  .cover {
+    min-height: 0;
+    height: 10in;
+    padding: 50px;
+    page-break-after: always;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .cover h1 { font-size: 32pt; }
+  .cover-subtitle { font-size: 13pt; }
+  .container { padding: 0; max-width: 100%; }
+  .section { margin-bottom: 24px; page-break-inside: avoid; }
+  h2 { font-size: 14pt; margin-bottom: 10px; page-break-after: avoid; }
+  h3 { font-size: 11pt; margin: 14px 0 8px; page-break-after: avoid; }
+  p { margin-bottom: 6px; }
+  .lead { font-size: 10pt; margin-bottom: 14px; }
+  table { font-size: 8pt; margin: 10px 0; page-break-inside: avoid; }
+  th, td { padding: 6px 8px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .highlight-box, .quote-block { padding: 12px 16px; margin: 14px 0; page-break-inside: avoid; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .insight-grid { gap: 12px; }
+  .footer { margin-top: 20px; padding: 16px; }
+}
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-label">MEETING SUMMARY</div>
+      <h1>CI/CD Kickoff with Anand, Srinivas, and Divakar</h1>
+      <p class="cover-subtitle">Discovery session covering access, infrastructure, DeepSight AI platform, and technical philosophy for the NX-OS CI/CD engagement.</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <label>Date</label>
+          <span>February 17, 2026</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Location</label>
+          <span>Cisco Office, 3rd Floor</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Duration</label>
+          <span>~60 minutes</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Classification</label>
+          <span>Internal</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo">Bay<span>One</span> Solutions</div>
+  </div>
+
+  <div class="container">
+    <!-- SECTION 01: Executive Summary -->
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>Executive Summary</h2>
+      <p class="lead">First discovery session for the NX-OS CI/CD engagement. Key outcomes:</p>
+      <table>
+        <tr>
+          <th>Topic</th>
+          <th>Outcome</th>
+        </tr>
+        <tr>
+          <td><strong>AI Platform</strong></td>
+          <td>BayOne will build on Cisco's DeepSight platform, not from scratch. Infrastructure is 90% done.</td>
+        </tr>
+        <tr>
+          <td><strong>Timeline</strong></td>
+          <td>Quarter timing starts when access is granted. Flexibility on fiscal alignment.</td>
+        </tr>
+        <tr>
+          <td><strong>Key Blocker</strong></td>
+          <td>GitHub Enterprise training (3-4 hours) unlocks repository access. Must complete first.</td>
+        </tr>
+        <tr>
+          <td><strong>Immediate Next Steps</strong></td>
+          <td>Sign NDA, complete GitHub training, watch DeepSight presentation recording.</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- SECTION 02: Key Insights (was 12) -->
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>Key Insights</h2>
+      <div class="insight-grid">
+        <div class="insight-card">
+          <h4>Dramatically Reduced AI Scope</h4>
+          <p>DeepSight platform means BayOne doesn't need to build AI infrastructure from scratch. Focus shifts to application logic, prompts, and integration rather than infrastructure.</p>
+        </div>
+        <div class="insight-card">
+          <h4>Existing CI/CD App</h4>
+          <p>There's already a CI/CD application (Rui's work) launching in 2-3 weeks. BayOne extends this rather than starting fresh. Need to coordinate handoff.</p>
+        </div>
+        <div class="insight-card">
+          <h4>Cultural Fit Confirmed</h4>
+          <p>Srinivas explicitly values direct communication, disagreement, and engineering-first thinking. This is a collaborative technical partnership, not a vendor relationship.</p>
+        </div>
+        <div class="insight-card">
+          <h4>Bazel Context Critical</h4>
+          <p>The team is stressed from Bazel production rollout. This explains limited availability and sets expectation that Cisco engineers are under pressure.</p>
+        </div>
+        <div class="insight-card">
+          <h4>Infrastructure Bottleneck Known</h4>
+          <p>ADS machine provisioning is a known pain point for all new engineers. Anand agreed to monitor this engagement as a test case for improving the process.</p>
+        </div>
+        <div class="insight-card">
+          <h4>Informal Culture</h4>
+          <p>No ticketing, no formal processes means fast iteration but no paper trail. Need to use WebEx space effectively and request recordings.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 03: Open Items (was 11) -->
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>Open Items</h2>
+      <table>
+        <tr>
+          <th>Item</th>
+          <th>Owner</th>
+          <th>Priority</th>
+          <th>Notes</th>
+        </tr>
+        <tr>
+          <td>Sign NDA</td>
+          <td>Colin/BayOne</td>
+          <td><span class="priority-immediate">Immediate</span></td>
+          <td>Can be done Feb 17 EOD</td>
+        </tr>
+        <tr>
+          <td>Complete GitHub Enterprise training</td>
+          <td>Colin + team</td>
+          <td><span class="priority-high">High</span></td>
+          <td>3-4 hours, unlocks repo access</td>
+        </tr>
+        <tr>
+          <td>Watch DeepSight presentation</td>
+          <td>Colin</td>
+          <td><span class="priority-high">High</span></td>
+          <td>1-1.5 hours, understand platform</td>
+        </tr>
+        <tr>
+          <td>Provision ADS Linux machines</td>
+          <td>Divakar</td>
+          <td><span class="priority-high">High</span></td>
+          <td>Blocking for code access</td>
+        </tr>
+        <tr>
+          <td>Finalize SOW</td>
+          <td>Zahra/Cisco</td>
+          <td><span class="priority-high">High</span></td>
+          <td>In progress</td>
+        </tr>
+        <tr>
+          <td>Check MySQL provisioning options</td>
+          <td>Divakar</td>
+          <td><span class="priority-medium">Medium</span></td>
+          <td>Self-service vs request</td>
+        </tr>
+        <tr>
+          <td>Schedule 2-week status meeting</td>
+          <td>Anand</td>
+          <td><span class="priority-medium">Medium</span></td>
+          <td>With Anand, Divakar, Srinivas</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- SECTION 04: Decisions Made (was 09) -->
+    <div class="section">
+      <div class="section-number">04</div>
+      <h2>Decisions Made</h2>
+      <table>
+        <tr>
+          <th>Decision</th>
+          <th>Made By</th>
+          <th>Context</th>
+        </tr>
+        <tr>
+          <td>BayOne builds on DeepSight platform, not from scratch</td>
+          <td>Srinivas</td>
+          <td>"You are not building anything in AI stack because all the AI stack is given to you."</td>
+        </tr>
+        <tr>
+          <td>Quarter timing starts when access granted</td>
+          <td>Anand</td>
+          <td>"Whenever we get started, the quarter starts then."</td>
+        </tr>
+        <tr>
+          <td>Use existing "BayOne" WebEx space</td>
+          <td>Srinivas</td>
+          <td>Not Zahra's newly created duplicate</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- SECTION 05: Commitments Made (was 10) -->
+    <div class="section">
+      <div class="section-number">05</div>
+      <h2>Commitments Made</h2>
+
+      <h3>Cisco Commitments</h3>
+      <table>
+        <tr>
+          <th>Owner</th>
+          <th>Commitment</th>
+          <th>Timing</th>
+        </tr>
+        <tr>
+          <td><strong>Divakar</strong></td>
+          <td>Add engineers to WebEx space</td>
+          <td>Ongoing</td>
+        </tr>
+        <tr>
+          <td><strong>Divakar</strong></td>
+          <td>Provide Jenkins access</td>
+          <td>After GitHub training</td>
+        </tr>
+        <tr>
+          <td><strong>Divakar</strong></td>
+          <td>Check with IT on MySQL provisioning</td>
+          <td>TBD</td>
+        </tr>
+        <tr>
+          <td><strong>Divakar</strong></td>
+          <td>Provision ADS Linux machines</td>
+          <td>After onboarding</td>
+        </tr>
+        <tr>
+          <td><strong>Srinivas</strong></td>
+          <td>Share DeepSight presentation recording</td>
+          <td>After NDA signed</td>
+        </tr>
+        <tr>
+          <td><strong>Anand</strong></td>
+          <td>Ensure questions get answered, unblock as needed</td>
+          <td>Ongoing</td>
+        </tr>
+      </table>
+
+      <h3>BayOne Commitments</h3>
+      <table>
+        <tr>
+          <th>Owner</th>
+          <th>Commitment</th>
+          <th>Timing</th>
+        </tr>
+        <tr>
+          <td><strong>Colin</strong></td>
+          <td>Complete GitHub Enterprise training (3-4 hours)</td>
+          <td>ASAP</td>
+        </tr>
+        <tr>
+          <td><strong>Colin</strong></td>
+          <td>Get NDA signed</td>
+          <td>End of day Feb 17</td>
+        </tr>
+        <tr>
+          <td><strong>Colin</strong></td>
+          <td>Watch DeepSight presentation recording (1-1.5 hours)</td>
+          <td>Before next meeting</td>
+        </tr>
+        <tr>
+          <td><strong>Colin</strong></td>
+          <td>Ensure all 5 team members complete GitHub training</td>
+          <td>As they onboard</td>
+        </tr>
+        <tr>
+          <td><strong>Colin</strong></td>
+          <td>Always request recorded sessions</td>
+          <td>Going forward</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- SECTION 06: Next Meeting (was 13) -->
+    <div class="section">
+      <div class="section-number">06</div>
+      <h2>Next Meeting</h2>
+      <table>
+        <tr>
+          <th>Meeting</th>
+          <th>When</th>
+          <th>Who</th>
+          <th>Purpose</th>
+        </tr>
+        <tr>
+          <td><strong>Follow-up Discovery</strong></td>
+          <td>February 18, 2026</td>
+          <td>Colin, Divakar</td>
+          <td>Continue through remaining discovery questions</td>
+        </tr>
+        <tr>
+          <td><strong>Status Check-in</strong></td>
+          <td>~2 weeks from Feb 17</td>
+          <td>Colin, Anand, Divakar, Srinivas</td>
+          <td>Review onboarding progress, determine ongoing cadence</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- SECTION 07: Engagement Model (NEW - Option K) -->
+    <div class="section">
+      <div class="section-number">07</div>
+      <h2>Engagement Model</h2>
+      <p class="lead">Srinivas wants BayOne to operate as a strategic technical partner, not just an execution team. Colin accepted a dual mandate: deliver on current needs while identifying issues and thinking ahead.</p>
+
+      <div class="insight-grid">
+        <div class="insight-card">
+          <h4>Dual Mandate</h4>
+          <p>Wear two hats: (1) implement and execute, (2) be a strategic partner who finds and flags issues before they become problems.</p>
+        </div>
+        <div class="insight-card">
+          <h4>Peer Relationship</h4>
+          <p>Treated as internal team, not vendor. Engineer-to-engineer. Expected to push back and disagree openly, even in large meetings.</p>
+        </div>
+        <div class="insight-card">
+          <h4>Future-Proof Thinking</h4>
+          <p>Every solution should be extensible and ready for agentic infrastructure. Solve current needs while enabling future capabilities.</p>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <p><strong>Srinivas:</strong> "You can always correct me — even in peak meetings. Once you're onboarded, you're my colleague."</p>
+      </div>
+    </div>
+
+    <!-- SECTION 08: Participants (was 01) -->
+    <div class="section">
+      <div class="section-number">08</div>
+      <h2>Participants</h2>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Organization</th>
+          <th>Role</th>
+          <th>Scope in Meeting</th>
+        </tr>
+        <tr>
+          <td><strong>Colin Moore</strong></td>
+          <td>BayOne</td>
+          <td>Director of AI, Technical Lead</td>
+          <td>Asking discovery questions, project accountability</td>
+        </tr>
+        <tr>
+          <td><strong>Anand</strong></td>
+          <td>Cisco</td>
+          <td>Director</td>
+          <td>Brief appearance; high-level coordination, escalation path</td>
+        </tr>
+        <tr>
+          <td><strong>Divakar</strong></td>
+          <td>Cisco</td>
+          <td>Engineering Lead</td>
+          <td>Access, infrastructure, build systems, Bazel deployment</td>
+        </tr>
+        <tr>
+          <td><strong>Srinivas (Srini)</strong></td>
+          <td>Cisco</td>
+          <td>Senior Engineering Manager</td>
+          <td>AI platform (DeepSight), technical strategy, agentic infrastructure</td>
+        </tr>
+      </table>
+
+      <div class="highlight-box">
+        <p><strong>Context:</strong> Anand was pulled away early due to Bazel production rollout issues. Srinivas was supposed to join in person but was debugging something since morning, so he joined the second half. Divakar handled most access/infrastructure questions.</p>
+      </div>
+    </div>
+
+    <!-- SECTION 09: DeepSight Platform (was 07) -->
+    <div class="section">
+      <div class="section-number">09</div>
+      <h2>DeepSight Platform</h2>
+      <p class="lead">Cisco's internal AI platform, already live in production. Full name: DeepSight Atlas (the entire infrastructure). Multiple apps planned (8-10), releasing one at a time.</p>
+
+      <h3>Current/Upcoming Apps</h3>
+      <table>
+        <tr>
+          <th>App</th>
+          <th>Status</th>
+        </tr>
+        <tr>
+          <td><strong>Triage</strong></td>
+          <td>Launched last weekend</td>
+        </tr>
+        <tr>
+          <td><strong>Runbook</strong></td>
+          <td>Launching end of this week</td>
+        </tr>
+        <tr>
+          <td><strong>Telemetry</strong></td>
+          <td>Aggregation of all applications</td>
+        </tr>
+        <tr>
+          <td><strong>CI/CD App</strong></td>
+          <td>Exists, launching in 2-3 weeks</td>
+        </tr>
+      </table>
+
+      <h3>What BayOne Will Build</h3>
+      <p>Application ON TOP of DeepSight platform. All AI stack is provided: SDK, infrastructure, everything. Work becomes: Build MCP/LCP, build prompts, stitch together. Should NOT spend time on infrastructure - it's 90% done.</p>
+
+      <div class="quote-block">
+        <p>"You are not building anything in AI stack because all the AI stack is given to you. Everything else is given to you. All you have to do is build an [MCP], build a patch of prompts queries and stitch it here."</p>
+        <span style="display: block; margin-top: 12px; font-style: normal; font-size: 13px; color: var(--text-light);">— Srinivas</span>
+      </div>
+
+      <p><strong>Expected Timeline:</strong> "My expectation is within like two months, we should have an app running live here. Because all the infrastructure is already built for you."</p>
+    </div>
+
+    <!-- SECTION 10: Systems Architecture (was 04) -->
+    <div class="section">
+      <div class="section-number">10</div>
+      <h2>Systems Architecture</h2>
+      <p>Colin presented his understanding of systems; Divakar confirmed and updated:</p>
+      <table>
+        <tr>
+          <th>System</th>
+          <th>Owner/Access Point</th>
+          <th>Notes</th>
+        </tr>
+        <tr>
+          <td>GitHub Enterprise</td>
+          <td>Requires 3-4 hour training</td>
+          <td>Divakar grants access after training</td>
+        </tr>
+        <tr>
+          <td>Jenkins</td>
+          <td>Divakar has full context</td>
+          <td>Will bring in his engineer</td>
+        </tr>
+        <tr>
+          <td>Airflow</td>
+          <td>Different team</td>
+          <td>Divakar needs to reach out</td>
+        </tr>
+        <tr>
+          <td>DevX Platform</td>
+          <td>Different team</td>
+          <td>Can get data from there</td>
+        </tr>
+        <tr>
+          <td><strong>Bazel</strong></td>
+          <td><strong>Missing from Colin's list</strong></td>
+          <td><strong>Critical - added during meeting</strong></td>
+        </tr>
+        <tr>
+          <td>CAT (Commit Approval Tool)</td>
+          <td>—</td>
+          <td>Mentioned as "CAC retooling"</td>
+        </tr>
+        <tr>
+          <td>Jira</td>
+          <td>Divakar</td>
+          <td>"Not using it anymore" - informal process</td>
+        </tr>
+      </table>
+
+      <div class="quote-block">
+        <p>"There are different teams for different systems. It's a crossover."</p>
+        <span style="display: block; margin-top: 12px; font-style: normal; font-size: 13px; color: var(--text-light);">— Divakar</span>
+      </div>
+    </div>
+
+    <!-- SECTION 11: Infrastructure Details (was 06) -->
+    <div class="section">
+      <div class="section-number">11</div>
+      <h2>Infrastructure Details</h2>
+      <p class="lead">Current Cisco stack as described by Divakar. Not requirements — BayOne can propose alternatives if there's a better technical path.</p>
+      <table>
+        <tr>
+          <th>Component</th>
+          <th>What Divakar Said</th>
+        </tr>
+        <tr>
+          <td>Database</td>
+          <td>"All of our services are in MySQL, so I can give you MySQL."</td>
+        </tr>
+        <tr>
+          <td>Container Runtime</td>
+          <td>"It's a Podman container from Red Hat. So we have that provision."</td>
+        </tr>
+        <tr>
+          <td>Raw Pipeline Data</td>
+          <td>"It's MongoDB... it's one location." (on-prem)</td>
+        </tr>
+        <tr>
+          <td>Logging</td>
+          <td>"We have Splunk connected to our Jenkins... I can give you the Jenkins access for you to go directly and pick up the log information."</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- SECTION 12: Access & Onboarding (was 05) -->
+    <div class="section">
+      <div class="section-number">12</div>
+      <h2>Access & Onboarding</h2>
+
+      <h3>Formal Ticketing</h3>
+      <p><strong>Answer: No formal system.</strong> Engineers pushed back on creating tickets for every request. Process is very informal - just ping and ask. For new issues, use WebEx space to post and get answers.</p>
+
+      <h3>Points of Contact</h3>
+      <p><strong>Divakar</strong> for technical access. <strong>Anand</strong> for escalations and unblocking.</p>
+
+      <h3>Access Turnaround</h3>
+      <p>Should not be more than half a day, maybe a day max after training completion.</p>
+
+      <h3>Network Access</h3>
+      <p>VPN required for everything. Options: Cisco laptop OR Cisco image on personal laptop. Colin's laptop provisioning already initiated by Rahul. Without VPN, cannot connect to emails, machines, or anything.</p>
+
+      <h3>Development Environment</h3>
+      <p>Requires ADS machine (Linux) provisioned by Cisco, located in Cisco data center (on-prem). Needed to check out code, view code, build code. This is ON TOP of VPN access.</p>
+
+      <h3>Staging/Dev Environment</h3>
+      <p>Development environment exists but "not using it as much." <strong>Read-only access only</strong> - cannot commit, cannot push. Can view PR validations in progress. Local workspace changes stay local; GitHub rejects pushes. This isolation is intentional: "we want to make sure we're not doing things without you."</p>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Internal Meeting Notes — February 17, 2026</p>
+    </div>
+  </div>
+</body>
+</html>

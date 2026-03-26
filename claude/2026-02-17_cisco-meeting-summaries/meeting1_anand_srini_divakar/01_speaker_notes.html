@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speaker Notes: Meeting 1 — CI/CD Kickoff</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --primary: #0f172a;
+  --accent: #a855f7;
+  --purple-dark: #5b21b6;
+  --text: #334155;
+  --text-light: #64748b;
+  --border: #e2e8f0;
+  --bg-subtle: #f8fafc;
+  --white: #ffffff;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 15px;
+  background: var(--white);
+}
+
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px;
+  background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 80%;
+  height: 200%;
+  background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+  transform: rotate(-12deg);
+}
+
+.cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+.cover-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #e879f9;
+  margin-bottom: 24px;
+}
+
+.cover h1 {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+}
+
+.cover-subtitle {
+  font-size: 20px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 48px;
+  max-width: 600px;
+}
+
+.cover-meta {
+  display: flex;
+  gap: 48px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.cover-meta-item label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 8px;
+}
+
+.cover-meta-item span { font-size: 15px; font-weight: 500; }
+
+.logo {
+  position: absolute;
+  bottom: 80px;
+  right: 80px;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.logo span { color: #e879f9; }
+
+.container { max-width: 900px; margin: 0 auto; padding: 80px 40px; }
+
+.section { margin-bottom: 44px; }
+
+.section-number {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--purple-dark);
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  padding: 6px 14px;
+  background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%);
+  border-radius: 4px;
+}
+
+h2 { font-size: 28px; font-weight: 700; color: var(--primary); margin-bottom: 20px; }
+h3 { font-size: 18px; font-weight: 600; color: var(--primary); margin: 28px 0 14px; }
+p { margin-bottom: 16px; }
+
+.lead { font-size: 17px; color: var(--text-light); line-height: 1.8; margin-bottom: 28px; }
+
+table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+th { text-align: left; padding: 10px 14px; background: #5b21b6; color: var(--white); font-weight: 600; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; }
+th:first-child { border-radius: 8px 0 0 0; }
+th:last-child { border-radius: 0 8px 0 0; }
+td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr:nth-child(even) { background: var(--bg-subtle); }
+
+.quote-block {
+  background: var(--bg-subtle);
+  border-left: 3px solid var(--accent);
+  padding: 12px 16px;
+  margin: 10px 0;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+}
+
+.commitment-list { margin: 16px 0; padding-left: 24px; }
+.commitment-list li { margin-bottom: 8px; }
+
+.follow-up-box {
+  background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+  border-left: 4px solid #a855f7;
+  padding: 20px 24px;
+  margin: 24px 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.footer { text-align: center; padding: 48px 40px; border-top: 1px solid var(--border); margin-top: 64px; }
+.footer-logo { font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+.footer-logo span { color: #a855f7; }
+.footer p { font-size: 13px; color: var(--text-light); margin: 0; }
+
+@media print {
+  @page { size: 8.5in 11in; margin: 0.5in; }
+  body { font-size: 9pt; line-height: 1.4; }
+  .cover { min-height: 0; height: 10in; padding: 50px; page-break-after: always; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .cover h1 { font-size: 32pt; }
+  .container { padding: 0; max-width: 100%; }
+  .section { margin-bottom: 24px; page-break-inside: avoid; }
+  h2 { font-size: 14pt; page-break-after: avoid; }
+  table { font-size: 8pt; page-break-inside: avoid; }
+  th, td { padding: 6px 8px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-label">SPEAKER NOTES</div>
+      <h1>CI/CD Kickoff Meeting</h1>
+      <p class="cover-subtitle">Quick reference for who said what and their areas of ownership. Organized by speaker for easy lookup.</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <label>Date</label>
+          <span>February 17, 2026</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Speakers</label>
+          <span>Anand, Divakar, Srinivas, Colin</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Classification</label>
+          <span>Internal</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo">Bay<span>One</span> Solutions</div>
+  </div>
+
+  <div class="container">
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>Anand</h2>
+      <p class="lead">Director, Cisco — Present for first ~10 minutes, then briefly at end</p>
+
+      <h3>On Partnership Value</h3>
+      <div class="quote-block">
+        <p>"We really want these things to kind of help us a lot."</p>
+      </div>
+      <div class="quote-block">
+        <p>"If we do our job right, your job will be easier. That's how I get ready with the maintenance overload or operational overheads."</p>
+      </div>
+
+      <h3>On Timeline Flexibility</h3>
+      <div class="quote-block">
+        <p>"I know practically it's never possible to start quarter here and there, so we understand that, and we're very flexible on that. Whenever we get started, the quarter starts then."</p>
+      </div>
+      <div class="quote-block">
+        <p>"It's called business reality versus engineering reality."</p>
+      </div>
+
+      <h3>Key Ownership Areas</h3>
+      <ul class="commitment-list">
+        <li>Escalation path for blockers</li>
+        <li>Status meeting cadence (2-week check-ins)</li>
+        <li>Unblocking access/onboarding issues</li>
+        <li>Monitoring this engagement as test case for scaling onboarding process</li>
+      </ul>
+
+      <div class="follow-up-box">
+        <p><strong>Follow-up with Anand:</strong></p>
+        <ul class="commitment-list">
+          <li>Schedule 2-week status meeting</li>
+          <li>SOW finalization (via Zahra)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>Divakar</h2>
+      <p class="lead">Engineering Lead, Cisco — Present throughout meeting (primary contact for Phase 2)</p>
+
+      <h3>On Systems & Infrastructure</h3>
+      <div class="quote-block">
+        <p>"There are different teams for different systems. It's a crossover."</p>
+      </div>
+      <div class="quote-block">
+        <p>"All of our services are in MySQL."</p>
+      </div>
+      <div class="quote-block">
+        <p>"It's not a Docker container. It is a Podman container from Red Hat."</p>
+      </div>
+      <div class="quote-block">
+        <p>"It's a MongoDB... one location."</p>
+      </div>
+      <div class="quote-block">
+        <p>"We have Splunk connected to our Jenkins to be able to push all our data into Splunk."</p>
+      </div>
+
+      <h3>On Access & Process</h3>
+      <div class="quote-block">
+        <p>"We had [Jira] for a year or so. We tried it. But a lot of pushback from the engineers... I think we are used to very informal."</p>
+      </div>
+      <div class="quote-block">
+        <p>"Should not be more than half a day, maybe a day max."</p>
+      </div>
+      <div class="quote-block">
+        <p>"If you have a read-only access, you cannot stage anything... You could make it on your workspace and commit... but if you try to push it, GitHub is going to reject your arguments."</p>
+      </div>
+
+      <h3>On Bazel Rollout</h3>
+      <div class="quote-block">
+        <p>"We just rolled out [Bazel] to production... working with every branch owner to enable Bazel for all of them."</p>
+      </div>
+
+      <h3>Key Ownership Areas</h3>
+      <ul class="commitment-list">
+        <li>GitHub Enterprise access (after training)</li>
+        <li>Jenkins access and context</li>
+        <li>ADS machine provisioning</li>
+        <li>Infrastructure questions (database, logging)</li>
+        <li>Airflow outreach (different team)</li>
+        <li>DevX Platform outreach (different team)</li>
+      </ul>
+
+      <div class="follow-up-box">
+        <p><strong>Follow-up with Divakar:</strong></p>
+        <ul class="commitment-list">
+          <li>Complete GitHub training (unlocks access)</li>
+          <li>ADS machine provisioning</li>
+          <li>MySQL provisioning check with IT</li>
+          <li>Airflow team contact</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>Srinivas (Srini)</h2>
+      <p class="lead">Senior Engineering Manager, Cisco — Present for Phase 3 (~30 minutes)</p>
+
+      <h3>On DeepSight Platform</h3>
+      <div class="quote-block">
+        <p>"What we have is an AI platform. It's for DeepSight... this is already live."</p>
+      </div>
+      <div class="quote-block">
+        <p>"We call this the entire infrastructure DeepSight Atlas."</p>
+      </div>
+      <div class="quote-block">
+        <p>"This week we launched Triage... end of this week we're gonna launch Runbook."</p>
+      </div>
+      <div class="quote-block">
+        <p>"We already have a CI/CD application built today. In the next two weeks, I work with Arun's team, Rui is there, to launch that application."</p>
+      </div>
+
+      <h3>On BayOne's Role</h3>
+      <div class="quote-block">
+        <p>"You are not building anything in AI stack because all the AI stack is given to you. Everything else is given to you."</p>
+      </div>
+      <div class="quote-block">
+        <p>"All you have to do is build an [MCP], build a patch of prompts queries and stitch it here."</p>
+      </div>
+      <div class="quote-block">
+        <p>"My expectation is within like two months, we should have an app running live here. Because all the infrastructure is already built for you."</p>
+      </div>
+
+      <h3>On Technical Philosophy</h3>
+      <div class="quote-block">
+        <p>"Always put two hats when you evaluate. One, will you solve my current need? Two, can it be extensible?"</p>
+      </div>
+      <div class="quote-block">
+        <p>"Anything we do should be future proof and ready to enable the agentic infrastructure."</p>
+      </div>
+
+      <h3>On Working Relationship</h3>
+      <div class="quote-block">
+        <p>"Once you start working, it's engineer-to-engineer conversation. You'll find a good partner."</p>
+      </div>
+      <div class="quote-block">
+        <p>"Once you are onboarding, you are my friend. So I'll treat you the way or treat me the same way as a colleague."</p>
+      </div>
+      <div class="quote-block">
+        <p>"You can always correct me saying that you are wrong. I don't mind... even in peak meetings."</p>
+      </div>
+      <div class="quote-block">
+        <p>"I go very fast, very, very fast. People know me who are working with me."</p>
+      </div>
+
+      <h3>Key Ownership Areas</h3>
+      <ul class="commitment-list">
+        <li>DeepSight platform and AI strategy</li>
+        <li>DeepSight presentation recording share</li>
+        <li>Rui handoff coordination (CI/CD app)</li>
+        <li>Technical direction and extensibility requirements</li>
+        <li>Monitoring WebEx space for blockers</li>
+      </ul>
+
+      <div class="follow-up-box">
+        <p><strong>Follow-up with Srinivas:</strong></p>
+        <ul class="commitment-list">
+          <li>Watch DeepSight presentation (1-1.5 hours)</li>
+          <li>Coordinate Rui handoff after CI/CD app launches</li>
+          <li>Pull into other meetings once app is running</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">04</div>
+      <h2>Colin Moore</h2>
+      <p class="lead">Director of AI, BayOne — Present throughout meeting</p>
+
+      <h3>On Integration Vision</h3>
+      <div class="quote-block">
+        <p>"I'm hoping we'll have some kind of MCP on top of [Jenkins] to be able to talk to GitHub to get data like how many comments are going through, how many branches are there, what is having issues."</p>
+      </div>
+
+      <h3>On DeepSight Platform</h3>
+      <div class="quote-block">
+        <p>"We have a similar platform, so that's a really cool thing. Yours is much nicer, I have to say, for the UI, but it's similar approach to it."</p>
+      </div>
+
+      <h3>On Quality Philosophy</h3>
+      <div class="quote-block">
+        <p>"Where I feel good is whenever I can walk away from things and I don't have to hear about them or touch them in 10 years. That's great for me. That means I did something right."</p>
+      </div>
+
+      <h3>On Client Engagement</h3>
+      <div class="quote-block">
+        <p>"Sometimes in solutions... there's two types of client. Type one wants you to do something exactly as prescribed, and against all of your instincts, you have to do it. Refreshing that's not [the case here]."</p>
+      </div>
+
+      <h3>Committed To</h3>
+      <ul class="commitment-list">
+        <li>NDA signed by end of day Feb 17</li>
+        <li>GitHub Enterprise training (3-4 hours)</li>
+        <li>Watch DeepSight presentation (1-1.5 hours)</li>
+        <li>Ensure all 5 team members complete training</li>
+        <li>Always request recorded sessions going forward</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-number">REFERENCE</div>
+      <h2>Transcription Corrections</h2>
+      <table>
+        <tr>
+          <th>Transcript Shows</th>
+          <th>Actually Means</th>
+        </tr>
+        <tr>
+          <td>"the worker"</td>
+          <td>Divakar</td>
+        </tr>
+        <tr>
+          <td>"basil" / "bezel"</td>
+          <td>Bazel (Google build system)</td>
+        </tr>
+        <tr>
+          <td>"total less"</td>
+          <td>Atlas (DeepSight Atlas)</td>
+        </tr>
+        <tr>
+          <td>"Java" / "Gerard" / "C"</td>
+          <td>Zahra</td>
+        </tr>
+        <tr>
+          <td>"LCP"</td>
+          <td>Likely MCP (Model Context Protocol)</td>
+        </tr>
+        <tr>
+          <td>"CAC retooling"</td>
+          <td>CAT (Commit Approval Tool)</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Internal Speaker Notes — February 17, 2026</p>
+    </div>
+  </div>
+</body>
+</html>

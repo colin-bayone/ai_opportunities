@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meeting 1 Summary - NX-OS CI/CD Pipeline Discovery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #a855f7;
+      --purple-dark: #5b21b6;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #e879f9 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .cover-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .cover-subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 48px;
+      max-width: 600px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 48px;
+      padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .cover-meta-item label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+
+    .cover-meta-item span {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .logo {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span { color: #7c3aed; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .section { margin-bottom: 56px; }
+
+    .section-number {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--purple-dark);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      padding: 6px 14px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%);
+      border-radius: 4px;
+    }
+
+    h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 28px 0 14px;
+    }
+
+    p { margin-bottom: 16px; }
+
+    .lead {
+      font-size: 17px;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      padding: 12px 14px;
+      background: #5b21b6;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+
+    th:last-child { border-right: none; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    ul {
+      margin: 16px 0;
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border-left: 4px solid #a855f7;
+      padding: 20px 24px;
+      margin: 24px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    .footer {
+      text-align: center;
+      padding: 48px 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 64px;
+    }
+
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .footer-logo span { color: #a855f7; }
+
+    .footer p {
+      font-size: 13px;
+      color: var(--text-light);
+      margin: 0;
+    }
+
+    @media print {
+      @page { size: 8.5in 11in; margin: 0.5in; }
+      body { font-size: 9pt; line-height: 1.4; }
+      .cover {
+        min-height: 0; height: 10in; padding: 50px;
+        page-break-after: always;
+        -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      }
+      .cover h1 { font-size: 32pt; }
+      .cover-subtitle { font-size: 13pt; }
+      .container { padding: 0; max-width: 100%; }
+      .section { margin-bottom: 24px; page-break-inside: avoid; }
+      h2 { font-size: 14pt; margin-bottom: 10px; page-break-after: avoid; }
+      h3 { font-size: 11pt; margin: 14px 0 8px; page-break-after: avoid; }
+      table { font-size: 8pt; margin: 10px 0; page-break-inside: avoid; }
+      th, td { padding: 6px 8px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .highlight-box { padding: 12px 16px; margin: 14px 0; page-break-inside: avoid; }
+      .footer { margin-top: 20px; padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-label">Discovery Meeting Summary</div>
+      <h1>NX-OS CI/CD Pipeline Improvement</h1>
+      <p class="cover-subtitle">Confirmed Decisions and Next Steps from Meeting 1</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <label>Meeting Date</label>
+          <span>February 17, 2026</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Attendees</label>
+          <span>Anand, Divakar, Srinivas, Colin</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Location</label>
+          <span>Cisco - In Person</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo">Bay<span>One</span> Solutions</div>
+  </div>
+
+  <div class="container">
+
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>Communication & Coordination</h2>
+
+      <table>
+        <tr>
+          <th>Item</th>
+          <th>Confirmed</th>
+        </tr>
+        <tr>
+          <td><strong>Primary communication channel</strong></td>
+          <td>WebEx space (BayOne CICD WG)</td>
+        </tr>
+        <tr>
+          <td><strong>Access and infrastructure contact</strong></td>
+          <td>Divakar</td>
+        </tr>
+        <tr>
+          <td><strong>DeepSight / AI platform contact</strong></td>
+          <td>Srinivas</td>
+        </tr>
+        <tr>
+          <td><strong>Escalation contact</strong></td>
+          <td>Anand</td>
+        </tr>
+        <tr>
+          <td><strong>Existing CICD app contact</strong></td>
+          <td>Rui (Arun's team), coordinate through Srinivas</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>Access & Onboarding</h2>
+
+      <table>
+        <tr>
+          <th>Item</th>
+          <th>Confirmed</th>
+        </tr>
+        <tr>
+          <td><strong>Network access model</strong></td>
+          <td>VPN with Cisco-provided or Cisco-imaged machines</td>
+        </tr>
+        <tr>
+          <td><strong>GitHub Enterprise access</strong></td>
+          <td>Requires training (3-4 hours), then access granted</td>
+        </tr>
+        <tr>
+          <td><strong>Access turnaround</strong></td>
+          <td>Same day or next day after training completion</td>
+        </tr>
+        <tr>
+          <td><strong>On-prem code access</strong></td>
+          <td>ADS Linux machines provisioned by Divakar</td>
+        </tr>
+        <tr>
+          <td><strong>Onshore vs offshore access</strong></td>
+          <td>No difference in access tiers</td>
+        </tr>
+        <tr>
+          <td><strong>Discovery work during onboarding</strong></td>
+          <td>Can proceed with non-sensitive work</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>Infrastructure</h2>
+
+      <table>
+        <tr>
+          <th>Item</th>
+          <th>Confirmed</th>
+        </tr>
+        <tr>
+          <td><strong>Database</strong></td>
+          <td>MySQL available on-prem</td>
+        </tr>
+        <tr>
+          <td><strong>Pipeline data storage</strong></td>
+          <td>MongoDB, single location, on-prem</td>
+        </tr>
+        <tr>
+          <td><strong>Logging</strong></td>
+          <td>Splunk connected to Jenkins; direct Jenkins access available</td>
+        </tr>
+        <tr>
+          <td><strong>Container runtime</strong></td>
+          <td>Podman (Red Hat)</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">04</div>
+      <h2>DeepSight AI Platform</h2>
+
+      <p>BayOne will build on top of the existing DeepSight platform infrastructure. The platform is already live with multiple applications.</p>
+
+      <table>
+        <tr>
+          <th>Item</th>
+          <th>Confirmed</th>
+        </tr>
+        <tr>
+          <td><strong>AI infrastructure</strong></td>
+          <td>Provided by DeepSight - SDK and tooling available</td>
+        </tr>
+        <tr>
+          <td><strong>Development approach</strong></td>
+          <td>Build MCP and integrate with existing platform</td>
+        </tr>
+        <tr>
+          <td><strong>Existing CICD app</strong></td>
+          <td>Will be live on DeepSight in 2-3 weeks; BayOne extends from there</td>
+        </tr>
+        <tr>
+          <td><strong>Code repositories</strong></td>
+          <td>DeepSight repos available for application code</td>
+        </tr>
+      </table>
+
+      <div class="highlight-box">
+        <p><strong>Platform onboarding:</strong> Srinivas shared a recorded presentation (1-1.5 hours) covering the DeepSight platform capabilities and architecture.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">05</div>
+      <h2>Working Rhythm</h2>
+
+      <table>
+        <tr>
+          <th>Item</th>
+          <th>Confirmed</th>
+        </tr>
+        <tr>
+          <td><strong>First check-in</strong></td>
+          <td>Two weeks after onboarding begins</td>
+        </tr>
+        <tr>
+          <td><strong>Ongoing cadence</strong></td>
+          <td>To be determined together at first check-in</td>
+        </tr>
+        <tr>
+          <td><strong>Knowledge transfer format</strong></td>
+          <td>Recorded sessions preferred</td>
+        </tr>
+        <tr>
+          <td><strong>Status updates</strong></td>
+          <td>Anand primary recipient; Arun involved as needed</td>
+        </tr>
+        <tr>
+          <td><strong>Day-to-day questions</strong></td>
+          <td>WebEx space</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">06</div>
+      <h2>Timeline</h2>
+
+      <p>The engagement timeline is flexible and will be measured from when BayOne has access and can begin work.</p>
+
+      <table>
+        <tr>
+          <th>Item</th>
+          <th>Confirmed</th>
+        </tr>
+        <tr>
+          <td><strong>Timeline flexibility</strong></td>
+          <td>Quarter starts when BayOne starts</td>
+        </tr>
+        <tr>
+          <td><strong>Expected onboarding</strong></td>
+          <td>1-2 weeks</td>
+        </tr>
+        <tr>
+          <td><strong>First check-in target</strong></td>
+          <td>~March 3, 2026</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">07</div>
+      <h2>Next Steps</h2>
+
+      <table>
+        <tr>
+          <th>Action</th>
+          <th>Owner</th>
+        </tr>
+        <tr>
+          <td>Complete GitHub Enterprise training</td>
+          <td>BayOne team</td>
+        </tr>
+        <tr>
+          <td>Provision ADS Linux machines</td>
+          <td>Divakar</td>
+        </tr>
+        <tr>
+          <td>Review DeepSight platform recording</td>
+          <td>BayOne team</td>
+        </tr>
+        <tr>
+          <td>Connect BayOne with Rui regarding existing CICD app</td>
+          <td>Srinivas</td>
+        </tr>
+        <tr>
+          <td>Confirm server provisioning process with IT</td>
+          <td>Divakar</td>
+        </tr>
+        <tr>
+          <td>Schedule two-week check-in</td>
+          <td>Anand / Colin</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Confidential - Prepared for Cisco</p>
+    </div>
+  </div>
+</body>
+</html>

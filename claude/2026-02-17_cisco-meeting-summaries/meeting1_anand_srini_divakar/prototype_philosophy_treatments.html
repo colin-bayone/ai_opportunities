@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prototype: Philosophy Section Treatments</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --primary: #0f172a;
+  --accent: #a855f7;
+  --purple-dark: #5b21b6;
+  --text: #334155;
+  --text-light: #64748b;
+  --border: #e2e8f0;
+  --bg-subtle: #f8fafc;
+  --white: #ffffff;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 15px;
+  background: var(--bg-subtle);
+  padding: 40px;
+}
+
+.prototype-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--purple-dark);
+  padding: 6px 12px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.prototype-section {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 32px;
+  margin-bottom: 40px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.prototype-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+/* ============================================
+   CURRENT STATE - The verbose 4 quote blocks
+   ============================================ */
+
+.current-quote-block {
+  background: var(--bg-subtle);
+  border-left: 3px solid var(--accent);
+  padding: 12px 16px;
+  margin: 10px 0;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+}
+
+.current-quote-block h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 8px;
+  font-style: normal;
+}
+
+/* ============================================
+   OPTION A - Compact 2x2 principle cards
+   ============================================ */
+
+.principle-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.principle-card {
+  background: linear-gradient(135deg, rgba(124,58,237,0.04) 0%, rgba(168,85,247,0.08) 100%);
+  border: 1px solid rgba(168,85,247,0.15);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.principle-card-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--purple-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.principle-card-text {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.principle-card-text.quote {
+  font-style: italic;
+}
+
+/* ============================================
+   OPTION B - Horizontal banner with pills
+   ============================================ */
+
+.principle-banner {
+  background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+}
+
+.principle-banner-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--purple-dark);
+  margin-bottom: 10px;
+}
+
+.principle-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.principle-pill {
+  background: var(--white);
+  border: 1px solid rgba(168,85,247,0.25);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--purple-dark);
+}
+
+.principle-anchor-quote {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--text);
+  padding-top: 8px;
+  border-top: 1px solid rgba(168,85,247,0.15);
+}
+
+/* ============================================
+   OPTION C - Pull quote with supporting list
+   ============================================ */
+
+.pullquote-treatment {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.pullquote-main {
+  background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%);
+  color: var(--white);
+  padding: 24px;
+  border-radius: 10px;
+}
+
+.pullquote-text {
+  font-size: 18px;
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.pullquote-attr {
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.pullquote-list {
+  padding-left: 0;
+}
+
+.pullquote-list-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 10px;
+}
+
+.pullquote-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.pullquote-list li {
+  font-size: 14px;
+  color: var(--text);
+  padding: 6px 0;
+  padding-left: 16px;
+  position: relative;
+}
+
+.pullquote-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 12px;
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+/* ============================================
+   OPTION D - Ultra-compact inline chips
+   ============================================ */
+
+.inline-principles {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.inline-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+
+.inline-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.inline-chip-icon {
+  width: 16px;
+  height: 16px;
+  background: var(--accent);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: white;
+  font-weight: 700;
+}
+
+/* ============================================
+   OPTION E - Dense info block (table-like)
+   ============================================ */
+
+.dense-block {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.dense-header {
+  background: var(--purple-dark);
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 10px 16px;
+}
+
+.dense-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  border-bottom: 1px solid var(--border);
+}
+
+.dense-row:last-child {
+  border-bottom: none;
+}
+
+.dense-label {
+  background: var(--bg-subtle);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--purple-dark);
+  padding: 10px 16px;
+  border-right: 1px solid var(--border);
+}
+
+.dense-value {
+  font-size: 13px;
+  color: var(--text);
+  padding: 10px 16px;
+}
+
+.dense-value.highlight {
+  background: #fef9c3;
+  font-style: italic;
+}
+
+/* ============================================
+   OPTION F - Single statement + signature
+   ============================================ */
+
+.signature-block {
+  background: linear-gradient(135deg, rgba(124,58,237,0.03) 0%, rgba(168,85,247,0.06) 100%);
+  border: 1px solid rgba(168,85,247,0.12);
+  border-radius: 10px;
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.signature-content {
+  flex: 1;
+}
+
+.signature-lead {
+  font-size: 15px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.signature-quote {
+  font-size: 16px;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--primary);
+}
+
+.signature-meta {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.signature-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.signature-title {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.signature-tags {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+  justify-content: flex-end;
+}
+
+.signature-tag {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--purple-dark);
+  background: rgba(168,85,247,0.1);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="prototype-label">Prototype Comparison</div>
+  <h1 style="font-size: 28px; margin-bottom: 8px; color: var(--primary);">Technical Philosophy Section Treatments</h1>
+  <p style="color: var(--text-light); margin-bottom: 32px;">Comparing density, glanceability, and visual impact</p>
+
+  <!-- CURRENT STATE -->
+  <div class="prototype-section">
+    <div class="prototype-title">CURRENT STATE — 4 separate quote blocks (verbose, ~200px height)</div>
+
+    <div class="current-quote-block">
+      <h4>Extensibility First</h4>
+      <p>"Always put two hats when you evaluate. One, will you solve my current need? Two, can it be extensible? Or can I today write the infrastructure in a way that it is available for agentic infrastructure?"</p>
+    </div>
+    <div class="current-quote-block">
+      <h4>Agentic Infrastructure</h4>
+      <p>"Anything we do should be future proof and ready to enable the agentic infrastructure. So while you are solving your current need, we may be solving another agentic infrastructure behind the scenes."</p>
+    </div>
+    <div class="current-quote-block">
+      <h4>Direct Communication</h4>
+      <p>"Once you start working, it's engineer-to-engineer conversation. You'll find a good partner."</p>
+    </div>
+    <div class="current-quote-block">
+      <h4>Open Disagreement</h4>
+      <p>"You can always correct me saying that you are wrong. I don't mind in the private or for me it doesn't matter. From the technical point of view, it doesn't matter if you can catch me anywhere, even in peak meetings."</p>
+    </div>
+  </div>
+
+  <!-- OPTION A -->
+  <div class="prototype-section">
+    <div class="prototype-title">OPTION A — Compact 2x2 principle cards (~120px height)</div>
+
+    <div class="principle-grid">
+      <div class="principle-card">
+        <div class="principle-card-title">Extensibility First</div>
+        <div class="principle-card-text">Build for today, design for tomorrow's agentic infrastructure</div>
+      </div>
+      <div class="principle-card">
+        <div class="principle-card-title">Agentic-Ready</div>
+        <div class="principle-card-text">Everything we build should enable future AI agent capabilities</div>
+      </div>
+      <div class="principle-card">
+        <div class="principle-card-title">Direct Communication</div>
+        <div class="principle-card-text">Engineer-to-engineer — no gatekeepers, no formality</div>
+      </div>
+      <div class="principle-card">
+        <div class="principle-card-title">Open Disagreement</div>
+        <div class="principle-card-text quote">"Correct me anywhere, even in peak meetings"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION B -->
+  <div class="prototype-section">
+    <div class="prototype-title">OPTION B — Horizontal banner with pills (~90px height)</div>
+
+    <div class="principle-banner">
+      <div class="principle-banner-label">Partnership Principles</div>
+      <div class="principle-pills">
+        <span class="principle-pill">Extensibility First</span>
+        <span class="principle-pill">Agentic-Ready</span>
+        <span class="principle-pill">Direct Communication</span>
+        <span class="principle-pill">Open Disagreement</span>
+      </div>
+      <div class="principle-anchor-quote">"You can always correct me — even in peak meetings." — Srinivas</div>
+    </div>
+  </div>
+
+  <!-- OPTION C -->
+  <div class="prototype-section">
+    <div class="prototype-title">OPTION C — Pull quote with supporting list (~140px height)</div>
+
+    <div class="pullquote-treatment">
+      <div class="pullquote-main">
+        <div class="pullquote-text">"You can always correct me — even in peak meetings."</div>
+        <div class="pullquote-attr">— Srinivas, on working relationship</div>
+      </div>
+      <div class="pullquote-list">
+        <div class="pullquote-list-label">Also emphasized</div>
+        <ul>
+          <li>Build for extensibility and future agentic infrastructure</li>
+          <li>Engineer-to-engineer communication, no gatekeepers</li>
+          <li>Collaborative technical partnership, not vendor relationship</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION D -->
+  <div class="prototype-section">
+    <div class="prototype-title">OPTION D — Ultra-compact inline chips (~50px height)</div>
+
+    <div class="inline-principles">
+      <span class="inline-label">Working style:</span>
+      <span class="inline-chip"><span class="inline-chip-icon">E</span> Extensibility First</span>
+      <span class="inline-chip"><span class="inline-chip-icon">A</span> Agentic-Ready</span>
+      <span class="inline-chip"><span class="inline-chip-icon">D</span> Direct Comms</span>
+      <span class="inline-chip"><span class="inline-chip-icon">O</span> Open Disagreement</span>
+    </div>
+  </div>
+
+  <!-- OPTION E -->
+  <div class="prototype-section">
+    <div class="prototype-title">OPTION E — Dense info block / table-like (~160px height)</div>
+
+    <div class="dense-block">
+      <div class="dense-header">Partnership Principles — Srinivas</div>
+      <div class="dense-row">
+        <div class="dense-label">Extensibility</div>
+        <div class="dense-value">Build for today, design for tomorrow's agentic infrastructure</div>
+      </div>
+      <div class="dense-row">
+        <div class="dense-label">Communication</div>
+        <div class="dense-value">Engineer-to-engineer, no gatekeepers or formality required</div>
+      </div>
+      <div class="dense-row">
+        <div class="dense-label">Disagreement</div>
+        <div class="dense-value highlight">"You can always correct me — even in peak meetings"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION F -->
+  <div class="prototype-section">
+    <div class="prototype-title">OPTION F — Single statement + signature (~80px height)</div>
+
+    <div class="signature-block">
+      <div class="signature-content">
+        <div class="signature-lead">On technical collaboration:</div>
+        <div class="signature-quote">"You can always correct me — even in peak meetings. It's engineer-to-engineer, and you'll find a good partner."</div>
+      </div>
+      <div class="signature-meta">
+        <div class="signature-name">Srinivas</div>
+        <div class="signature-title">Senior Engineering Manager</div>
+        <div class="signature-tags">
+          <span class="signature-tag">Extensibility</span>
+          <span class="signature-tag">Agentic</span>
+          <span class="signature-tag">Direct</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
