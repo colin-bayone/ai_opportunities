@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<!-- saved from url=(0122)file://wsl.localhost/Ubuntu-22.04/home/cmoore/programming/cisco_projects/cicd/SOW/SOW-Building-Nexus-9000-switches-v3.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOW - FY26Q3_Building Nexus 9000 (switches) product line _Bayone</title>
+    <style>
+        /* ============================================
+           CISCO SOW DOCUMENT STYLES
+           Professional styling matching original PDF
+           Print-optimized for 8.5" x 11"
+           ============================================ */
+
+        :root {
+            --cisco-blue: #049fd9;
+            --cisco-dark-blue: #005073;
+            --text-color: #333333;
+            --border-color: #000000;
+            --light-gray: #f5f5f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: 8.5in 11in;
+            margin: 0.75in 0.75in 1in 0.75in;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 11pt;
+            line-height: 1.5;
+            color: var(--text-color);
+            background: white;
+        }
+
+        /* Page container for screen viewing */
+        .page {
+            width: 8.5in;
+            min-height: 11in;
+            margin: 0 auto 20px auto;
+            padding: 0.75in;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+            page-break-after: always;
+        }
+
+        .page:last-child {
+            page-break-after: auto;
+        }
+
+        /* Page footer */
+        .page-footer {
+            position: absolute;
+            bottom: 0.5in;
+            left: 0.75in;
+            right: 0.75in;
+            display: flex;
+            justify-content: space-between;
+            font-size: 10pt;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+
+        .page-footer .confidential {
+            /* Left-aligned */
+        }
+
+        .page-footer .page-number {
+            /* Right-aligned */
+        }
+
+        /* Cover page specific styles */
+        .cover-page {
+            text-align: center;
+            padding-top: 1in;
+            border: none;
+        }
+
+        .cisco-logo {
+            margin-bottom: 1.5in;
+        }
+
+        .cisco-logo img {
+            width: 150px;
+            height: auto;
+        }
+
+        .cisco-logo svg {
+            width: 150px;
+            height: auto;
+        }
+
+        .cover-title {
+            font-size: 18pt;
+            font-weight: normal;
+            margin-bottom: 0.5in;
+        }
+
+        .cover-subtitle {
+            font-size: 14pt;
+            margin-bottom: 0.25in;
+        }
+
+        .cover-sow {
+            font-size: 16pt;
+            font-weight: bold;
+            margin-bottom: 0.5in;
+        }
+
+        .cover-info {
+            font-size: 11pt;
+            margin-bottom: 0.1in;
+        }
+
+        /* Section headers - blue colored like original */
+        h2.section-header {
+            color: var(--cisco-blue);
+            font-size: 14pt;
+            font-weight: bold;
+            margin-top: 0.25in;
+            margin-bottom: 0.15in;
+            border: none;
+        }
+
+        h3.section-header {
+            color: var(--cisco-blue);
+            font-size: 12pt;
+            font-weight: bold;
+            margin-top: 0.35in;
+            margin-bottom: 0.1in;
+            padding-top: 0.15in;
+            border-top: 1px solid #ddd;
+        }
+
+        h4.section-header {
+            color: var(--cisco-blue);
+            font-size: 11pt;
+            font-weight: bold;
+            margin-top: 0.15in;
+            margin-bottom: 0.1in;
+        }
+
+        /* Empty section headers (no content follows) */
+        .empty-header {
+            margin-bottom: 0;
+        }
+
+        /* Financial summary header */
+        .financial-summary-header {
+            font-size: 12pt;
+            margin-bottom: 0.05in;
+        }
+
+        .financial-summary-total {
+            font-size: 12pt;
+            background-color: #f0f4f8;
+            padding: 0.1in 0.15in;
+            border-left: 3px solid var(--cisco-blue);
+            margin-bottom: 0.15in;
+        }
+
+        /* Subsection headers (bold, slightly larger, subtle color) */
+        .subsection-header {
+            font-weight: bold;
+            font-size: 11.5pt;
+            color: #444444;
+            margin-top: 0.15in;
+            margin-bottom: 0.05in;
+        }
+
+        /* Indented section content */
+        .section-content {
+            margin-left: 0.25in;
+        }
+
+        /* Body text */
+        p {
+            margin-bottom: 0.1in;
+            text-align: justify;
+        }
+
+        /* Field labels and values */
+        .field-line {
+            margin-bottom: 0.05in;
+            display: flex;
+        }
+
+        .field-label {
+            font-weight: bold;
+            min-width: 2.5in;
+            flex-shrink: 0;
+        }
+
+        .field-value {
+            flex: 1;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.15in 0;
+            font-size: 10pt;
+            border: 1px solid var(--border-color);
+        }
+
+        table th,
+        table td {
+            padding: 5px 8px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
+        table tr:last-child td {
+            border-bottom: none;
+        }
+
+        table.sla-table {
+            width: 100%;
+        }
+
+        table.sla-table td:first-child {
+            width: 25%;
+            font-weight: bold;
+            padding: 8px 12px;
+        }
+
+        table.sla-table td:last-child {
+            font-style: italic;
+            padding: 8px 12px;
+        }
+
+        table.data-table {
+            width: 100%;
+        }
+
+        table.data-table th {
+            background-color: #f0f4f8;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        table.milestone-header {
+            margin-bottom: 0;
+        }
+
+        table.milestone-header th {
+            background-color: #e6eef4;
+            font-weight: bold;
+        }
+
+        table.milestone-header td {
+            background-color: #f8fafc;
+            font-weight: 500;
+        }
+
+        table.milestone-header td:first-child {
+            font-weight: bold;
+        }
+
+        table.milestone-details {
+            margin-top: 0;
+        }
+
+        table.milestone-details tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+        table.milestone-details td:first-child {
+            width: 20%;
+            font-style: italic;
+            padding: 5px 10px;
+        }
+
+        table.milestone-details td:last-child {
+            padding: 5px 10px;
+        }
+
+        table.milestone-details ul {
+            margin: 0.5em 0;
+            padding-left: 1.5em;
+        }
+
+        table.milestone-details li {
+            margin-bottom: 0.25em;
+        }
+
+        /* Empty table rows */
+        table.empty-table td {
+            height: 25px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Instruction text (template notes) */
+        .instruction-text {
+            font-style: italic;
+            background-color: #fff8e6;
+            border-left: 3px solid #e6c200;
+            padding: 8px 12px;
+            margin: 0.15in 0;
+        }
+
+        /* Signature block */
+        .signature-block {
+            margin-top: 0.3in;
+        }
+
+        .signature-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 0.25in;
+            border: none;
+        }
+
+        .signature-table td {
+            border: none !important;
+            border-bottom: none !important;
+            padding: 3px 0;
+            vertical-align: bottom;
+        }
+
+        .signature-table .sig-label {
+            width: 130px;
+            font-weight: normal;
+        }
+
+        .signature-table .sig-line {
+            border-bottom: 1px solid black !important;
+            min-width: 200px;
+        }
+
+        .signature-table .date-label {
+            width: 50px;
+            padding-left: 20px;
+        }
+
+        .signature-table .date-line {
+            border-bottom: 1px solid black !important;
+            width: 120px;
+        }
+
+        .signature-table .info-label {
+            width: 130px;
+            padding-top: 10px !important;
+        }
+
+        .signature-line .date-label {
+            display: inline-block;
+            width: 40px;
+        }
+
+        .signature-line .date-line {
+            display: inline-block;
+            width: 150px;
+            border-bottom: 1px solid black;
+        }
+
+        /* Totals section */
+        .totals-section {
+            border: 1px solid #ccc;
+            background-color: #fafafa;
+            padding: 0.2in;
+            margin-top: 0.1in;
+        }
+
+        .totals-section p {
+            margin-bottom: 0.05in;
+        }
+
+        .totals-section .field-line {
+            margin-bottom: 0.08in;
+        }
+
+        .totals-section .field-label {
+            min-width: 4.5in;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+            }
+
+            /* Hide HTML-based footers - Playwright's displayHeaderFooter handles this */
+            .page-footer {
+                display: none !important;
+            }
+
+            /* Remove screen-only styling, let content flow naturally */
+            .page {
+                width: auto !important;
+                min-height: auto !important;
+                height: auto !important;
+                box-shadow: none !important;
+                margin: 0 !important;
+                padding: 0.3in 0 !important;
+                border: none !important;
+                page-break-after: auto !important;
+                page-break-inside: auto !important;
+            }
+
+            /* Cover page needs special handling - it should be its own page */
+            .cover-page {
+                page-break-after: always !important;
+                padding-top: 1.5in !important;
+                padding-bottom: 1in !important;
+                text-align: center;
+                border: none;
+            }
+
+            /* Keep tables and signature blocks together when possible */
+            table, .signature-block, .totals-section {
+                page-break-inside: avoid;
+            }
+
+            /* Keep headers with their following content */
+            h2, h3, h4 {
+                page-break-after: avoid;
+            }
+
+            .no-print {
+                display: none;
+            }
+
+            /* Preserve colors in print */
+            table th,
+            .totals-section,
+            .instruction-text,
+            .financial-summary-total {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        /* Description list styling */
+        .description-content {
+            white-space: pre-line;
+        }
+
+        .description-content .bullet-item {
+            display: block;
+            margin-left: 0.2in;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== PAGE 1 OF 12 ==================== -->
+<div class="page cover-page">
+    <div class="cisco-logo">
+        <!-- Cisco Logo - PNG with SVG fallback -->
+        <img src="../claude/2026-02-10_capabilities_deck/slides/logos/cisco.png" alt="Cisco Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+            <!-- SVG Fallback -->
+            <rect x="30" y="10" width="4" height="25" fill="#049fd9"></rect>
+            <rect x="45" y="5" width="4" height="35" fill="#049fd9"></rect>
+            <rect x="60" y="0" width="4" height="45" fill="#049fd9"></rect>
+            <rect x="75" y="5" width="4" height="35" fill="#049fd9"></rect>
+            <rect x="90" y="10" width="4" height="25" fill="#049fd9"></rect>
+            <rect x="110" y="10" width="4" height="25" fill="#049fd9"></rect>
+            <rect x="125" y="5" width="4" height="35" fill="#049fd9"></rect>
+            <rect x="140" y="0" width="4" height="45" fill="#049fd9"></rect>
+            <rect x="155" y="5" width="4" height="35" fill="#049fd9"></rect>
+            <rect x="170" y="10" width="4" height="25" fill="#049fd9"></rect>
+            <text x="100" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#049fd9">CISCO</text>
+        </svg>
+    </div>
+
+    <div class="cover-title">Cisco Systems</div>
+    <div class="cover-subtitle">FY26Q3_Building Nexus 9000 (switches) product line _Bayone</div>
+    <div class="cover-sow">SOW</div>
+    <div class="cover-info">Reference ID: 33282</div>
+    <div class="cover-info">Prepared by: Mahaveer Jinka</div>
+
+    <div class="page-footer">
+        <span class="confidential">Confidential</span>
+        <span class="page-number">Page 1 of 12</span>
+    </div>
+</div>
+
+<!-- ==================== PAGE 2 OF 12 ==================== -->
+<div class="page">
+    <h2 class="section-header" style="text-align: center; margin-bottom: 0.3in;">SOW</h2>
+    <h3 class="section-header" style="text-align: center; margin-bottom: 0.3in;">FY26Q3_Building Nexus 9000 (switches) product line _Bayone</h3>
+
+    <h4 class="section-header">General Information</h4>
+    <div class="field-line"><span class="field-label">Currency:</span><span class="field-value">INR</span></div>
+    <div class="field-line"><span class="field-label">Estimated Budget Amount (INR):</span><span class="field-value">4,393,740.00</span></div>
+    <div class="field-line"><span class="field-label">Work Location:</span><span class="field-value">CISCO_BUILDING|India|KARNATAKA|BANGALORE|BANGALORE 15 (BGL15)</span></div>
+    <div class="field-line"><span class="field-label">Tax Job Category:</span><span class="field-value">Services Procurement - India</span></div>
+    <div class="field-line"><span class="field-label">Amendment Comments:</span><span class="field-value">Adding Q3 BAN &amp; Milestones</span></div>
+
+    <h4 class="section-header">Timeline</h4>
+    <div class="field-line"><span class="field-label">Estimated Start Date:</span><span class="field-value">11/5/2025</span></div>
+    <div class="field-line"><span class="field-label">Estimated End Date:</span><span class="field-value">4/30/2026</span></div>
+
+    <h4 class="section-header">Owner Information</h4>
+    <div class="field-line"><span class="field-label">Owner:</span><span class="field-value">Mahaveer Jinka</span></div>
+    <div class="field-line"><span class="field-label">Cost Center:</span><span class="field-value">DCN-Switching-India-123023191</span></div>
+
+    <h4 class="section-header">Custom Fields</h4>
+    <div class="field-line"><span class="field-label">Service Category:</span><span class="field-value">MS.Application Services &amp; Engineering(GL#62330)</span></div>
+
+    <h4 class="section-header">Vendor Information</h4>
+    <div class="field-line"><span class="field-label">Supplier:</span><span class="field-value">BAYONE TECHNO ADVISORS PRIVATE LIMITED</span></div>
+    <div class="field-line"><span class="field-label">Point of Contact:</span><span class="field-value">Ashish Singh</span></div>
+
+    <h4 class="section-header empty-header">Vendor Fields</h4>
+    <h4 class="section-header empty-header">Terms</h4>
+
+    <h3 class="section-header">1 General Information</h3>
+
+    <h4 class="section-header">1.1 General Information</h4>
+    <p>Cisco does not authorize, and Supplier shall not commence work on this project until Cisco issues Supplier a purchase order for this project.</p>
+    <p>This Statement of Work ("SOW") defines work that Supplier shall deliver to the Cisco entity identified on the face of the purchase order to which this SOW is attached ("Cisco").</p>
+
+    <div class="page-footer">
+        <span class="confidential">Confidential</span>
+        <span class="page-number">Page 2 of 12</span>
+    </div>
+</div>
+
+<!-- ==================== PAGE 3 OF 12 ==================== -->
+<div class="page">
+    <p>The program agreement executed between the supplier and Cisco governs this SOW (the "Program Agreement"). In the event of a conflict between this SOW and the Program Agreement, the provisions of the Program Agreement prevail.</p>
+
+    <p>Once finalized, this SOW begins on the Start Date identified within the C-Worker connect associated "Project " and remains in effect until the later of: (i) completion and acceptance of all Milestones and other Deliverables; or (ii) the identified End Date, unless terminated earlier in accordance with the Program Agreement.</p>
+
+    <p>By accepting this SOW, the supplier is agreeing to the terms of this SOW as governed by the Program Agreement.</p>
+
+    <h3 class="section-header">2 Services and Work Product</h3>
+
+    <h4 class="section-header">2.1 Services Objectives</h4>
+    <div class="section-content">
+        <p class="subsection-header">Organization background:</p>
+        <p>This scope is being requested by Cisco's Cloud Networking Group (CN) Test team. This team is responsible for validating (regression and automation tests) the generic engineering releases and customer specials (specific customer requests) releases for Nexus 9000 (switches) product line along with the development of required infrastructure tools.</p>
+
+        <p>Cisco NX-OS (Nexus operating system) Software is a data center-class operating system built with modularity, resiliency, and serviceability at its foundation. Cisco NX-OS helps ensure continuous availability for mission-critical data center environments and provides a robust feature set that fulfils the switching and storage networking needs of data centers.</p>
+
+        <p class="subsection-header">Outsourced:</p>
+        <p>To determine the best user experience in upcoming NX-OS releases, Cisco needs to execute automation and regression testing of the features in an upcoming NX-OS release.</p>
+
+        <p class="subsection-header">Impact/Benefit:</p>
+        <p>Apart from cost saving, the other benefits of this service is speed of delivery, quality and consistency with Cisco internal brand guidelines.</p>
+
+        <p class="subsection-header">Supplier management of resource:</p>
+        <p>The supplier will manage the Service outcome along with the resources. The supplier will be responsible for managing the resources in regard to ensuring they understand and complete the project to satisfaction as well as provide any necessary training. The supplier is responsible for replacing the resource with minimal to no disruption to Cisco or the Service. Supplier is responsible for the service outcome. Supplier has a lead who is primary point of contact and all work is routed through the lead.</p>
+    </div>
+
+    <div class="page-footer">
+        <span class="confidential">Confidential</span>
+        <span class="page-number">Page 3 of 12</span>
+    </div>
+</div>
+
+<!-- ==================== PAGE 4 OF 12 ==================== -->
+<div class="page">
+    <h4 class="section-header">2.2 Services &amp; Service Levels</h4>
+    <div class="section-content">
+        <p>Supplier shall perform the following services ("Services") detailed in the tables below.</p>
+
+        <p>Supplier shall meet or exceed each of the service level requirements below ("Service Levels"). Supplier shall measure, calculate, and report the Service Levels no later than the tenth day of each month. Cisco and Supplier shall mutually agree on the criteria and data source for the report.</p>
+
+        <p>Supplier shall detail all agreed upon non-billable deliverables such as but not limited to: Scheduled reports, progress update meeting cadence, Project planning Cadence, Quality Business reviews, etc).</p>
+
+        <p>If Supplier fails to meet any Service Level, in addition to any applicable rights, remedies, and obligations set out in the Program Agreement, Supplier shall make fee adjustments as set forth below in Supplier's next invoice. If the fee adjustment arises after the final invoice Supplier provides in connection with this SOW, Supplier shall refund to Cisco an amount equal to the fee adjustment.</p>
+
+        <p class="instruction-text">[Include at least two SLAs that measure the quality, quantity, timing, and acceptability of the services being provided. (one SLA per field)]</p>
+
+        <p><strong>Table 4.2.1 &lt;Service Level Agreement 1&gt;</strong></p>
+        <table class="sla-table">
+            <tbody><tr><td>Name</td><td>Regression execution</td></tr>
+            <tr><td>Description</td><td>Execute all identified suites on QR2F and complete the analysis of all failures</td></tr>
+            <tr><td>Measurement</td><td>100% execution and 100% failure analysis</td></tr>
+            <tr><td>Target</td><td>QR2F - 100% completion</td></tr>
+            <tr><td>Frequency</td><td>Weekly</td></tr>
+            <tr><td>Fee Adjustment</td><td></td></tr>
+        </tbody></table>
+
+        <p><strong>Table 4.2.2 &lt;Service Level Agreement 2&gt;</strong></p>
+        <table class="sla-table">
+            <tbody><tr><td>Name</td><td>Testcase automation</td></tr>
+            <tr><td>Description</td><td>Automate all identified testcases and fix all open autons</td></tr>
+            <tr><td>Measurement</td><td>100% completion of all identified testcases</td></tr>
+        </tbody></table>
+    </div>
+
+    <div class="page-footer">
+        <span class="confidential">Confidential</span>
+        <span class="page-number">Page 4 of 12</span>
+    </div>
+</div>
+
+<!-- ==================== PAGE 5 OF 12 ==================== -->
+<div class="page">
+    <div class="section-content">
+        <table class="sla-table">
+            <tbody><tr><td>Target</td><td>QR2F - 100% completion</td></tr>
+            <tr><td>Frequency</td><td>Weekly</td></tr>
+            <tr><td>Fee Adjustment</td><td></td></tr>
+        </tbody></table>
+    </div>
+
+    <h4 class="section-header">2.3 Deliverables</h4>
+    <div class="section-content">
+        <p>Supplier shall provide a detailed listing of deliverables with due dates and format of delivery within the Financials section. Including any relevant reports Supplier will provide with the frequency of the report (e.g., weekly status reporting, monthly productivity reporting, project plan)</p>
+
+        <p>Supplier shall deliver each of the deliverables ("Deliverables") detailed in the Financials section by no later than the indicated due date identified in the finalized "Project".</p>
+    </div>
+
+    <h4 class="section-header">2.4 Acceptance of Deliverables</h4>
+    <div class="section-content">
+        <p>Supplier shall notify the Cisco Program Manager (listed in Section 1) on completion of each Deliverable.</p>
+
+        <p>If Cisco does not provide written acceptance or rejection within ten business days <em>[acceptance period]</em> of receiving notice of a Deliverable, Supplier may consider such failure to constitute Cisco's acceptance of the Deliverable.</p>
+
+        <p>Cisco and Supplier may mutually agree to extend the period allotted for any review, correction, or change under this Section. Any such extension will extend the schedule for subsequent Deliverables by a corresponding amount to the extent the subsequent Deliverable is dependent on completion of the earlier Deliverable.</p>
+    </div>
+
+    <h4 class="section-header">2.5 Resources</h4>
+    <div class="section-content">
+        <p>Cisco may require Supplier to remove Supplier personnel from the performance of work in connection with this SOW for any reason or for no reason, and Supplier shall promptly comply with Cisco's direction.</p>
+
+        <p class="subsection-header">2.4.1 Supplier Program Manager</p>
+        <p>The Supplier Program Manager identified in Section 1 under Vendor Information is Supplier's single point of contact for communication with Cisco in connection with this SOW. Supplier shall not remove the Supplier Program Manager from these services without Cisco's consent unless the Supplier Program Manager enters extended leave or ceases to be employed by Supplier. Supplier shall promptly notify Cisco of any such removal.</p>
+
+        <p class="subsection-header">2.4.2 Required Personnel</p>
+        <p>The following Supplier personnel ("Required Personnel") possess professional/technical skills essential for the successful performance of the Services. Participation in these services by the</p>
+    </div>
+
+    <div class="page-footer">
+        <span class="confidential">Confidential</span>
+        <span class="page-number">Page 5 of 12</span>
+    </div>
+</div>
+
+<!-- ==================== PAGE 6 OF 12 ==================== -->
+<div class="page">
+    <p>specific individuals identified in 2.6 below was a material consideration upon which Cisco relied in entering into this SOW. Supplier shall not remove any Required Personnel from these services without Cisco's consent unless the Required Personnel enters extended leave or ceases to be employed by Supplier. Supplier shall promptly notify Cisco of any such removal. If any Required Personnel ceases to participate in the provision of these services for any reason without Cisco's express written consent, Cisco may immediately terminate this SOW upon written notice to Supplier.</p>
+
+    <h4 class="section-header">2.6 Required Personnel &amp; Other Resources</h4>
+    <div class="section-content">
+        <p>[Note: If there are no Required Personnel for this SOW, insert "N/A"]</p>
+
+        <p><strong>Required Personnel</strong></p>
+        <table class="data-table empty-table">
+            <tbody><tr>
+                <th>Name (First, Last)</th>
+                <th>Role/Skills</th>
+                <th>Primary Location</th>
+            </tr>
+            <tr><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td></tr>
+        </tbody></table>
+
+        <p>Except as otherwise set forth in this SOW, Supplier shall provide all resources necessary or appropriate for provision of the Services, including the following non-personnel resources:</p>
+
+        <p><strong>Other Resources</strong></p>
+        <table class="data-table empty-table">
+            <tbody><tr>
+                <th>#</th>
+                <th>Description</th>
+            </tr>
+            <tr><td></td><td></td></tr>
+            <tr><td></td><td></td></tr>
+            <tr><td></td><td></td></tr>
+            <tr><td></td><td></td></tr>
+        </tbody></table>
+    </div>
+
+    <h4 class="section-header">2.7 Place of Performance</h4>
+    <div class="section-content">
+        <p>Supplier shall perform the work on the project from the following Location(s)</p>
+        <p>Supplier Facilities – India, Bangalore</p>
+        <p>Supplier shall perform the Services during the following times:</p>
+        <p>08:00 – 17:00 Local Time, M- F, excluding holidays during which Cisco offices are closed</p>
+    </div>
+
+    <h3 class="section-header">3 Payment</h3>
+
+    <h4 class="section-header">3.1 Payment</h4>
+    <div class="section-content">
+        <p>Upon completion and acceptance of the Milestones set forth in the Financials section of this SOW, Supplier shall invoice Cisco for the amounts payable identified in the finalized C-Worker connect identified "Project" corresponding to such Milestones. Cisco shall pay Supplier such</p>
+    </div>
+
+    <div class="page-footer">
+        <span class="confidential">Confidential</span>
+        <span class="page-number">Page 6 of 12</span>
+    </div>
+</div>
+
+<!-- ==================== PAGE 7 OF 12 ==================== -->
+<div class="page">
+    <p>amounts after receiving such invoices from Supplier; however, Cisco's funding liability under this SOW will not exceed the funding Cisco makes available via Cisco purchase order(s) for the Milestones.</p>
+
+    <h3 class="section-header">Financials</h3>
+
+    <h4 class="section-header financial-summary-header">Fixed Bid</h4>
+    <p class="financial-summary-total">Section Total (INR): <strong>Rs4,393,740.00</strong></p>
+
+    <!-- Milestone 1: November 2025 -->
+    <table class="data-table milestone-header">
+        <tbody><tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Gross Amount</th>
+            <th>Amount</th>
+        </tr>
+        <tr>
+            <td><strong>Develop AI solutions Phase 1 of 3 (66% of features complete) - 2025/11</strong></td>
+            <td>Deliverable</td>
+            <td>11/5/2025</td>
+            <td>11/30/2025</td>
+            <td>Rs690,580.00</td>
+            <td>Rs690,580.00</td>
+        </tr>
+    </tbody></table>
+    <table class="milestone-details">
+        <tbody><tr>
+            <td>Description</td>
+            <td>The supplier is being engaged to build tools using AI technologies. This will involve building data pipelines, developing AI models, test and deploy in production.<br><br>The supplier will be responsible for:
+                <ul>
+                    <li>Build data pipeline for the given problem</li>
+                    <li>Design, Develop AI models</li>
+                    <li>Test and deploy the solutions in production</li>
+                    <li>Raise defects in bug reporting tool and fix them.</li>
+                    <li>Build any supporting code, tools and infrastructure to achieve the desired solutions</li>
+                    <li>Report progress status on weekly/monthly basis as desired</li>
+                    <li>Porting the test plan to the new test bed</li>
+                    <li>Executing the test plan for maintenance releases and pre-FCS [First Customer Shipment] release</li>
+                    <li>Automating test cases</li>
+                    <li>Reporting results on TIMS [Test Information Management System]</li>
+                    <li>Filing defects and working with Cisco Development to resolve the defects</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Acceptance Criteria</td>
+            <td>
+                <ul>
+                    <li>Project completion ensures the Cisco team's releases are appropriately addressed and covered, ensuring high quality and accurate product performance for a growing base of customers. This will offer benefit by ensuring the releases are covered and any and all user issues identified for resolution are completed in a more timely manner prior to the actual</li>
+                </ul>
+            </td>
+        </tr>
+    </tbody></table>
+
+    <div class="page-footer">
+        <span class="confidential">Confidential</span>
+        <span class="page-number">Page 7 of 12</span>
+    </div>
+</div>
+
+<!-- ==================== PAGE 8 OF 12 ==================== -->
+<div class="page">
+    <table class="milestone-details">
+        <tbody><tr>
+            <td></td>
+            <td>release.</td>
+        </tr>
+        <tr>
+            <td>BAN</td>
+            <td>Outside Services - India Contractors-660619</td>
+        </tr>
+    </tbody></table>
+
+    <!-- Milestone 2: December 2025 -->
+    <table class="data-table milestone-header">
+        <tbody><tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Gross Amount</th>
+            <th>Amount</th>
+        </tr>
+        <tr>
+            <td><strong>Develop AI solutions Phase 1 of 3 (66% of features complete) - 2025/12</strong></td>
+            <td>Deliverable</td>
+            <td>12/1/2025</td>
+            <td>12/31/2026</td>
+            <td>Rs690,580.00</td>
+            <td>Rs690,580.00</td>
+        </tr>
+    </tbody></table>
+    <table class="milestone-details">
+        <tbody><tr>
+            <td>Description</td>
+            <td>The supplier is being engaged to build tools using AI technologies. This will involve building data pipelines, developing AI models, test and deploy in production.<br><br>The supplier will be responsible for:
+                <ul>
+                    <li>Build data pipeline for the given problem</li>
+                    <li>Design, Develop AI models</li>
+                    <li>Test and deploy the solutions in production</li>
+                    <li>Raise defects in bug reporting tool and fix them.</li>
+                    <li>Build any supporting code, tools and infrastructure to achieve the desired solutions</li>
+                    <li>Report progress status on weekly/monthly basis as desired</li>
+                    <li>Porting the test plan to the new test bed</li>
+                    <li>Executing the test plan for maintenance releases and pre-FCS [First Customer Shipment] release</li>
+                    <li>Automating test cases</li>
+                    <li>Reporting results on TIMS [Test Information Management System]</li>
+                    <li>Filing defects and working with Cisco Development to resolve the defects</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Acceptance Criteria</td>
+            <td>
+                <ul>
+                    <li>Project completion ensures the Cisco team's releases are appropriately addressed and covered, ensuring high quality and accurate product performance for a growing base of customers. This will offer benefit by ensuring the releases are covered and any and all user issues identified for resolution are completed in a more timely manner prior to the actual release.</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>BAN</td>
+            <td>Outside Services - India Contractors-660619</td>
+        </tr>
+    </tbody></table>
+
+    <!-- Milestone 3: January 2026 (partial) -->
+    <table class="data-table milestone-header">
+        <tbody><tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Gross Amount</th>
+            <th>Amount</th>
+        </tr>
+        <tr>
+            <td><strong>Develop AI solutions Phase 1 of 3 (66% of features complete) -</strong></td>
+            <td>Deliverable</td>
+            <td>1/1/2026</td>
+            <td>1/31/2026</td>
+            <td>Rs690,580.00</td>
+            <td>Rs690,580.00</td>
+        </tr>
+    </tbody></table>
+
+    <div class="page-footer">
+        <span class="confidential">Confidential</span>
+        <span class="page-number">Page 8 of 12</span>
+    </div>
+</div>
+
+<!-- ==================== PAGE 9 OF 12 ==================== -->
+<div class="page">
+    <!-- Milestone 3 continued: January 2026 -->
+    <table class="data-table milestone-header">
+        <tbody><tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Gross Amount</th>
+            <th>Amount</th>
+        </tr>
+        <tr>
+            <td><strong>2026/01</strong></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody></table>
+    <table class="milestone-details">
+        <tbody><tr>
+            <td>Description</td>
+            <td>The supplier is being engaged to build tools using AI technologies. This will involve building data pipelines, developing AI models, test and deploy in production.<br><br>The supplier will be responsible for:
+                <ul>
+                    <li>Build data pipeline for the given problem</li>
+                    <li>Design, Develop AI models</li>
+                    <li>Test and deploy the solutions in production</li>
+                    <li>Raise defects in bug reporting tool and fix them.</li>
+                    <li>Build any supporting code, tools and infrastructure to achieve the desired solutions</li>
+                    <li>Report progress status on weekly/monthly basis as desired</li>
+                    <li>Porting the test plan to the new test bed</li>
+                    <li>Executing the test plan for maintenance releases and pre-FCS [First Customer Shipment] release</li>
+                    <li>Automating test cases</li>
+                    <li>Reporting results on TIMS [Test Information Management System]</li>
+                    <li>Filing defects and working with Cisco Development to resolve the defects</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Acceptance Criteria</td>
+            <td>
+                <ul>
+                    <li>Project completion ensures the Cisco team's releases are appropriately addressed and covered, ensuring high quality and accurate product performance for a growing base of customers. This will offer benefit by ensuring the releases are covered and any and all user issues identified for resolution are completed in a more timely manner prior to the actual release.</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>BAN</td>
+            <td>Outside Services - India Contractors-660619</td>
+        </tr>
+    </tbody></table>
+
+    <!-- Milestone 4: February 2026 (partial) -->
+    <table class="data-table milestone-header">
+        <tbody><tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Gross Amount</th>
+            <th>Amount</th>
+        </tr>
+        <tr>
+            <td><strong>Develop AI solutions Phase - 2026/02 - 670854</strong></td>
+            <td>Deliverable</td>
+            <td>2/1/2026</td>
+            <td>2/28/2026</td>
+            <td>Rs774,000.00</td>
+            <td>Rs774,000.00</td>
+        </tr>
+    </tbody></table>
+    <table class="milestone-details">
+        <tbody><tr>
+            <td>Description</td>
+            <td>The supplier is being engaged to build tools using AI technologies. This will involve building data pipelines, developing AI models, test and deploy in production,<br><br>The supplier will be responsible for:<br>- Build data pipeline for the given problem<br>- Design, Develop AI models<br>- Test and deploy the solutions in production</td>
+        </tr>
+    </tbody></table>
+
+    <div class="page-footer">
+        <span class="confidential">Confidential</span>
+        <span class="page-number">Page 9 of 12</span>
+    </div>
+</div>
+
+<!-- ==================== PAGE 10 OF 12 ==================== -->
+<div class="page">
+    <!-- Milestone 4 continued: February 2026 -->
+    <table class="milestone-details">
+        <tbody><tr>
+            <td></td>
+            <td>
+                <ul>
+                    <li>Raise defects in bug reporting tool and fix them.</li>
+                    <li>Build any supporting code, tools and infrastructure to achieve the desired solutions</li>
+                    <li>Report progress status on weekly/monthly basis as desired</li>
+                    <li>Porting the test plan to the new test bed</li>
+                    <li>Executing the test plan for maintenance releases and pre-FCS [First Customer Shipment] release</li>
+                    <li>Automating test cases</li>
+                    <li>Reporting results on TIMS [Test Information Management System]</li>
+                    <li>Filing defects and working with Cisco Development to resolve the defects</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Acceptance Criteria</td>
+            <td>
+                <ul>
+                    <li>Project completion ensures the Cisco team's releases are appropriately addressed and covered, ensuring high quality and accurate product performance for a growing base of customers. This will offer benefit by ensuring the releases are covered and any and all user issues identified for resolution are completed in a more timely manner prior to the actual release.</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>BAN</td>
+            <td>Outside Services - India Contractors-670854</td>
+        </tr>
+    </tbody></table>
+
+    <!-- Milestone 5: March 2026 -->
+    <table class="data-table milestone-header">
+        <tbody><tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Gross Amount</th>
+            <th>Amount</th>
+        </tr>
+        <tr>
+            <td><strong>Develop AI solutions Phase - 2026/03 - 670854</strong></td>
+            <td>Deliverable</td>
+            <td>3/1/2026</td>
+            <td>3/31/2026</td>
+            <td>Rs774,000.00</td>
+            <td>Rs774,000.00</td>
+        </tr>
+    </tbody></table>
+    <table class="milestone-details">
+        <tbody><tr>
+            <td>Description</td>
+            <td>The supplier is being engaged to build tools using AI technologies. This will involve building data pipelines, developing AI models, test and deploy in production.<br><br>The supplier will be responsible for:
+                <ul>
+                    <li>Build data pipeline for the given problem</li>
+                    <li>Design, Develop AI models</li>
+                    <li>Test and deploy the solutions in production</li>
+                    <li>Raise defects in bug reporting tool and fix them.</li>
+                    <li>Build any supporting code, tools and infrastructure to achieve the desired solutions</li>
+                    <li>Report progress status on weekly/monthly basis as desired</li>
+                    <li>Porting the test plan to the new test bed</li>
+                    <li>Executing the test plan for maintenance releases and pre-FCS [First Customer Shipment] release</li>
+                    <li>Automating test cases</li>
+                    <li>Reporting results on TIMS [Test Information Management System]</li>
+                    <li>Filing defects and working with Cisco Development to resolve the defects</li>
+                </ul>
+            </td>
+        </tr>
+    </tbody></table>
+
+    <div class="page-footer">
+        <span class="confidential">Confidential</span>
+        <span class="page-number">Page 10 of 12</span>
+    </div>
+</div>
+
+<!-- ==================== PAGE 11 OF 12 ==================== -->
+<div class="page">
+    <!-- Milestone 5 continued: March 2026 -->
+    <table class="milestone-details">
+        <tbody><tr>
+            <td>Acceptance Criteria</td>
+            <td>
+                <ul>
+                    <li>Project completion ensures the Cisco team's releases are appropriately addressed and covered, ensuring high quality and accurate product performance for a growing base of customers. This will offer benefit by ensuring the releases are covered and any and all user issues identified for resolution are completed in a more timely manner prior to the actual release.</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>BAN</td>
+            <td>Outside Services - India Contractors-670854</td>
+        </tr>
+    </tbody></table>
+
+    <!-- Milestone 6: April 2026 -->
+    <table class="data-table milestone-header">
+        <tbody><tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Gross Amount</th>
+            <th>Amount</th>
+        </tr>
+        <tr>
+            <td><strong>Develop AI solutions Phase - 2026/04 - 670854</strong></td>
+            <td>Deliverable</td>
+            <td>4/1/2026</td>
+            <td>4/30/2026</td>
+            <td>Rs774,000.00</td>
+            <td>Rs774,000.00</td>
+        </tr>
+    </tbody></table>
+    <table class="milestone-details">
+        <tbody><tr>
+            <td>Description</td>
+            <td>The supplier is being engaged to build tools using AI technologies. This will involve building data pipelines, developing AI models, test and deploy in production.<br><br>The supplier will be responsible for:
+                <ul>
+                    <li>Build data pipeline for the given problem</li>
+                    <li>Design, Develop AI models</li>
+                    <li>Test and deploy the solutions in production</li>
+                    <li>Raise defects in bug reporting tool and fix them.</li>
+                    <li>Build any supporting code, tools and infrastructure to achieve the desired solutions</li>
+                    <li>Report progress status on weekly/monthly basis as desired</li>
+                    <li>Porting the test plan to the new test bed</li>
+                    <li>Executing the test plan for maintenance releases and pre-FCS [First Customer Shipment] release</li>
+                    <li>Automating test cases</li>
+                    <li>Reporting results on TIMS [Test Information Management System]</li>
+                    <li>Filing defects and working with Cisco Development to resolve the defects</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Acceptance Criteria</td>
+            <td>
+                <ul>
+                    <li>Project completion ensures the Cisco team's releases are appropriately addressed and covered, ensuring high quality and accurate product performance for a growing base of customers. This will offer benefit by ensuring the releases are covered and any and all user issues identified for resolution are completed in a more timely manner prior to the actual release.</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>BAN</td>
+            <td>Outside Services - India Contractors-670854</td>
+        </tr>
+    </tbody></table>
+
+    <div class="page-footer">
+        <span class="confidential">Confidential</span>
+        <span class="page-number">Page 11 of 12</span>
+    </div>
+</div>
+
+<!-- ==================== PAGE 12 OF 12 ==================== -->
+<div class="page">
+    <h4 class="section-header">Unit of Measure</h4>
+    <p>Section Total (INR): <strong>Rs0.00</strong></p>
+
+    <table class="data-table empty-table">
+        <tbody><tr>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Quantity</th>
+            <th>Amount Per Quantity</th>
+            <th>Gross Amount</th>
+            <th>Amount</th>
+        </tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody></table>
+
+    <h3 class="section-header">Totals</h3>
+    <div class="totals-section">
+        <div class="field-line"><span class="field-label">Total Amount (INR):</span><span class="field-value">4,393,740.00</span></div>
+        <div class="field-line"><span class="field-label">Total Gross Amount (INR):</span><span class="field-value">4,393,740.00</span></div>
+        <div class="field-line"><span class="field-label">Total Estimated Taxes and Fees (INR):</span><span class="field-value">0.00</span></div>
+        <br>
+        <div class="field-line"><span class="field-label">Milestone Total Amount (INR):</span><span class="field-value">4,393,740.00</span></div>
+        <div class="field-line"><span class="field-label">Milestone Total Gross Amount (INR):</span><span class="field-value">4,393,740.00</span></div>
+        <div class="field-line"><span class="field-label">Milestone Total Estimated Taxes and Fees (INR):</span><span class="field-value">0.00</span></div>
+        <br>
+        <div class="field-line"><span class="field-label">Unit of Measure Total Amount (INR):</span><span class="field-value">0.00</span></div>
+        <div class="field-line"><span class="field-label">Unit of Measure Total Gross Amount (INR):</span><span class="field-value">0.00</span></div>
+        <div class="field-line"><span class="field-label">Unit of Measure Total Estimated Taxes and Fees (INR):</span><span class="field-value">0.00</span></div>
+        <br>
+        <div class="field-line"><span class="field-label">Resource Total Amount (INR):</span><span class="field-value">0.00</span></div>
+    </div>
+
+    <br>
+    <p>IN WITNESS WHEREOF, the parties have caused this Agreement to be executed by their duly authorized representatives.</p>
+
+    <div class="signature-block">
+        <table class="signature-table">
+            <tbody><tr>
+                <td class="sig-label">Owner Signature:</td>
+                <td class="sig-line"></td>
+                <td class="date-label">Date:</td>
+                <td class="date-line"></td>
+            </tr>
+            <tr>
+                <td class="info-label">Title:</td>
+                <td colspan="3">[insert title here]</td>
+            </tr>
+            <tr>
+                <td class="info-label">Name:</td>
+                <td colspan="3">Mahaveer Jinka</td>
+            </tr>
+        </tbody></table>
+
+        <table class="signature-table">
+            <tbody><tr>
+                <td class="sig-label">Vendor Signature:</td>
+                <td class="sig-line"></td>
+                <td class="date-label">Date:</td>
+                <td class="date-line"></td>
+            </tr>
+            <tr>
+                <td class="info-label">Title:</td>
+                <td colspan="3">[insert title here]</td>
+            </tr>
+            <tr>
+                <td class="info-label">Name:</td>
+                <td colspan="3">Ashish Singh</td>
+            </tr>
+        </tbody></table>
+    </div>
+
+    <div class="page-footer">
+        <span class="confidential">Confidential</span>
+        <span class="page-number">Page 12 of 12</span>
+    </div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOW - Table of Contents Prototype</title>
+    <style>
+        :root {
+            --cisco-blue: #049fd9;
+            --cisco-dark-blue: #005073;
+            --text-color: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: #f5f5f5;
+        }
+
+        .page {
+            width: 8.5in;
+            min-height: 11in;
+            margin: 20px auto;
+            padding: 0.75in;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .toc-title {
+            color: var(--cisco-blue);
+            font-size: 18pt;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 0.4in;
+            padding-bottom: 0.15in;
+            border-bottom: 2px solid var(--cisco-blue);
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        /* Level 1 - Main sections (h3) */
+        .toc-l1 {
+            margin-top: 0.2in;
+        }
+
+        .toc-l1 > .toc-entry {
+            font-weight: bold;
+            font-size: 12pt;
+            color: var(--cisco-dark-blue);
+            padding: 6px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .toc-l1 > .toc-entry::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            background: var(--cisco-blue);
+            border-radius: 50%;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        /* Level 2 - Subsections (h4) */
+        .toc-l2 {
+            margin-left: 0.3in;
+            margin-top: 4px;
+        }
+
+        .toc-l2 > .toc-entry {
+            font-size: 11pt;
+            color: var(--text-color);
+            padding: 3px 0;
+        }
+
+        .toc-l2 > .toc-entry::before {
+            content: "\2013";  /* en-dash */
+            margin-right: 8px;
+            color: #999;
+        }
+
+        /* Nested list for subsections */
+        .toc-children {
+            list-style: none;
+        }
+
+        /* Section numbers */
+        .section-num {
+            display: inline-block;
+            min-width: 0.4in;
+            color: var(--cisco-blue);
+            font-weight: bold;
+        }
+
+        /* Hover effect */
+        .toc-entry:hover {
+            background: #f8fafc;
+        }
+
+        /* Print styles */
+        @media print {
+            body { background: white; }
+            .page {
+                box-shadow: none;
+                margin: 0;
+                padding: 0.5in 0.75in;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <h1 class="toc-title">Table of Contents</h1>
+
+    <ul class="toc-list">
+        <!-- Section 1 -->
+        <li class="toc-l1">
+            <div class="toc-entry"><span class="section-num">1</span> General Information</div>
+            <ul class="toc-children">
+                <li class="toc-l2"><div class="toc-entry"><span class="section-num">1.1</span> General Information</div></li>
+            </ul>
+        </li>
+
+        <!-- Section 2 -->
+        <li class="toc-l1">
+            <div class="toc-entry"><span class="section-num">2</span> Services and Work Product</div>
+            <ul class="toc-children">
+                <li class="toc-l2"><div class="toc-entry"><span class="section-num">2.1</span> Services Objectives</div></li>
+                <li class="toc-l2"><div class="toc-entry"><span class="section-num">2.2</span> Services &amp; Service Levels</div></li>
+                <li class="toc-l2"><div class="toc-entry"><span class="section-num">2.3</span> Deliverables</div></li>
+                <li class="toc-l2"><div class="toc-entry"><span class="section-num">2.4</span> Acceptance of Deliverables</div></li>
+                <li class="toc-l2"><div class="toc-entry"><span class="section-num">2.5</span> Resources</div></li>
+                <li class="toc-l2"><div class="toc-entry"><span class="section-num">2.6</span> Required Personnel &amp; Other Resources</div></li>
+                <li class="toc-l2"><div class="toc-entry"><span class="section-num">2.7</span> Place of Performance</div></li>
+            </ul>
+        </li>
+
+        <!-- Section 3 -->
+        <li class="toc-l1">
+            <div class="toc-entry"><span class="section-num">3</span> Payment</div>
+            <ul class="toc-children">
+                <li class="toc-l2"><div class="toc-entry"><span class="section-num">3.1</span> Payment</div></li>
+            </ul>
+        </li>
+
+        <!-- Financials -->
+        <li class="toc-l1">
+            <div class="toc-entry">Financials</div>
+            <ul class="toc-children">
+                <li class="toc-l2"><div class="toc-entry">Fixed Bid</div></li>
+                <li class="toc-l2"><div class="toc-entry">Milestone 1: November 2025</div></li>
+                <li class="toc-l2"><div class="toc-entry">Milestone 2: December 2025</div></li>
+                <li class="toc-l2"><div class="toc-entry">Milestone 3: January 2026</div></li>
+                <li class="toc-l2"><div class="toc-entry">Milestone 4: February 2026</div></li>
+                <li class="toc-l2"><div class="toc-entry">Milestone 5: March 2026</div></li>
+                <li class="toc-l2"><div class="toc-entry">Milestone 6: April 2026</div></li>
+                <li class="toc-l2"><div class="toc-entry">Unit of Measure</div></li>
+            </ul>
+        </li>
+
+        <!-- Totals -->
+        <li class="toc-l1">
+            <div class="toc-entry">Totals</div>
+        </li>
+
+        <!-- Signatures -->
+        <li class="toc-l1">
+            <div class="toc-entry">Signatures</div>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
