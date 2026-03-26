@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposed Account Management Team</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--purple-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 16px 40px 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+      flex-shrink: 0;
+    }
+
+    /* Org chart */
+    .org-chart {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    /* Tier label */
+    .tier-label {
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--purple-accent);
+      margin-bottom: 2px;
+    }
+
+    /* Person rows */
+    .leadership-row {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      padding-bottom: 14px;
+      position: relative;
+    }
+
+    .leadership-row::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 15%;
+      right: 15%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(124,58,237,0.25), rgba(168,85,247,0.4), rgba(124,58,237,0.25), transparent);
+    }
+
+    .operations-row {
+      display: flex;
+      justify-content: center;
+      gap: 36px;
+      padding-top: 6px;
+    }
+
+    /* Person card */
+    .person {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 130px;
+    }
+
+    .person-photo {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid transparent;
+      background-image: linear-gradient(#fff, #fff), linear-gradient(135deg, var(--purple-mid), var(--purple-accent));
+      background-origin: border-box;
+      background-clip: content-box, border-box;
+      margin-bottom: 8px;
+    }
+
+    .operations-row .person-photo {
+      width: 62px;
+      height: 62px;
+      border-width: 2.5px;
+    }
+
+    .person-role {
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--purple-bright);
+      margin-bottom: 3px;
+      line-height: 1.3;
+    }
+
+    .person-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+
+    .operations-row .person-name {
+      font-size: 12px;
+    }
+
+    .person-title {
+      font-size: 9.5px;
+      color: var(--text-light);
+      line-height: 1.3;
+    }
+
+    /* Governance table */
+    .governance-section {
+      flex-shrink: 0;
+      margin-top: auto;
+      padding-top: 6px;
+    }
+
+    .governance-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .governance-header h3 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+
+    .governance-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .governance-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10px;
+    }
+
+    .governance-table thead th {
+      background: linear-gradient(135deg, var(--purple-darkest), var(--purple-dark));
+      color: #fff;
+      font-weight: 600;
+      padding: 7px 14px;
+      text-align: left;
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .governance-table thead th:first-child { border-radius: 6px 0 0 0; }
+    .governance-table thead th:last-child { border-radius: 0 6px 0 0; }
+
+    .governance-table tbody td {
+      padding: 4px 14px;
+      border-bottom: 1px solid rgba(124,58,237,0.08);
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    .governance-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .governance-table tbody tr:nth-child(even) td {
+      background: rgba(124,58,237,0.03);
+    }
+
+    .governance-table tbody td:first-child {
+      font-weight: 600;
+      color: var(--purple-dark);
+      width: 90px;
+    }
+
+    .governance-table tbody td:nth-child(2) {
+      width: 280px;
+    }
+
+    /* Footer */
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>Proposed Account Management Team</h2>
+
+      <div class="org-chart">
+        <!-- Leadership Tier -->
+        <div class="tier-label">Leadership</div>
+        <div class="leadership-row">
+          <div class="person">
+            <img src="../source/bio_pics/surej.jpg" alt="Surej KP" class="person-photo">
+            <div class="person-role">Executive Sponsor</div>
+            <div class="person-name">Surej KP</div>
+            <div class="person-title">CEO</div>
+          </div>
+          <div class="person">
+            <img src="../source/bio_pics/neha.jpg" alt="Neha Malhotra" class="person-photo">
+            <div class="person-role">Account Owner</div>
+            <div class="person-name">Neha Malhotra</div>
+            <div class="person-title">VP, Growth & Customer Success</div>
+          </div>
+          <div class="person">
+            <img src="../source/bio_pics/sripriya.jpg" alt="Sripriya K." class="person-photo">
+            <div class="person-role">Technical Exec Sponsor</div>
+            <div class="person-name">Sripriya K.</div>
+            <div class="person-title">CTO</div>
+          </div>
+        </div>
+
+        <!-- Operations Tier -->
+        <div class="tier-label">Operations</div>
+        <div class="operations-row">
+          <div class="person">
+            <img src="../source/bio_pics/zahra.jpg" alt="Zahra Syed" class="person-photo">
+            <div class="person-role">Sr. Relationship Manager</div>
+            <div class="person-name">Zahra Syed</div>
+            <div class="person-title">Co-Account Owner</div>
+          </div>
+          <div class="person">
+            <img src="../source/bio_pics/amit.jpg" alt="Amit Grover" class="person-photo">
+            <div class="person-role">Delivery Manager</div>
+            <div class="person-name">Amit Grover</div>
+            <div class="person-title">VP, Solutions & Delivery</div>
+          </div>
+          <div class="person">
+            <img src="../source/bio_pics/colin.jpg" alt="Colin Moore" class="person-photo">
+            <div class="person-role">Head of AI</div>
+            <div class="person-name">Colin Moore</div>
+            <div class="person-title">Director of AI</div>
+          </div>
+          <div class="person">
+            <img src="../source/bio_pics/kishore.jpg" alt="Kishore Elimineti" class="person-photo">
+            <div class="person-role">Governance Lead</div>
+            <div class="person-name">Kishore Elimineti</div>
+            <div class="person-title">Program Leader</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Governance Table -->
+      <div class="governance-section">
+        <div class="governance-header">
+          <h3>Governance & Review Cadence</h3>
+        </div>
+        <table class="governance-table">
+          <thead>
+            <tr>
+              <th>Cadence</th>
+              <th>Participants</th>
+              <th>Focus</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Weekly</td>
+              <td>Kishore + MGRC leads</td>
+              <td>Operational review, ticket health, SLA tracking</td>
+            </tr>
+            <tr>
+              <td>Monthly</td>
+              <td>Neha + Amit + MGRC management</td>
+              <td>Service delivery, CSAT, resource planning</td>
+            </tr>
+            <tr>
+              <td>Quarterly</td>
+              <td>Neha + Surej + Sripriya + MGRC VP</td>
+              <td>Strategic review, transformation roadmap</td>
+            </tr>
+            <tr>
+              <td>Annual</td>
+              <td>Full leadership team</td>
+              <td>Partnership roadmap, long-term planning</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">30</div>
+    </div>
+  </div>
+
+</body>
+</html>

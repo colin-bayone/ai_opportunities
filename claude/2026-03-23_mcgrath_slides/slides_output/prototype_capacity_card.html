@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prototype: Capacity Card Variants (Year 1 data)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .variant-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .variant-desc {
+      font-size: 11px;
+      color: var(--text-light);
+      text-align: center;
+      margin-bottom: 16px;
+      max-width: 280px;
+    }
+
+    .variant-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ============================================
+       VERSION A: "Big Metric"
+       Total is the hero. Onsite/offshore as pills.
+       Output in a tinted footer band.
+       ============================================ */
+    .card-a {
+      width: 260px;
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(124,58,237,0.08);
+      overflow: hidden;
+    }
+
+    .card-a .card-header {
+      background: linear-gradient(135deg, #5B21B6, #6D28D9);
+      padding: 8px 16px;
+      text-align: center;
+    }
+
+    .card-a .card-header h3 {
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .card-a .card-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .card-a .scen {
+      padding: 14px 10px 10px;
+      text-align: center;
+    }
+
+    .card-a .scen.high {
+      border-left: 1px solid #f1f5f9;
+      background: rgba(46,16,101,0.025);
+    }
+
+    .card-a .scen-tag {
+      font-size: 8px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .card-a .scen.med .scen-tag { color: #7C3AED; }
+    .card-a .scen.high .scen-tag { color: #2e1065; }
+
+    .card-a .hero-num {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+
+    .card-a .scen.med .hero-num {
+      background: linear-gradient(135deg, #6D28D9, #A855F7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .card-a .scen.high .hero-num {
+      background: linear-gradient(135deg, #2e1065, #5B21B6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .card-a .hero-label {
+      font-size: 8px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-light);
+      margin-bottom: 10px;
+    }
+
+    .card-a .pills {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      margin-bottom: 10px;
+    }
+
+    .card-a .pill {
+      font-size: 9px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .card-a .pill i {
+      font-size: 7px;
+      margin-right: 2px;
+      opacity: 0.5;
+    }
+
+    .card-a .output-band {
+      padding: 8px 10px;
+      background: rgba(124,58,237,0.04);
+      border-top: 1px solid #f1f5f9;
+    }
+
+    .card-a .out-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 1px 0;
+    }
+
+    .card-a .out-label {
+      font-size: 9px;
+      color: var(--text-light);
+    }
+
+    .card-a .out-val {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--purple-dark);
+    }
+
+    /* ============================================
+       VERSION B: "Centered Comparison"
+       Shared labels down the center. Numbers flank.
+       Clean, table-inspired but card-styled.
+       ============================================ */
+    .card-b {
+      width: 260px;
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(124,58,237,0.08);
+      overflow: hidden;
+    }
+
+    .card-b .card-header {
+      background: linear-gradient(135deg, #5B21B6, #6D28D9);
+      padding: 8px 16px;
+      text-align: center;
+    }
+
+    .card-b .card-header h3 {
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .card-b .scen-headers {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      padding: 8px 14px 6px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .card-b .scen-h {
+      font-size: 8.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .card-b .scen-h.med { color: #7C3AED; text-align: right; padding-right: 10px; }
+    .card-b .scen-h.high { color: #2e1065; text-align: left; padding-left: 10px; }
+    .card-b .scen-h.spacer { width: 60px; }
+
+    .card-b .data-rows {
+      padding: 8px 14px;
+    }
+
+    .card-b .d-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: baseline;
+      padding: 4px 0;
+    }
+
+    .card-b .d-row.separator {
+      border-top: 1px solid #f1f5f9;
+      margin-top: 4px;
+      padding-top: 8px;
+    }
+
+    .card-b .d-val {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .card-b .d-val.left { text-align: right; padding-right: 10px; }
+    .card-b .d-val.right { text-align: left; padding-left: 10px; }
+
+    .card-b .d-label {
+      font-size: 9px;
+      color: var(--text-light);
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .card-b .d-label i {
+      font-size: 7px;
+      margin-right: 2px;
+      opacity: 0.5;
+    }
+
+    .card-b .d-row.total .d-val {
+      font-size: 18px;
+    }
+
+    .card-b .d-row.total .d-val.left {
+      background: linear-gradient(135deg, #6D28D9, #A855F7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .card-b .d-row.total .d-val.right {
+      background: linear-gradient(135deg, #2e1065, #5B21B6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .card-b .d-row.metric .d-val {
+      font-size: 12px;
+      color: var(--purple-dark);
+    }
+
+    /* ============================================
+       VERSION C: "Nested Blocks"
+       Two stacked scenario blocks inside the card.
+       Each block is a self-contained mini-card.
+       ============================================ */
+    .card-c {
+      width: 260px;
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(124,58,237,0.08);
+      overflow: hidden;
+    }
+
+    .card-c .card-header {
+      background: linear-gradient(135deg, #5B21B6, #6D28D9);
+      padding: 8px 16px;
+      text-align: center;
+    }
+
+    .card-c .card-header h3 {
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .card-c .card-body {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .card-c .block {
+      border-radius: 8px;
+      padding: 10px 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-c .block::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 3px;
+    }
+
+    .card-c .block.med {
+      background: rgba(124,58,237,0.04);
+      border: 1px solid rgba(124,58,237,0.1);
+    }
+
+    .card-c .block.med::before { background: linear-gradient(180deg, #7C3AED, #A855F7); }
+
+    .card-c .block.high {
+      background: rgba(46,16,101,0.04);
+      border: 1px solid rgba(46,16,101,0.1);
+    }
+
+    .card-c .block.high::before { background: linear-gradient(180deg, #2e1065, #4C1D95); }
+
+    .card-c .block-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+
+    .card-c .block-tag {
+      font-size: 8px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .card-c .block.med .block-tag { color: #7C3AED; }
+    .card-c .block.high .block-tag { color: #2e1065; }
+
+    .card-c .block-total {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .card-c .block.med .block-total {
+      background: linear-gradient(135deg, #6D28D9, #A855F7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .card-c .block.high .block-total {
+      background: linear-gradient(135deg, #2e1065, #5B21B6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .card-c .block-details {
+      font-size: 9.5px;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    .card-c .block-details i {
+      font-size: 7.5px;
+      margin-right: 2px;
+      opacity: 0.5;
+    }
+
+    .card-c .block-details strong {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .card-c .block-metrics {
+      display: flex;
+      gap: 10px;
+      margin-top: 6px;
+      padding-top: 6px;
+      border-top: 1px solid rgba(124,58,237,0.08);
+    }
+
+    .card-c .bm {
+      font-size: 9px;
+      color: var(--text);
+    }
+
+    .card-c .bm strong {
+      font-weight: 700;
+      color: var(--purple-dark);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- VERSION A: Big Metric -->
+  <div class="variant-wrap">
+    <div class="variant-label">Version A: Big Metric</div>
+    <div class="variant-desc">Total as the hero number. Onsite/offshore as pill badges. Output in a tinted footer band.</div>
+    <div class="card-a">
+      <div class="card-header"><h3>Year 1</h3></div>
+      <div class="card-body">
+        <div class="scen med">
+          <div class="scen-tag">Medium</div>
+          <div class="hero-num">31</div>
+          <div class="hero-label">people</div>
+          <div class="pills">
+            <span class="pill"><i class="fa-solid fa-building"></i> 9 on</span>
+            <span class="pill"><i class="fa-solid fa-globe"></i> 22 off</span>
+          </div>
+          <div class="output-band">
+            <div class="out-row">
+              <span class="out-label">Tickets</span>
+              <span class="out-val">~3,300</span>
+            </div>
+            <div class="out-row">
+              <span class="out-label">Enh hrs</span>
+              <span class="out-val">1,500</span>
+            </div>
+          </div>
+        </div>
+        <div class="scen high">
+          <div class="scen-tag">High</div>
+          <div class="hero-num">37</div>
+          <div class="hero-label">people</div>
+          <div class="pills">
+            <span class="pill"><i class="fa-solid fa-building"></i> 11 on</span>
+            <span class="pill"><i class="fa-solid fa-globe"></i> 26 off</span>
+          </div>
+          <div class="output-band">
+            <div class="out-row">
+              <span class="out-label">Tickets</span>
+              <span class="out-val">~3,900</span>
+            </div>
+            <div class="out-row">
+              <span class="out-label">Enh hrs</span>
+              <span class="out-val">2,000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VERSION B: Centered Comparison -->
+  <div class="variant-wrap">
+    <div class="variant-label">Version B: Centered Comparison</div>
+    <div class="variant-desc">Shared labels down the middle. Numbers flank left and right. Easy to scan across.</div>
+    <div class="card-b">
+      <div class="card-header"><h3>Year 1</h3></div>
+      <div class="scen-headers">
+        <span class="scen-h med">Medium</span>
+        <span class="scen-h spacer"></span>
+        <span class="scen-h high">High</span>
+      </div>
+      <div class="data-rows">
+        <div class="d-row">
+          <span class="d-val left">9</span>
+          <span class="d-label"><i class="fa-solid fa-building"></i> Onsite</span>
+          <span class="d-val right">11</span>
+        </div>
+        <div class="d-row">
+          <span class="d-val left">22</span>
+          <span class="d-label"><i class="fa-solid fa-globe"></i> Offshore</span>
+          <span class="d-val right">26</span>
+        </div>
+        <div class="d-row total separator">
+          <span class="d-val left">31</span>
+          <span class="d-label">Total</span>
+          <span class="d-val right">37</span>
+        </div>
+        <div class="d-row metric separator">
+          <span class="d-val left">~3,300</span>
+          <span class="d-label">Tickets</span>
+          <span class="d-val right">~3,900</span>
+        </div>
+        <div class="d-row metric">
+          <span class="d-val left">1,500</span>
+          <span class="d-label">Enh hrs</span>
+          <span class="d-val right">2,000</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VERSION C: Nested Blocks -->
+  <div class="variant-wrap">
+    <div class="variant-label">Version C: Nested Blocks</div>
+    <div class="variant-desc">Two scenario blocks stacked inside the card. Each is a self-contained mini-card with colored accent.</div>
+    <div class="card-c">
+      <div class="card-header"><h3>Year 1</h3></div>
+      <div class="card-body">
+        <div class="block med">
+          <div class="block-header">
+            <span class="block-tag">Medium</span>
+            <span class="block-total">31</span>
+          </div>
+          <div class="block-details">
+            <i class="fa-solid fa-building"></i> <strong>9</strong> onsite
+            &nbsp;&middot;&nbsp;
+            <i class="fa-solid fa-globe"></i> <strong>22</strong> offshore
+          </div>
+          <div class="block-metrics">
+            <span class="bm"><strong>~3,300</strong> tickets</span>
+            <span class="bm"><strong>1,500</strong> enh hrs</span>
+          </div>
+        </div>
+        <div class="block high">
+          <div class="block-header">
+            <span class="block-tag">High</span>
+            <span class="block-total">37</span>
+          </div>
+          <div class="block-details">
+            <i class="fa-solid fa-building"></i> <strong>11</strong> onsite
+            &nbsp;&middot;&nbsp;
+            <i class="fa-solid fa-globe"></i> <strong>26</strong> offshore
+          </div>
+          <div class="block-metrics">
+            <span class="bm"><strong>~3,900</strong> tickets</span>
+            <span class="bm"><strong>2,000</strong> enh hrs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

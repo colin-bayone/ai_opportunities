@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample Profile: Salesforce Developer / CPQ Specialist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--purple-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 12px 40px 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--purple-accent);
+      margin-bottom: 4px;
+      flex-shrink: 0;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-shrink: 0;
+    }
+
+    .title-row h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .years-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 14px;
+      background: linear-gradient(135deg, rgba(76,29,149,0.08), rgba(168,85,247,0.12));
+      border: 1px solid rgba(124,58,237,0.18);
+      border-radius: 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple-dark);
+      white-space: nowrap;
+    }
+
+    .profile-summary {
+      margin-bottom: 8px;
+      flex-shrink: 0;
+    }
+
+    .profile-summary p {
+      font-size: 12.5px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .profile-summary strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .competencies-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--purple-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .competencies-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .strengths-intro {
+      font-size: 12.5px;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 4px;
+      flex-shrink: 0;
+    }
+
+    .strengths-intro strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .competencies-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      margin-bottom: 10px;
+    }
+
+    .competencies-list li {
+      font-size: 12.5px;
+      color: var(--text);
+      line-height: 1.45;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .competencies-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 7px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--purple-accent);
+    }
+
+    .competencies-list li strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    /* Nested sub-bullets */
+    .competencies-list .sub-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-top: 2px;
+      padding-left: 16px;
+    }
+
+    .competencies-list .sub-list li {
+      font-size: 12px;
+      padding-left: 14px;
+    }
+
+    .competencies-list .sub-list li::before {
+      width: 5px;
+      height: 5px;
+      top: 6px;
+      background: rgba(168,85,247,0.5);
+    }
+
+    /* Technical skills snapshot */
+    .snapshot-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .snapshot-list p {
+      font-size: 12.5px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .snapshot-list p strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="section-label">Sample Profiles</div>
+      <div class="title-row">
+        <h2>Salesforce</h2>
+        <span class="years-badge">12+ Years</span>
+      </div>
+
+      <div class="profile-summary">
+        <p><strong>Senior Salesforce Developer / CPQ Specialist:</strong> Professional Experience:12+ years of IT experience with deep expertise across Salesforce Development, CPQ (Salesforce & Apttus), Sales Cloud, Service Cloud, Revenue Cloud (CPQ & Billing), Experience Cloud, and Marketing Cloud. Extensive hands-on development background, full SDLC exposure, and strong integration and automation capabilities.</p>
+      </div>
+
+      <div class="competencies-label">Core Strengths</div>
+      <p class="strengths-intro">Expert in Salesforce CPQ (SteelBrick), including:</p>
+      <ul class="competencies-list">
+        <li>Product configuration & rules</li>
+        <li>Complex pricing and discounting</li>
+        <li>Quote Calculator Plugin (QCP)</li>
+        <li>Quote templates (Conga Composer)</li>
+        <li>Strong in Salesforce Billing: invoices, payments, revenue recognition, subscription management.</li>
+        <li>Advanced development capabilities in:
+          <ul class="sub-list">
+            <li>Apex, Triggers, Batch, Callouts</li>
+            <li>Lightning Web Components (LWC), Aura, Visualforce</li>
+            <li>SOQL/SOSL</li>
+          </ul>
+        </li>
+        <li>Deep experience with Integrations (REST/SOAP), Data Migration, CI/CD, and managed/unmanaged packages.</li>
+        <li>Hands-on with CLM integrations (DocuSign, Adobe Sign).</li>
+        <li>Skilled in Agile, onshore/offshore collaboration, and tech/business stakeholder alignment.</li>
+      </ul>
+
+      <div class="competencies-label">Technical Skills Snapshot</div>
+      <div class="snapshot-list">
+        <p><strong>Languages:</strong> Apex, Visualforce, LWC, Aura, Java, SQL, PL/SQL</p>
+        <p><strong>Salesforce Tools:</strong> CPQ, Billing, Conga, Experience Cloud, Flows, Process Builder</p>
+        <p><strong>DevOps / Deployment:</strong> Gearset, Copado, Ant, Jenkins, VS Code, GitHub</p>
+        <p><strong>Integrations:</strong> REST/SOAP APIs, MuleSoft, Dell Boomi</p>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">42</div>
+    </div>
+  </div>
+
+</body>
+</html>

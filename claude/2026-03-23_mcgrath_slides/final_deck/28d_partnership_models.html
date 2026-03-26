@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide: Partnership Models</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--purple-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 12px 40px 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+      flex-shrink: 0;
+    }
+
+    .slide-content .lead {
+      font-size: 11.5px;
+      color: var(--text-light);
+      margin-bottom: 10px;
+      flex-shrink: 0;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+
+    /* Partnership Models Grid */
+    .models-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 12px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .model-card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 14px;
+      padding: 14px 18px;
+      box-shadow: 0 2px 10px rgba(124,58,237,0.06);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .model-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+
+    .model-card.m1::before { background: linear-gradient(90deg, #4C1D95, #5B21B6); }
+    .model-card.m2::before { background: linear-gradient(90deg, #5B21B6, #7C3AED); }
+    .model-card.m3::before { background: linear-gradient(90deg, #7C3AED, #A855F7); }
+    .model-card.m4::before { background: linear-gradient(90deg, #A855F7, #C026D3); }
+
+    /* Recommended highlight */
+    .model-card.recommended {
+      border-color: rgba(76,29,149,0.25);
+      box-shadow: 0 2px 12px rgba(76,29,149,0.12);
+    }
+
+    .model-card .card-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .model-card .number-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .model-card.m1 .number-badge { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .model-card.m2 .number-badge { background: linear-gradient(135deg, #5B21B6, #7C3AED); }
+    .model-card.m3 .number-badge { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+    .model-card.m4 .number-badge { background: linear-gradient(135deg, #A855F7, #C026D3); }
+
+    .model-card .card-title-area {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .model-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      line-height: 1.3;
+    }
+
+    .rec-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 9px;
+      font-weight: 600;
+      color: #4C1D95;
+      background: linear-gradient(135deg, rgba(76,29,149,0.08), rgba(168,85,247,0.12));
+      padding: 2px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    .model-card .description {
+      font-size: 10.5px;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .model-card .features {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      flex: 1;
+    }
+
+    .model-card .feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 10px;
+      line-height: 1.5;
+      color: #475569;
+    }
+
+    .model-card .feature i {
+      font-size: 10px;
+      margin-top: 3px;
+      width: 14px;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    .model-card.m1 .feature i { color: #4C1D95; }
+    .model-card.m2 .feature i { color: #5B21B6; }
+    .model-card.m3 .feature i { color: #7C3AED; }
+    .model-card.m4 .feature i { color: #A855F7; }
+
+    .model-card .feature strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    /* Bottom context bar */
+    .context-bar {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+      flex-shrink: 0;
+    }
+
+    .context-card {
+      flex: 1;
+      background: linear-gradient(135deg, rgba(76,29,149,0.06), rgba(168,85,247,0.08));
+      border: 1px solid rgba(124,58,237,0.18);
+      border-radius: 8px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .context-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple-accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .context-text h4 {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+
+    .context-text p {
+      font-size: 10px;
+      color: var(--text);
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>Partnership Models</h2>
+      <p class="lead">Flexible engagement options to match McGrath's evolving needs across your managed services lifecycle</p>
+
+      <div class="models-grid">
+
+        <!-- 01: Managed Services -->
+        <div class="model-card m1 recommended">
+          <div class="card-top">
+            <div class="number-badge">01</div>
+            <div class="card-title-area">
+              <h3>Managed Services</h3>
+              <div class="rec-badge"><i class="fa-solid fa-star" style="font-size: 7px;"></i> Recommended for McGrath</div>
+            </div>
+          </div>
+          <p class="description">End-to-end service delivery with defined SLAs, billed as a fixed monthly fee for predictable budgeting.</p>
+          <div class="features">
+            <div class="feature">
+              <i class="fa-solid fa-handshake"></i>
+              <span><strong>Full accountability</strong> for Oracle Fusion, Salesforce, and integration support operations</span>
+            </div>
+            <div class="feature">
+              <i class="fa-solid fa-gauge-high"></i>
+              <span><strong>SLA-driven delivery</strong> with P1 through P4 response targets and monthly reporting</span>
+            </div>
+            <div class="feature">
+              <i class="fa-solid fa-arrows-spin"></i>
+              <span><strong>Continuous improvement</strong> with quarterly reviews and optimization recommendations</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 02: Time & Material -->
+        <div class="model-card m2">
+          <div class="card-top">
+            <div class="number-badge">02</div>
+            <div class="card-title-area">
+              <h3>Time & Material</h3>
+            </div>
+          </div>
+          <p class="description">Flexible engagement where billing is based on actual hours worked, ideal for variable-scope initiatives.</p>
+          <div class="features">
+            <div class="feature">
+              <i class="fa-solid fa-clock"></i>
+              <span><strong>Pay-as-you-go</strong> for enhancement requests and transformation projects</span>
+            </div>
+            <div class="feature">
+              <i class="fa-solid fa-sliders"></i>
+              <span><strong>Scope flexibility</strong> to scale effort up or down as priorities shift</span>
+            </div>
+            <div class="feature">
+              <i class="fa-solid fa-file-invoice-dollar"></i>
+              <span><strong>Transparent billing</strong> with detailed time tracking and deliverable reporting</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 03: Fixed Capacity -->
+        <div class="model-card m3">
+          <div class="card-top">
+            <div class="number-badge">03</div>
+            <div class="card-title-area">
+              <h3>Fixed Capacity</h3>
+            </div>
+          </div>
+          <p class="description">Pre-allocated team at a fixed cost, ensuring consistent resource availability for ongoing operations.</p>
+          <div class="features">
+            <div class="feature">
+              <i class="fa-solid fa-users"></i>
+              <span><strong>Dedicated team</strong> with deep institutional knowledge of McGrath systems</span>
+            </div>
+            <div class="feature">
+              <i class="fa-solid fa-calendar-check"></i>
+              <span><strong>Predictable capacity</strong> to handle quarterly Oracle patches and ongoing support</span>
+            </div>
+            <div class="feature">
+              <i class="fa-solid fa-building-columns"></i>
+              <span><strong>Knowledge retention</strong> through team continuity across engagement periods</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 04: Managed Projects -->
+        <div class="model-card m4">
+          <div class="card-top">
+            <div class="number-badge">04</div>
+            <div class="card-title-area">
+              <h3>Managed Projects</h3>
+            </div>
+          </div>
+          <p class="description">Fixed-price delivery with defined scope, budget, and milestones for discrete transformation initiatives.</p>
+          <div class="features">
+            <div class="feature">
+              <i class="fa-solid fa-bullseye"></i>
+              <span><strong>Defined deliverables</strong> with clear milestones and acceptance criteria</span>
+            </div>
+            <div class="feature">
+              <i class="fa-solid fa-shield-halved"></i>
+              <span><strong>Fixed budget</strong> providing cost certainty for QA automation or integration projects</span>
+            </div>
+            <div class="feature">
+              <i class="fa-solid fa-flag-checkered"></i>
+              <span><strong>Outcome-driven</strong> engagement with completion-based payment schedules</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom context bar -->
+      <div class="context-bar">
+        <div class="context-card">
+          <div class="context-icon"><i class="fa-solid fa-puzzle-piece"></i></div>
+          <div class="context-text">
+            <h4>Blended Approach</h4>
+            <p>Models can be combined: Managed Services for core operations with T&M or Managed Projects for transformation initiatives and enhancement backlogs</p>
+          </div>
+        </div>
+        <div class="context-card">
+          <div class="context-icon"><i class="fa-solid fa-rotate"></i></div>
+          <div class="context-text">
+            <h4>Evolve Over Time</h4>
+            <p>Start with the model that fits today and transition as the engagement matures across Years 1, 2, and 3</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">26</div>
+    </div>
+  </div>
+
+</body>
+</html>

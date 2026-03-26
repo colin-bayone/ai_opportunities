@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Information Request - Lam Research</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .cover-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e879f9;
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 56px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .cover-subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 48px;
+      max-width: 600px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 48px;
+      padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .cover-meta-item label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+
+    .cover-meta-item span {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .logo {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span { color: #e879f9; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .section { margin-bottom: 64px; }
+
+    .section-number {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      padding: 6px 14px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%);
+      border-radius: 4px;
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 32px 0 16px;
+    }
+
+    h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 24px 0 12px;
+    }
+
+    p { margin-bottom: 16px; }
+
+    .lead {
+      font-size: 18px;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border-left: 4px solid #a855f7;
+      padding: 24px 28px;
+      margin: 32px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    .highlight-box ul {
+      margin: 12px 0 0 20px;
+      padding: 0;
+    }
+
+    .highlight-box li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      padding: 14px 16px;
+      background: #5b21b6;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+
+    th:last-child { border-right: none; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    ul.request-list {
+      margin: 0 0 0 20px;
+      padding: 0;
+    }
+
+    ul.request-list li {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin: 24px 0;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      padding: 28px;
+    }
+
+    .card h4 {
+      margin-top: 0;
+      color: var(--purple-mid);
+    }
+
+    .card ul {
+      margin: 0 0 0 20px;
+      padding: 0;
+    }
+
+    .card li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .card p {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .card p:last-child { margin-bottom: 0; }
+
+    /* Priority tier styling */
+    .priority-tier {
+      background: var(--white);
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      padding: 32px;
+      margin: 32px 0;
+      box-shadow: 0 1px 3px rgba(124,58,237,0.06);
+    }
+
+    .priority-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+
+    .priority-badge {
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: var(--white);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .priority-badge.tier-2 {
+      background: linear-gradient(135deg, #4c1d95, #7c3aed);
+    }
+
+    .priority-badge.tier-3 {
+      background: linear-gradient(135deg, #2e1065, #4c1d95);
+    }
+
+    .priority-audience {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-light);
+      padding: 4px 12px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .priority-tier h3 {
+      margin-top: 12px;
+    }
+
+    .ask-card {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px 28px;
+      margin: 20px 0;
+    }
+
+    .ask-card h4 {
+      margin-top: 0;
+      color: var(--purple-mid);
+      font-size: 17px;
+    }
+
+    .ask-card p {
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .ask-card p:last-child { margin-bottom: 0; }
+
+    .ask-card ul {
+      margin: 8px 0 0 20px;
+      padding: 0;
+    }
+
+    .ask-card li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    /* Call to action box */
+    .cta-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(168,85,247,0.12) 100%);
+      border: 2px solid rgba(124,58,237,0.2);
+      border-radius: 12px;
+      padding: 32px;
+      margin: 32px 0;
+    }
+
+    .cta-box h3 {
+      margin-top: 0;
+      color: var(--purple-mid);
+    }
+
+    .cta-box p:last-child { margin-bottom: 0; }
+
+    .footer {
+      text-align: center;
+      padding: 48px 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 64px;
+    }
+
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .footer-logo span { color: #a855f7; }
+
+    .footer p {
+      font-size: 13px;
+      color: var(--text-light);
+      margin: 0;
+    }
+
+    @media print {
+      @page {
+        size: 8.5in 11in;
+        margin: 0.4in;
+      }
+
+      body { font-size: 9pt; line-height: 1.4; }
+
+      .cover {
+        min-height: 0;
+        height: 10in;
+        padding: 50px;
+        page-break-after: always;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .cover h1 { font-size: 32pt; }
+      .cover-subtitle { font-size: 13pt; }
+      .cover-meta { padding-top: 32px; gap: 32px; }
+      .logo { position: relative; bottom: auto; right: auto; margin-top: 32px; }
+
+      .container { padding: 0; max-width: 100%; }
+
+      .section { margin-bottom: 20px; }
+
+      h2 { font-size: 14pt; margin-bottom: 10px; }
+      h3 { font-size: 11pt; margin: 14px 0 8px; }
+      h4 { font-size: 10pt; margin: 10px 0 6px; }
+      p { margin-bottom: 6px; }
+      .lead { font-size: 10pt; margin-bottom: 14px; }
+
+      table {
+        font-size: 8pt;
+        margin: 10px 0;
+      }
+
+      th, td {
+        padding: 6px 8px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .highlight-box {
+        padding: 12px 16px;
+        margin: 14px 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .priority-tier { padding: 16px; margin: 14px 0; }
+      .ask-card { padding: 12px 16px; margin: 10px 0; }
+      .two-col { gap: 16px; }
+      .card { padding: 16px; }
+
+      .cta-box {
+        padding: 16px;
+        margin: 14px 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .footer {
+        margin-top: 20px;
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-label">Discovery</div>
+      <h1>Next Steps and Discovery</h1>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <label>Prepared For</label>
+          <span>Lam Research</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Prepared By</label>
+          <span>BayOne Solutions</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Date</label>
+          <span>March 2026</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo">Bay<span>One</span></div>
+  </div>
+
+  <div class="container">
+
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>Purpose</h2>
+      <p class="lead">During the discovery session, we gained a strong understanding of the problem space. To move forward with a preliminary approach, we need additional specifics that will allow us to scope an initial proof of concept and prepare meaningful recommendations with trade-offs for the follow-up meeting.</p>
+      <p>This document outlines the information we are requesting from the Lam Research team. We have organized the items by priority and have noted which items could be addressed by the business team versus those that may require involvement from the technical team.</p>
+
+      <div class="highlight-box">
+        <p><strong>How this document is organized:</strong></p>
+        <ul>
+          <li><strong>Priority 1</strong> items are essential for scoping the initial proof of concept and can be answered by the business team</li>
+          <li><strong>Priority 2</strong> items require involvement from the technical team and will inform the architecture of our proposed approach</li>
+          <li><strong>Priority 3</strong> items are best addressed in a working session with the technical team rather than asynchronously</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>Priority 1: Selecting the Starting Point</h2>
+      <p class="lead">These items are essential for scoping the initial proof of concept and do not require deep technical knowledge to answer.</p>
+
+      <div class="priority-tier">
+        <div class="priority-header">
+          <span class="priority-badge">Priority 1</span>
+          <span class="priority-audience">Business team can answer</span>
+        </div>
+
+        <div class="ask-card">
+          <h4>1.1 Identify One Application</h4>
+          <p>We need to start with one specific application or system from the Lam environment. During the discovery session, the team described a broad landscape of tools and knowledge systems. To build something meaningful rather than generic, we need to focus on a single, high-impact starting point.</p>
+          <p><strong>What we are asking for:</strong></p>
+          <ul>
+            <li>The name of one application or system that is considered the highest-impact candidate for this initiative</li>
+            <li>A description of what that application does (what problem it solves for its users, how they interact with it)</li>
+            <li>What data sources feed into it (documents, databases, APIs, user-entered text, transcripts, or other inputs)</li>
+            <li>What types of content within that application are most likely to contain customer-identifiable information</li>
+          </ul>
+          <p>This is a business-level question about which tool matters most, not a technical deep dive into architecture.</p>
+        </div>
+
+        <div class="ask-card">
+          <h4>1.2 Representative Data Samples</h4>
+          <p>To validate any approach, we need to see examples of the actual content the system would process. We need both positive and negative examples.</p>
+          <p><strong>What we are asking for:</strong></p>
+          <ul>
+            <li><strong>Examples of content that should be flagged:</strong> Documents, tickets, or data entries that contain customer-identifiable information and represent the types of violations the system needs to catch. These are the failure cases, the things that the current approach misses or that policy violations look like in practice.</li>
+            <li><strong>Examples of content that is clean:</strong> Documents or entries that are free of customer-identifiable information and should pass through without flagging. This is the gold standard for what "good" looks like.</li>
+            <li><strong>Coverage across data types:</strong> If the selected application ingests multiple content types (text documents, Excel files, transcripts, images, database records), we would benefit from seeing examples of each type that is in scope.</li>
+          </ul>
+          <p>If security or IP concerns prevent sharing actual documents, sanitized examples or synthetic representations that preserve the structure and patterns of real content would also be valuable.</p>
+          <p>For live data sources (databases, APIs), we would need either an export of representative data tagged by the team as "should be flagged" or "is clean," or access to the data source along with a subject matter expert who can walk us through what should and should not be caught.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>Priority 2: Technical Context</h2>
+      <p class="lead">These items require involvement from the technical team and will inform the architecture of our proposed approach.</p>
+
+      <div class="priority-tier">
+        <div class="priority-header">
+          <span class="priority-badge tier-2">Priority 2</span>
+          <span class="priority-audience">Technical team needed</span>
+        </div>
+
+        <div class="ask-card">
+          <h4>2.1 Representative Data Samples</h4>
+          <p>To validate any approach, we need to see examples of the actual content the system would process. We need both positive and negative examples.</p>
+          <p><strong>What we are asking for:</strong></p>
+          <ul>
+            <li><strong>Examples of content that should be flagged:</strong> Documents, tickets, or data entries that contain customer-identifiable information and represent the types of violations the system needs to catch. These are the failure cases, the things that the current approach misses or that policy violations look like in practice.</li>
+            <li><strong>Examples of content that is clean:</strong> Documents or entries that are free of customer-identifiable information and should pass through without flagging. This is the gold standard for what "good" looks like.</li>
+            <li><strong>Coverage across data types:</strong> If the selected application ingests multiple content types (text documents, Excel files, transcripts, images, database records), we would benefit from seeing examples of each type that is in scope.</li>
+          </ul>
+          <p>If security or IP concerns prevent sharing actual documents, sanitized examples or synthetic representations that preserve the structure and patterns of real content would also be valuable.</p>
+          <p>For live data sources (databases, APIs), we would need either an export of representative data tagged by the team as "should be flagged" or "is clean," or access to the data source along with a subject matter expert who can walk us through what should and should not be caught.</p>
+        </div>
+
+        <div class="ask-card">
+          <h4>2.2 What "Sensitive" Looks Like in Practice</h4>
+          <p>During the discovery session, the team described customer names and file names as the initial target fields. To calibrate detection accurately, we need concrete examples of what customer-identifiable information looks like in the wild.</p>
+          <p><strong>What we are asking for:</strong></p>
+          <ul>
+            <li>A list of the specific customer names, abbreviations, and identifiers that the system should recognize</li>
+            <li>Known spelling variations for key identifiers (the discovery session surfaced examples like Fab 11, F11, Micro 11, FAP 11, FAP-11, and we expect there are many more)</li>
+            <li>Any other categories of information beyond customer names and file names that should be flagged, even if those are lower priority for the initial scope</li>
+            <li>Examples of borderline cases: content that is ambiguous or context-dependent, where a human reviewer would need to make a judgment call</li>
+          </ul>
+        </div>
+
+        <div class="ask-card">
+          <h4>2.3 Prior Technical Work</h4>
+          <p>We understand that multiple ML-based approaches have been tried (Transformers, SpaCy, an Azure AI model) with results around 20% false positive rate, fine-tuned to 17%. To avoid repeating prior work and to understand what has already been learned, we would benefit from the following:</p>
+
+          <table>
+            <tr>
+              <th>Area</th>
+              <th>What We Need</th>
+            </tr>
+            <tr>
+              <td><strong>Model Architectures</strong></td>
+              <td>The specific model architectures and configurations that were used</td>
+            </tr>
+            <tr>
+              <td><strong>Training Data</strong></td>
+              <td>What was used, how large it was, and how it was labeled</td>
+            </tr>
+            <tr>
+              <td><strong>Testing Methodology</strong></td>
+              <td>How the false positive rate was calculated, what the test set was, and how ground truth was established</td>
+            </tr>
+            <tr>
+              <td><strong>Labeling Exercise</strong></td>
+              <td>The intended scope and methodology of the effort assessed at 1,000+ person-hours</td>
+            </tr>
+            <tr>
+              <td><strong>Prior Partners</strong></td>
+              <td>What was delivered, how the problem was scoped, and what the outcome was</td>
+            </tr>
+            <tr>
+              <td><strong>Reusable Artifacts</strong></td>
+              <td>Whether any prior work produced trained models, labeled datasets, or evaluation scripts</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="ask-card">
+          <h4>2.4 Infrastructure and Systems</h4>
+          <p>During the discovery session, the infrastructure landscape was described at a high level. To recommend an approach that fits the existing environment, we need more specifics:</p>
+          <ul>
+            <li>What Azure services are currently in use (and licensed) across the organization</li>
+            <li>Which systems involved in this initiative are on-premises versus cloud-hosted</li>
+            <li>The architecture of the selected application from Priority 1.1 (how data enters, how it is stored, how it is served to users)</li>
+            <li>Data volume estimates: how many documents are ingested per day or week, how many tickets are created, how many search queries are performed</li>
+            <li>Any existing data pipelines, ingestion frameworks, or middleware that are already in place</li>
+          </ul>
+        </div>
+
+        <div class="ask-card">
+          <h4>2.5 Organizational and Governance Context</h4>
+          <p>Understanding the decision-making structure and existing governance will help us propose an approach that is operationally realistic.</p>
+          <ul>
+            <li>The governance structure for AI and data initiatives: who approves new tools, who manages compliance, and how IT and cybersecurity are involved in decisions of this nature</li>
+            <li>Any regulatory or contractual requirements that constrain how customer data is handled (beyond the general principle of customer IP protection)</li>
+            <li>The scope of systems that fall within the initiative owner's direct authority versus systems that require coordination with other teams or departments</li>
+          </ul>
+        </div>
+
+        <div class="ask-card">
+          <h4>2.6 The "2-5 Seconds" Requirement</h4>
+          <p>The discovery session referenced a two-to-five-second performance requirement for the detection use case. To architect appropriately, we need to understand what this requirement is measuring:</p>
+          <ul>
+            <li>Is this the time from document upload to confirmation that the upload was accepted?</li>
+            <li>Is this the time from data entry to a detection notification appearing in the UI?</li>
+            <li>Is this the time from upload to the content being available for search or Q&A?</li>
+          </ul>
+          <p>The architecture differs significantly depending on which of these the requirement applies to.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">04</div>
+      <h2>Priority 3: Follow-Up Discussion</h2>
+      <p class="lead">These items are best addressed in a working session with the technical team rather than asynchronously.</p>
+
+      <div class="priority-tier">
+        <div class="priority-header">
+          <span class="priority-badge tier-3">Priority 3</span>
+          <span class="priority-audience">Working session</span>
+        </div>
+
+        <div class="two-col">
+          <div class="card">
+            <h4>3.1 Technical Working Session</h4>
+            <p>We would like to schedule a working session with the technical lead and relevant team members to walk through the items in Priority 2 in a conversational format. This would allow us to ask follow-up questions in real time and ensure we have the depth needed to prepare a well-grounded preliminary approach.</p>
+          </div>
+          <div class="card">
+            <h4>3.2 Application Inventory (Lightweight)</h4>
+            <p>We do not need an exhaustive inventory of every application in the environment. However, a lightweight view of the top three to five most important applications or knowledge systems that are candidates for this initiative would help us understand the broader landscape and plan for incremental expansion beyond the initial proof of concept.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">05</div>
+      <h2>Next Steps</h2>
+
+      <div class="cta-box">
+        <h3>What Happens Next</h3>
+        <p>Once we receive the information outlined in Priority 1, we will be in a position to prepare a preliminary approach document with specific recommendations, trade-offs, and a proposed scope for the initial proof of concept.</p>
+        <p>We are targeting the follow-up meeting as the venue to present this approach, and we want to ensure that what we bring is grounded in the actual environment rather than generic recommendations.</p>
+      </div>
+
+      <table>
+        <tr>
+          <th>Priority</th>
+          <th>Action</th>
+          <th>Responder</th>
+        </tr>
+        <tr>
+          <td><strong>1</strong></td>
+          <td>Identify one application as the highest-impact starting point for the proof of concept</td>
+          <td>Business team</td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td>Provide representative data samples, define what "sensitive" looks like, share prior technical work details, infrastructure context, governance structure, and performance requirements</td>
+          <td>Technical team</td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td>Schedule a working session to walk through Priority 2 items and review the application landscape</td>
+          <td>Both teams</td>
+        </tr>
+      </table>
+
+      <p>We appreciate the team's time and openness during the discovery session and look forward to continuing this conversation.</p>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Confidential - Prepared for Lam Research</p>
+    </div>
+  </div>
+</body>
+</html>

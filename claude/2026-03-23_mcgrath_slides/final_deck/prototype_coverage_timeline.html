@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coverage Timeline Prototype</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #fff;
+      padding: 40px;
+    }
+
+    h3 {
+      font-size: 14px;
+      margin-bottom: 16px;
+      color: #0f172a;
+    }
+
+    .timeline-box {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 10px;
+      padding: 16px 20px;
+      max-width: 900px;
+    }
+
+    /*
+      24-hour day in PST, split into 24 equal columns.
+      Each column = 1 hour. We use a CSS grid with 24 columns.
+
+      Timeline (PST):
+        7 PM (19:00) - India on-call starts
+        1 AM (01:00) - India working starts
+        8 AM (08:00) - US working starts (overlap begins)
+       10 AM (10:00) - India working ends (overlap ends)
+        4 PM (16:00) - US working ends, US on-call starts
+        7 PM (19:00) - US on-call ends
+
+      We'll show midnight-to-midnight (0-24) on the grid.
+      But the coverage wraps around midnight, so we show 7PM to 7PM (19:00 to 19:00 next day).
+      Actually, let's just do a simple 12AM to 12AM grid and place blocks accordingly.
+
+      Positions (hour index from midnight):
+        India on-call:  19:00 - 01:00 (wraps midnight) = col 19-24 + col 0-1
+        India working:  01:00 - 10:00 = col 1-10
+        US working:     08:00 - 16:00 = col 8-16
+        US on-call:     16:00 - 19:00 = col 16-19
+        Overlap:        08:00 - 10:00 (India working + US working)
+
+      Since India on-call wraps midnight, let's shift the view.
+      Show from 7PM to 7PM (19 to 19+24=43, normalize to 0-24).
+      Or simpler: show 6PM to 8PM next day = shift everything by -18.
+
+      Actually the simplest: use the same approach as original.
+      Left = evening/night, middle = business day, right = evening.
+      Time axis: 7 PM | 1 AM | 8 AM | 10 AM | 4 PM | 7 PM
+      Spans:     7PM-1AM(6h) | 1AM-8AM(7h) | 8AM-10AM(2h) | 10AM-4PM(6h) | 4PM-7PM(3h)
+      Total: 24h. Flex ratios: 6:7:2:6:3
+    */
+
+    .time-axis {
+      display: flex;
+      margin-bottom: 4px;
+      padding-left: 100px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    .time-mark {
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .time-mark.t1 { flex: 6; }
+    .time-mark.t2 { flex: 7; }
+    .time-mark.t3 { flex: 2; }
+    .time-mark.t4 { flex: 6; }
+    .time-mark.t5 { flex: 3; }
+
+    .row {
+      display: flex;
+      align-items: center;
+      height: 34px;
+      margin-bottom: 4px;
+    }
+
+    .row-label {
+      width: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #0f172a;
+      flex-shrink: 0;
+    }
+
+    .bar-track {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      border-radius: 5px;
+      overflow: hidden;
+      background: #f8fafc;
+    }
+
+    .segment {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    /* India segments across 7PM-7PM:
+       7PM-1AM (6h): on-call - dark purple
+       1AM-8AM (7h): working - medium purple
+       8AM-10AM (2h): working + overlap - medium purple with indicator
+       10AM-7PM (9h): off - empty
+    */
+    .india-oncall {
+      flex: 6;
+      background: linear-gradient(135deg, #3b0d7a, #4C1D95);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .india-working {
+      flex: 7;
+      background: linear-gradient(135deg, #4C1D95, #5B21B6);
+      color: #fff;
+    }
+
+    .india-overlap {
+      flex: 2;
+      background: linear-gradient(135deg, #5B21B6, #6D28D9);
+      color: #fff;
+      border-left: 2px solid rgba(255,255,255,0.3);
+    }
+
+    .india-off {
+      flex: 9;
+      background: transparent;
+    }
+
+    /* US segments across 7PM-7PM:
+       7PM-8AM (13h): off - empty
+       8AM-10AM (2h): working + overlap - purple with indicator
+       10AM-4PM (6h): working - purple
+       4PM-7PM (3h): on-call - green
+    */
+    .us-off {
+      flex: 13;
+      background: transparent;
+    }
+
+    .us-overlap {
+      flex: 2;
+      background: linear-gradient(135deg, #7C3AED, #8B5CF6);
+      color: #fff;
+      border-right: 2px solid rgba(255,255,255,0.3);
+    }
+
+    .us-working {
+      flex: 6;
+      background: linear-gradient(135deg, #7C3AED, #A855F7);
+      color: #fff;
+    }
+
+    .us-oncall {
+      flex: 3;
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: #fff;
+    }
+
+    /* Overlap bracket */
+    .overlap-row {
+      display: flex;
+      padding-left: 100px;
+      margin-top: 2px;
+      margin-bottom: 6px;
+    }
+
+    .overlap-spacer { flex: 13; }
+    .overlap-indicator {
+      flex: 2;
+      text-align: center;
+      font-size: 9px;
+      font-weight: 700;
+      color: #7C3AED;
+      border-top: 2px solid #7C3AED;
+      padding-top: 2px;
+    }
+    .overlap-spacer-end { flex: 9; }
+
+    /* Legend */
+    .legend {
+      display: flex;
+      gap: 16px;
+      margin-top: 10px;
+      padding-left: 100px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      color: #475569;
+    }
+
+    .legend-swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+    }
+
+    .swatch-india-work { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .swatch-india-oncall { background: linear-gradient(135deg, #3b0d7a, #4C1D95); }
+    .swatch-us-work { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+    .swatch-us-oncall { background: linear-gradient(135deg, #059669, #10b981); }
+    .swatch-overlap { background: linear-gradient(135deg, #5B21B6, #8B5CF6); border: 1px dashed #7C3AED; }
+  </style>
+</head>
+<body>
+
+  <h3>Coverage Timeline (PST) -- Prototype</h3>
+
+  <div class="timeline-box">
+
+    <!-- Time axis -->
+    <div class="time-axis">
+      <div class="time-mark t1">7 PM</div>
+      <div class="time-mark t2">1 AM</div>
+      <div class="time-mark t3">8 AM</div>
+      <div class="time-mark t4">10 AM</div>
+      <div class="time-mark t5">4 PM</div>
+    </div>
+
+    <!-- India row -->
+    <div class="row">
+      <div class="row-label">India Team</div>
+      <div class="bar-track">
+        <div class="segment india-oncall">On-call</div>
+        <div class="segment india-working">Working Hours</div>
+        <div class="segment india-overlap">div>
+        <div class="segment india-off"></div>
+      </div>
+    </div>
+
+    <!-- US row -->
+    <div class="row">
+      <div class="row-label">US Team</div>
+      <div class="bar-track">
+        <div class="segment us-off"></div>
+        <div class="segment us-overlap">div>
+        <div class="segment us-working">Working Hours</div>
+        <div class="segment us-oncall">On-call</div>
+      </div>
+    </div>
+
+    <!-- Overlap indicator -->
+    <div class="overlap-row">
+      <div class="overlap-spacer"></div>
+      <div class="overlap-indicator">2hr Overlap</div>
+      <div class="overlap-spacer-end"></div>
+    </div>
+
+    <!-- Legend -->
+    <div class="legend">
+      <div class="legend-item"><div class="legend-swatch swatch-india-work"></div> India Working</div>
+      <div class="legend-item"><div class="legend-swatch swatch-india-oncall"></div> India On-call</div>
+      <div class="legend-item"><div class="legend-swatch swatch-us-work"></div> US Working</div>
+      <div class="legend-item"><div class="legend-swatch swatch-us-oncall"></div> US On-call</div>
+      <div class="legend-item"><div class="legend-swatch swatch-overlap"></div> Overlap</div>
+    </div>
+
+  </div>
+
+</body>
+</html>

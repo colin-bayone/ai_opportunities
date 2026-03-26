@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sentiment Analysis - Mani 2026 Roadmap Discussion</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #a855f7;
+      --purple-dark: #5b21b6;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .cover-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e879f9;
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .cover-subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 48px;
+      max-width: 600px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 48px;
+      padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .cover-meta-item label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+
+    .cover-meta-item span { font-size: 15px; font-weight: 500; }
+
+    .logo {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span { color: #e879f9; }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 80px 40px; }
+
+    .section { margin-bottom: 44px; }
+
+    .section-number {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--purple-dark);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      padding: 6px 14px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%);
+      border-radius: 4px;
+    }
+
+    h2 { font-size: 28px; font-weight: 700; color: var(--primary); margin-bottom: 20px; letter-spacing: -0.5px; }
+    h3 { font-size: 18px; font-weight: 600; color: var(--primary); margin: 28px 0 14px; }
+    h4 { font-size: 15px; font-weight: 600; color: var(--primary); margin: 20px 0 10px; }
+    p { margin-bottom: 16px; }
+
+    .lead { font-size: 17px; color: var(--text-light); line-height: 1.8; margin-bottom: 28px; }
+
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+
+    th {
+      text-align: left;
+      padding: 10px 14px;
+      background: #5b21b6;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+
+    th:last-child { border-right: none; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+
+    td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border-left: 4px solid #a855f7;
+      padding: 20px 24px;
+      margin: 24px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    .quote-block {
+      background: var(--bg-subtle);
+      border-left: 3px solid var(--accent);
+      padding: 12px 16px;
+      margin: 10px 0;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+    }
+
+    .quote-block .interpretation {
+      display: block;
+      margin-top: 12px;
+      font-style: normal;
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    .tone-summary {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .tone-badge {
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .tone-badge.positive {
+      background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%);
+      color: var(--purple-dark);
+    }
+
+    .indicators-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin: 24px 0;
+    }
+
+    .indicator-card {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .indicator-card h4 { margin: 0 0 12px 0; font-size: 14px; color: var(--accent); }
+
+    .indicator-card ul {
+      margin: 0;
+      padding-left: 20px;
+      font-size: 14px;
+    }
+
+    .indicator-card li { margin-bottom: 6px; }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .score-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: var(--bg-subtle);
+      border-radius: 8px;
+    }
+
+    .score-item .label { font-weight: 500; }
+    .score-item .score {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 18px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 48px 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 64px;
+    }
+
+    .footer-logo { font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+    .footer-logo span { color: #a855f7; }
+    .footer p { font-size: 13px; color: var(--text-light); margin: 0; }
+
+    @media print {
+      @page { size: 8.5in 11in; margin: 0.5in; }
+      body { font-size: 9pt; line-height: 1.4; }
+      .cover { min-height: 0; height: 10in; padding: 50px; page-break-after: always; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .cover h1 { font-size: 32pt; }
+      .cover-subtitle { font-size: 13pt; }
+      .container { padding: 0; max-width: 100%; }
+      .section { margin-bottom: 24px; page-break-inside: avoid; }
+      h2 { font-size: 14pt; margin-bottom: 10px; page-break-after: avoid; }
+      h3 { font-size: 11pt; margin: 14px 0 8px; page-break-after: avoid; }
+      p { margin-bottom: 6px; }
+      .lead { font-size: 10pt; margin-bottom: 14px; }
+      table { font-size: 8pt; margin: 10px 0; page-break-inside: avoid; }
+      th, td { padding: 6px 8px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .highlight-box, .quote-block { padding: 12px 16px; margin: 14px 0; page-break-inside: avoid; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .indicators-grid { gap: 12px; }
+      .footer { margin-top: 20px; padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-label">SENTIMENT ANALYSIS</div>
+      <h1>Mani 2026 Roadmap Discussion</h1>
+      <p class="cover-subtitle">Analysis of tone, trust signals, enthusiasm indicators, and relationship quality</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <label>Date</label>
+          <span>February 2026</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Location</label>
+          <span>Sephora Offices (FSC)</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Classification</label>
+          <span>Internal</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo">Bay<span>One</span> Solutions</div>
+  </div>
+
+  <div class="container">
+
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>Overall Tone</h2>
+      <div class="tone-summary">
+        <span class="tone-badge positive">Collaborative</span>
+        <span class="tone-badge positive">Informative</span>
+        <span class="tone-badge positive">Forward-Looking</span>
+      </div>
+      <p class="lead">The meeting had a positive, forward-looking quality with medium-high energy. Mani was generous with information, indicating comfort with the BayOne team. There were no defensive moments or guarded responses.</p>
+
+      <p>The overall tone was professional but relaxed, with an established relationship evident throughout. Mani engaged and was forthcoming with details about organizational changes, rate expectations, and AI interests.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>Mani Soundararajan</h2>
+      <p class="lead">VP, Marketing Tech, Data/AI, Reporting - Open, confident, genuinely interested in AI help</p>
+
+      <h3>Enthusiasm Indicators</h3>
+      <p>Mani showed high enthusiasm for EDW modernization acceleration, AI-assisted codebase analysis, organizational restructuring (describing it as "the right thing to do"), and nearshore talent quality. He was measured and pragmatic about timeline pressure, Databricks tooling exploration, and rate expectations.</p>
+
+      <h3>Trust Signals</h3>
+      <table>
+        <tr>
+          <th>Signal</th>
+          <th>Evidence</th>
+          <th>Interpretation</th>
+        </tr>
+        <tr>
+          <td><strong>Detailed disclosure</strong></td>
+          <td>Shared complete org restructuring including three experimental models</td>
+          <td>High trust - wouldn't share internal strategy changes with untrusted vendors</td>
+        </tr>
+        <tr>
+          <td><strong>Rate transparency</strong></td>
+          <td>Gave specific rate ranges and thresholds</td>
+          <td>Trust plus desire to align expectations</td>
+        </tr>
+        <tr>
+          <td><strong>Candid criticism</strong></td>
+          <td>Spoke openly about India talent issues</td>
+          <td>Comfortable enough to share honest opinions</td>
+        </tr>
+        <tr>
+          <td><strong>Forward commitments</strong></td>
+          <td>Offered to send skill profiles, connect Colin with teams</td>
+          <td>Investing in relationship</td>
+        </tr>
+      </table>
+
+      <h3>Key Insight</h3>
+      <div class="highlight-box">
+        <p><strong>Mani's statement "If that person comes with groundwork done and a proposal" is both an invitation and a test.</strong> He's signaling that he takes AI seriously, he's been disappointed by vendors who don't prepare, and BayOne has an opportunity if they execute well.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>Zahra Syed</h2>
+      <p class="lead">Director, Strategic Accounts - Confident, strategic, relationship-focused</p>
+
+      <h3>Sales Approach Analysis</h3>
+      <p>Zahra employed effective techniques throughout the conversation: leading with value (AI practice) before asking for anything, using social proof ("Colin is amazing", "AI genius"), asking pain-point questions ("something that keeps you up at night"), confirming understanding through summaries, and creating urgency without pressure.</p>
+
+      <h3>Trust-Building Behaviors</h3>
+      <table>
+        <tr>
+          <th>Behavior</th>
+          <th>Example</th>
+          <th>Effect</th>
+        </tr>
+        <tr>
+          <td><strong>Active listening</strong></td>
+          <td>Summarized rate structure back to Mani</td>
+          <td>Shows comprehension, builds rapport</td>
+        </tr>
+        <tr>
+          <td><strong>Transparency about gaps</strong></td>
+          <td>"I didn't have head count" about Andrew</td>
+          <td>Honest about limitations</td>
+        </tr>
+        <tr>
+          <td><strong>Celebrating shared wins</strong></td>
+          <td>"We did find Sithara a job"</td>
+          <td>Reinforces successful partnership</td>
+        </tr>
+        <tr>
+          <td><strong>Concrete commitments</strong></td>
+          <td>"We can come back with a one-pager"</td>
+          <td>Demonstrates follow-through intent</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">04</div>
+      <h2>Relationship Indicators</h2>
+
+      <div class="indicators-grid">
+        <div class="indicator-card">
+          <h4>Trust Signals</h4>
+          <ul>
+            <li>Shared internal org changes</li>
+            <li>Disclosed rate ceilings</li>
+            <li>Candid about talent preferences</li>
+            <li>Offered to send skill profiles</li>
+          </ul>
+        </div>
+        <div class="indicator-card">
+          <h4>Interest Signals</h4>
+          <ul>
+            <li>Provided unsolicited AI use cases</li>
+            <li>Engaged substantively on AI topics</li>
+            <li>Invited Colin conversation</li>
+            <li>Set clear parameters (not dismissive)</li>
+          </ul>
+        </div>
+        <div class="indicator-card">
+          <h4>Investment Signals</h4>
+          <ul>
+            <li>Spent significant time sharing context</li>
+            <li>Made forward commitments</li>
+            <li>Personal connection attempt ("purchase from Sephora")</li>
+            <li>Detailed hiring landscape shared</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">05</div>
+      <h2>Opportunity Assessment</h2>
+
+      <div class="score-grid">
+        <div class="score-item">
+          <span class="label">Trust Level</span>
+          <span class="score">8/10</span>
+        </div>
+        <div class="score-item">
+          <span class="label">Interest in AI</span>
+          <span class="score">9/10</span>
+        </div>
+        <div class="score-item">
+          <span class="label">Decision Authority</span>
+          <span class="score">7/10</span>
+        </div>
+        <div class="score-item">
+          <span class="label">Timing</span>
+          <span class="score">8/10</span>
+        </div>
+        <div class="score-item">
+          <span class="label">Competition Risk</span>
+          <span class="score">6/10</span>
+        </div>
+        <div class="score-item">
+          <span class="label">Overall Readiness</span>
+          <span class="score">HIGH</span>
+        </div>
+      </div>
+
+      <p>The relationship is primed for expansion. Mani has essentially issued an invitation with clear parameters. The ball is now in BayOne's court.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-number">06</div>
+      <h2>Warning Signs</h2>
+      <table>
+        <tr>
+          <th>Signal</th>
+          <th>Evidence</th>
+          <th>Risk</th>
+        </tr>
+        <tr>
+          <td><strong>Clear expectations for Colin</strong></td>
+          <td>"Come with groundwork done"</td>
+          <td>If proposal is generic, opportunity lost</td>
+        </tr>
+        <tr>
+          <td><strong>Databricks in conversation</strong></td>
+          <td>"We have asked Databricks to come with recommendations"</td>
+          <td>Competition for AI positioning</td>
+        </tr>
+        <tr>
+          <td><strong>Grishi hiring on hold</strong></td>
+          <td>"She's temporarily put them on hold"</td>
+          <td>Something happening internally we don't understand</td>
+        </tr>
+        <tr>
+          <td><strong>Rate pressure</strong></td>
+          <td>"$120 is something we are not going anymore"</td>
+          <td>Margin pressure on staffing</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">07</div>
+      <h2>Recommendations</h2>
+
+      <h3>For Colin's Preparation</h3>
+      <p>Match Mani's directness as he's pragmatic and appreciates efficiency. Lead with a specific proposal rather than asking "what are your challenges?" Reference this conversation to show the groundwork is done. Be honest about scope as Mani respects candor over overselling. Address Databricks positioning by acknowledging they're in the mix and differentiating BayOne's approach.</p>
+
+      <h3>For Ongoing Relationship</h3>
+      <p>Maintain information flow as Mani values being kept informed. Respect rate boundaries and don't try to push $120+ offshore. Pre-pipeline agentic AI talent as he specifically asked for this. Follow up on commitments because he'll remember if BayOne doesn't deliver the proposal.</p>
+
+      <div class="highlight-box">
+        <p><strong>Summary:</strong> This meeting reveals a healthy, trust-based relationship with clear expansion potential. The sentiment is positive but conditional - BayOne has earned trust through staffing, but must prove AI capabilities to expand the relationship. The next interaction (Colin's proposal) is a critical test.</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Internal Meeting Notes</p>
+    </div>
+  </div>
+</body>
+</html>

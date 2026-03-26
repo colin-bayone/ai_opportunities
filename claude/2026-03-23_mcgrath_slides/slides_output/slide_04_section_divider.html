@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 4: Support Proposal Solution</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(135deg, #1e1b2e 0%, var(--purple-darkest) 30%, var(--purple-dark) 60%, var(--purple-mid) 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Decorative radial gradients */
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: -15%;
+      right: -10%;
+      width: 50%;
+      height: 60%;
+      background: radial-gradient(circle, rgba(168,85,247,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .slide::after {
+      content: '';
+      position: absolute;
+      bottom: -10%;
+      left: -5%;
+      width: 40%;
+      height: 50%;
+      background: radial-gradient(circle, rgba(232,121,249,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid rgba(168, 85, 247, 0.15);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .header-logo span { color: var(--purple-accent); }
+
+    .header-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.5px;
+    }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Large background section number */
+    .section-number-bg {
+      position: absolute;
+      font-size: 220px;
+      font-weight: 700;
+      color: rgba(168, 85, 247, 0.06);
+      letter-spacing: -8px;
+      pointer-events: none;
+      user-select: none;
+      line-height: 1;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 16px;
+    }
+
+    .section-label span {
+      color: rgba(255,255,255,0.4);
+    }
+
+    .divider-title {
+      font-size: 40px;
+      font-weight: 700;
+      color: #fff;
+      text-align: center;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .divider-subtitle {
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.55);
+      text-align: center;
+      max-width: 480px;
+      line-height: 1.6;
+    }
+
+    /* Thin decorative line */
+    .accent-line {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 12px 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-mid), var(--purple-accent), var(--purple-glow), var(--purple-accent), var(--purple-mid));
+      border-radius: 2px;
+      box-shadow: 0 0 8px rgba(168, 85, 247, 0.3);
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="section-number-bg">02</div>
+      <div class="section-label">Section Two <span>&middot;</span> Our Solution</div>
+      <div class="accent-line"></div>
+      <h1 class="divider-title">Support Proposal<br>Solution</h1>
+      <p class="divider-subtitle">Our approach to McGrath's NextGen managed services across Oracle Fusion, integrations, and ongoing support operations</p>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">04</div>
+    </div>
+  </div>
+
+</body>
+</html>

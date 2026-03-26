@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>24/7 Global Coverage Model</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--purple-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 12px 40px 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+      flex-shrink: 0;
+    }
+
+    .lead {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+
+    /* ===== COVERAGE TIMELINE ===== */
+    .timeline-section {
+      flex-shrink: 0;
+      margin-bottom: 12px;
+    }
+
+    .timeline-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--purple-dark);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 6px;
+    }
+
+    .timeline-wrapper {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 10px;
+      padding: 10px 16px;
+      box-shadow: 0 2px 6px rgba(124,58,237,0.06);
+    }
+
+    /* Time axis: 7PM(6h)1AM(7h)8AM(2h)10AM(6h)4PM(3h)7PM = 24h */
+    .time-axis {
+      display: flex;
+      margin-bottom: 4px;
+      padding-left: 90px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-light);
+    }
+
+    .time-mark { text-align: left; white-space: nowrap; }
+    .time-mark.t1 { flex: 6; }
+    .time-mark.t2 { flex: 7; }
+    .time-mark.t3 { flex: 2; }
+    .time-mark.t4 { flex: 6; }
+    .time-mark.t5 { flex: 3; }
+
+    .tl-row {
+      display: flex;
+      align-items: center;
+      height: 32px;
+      margin-bottom: 3px;
+    }
+
+    .tl-row-label {
+      width: 90px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .bar-track {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      border-radius: 5px;
+      overflow: hidden;
+      background: #f8fafc;
+    }
+
+    .seg {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    /* India (dark purple family): on-call(6), working(7), overlap(2), off(9) */
+    .seg.india-oncall { flex: 6; background: #2e1065; color: rgba(255,255,255,0.85); }
+    .seg.india-working { flex: 7; background: #4C1D95; color: #fff; }
+    .seg.india-overlap { flex: 2; background: #6D28D9; color: #fff; }
+    .seg.india-off { flex: 9; background: transparent; }
+
+    /* US (light purple family): off(13), overlap(2), working(6), on-call(3) */
+    .seg.us-off { flex: 13; background: transparent; }
+    .seg.us-overlap { flex: 2; background: #6D28D9; color: #fff; }
+    .seg.us-working { flex: 6; background: #A855F7; color: #fff; }
+    .seg.us-oncall { flex: 3; background: #9333EA; color: #fff; }
+
+    /* Overlap indicator */
+    .overlap-row {
+      display: flex;
+      padding-left: 90px;
+      margin-top: 2px;
+      margin-bottom: 4px;
+    }
+    .overlap-spacer { flex: 13; }
+    .overlap-indicator {
+      flex: 2;
+      text-align: center;
+      font-size: 9px;
+      font-weight: 700;
+      color: #7C3AED;
+      border-top: 2px solid #7C3AED;
+      padding-top: 2px;
+    }
+    .overlap-spacer-end { flex: 9; }
+
+    /* Legend */
+    .tl-legend {
+      display: flex;
+      gap: 14px;
+      margin-top: 6px;
+      padding-left: 90px;
+    }
+    .tl-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 9px;
+      color: #475569;
+    }
+    .tl-swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+    .sw-india-work { background: #4C1D95; }
+    .sw-india-oncall { background: #2e1065; }
+    .sw-us-work { background: #A855F7; }
+    .sw-us-oncall { background: #9333EA; }
+
+    /* ===== PRIMARY TEAMS (US + India) ===== */
+    .teams-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      flex: 1;
+      min-height: 0;
+      margin-bottom: 10px;
+    }
+
+    .team-card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 10px;
+      padding: 10px 14px;
+      box-shadow: 0 2px 6px rgba(124,58,237,0.06);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .team-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .team-card.us::before { background: linear-gradient(90deg, #7C3AED, #A855F7); }
+    .team-card.india::before { background: linear-gradient(90deg, #4C1D95, #5B21B6); }
+
+    .team-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .team-header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .team-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .team-card.us .team-icon { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+    .team-card.india .team-icon { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+
+    .team-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .team-location {
+      font-size: 11px;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    .hours-badge {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .team-card.us .hours-badge {
+      background: rgba(124,58,237,0.08);
+      color: var(--purple-bright);
+    }
+
+    .team-card.india .hours-badge {
+      background: rgba(76,29,149,0.08);
+      color: var(--purple-dark);
+    }
+
+    .hours-badge i { font-size: 8px; }
+
+    .team-details {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .detail-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 12px;
+      line-height: 1.45;
+      color: #475569;
+    }
+
+    .detail-item i {
+      font-size: 7px;
+      margin-top: 4px;
+      width: 10px;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    .team-card.us .detail-item i { color: #7C3AED; }
+    .team-card.india .detail-item i { color: #4C1D95; }
+
+    .detail-item strong {
+      font-weight: 600;
+      color: var(--purple-dark);
+    }
+
+    /* Stat pill inside team card */
+    .team-stat {
+      margin-top: auto;
+      padding-top: 6px;
+      border-top: 1px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .team-card.us .team-stat { color: var(--purple-bright); }
+    .team-card.india .team-stat { color: var(--purple-dark); }
+
+    .team-stat i { font-size: 9px; }
+
+    /* ===== GLOBAL REACH ROW ===== */
+    .global-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .region-card {
+      background: linear-gradient(135deg, rgba(76,29,149,0.04), rgba(168,85,247,0.06));
+      border: 1px solid rgba(124,58,237,0.1);
+      border-radius: 8px;
+      padding: 8px 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .region-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.12), rgba(168,85,247,0.15));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: var(--purple-bright);
+      flex-shrink: 0;
+    }
+
+    .region-info {
+      flex: 1;
+    }
+
+    .region-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1px;
+    }
+
+    .region-detail {
+      font-size: 10px;
+      color: var(--text-light);
+      line-height: 1.4;
+    }
+
+    /* Footer */
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>24/7 Global Coverage Model</h2>
+      <p class="lead">Purpose-built team structure delivering continuous coverage across McGrath's business hours and beyond</p>
+
+      <!-- Coverage Timeline -->
+      <div class="timeline-section">
+        <div class="timeline-label">Coverage Timeline (PST)</div>
+        <div class="timeline-wrapper">
+          <div class="time-axis">
+            <div class="time-mark t1">7 PM</div>
+            <div class="time-mark t2">1 AM</div>
+            <div class="time-mark t3">8 AM</div>
+            <div class="time-mark t4">10 AM</div>
+            <div class="time-mark t5">4 PM</div>
+          </div>
+
+          <div class="tl-row">
+            <div class="tl-row-label">India Team</div>
+            <div class="bar-track">
+              <div class="seg india-oncall">On-call</div>
+              <div class="seg india-working">Working Hours</div>
+              <div class="seg india-overlap"></div>
+              <div class="seg india-off"></div>
+            </div>
+          </div>
+
+          <div class="tl-row">
+            <div class="tl-row-label">US Team</div>
+            <div class="bar-track">
+              <div class="seg us-off"></div>
+              <div class="seg us-overlap"></div>
+              <div class="seg us-working">Working Hours</div>
+              <div class="seg us-oncall">On-call</div>
+            </div>
+          </div>
+
+          <div class="overlap-row">
+            <div class="overlap-spacer"></div>
+            <div class="overlap-indicator">2hr Overlap</div>
+            <div class="overlap-spacer-end"></div>
+          </div>
+
+          <div class="tl-legend">
+            <div class="tl-legend-item"><div class="tl-swatch sw-india-work"></div> India Working</div>
+            <div class="tl-legend-item"><div class="tl-swatch sw-india-oncall"></div> India On-call</div>
+            <div class="tl-legend-item"><div class="tl-swatch sw-us-work"></div> US Working</div>
+            <div class="tl-legend-item"><div class="tl-swatch sw-us-oncall"></div> US On-call</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Primary Team Cards -->
+      <div class="teams-row">
+
+        <!-- US Onsite Team -->
+        <div class="team-card us">
+          <div class="team-header">
+            <div class="team-header-left">
+              <div class="team-icon"><i class="fa-solid fa-building-user"></i></div>
+              <div>
+                <div class="team-name">United States Onsite Team</div>
+                <div class="team-location">Functional SMEs and Program Management</div>
+              </div>
+            </div>
+            <div class="hours-badge"><i class="fa-solid fa-clock"></i> 5 AM - 8 PM PST</div>
+          </div>
+          <div class="team-details">
+            <div class="detail-item">
+              <i class="fa-solid fa-circle"></i>
+              <span><strong>Functional SMEs</strong> across Fusion, Salesforce, Mulesoft, Avalara, RecVue, BI Reporting</span>
+            </div>
+            <div class="detail-item">
+              <i class="fa-solid fa-circle"></i>
+              <span><strong>Critical incident management</strong> with direct user and business team collaboration</span>
+            </div>
+            <div class="detail-item">
+              <i class="fa-solid fa-circle"></i>
+              <span><strong>Governance, reporting</strong>, and risk management across all service towers</span>
+            </div>
+          </div>
+          <div class="team-stat">
+            <i class="fa-solid fa-shield-check"></i>
+            100% governance and SME availability during core business hours
+          </div>
+        </div>
+
+        <!-- India Offshore Team -->
+        <div class="team-card india">
+          <div class="team-header">
+            <div class="team-header-left">
+              <div class="team-icon"><i class="fa-solid fa-headset"></i></div>
+              <div>
+                <div class="team-name">India Offshore Team</div>
+                <div class="team-location">Technical Support Engineers and Project Management</div>
+              </div>
+            </div>
+            <div class="hours-badge"><i class="fa-solid fa-clock"></i> 8 PM - 5 PM PST</div>
+          </div>
+          <div class="team-details">
+            <div class="detail-item">
+              <i class="fa-solid fa-circle"></i>
+              <span><strong>Ticket resolution</strong> and incident response across all supported platforms</span>
+            </div>
+            <div class="detail-item">
+              <i class="fa-solid fa-circle"></i>
+              <span><strong>Documentation, playbooks</strong>, and runbook creation for operational continuity</span>
+            </div>
+            <div class="detail-item">
+              <i class="fa-solid fa-circle"></i>
+              <span><strong>Monitoring and minor enhancements</strong> delivered during overnight coverage</span>
+            </div>
+          </div>
+          <div class="team-stat">
+            <i class="fa-solid fa-users"></i>
+            80% engineering capacity available during core business hours
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Global Reach -->
+      <div class="global-row">
+        <div class="region-card">
+          <div class="region-icon"><i class="fa-solid fa-earth-americas"></i></div>
+          <div class="region-info">
+            <div class="region-name">North America</div>
+            <div class="region-detail">On and nearshore delivery model with English, Spanish, and Portuguese support</div>
+          </div>
+        </div>
+        <div class="region-card">
+          <div class="region-icon"><i class="fa-solid fa-earth-americas"></i></div>
+          <div class="region-info">
+            <div class="region-name">Latin America</div>
+            <div class="region-detail">Nearshore operations with business continuity and cost-optimized delivery</div>
+          </div>
+        </div>
+        <div class="region-card">
+          <div class="region-icon"><i class="fa-solid fa-earth-asia"></i></div>
+          <div class="region-info">
+            <div class="region-name">Asia-Pacific</div>
+            <div class="region-detail">Global support hub with multilingual capability and offshore scalability</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number"></div>
+    </div>
+  </div>
+</body>
+</html>

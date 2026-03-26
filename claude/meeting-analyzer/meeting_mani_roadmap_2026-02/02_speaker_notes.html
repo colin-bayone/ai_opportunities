@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speaker Notes - Mani 2026 Roadmap Discussion</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #a855f7;
+      --purple-dark: #5b21b6;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .cover-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e879f9;
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .cover-subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 48px;
+      max-width: 600px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 48px;
+      padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .cover-meta-item label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+
+    .cover-meta-item span { font-size: 15px; font-weight: 500; }
+
+    .logo {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span { color: #e879f9; }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 80px 40px; }
+
+    .section { margin-bottom: 44px; }
+
+    .section-number {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--purple-dark);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      padding: 6px 14px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%);
+      border-radius: 4px;
+    }
+
+    h2 { font-size: 28px; font-weight: 700; color: var(--primary); margin-bottom: 20px; letter-spacing: -0.5px; }
+    h3 { font-size: 18px; font-weight: 600; color: var(--primary); margin: 28px 0 14px; }
+    h4 { font-size: 15px; font-weight: 600; color: var(--primary); margin: 20px 0 10px; }
+    p { margin-bottom: 16px; }
+
+    .lead { font-size: 17px; color: var(--text-light); line-height: 1.8; margin-bottom: 28px; }
+
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+
+    th {
+      text-align: left;
+      padding: 10px 14px;
+      background: #5b21b6;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+
+    th:last-child { border-right: none; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+
+    td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    .quote-block {
+      background: var(--bg-subtle);
+      border-left: 3px solid var(--accent);
+      padding: 12px 16px;
+      margin: 10px 0;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+    }
+
+    .commitment-list {
+      margin: 16px 0;
+      padding-left: 20px;
+    }
+
+    .commitment-list li {
+      margin-bottom: 8px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 48px 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 64px;
+    }
+
+    .footer-logo { font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+    .footer-logo span { color: #a855f7; }
+    .footer p { font-size: 13px; color: var(--text-light); margin: 0; }
+
+    @media print {
+      @page { size: 8.5in 11in; margin: 0.5in; }
+      body { font-size: 9pt; line-height: 1.4; }
+      .cover { min-height: 0; height: 10in; padding: 50px; page-break-after: always; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .cover h1 { font-size: 32pt; }
+      .cover-subtitle { font-size: 13pt; }
+      .container { padding: 0; max-width: 100%; }
+      .section { margin-bottom: 24px; page-break-inside: avoid; }
+      h2 { font-size: 14pt; margin-bottom: 10px; page-break-after: avoid; }
+      h3 { font-size: 11pt; margin: 14px 0 8px; page-break-after: avoid; }
+      p { margin-bottom: 6px; }
+      .lead { font-size: 10pt; margin-bottom: 14px; }
+      table { font-size: 8pt; margin: 10px 0; page-break-inside: avoid; }
+      th, td { padding: 6px 8px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .quote-block { padding: 12px 16px; margin: 14px 0; page-break-inside: avoid; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .footer { margin-top: 20px; padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-label">SPEAKER NOTES</div>
+      <h1>Mani 2026 Roadmap Discussion</h1>
+      <p class="cover-subtitle">Quick reference organized by speaker for easy lookup of who said what</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <label>Date</label>
+          <span>February 2026</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Location</label>
+          <span>Sephora Offices (FSC)</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Classification</label>
+          <span>Internal</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo">Bay<span>One</span> Solutions</div>
+  </div>
+
+  <div class="container">
+
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>Mani Soundararajan</h2>
+      <p class="lead">VP, Marketing Tech, Data/AI, Reporting at Sephora - Primary information provider sharing org structure, roadmap, and AI interests</p>
+
+      <h3>On Reporting Democratization</h3>
+      <div class="quote-block">
+        <p>"Reports will be part of those individual domain engineering use cases itself. Because that's the right thing to do, because they know their business, they know their project, they do what they're doing. Like report is just actually reporting what they have done. So it doesn't have to be done by another separate team."</p>
+      </div>
+
+      <div class="quote-block">
+        <p>"My team will become a lean team, which is like a core platform report kind of a team."</p>
+      </div>
+
+      <h3>On EDW Modernization</h3>
+      <div class="quote-block">
+        <p>"We're starting a big project called EDW Modernization. This project is to move from all legacy technologies into modern technologies."</p>
+      </div>
+
+      <div class="quote-block">
+        <p>"We're going to be re-engineering all the reports that we have done over the past 15, 20 years. Over the past 15, 20 years, we have about seven, like thousands of reports, basically."</p>
+      </div>
+
+      <div class="quote-block">
+        <p>"Right now the plan is already going till 2028. But we're trying to see how we can possibly do it in 2027 or maybe finish it off by early 2028."</p>
+      </div>
+
+      <h3>On AI Acceleration Needs</h3>
+      <div class="quote-block">
+        <p>"If we go report by report, it will take a long time for us. So we are saying, what would be an easier way, what would be the right way, like efficient way to do this. Instead of going report by report, can we do something like maybe if we do this, we can finish off three reports at one shot. We can finish off like six reports at one shot, so we can expedite the delivery."</p>
+      </div>
+
+      <div class="quote-block">
+        <p>"Those things we are looking for AI to come and help to say, okay, look at the codebase, look at things, see actually, come up with, AI would itself proactively come and tell us, like these things are something to watch out for. This is what you can take. So it will tell us where all actually, it will analyze the codebase and then say, okay, these are all the places for us to mind for."</p>
+      </div>
+
+      <h3>On Meeting Colin</h3>
+      <div class="quote-block">
+        <p>"If that person comes with a little bit of groundwork done, instead of coming and asking 'hey, what is this? What are you guys doing?' Sort of that, to keep that, that person can come with groundwork, talking to the teams and all that and then coming with a certain proposal, that would be great. So that would be a very productive discussion."</p>
+      </div>
+
+      <h3>On Rate Expectations</h3>
+      <div class="quote-block">
+        <p>"If it is coming to like 100 to 105 and above, they are actually, I've told the team, they should be in the office. If the people are not in the office, then we cannot go with that rate anymore."</p>
+      </div>
+
+      <div class="quote-block">
+        <p>"120 is something that we are not going anymore."</p>
+      </div>
+
+      <h3>On Talent Preferences</h3>
+      <div class="quote-block">
+        <p>"Right now, what I'm observing is that some of the new talent hubs are emerging. People who come from Oklahoma or Kansas City or they are working from Utah. So these people are actually coming in nearshore rates."</p>
+      </div>
+
+      <div class="quote-block">
+        <p>"You definitely find better talent here and nearshore because India is just like sometimes feels like bodies than actual problem solvers. And there's such a churn."</p>
+      </div>
+
+      <h3>On Future Skills</h3>
+      <div class="quote-block">
+        <p>"We are coming up with completely like agentic coding and AI and all those things. So that will be a new required skill set for these."</p>
+      </div>
+
+      <h4>Commitments Made</h4>
+      <ul class="commitment-list">
+        <li>Will send two skill profile types (full stack, full stack + AI) to BayOne</li>
+        <li>Open to connecting Colin with teams after receiving proposal</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>Zahra Syed</h2>
+      <p class="lead">Director, Strategic Accounts at BayOne - Lead interviewer gathering intelligence and positioning AI practice</p>
+
+      <h3>On AI Practice</h3>
+      <div class="quote-block">
+        <p>"One of the exciting things that we have been doing is we've opened up an AI practice and we hired a director of AI as well, who I do want to get you in front of sometime in the new year as well."</p>
+      </div>
+
+      <div class="quote-block">
+        <p>"We have AI practice with Colin, who's amazing. He builds something for Wayo. We've done a couple of POCs, which we'd love for you to have a chat with him."</p>
+      </div>
+
+      <h3>On Colin's Work</h3>
+      <div class="quote-block">
+        <p>"He's built a Recruiting 2.0. So in our business, recruiting is a big use case for AI. So a lot of things are automated and he's created that and he has a great team in India."</p>
+      </div>
+
+      <div class="quote-block">
+        <p>"He did something that's like an employee portal, like an AI day. So it's basically the tools that are available for Wayo employees that are AI tools, to kind of give them that education that this is available to you."</p>
+      </div>
+
+      <h3>On Next Steps</h3>
+      <div class="quote-block">
+        <p>"Maybe we can come back with like a one-pager or something for you to take a look at and then further meetings around it."</p>
+      </div>
+
+      <h4>Commitments Made</h4>
+      <ul class="commitment-list">
+        <li>Take AI/EDW use cases back to Colin</li>
+        <li>Come back with proposal/one-pager</li>
+        <li>Follow up with Ram (back from India ~19th)</li>
+        <li>Pipeline full stack + AI candidates once profiles received</li>
+        <li>Pre-pipeline agentic AI talent</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>Neha Malhotra</h2>
+      <p class="lead">Head of Recruiting, Enterprise at BayOne - Supporting staffing and recruiting perspective</p>
+
+      <h3>On Current Status</h3>
+      <div class="quote-block">
+        <p>"Grishi said she did have some. We're working on those. They went through HackerRank. They actually, we finally got lucky. We had a really good pipeline, but she said, right now that she's just trying to figure things out, she's temporarily put them on hold."</p>
+      </div>
+
+      <div class="quote-block">
+        <p>"Andrew and I have been going back on an SOW, but I hadn't heard anything in terms of headcount, but I'll reach back out to him."</p>
+      </div>
+
+      <div class="quote-block">
+        <p>"Ram has reached out a couple of times and I haven't heard from him in the last two months, so that's on me to follow up with him."</p>
+      </div>
+
+      <h4>Commitments Made</h4>
+      <ul class="commitment-list">
+        <li>Follow up with Ram</li>
+        <li>Follow up with Andrew on SOW</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-number">REFERENCE</div>
+      <h2>Transcription Corrections</h2>
+      <table>
+        <tr>
+          <th>Transcript Shows</th>
+          <th>Actually Means</th>
+        </tr>
+        <tr>
+          <td>"money" / "Money"</td>
+          <td>Mani</td>
+        </tr>
+        <tr>
+          <td>"Karishi" / "Gashi" / "Grishio"</td>
+          <td>Grishi</td>
+        </tr>
+        <tr>
+          <td>"Rajesha"</td>
+          <td>Rajesh</td>
+        </tr>
+        <tr>
+          <td>"Zara"</td>
+          <td>Zahra</td>
+        </tr>
+        <tr>
+          <td>"Lamo" / "Al 2" / "AO 2"</td>
+          <td>Wayo</td>
+        </tr>
+        <tr>
+          <td>"C school"</td>
+          <td>Cisco</td>
+        </tr>
+        <tr>
+          <td>"d bricks" / "D bricks"</td>
+          <td>Databricks</td>
+        </tr>
+        <tr>
+          <td>"Kobos"</td>
+          <td>Cognos</td>
+        </tr>
+        <tr>
+          <td>"near show rate"</td>
+          <td>nearshore rate</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Internal Meeting Notes</p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prototype: Global Coverage with Map</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--purple-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 12px 40px 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+      flex-shrink: 0;
+    }
+
+    .lead {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+
+    /* ===== MAIN LAYOUT ===== */
+    .main-area {
+      flex: 1;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* ===== LEFT: MAP ===== */
+    .map-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .map-wrapper {
+      flex: 1;
+      min-height: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(124,58,237,0.12);
+      box-shadow: 0 2px 6px rgba(124,58,237,0.06);
+    }
+
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Override Leaflet styles for clean look */
+    .leaflet-container {
+      background: #f8fafc !important;
+      font-family: 'Inter', sans-serif !important;
+    }
+
+    .leaflet-control-attribution { display: none !important; }
+    .leaflet-control-zoom { display: none !important; }
+
+    /* Custom marker label */
+    .map-label {
+      background: rgba(255,255,255,0.95);
+      border: 1px solid rgba(124,58,237,0.2);
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--purple-dark);
+      white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .map-label.primary {
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple-bright));
+      color: #fff;
+      border-color: transparent;
+    }
+
+    /* Region cards below map */
+    .region-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .region-card {
+      background: linear-gradient(135deg, rgba(76,29,149,0.04), rgba(168,85,247,0.06));
+      border: 1px solid rgba(124,58,237,0.1);
+      border-radius: 8px;
+      padding: 7px 10px;
+    }
+
+    .region-name {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1px;
+    }
+
+    .region-detail {
+      font-size: 8.5px;
+      color: var(--text-light);
+      line-height: 1.35;
+    }
+
+    /* ===== RIGHT: Timeline + Teams ===== */
+    .right-section {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Coverage Timeline */
+    .timeline-wrapper {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 10px;
+      padding: 10px 14px;
+      box-shadow: 0 2px 6px rgba(124,58,237,0.06);
+      flex-shrink: 0;
+    }
+
+    .timeline-title {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--purple-dark);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 6px;
+    }
+
+    .time-axis {
+      display: flex;
+      margin-bottom: 4px;
+      padding-left: 72px;
+    }
+
+    .time-slot {
+      font-size: 7.5px;
+      font-weight: 600;
+      color: var(--text-light);
+      text-align: center;
+    }
+
+    .time-slot.night { flex: 9; }
+    .time-slot.day { flex: 12; }
+    .time-slot.evening { flex: 3; }
+
+    .timeline-row {
+      display: flex;
+      align-items: center;
+      height: 24px;
+      margin-bottom: 3px;
+    }
+
+    .timeline-row:last-child { margin-bottom: 0; }
+
+    .row-label {
+      width: 72px;
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--primary);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .row-label i {
+      font-size: 8px;
+      color: var(--purple-accent);
+      width: 12px;
+      text-align: center;
+    }
+
+    .timeline-bar {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      border-radius: 4px;
+      overflow: hidden;
+      background: #f8fafc;
+    }
+
+    .time-block {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 7.5px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .india-primary {
+      flex: 9;
+      background: linear-gradient(135deg, #4C1D95, #5B21B6);
+      color: #fff;
+    }
+
+    .india-overlap {
+      flex: 12;
+      background: rgba(91,33,182,0.12);
+      color: var(--purple-dark);
+    }
+
+    .india-off { flex: 3; }
+
+    .us-off { flex: 9; }
+
+    .us-primary {
+      flex: 12;
+      background: linear-gradient(135deg, #7C3AED, #A855F7);
+      color: #fff;
+    }
+
+    .us-oncall {
+      flex: 3;
+      background: rgba(168,85,247,0.15);
+      color: var(--purple-bright);
+    }
+
+    .coverage-indicator {
+      display: flex;
+      align-items: center;
+      margin-top: 5px;
+      padding-left: 72px;
+      gap: 6px;
+    }
+
+    .coverage-strip {
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, #4C1D95, #5B21B6, #7C3AED, #A855F7, #E879F9);
+      border-radius: 1px;
+    }
+
+    .coverage-text {
+      font-size: 8px;
+      font-weight: 700;
+      color: #059669;
+      white-space: nowrap;
+    }
+
+    /* Team Cards */
+    .team-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .team-card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 10px;
+      padding: 10px 12px;
+      box-shadow: 0 2px 6px rgba(124,58,237,0.06);
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .team-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .team-card.us::before { background: linear-gradient(90deg, #7C3AED, #A855F7); }
+    .team-card.india::before { background: linear-gradient(90deg, #4C1D95, #5B21B6); }
+
+    .team-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .team-card-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .team-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .team-card.us .team-icon { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+    .team-card.india .team-icon { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+
+    .team-card-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .team-card-sub {
+      font-size: 8.5px;
+      color: var(--text-light);
+    }
+
+    .hours-pill {
+      font-size: 8.5px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+
+    .team-card.us .hours-pill {
+      background: rgba(124,58,237,0.08);
+      color: var(--purple-bright);
+    }
+
+    .team-card.india .hours-pill {
+      background: rgba(76,29,149,0.08);
+      color: var(--purple-dark);
+    }
+
+    .team-items {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      flex: 1;
+    }
+
+    .team-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 9.5px;
+      line-height: 1.4;
+      color: #475569;
+    }
+
+    .team-item i {
+      font-size: 5px;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    .team-card.us .team-item i { color: #7C3AED; }
+    .team-card.india .team-item i { color: #4C1D95; }
+
+    .team-item strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    .team-stat {
+      margin-top: auto;
+      padding-top: 5px;
+      border-top: 1px solid #f1f5f9;
+      font-size: 9px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .team-card.us .team-stat { color: var(--purple-bright); }
+    .team-card.india .team-stat { color: var(--purple-dark); }
+
+    .team-stat i { font-size: 8px; }
+
+    /* Footer */
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>24/7 Global Coverage Model</h2>
+      <p class="lead">Purpose-built team structure delivering continuous coverage across McGrath's business hours and beyond</p>
+
+      <div class="main-area">
+
+        <!-- LEFT: Map + Region Cards -->
+        <div class="map-section">
+          <div class="map-wrapper">
+            <div id="map"></div>
+          </div>
+          <div class="region-cards">
+            <div class="region-card">
+              <div class="region-name">North America</div>
+              <div class="region-detail">On and nearshore delivery, English, Spanish, Portuguese</div>
+            </div>
+            <div class="region-card">
+              <div class="region-name">Latin America</div>
+              <div class="region-detail">Nearshore operations with business continuity</div>
+            </div>
+            <div class="region-card">
+              <div class="region-name">India</div>
+              <div class="region-detail">Global support hub, multilingual, offshore scalability</div>
+            </div>
+            <div class="region-card">
+              <div class="region-name">Asia-Pacific</div>
+              <div class="region-detail">Extended regional support and language coverage</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Timeline + Teams -->
+        <div class="right-section">
+
+          <div class="timeline-wrapper">
+            <div class="timeline-title">Coverage Timeline (PST)</div>
+            <div class="time-axis">
+              <div class="time-slot night">8 PM - 5 AM</div>
+              <div class="time-slot day">5 AM - 5 PM</div>
+              <div class="time-slot evening">5 - 8 PM</div>
+            </div>
+            <div class="timeline-row">
+              <div class="row-label"><i class="fa-solid fa-globe-asia"></i> India</div>
+              <div class="timeline-bar">
+                <div class="time-block india-primary">Primary</div>
+                <div class="time-block india-overlap">Overlap</div>
+                <div class="time-block india-off"></div>
+              </div>
+            </div>
+            <div class="timeline-row">
+              <div class="row-label"><i class="fa-solid fa-flag-usa"></i> US</div>
+              <div class="timeline-bar">
+                <div class="time-block us-off"></div>
+                <div class="time-block us-primary">Primary</div>
+                <div class="time-block us-oncall">On-Call</div>
+              </div>
+            </div>
+            <div class="coverage-indicator">
+              <div class="coverage-strip"></div>
+              <div class="coverage-text">24/7 Coverage</div>
+            </div>
+          </div>
+
+          <div class="team-cards">
+            <div class="team-card us">
+              <div class="team-card-header">
+                <div class="team-card-left">
+                  <div class="team-icon"><i class="fa-solid fa-building-user"></i></div>
+                  <div>
+                    <div class="team-card-name">United States Onsite</div>
+                    <div class="team-card-sub">Functional SMEs and Program Management</div>
+                  </div>
+                </div>
+                <div class="hours-pill">5 AM - 8 PM PST</div>
+              </div>
+              <div class="team-items">
+                <div class="team-item">
+                  <i class="fa-solid fa-circle"></i>
+                  <span><strong>Functional SMEs</strong> across Fusion, Salesforce, Mulesoft, Avalara, RecVue, BI Reporting</span>
+                </div>
+                <div class="team-item">
+                  <i class="fa-solid fa-circle"></i>
+                  <span><strong>Critical incident management</strong> with direct user and business team collaboration</span>
+                </div>
+                <div class="team-item">
+                  <i class="fa-solid fa-circle"></i>
+                  <span><strong>Governance, reporting</strong>, and risk management across all service towers</span>
+                </div>
+              </div>
+              <div class="team-stat"><i class="fa-solid fa-check-circle"></i> 100% governance and SME availability during core hours</div>
+            </div>
+
+            <div class="team-card india">
+              <div class="team-card-header">
+                <div class="team-card-left">
+                  <div class="team-icon"><i class="fa-solid fa-headset"></i></div>
+                  <div>
+                    <div class="team-card-name">India Offshore</div>
+                    <div class="team-card-sub">Technical Support Engineers and Project Management</div>
+                  </div>
+                </div>
+                <div class="hours-pill">8 PM - 5 PM PST</div>
+              </div>
+              <div class="team-items">
+                <div class="team-item">
+                  <i class="fa-solid fa-circle"></i>
+                  <span><strong>Ticket resolution</strong> and incident response across all supported platforms</span>
+                </div>
+                <div class="team-item">
+                  <i class="fa-solid fa-circle"></i>
+                  <span><strong>Documentation, playbooks</strong>, and runbook creation for operational continuity</span>
+                </div>
+                <div class="team-item">
+                  <i class="fa-solid fa-circle"></i>
+                  <span><strong>Monitoring and minor enhancements</strong> delivered during overnight coverage</span>
+                </div>
+              </div>
+              <div class="team-stat"><i class="fa-solid fa-check-circle"></i> 80% engineering capacity during core business hours</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number"></div>
+    </div>
+  </div>
+
+  <script>
+    // Initialize Leaflet map - static, no interactivity
+    const map = L.map('map', {
+      zoomControl: false,
+      attributionControl: false,
+      dragging: false,
+      scrollWheelZoom: false,
+      doubleClickZoom: false,
+      boxZoom: false,
+      keyboard: false,
+      touchZoom: false
+    }).setView([22, 30], 1.8);
+
+    // Clean, minimal tile layer (CartoDB Positron - light gray, no clutter)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+      maxZoom: 19
+    }).addTo(map);
+
+    // Custom marker style
+    const primaryStyle = {
+      radius: 7,
+      fillColor: '#7c3aed',
+      color: '#5b21b6',
+      weight: 2,
+      opacity: 1,
+      fillOpacity: 0.85
+    };
+
+    const secondaryStyle = {
+      radius: 5,
+      fillColor: '#a855f7',
+      color: '#7c3aed',
+      weight: 1.5,
+      opacity: 0.8,
+      fillOpacity: 0.6
+    };
+
+    // Primary locations
+    const usa = L.circleMarker([37.5, -97], primaryStyle).addTo(map);
+    const india = L.circleMarker([20.5, 78.9], primaryStyle).addTo(map);
+
+    // Secondary locations
+    const costaRica = L.circleMarker([9.7, -83.7], secondaryStyle).addTo(map);
+    const philippines = L.circleMarker([12.8, 121.7], secondaryStyle).addTo(map);
+
+    // Labels for primary locations
+    const labelStyle = 'map-label primary';
+    const labelStyleSec = 'map-label';
+
+    usa.bindTooltip('United States', {
+      permanent: true, direction: 'top', offset: [0, -10],
+      className: labelStyle
+    });
+
+    india.bindTooltip('India', {
+      permanent: true, direction: 'top', offset: [0, -10],
+      className: labelStyle
+    });
+
+    costaRica.bindTooltip('Costa Rica', {
+      permanent: true, direction: 'bottom', offset: [0, 10],
+      className: labelStyleSec
+    });
+
+    philippines.bindTooltip('Philippines', {
+      permanent: true, direction: 'bottom', offset: [0, 10],
+      className: labelStyleSec
+    });
+
+    // Draw a curved line connecting US and India
+    const connectionPoints = [
+      [37.5, -97],
+      [45, -40],
+      [42, 10],
+      [35, 50],
+      [20.5, 78.9]
+    ];
+
+    L.polyline(connectionPoints, {
+      color: '#a855f7',
+      weight: 1.5,
+      opacity: 0.35,
+      dashArray: '6, 4',
+      smoothFactor: 3
+    }).addTo(map);
+  </script>
+</body>
+</html>

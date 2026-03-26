@@ -1,0 +1,3779 @@
+
+ ▐▛███▜▌   Claude Code v2.0.53
+▝▜█████▛▘  Opus 4.5 · Claude Max
+  ▘▘ ▝▝    ~/programming/cisco_projects/cicd
+
+> I need help improving recruiter guides for 4 engineering roles we're 
+hiring for a Cisco consulting engagement. A previous Claude session did 
+research but made poor edits, so we're starting fresh with you.
+
+  Start by reading these files in order:
+
+  1. /home/cmoore/programming/cisco_projects/cicd/claude/2026-02-04_recruite
+r-guides/planning/00_handoff_to_next_session.md - Context from last session,
+ what went wrong, key learnings, your instructions
+  2. /home/cmoore/programming/cisco_projects/cicd/claude/2026-02-04_recruite
+r-guides/research/ - Three research docs on AI engineer landscape, recruiter
+ search strategies, and Cisco project context
+  3. /home/cmoore/programming/cisco_projects/cicd/CLAUDE.md - Project-wide 
+instructions and documentation system
+
+  The 4 roles (JDs in /deliverables/jd_*.md):
+  - Senior AI Solutions Engineer (onsite San Jose, client-facing)
+  - Automation Engineer (onsite San Jose, client-facing)
+  - AI Engineer (offshore, chat/dashboard focus)
+  - Agentic AI Engineer (offshore, autonomous systems/self-healing)
+
+  Current recruiter guides are in 
+/deliverables/job_descriptions/recruiter_guides/ - they exist but the search
+ strings and tech stacks are weak and need rewriting.
+
+  What I need:
+  - Go one role at a time, starting with Senior AI Solutions Engineer
+  - Ask me targeted questions before making edits
+  - Use the research to inform your work, don't just parrot what I say
+  - Think in tiers: must-have → preferred → nice-to-have
+  - Think in synonyms for non-technical recruiters
+
+  Key context:
+  - Cisco environment: on-prem, Python-heavy, Airflow + Jenkins + Bazel, 
+PostgreSQL + pgvector
+  - LLM APIs: Claude and OpenAI (not self-hosted models)
+  - This is production systems work, not research/POC
+  - Budget: ~$100K/quarter, team of Colin (tech lead, remote) + 2 onshore + 
+2 offshore
+
+  Read the files first, then let's start with Senior AI Solutions Engineer. 
+
+● I'll read through those files now to get the full context.
+
+● Read(claude/2026-02-04_recruiter-guides/planning/00_handoff_to_next_session.md
+      )
+  ⎿  Read 102 lines
+
+● Search(pattern: "/home/cmoore/programming/cisco_projects/cicd/claude/2026-02-0
+        4_recruiter-guides/research/*.md")
+  ⎿  Found 0 files 
+
+● Let me try finding those research files with a broader search:
+
+● Search(pattern: "**/2026-02-04_recruiter-guides/research/*")
+  ⎿  Found 3 files (ctrl+o to expand)
+
+● Bash(ls -la /home/cmoore/programming/cisco_projects/cicd/claude/2026-02-04_rec
+      ruiter-guides/)
+  ⎿  total 24                                       
+     drwxr-xr-x 6 cmoore cmoore 4096 Feb  4 09:02 .
+     drwxr-xr-x 4 cmoore cmoore 4096 Feb  4 09:02 ..
+     … +4 lines (ctrl+o to expand)
+
+● Read(claude/2026-02-04_recruiter-guides/research/01_ai_engineer_landscape_2026
+      .md)
+  ⎿  Read 154 lines
+
+● Read(claude/2026-02-04_recruiter-guides/research/02_recruiter_search_strategie
+      s.md)
+  ⎿  Read 161 lines
+
+● Read(claude/2026-02-04_recruiter-guides/research/03_cisco_project_context.md)
+  ⎿  Read 131 lines
+
+● Now let me read the current JD and recruiter guide for Senior AI Solutions
+   Engineer:
+
+● Read(claude/2026-02-02_resource-planning/deliverables/jd_senior_ai_solutions_e
+      ngineer.md)
+  ⎿  Read 111 lines
+
+● Search(pattern: "**/recruiter_guides/*senior*")
+  ⎿  Found 1 file (ctrl+o to expand)
+
+● Read(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recruit
+      er_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Read 178 lines
+
+● Good, I've read everything. Here's my assessment of the current Senior AI
+  Solutions Engineer recruiter guide:
+
+  What's working:
+  - Structure is clean and print-friendly
+  - Must-haves are mostly on target (LLM, Python, RAG, client-facing)
+  - Warning signs and questions are solid
+
+  What needs work:
+
+  1. Search strings are flat, not tiered. They're all OR-heavy, so
+  recruiters get noise. Should be: Layer 1 (narrow must-haves), Layer 2 (add
+   preferred), Layer 3 (broaden if needed).
+  2. "Target companies" search is backwards. Lists specific AI companies
+  (Anthropic, OpenAI, Hugging Face) but your research says industries >
+  companies, and 100+ employee companies are ideal. Someone from Anthropic
+  probably isn't looking for this role.
+  3. Missing Cisco environment context in searches. No Airflow, Jenkins, or
+  "developer tools" keywords. This role specifically needs people
+  comfortable with CI/CD integration.
+  4. ChromaDB is listed but your research flags it as "prototyping only -
+  not production scale." Sends wrong signal.
+  5. Missing observability tools as signals. Research says
+  LangSmith/Langfuse signal depth of experience. Not in strong signals or
+  keywords.
+  6. Synonym groups aren't explicit. Non-technical recruiters need (Claude 
+  OR Anthropic) and (OpenAI OR GPT OR GPT-4) spelled out as equivalent
+  terms, not scattered.
+
+  ---
+  Before I rewrite, a few targeted questions:
+
+  1. Salary range? The research shows Senior AI (L5+) at $280K-$400K. What's
+   BayOne's actual range for this role? This affects which talent pool to
+  target.
+  2. Consulting background weight? Current guide emphasizes consulting firms
+   heavily. Is that a true must-have, or would you take someone from
+  enterprise ML platform teams who's never done consulting but has strong
+  client skills?
+  3. CI/CD experience weight? JD says "preferred." Should search strings
+  include Airflow/Jenkins/Bazel as Layer 1 (must-have) or Layer 2
+  (nice-to-have)?
+  4. On-prem as screening criterion? Research says "only cloud-native
+  experience" is a warning sign. Should this be elevated to a must-have
+  filter in searches (e.g., explicit "on-prem" OR "enterprise" keywords)?
+
+> Not really sure what to make of this because there's a lot of things going
+ on here.
+
+Why would salary range be part of this? That is none of your concern. 
+Consulting background is not a must-have; it simply was meant to be an 
+industry alignment thing, but I do not want to put too much weight on it.
+
+I would be more than happy for someone with an enterprise team, the 
+client-side nature of it is more about them being an extremely strong 
+communicator in both verbal and written communication as well as 
+presentation skills and in general personal skills to build rapport. That 
+does favor people with consulting background, but that can also just be any 
+standard good person from literally any background.
+
+For CI/CD experience, yes it is preferred, but it should be a nice-to-have. 
+And to be honest, we should separate because there's some things in that are
+ far more common than others and their synonyms as well. I don't think cloud
+ native experience only is a warning sign; I just think whenever we're 
+talking about hosting, we don't want people that can only work in a pampered
+ cloud environment.
+
+I don't think you're thinking correctly about this. I want to know that 
+they're capable of working within an on-prem environment. We're literally 
+just using APIs; the only difference with on-prem is deployment. If they're 
+a profile that relies crazy heavy on external cloud services only and never 
+actually builds anything themselves, that would be a problem.
+
+I'll give you an example: someone who has done Azure AI search but has no 
+clue on how to do vector search without using Azure AI search. That's what 
+I'm talking about when I say a pampered cloud environment. Does that make 
+sense? 
+
+● Yes, that makes sense. The warning sign isn't "cloud experience" - it's
+  dependency on managed abstractions without understanding the fundamentals.
+
+  Someone who's built RAG with Pinecone AND understands how embeddings,
+  similarity search, and indexing actually work = fine.
+
+  Someone who's only ever used Azure AI Search as a black box and couldn't
+  set up pgvector or explain cosine similarity = problem.
+
+  The test is: "Can they build it themselves, or do they only know how to
+  configure a managed service?"
+
+  ---
+  Revised approach for this guide:
+
+  1. Reframe "client-facing" as communication/presentation skills, not
+  consulting background. Consulting becomes one signal among many, not a
+  search priority.
+  2. Warning signs: Change "only cloud-native experience" to something like
+  "relies on managed AI services without understanding underlying mechanics"
+   - and give recruiters a screening question to test this.
+  3. CI/CD tools: Move to nice-to-have tier, group by commonality:
+    - Common: Jenkins, GitHub Actions
+    - Less common: Airflow, Bazel, GitLab CI
+  4. Search strings: Restructure as tiered layers, remove the "target
+  companies" search that lists AI labs.
+
+  One more clarifying question before I draft:
+
+  For the "fundamentals vs managed service" distinction - what's a good
+  screening question a non-technical recruiter could ask? Something like
+  "Have you ever set up a vector database from scratch, or only used managed
+   services?" Or is there a better way to surface this?
+
+> Definitely a better way to surface this. I think the real answer for 
+screening questions on this might not be at the recruiter level because 
+again they're going to be non-technical people, so they're going to be 
+asking vanilla questions and not really understanding their answer.
+
+One option we have is to request that they record all meetings on Teams. The
+ other thing we could suggest is to give them questions that don't really 
+require a follow-up and are just kind of like canary questions that 
+immediately tell us if someone's bullshitting. For instance, for your "Have 
+you ever set up a vector database from scratch or only use managed 
+services?" question? That would be a very poor one because the candidate 
+could just say, "Oh yeah, I've done that and I use PGvector, Milvus, and 
+Wavy8." That doesn't tell us anything. Anyone can say boss words.
+
+What we should say is, "When selecting a vector database, what's important?"
+ or ask them specific things about key abilities and what would be a good 
+fit given a scenario. But something that is not too long or complicated, or 
+requires too much additional explanation. Something the recruiters could 
+fire off as a question and get a clear response back on without ambiguity. 
+And... Something that actually gives us indication of their actual depth. 
+Not just can they name off platforms and buzzwords, but also not asking them
+ super technical questions and screening just kind of a litmus test to check
+ to the action of the hell they're talking about.
+
+Okay. Thank you very much for your attention. 
+
+● Got it. Canary questions where the shape of the answer reveals depth, not
+  the specific content. Recruiter doesn't need to evaluate the tech - they
+  just note whether the candidate reasoned through trade-offs or listed
+  buzzwords.
+
+  Here's what I'll draft for the revised guide:
+
+  ---
+  Screening Questions (canary style):
+
+  1. "When selecting a vector database for a project, what factors do you
+  consider?"
+    - Shallow: names databases
+    - Deep: talks about trade-offs (scale, latency, filtering needs, ops
+  burden, existing infrastructure)
+  2. "What problems show up in production AI that you don't see in
+  prototypes?"
+    - Shallow: generic ("it's harder")
+    - Deep: specific failure modes, monitoring gaps, cost surprises,
+  latency, user trust
+  3. "If a client asked you to ship an AI feature in 2 weeks, how would you
+  respond?"
+    - Shallow: "sure" or "no"
+    - Deep: scoping conversation, MVP definition, what can/can't be done,
+  risk communication
+  4. "How do you test an AI system when the outputs aren't deterministic?"
+    - Shallow: "I run it a few times"
+    - Deep: evaluation frameworks, edge cases, regression tests, human
+  review loops
+
+  ---
+  Other changes I'll make:
+  - Remove consulting-heavy emphasis; reframe as communication/presentation
+  skills
+  - Warning sign becomes "relies on managed AI services without
+  understanding mechanics"
+  - CI/CD as nice-to-have tier, grouped by commonality
+  - Search strings restructured as Layer 1/2/3
+  - Kill the "target companies" search listing AI labs
+
+  Want me to proceed with the full rewrite, or review any of these questions
+   first?
+
+> Proceed with the full rewrite. In addition to the screening questions, 
+your shallow and deep are piss poor. Again, this is a non-technical 
+recruiter, I am not going to remind you of this again. Why could you not be 
+bothered to give more than a few words in those sections? How in the fuck 
+would my non-technical recruiter know what an ops burden is or know what a 
+generic answer is to what problems show up in production AI that you don't 
+see in prototype? You really need to come back and think about this. Here is
+ what I want you to do: You can generate your screening questions, then I 
+want you to self-critique them. 
+
+● You're right. Let me actually think about this properly.
+
+  ---
+  Screening Questions - Self-Critique:
+
+  1. "When selecting a vector database for a project, what factors do you 
+  consider?"
+
+  Draft shallow/deep:
+  - Shallow: names databases
+  - Deep: talks about trade-offs (scale, latency, filtering needs, ops
+  burden, existing infrastructure)
+
+  Critique: "Ops burden" is jargon. "Trade-offs" is vague. A non-technical
+  recruiter reading "talks about trade-offs" still doesn't know what to
+  listen for. What does a trade-off SOUND like? How would they recognize it?
+
+  Rewrite:
+  - ✗ WEAK: Lists database names (Pinecone, Weaviate, pgvector) without
+  explaining WHY they'd pick one over another. Short answer, no reasoning.
+  - ✓ GOOD: Says "it depends" and explains WHAT it depends on - like how
+  much data, how fast it needs to be, what the team already uses, budget.
+  You hear them weighing options, not just naming things.
+
+  ---
+  2. "What problems show up in production AI that you don't see in 
+  prototypes?"
+
+  Draft shallow/deep:
+  - Shallow: generic ("it's harder")
+  - Deep: specific failure modes, monitoring gaps, cost surprises, latency,
+  user trust
+
+  Critique: "Specific failure modes" and "monitoring gaps" are meaningless
+  to a non-technical recruiter. They can't distinguish a generic answer from
+   a specific one if they don't know the domain.
+
+  Rewrite - actually, the question itself is flawed. A recruiter can't
+  evaluate whether "the model sometimes hallucinates under load" is a real
+  answer or bullshit.
+
+  Better question: "Tell me about a time something went wrong with an AI
+  system in production. What happened and what did you do?"
+
+  Now it's a story question. Recruiter can observe:
+  - ✗ WEAK: Can't recall a specific situation. Gives theoretical answers
+  ("sometimes models give wrong outputs") instead of a real story.
+  - ✓ GOOD: Tells a specific story with details - what broke, how they found
+   out, what they did. You can tell they actually lived through it, not
+  reciting a textbook.
+
+  ---
+  3. "If a client asked you to ship an AI feature in 2 weeks, how would you 
+  respond?"
+
+  Draft shallow/deep:
+  - Shallow: "sure" or "no"
+  - Deep: scoping conversation, MVP definition, what can/can't be done, risk
+   communication
+
+  Critique: "Scoping conversation" and "MVP definition" are
+  consultant-speak. And it's hypothetical - easy to give a rehearsed answer.
+
+  Better question: "Tell me about a time a client or stakeholder had
+  unrealistic expectations about AI. How did you handle it?"
+
+  - ✗ WEAK: Can't recall a specific situation. Or describes just agreeing
+  with whatever the client wanted. Or avoided the conversation.
+  - ✓ GOOD: Describes a real situation - what the client expected, how they
+  understood what the client actually needed, how they communicated what was
+   realistic. Shows they can push back respectfully.
+
+  ---
+  4. "How do you test an AI system when the outputs aren't deterministic?"
+
+  Draft shallow/deep:
+  - Shallow: "I run it a few times"
+  - Deep: evaluation frameworks, edge cases, regression tests, human review
+  loops
+
+  Critique: "Evaluation frameworks" and "regression tests" require technical
+   context to evaluate. Recruiter can't tell if "I use pytest with fixtures"
+   is good or not.
+
+  Simpler question: "How do you know if an AI feature is working correctly
+  after you ship it?"
+
+  - ✗ WEAK: Vague answers like "we test it" or "users tell us." Can't
+  describe any systematic approach.
+  - ✓ GOOD: Describes a process - how they track whether it's working, what
+  they look at, how they catch problems before users do. Has structure to
+  their answer, not just "we check it."
+
+  ---
+  One more I'll add for client skills:
+
+  5. "Can you explain [most complex thing on their resume] to me like I'm 
+  not technical?"
+
+  - ✗ WEAK: Uses jargon, gets frustrated, talks down to you, or can't
+  simplify it at all.
+  - ✓ GOOD: Uses analogies, checks if you're following, adjusts based on
+  your reactions. Patient and clear.
+
+  This one the recruiter can directly evaluate because they ARE the
+  non-technical audience.
+
+  ---
+  Now I'll proceed with the full rewrite using these corrected questions.
+
+● Write(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recrui
+       ter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 150 additions and 58 removals
+
+       56          font-size: 8.5pt;
+       57          margin: 2px;
+       58        }
+       59 +      .tag-secondary {
+       60 +        display: inline-block;
+       61 +        background: #f1f5f9;
+       62 +        color: #475569;
+       63 +        padding: 2px 8px;
+       64 +        border-radius: 3px;
+       65 +        font-size: 8.5pt;
+       66 +        margin: 2px;
+       67 +      }
+       68        .green { color: #16a34a; }
+       69        .red { color: #dc2626; }
+       70        .full-width { grid-column: 1 / -1; }
+       71        strong { color: #0f172a; }
+       72 +      .question-block {
+       73 +        background: #fafafa;
+       74 +        border-left: 3px solid #a855f7;
+       75 +        padding: 8px 12px;
+       76 +        margin-bottom: 10px;
+       77 +      }
+       78 +      .question-block p { margin-bottom: 4px; }
+       79 +      .question-text { font-weight: 600; font-style: italic; }
+       80 +      .signal-good { color: #16a34a; font-size: 9pt; }
+       81 +      .signal-weak { color: #dc2626; font-size: 9pt; }
+       82 +      .layer-label {
+       83 +        font-weight: 600;
+       84 +        color: #7c3aed;
+       85 +        margin-bottom: 4px;
+       86 +        display: block;
+       87 +      }
+       88 +      .synonym-note {
+       89 +        font-size: 8pt;
+       90 +        color: #64748b;
+       91 +        font-style: italic;
+       92 +      }
+       93        @media print {
+       94          body { padding: 0; }
+       95          @page { size: 8.5in 11in; margin: 0.4in 0.5in; }
+     ...
+        76        <div class="section">
+        77          <div class="section-title">Must-Have Skills</div>
+        78          <ul>
+        79 -          <li><strong>LLM application development</strong> – 
+           -  Built features using Claude API or OpenAI API in production
+           -  </li>
+        80 -          <li><strong>Python backend</strong> – FastAPI, 
+           -  Django, or Flask; comfortable with async code</li>
+        81 -          <li><strong>Prompt engineering</strong> – Context 
+           -  management, structured outputs, few-shot patterns</li>
+        82 -          <li><strong>LangChain or LangGraph</strong> – Or 
+           - equivalent orchestration framework</li>
+        83 -          <li><strong>RAG patterns</strong> – Experience with
+           -  retrieval-augmented generation</li>
+        84 -          <li><strong>Client-facing experience</strong> – 
+           - Consulting, professional services, or stakeholder-heavy 
+           - roles</li>
+        79 +          <li><strong>LLM application development</strong> – 
+           +  Built features using Claude/OpenAI APIs that real users 
+           +  rely on</li>
+        80 +          <li><strong>Python backend</strong> – FastAPI, 
+           +  Django, or Flask; comfortable building APIs and services
+           +  </li>
+        81 +          <li><strong>Prompt engineering</strong> – Context 
+           +  management, structured outputs, handling 
+           +  when the AI gives bad answers</li>
+        82 +          <li><strong>RAG experience</strong> – Has built 
+           + search/retrieval systems, understands how vector search 
+           + works (not just used a managed service)</li>
+        83 +          <li><strong>Strong communicator</strong> – Clear 
+           + writing, comfortable presenting, builds rapport easily</li>
+        84          </ul>
+        85        </div>
+        86    
+        87        <div class="section">
+        88          <div class="section-title">Strong Signals</div>
+        89          <ul>
+        90 -          <li class="green">✓ Shipped AI features to 
+           -  production (not just prototypes)</li>
+        91 -          <li class="green">✓ Experience at consulting firms 
+           - (Accenture, Deloitte, Slalom, etc.)</li>
+        90 +          <li class="green">✓ Shipped AI features that real 
+           +  users depend on (not just demos/prototypes)</li>
+        91 +          <li class="green">✓ Can explain technical concepts 
+           + clearly to non-technical people</li>
+        92 +          <li class="green">✓ Experience presenting to or 
+           + working directly with clients/stakeholders</li>
+        93            <li class="green">✓ Built chat interfaces or 
+             conversational AI</li>
+        94 -          <li class="green">✓ Worked with CI/CD or developer 
+           - tools</li>
+        94            <li class="green">✓ Uses AI coding tools daily 
+             (Claude Code, Cursor, Copilot)</li>
+        95 -          <li class="green">✓ Postgres/pgVector or vector DB 
+           - experience</li>
+        95 +          <li class="green">✓ Has set up vector databases 
+           + themselves (pgvector, Pinecone, Qdrant)</li>
+        96 +          <li class="green">✓ Mentions LangSmith, Langfuse, 
+           + or similar monitoring tools</li>
+        97          </ul>
+        98        </div>
+        99    
+       100        <div class="section">
+       101          <div class="section-title">Warning Signs</div>
+       102          <ul>
+       103 -          <li class="red">✗ Only notebook/research experience
+           -  , no production deployment</li>
+       104 -          <li class="red">✗ Can't articulate how they handle 
+           - LLM failures or non-determinism</li>
+       105 -          <li class="red">✗ No experience working with 
+           - external clients or stakeholders</li>
+       106 -          <li class="red">✗ Uncomfortable presenting or 
+           - demoing work</li>
+       107 -          <li class="red">✗ Only cloud-native experience 
+           - (AWS/Azure dependent)</li>
+       103 +          <li class="red">✗ Only notebook/research experience
+           +   - never deployed anything users relied on</li>
+       104 +          <li class="red">✗ Can't explain how their AI tools 
+           + work, only how to configure them</li>
+       105 +          <li class="red">✗ Relies entirely on managed 
+           + services (e.g., uses Azure AI Search but couldn't set up 
+           + vector search without it)</li>
+       106 +          <li class="red">✗ No experience working with 
+           + clients, stakeholders, or people outside their team</li>
+       107 +          <li class="red">✗ Uncomfortable presenting or gets 
+           + defensive when asked to explain</li>
+       108 +          <li class="red">✗ Vague about what they personally 
+           + built vs. what their team built</li>
+       109          </ul>
+       110        </div>
+       111    
+       112        <div class="section">
+       113 -        <div class="section-title">Questions to Ask</div>
+       113 +        <div class="section-title">Nice-to-Have Background
+           +  </div>
+       114          <ul>
+       115 -          <li>"Walk me through an AI feature you took from 
+           - prototype to production."</li>
+       116 -          <li>"How do you handle it when an LLM gives 
+           - inconsistent or wrong outputs?"</li>
+       117 -          <li>"Describe a time you had to explain a technical
+           -  decision to a non-technical client."</li>
+       118 -          <li>"What AI coding tools do you use and how do 
+           - they fit into your workflow?"</li>
+       115 +          <li>CI/CD or developer tools experience</li>
+       116 +          <li>Consulting or professional services</li>
+       117 +          <li>Enterprise environment experience</li>
+       118 +          <li>Team lead or mentoring experience</li>
+       119 +          <li>Log analysis or observability background</li>
+       120          </ul>
+       121        </div>
+       122    
+       123        <div class="section full-width">
+       124 -        <div class="section-title">LinkedIn Search Strings
+           -  </div>
+       124 +        <div class="section-title">Screening Questions</div>
+       125 +        <p style="font-size: 9pt; color: #64748b; 
+           + margin-bottom: 10px;">Record all screening calls. These 
+           + questions reveal depth without requiring technical 
+           + evaluation. Note their answers verbatim for technical 
+           + review.</p>
+       126 +  
+       127 +        <div class="question-block">
+       128 +          <p class="question-text">"When selecting a vector 
+           + database for a project, what factors do you consider?"</p>
+       129 +          <p class="signal-weak">✗ WEAK: Lists database names
+           +  (Pinecone, Weaviate, pgvector) without explaining WHY 
+           + they'd pick one over another. Short answer, no 
+           + reasoning.</p>
+       130 +          <p class="signal-good">✓ GOOD: Says "it depends" 
+           + and explains WHAT it depends on - size of data, speed 
+           + requirements, what the team already uses, budget. You hear 
+           + them weighing options, not just naming things.</p>
+       131 +        </div>
+       132 +  
+       133 +        <div class="question-block">
+       134 +          <p class="question-text">"Tell me about a time 
+           + something went wrong with an AI system in production. What 
+           + happened and what did you do?"</p>
+       135 +          <p class="signal-weak">✗ WEAK: Can't recall a 
+           + specific situation. Gives theoretical answers ("sometimes 
+           + models give wrong outputs") instead of a real story.</p>
+       136 +          <p class="signal-good">✓ GOOD: Tells a specific 
+           + story with details - what broke, how they found out, what 
+           + they did. You can tell they actually lived through it.</p>
+       137 +        </div>
+       138 +  
+       139 +        <div class="question-block">
+       140 +          <p class="question-text">"Tell me about a time a 
+           + client or stakeholder had unrealistic expectations about AI.
+           +  How did you handle it?"</p>
+       141 +          <p class="signal-weak">✗ WEAK: Can't recall a 
+           + specific situation. Or just agreed with whatever the client 
+           + wanted. Or avoided the hard conversation.</p>
+       142 +          <p class="signal-good">✓ GOOD: Describes a real 
+           + situation - what the client expected, how they figured out 
+           + what was actually needed, how they communicated what was 
+           + realistic. Pushed back respectfully.</p>
+       143 +        </div>
+       144 +  
+       145 +        <div class="question-block">
+       146 +          <p class="question-text">"How do you know if an AI 
+           + feature is working correctly after you ship it?"</p>
+       147 +          <p class="signal-weak">✗ WEAK: Vague answers like 
+           + "we test it" or "users tell us if it's broken." No 
+           + process.</p>
+       148 +          <p class="signal-good">✓ GOOD: Describes a system -
+           +  how they track quality, what they measure, how they catch 
+           + problems before users complain. Structured answer.</p>
+       149 +        </div>
+       150 +  
+       151 +        <div class="question-block">
+       152 +          <p class="question-text">"Can you explain [most 
+           + complex thing on their resume] to me like I'm not 
+           + technical?"</p>
+       153 +          <p class="signal-weak">✗ WEAK: Uses jargon, gets 
+           + frustrated, talks down to you, or can't simplify it.</p>
+       154 +          <p class="signal-good">✓ GOOD: Uses analogies, 
+           + checks if you're following, adjusts based on your reactions.
+           +  Patient and clear. (You can judge this directly.)</p>
+       155 +        </div>
+       156 +      </div>
+       157 +  
+       158 +      <div class="section full-width">
+       159 +        <div class="section-title">LinkedIn Search Strings 
+           + (Tiered)</div>
+       160 +        <p style="font-size: 9pt; color: #64748b; 
+           + margin-bottom: 8px;">Start with Layer 1. If too few results 
+           + (&lt;20), move to Layer 2. Still struggling? Use Layer 
+           + 3.</p>
+       161          <div class="search-box">
+       162 -  <strong>LLM + Production:</strong> ("shipped" OR "deployed"
+           -  OR "production") AND ("LangChain" OR "LangGraph" OR 
+           - "LlamaIndex") AND ("prompt engineering" OR "RAG" OR 
+           - "retrieval augmented")<br><br>
+       163 -  <strong>Client-facing AI:</strong> ("solutions engineer" OR
+           -  "solutions architect" OR "technical consultant") AND 
+           - ("generative AI" OR "LLM" OR "GPT-4" OR "Claude") -recruiter
+           -  -sales<br><br>
+       164 -  <strong>Specific titles:</strong> "AI Solutions Engineer" 
+           - OR "ML Solutions Engineer" OR "Applied AI Engineer" OR "LLM 
+           - Engineer"<br><br>
+       165 -  <strong>Consulting + AI:</strong> (Accenture OR Deloitte OR
+           -  Slalom OR Cognizant OR Infosys OR Wipro OR "Big 4") AND 
+           - ("generative AI" OR "LLM" OR "ChatGPT" OR "OpenAI")<br><br>
+       166 -  <strong>RAG specialists:</strong> ("vector database" OR 
+           - "pgvector" OR "embeddings" OR "semantic search") AND 
+           - ("LangChain" OR "LlamaIndex") AND Python<br><br>
+       167 -  <strong>Target companies:</strong> (Anthropic OR OpenAI OR 
+           - Cohere OR "AI21" OR Weights&Biases OR Scale OR Hugging Face)
+           -  AND (engineer OR developer)
+       162 +  <span class="layer-label">Layer 1 – Narrow (start 
+           + here):</span>
+       163 +  ("AI engineer" OR "ML engineer" OR "LLM engineer") AND 
+           + Python AND (LangChain OR LangGraph OR LlamaIndex OR RAG) AND
+           +  (production OR shipped OR deployed)<br><br>
+       164 +  
+       165 +  <span class="layer-label">Layer 2 – Broader titles:</span>
+       166 +  ("AI engineer" OR "ML engineer" OR "solutions engineer" OR 
+           + "applied scientist" OR "senior software engineer") AND 
+           + Python AND (LLM OR "large language model" OR "generative AI"
+           +  OR Claude OR OpenAI)<br><br>
+       167 +  
+       168 +  <span class="layer-label">Layer 3 – Widest net:</span>
+       169 +  ("software engineer" OR "backend engineer" OR "full stack")
+           +  AND Python AND ("generative AI" OR LLM OR GPT OR ChatGPT OR
+           +  Claude) AND (API OR backend OR production)<br><br>
+       170 +  
+       171 +  <span class="layer-label">Communication skills filter (add 
+           + to any layer):</span>
+       172 +  AND (consulting OR "client-facing" OR "stakeholder" OR 
+           + "presented" OR "cross-functional")
+       173          </div>
+       174        </div>
+       175    
+       176        <div class="section full-width">
+       177 -        <div class="section-title">Target Backgrounds</div>
+       178 -        <span class="tag">Accenture AI practice</span>
+       179 -        <span class="tag">Deloitte AI & Data</span>
+       180 -        <span class="tag">Slalom Build</span>
+       181 -        <span class="tag">Thoughtworks</span>
+       182 -        <span class="tag">AI startups (Series A-C)</span>
+       183 -        <span class="tag">Enterprise ML platform teams</span>
+       184 -        <span class="tag">Developer tools companies</span>
+       185 -        <span class="tag">Big tech applied AI orgs</span>
+       177 +        <div class="section-title">Synonym 
+           +  Groups for Recruiters</div>
+       178 +        <p style="font-size: 9pt; color: #64748b; 
+           + margin-bottom: 8px;">These terms mean the same thing or come
+           +  from the same company. Use OR between them in searches.</p>
+       179 +        <div class="search-box">
+       180 +  <strong>LLM Providers:</strong><br>
+       181 +  (Claude OR Anthropic) <span class="synonym-note">← same 
+           + company</span><br>
+       182 +  (OpenAI OR GPT OR "GPT-4" OR ChatGPT) <span 
+           + class="synonym-note">← same provider</span><br><br>
+       183 +  
+       184 +  <strong>Vector Databases:</strong><br>
+       185 +  (pgvector OR Pinecone OR Qdrant OR Weaviate OR Milvus OR 
+           + "vector database" OR "vector DB")<br><br>
+       186 +  
+       187 +  <strong>Orchestration Frameworks:</strong><br>
+       188 +  (LangChain OR LangGraph OR LlamaIndex) <span 
+           + class="synonym-note">← related ecosystem, not 
+           + identical</span><br><br>
+       189 +  
+       190 +  <strong>Python Web Frameworks:</strong><br>
+       191 +  (FastAPI OR Django OR Flask)
+       192 +        </div>
+       193        </div>
+       194    
+       195        <div class="section full-width">
+       196 -        <div class="section-title">Tech Stack Keywords
+           -   to Search</div>
+       197 -        <div style="margin-bottom: 8px;"><strong>Core LLM
+           -  :</strong></div>
+       196 +        <div class="section-title">Tech Stack Keywords</div>
+       197 +        <div style="margin-bottom: 8px;"><strong>Must-have 
+           +  (search for these):</strong></div>
+       198 +        <span class="tag">Python</span>
+       199          <span class="tag">LangChain</span>
+       200          <span class="tag">LangGraph</span>
+       201 -        <span class="tag">LlamaIndex</span>
+       201          <span class="tag">OpenAI API</span>
+       202          <span class="tag">Claude API</span>
+       203 -        <span class="tag">Anthropic</span>
+       204 -        <span class="tag">function calling</span>
+       205 -        <span class="tag">structured outputs</span>
+       206 -        <span class="tag">prompt engineering</span>
+       207 -        <div style="margin: 8px 
+           - 0;"><strong>RAG/Retrieval:</strong></div>
+       203 +        <span class="tag">RAG</span>
+       204          <span class="tag">pgvector</span>
+       205 -        <span class="tag">Pinecone</span>
+       206 -        <span class="tag">Weaviate</span>
+       207 -        <span class="tag">ChromaDB</span>
+       208 -        <span class="tag">embeddings</span>
+       209 -        <span class="tag">semantic search</span>
+       210 -        <span class="tag">text-embedding-ada</span>
+       211 -        <div style="margin: 8px 0;"><strong>Python 
+           - ecosystem:</strong></div>
+       205          <span class="tag">FastAPI</span>
+       206 -        <span class="tag">Pydantic</span>
+       207 -        <span class="tag">asyncio</span>
+       208 -        <span class="tag">httpx</span>
+       209 -        <span class="tag">SQLAlchemy</span>
+       210 -        <span class="tag">pytest</span>
+       211 -        <span class="tag">Streamlit</span>
+       212 -        <span class="tag">Gradio</span>
+       206 +        <span class="tag">prompt engineering</span>
+       207 +  
+       208 +        <div style="margin: 8px 0;"><strong>Nice-to-have 
+           + (bonus points):</strong></div>
+       209 +        <span class="tag-secondary">LangSmith</span>
+       210 +        <span class="tag-secondary">Langfuse</span>
+       211 +        <span class="tag-secondary">Pinecone</span>
+       212 +        <span class="tag-secondary">Qdrant</span>
+       213 +        <span class="tag-secondary">Streamlit</span>
+       214 +        <span class="tag-secondary">Gradio</span>
+       215 +        <span class="tag-secondary">embeddings</span>
+       216 +        <span class="tag-secondary">semantic search</span>
+       217 +  
+       218 +        <div style="margin: 8px 0;"><strong>CI/CD 
+           + (nice-to-have, not required):</strong></div>
+       219 +        <span class="tag-secondary">Jenkins</span>
+       220 +        <span class="tag-secondary">GitHub Actions</span>
+       221 +        <span class="tag-secondary">GitLab CI</span>
+       222 +        <span class="tag-secondary">Airflow</span>
+       223 +        <span class="tag-secondary">Bazel</span>
+       224        </div>
+       225 +  
+       226 +      <div class="section full-width">
+       227 +        <div class="section-title">Target Backgrounds</div>
+       228 +        <p style="font-size: 9pt; color: #64748b; 
+           + margin-bottom: 8px;">Look for people from these types of 
+           + companies/teams, not specific company names. 100+ employee 
+           + companies are ideal.</p>
+       229 +        <span class="tag">Enterprise ML platform teams</span>
+       230 +        <span class="tag">Developer tools companies</span>
+       231 +        <span class="tag">AI/ML product teams</span>
+       232 +        <span class="tag">B2B SaaS with AI features</span>
+       233 +        <span class="tag">Internal tools / productivity 
+           + teams</span>
+       234 +        <span class="tag-secondary">Consulting (Accenture, 
+           + Deloitte, Slalom, Thoughtworks)</span>
+       235 +        <span class="tag-secondary">AI startups (Series A-C, 
+           + not pre-seed)</span>
+       236 +      </div>
+       237      </div>
+       238    </body>
+       239    </html>
+
+● Done. Key changes:
+
+  Screening Questions:
+  - Rewrote all weak/good indicators in plain language a recruiter can
+  actually observe
+  - Added the "explain it to me" question where the recruiter IS the
+  evaluation mechanism
+  - Added note to record all calls for technical review
+
+  Structure:
+  - Tiered search strings (Layer 1/2/3) with clear instructions
+  - Explicit synonym groups with notes ("same company", "related ecosystem")
+  - Split tech stack into must-have vs nice-to-have tiers
+  - Moved consulting to secondary tag in Target Backgrounds
+
+  Content fixes:
+  - Removed the "target companies" search listing AI labs
+  - Warning sign now has concrete example (Azure AI Search)
+  - "Strong communicator" replaced "client-facing experience" in must-haves
+  - Added LangSmith/Langfuse as depth signals
+  - Removed ChromaDB
+
+  Ready for feedback or move to Automation Engineer?
+
+> Pretty good. Just switch the order of Strong skills and nice to have 
+background. Basically the top row should be Must-have skills, then 
+nice-to-have background, and then underneath of it should be strong signals,
+ then warning signs 
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 11 additions and 11 removals
+
+       115        </div>
+       116    
+       117        <div class="section">
+       118 +        <div class="section-title">Nice-to-Have 
+           + Background</div>
+       119 +        <ul>
+       120 +          <li>CI/CD or developer tools experience</li>
+       121 +          <li>Consulting or professional services</li>
+       122 +          <li>Enterprise environment experience</li>
+       123 +          <li>Team lead or mentoring experience</li>
+       124 +          <li>Log analysis or observability background</li>
+       125 +        </ul>
+       126 +      </div>
+       127 +  
+       128 +      <div class="section">
+       129          <div class="section-title">Strong Signals</div>
+       130          <ul>
+       131            <li class="green">✓ Shipped AI features that real 
+             users depend on (not just demos/prototypes)</li>
+     ...
+       139          </ul>
+       140        </div>
+       141    
+       142 -      <div class="section">
+       143 -        <div class="section-title">Nice-to-Have 
+           - Background</div>
+       144 -        <ul>
+       145 -          <li>CI/CD or developer tools experience</li>
+       146 -          <li>Consulting or professional services</li>
+       147 -          <li>Enterprise environment experience</li>
+       148 -          <li>Team lead or mentoring experience</li>
+       149 -          <li>Log analysis or observability background</li>
+       150 -        </ul>
+       151 -      </div>
+       152 -  
+       142        <div class="section full-width">
+       143          <div class="section-title">Screening Questions</div>
+       144          <p style="font-size: 9pt; color: #64748b; 
+             margin-bottom: 10px;">Record all screening calls. These 
+             questions reveal depth without requiring technical 
+             evaluation. Note their answers verbatim for technical 
+             review.</p>
+
+● Done. Top row is now Must-Have Skills | Nice-to-Have Background, bottom
+  row is Strong Signals | Warning Signs.
+
+  Ready for Automation Engineer?
+
+> No, I still think that in your must-have and nice-to-have sections, you 
+haven't given much technical depth that matches either the job description 
+or the position requirements based upon the project requirements. You have 
+again gotten far too basic. 
+
+● You're right. Let me look at the JD and project requirements again and
+  give you something with actual technical depth.
+
+  Looking at the JD and project context:
+
+  Must-haves I'm missing or underselling:
+  - Years of experience (5+ software, 3+ AI, 1+ LLM)
+  - LangChain/LangGraph specifically (not just "orchestration")
+  - Chat interface / conversational AI (capability C - cross-pipeline
+  visibility)
+  - Log analysis and failure diagnosis (capability B - gate failures)
+  - Testing non-deterministic AI outputs
+  - API integration patterns
+  - pgvector specifically (confirmed stack)
+
+  Nice-to-haves I'm missing:
+  - Specific tools: Airflow, Jenkins, Grafana (all confirmed stack)
+  - Agentic AI / tool-calling patterns
+  - NLP beyond LLMs (text processing, parsing, classification)
+  - On-prem deployment (not vague "enterprise")
+
+  Let me rewrite:
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 15 additions and 10 removals
+
+       106        <div class="section">
+       107          <div class="section-title">Must-Have Skills</div>
+       108          <ul>
+       109 -          <li><strong>LLM application development</strong> – 
+           - Built features using Claude/OpenAI APIs that real users rely
+           -  on</li>
+       110 -          <li><strong>Python backend</strong> – FastAPI, 
+           -  Django, or Flask; comfortable building APIs and services
+           -  </li>
+       111 -          <li><strong>Prompt engineering</strong> – Context 
+           - management, structured outputs, handling when the AI gives 
+           - bad answers</li>
+       112 -          <li><strong>RAG experience</strong> – Has built 
+           - search/retrieval systems, understands how vector search 
+           - works (not just used a managed service)</li>
+       113 -          <li><strong>Strong communicator</strong> – Clear 
+           - writing, comfortable presenting, builds rapport easily</li>
+       109 +          <li><strong>5+ years software engineering, 3+ years
+           +  AI/ML, 1+ year LLMs</strong> – Production experience, not 
+           + research or coursework</li>
+       110 +          <li><strong>Python backend</strong> – FastAPI or 
+           +  Django, async patterns, building APIs and data pipelines
+           +  </li>
+       111 +          <li><strong>LangChain or LangGraph</strong> – Built
+           +  AI pipelines with orchestration frameworks; understands 
+           + chains, agents, memory</li>
+       112 +          <li><strong>Prompt engineering</strong> – Context 
+           + window management, few-shot learning, structured outputs, 
+           + output parsing, handling LLM failures</li>
+       113 +          <li><strong>RAG / vector search</strong> – Built 
+           + retrieval systems with pgvector, Pinecone, or Qdrant; 
+           + understands embeddings, chunking, similarity search</li>
+       114 +          <li><strong>Conversational AI</strong> – Built chat
+           +  interfaces or NL query systems; conversation history, 
+           + multi-turn context</li>
+       115 +          <li><strong>Testing non-deterministic 
+           + systems</strong> – Strategies for testing AI outputs that 
+           + vary; evaluation frameworks</li>
+       116 +          <li><strong>Strong communicator</strong> – Clear 
+           + writing, comfortable presenting, explains technical concepts
+           +  to non-technical audiences</li>
+       117          </ul>
+       118        </div>
+       119    
+       120        <div class="section">
+       121          <div class="section-title">Nice-to-Have 
+             Background</div>
+       122          <ul>
+       123 -          <li>CI/CD or developer tools experience</li>
+       124 -          <li>Consulting or professional services</li>
+       125 -          <li>Enterprise environment experience</li>
+       126 -          <li>Team lead or mentoring experience</li>
+       127 -          <li>Log analysis or observability background</li>
+       123 +          <li><strong>Log analysis / failure 
+           + diagnosis</strong> – Parsing logs, root cause analysis, 
+           + observability tooling</li>
+       124 +          <li><strong>CI/CD tooling</strong> – Jenkins, 
+           + Airflow, GitHub Actions, GitLab CI</li>
+       125 +          <li><strong>Grafana / dashboards</strong> – 
+           + Building monitoring and visualization dashboards</li>
+       126 +          <li><strong>Agentic AI</strong> – Tool-calling, 
+           + autonomous agents, multi-step reasoning, LangGraph 
+           + agents</li>
+       127 +          <li><strong>On-prem deployment</strong> – Deploying
+           +  systems without cloud service dependencies</li>
+       128 +          <li><strong>NLP fundamentals</strong> – Text 
+           + processing, parsing, search, classification beyond LLM 
+           + APIs</li>
+       129 +          <li><strong>Mentoring</strong> – Leading or 
+           + mentoring other engineers</li>
+       130          </ul>
+       131        </div>
+       132    
+
+● Updated. Must-haves now include:
+  - Specific years (5+ software, 3+ AI, 1+ LLM)
+  - LangChain/LangGraph explicitly
+  - Conversational AI / chat interfaces
+  - Testing non-deterministic systems
+  - More specific RAG (pgvector, chunking, embeddings)
+
+  Nice-to-haves now include:
+  - Log analysis / failure diagnosis (maps to capability B)
+  - Specific CI/CD tools (Jenkins, Airflow)
+  - Grafana dashboards
+  - Agentic AI / tool-calling
+  - On-prem deployment specifically
+  - NLP fundamentals beyond LLMs
+
+  How's that?
+
+> Much better, but this document is very ugly. Please give it a facelift 
+while keeping it minimalist and clean and stickign with the3 theme specs. 
+
+● Let me check the BayOne design spec first:
+
+● Read(specs/bayone-design-spec.md)
+  ⎿  Read 661 lines
+
+● Now I'll rewrite with proper BayOne styling - numbered sections, proper
+  color palette, no emojis, cleaner hierarchy:
+
+● Write(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recrui
+       ter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 500 additions and 176 removals
+
+         4      <meta charset="UTF-8">
+         5      <meta name="viewport" content="width=device-width, 
+             initial-scale=1.0">
+         6      <title>Recruiter Guide: Senior AI Solutions 
+             Engineer</title>
+         7 -    <link 
+           -  href="https://fonts.googleapis.com/css2?family=Inter:wght@
+           -  400;500;600;700&display=swap" rel="stylesheet">
+         7 +    <link 
+           +  href="https://fonts.googleapis.com/css2?family=Inter:wght@
+           +  300;400;500;600;700&display=swap" rel="stylesheet">
+         8      <style>
+         9 +      :root {
+        10 +        --purple-mid: #5b21b6;
+        11 +        --purple-accent: #a855f7;
+        12 +        --primary: #0f172a;
+        13 +        --text: #334155;
+        14 +        --text-light: #64748b;
+        15 +        --border: #e2e8f0;
+        16 +        --bg-subtle: #f8fafc;
+        17 +        --green: #16a34a;
+        18 +        --red: #dc2626;
+        19 +      }
+        20 +  
+        21        * { margin: 0; padding: 0; box-sizing: border-box; }
+        22 +  
+        23        body {
+        24 -        font-family: 'Inter', -apple-system, sans-serif;
+        25 -        color: #334155;
+        24 +        font-family: 'Inter', -apple-system, 
+           +  BlinkMacSystemFont, sans-serif;
+        25 +        color: var(--text);
+        26          line-height: 1.5;
+        27          font-size: 10pt;
+        28          max-width: 8.5in;
+        29          margin: 0 auto;
+        30 -        padding: 0.4in 0.5in;
+        30 +        padding: 0.5in;
+        31        }
+        32 +  
+        33 +      /* Header */
+        34        .header {
+        35 -        display: flex;
+        36 -        justify-content: space-between;
+        37 -        align-items: baseline;
+        38 -        border-bottom: 2px solid #a855f7;
+        39 -        padding-bottom: 8px;
+        40 -        margin-bottom: 16px;
+        35 +        margin-bottom: 24px;
+        36 +        padding-bottom: 16px;
+        37 +        border-bottom: 2px solid var(--purple-accent);
+        38        }
+        39 -      h1 { font-size: 16pt; font-weight: 700; color: #0f172a;
+           -  }
+        40 -      .subtitle { font-size: 9pt; color: #64748b; }
+        41 -      .grid { display: grid; grid-template-columns: 1fr 1fr; 
+           - gap: 16px; }
+        42 -      .section { margin-bottom: 14px; }
+        43 -      .section-title {
+        44 -        font-size: 10pt;
+        39 +  
+        40 +      .header-label {
+        41 +        font-size: 10px;
+        42 +        font-weight: 600;
+        43 +        letter-spacing: 2px;
+        44 +        text-transform: uppercase;
+        45 +        color: var(--purple-accent);
+        46 +        margin-bottom: 4px;
+        47 +      }
+        48 +  
+        49 +      h1 {
+        50 +        font-size: 22pt;
+        51          font-weight: 700;
+        52 -        color: #7c3aed;
+        52 +        color: var(--primary);
+        53 +        letter-spacing: -0.5px;
+        54 +        margin-bottom: 4px;
+        55 +      }
+        56 +  
+        57 +      .subtitle {
+        58 +        font-size: 11px;
+        59 +        color: var(--text-light);
+        60 +      }
+        61 +  
+        62 +      /* Section styling */
+        63 +      .section-number {
+        64 +        font-size: 10px;
+        65 +        font-weight: 600;
+        66 +        color: var(--purple-accent);
+        67 +        letter-spacing: 2px;
+        68          margin-bottom: 6px;
+        69 -        text-transform: uppercase;
+        70 -        letter-spacing: 0.5px;
+        69        }
+        70 -      ul { margin-left: 16px; }
+        71 -      li { margin-bottom: 4px; }
+        72 -      .search-box {
+        73 -        background: #f8fafc;
+        74 -        border: 1px solid #e2e8f0;
+        75 -        border-radius: 4px;
+        76 -        padding: 10px;
+        77 -        font-family: monospace;
+        70 +  
+        71 +      .section-title {
+        72 +        font-size: 12pt;
+        73 +        font-weight: 600;
+        74 +        color: var(--primary);
+        75 +        margin-bottom: 10px;
+        76 +      }
+        77 +  
+        78 +      /* Grid layout */
+        79 +      .grid {
+        80 +        display: grid;
+        81 +        grid-template-columns: 1fr 1fr;
+        82 +        gap: 24px;
+        83 +      }
+        84 +  
+        85 +      .full-width { grid-column: 1 / -1; }
+        86 +  
+        87 +      /* Lists */
+        88 +      .skill-list {
+        89 +        list-style: none;
+        90 +        margin: 0;
+        91 +      }
+        92 +  
+        93 +      .skill-list li {
+        94 +        padding: 6px 0;
+        95 +        border-bottom: 1px solid var(--border);
+        96 +        font-size: 9.5pt;
+        97 +      }
+        98 +  
+        99 +      .skill-list li:last-child { border-bottom: none; }
+       100 +  
+       101 +      .skill-list strong {
+       102 +        color: var(--primary);
+       103 +        font-weight: 600;
+       104 +      }
+       105 +  
+       106 +      .skill-list .detail {
+       107 +        color: var(--text-light);
+       108 +        font-size: 9pt;
+       109 +      }
+       110 +  
+       111 +      /* Signal lists */
+       112 +      .signal-list {
+       113 +        list-style: none;
+       114 +        margin: 0;
+       115 +      }
+       116 +  
+       117 +      .signal-list li {
+       118 +        padding: 5px 0 5px 16px;
+       119 +        position: relative;
+       120 +        font-size: 9.5pt;
+       121 +      }
+       122 +  
+       123 +      .signal-list li::before {
+       124 +        content: '';
+       125 +        position: absolute;
+       126 +        left: 0;
+       127 +        top: 10px;
+       128 +        width: 8px;
+       129 +        height: 8px;
+       130 +        border-radius: 50%;
+       131 +      }
+       132 +  
+       133 +      .signal-list.positive li::before { background: 
+           + var(--green); }
+       134 +      .signal-list.negative li::before { background: 
+           + var(--red); }
+       135 +  
+       136 +      /* Question blocks */
+       137 +      .question-block {
+       138 +        background: linear-gradient(135deg, 
+           + rgba(124,58,237,0.04) 0%, rgba(168,85,247,0.06) 100%);
+       139 +        border-left: 3px solid var(--purple-accent);
+       140 +        padding: 12px 14px;
+       141 +        margin-bottom: 12px;
+       142 +        border-radius: 0 6px 6px 0;
+       143 +      }
+       144 +  
+       145 +      .question-text {
+       146 +        font-weight: 600;
+       147 +        color: var(--primary);
+       148 +        font-size: 10pt;
+       149 +        margin-bottom: 8px;
+       150 +      }
+       151 +  
+       152 +      .signal-row {
+       153 +        display: grid;
+       154 +        grid-template-columns: 1fr 1fr;
+       155 +        gap: 12px;
+       156          font-size: 8.5pt;
+       157 -        line-height: 1.6;
+       157 +        line-height: 1.4;
+       158        }
+       159 +  
+       160 +      .signal-label {
+       161 +        font-weight: 600;
+       162 +        font-size: 8pt;
+       163 +        letter-spacing: 0.5px;
+       164 +        text-transform: uppercase;
+       165 +        margin-bottom: 2px;
+       166 +      }
+       167 +  
+       168 +      .signal-weak .signal-label { color: var(--red); }
+       169 +      .signal-good .signal-label { color: var(--green); }
+       170 +      .signal-weak, .signal-good { color: var(--text); }
+       171 +  
+       172 +      /* Search strings */
+       173 +      .search-card {
+       174 +        background: var(--bg-subtle);
+       175 +        border: 1px solid var(--border);
+       176 +        border-radius: 6px;
+       177 +        padding: 14px;
+       178 +        margin-bottom: 12px;
+       179 +      }
+       180 +  
+       181 +      .search-card-title {
+       182 +        font-size: 9pt;
+       183 +        font-weight: 600;
+       184 +        color: var(--purple-mid);
+       185 +        margin-bottom: 8px;
+       186 +      }
+       187 +  
+       188 +      .search-string {
+       189 +        font-family: 'SF Mono', 'Consolas', monospace;
+       190 +        font-size: 8pt;
+       191 +        line-height: 1.5;
+       192 +        color: var(--text);
+       193 +        word-break: break-word;
+       194 +      }
+       195 +  
+       196 +      .search-note {
+       197 +        font-size: 8pt;
+       198 +        color: var(--text-light);
+       199 +        font-style: italic;
+       200 +        margin-top: 6px;
+       201 +      }
+       202 +  
+       203 +      /* Tags */
+       204 +      .tag-section { margin-bottom: 12px; }
+       205 +  
+       206 +      .tag-label {
+       207 +        font-size: 9pt;
+       208 +        font-weight: 600;
+       209 +        color: var(--primary);
+       210 +        margin-bottom: 6px;
+       211 +      }
+       212 +  
+       213 +      .tag-group {
+       214 +        display: flex;
+       215 +        flex-wrap: wrap;
+       216 +        gap: 4px;
+       217 +      }
+       218 +  
+       219        .tag {
+       220          display: inline-block;
+       221 -        background: #f3e8ff;
+       222 -        color: #7c3aed;
+       223 -        padding: 2px 8px;
+       224 -        border-radius: 3px;
+       221 +        background: linear-gradient(135deg, 
+           + rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.12) 100%);
+       222 +        color: var(--purple-mid);
+       223 +        padding: 3px 10px;
+       224 +        border-radius: 4px;
+       225          font-size: 8.5pt;
+       226 -        margin: 2px;
+       226 +        font-weight: 500;
+       227        }
+       228 +  
+       229        .tag-secondary {
+       230          display: inline-block;
+       231 -        background: #f1f5f9;
+       232 -        color: #475569;
+       233 -        padding: 2px 8px;
+       234 -        border-radius: 3px;
+       231 +        background: var(--bg-subtle);
+       232 +        color: var(--text);
+       233 +        padding: 3px 10px;
+       234 +        border-radius: 4px;
+       235          font-size: 8.5pt;
+       236 -        margin: 2px;
+       236 +        border: 1px solid var(--border);
+       237        }
+       238 -      .green { color: #16a34a; }
+       239 -      .red { color: #dc2626; }
+       240 -      .full-width { grid-column: 1 / -1; }
+       241 -      strong { color: #0f172a; }
+       242 -      .question-block {
+       243 -        background: #fafafa;
+       244 -        border-left: 3px solid #a855f7;
+       245 -        padding: 8px 12px;
+       246 -        margin-bottom: 10px;
+       238 +  
+       239 +      /* Synonym box */
+       240 +      .synonym-box {
+       241 +        background: var(--bg-subtle);
+       242 +        border: 1px solid var(--border);
+       243 +        border-radius: 6px;
+       244 +        padding: 12px 14px;
+       245        }
+       246 -      .question-block p { margin-bottom: 4px; }
+       247 -      .question-text { font-weight: 600; font-style: italic; 
+           - }
+       248 -      .signal-good { color: #16a34a; font-size: 9pt; }
+       249 -      .signal-weak { color: #dc2626; font-size: 9pt; }
+       250 -      .layer-label {
+       251 -        font-weight: 600;
+       252 -        color: #7c3aed;
+       253 -        margin-bottom: 4px;
+       254 -        display: block;
+       246 +  
+       247 +      .synonym-group {
+       248 +        margin-bottom: 8px;
+       249        }
+       250 -      .synonym-note {
+       250 +  
+       251 +      .synonym-group:last-child { margin-bottom: 0; }
+       252 +  
+       253 +      .synonym-group strong {
+       254 +        font-size: 8.5pt;
+       255 +        color: var(--primary);
+       256 +      }
+       257 +  
+       258 +      .synonym-group code {
+       259 +        font-family: 'SF Mono', 'Consolas', monospace;
+       260          font-size: 8pt;
+       261 -        color: #64748b;
+       261 +        color: var(--text);
+       262 +        background: white;
+       263 +        padding: 1px 4px;
+       264 +        border-radius: 3px;
+       265 +        border: 1px solid var(--border);
+       266 +      }
+       267 +  
+       268 +      .synonym-note {
+       269 +        font-size: 7.5pt;
+       270 +        color: var(--text-light);
+       271          font-style: italic;
+       272        }
+       273 +  
+       274 +      /* Intro text */
+       275 +      .section-intro {
+       276 +        font-size: 9pt;
+       277 +        color: var(--text-light);
+       278 +        margin-bottom: 10px;
+       279 +      }
+       280 +  
+       281        @media print {
+       282          body { padding: 0; }
+       283 -        @page { size: 8.5in 11in; margin: 0.4in 0.5in; }
+       283 +        @page { size: 8.5in 11in; margin: 0.4in; }
+       284 +        .question-block, .search-card, .tag, .synonym-box {
+       285 +          -webkit-print-color-adjust: exact;
+       286 +          print-color-adjust: exact;
+       287 +        }
+       288        }
+       289      </style>
+       290    </head>
+       291    <body>
+       292      <div class="header">
+       293 +      <div class="header-label">Recruiter Guide</div>
+       294        <h1>Senior AI Solutions Engineer</h1>
+       295 -      <span class="subtitle">On-site San Jose 
+           -  | Client-facing | AI + LLM Focus</span>
+       295 +      <div class="subtitle">On-site San Jose, CA 
+           +  | Client-facing | AI/LLM Focus</div>
+       296      </div>
+       297    
+       298      <div class="grid">
+       299 -      <div class="section">
+       299 +      <!-- 01 Must-Have Skills -->
+       300 +      <div>
+       301 +        <div class="section-number">01</div>
+       302          <div class="section-title">Must-Have Skills</div>
+       303 -        <ul>
+       304 -          <li><strong>5+ years software engineering, 3+ years
+           -  AI/ML, 1+ year LLMs</strong> – Production experience, not 
+           - research or coursework</li>
+       305 -          <li><strong>Python backend</strong> – FastAPI or 
+           - Django, async patterns, building APIs and data 
+           - pipelines</li>
+       306 -          <li><strong>LangChain or LangGraph</strong> – Built
+           -  AI pipelines with orchestration frameworks; understands 
+           - chains, agents, memory</li>
+       307 -          <li><strong>Prompt engineering</strong> – Context 
+           - window management, few-shot learning, structured outputs, 
+           - output parsing, handling LLM failures</li>
+       308 -          <li><strong>RAG / vector search</strong> – Built 
+           - retrieval systems with pgvector, Pinecone, or Qdrant; 
+           - understands embeddings, chunking, similarity search</li>
+       309 -          <li><strong>Conversational AI</strong> – Built chat
+           -  interfaces or NL query systems; conversation history, 
+           - multi-turn context</li>
+       310 -          <li><strong>Testing non-deterministic 
+           - systems</strong> – Strategies for testing AI outputs that 
+           - vary; evaluation frameworks</li>
+       311 -          <li><strong>Strong communicator</strong> – Clear 
+           - writing, comfortable presenting, explains technical concepts
+           -  to non-technical audiences</li>
+       303 +        <ul class="skill-list">
+       304 +          <li>
+       305 +            <strong>5+ years software engineering, 3+ years 
+           + AI/ML, 1+ year LLMs</strong>
+       306 +            <div class="detail">Production experience, not 
+           + research or coursework only</div>
+       307 +          </li>
+       308 +          <li>
+       309 +            <strong>Python backend development</strong>
+       310 +            <div class="detail">FastAPI or Django, async 
+           + patterns, APIs and data pipelines</div>
+       311 +          </li>
+       312 +          <li>
+       313 +            <strong>LangChain or LangGraph</strong>
+       314 +            <div class="detail">Built AI pipelines with 
+           + orchestration; understands chains, agents, memory</div>
+       315 +          </li>
+       316 +          <li>
+       317 +            <strong>Prompt engineering</strong>
+       318 +            <div class="detail">Context window management, 
+           + few-shot learning, structured outputs, handling 
+           + failures</div>
+       319 +          </li>
+       320 +          <li>
+       321 +            <strong>RAG and vector search</strong>
+       322 +            <div class="detail">Built retrieval systems with 
+           + pgvector, Pinecone, or Qdrant; understands embeddings and 
+           + chunking</div>
+       323 +          </li>
+       324 +          <li>
+       325 +            <strong>Conversational AI</strong>
+       326 +            <div class="detail">Built chat interfaces or NL 
+           + query systems; conversation history, multi-turn 
+           + context</div>
+       327 +          </li>
+       328 +          <li>
+       329 +            <strong>Testing non-deterministic 
+           + systems</strong>
+       330 +            <div class="detail">Strategies for testing AI 
+           + outputs that vary; evaluation approaches</div>
+       331 +          </li>
+       332 +          <li>
+       333 +            <strong>Strong communicator</strong>
+       334 +            <div class="detail">Clear writing, comfortable 
+           + presenting, explains technical concepts to non-technical 
+           + audiences</div>
+       335 +          </li>
+       336          </ul>
+       337        </div>
+       338    
+       339 -      <div class="section">
+       339 +      <!-- 02 Nice-to-Have -->
+       340 +      <div>
+       341 +        <div class="section-number">02</div>
+       342          <div class="section-title">Nice-to-Have 
+             Background</div>
+       343 -        <ul>
+       344 -          <li><strong>Log analysis / failure 
+           - diagnosis</strong> – Parsing logs, root cause analysis, 
+           - observability tooling</li>
+       345 -          <li><strong>CI/CD tooling</strong> – Jenkins, 
+           - Airflow, GitHub Actions, GitLab CI</li>
+       346 -          <li><strong>Grafana / dashboards</strong> – 
+           - Building monitoring and visualization dashboards</li>
+       347 -          <li><strong>Agentic AI</strong> – Tool-calling, 
+           - autonomous agents, multi-step reasoning, LangGraph 
+           - agents</li>
+       348 -          <li><strong>On-prem deployment</strong> – Deploying
+           -  systems without cloud service dependencies</li>
+       349 -          <li><strong>NLP fundamentals</strong> – Text 
+           - processing, parsing, search, classification beyond LLM 
+           - APIs</li>
+       350 -          <li><strong>Mentoring</strong> – Leading or 
+           - mentoring other engineers</li>
+       343 +        <ul class="skill-list">
+       344 +          <li>
+       345 +            <strong>Log analysis / failure diagnosis</strong>
+       346 +            <div class="detail">Parsing logs, root cause 
+           + analysis, observability tooling</div>
+       347 +          </li>
+       348 +          <li>
+       349 +            <strong>CI/CD tooling</strong>
+       350 +            <div class="detail">Jenkins, Airflow, GitHub 
+           + Actions, GitLab CI</div>
+       351 +          </li>
+       352 +          <li>
+       353 +            <strong>Grafana / dashboards</strong>
+       354 +            <div class="detail">Building monitoring and 
+           + visualization dashboards</div>
+       355 +          </li>
+       356 +          <li>
+       357 +            <strong>Agentic AI</strong>
+       358 +            <div class="detail">Tool-calling, autonomous 
+           + agents, multi-step reasoning</div>
+       359 +          </li>
+       360 +          <li>
+       361 +            <strong>On-prem deployment</strong>
+       362 +            <div class="detail">Deploying systems without 
+           + cloud service dependencies</div>
+       363 +          </li>
+       364 +          <li>
+       365 +            <strong>NLP fundamentals</strong>
+       366 +            <div class="detail">Text processing, parsing, 
+           + search, classification beyond LLM APIs</div>
+       367 +          </li>
+       368 +          <li>
+       369 +            <strong>Mentoring experience</strong>
+       370 +            <div class="detail">Leading or mentoring other 
+           + engineers</div>
+       371 +          </li>
+       372          </ul>
+       373        </div>
+       374    
+       375 -      <div class="section">
+       375 +      <!-- 03 Strong Signals -->
+       376 +      <div>
+       377 +        <div class="section-number">03</div>
+       378          <div class="section-title">Strong Signals</div>
+       379 -        <ul>
+       380 -          <li class="green">✓ 
+           -  Shipped AI features that real users depend on (not just 
+           -  demos/prototypes)</li>
+       381 -          <li class="green">✓ 
+           -  Can explain technical concepts clearly to non-technical 
+           -  people</li>
+       382 -          <li class="green">✓ 
+           -  Experience presenting to or working directly 
+           -  with clients/stakeholders</li>
+       383 -          <li class="green">✓ 
+           -  Built chat interfaces or conversational AI</li>
+       384 -          <li class="green">✓ 
+           -  Uses AI coding tools daily (Claude Code, Cursor, 
+           -  Copilot)</li>
+       385 -          <li class="green">✓ 
+           -  Has set up vector databases themselves (pgvector, Pinecone,
+           -   Qdrant)</li>
+       386 -          <li class="green">✓ 
+           -  Mentions LangSmith, Langfuse, or similar monitoring
+           -   tools</li>
+       379 +        <ul class="signal-list positive">
+       380 +          <li>
+           +  Shipped AI features that real users depend on (not just 
+           +  demos)</li>
+       381 +          <li>
+           +  Can explain technical concepts clearly to non-technical 
+           +  people</li>
+       382 +          <li>Experience presenting to or working 
+           +  with clients/stakeholders</li>
+       383 +          <li>Built chat interfaces or conversational AI
+           +   systems</li>
+       384 +          <li>
+           +  Uses AI coding tools daily (Claude Code, Cursor, 
+           +  Copilot)</li>
+       385 +          <li>
+           +  Has set up vector databases themselves (pgvector, Pinecone,
+           +   Qdrant)</li>
+       386 +          <li>Mentions LangSmith, Langfuse, or similar 
+           +  observability tools</li>
+       387          </ul>
+       388        </div>
+       389    
+       390 -      <div class="section">
+       390 +      <!-- 04 Warning Signs -->
+       391 +      <div>
+       392 +        <div class="section-number">04</div>
+       393          <div class="section-title">Warning Signs</div>
+       394 -        <ul>
+       395 -          <li class="red">✗ Only notebook/research experience
+           -   - never deployed anything users relied on</li>
+       396 -          <li class="red">✗ 
+           -  Can't explain how their AI tools work, only how to 
+           -  configure them</li>
+       397 -          <li class="red">✗ 
+           -  Relies entirely on managed services (e.g., uses Azure AI 
+           -  Search but couldn't set up vector search without it)</li>
+       398 -          <li class="red">✗ 
+           -  No experience working with clients, stakeholders, 
+           -  or people outside their team</li>
+       399 -          <li class="red">✗ 
+           -  Uncomfortable presenting or gets defensive when asked to 
+           -  explain</li>
+       400 -          <li class="red">✗ 
+           -  Vague about what they personally built vs. what their team 
+           -  built</li>
+       394 +        <ul class="signal-list negative">
+       395 +          <li>Only notebook/research experience; 
+           +  never deployed for real users</li>
+       396 +          <li>
+           +  Can't explain how their AI tools work, only how to 
+           +  configure them</li>
+       397 +          <li>
+           +  Relies entirely on managed services (e.g., uses Azure AI 
+           +  Search but couldn't set up vector search without it)</li>
+       398 +          <li>No experience working with clients 
+           +  or people outside their team</li>
+       399 +          <li>
+           +  Uncomfortable presenting or gets defensive when asked to 
+           +  explain</li>
+       400 +          <li>
+           +  Vague about what they personally built vs. what their team 
+           +  built</li>
+       401          </ul>
+       402        </div>
+       403    
+       404 -      <div class="section full-width">
+       404 +      <!-- 05 Screening Questions -->
+       405 +      <div class="full-width">
+       406 +        <div class="section-number">05</div>
+       407          <div class="section-title">Screening Questions</div>
+       408 -        <p style="font-
+           -  size: 9pt; color: #64748b; margin-bottom: 10px;
+           -  ">Record all screening calls. These questions reveal depth 
+           -  without requiring technical evaluation. Note their 
+           -  answers verbatim for technical review.</p>
+       408 +        <p class="section-intro
+           +  ">Record all screening calls. These questions reveal depth 
+           +  without requiring technical evaluation. Note 
+           +  answers verbatim for technical review.</p>
+       409    
+       410          <div class="question-block">
+       411 -          <p
+           -   class="question-text">"When selecting a vector database 
+           -  for a project, what factors do you consider?"</p>
+       412 -          <p class="signal-weak">✗ WEAK: Lists database names
+           -  (Pinecone, Weaviate, pgvector) without explaining WHY 
+           - they'd pick one over another. Short answer, no 
+           - reasoning.</p>
+       413 -          <p class="signal-good">✓ GOOD: Says "it depends" 
+           - and explains WHAT it depends on - size of data, speed 
+           - requirements, what the team already uses, budget. You hear 
+           - them weighing options, not just naming things.</p>
+       411 +          <div
+           +   class="question-text">"When selecting a vector database 
+           +  for a project, what factors do you consider?"</div>
+       412 +          <div class="signal-row">
+       413 +            <div class="signal-weak">
+       414 +              <div class="signal-label">Weak Answer</div>
+       415 +              Lists database names (Pinecone, Weaviate, 
+           + pgvector) without explaining WHY they'd pick one. Short 
+           + answer, no reasoning.
+       416 +            </div>
+       417 +            <div class="signal-good">
+       418 +              <div class="signal-label">Good Answer</div>
+       419 +              Says "it depends" and explains WHAT it depends 
+           + on: size of data, speed requirements, what the team already 
+           + uses, budget. Weighs options.
+       420 +            </div>
+       421 +          </div>
+       422          </div>
+       423    
+       424          <div class="question-block">
+       425 -          <p
+           -   class="question-text">"Tell me about a time something went
+           -   wrong with an AI system in production. What happened
+           -   and what did you do?"</p>
+       426 -          <p class="signal-weak">✗ WEAK: Can't recall a 
+           - specific situation. Gives theoretical answers ("sometimes 
+           - models give wrong outputs") instead of a real story.</p>
+       427 -          <p class="signal-good">✓ GOOD: Tells a specific 
+           - story with details - what broke, how they found out, what 
+           - they did. You can tell they actually lived through it.</p>
+       425 +          <div
+           +   class="question-text">"Tell me about a time something went
+           +   wrong with an AI system in production. What happened?"</
+           +  div>
+       426 +          <div class="signal-row">
+       427 +            <div class="signal-weak">
+       428 +              <div class="signal-label">Weak Answer</div>
+       429 +              Can't recall a specific situation. Gives 
+           + theoretical answers ("sometimes models give wrong outputs") 
+           + instead of a real story.
+       430 +            </div>
+       431 +            <div class="signal-good">
+       432 +              <div class="signal-label">Good Answer</div>
+       433 +              Tells a specific story with details: what 
+           + broke, how they found out, what they did. You can tell they 
+           + actually lived through it.
+       434 +            </div>
+       435 +          </div>
+       436          </div>
+       437    
+       438          <div class="question-block">
+       439 -          <p
+           -   class="question-text">"Tell me about a time a client or 
+           -  stakeholder had unrealistic expectations about AI. How did 
+           -  you handle it?"</p>
+       440 -          <p class="signal-weak">✗ WEAK: Can't recall a 
+           - specific situation. Or just agreed with whatever the client 
+           - wanted. Or avoided the hard conversation.</p>
+       441 -          <p class="signal-good">✓ GOOD: Describes a real 
+           - situation - what the client expected, how they figured out 
+           - what was actually needed, how they communicated what was 
+           - realistic. Pushed back respectfully.</p>
+       439 +          <div
+           +   class="question-text">"Tell me about a time a client or 
+           +  stakeholder had unrealistic expectations about AI. How did 
+           +  you handle it?"</div>
+       440 +          <div class="signal-row">
+       441 +            <div class="signal-weak">
+       442 +              <div class="signal-label">Weak Answer</div>
+       443 +              Can't recall a specific situation. Or just 
+           + agreed with whatever the client wanted. Or avoided the 
+           + conversation entirely.
+       444 +            </div>
+       445 +            <div class="signal-good">
+       446 +              <div class="signal-label">Good Answer</div>
+       447 +              Describes a real situation: what the client 
+           + expected, how they understood what was actually needed, how 
+           + they communicated what was realistic.
+       448 +            </div>
+       449 +          </div>
+       450          </div>
+       451    
+       452          <div class="question-block">
+       453 -          <p
+           -   class="question-text">"How do you know if an AI feature is
+           -   working correctly after you ship it?"</p>
+       454 -          <p class="signal-weak">✗ WEAK: Vague answers like 
+           - "we test it" or "users tell us if it's broken." No 
+           - process.</p>
+       455 -          <p class="signal-good">✓ GOOD: Describes a system -
+           -  how they track quality, what they measure, how they catch 
+           - problems before users complain. Structured answer.</p>
+       453 +          <div
+           +   class="question-text">"How do you know if an AI feature is
+           +   working correctly after you ship it?"</div>
+       454 +          <div class="signal-row">
+       455 +            <div class="signal-weak">
+       456 +              <div class="signal-label">Weak Answer</div>
+       457 +              Vague answers like "we test it" or "users tell 
+           + us if it's broken." No systematic process described.
+       458 +            </div>
+       459 +            <div class="signal-good">
+       460 +              <div class="signal-label">Good Answer</div>
+       461 +              Describes a system: how they track quality, 
+           + what they measure, how they catch problems before users 
+           + complain. Structured answer.
+       462 +            </div>
+       463 +          </div>
+       464          </div>
+       465    
+       466          <div class="question-block">
+       467 -          <p
+           -   class="question-text">"Can you explain [most complex thing
+           -   on their resume] to me like I'm not technical?"</p>
+       468 -          <p class="signal-weak">✗ WEAK: Uses jargon, gets 
+           - frustrated, talks down to you, or can't simplify it.</p>
+       469 -          <p class="signal-good">✓ GOOD: Uses analogies, 
+           - checks if you're following, adjusts based on your reactions.
+           -  Patient and clear. (You can judge this directly.)</p>
+       467 +          <div
+           +   class="question-text">"Can you explain [most complex thing
+           +   on their resume] to me like I'm not technical?"</div>
+       468 +          <div class="signal-row">
+       469 +            <div class="signal-weak">
+       470 +              <div class="signal-label">Weak Answer</div>
+       471 +              Uses jargon, gets frustrated, talks down to 
+           + you, or can't simplify it at all.
+       472 +            </div>
+       473 +            <div class="signal-good">
+       474 +              <div class="signal-label">Good Answer</div>
+       475 +              Uses analogies, checks if you're following, 
+           + adjusts based on your reactions. Patient and clear. (You can
+           +  evaluate this directly.)
+       476 +            </div>
+       477 +          </div>
+       478          </div>
+       479        </div>
+       480    
+       481 -      <div class="section full-width">
+       482 -        <div class="section-title">LinkedIn Search Strings 
+           - (Tiered)</div>
+       483 -        <p style="font-size: 9pt; color: #64748b; 
+           - margin-bottom: 8px;">Start with Layer 1. If too few results 
+           - (&lt;20), move to Layer 2. Still struggling? Use Layer 
+           - 3.</p>
+       484 -        <div class="search-box">
+       485 -  <span class="layer-label">Layer 1 – Narrow (start 
+           - here):</span>
+       486 -  ("AI engineer" OR "ML engineer" OR "LLM engineer") AND 
+           - Python AND (LangChain OR LangGraph OR LlamaIndex OR RAG) AND
+           -  (production OR shipped OR deployed)<br><br>
+       481 +      <!-- 06 LinkedIn Search Strings -->
+       482 +      <div class="full-width">
+       483 +        <div class="section-number">06</div>
+       484 +        <div class="section-title">LinkedIn Search 
+           + Strings</div>
+       485 +        <p class="section-intro">Start with Layer 1 (most 
+           + precise). If fewer than 20 results, try Layer 2. Still 
+           + struggling? Use Layer 3.</p>
+       486    
+       487 -  <span class="layer-label">Layer 2 – Broader titles:</span>
+       488 -  ("AI engineer" OR "ML engineer" OR "solutions engineer" OR 
+           - "applied scientist" OR "senior software engineer") AND 
+           - Python AND (LLM OR "large language model" OR "generative AI"
+           -  OR Claude OR OpenAI)<br><br>
+       487 +        <div style="display: grid; grid-template-columns: 1fr
+           +  1fr; gap: 12px;">
+       488 +          <div class="search-card">
+       489 +            <div class="search-card-title">Layer 1 — Narrow 
+           + (Start Here)</div>
+       490 +            <div class="search-string">("AI engineer" OR "ML 
+           + engineer" OR "LLM engineer") AND Python AND (LangChain OR 
+           + LangGraph OR LlamaIndex OR RAG) AND (production OR shipped 
+           + OR deployed)</div>
+       491 +          </div>
+       492    
+       493 -  <span class="layer-label">Layer 3 – Widest net:</span>
+       494 -  ("software engineer" OR "backend engineer" OR "full stack")
+           -  AND Python AND ("generative AI" OR LLM OR GPT OR ChatGPT OR
+           -  Claude) AND (API OR backend OR production)<br><br>
+       493 +          <div class="search-card">
+       494 +            <div class="search-card-title">Layer 2 — Broader 
+           + Titles</div>
+       495 +            <div class="search-string">("AI engineer" OR "ML 
+           + engineer" OR "solutions engineer" OR "applied scientist" OR 
+           + "senior software engineer") AND Python AND (LLM OR "large 
+           + language model" OR "generative AI" OR Claude OR 
+           + OpenAI)</div>
+       496 +          </div>
+       497    
+       498 -  <span class="layer-label">Communication skills filter (add 
+           - to any layer):</span>
+       499 -  AND (consulting OR "client-facing" OR "stakeholder" OR 
+           - "presented" OR "cross-functional")
+       498 +          <div class="search-card">
+       499 +            <div class="search-card-title">Layer 3 — Widest 
+           + Net</div>
+       500 +            <div class="search-string">("software engineer" 
+           + OR "backend engineer" OR "full stack") AND Python AND 
+           + ("generative AI" OR LLM OR GPT OR ChatGPT OR Claude) AND 
+           + (API OR backend OR production)</div>
+       501 +          </div>
+       502 +  
+       503 +          <div class="search-card">
+       504 +            <div class="search-card-title">Communication 
+           + Filter (Add to Any Layer)</div>
+       505 +            <div class="search-string">AND (consulting OR 
+           + "client-facing" OR stakeholder OR presented OR 
+           + "cross-functional")</div>
+       506 +          </div>
+       507          </div>
+       508        </div>
+       509    
+       510 -      <div class="section full-width">
+       511 -        <div class="section-title">Synonym Groups for 
+           - Recruiters</div>
+       512 -        <p style="font-size: 9pt; color: #64748b; 
+           - margin-bottom: 8px;">These terms mean the same thing or come
+           -  from the same company. Use OR between them in searches.</p>
+       513 -        <div class="search-box">
+       514 -  <strong>LLM Providers:</strong><br>
+       515 -  (Claude OR Anthropic) <span class="synonym-note">← same 
+           - company</span><br>
+       516 -  (OpenAI OR GPT OR "GPT-4" OR ChatGPT) <span 
+           - class="synonym-note">← same provider</span><br><br>
+       517 -  
+       518 -  <strong>Vector Databases:</strong><br>
+       519 -  (pgvector OR Pinecone OR Qdrant OR Weaviate OR Milvus OR 
+           - "vector database" OR "vector DB")<br><br>
+       520 -  
+       521 -  <strong>Orchestration Frameworks:</strong><br>
+       522 -  (LangChain OR LangGraph OR LlamaIndex) <span 
+           - class="synonym-note">← related ecosystem, not 
+           - identical</span><br><br>
+       523 -  
+       524 -  <strong>Python Web Frameworks:</strong><br>
+       525 -  (FastAPI OR Django OR Flask)
+       510 +      <!-- 07 Synonym Groups -->
+       511 +      <div>
+       512 +        <div class="section-number">07</div>
+       513 +        <div class="section-title">Synonym Groups</div>
+       514 +        <p class="section-intro">Use OR between these in 
+           + searches. They refer to the same thing or related 
+           + ecosystem.</p>
+       515 +        <div class="synonym-box">
+       516 +          <div class="synonym-group">
+       517 +            <strong>LLM Providers:</strong><br>
+       518 +            <code>(Claude OR Anthropic)</code> <span 
+           + class="synonym-note">same company</span><br>
+       519 +            <code>(OpenAI OR GPT OR "GPT-4" OR 
+           + ChatGPT)</code> <span class="synonym-note">same 
+           + provider</span>
+       520 +          </div>
+       521 +          <div class="synonym-group">
+       522 +            <strong>Vector Databases:</strong><br>
+       523 +            <code>(pgvector OR Pinecone OR Qdrant OR Weaviate
+           +  OR Milvus OR "vector database")</code>
+       524 +          </div>
+       525 +          <div class="synonym-group">
+       526 +            <strong>Orchestration:</strong><br>
+       527 +            <code>(LangChain OR LangGraph OR 
+           + LlamaIndex)</code> <span class="synonym-note">related, not 
+           + identical</span>
+       528 +          </div>
+       529 +          <div class="synonym-group">
+       530 +            <strong>Python Frameworks:</strong><br>
+       531 +            <code>(FastAPI OR Django OR Flask)</code>
+       532 +          </div>
+       533          </div>
+       534        </div>
+       535    
+       536 -      <div class="section full-width">
+       536 +      <!-- 08 Tech Stack Keywords -->
+       537 +      <div>
+       538 +        <div class="section-number">08</div>
+       539          <div class="section-title">Tech Stack Keywords</div>
+       540 -        <div style="margin-bottom: 8px;"><strong>Must-have 
+           - (search for these):</strong></div>
+       541 -        <span class="tag">Python</span>
+       542 -        <span class="tag">LangChain</span>
+       543 -        <span class="tag">LangGraph</span>
+       544 -        <span class="tag">OpenAI API</span>
+       545 -        <span class="tag">Claude API</span>
+       546 -        <span class="tag">RAG</span>
+       547 -        <span class="tag">pgvector</span>
+       548 -        <span class="tag">FastAPI</span>
+       549 -        <span class="tag">prompt engineering</span>
+       540    
+       541 -        <div style="margin: 8px 0;"><strong>Nice-to-have 
+           - (bonus points):</strong></div>
+       542 -        <span class="tag-secondary">LangSmith</span>
+       543 -        <span class="tag-secondary">Langfuse</span>
+       544 -        <span class="tag-secondary">Pinecone</span>
+       545 -        <span class="tag-secondary">Qdrant</span>
+       546 -        <span class="tag-secondary">Streamlit</span>
+       547 -        <span class="tag-secondary">Gradio</span>
+       548 -        <span class="tag-secondary">embeddings</span>
+       549 -        <span class="tag-secondary">semantic search</span>
+       541 +        <div class="tag-section">
+       542 +          <div class="tag-label">Must-Have (Search for 
+           + These)</div>
+       543 +          <div class="tag-group">
+       544 +            <span class="tag">Python</span>
+       545 +            <span class="tag">LangChain</span>
+       546 +            <span class="tag">LangGraph</span>
+       547 +            <span class="tag">OpenAI API</span>
+       548 +            <span class="tag">Claude API</span>
+       549 +            <span class="tag">RAG</span>
+       550 +            <span class="tag">pgvector</span>
+       551 +            <span class="tag">FastAPI</span>
+       552 +            <span class="tag">prompt engineering</span>
+       553 +          </div>
+       554 +        </div>
+       555    
+       556 -        <div style="margin: 8px 0;"><strong>CI/CD 
+           - (nice-to-have, not required):</strong></div>
+       557 -        <span class="tag-secondary">Jenkins</span>
+       558 -        <span class="tag-secondary">GitHub Actions</span>
+       559 -        <span class="tag-secondary">GitLab CI</span>
+       560 -        <span class="tag-secondary">Airflow</span>
+       561 -        <span class="tag-secondary">Bazel</span>
+       556 +        <div class="tag-section">
+       557 +          <div class="tag-label">Nice-to-Have (Bonus 
+           + Points)</div>
+       558 +          <div class="tag-group">
+       559 +            <span class="tag-secondary">LangSmith</span>
+       560 +            <span class="tag-secondary">Langfuse</span>
+       561 +            <span class="tag-secondary">Pinecone</span>
+       562 +            <span class="tag-secondary">Qdrant</span>
+       563 +            <span class="tag-secondary">Streamlit</span>
+       564 +            <span class="tag-secondary">embeddings</span>
+       565 +            <span class="tag-secondary">semantic 
+           + search</span>
+       566 +          </div>
+       567 +        </div>
+       568 +  
+       569 +        <div class="tag-section">
+       570 +          <div class="tag-label">CI/CD (Nice-to-Have)</div>
+       571 +          <div class="tag-group">
+       572 +            <span class="tag-secondary">Jenkins</span>
+       573 +            <span class="tag-secondary">GitHub Actions</span>
+       574 +            <span class="tag-secondary">GitLab CI</span>
+       575 +            <span class="tag-secondary">Airflow</span>
+       576 +            <span class="tag-secondary">Bazel</span>
+       577 +          </div>
+       578 +        </div>
+       579        </div>
+       580    
+       581 -      <div class="section full-width">
+       581 +      <!-- 09 Target Backgrounds -->
+       582 +      <div class="full-width">
+       583 +        <div class="section-number">09</div>
+       584          <div class="section-title">Target Backgrounds</div>
+       585 -        <p style="font-
+           -  size: 9pt; color: #64748b; margin-bottom: 8px;
+           -  ">Look for people from these types of companies/teams, not 
+           -  specific company names. 100+ employee companies are 
+           -  ideal.</p>
+       586 -        <span class="tag">Enterprise ML platform teams</span>
+       587 -        <span class="tag">Developer tools companies</span>
+       588 -        <span class="tag">AI/ML product teams</span>
+       589 -        <span class="tag">B2B SaaS with AI features</span>
+       590 -        <span class="tag">Internal tools / productivity 
+           - teams</span>
+       591 -        <span class="tag-secondary">Consulting (Accenture, 
+           - Deloitte, Slalom, Thoughtworks)</span>
+       592 -        <span class="tag-secondary">AI startups (Series A-C, 
+           - not pre-seed)</span>
+       585 +        <p class="section-intro
+           +  ">Look for people from these types of companies/teams, not 
+           +  specific company names. 100+ employee companies are 
+           +  ideal.</p>
+       586 +        <div class="tag-group">
+       587 +          <span class="tag">Enterprise ML platform 
+           + teams</span>
+       588 +          <span class="tag">Developer tools companies</span>
+       589 +          <span class="tag">AI/ML product teams</span>
+       590 +          <span class="tag">B2B SaaS with AI features</span>
+       591 +          <span class="tag">Internal tools / productivity 
+           + teams</span>
+       592 +          <span class="tag-secondary">Consulting (Accenture, 
+           + Deloitte, Slalom, Thoughtworks)</span>
+       593 +          <span class="tag-secondary">AI startups (Series 
+           + A-C, not pre-seed)</span>
+       594 +        </div>
+       595        </div>
+       596      </div>
+       597    </body>
+
+● Done. Key visual changes:
+
+  - Numbered sections (01-09) per design spec
+  - Purple palette from brand guidelines
+  - Replaced emojis with styled colored dots (green/red)
+  - Question blocks use highlight-box gradient style
+  - Two-column layout for weak/good answer indicators
+  - Code styling for search strings in synonym groups
+  - Clean Inter typography with proper hierarchy
+  - Consistent spacing and subtle borders
+
+  Take a look and let me know if you want adjustments.
+
+> It looks much better overall, but I think the section number badges are a 
+little bit Distracting and not needed for this. Why don't you try one more 
+time? 
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 9 removals
+
+       59          color: var(--text-light);
+       60        }
+       61    
+       62 -      /* Section styling */
+       63 -      .section-number {
+       64 -        font-size: 10px;
+       65 -        font-weight: 600;
+       66 -        color: var(--purple-accent);
+       67 -        letter-spacing: 2px;
+       68 -        margin-bottom: 6px;
+       69 -      }
+       70 -  
+       62        .section-title {
+       63          font-size: 12pt;
+       64          font-weight: 600;
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 2 removals
+
+       287      </div>
+       288    
+       289      <div class="grid">
+       290 -      <!-- 01 Must-Have Skills -->
+       290        <div>
+       291 -        <div class="section-number">01</div>
+       291          <div class="section-title">Must-Have Skills</div>
+       292          <ul class="skill-list">
+       293            <li>
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 2 removals
+
+       325          </ul>
+       326        </div>
+       327    
+       328 -      <!-- 02 Nice-to-Have -->
+       328        <div>
+       329 -        <div class="section-number">02</div>
+       329          <div class="section-title">Nice-to-Have 
+             Background</div>
+       330          <ul class="skill-list">
+       331            <li>
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 2 removals
+
+       359          </ul>
+       360        </div>
+       361    
+       362 -      <!-- 03 Strong Signals -->
+       362        <div>
+       363 -        <div class="section-number">03</div>
+       363          <div class="section-title">Strong Signals</div>
+       364          <ul class="signal-list positive">
+       365            <li>Shipped AI features that real users depend on 
+             (not just demos)</li>
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 2 removals
+
+       372          </ul>
+       373        </div>
+       374    
+       375 -      <!-- 04 Warning Signs -->
+       375        <div>
+       376 -        <div class="section-number">04</div>
+       376          <div class="section-title">Warning Signs</div>
+       377          <ul class="signal-list negative">
+       378            <li>Only notebook/research experience; never 
+             deployed for real users</li>
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 2 removals
+
+       384          </ul>
+       385        </div>
+       386    
+       387 -      <!-- 05 Screening Questions -->
+       387        <div class="full-width">
+       388 -        <div class="section-number">05</div>
+       388          <div class="section-title">Screening Questions</div>
+       389          <p class="section-intro">Record all screening calls. 
+             These questions reveal depth without requiring technical 
+             evaluation. Note answers verbatim for technical review.</p>
+       390    
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 2 removals
+
+       459          </div>
+       460        </div>
+       461    
+       462 -      <!-- 06 LinkedIn Search Strings -->
+       462        <div class="full-width">
+       463 -        <div class="section-number">06</div>
+       463          <div class="section-title">LinkedIn Search 
+             Strings</div>
+       464          <p class="section-intro">Start with Layer 1 (most 
+             precise). If fewer than 20 results, try Layer 2. Still 
+             struggling? Use Layer 3.</p>
+       465    
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 2 removals
+
+       486          </div>
+       487        </div>
+       488    
+       489 -      <!-- 07 Synonym Groups -->
+       489        <div>
+       490 -        <div class="section-number">07</div>
+       490          <div class="section-title">Synonym Groups</div>
+       491          <p class="section-intro">Use OR between these in 
+             searches. They refer to the same thing or related 
+             ecosystem.</p>
+       492          <div class="synonym-box">
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 2 removals
+
+       510          </div>
+       511        </div>
+       512    
+       513 -      <!-- 08 Tech Stack Keywords -->
+       513        <div>
+       514 -        <div class="section-number">08</div>
+       514          <div class="section-title">Tech Stack Keywords</div>
+       515    
+       516          <div class="tag-section">
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 2 removals
+
+       553          </div>
+       554        </div>
+       555    
+       556 -      <!-- 09 Target Backgrounds -->
+       556        <div class="full-width">
+       557 -        <div class="section-number">09</div>
+       557          <div class="section-title">Target Backgrounds</div>
+       558          <p class="section-intro">Look for people from these 
+             types of companies/teams, not specific company names. 100+ 
+             employee companies are ideal.</p>
+       559          <div class="tag-group">
+
+● Done - removed all the section number badges. Cleaner now.
+
+> Consulting (Accenture, Deloitte, Slalom, Thoughtworks)
+AI startups (Series A-C, not pre-seed)  These are really weird to be honest.
+ Why those specific companies? And why would my non-technical recruiter know
+ what pre-seed AI start-ups are? Please take another fresh look at this 
+document. I'm getting really, really frustrated with you. I think what we 
+need to do for the future documents is create them as markdowns first before
+ we move into HTML mode because this is honestly just not working for me. 
+It's like you can't holistically look at the document with fresh eyes. Make 
+these changes. I'm going to warn you right now. I'm going to create another 
+Claude session specifically meant to harass and challenge you so you better 
+have a good mind of quality or else that Claude session is going to slam you
+ senseless. 
+
+● You're right. Let me actually look at this fresh.
+
+  Target Backgrounds section is broken:
+  - "Consulting (Accenture, Deloitte, Slalom, Thoughtworks)" - Arbitrary
+  company names. Why these four? A recruiter doesn't need a random list.
+  - "AI startups (Series A-C, not pre-seed)" - VC jargon. A recruiter has no
+   idea what this means.
+  - "Enterprise ML platform teams" - Vague jargon
+  - "B2B SaaS with AI features" - More jargon
+
+  This whole section doesn't help a recruiter DO anything. Let me rewrite it
+   as actionable guidance in plain language:
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 19 additions and 11 removals
+
+       554        </div>
+       555    
+       556        <div class="full-width">
+       557 -        <div class="section-title">Target Backgrounds</div>
+       558 -        <p class="section-intro">Look for people from these 
+           - types of companies/teams, not specific company names. 100+ 
+           - employee companies are ideal.</p>
+       559 -        <div class="tag-group">
+       560 -          <span class="tag">Enterprise ML platform 
+           - teams</span>
+       561 -          <span class="tag">Developer tools companies</span>
+       562 -          <span class="tag">AI/ML product teams</span>
+       563 -          <span class="tag">B2B SaaS with AI features</span>
+       564 -          <span class="tag">Internal tools / productivity 
+           - teams</span>
+       565 -          <span class="tag-secondary">Consulting (Accenture, 
+           - Deloitte, Slalom, Thoughtworks)</span>
+       566 -          <span class="tag-secondary">AI startups (Series 
+           - A-C, not pre-seed)</span>
+       567 -        </div>
+       557 +        <div class="section-title">What 
+           +  to Look for in Work History</div>
+       558 +        <ul class="skill-list">
+       559 +          <li>
+       560 +            <strong>Company size: 100+ employees 
+           + preferred</strong>
+       561 +            <div class="detail">Large enough to have real 
+           + production systems and team collaboration, not just solo 
+           + side projects</div>
+       562 +          </li>
+       563 +          <li>
+       564 +            <strong>Built AI features that real users relied 
+           + on</strong>
+       565 +            <div class="detail">Not just research, demos, or 
+           + internal experiments - actual products or tools people 
+           + depended on</div>
+       566 +          </li>
+       567 +          <li>
+       568 +            <strong>Worked on a team, not just solo</strong>
+       569 +            <div class="detail">Experience collaborating with
+           +  other engineers, reviewing code, coordinating work</div>
+       570 +          </li>
+       571 +          <li>
+       572 +            <strong>Client-facing or stakeholder-heavy roles 
+           + are a plus</strong>
+       573 +            <div class="detail">Consulting, professional 
+           + services, customer success engineering, or internal roles 
+           + that required presenting to leadership</div>
+       574 +          </li>
+       575 +        </ul>
+       576        </div>
+       577      </div>
+       578    </body>
+
+● Let me also check the Nice-to-Have section for jargon issues:
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 1 addition and 1 removal
+
+       330          <ul class="skill-list">
+       331            <li>
+       332              <strong>Log analysis / failure diagnosis</strong>
+       333 -            <div class="detail">Parsing logs, root cause 
+           - analysis, observability tooling</div>
+       333 +            <div class="detail">Experience digging through 
+           + system logs to figure out why something broke</div>
+       334            </li>
+       335            <li>
+       336              <strong>CI/CD tooling</strong>
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 1 addition and 1 removal
+
+       342            </li>
+       343            <li>
+       344              <strong>Agentic AI</strong>
+       345 -            <div class="detail">Tool-calling, autonomous 
+           - agents, multi-step reasoning</div>
+       345 +            <div class="detail">AI systems that take actions 
+           + on their own, make decisions, work through problems 
+           + step-by-step</div>
+       346            </li>
+       347            <li>
+       348              <strong>On-prem deployment</strong>
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 1 addition and 1 removal
+
+       350            </li>
+       351            <li>
+       352              <strong>NLP fundamentals</strong>
+       353 -            <div class="detail">Text processing, parsing, 
+           - search, classification beyond LLM APIs</div>
+       353 +            <div class="detail">Older text/language 
+           + processing skills, not just using ChatGPT-style APIs</div>
+       354            </li>
+       355            <li>
+       356              <strong>Mentoring experience</strong>
+
+● Done. Changes made:
+  1. Replaced "Target Backgrounds" (jargon tags) with "What to Look for in
+  Work History" (plain English guidance)
+  2. Fixed "Log analysis" description - was jargon, now plain
+  3. Fixed "Agentic AI" description - was jargon, now plain
+  4. Fixed "NLP fundamentals" description - was jargon, now plain
+
+  For the remaining 3 roles, I'll do markdown first so we can nail the
+  content before touching HTML. That's a better workflow.
+
+  Ready for your critique session - and ready to move to Automation Engineer
+   when you are.
+
+> Almost good here. Maybe add one more item to the top that requests the 
+recruiter to enable transcription and share transcripts when possible if it 
+is a Teams meeting with the candidate. Phrase this nicely: It's not a 
+requirement; just something that would be helpful so I can assist with 
+pre-screening more effectively. 
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 4 additions
+
+       286        <div class="subtitle">On-site San Jose, CA | 
+             Client-facing | AI/LLM Focus</div>
+       287      </div>
+       288    
+       289 +    <div class="note-box" style="background: 
+           + var(--bg-subtle); border: 1px solid var(--border); 
+           + border-radius: 6px; padding: 12px 14px; margin-bottom: 20px;
+           +  font-size: 9pt; color: var(--text);">
+       290 +      <strong style="color: var(--primary);">Helpful for 
+           + pre-screening:</strong> If your screening call is on Teams, 
+           + please enable transcription and share the transcript 
+           + afterward. This helps our technical team review candidates 
+           + more effectively. Not required, but appreciated!
+       291 +    </div>
+       292 +  
+       293      <div class="grid">
+       294        <div>
+       295          <div class="section-title">Must-Have Skills</div>
+
+● Added a note box at the top requesting Teams transcription - friendly, not
+   demanding. Ready for Automation Engineer?
+
+> Yes, ready. 
+
+● Let me read the Automation Engineer JD and current recruiter guide first:
+
+● Search(pattern: "**/jd_automation_engineer*.md")
+  ⎿  Found 1 file (ctrl+o to expand)
+
+● Search(pattern: "**/recruiter_guide*automation*.html")
+  ⎿  Found 1 file (ctrl+o to expand)
+
+● Read(claude/2026-02-02_resource-planning/deliverables/jd_automation_engineer.m
+      d)
+  ⎿  Read 117 lines
+
+● Read(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recruit
+      er_guides/recruiter_guide_automation_engineer.html)
+  ⎿  Read 184 lines
+
+● Let me draft this in markdown first. Looking at the current guide, I see
+  the same problems:
+  - Specific company names as "targets" (Google, Meta, Netflix...)
+  - No weak/good indicators on questions
+  - Emojis
+  - Missing nice-to-have tier
+  - "Target backgrounds" with arbitrary company/team combos
+
+  Key differences for this role vs Senior AI Solutions Engineer:
+  - 60% CI/CD focus, only 15% client-facing (vs 25% for Senior AI)
+  - Airflow/Jenkins/Bazel are core, not LLMs
+  - Systems integration focus - connecting disparate tools
+  - 4+ years software, 3+ years CI/CD specifically
+
+● Write(claude/2026-02-04_recruiter-guides/drafts/automation_engineer_recruiter_
+       guide.md)
+  ⎿  Wrote 166 lines to claude/2026-02-04_recruiter-guides/drafts/automatio
+     _engineer_recruiter_guide.md
+     # Recruiter Guide: Automation Engineer
+     **On-site San Jose, CA | Client-facing | CI/CD + Integration Focus**
+     ---
+     **Helpful for pre-screening:** If your screening call is on Teams,
+     please enable transcription and share the transcript afterward. This
+     helps our technical team review candidates more effectively. Not
+     required, but appreciated!
+     ---
+     … +156 lines (ctrl+o to expand)
+
+● Done. Markdown draft is at /claude/2026-02-04_recruiter-guides/drafts/auto
+  mation_engineer_recruiter_guide.md
+
+  Key things I changed from the original:
+
+  1. Explained jargon - Added "What This Means" column for technical terms
+  2. Removed company name lists - No more "Google (build/release teams)"
+  arbitrary targeting
+  3. Added weak/good indicators - All screening questions now have
+  plain-language signals
+  4. Added domain knowledge question - "What's the difference between
+  Airflow and Jenkins?" tests real understanding
+  5. Tiered search strings - Layer 1/2/3 structure
+  6. Replaced Target Backgrounds - Now "What to Look for in Work History"
+  with actionable guidance
+  7. Separated must-have vs nice-to-have - Clear tiers
+
+  Notable for this role vs Senior AI Solutions Engineer:
+  - Less client-facing (15% vs 25%), so less emphasis on presentation skills
+  - Focus on integration/debugging across systems
+  - Airflow/Jenkins are core, LLMs are not required
+  - "Legacy systems" experience matters here
+
+  Review the markdown and let me know what needs adjusting before I convert
+  to HTML.
+
+> Go ahead and query and convert to HTML now, and I will review the HTML. It
+ is easier for me to look at. 
+
+● Write(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recrui
+       ter_guides/recruiter_guide_automation_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_automation_engineer.html with 495
+     additions and 122 removals
+
+         4      <meta charset="UTF-8">
+         5      <meta name="viewport" content="width=device-width, 
+             initial-scale=1.0">
+         6      <title>Recruiter Guide: Automation Engineer</title>
+         7 -    <link 
+           -  href="https://fonts.googleapis.com/css2?family=Inter:wght@
+           -  400;500;600;700&display=swap" rel="stylesheet">
+         7 +    <link 
+           +  href="https://fonts.googleapis.com/css2?family=Inter:wght@
+           +  300;400;500;600;700&display=swap" rel="stylesheet">
+         8      <style>
+         9 +      :root {
+        10 +        --purple-mid: #5b21b6;
+        11 +        --purple-accent: #a855f7;
+        12 +        --primary: #0f172a;
+        13 +        --text: #334155;
+        14 +        --text-light: #64748b;
+        15 +        --border: #e2e8f0;
+        16 +        --bg-subtle: #f8fafc;
+        17 +        --green: #16a34a;
+        18 +        --red: #dc2626;
+        19 +      }
+        20 +  
+        21        * { margin: 0; padding: 0; box-sizing: border-box; }
+        22 +  
+        23        body {
+        24 -        font-family: 'Inter', -apple-system, sans-serif;
+        25 -        color: #334155;
+        24 +        font-family: 'Inter', -apple-system, 
+           +  BlinkMacSystemFont, sans-serif;
+        25 +        color: var(--text);
+        26          line-height: 1.5;
+        27          font-size: 10pt;
+        28          max-width: 8.5in;
+        29          margin: 0 auto;
+        30 -        padding: 0.4in 0.5in;
+        30 +        padding: 0.5in;
+        31        }
+        32 +  
+        33        .header {
+        34 -        display: flex;
+        35 -        justify-content: space-between;
+        36 -        align-items: baseline;
+        37 -        border-bottom: 2px solid #a855f7;
+        38 -        padding-bottom: 8px;
+        39 -        margin-bottom: 16px;
+        34 +        margin-bottom: 24px;
+        35 +        padding-bottom: 16px;
+        36 +        border-bottom: 2px solid var(--purple-accent);
+        37        }
+        38 -      h1 { font-size: 16pt; font-weight: 700; color: #0f172a;
+           -  }
+        39 -      .subtitle { font-size: 9pt; color: #64748b; }
+        40 -      .grid { display: grid; grid-template-columns: 1fr 1fr; 
+           - gap: 16px; }
+        41 -      .section { margin-bottom: 14px; }
+        38 +  
+        39 +      .header-label {
+        40 +        font-size: 10px;
+        41 +        font-weight: 600;
+        42 +        letter-spacing: 2px;
+        43 +        text-transform: uppercase;
+        44 +        color: var(--purple-accent);
+        45 +        margin-bottom: 4px;
+        46 +      }
+        47 +  
+        48 +      h1 {
+        49 +        font-size: 22pt;
+        50 +        font-weight: 700;
+        51 +        color: var(--primary);
+        52 +        letter-spacing: -0.5px;
+        53 +        margin-bottom: 4px;
+        54 +      }
+        55 +  
+        56 +      .subtitle {
+        57 +        font-size: 11px;
+        58 +        color: var(--text-light);
+        59 +      }
+        60 +  
+        61        .section-title {
+        62 +        font-size: 12pt;
+        63 +        font-weight: 600;
+        64 +        color: var(--primary);
+        65 +        margin-bottom: 10px;
+        66 +      }
+        67 +  
+        68 +      .grid {
+        69 +        display: grid;
+        70 +        grid-template-columns: 1fr 1fr;
+        71 +        gap: 24px;
+        72 +      }
+        73 +  
+        74 +      .full-width { grid-column: 1 / -1; }
+        75 +  
+        76 +      .skill-list {
+        77 +        list-style: none;
+        78 +        margin: 0;
+        79 +      }
+        80 +  
+        81 +      .skill-list li {
+        82 +        padding: 6px 0;
+        83 +        border-bottom: 1px solid var(--border);
+        84 +        font-size: 9.5pt;
+        85 +      }
+        86 +  
+        87 +      .skill-list li:last-child { border-bottom: none; }
+        88 +  
+        89 +      .skill-list strong {
+        90 +        color: var(--primary);
+        91 +        font-weight: 600;
+        92 +      }
+        93 +  
+        94 +      .skill-list .detail {
+        95 +        color: var(--text-light);
+        96 +        font-size: 9pt;
+        97 +      }
+        98 +  
+        99 +      .signal-list {
+       100 +        list-style: none;
+       101 +        margin: 0;
+       102 +      }
+       103 +  
+       104 +      .signal-list li {
+       105 +        padding: 5px 0 5px 16px;
+       106 +        position: relative;
+       107 +        font-size: 9.5pt;
+       108 +      }
+       109 +  
+       110 +      .signal-list li::before {
+       111 +        content: '';
+       112 +        position: absolute;
+       113 +        left: 0;
+       114 +        top: 10px;
+       115 +        width: 8px;
+       116 +        height: 8px;
+       117 +        border-radius: 50%;
+       118 +      }
+       119 +  
+       120 +      .signal-list.positive li::before { background: 
+           + var(--green); }
+       121 +      .signal-list.negative li::before { background: 
+           + var(--red); }
+       122 +  
+       123 +      .question-block {
+       124 +        background: linear-gradient(135deg, 
+           + rgba(124,58,237,0.04) 0%, rgba(168,85,247,0.06) 100%);
+       125 +        border-left: 3px solid var(--purple-accent);
+       126 +        padding: 12px 14px;
+       127 +        margin-bottom: 12px;
+       128 +        border-radius: 0 6px 6px 0;
+       129 +      }
+       130 +  
+       131 +      .question-text {
+       132 +        font-weight: 600;
+       133 +        color: var(--primary);
+       134          font-size: 10pt;
+       135 -        font-weight: 700;
+       136 -        color: #7c3aed;
+       137 -        margin-bottom: 6px;
+       138 -        text-transform: uppercase;
+       135 +        margin-bottom: 8px;
+       136 +      }
+       137 +  
+       138 +      .signal-row {
+       139 +        display: grid;
+       140 +        grid-template-columns: 1fr 1fr;
+       141 +        gap: 12px;
+       142 +        font-size: 8.5pt;
+       143 +        line-height: 1.4;
+       144 +      }
+       145 +  
+       146 +      .signal-label {
+       147 +        font-weight: 600;
+       148 +        font-size: 8pt;
+       149          letter-spacing: 0.5px;
+       150 +        text-transform: uppercase;
+       151 +        margin-bottom: 2px;
+       152        }
+       153 -      ul { margin-left: 16px; }
+       154 -      li { margin-bottom: 4px; }
+       155 -      .search-box {
+       156 -        background: #f8fafc;
+       157 -        border: 1px solid #e2e8f0;
+       153 +  
+       154 +      .signal-weak .signal-label { color: var(--red); }
+       155 +      .signal-good .signal-label { color: var(--green); }
+       156 +      .signal-weak, .signal-good { color: var(--text); }
+       157 +  
+       158 +      .search-card {
+       159 +        background: var(--bg-subtle);
+       160 +        border: 1px solid var(--border);
+       161 +        border-radius: 6px;
+       162 +        padding: 14px;
+       163 +        margin-bottom: 12px;
+       164 +      }
+       165 +  
+       166 +      .search-card-title {
+       167 +        font-size: 9pt;
+       168 +        font-weight: 600;
+       169 +        color: var(--purple-mid);
+       170 +        margin-bottom: 8px;
+       171 +      }
+       172 +  
+       173 +      .search-string {
+       174 +        font-family: 'SF Mono', 'Consolas', monospace;
+       175 +        font-size: 8pt;
+       176 +        line-height: 1.5;
+       177 +        color: var(--text);
+       178 +        word-break: break-word;
+       179 +      }
+       180 +  
+       181 +      .tag-section { margin-bottom: 12px; }
+       182 +  
+       183 +      .tag-label {
+       184 +        font-size: 9pt;
+       185 +        font-weight: 600;
+       186 +        color: var(--primary);
+       187 +        margin-bottom: 6px;
+       188 +      }
+       189 +  
+       190 +      .tag-group {
+       191 +        display: flex;
+       192 +        flex-wrap: wrap;
+       193 +        gap: 4px;
+       194 +      }
+       195 +  
+       196 +      .tag {
+       197 +        display: inline-block;
+       198 +        background: linear-gradient(135deg, 
+           + rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.12) 100%);
+       199 +        color: var(--purple-mid);
+       200 +        padding: 3px 10px;
+       201          border-radius: 4px;
+       202 -        padding: 10px;
+       203 -        font-family: monospace;
+       202          font-size: 8.5pt;
+       203 -        line-height: 1.6;
+       203 +        font-weight: 500;
+       204        }
+       205 -      .tag {
+       205 +  
+       206 +      .tag-secondary {
+       207          display: inline-block;
+       208 -        background: #f3e8ff;
+       209 -        color: #7c3aed;
+       210 -        padding: 2px 8px;
+       211 -        border-radius: 3px;
+       208 +        background: var(--bg-subtle);
+       209 +        color: var(--text);
+       210 +        padding: 3px 10px;
+       211 +        border-radius: 4px;
+       212          font-size: 8.5pt;
+       213 -        margin: 2px;
+       213 +        border: 1px solid var(--border);
+       214        }
+       215 -      .green { color: #16a34a; }
+       216 -      .red { color: #dc2626; }
+       217 -      .full-width { grid-column: 1 / -1; }
+       218 -      strong { color: #0f172a; }
+       215 +  
+       216 +      .synonym-box {
+       217 +        background: var(--bg-subtle);
+       218 +        border: 1px solid var(--border);
+       219 +        border-radius: 6px;
+       220 +        padding: 12px 14px;
+       221 +      }
+       222 +  
+       223 +      .synonym-group {
+       224 +        margin-bottom: 8px;
+       225 +      }
+       226 +  
+       227 +      .synonym-group:last-child { margin-bottom: 0; }
+       228 +  
+       229 +      .synonym-group strong {
+       230 +        font-size: 8.5pt;
+       231 +        color: var(--primary);
+       232 +      }
+       233 +  
+       234 +      .synonym-group code {
+       235 +        font-family: 'SF Mono', 'Consolas', monospace;
+       236 +        font-size: 8pt;
+       237 +        color: var(--text);
+       238 +        background: white;
+       239 +        padding: 1px 4px;
+       240 +        border-radius: 3px;
+       241 +        border: 1px solid var(--border);
+       242 +      }
+       243 +  
+       244 +      .section-intro {
+       245 +        font-size: 9pt;
+       246 +        color: var(--text-light);
+       247 +        margin-bottom: 10px;
+       248 +      }
+       249 +  
+       250 +      .note-box {
+       251 +        background: var(--bg-subtle);
+       252 +        border: 1px solid var(--border);
+       253 +        border-radius: 6px;
+       254 +        padding: 12px 14px;
+       255 +        margin-bottom: 20px;
+       256 +        font-size: 9pt;
+       257 +        color: var(--text);
+       258 +      }
+       259 +  
+       260 +      .note-box strong {
+       261 +        color: var(--primary);
+       262 +      }
+       263 +  
+       264        @media print {
+       265          body { padding: 0; }
+       266 -        @page { size: 8.5in 11in; margin: 0.4in 0.5in; }
+       266 +        @page { size: 8.5in 11in; margin: 0.4in; }
+       267 +        .question-block, .search-card, .tag, .synonym-box, 
+           + .note-box {
+       268 +          -webkit-print-color-adjust: exact;
+       269 +          print-color-adjust: exact;
+       270 +        }
+       271        }
+       272      </style>
+       273    </head>
+       274    <body>
+       275      <div class="header">
+       276 +      <div class="header-label">Recruiter Guide</div>
+       277        <h1>Automation Engineer</h1>
+       278 -      <span class="subtitle">On-site San Jose 
+           -  | Client-facing | CI/CD + Integration Focus</span>
+       278 +      <div class="subtitle">On-site San Jose, CA 
+           +  | Client-facing | CI/CD + Integration Focus</div>
+       279      </div>
+       280    
+       281 +    <div class="note-box">
+       282 +      <strong>Helpful for pre-screening:</strong> If your 
+           + screening call is on Teams, please enable transcription and 
+           + share the transcript afterward. This helps our technical 
+           + team review candidates more effectively. Not required, but 
+           + appreciated!
+       283 +    </div>
+       284 +  
+       285      <div class="grid">
+       286 -      <div class="section">
+       286 +      <div>
+       287          <div class="section-title">Must-Have Skills</div>
+       288 -        <ul>
+       289 -          <li><strong>Apache Airflow</strong> – DAG 
+           - development, Airflow APIs, workflow orchestration</li>
+       290 -          <li><strong>Jenkins</strong> – Pipeline 
+           - configuration, plugin development, or API integration</li>
+       291 -          <li><strong>Python backend</strong> – Data 
+           - pipelines, ETL, API development</li>
+       292 -          <li><strong>CI/CD systems</strong> – Deep 
+           - understanding of build/test/deploy workflows</li>
+       293 -          <li><strong>SQL + databases</strong> – Schema 
+           - design, data modeling, Postgres experience</li>
+       294 -          <li><strong>Client-facing experience</strong> – 
+           - Comfortable working directly with external teams</li>
+       288 +        <ul class="skill-list">
+       289 +          <li>
+       290 +            <strong>4+ years software engineering, 3+ years 
+           + CI/CD</strong>
+       291 +            <div class="detail">Has built pipelines and 
+           + automation, not just used them as a developer</div>
+       292 +          </li>
+       293 +          <li>
+       294 +            <strong>Apache Airflow experience</strong>
+       295 +            <div class="detail">Airflow schedules and runs 
+           + tasks in sequence. Should have built workflows in it, not 
+           + just used dashboards</div>
+       296 +          </li>
+       297 +          <li>
+       298 +            <strong>Jenkins experience</strong>
+       299 +            <div class="detail">Should have configured 
+           + pipelines or built integrations, not just clicked 
+           + "run"</div>
+       300 +          </li>
+       301 +          <li>
+       302 +            <strong>Python backend development</strong>
+       303 +            <div class="detail">Comfortable building APIs, 
+           + data pipelines, and backend services</div>
+       304 +          </li>
+       305 +          <li>
+       306 +            <strong>SQL and database skills</strong>
+       307 +            <div class="detail">Can design tables, write 
+           + complex queries, work with PostgreSQL</div>
+       308 +          </li>
+       309 +          <li>
+       310 +            <strong>Integration experience</strong>
+       311 +            <div class="detail">Has connected multiple 
+           + systems - pulling data from one, transforming, pushing to 
+           + another</div>
+       312 +          </li>
+       313 +          <li>
+       314 +            <strong>Strong communicator</strong>
+       315 +            <div class="detail">Clear writing, comfortable 
+           + explaining technical systems to others</div>
+       316 +          </li>
+       317          </ul>
+       318        </div>
+       319    
+       320 -      <div class="section">
+       320 +      <div>
+       321 +        <div class="section-title">Nice-to-Have 
+           + Background</div>
+       322 +        <ul class="skill-list">
+       323 +          <li>
+       324 +            <strong>Bazel or similar build tools</strong>
+       325 +            <div class="detail">Build systems used at large 
+           + companies. Also: Gradle, Buck, Pants</div>
+       326 +          </li>
+       327 +          <li>
+       328 +            <strong>Grafana dashboards</strong>
+       329 +            <div class="detail">Built monitoring dashboards 
+           + to visualize system health</div>
+       330 +          </li>
+       331 +          <li>
+       332 +            <strong>GitHub APIs / webhooks</strong>
+       333 +            <div class="detail">Automated things based on 
+           + GitHub events (PRs, commits, etc.)</div>
+       334 +          </li>
+       335 +          <li>
+       336 +            <strong>On-prem deployment</strong>
+       337 +            <div class="detail">Deployed systems in corporate
+           +  data centers, not just cloud</div>
+       338 +          </li>
+       339 +          <li>
+       340 +            <strong>Platform engineering background</strong>
+       341 +            <div class="detail">Worked on internal tools that
+           +  help other developers be productive</div>
+       342 +          </li>
+       343 +          <li>
+       344 +            <strong>Working with legacy systems</strong>
+       345 +            <div class="detail">Comfortable integrating with 
+           + old, poorly-documented systems</div>
+       346 +          </li>
+       347 +        </ul>
+       348 +      </div>
+       349 +  
+       350 +      <div>
+       351          <div class="section-title">Strong Signals</div>
+       352 -        <ul>
+       353 -          <li class="green">✓ 
+           -  Built integrations between multiple CI/CD systems</li>
+       354 -          <li class="green">✓ Platform engineering or 
+           - developer productivity background</li>
+       355 -          <li class="green">✓ Experience at consulting firms 
+           - or professional services</li>
+       356 -          <li class="green">✓ Worked with build systems 
+           - (Bazel, Gradle, Make)</li>
+       357 -          <li class="green">✓ 
+           -  Uses AI coding tools daily (Claude Code, Cursor, 
+           -  Copilot)</li>
+       358 -          <li class="green">✓ On-prem or enterprise 
+           - environment experience</li>
+       352 +        <ul class="signal-list positive">
+       353 +          <li>
+           +  Built integrations between multiple CI/CD systems
+           +   (not just used one tool)</li>
+       354 +          <li>Has worked on "developer productivity" or 
+           + "platform engineering" teams</li>
+       355 +          <li>Experience at companies with 100+ engineers 
+           + (enough CI/CD complexity)</li>
+       356 +          <li>Comfortable with incomplete documentation - can
+           +  figure things out</li>
+       357 +          <li>
+           +  Uses AI coding tools daily (Claude Code, Cursor, 
+           +  Copilot)</li>
+       358 +          <li>Has debugged issues that span multiple 
+           + systems</li>
+       359          </ul>
+       360        </div>
+       361    
+       362 -      <div class="section">
+       362 +      <div>
+       363          <div class="section-title">Warning Signs</div>
+       364 -        <ul>
+       365 -          <li class="red">✗ Only used CI/CD as a consumer, 
+           -  never built pipelines</li>
+       366 -          <li class="red">✗ No experience debugging across 
+           - multiple integrated systems</li>
+       367 -          <li class="red">✗ Can't explain how Airflow DAGs 
+           - work or when to use them</li>
+       368 -          <li class="red">✗ Uncomfortable with incomplete 
+           - documentation</li>
+       369 -          <li class="red">✗ Only worked in greenfield 
+           - environments (no legacy integration)</li>
+       364 +        <ul class="signal-list negative">
+       365 +          <li>Only used CI/CD as a developer - never built 
+           +  or configured pipelines</li>
+       366 +          <li>Can't explain what Airflow does or when you'd 
+           + use it vs other tools</li>
+       367 +          <li>Only worked in brand-new environments - no 
+           + legacy integration experience</li>
+       368 +          <li>Uncomfortable when things aren't well 
+           + documented</li>
+       369 +          <li>Vague about what they personally built vs what 
+           + the team built</li>
+       370 +          <li>No experience working with people outside their
+           +  immediate team</li>
+       371          </ul>
+       372        </div>
+       373    
+       374 -      <div class="section">
+       375 -        <div class="section-title">Questions to Ask</div>
+       376 -        <ul>
+       377 -          <li>"Describe an Airflow DAG you built. What did it
+           -  orchestrate?"</li>
+       378 -          <li>"How have you integrated Jenkins with other 
+           - systems?"</li>
+       379 -          <li>"Tell me about a time you had to work with a 
+           - system that had poor documentation."</li>
+       380 -          <li>"What AI coding tools do you use and how do 
+           - they fit into your workflow?"</li>
+       381 -        </ul>
+       374 +      <div class="full-width">
+       375 +        <div class="section-title">Screening Questions</div>
+       376 +        <p class="section-intro">Record all screening calls. 
+           + These questions reveal depth without requiring technical 
+           + evaluation. Note answers verbatim for technical review.</p>
+       377 +  
+       378 +        <div class="question-block">
+       379 +          <div class="question-text">"Describe an Airflow DAG
+           +  you built. What did it do and why did you choose 
+           + Airflow?"</div>
+       380 +          <div class="signal-row">
+       381 +            <div class="signal-weak">
+       382 +              <div class="signal-label">Weak Answer</div>
+       383 +              Can't describe a specific DAG. Gives vague 
+           + answers like "it ran some jobs." Doesn't know why Airflow 
+           + was chosen vs other options.
+       384 +            </div>
+       385 +            <div class="signal-good">
+       386 +              <div class="signal-label">Good Answer</div>
+       387 +              Describes a specific workflow with details - 
+           + what tasks ran, in what order, what happened if something 
+           + failed. Can explain why Airflow made sense for that use 
+           + case.
+       388 +            </div>
+       389 +          </div>
+       390 +        </div>
+       391 +  
+       392 +        <div class="question-block">
+       393 +          <div class="question-text">"Tell me about a time 
+           + you had to integrate with a system that had poor 
+           + documentation. How did you figure it out?"</div>
+       394 +          <div class="signal-row">
+       395 +            <div class="signal-weak">
+       396 +              <div class="signal-label">Weak Answer</div>
+       397 +              Can't recall a specific situation. Or says they
+           +  just asked someone else. Or got frustrated and gave up.
+       398 +            </div>
+       399 +            <div class="signal-good">
+       400 +              <div class="signal-label">Good Answer</div>
+       401 +              Tells a specific story - how they explored the 
+           + system (reading code, testing APIs, tracing logs), what 
+           + didn't work, how they eventually figured it out.
+       402 +            </div>
+       403 +          </div>
+       404 +        </div>
+       405 +  
+       406 +        <div class="question-block">
+       407 +          <div class="question-text">"What's the difference 
+           + between Airflow and Jenkins? When would you use each?"</div>
+       408 +          <div class="signal-row">
+       409 +            <div class="signal-weak">
+       410 +              <div class="signal-label">Weak Answer</div>
+       411 +              Can't explain the difference, or thinks they're
+           +  the same. Gives a textbook definition without real 
+           + understanding.
+       412 +            </div>
+       413 +            <div class="signal-good">
+       414 +              <div class="signal-label">Good Answer</div>
+       415 +              Explains Jenkins is for CI/CD (triggered by 
+           + code changes) while Airflow is for scheduled workflows 
+           + (time-based or dependency-based). Gives examples of when 
+           + each makes sense.
+       416 +            </div>
+       417 +          </div>
+       418 +        </div>
+       419 +  
+       420 +        <div class="question-block">
+       421 +          <div class="question-text">"Tell me about a time 
+           + you had to debug an issue that involved multiple systems. 
+           + How did you track down the problem?"</div>
+       422 +          <div class="signal-row">
+       423 +            <div class="signal-weak">
+       424 +              <div class="signal-label">Weak Answer</div>
+       425 +              Can't recall a specific situation. Or just says
+           +  "I looked at the logs" with no detail.
+       426 +            </div>
+       427 +            <div class="signal-good">
+       428 +              <div class="signal-label">Good Answer</div>
+       429 +              Walks through a specific debugging journey - 
+           + which systems, how they narrowed it down, what tools they 
+           + used, how they confirmed the fix worked.
+       430 +            </div>
+       431 +          </div>
+       432 +        </div>
+       433 +  
+       434 +        <div class="question-block">
+       435 +          <div class="question-text">"Can you explain [most 
+           + complex thing on their resume] to me like I'm not 
+           + technical?"</div>
+       436 +          <div class="signal-row">
+       437 +            <div class="signal-weak">
+       438 +              <div class="signal-label">Weak Answer</div>
+       439 +              Uses jargon, gets frustrated, or can't simplify
+           +  it.
+       440 +            </div>
+       441 +            <div class="signal-good">
+       442 +              <div class="signal-label">Good Answer</div>
+       443 +              Uses plain language and analogies. Checks if 
+           + you're following. Patient and clear. (You can evaluate this 
+           + directly.)
+       444 +            </div>
+       445 +          </div>
+       446 +        </div>
+       447        </div>
+       448    
+       449 -      <div class="section full-width">
+       449 +      <div class="full-width">
+       450          <div class="section-title">LinkedIn Search 
+             Strings</div>
+       451 -        <div class="search-box">
+       452 -  <strong>Airflow specialists:</strong> ("Apache Airflow" OR 
+           - "Airflow DAG" OR "Airflow operator") AND ("Python") AND 
+           - (built OR developed OR designed) -"data analyst"<br><br>
+       453 -  <strong>Jenkins + integration:</strong> ("Jenkins pipeline"
+           -  OR "Jenkinsfile" OR "Jenkins API") AND ("integration" OR 
+           - "automation") AND Python -"QA" -"tester"<br><br>
+       454 -  <strong>Platform/DevEx titles:</strong> "Platform Engineer"
+           -  OR "Developer Productivity" OR "DevEx Engineer" OR "Build 
+           - Engineer" OR "Release Engineer" OR "CI/CD Engineer"<br><br>
+       455 -  <strong>Bazel experience (rare):</strong> "Bazel" AND 
+           - (engineer OR developer) AND (build OR CI OR 
+           - monorepo)<br><br>
+       456 -  <strong>Enterprise CI/CD:</strong> ("enterprise" OR 
+           - "large-scale" OR "monorepo") AND ("CI/CD" OR "build system")
+           -  AND ("Jenkins" OR "Airflow") AND Python<br><br>
+       457 -  <strong>Target companies:</strong> (Google OR Meta OR 
+           - Netflix OR Uber OR Lyft OR Stripe OR Airbnb) AND ("build" OR
+           -  "platform" OR "infrastructure" OR "developer productivity")
+       451 +        <p class="section-intro">Start with Layer 1 (most 
+           + precise). If fewer than 20 results, try Layer 2. Still 
+           + struggling? Use Layer 3.</p>
+       452 +  
+       453 +        <div style="display: grid; grid-template-columns: 1fr
+           +  1fr; gap: 12px;">
+       454 +          <div class="search-card">
+       455 +            <div class="search-card-title">Layer 1 — Narrow 
+           + (Start Here)</div>
+       456 +            <div class="search-string">("Airflow" OR "Apache 
+           + Airflow") AND ("Jenkins") AND Python AND (built OR developed
+           +  OR integration)</div>
+       457 +          </div>
+       458 +  
+       459 +          <div class="search-card">
+       460 +            <div class="search-card-title">Layer 2 — Broader 
+           + Titles</div>
+       461 +            <div class="search-string">("Platform Engineer" 
+           + OR "DevOps Engineer" OR "Build Engineer" OR "CI/CD Engineer"
+           +  OR "Release Engineer") AND Python AND (Airflow OR Jenkins 
+           + OR pipeline)</div>
+       462 +          </div>
+       463 +  
+       464 +          <div class="search-card">
+       465 +            <div class="search-card-title">Layer 3 — Widest 
+           + Net</div>
+       466 +            <div class="search-string">("software engineer" 
+           + OR "backend engineer") AND Python AND ("CI/CD" OR automation
+           +  OR pipeline OR Jenkins OR Airflow) AND (integration OR 
+           + built OR developed)</div>
+       467 +          </div>
+       468 +  
+       469 +          <div class="search-card">
+       470 +            <div class="search-card-title">Communication 
+           + Filter (Add to Any Layer)</div>
+       471 +            <div class="search-string">AND (consulting OR 
+           + "client-facing" OR stakeholder OR "cross-functional")</div>
+       472 +          </div>
+       473          </div>
+       474        </div>
+       475    
+       476 -      <div class="section full-width">
+       477 -        <div class="section-title">Target Backgrounds</div>
+       478 -        <span class="tag">Google (build/release teams)</span>
+       479 -        <span class="tag">Meta (developer 
+           - infrastructure)</span>
+       480 -        <span class="tag">Netflix (platform)</span>
+       481 -        <span class="tag">Uber/Lyft (developer 
+           - productivity)</span>
+       482 -        <span class="tag">Stripe (infrastructure)</span>
+       483 -        <span class="tag">LinkedIn (developer tools)</span>
+       484 -        <span class="tag">Airbnb (data platform)</span>
+       485 -        <span class="tag">Large enterprise DevOps</span>
+       476 +      <div>
+       477 +        <div class="section-title">Synonym Groups</div>
+       478 +        <p class="section-intro">Use OR between these in 
+           + searches - they're related tools.</p>
+       479 +        <div class="synonym-box">
+       480 +          <div class="synonym-group">
+       481 +            <strong>Workflow Orchestration:</strong><br>
+       482 +            <code>(Airflow OR Prefect OR Dagster OR Luigi OR 
+           + "Argo Workflows" OR Temporal)</code>
+       483 +          </div>
+       484 +          <div class="synonym-group">
+       485 +            <strong>CI/CD Systems:</strong><br>
+       486 +            <code>(Jenkins OR "GitHub Actions" OR "GitLab CI"
+           +  OR CircleCI OR BuildKite)</code>
+       487 +          </div>
+       488 +          <div class="synonym-group">
+       489 +            <strong>Build Systems:</strong><br>
+       490 +            <code>(Bazel OR Gradle OR Buck OR Pants OR 
+           + Make)</code>
+       491 +          </div>
+       492 +          <div class="synonym-group">
+       493 +            <strong>Database:</strong><br>
+       494 +            <code>(PostgreSQL OR Postgres OR MySQL)</code>
+       495 +          </div>
+       496 +        </div>
+       497        </div>
+       498    
+       499 -      <div class="section full-width">
+       500 -        <div class="section-title">Tech Stack Keywords
+           -   to Search</div>
+       501 -        <div style="margin-bottom: 
+           - 8px;"><strong>Orchestration:</strong></div>
+       502 -        <span class="tag">Apache Airflow</span>
+       503 -        <span class="tag">Airflow DAG</span>
+       504 -        <span class="tag">Airflow operator</span>
+       505 -        <span class="tag">Prefect</span>
+       506 -        <span class="tag">Dagster</span>
+       507 -        <span class="tag">Luigi</span>
+       508 -        <span class="tag">Argo Workflows</span>
+       509 -        <span class="tag">Temporal</span>
+       510 -        <div style="margin: 8px 
+           - 0;"><strong>CI/CD:</strong></div>
+       511 -        <span class="tag">Jenkins pipeline</span>
+       512 -        <span class="tag">Jenkinsfile</span>
+       513 -        <span class="tag">Jenkins shared library</span>
+       514 -        <span class="tag">GitHub Actions</span>
+       515 -        <span class="tag">GitLab CI</span>
+       516 -        <span class="tag">CircleCI</span>
+       517 -        <span class="tag">BuildKite</span>
+       518 -        <div style="margin: 8px 0;"><strong>Build 
+           - systems:</strong></div>
+       519 -        <span class="tag">Bazel</span>
+       520 -        <span class="tag">Buck</span>
+       521 -        <span class="tag">Pants</span>
+       522 -        <span class="tag">Gradle</span>
+       523 -        <span class="tag">monorepo</span>
+       524 -        <span class="tag">remote cache</span>
+       525 -        <span class="tag">build optimization</span>
+       526 -        <div style="margin: 8px 
+           - 0;"><strong>Data/Backend:</strong></div>
+       527 -        <span class="tag">PostgreSQL</span>
+       528 -        <span class="tag">SQLAlchemy</span>
+       529 -        <span class="tag">Alembic</span>
+       530 -        <span class="tag">Grafana</span>
+       531 -        <span class="tag">Prometheus</span>
+       532 -        <span class="tag">InfluxDB</span>
+       533 -        <span class="tag">time-series</span>
+       499 +      <div>
+       500 +        <div class="section-title">Tech Stack Keywords</div>
+       501 +  
+       502 +        <div class="tag-section">
+       503 +          <div class="tag-label">Must-Have (Search for 
+           + These)</div>
+       504 +          <div class="tag-group">
+       505 +            <span class="tag">Python</span>
+       506 +            <span class="tag">Airflow</span>
+       507 +            <span class="tag">Jenkins</span>
+       508 +            <span class="tag">CI/CD</span>
+       509 +            <span class="tag">PostgreSQL</span>
+       510 +            <span class="tag">API integration</span>
+       511 +            <span class="tag">data pipeline</span>
+       512 +          </div>
+       513 +        </div>
+       514 +  
+       515 +        <div class="tag-section">
+       516 +          <div class="tag-label">Nice-to-Have (Bonus 
+           + Points)</div>
+       517 +          <div class="tag-group">
+       518 +            <span class="tag-secondary">Bazel</span>
+       519 +            <span class="tag-secondary">Grafana</span>
+       520 +            <span class="tag-secondary">GitHub Actions</span>
+       521 +            <span class="tag-secondary">Docker</span>
+       522 +            <span class="tag-secondary">Kubernetes</span>
+       523 +            <span class="tag-secondary">ETL</span>
+       524 +            <span class="tag-secondary">monitoring</span>
+       525 +          </div>
+       526 +        </div>
+       527        </div>
+       528 +  
+       529 +      <div class="full-width">
+       530 +        <div class="section-title">What to Look for in Work 
+           + History</div>
+       531 +        <ul class="skill-list">
+       532 +          <li>
+       533 +            <strong>Company size 100+ employees</strong>
+       534 +            <div class="detail">Smaller companies often don't
+           +  have complex CI/CD - not enough scale to need it</div>
+       535 +          </li>
+       536 +          <li>
+       537 +            <strong>Built automation, not just used 
+           + it</strong>
+       538 +            <div class="detail">Many developers use CI/CD but
+           +  never configured or built pipelines themselves</div>
+       539 +          </li>
+       540 +          <li>
+       541 +            <strong>Integration or platform team 
+           + experience</strong>
+       542 +            <div class="detail">Shows they've connected 
+           + systems together, not just worked in one silo</div>
+       543 +          </li>
+       544 +          <li>
+       545 +            <strong>Experience with messy/legacy 
+           + systems</strong>
+       546 +            <div class="detail">Our client has mature 
+           + enterprise systems - not everything is new and clean</div>
+       547 +          </li>
+       548 +          <li>
+       549 +            <strong>Some client or stakeholder 
+           + interaction</strong>
+       550 +            <div class="detail">This role is 15% 
+           + client-facing - they need to communicate with external 
+           + teams</div>
+       551 +          </li>
+       552 +        </ul>
+       553 +      </div>
+       554      </div>
+       555    </body>
+       556    </html>
+
+● Done. HTML is ready for review. Same structure as Senior AI Solutions
+  Engineer but content tailored for CI/CD focus:
+
+  - Airflow/Jenkins as core skills (with plain-language explanations)
+  - Domain knowledge question: "What's the difference between Airflow and
+  Jenkins?"
+  - Integration and debugging across systems emphasized
+  - No company name lists
+  - All questions have weak/good indicators
+  - Teams transcription note included
+
+> you said "Bazel or similar build tools
+Build systems used at large companies. Also: Gradle, Buck, Pants" Gradle is 
+literally for Android development, is it not? What are Buck and what are 
+Pants? I have no idea what you're talking about here for the requirements. 
+In addition, we have failed to mention that they should have ideally prior 
+experience working with AI. Once again, on all of these requirements, we are
+ missing out on the fundamental capability that is required from all of 
+these positions: that they can effectively use AI pair programming to 
+accelerate their work and have used things like Claude Code Codex or similar
+ before. I am not looking for people that are using GitHub Copilot or are 
+not using AI tools at all. Again similar to what we just got done fixing, it
+ feels like there is a total misalignment between the project requirements 
+and the job description that we created for this position. As a result, you 
+have one chance to fix this. But, as I said, I'm going to have another cloud
+ session to go over your code with high scrutiny to fully understand. And 
+come back and slam you, especially if I have to repeat myself again. Am I 
+clear? 
+
+● Yes, you're clear. I made several errors:
+
+  1. Gradle - You're right, it's primarily Java/Android. Not relevant here.
+  2. Buck/Pants - Obscure tools I shouldn't have listed. If you don't know
+  them, recruiters certainly won't.
+  3. AI pair programming - I buried this as a "strong signal" when it's a
+  MUST-HAVE. This person works alongside AI engineers and integrates with AI
+   systems.
+  4. Specifically Claude Code/Cursor - Not just "any AI tool" or
+  Copilot-only users.
+
+  Let me fix this properly:
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_automation_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_automation_engineer.html with 10
+     additions and 2 removals
+       314              <strong>Strong communicator</strong>
+       315              <div class="detail">Clear writing, comfortable 
+             explaining technical systems to others</div>
+       316            </li>
+       317 +          <li>
+       318 +            <strong>AI pair programming proficiency</strong>
+       319 +            <div class="detail">Actively uses Claude Code, 
+           + Cursor, or similar agentic AI tools daily. Not just 
+           + autocomplete (Copilot) - should be comfortable with AI that 
+           + writes and edits code autonomously</div>
+       320 +          </li>
+       321 +          <li>
+       322 +            <strong>Experience working with AI 
+           + systems</strong>
+       323 +            <div class="detail">Has built integrations with 
+           + AI features, or worked alongside AI engineers. Understands 
+           + how AI components fit into larger systems</div>
+       324 +          </li>
+       325          </ul>
+       326        </div>
+       327    
+     ...
+       321          <div class="section-title">Nice-to-Have 
+             Background</div>
+       322          <ul class="skill-list">
+       323            <li>
+       324 -            <strong>Bazel or similar build tools</strong>
+       325 -            <div class="detail">Build systems used at large 
+           - companies. Also: Gradle, Buck, Pants</div>
+       324 +            <strong>Bazel experience</strong>
+       325 +            <div class="detail">Google's build system, used 
+           + for large codebases. Less common but valuable</div>
+       326            </li>
+       327            <li>
+       328              <strong>Grafana dashboards</strong>
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_automation_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_automation_engineer.html with 3
+     additions and 1 removal
+       362            <li>Has worked on "developer productivity" or 
+             "platform engineering" teams</li>
+       363            <li>Experience at companies with 100+ engineers 
+             (enough CI/CD complexity)</li>
+       364            <li>Comfortable with incomplete documentation - can
+              figure things out</li>
+       365 -          <li>Uses AI coding tools daily (Claude Code, 
+           - Cursor, Copilot)</li>
+       365 +          <li>Enthusiastic about AI tools - can describe 
+           + specific ways Claude Code or Cursor changed their 
+           + workflow</li>
+       366            <li>Has debugged issues that span multiple 
+             systems</li>
+       367 +          <li>Has worked on projects that involved AI 
+           + components or alongside AI engineers</li>
+       368          </ul>
+       369        </div>
+       370    
+     ...
+       374            <li>Can't explain what Airflow does or when you'd 
+             use it vs other tools</li>
+       375            <li>Only worked in brand-new environments - no 
+             legacy integration experience</li>
+       376            <li>Uncomfortable when things aren't well 
+             documented</li>
+       377 +          <li>Doesn't use AI coding tools, or only uses basic
+           +  autocomplete (Copilot alone)</li>
+       378            <li>Vague about what they personally built vs what 
+             the team built</li>
+       379            <li>No experience working with people outside their
+              immediate team</li>
+       380          </ul>
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_automation_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_automation_engineer.html with 14
+     additions
+       442          </div>
+       443    
+       444          <div class="question-block">
+       445 +          <div class="question-text">"What AI coding tools do
+           +  you use, and how have they changed the way you work?"</div>
+       446 +          <div class="signal-row">
+       447 +            <div class="signal-weak">
+       448 +              <div class="signal-label">Weak Answer</div>
+       449 +              Doesn't use AI tools, or only mentions basic 
+           + autocomplete like Copilot. Can't describe specific ways it 
+           + changed their workflow. Dismissive about AI assistance.
+       450 +            </div>
+       451 +            <div class="signal-good">
+       452 +              <div class="signal-label">Good Answer</div>
+       453 +              Uses Claude Code, Cursor, or similar agentic 
+           + tools. Gives specific examples of how it changed their work 
+           + - faster debugging, writing tests, exploring unfamiliar 
+           + codebases. Enthusiastic about the productivity gains.
+       454 +            </div>
+       455 +          </div>
+       456 +        </div>
+       457 +  
+       458 +        <div class="question-block">
+       459            <div class="question-text">"Can you explain [most 
+             complex thing on their resume] to me like I'm not 
+             technical?"</div>
+       460            <div class="signal-row">
+       461              <div class="signal-weak">
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_automation_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_automation_engineer.html with 5
+     additions and 2 removals
+       533              <span class="tag">PostgreSQL</span>
+       534              <span class="tag">API integration</span>
+       535              <span class="tag">data pipeline</span>
+       536 +            <span class="tag">Claude Code</span>
+       537 +            <span class="tag">Cursor</span>
+       538            </div>
+       539          </div>
+       540    
+     ...
+       544              <span class="tag-secondary">GitHub Actions</span>
+       545              <span class="tag-secondary">Docker</span>
+       546              <span class="tag-secondary">Kubernetes</span>
+       547 -            <span class="tag-secondary">ETL</span>
+       548 -            <span class="tag-secondary">monitoring</span>
+       547 +            <span class="tag-secondary">LangChain</span>
+       548 +            <span class="tag-secondary">LLM</span>
+       549 +            <span class="tag-secondary">AI integration</span>
+       550            </div>
+       551          </div>
+       552        </div>
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_automation_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_automation_engineer.html with 4
+     additions
+       517              <strong>Database:</strong><br>
+       518              <code>(PostgreSQL OR Postgres OR MySQL)</code>
+       519            </div>
+       520 +          <div class="synonym-group">
+       521 +            <strong>AI Coding Tools:</strong><br>
+       522 +            <code>("Claude Code" OR Cursor OR "AI pair 
+           + programming" OR "agentic AI")</code>
+       523 +          </div>
+       524          </div>
+       525        </div>
+       526    
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_automation_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_automation_engineer.html with 5
+     additions
+       494              <div class="search-card-title">Communication 
+             Filter (Add to Any Layer)</div>
+       495              <div class="search-string">AND (consulting OR 
+             "client-facing" OR stakeholder OR "cross-functional")</div>
+       496            </div>
+       497 +  
+       498 +          <div class="search-card">
+       499 +            <div class="search-card-title">AI Tools Filter 
+           + (Add to Any Layer)</div>
+       500 +            <div class="search-string">AND ("Claude Code" OR 
+           + Cursor OR "AI pair programming" OR "agentic AI" OR 
+           + "AI-assisted")</div>
+       501 +          </div>
+       502          </div>
+       503        </div>
+       504    
+
+● Now let me also fix the Senior AI Solutions Engineer guide - I made the
+  same mistake there, treating AI pair programming as a "signal" instead of
+  a must-have:
+
+● Read(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recruit
+      er_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Read 80 lines
+
+● Search(pattern: "AI coding tools|Claude Code|Cursor|Copilot", path:
+        "claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html",
+        output_mode: "content")
+  ⎿  Found 1 line (ctrl+o to expand)
+
+● Read(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recruit
+      er_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Read 120 lines
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 4 additions
+
+       326              <strong>Strong communicator</strong>
+       327              <div class="detail">Clear writing, comfortable 
+             presenting, explains technical concepts to non-technical 
+             audiences</div>
+       328            </li>
+       329 +          <li>
+       330 +            <strong>AI pair programming proficiency</strong>
+       331 +            <div class="detail">Actively uses Claude Code, 
+           + Cursor, or similar agentic AI tools daily. Not just 
+           + autocomplete (Copilot) - should be comfortable with AI that 
+           + writes and edits code autonomously</div>
+       332 +          </li>
+       333          </ul>
+       334        </div>
+       335    
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 2 additions and 1 removal
+
+       374            <li>Can explain technical concepts clearly to 
+             non-technical people</li>
+       375            <li>Experience presenting to or working with 
+             clients/stakeholders</li>
+       376            <li>Built chat interfaces or conversational AI 
+             systems</li>
+       377 -          <li>Uses AI coding tools daily (Claude Code, 
+           - Cursor, Copilot)</li>
+       377 +          <li>Enthusiastic about AI tools - can describe 
+           + specific ways Claude Code or Cursor changed their 
+           + workflow</li>
+       378            <li>Has set up vector databases themselves 
+             (pgvector, Pinecone, Qdrant)</li>
+       379            <li>Mentions LangSmith, Langfuse, or similar 
+             observability tools</li>
+       380          </ul>
+     ...
+       386            <li>Only notebook/research experience; never 
+             deployed for real users</li>
+       387            <li>Can't explain how their AI tools work, only how
+              to configure them</li>
+       388            <li>Relies entirely on managed services (e.g., uses
+              Azure AI Search but couldn't set up vector search without 
+             it)</li>
+       389 +          <li>Doesn't use AI coding tools, or only uses basic
+           +  autocomplete (Copilot alone)</li>
+       390            <li>No experience working with clients or people 
+             outside their team</li>
+       391            <li>Uncomfortable presenting or gets defensive when
+              asked to explain</li>
+       392            <li>Vague about what they personally built vs. what
+              their team built</li>
+
+● Search(pattern: "most complex thing on their resume", path:
+        "claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html",
+        output_mode: "content")
+  ⎿  Found 18 lines (ctrl+o to expand)
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 14 additions
+
+       454          </div>
+       455    
+       456          <div class="question-block">
+       457 +          <div class="question-text">"What AI coding tools do
+           +  you use, and how have they changed the way you work?"</div>
+       458 +          <div class="signal-row">
+       459 +            <div class="signal-weak">
+       460 +              <div class="signal-label">Weak Answer</div>
+       461 +              Doesn't use AI tools, or only mentions basic 
+           + autocomplete like Copilot. Can't describe specific ways it 
+           + changed their workflow. Dismissive about AI assistance.
+       462 +            </div>
+       463 +            <div class="signal-good">
+       464 +              <div class="signal-label">Good Answer</div>
+       465 +              Uses Claude Code, Cursor, or similar agentic 
+           + tools. Gives specific examples of how it changed their work 
+           + - faster debugging, writing tests, exploring unfamiliar 
+           + codebases. Enthusiastic about the productivity gains.
+       466 +            </div>
+       467 +          </div>
+       468 +        </div>
+       469 +  
+       470 +        <div class="question-block">
+       471            <div class="question-text">"Can you explain [most 
+             complex thing on their resume] to me like I'm not 
+             technical?"</div>
+       472            <div class="signal-row">
+       473              <div class="signal-weak">
+
+● Search(pattern: "Must-Have.*Search for These", path:
+        "claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html",
+        output_mode: "content")
+  ⎿  Found 16 lines (ctrl+o to expand)
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 2 additions
+
+       548              <span class="tag">pgvector</span>
+       549              <span class="tag">FastAPI</span>
+       550              <span class="tag">prompt engineering</span>
+       551 +            <span class="tag">Claude Code</span>
+       552 +            <span class="tag">Cursor</span>
+       553            </div>
+       554          </div>
+       555    
+
+● Search(pattern: "Communication Filter", path:
+        "claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html",
+        output_mode: "content")
+  ⎿  Found 7 lines (ctrl+o to expand)
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 5 additions
+
+       506              <div class="search-card-title">Communication 
+             Filter (Add to Any Layer)</div>
+       507              <div class="search-string">AND (consulting OR 
+             "client-facing" OR stakeholder OR presented OR 
+             "cross-functional")</div>
+       508            </div>
+       509 +  
+       510 +          <div class="search-card">
+       511 +            <div class="search-card-title">AI Tools Filter 
+           + (Add to Any Layer)</div>
+       512 +            <div class="search-string">AND ("Claude Code" OR 
+           + Cursor OR "AI pair programming" OR "agentic AI" OR 
+           + "AI-assisted")</div>
+       513 +          </div>
+       514          </div>
+       515        </div>
+       516    
+
+● Search(pattern: "Python Frameworks", path:
+        "claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html",
+        output_mode: "content")
+  ⎿  Found 7 lines (ctrl+o to expand)
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 4 additions
+
+       535              <strong>Python Frameworks:</strong><br>
+       536              <code>(FastAPI OR Django OR Flask)</code>
+       537            </div>
+       538 +          <div class="synonym-group">
+       539 +            <strong>AI Coding Tools:</strong><br>
+       540 +            <code>("Claude Code" OR Cursor OR "AI pair 
+           + programming" OR "agentic AI")</code>
+       541 +          </div>
+       542          </div>
+       543        </div>
+       544    
+
+● Done. Fixed both guides. Here's what changed:
+
+  Automation Engineer:
+  - Added "AI pair programming proficiency" to Must-Have (Claude
+  Code/Cursor, not just Copilot)
+  - Added "Experience working with AI systems" to Must-Have (works alongside
+   AI engineers)
+  - Fixed Bazel description - removed Gradle (Android), Buck, Pants
+  (obscure)
+  - Added screening question about AI tools with weak/good indicators
+  - Added AI warning sign: "Doesn't use AI coding tools, or only uses basic
+  autocomplete"
+  - Updated Strong Signal to be specific about Claude Code/Cursor enthusiasm
+  - Added AI tools to Tech Stack Keywords and Synonym Groups
+  - Added AI Tools Filter to search strings
+
+  Senior AI Solutions Engineer (also fixed):
+  - Added "AI pair programming proficiency" to Must-Have
+  - Added same screening question about AI tools
+  - Added same warning sign about not using AI tools
+  - Updated all the same sections for consistency
+
+  Both roles now clearly require Claude Code/Cursor-level AI tool
+  proficiency as a must-have, not a nice-to-have signal.
+
+
+

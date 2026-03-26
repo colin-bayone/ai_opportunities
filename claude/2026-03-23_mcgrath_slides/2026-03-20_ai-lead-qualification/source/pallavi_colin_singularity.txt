@@ -1,0 +1,3364 @@
+Transcript
+March 11, 2026, 3:26PM
+
+Colin Moore   2:47
+Good evening.
+
+Pallavi Badiger   2:49
+Hi, Colin. Good morning.
+
+Colin Moore   2:52
+Well thank thank you for for flexing with me on this one. It was we had a a a new joiner today so I'll I'll be introducing him in our our group team chat after we get off but I just had to get him all all on boarded. So busy week but the good kind of busy.
+
+Pallavi Badiger   3:03
+OK.
+OK, no problem.
+
+Colin Moore   3:13
+Good. Well, I know it's been a while. We have as much time as you have today. So I made sure I don't have anything after this one. So that's why I wanted to join early so we can spend as much time as as you want to spend. So we don't have to, you know, get cut off or anything like that.
+
+Pallavi Badiger   3:19
+OK.
+Mhm.
+
+Colin Moore   3:29
+OK.
+
+Pallavi Badiger   3:32
+OK, yeah, that I need your time only.
+
+Colin Moore   3:36
+Yes, well, that that's let's let's do it. So I know I didn't get to respond to your message yet, but it looks like I I was reading through and it looks like you found, you know, a a really nice conclusion here. So I was reading and you know, no library gives you all three parts.
+Your research is absolutely correct, so I'm really happy you went this thoroughly through it because like even that Django role permissions, you would think that library would be perfect. It sounds perfect, but it's old it it's dead code.
+
+Pallavi Badiger   3:53
+Yes, come in.
+Mhm.
+Mm-hmm.
+
+Colin Moore   4:08
+So, oh, yeah, so let me, I'll, I'll stop talking. Why don't you, you tell me, you know, where where you're at right now, what your mind's at and what you're thinking and then we can talk through the items that you shared over here as well.
+
+Pallavi Badiger   4:22
+Yes, Colin, sure. One second, let me set up.
+
+Colin Moore   4:28
+Mhm.
+
+Pallavi Badiger   4:54
+Uh, Colin, uh, just I'm just sharing my screen.
+
+Colin Moore   4:59
+Mm-hmm. Yeah, I can't see yet, but I can tell you when it pops up. There it goes. Yeah, just loaded.
+
+Pallavi Badiger   5:06
+OK, yes, yeah. First of all, yeah, just wait, just remove.
+So as of now just like everything is working so I will again I will start with the starting. Just like now our system is just for the when our we have three types of permissions just like we have a building blocks just like user.
+Roles and permission groups and pods we have. So whenever users new users created for for example if the user is internal so he will when he created and first he need a approval so after the approval.
+
+Colin Moore   5:45
+Mhm.
+
+Pallavi Badiger   5:58
+It will he will get anything just like basics, basic access. For that we have a just like this dashboard. As of now I am a super user so I I I'm seeing everything but.
+
+Colin Moore   6:12
+Mm-hmm.
+
+Pallavi Badiger   6:14
+Uh, whenever the user is created at the chatting he will, they will not get that much, but uh in our um.
+What is this?
+Now as of now we I have a this I created very easily in the new pod in the admin group only.
+
+Colin Moore   6:37
+Mhm.
+
+Pallavi Badiger   6:37
+So I can create very easily without any code changes. So any no need of any deployment anything. So I can create here very easily. Just like I will show you I can create. Just now I created this Tesla using the admin only.
+
+Colin Moore   6:47
+Mhm.
+
+Pallavi Badiger   6:56
+No need of changing any code. It's data is driven by the database completely. But when I am trying to add a permission group, new permission group, so I need to change in the three places.
+
+Colin Moore   7:02
+Mhm.
+Mhm.
+
+Pallavi Badiger   7:12
+Then again that code has to need to deploy. After that we can add the permission group. This is the problem.
+
+Colin Moore   7:23
+Mhm.
+So in in that.
+
+Pallavi Badiger   7:27
+If as of now or if this is the groups we have now. As of now I have a six groups. Suppose I am trying to add new group.
+
+Colin Moore   7:40
+Mm-hmm.
+
+Pallavi Badiger   7:42
+Um, what to help with?
+As of now, I will give anything.
+
+Colin Moore   7:57
+Mhm.
+
+Pallavi Badiger   7:58
+Permission.
+Yeah, that's enough.
+
+Colin Moore   8:04
+Mhm.
+
+Pallavi Badiger   8:07
+This group is created but when I am assigning the users for them.
+
+Colin Moore   8:14
+Mhm.
+
+Pallavi Badiger   8:17
+So here that there this group is group will not show.
+I'm assigning one of the member and even of this Priya.
+So I'm trying to assign.
+Group see here that group is not there.
+So for that I need to manually change the code for that.
+
+Colin Moore   8:50
+Mhm.
+I see. I see.
+
+Pallavi Badiger   8:54
+Just like where I have to change the code means this in the setup permission groups, we have our permission groups everything here only just like.
+Yeah users report exporters. See here also it has not there. If I rerun also it will it won't take that group I created but it will not take.
+
+Colin Moore   9:21
+Mm-hmm. I see.
+
+Pallavi Badiger   9:25
+Yeah, for this.
+Um, what we have to do?
+If in future if we we if anyone of them are trying to create a new pod, they can create easily users they can create easily. But the problem is they cannot create the permission group just like pod we have created in the admin section.
+So here again we have to need a developer for this.
+
+Colin Moore   9:53
+Mhm.
+Yes, yes.
+And and so I I read I read the issue on on GitHub too for the solution around.
+
+Pallavi Badiger   10:07
+Mhm.
+
+Colin Moore   10:07
+So I I think I like it. I think that so for for having something for the config for permissions.
+What I would say though, the only change that I would that we'll talk about this, I'm not gonna request it 'cause I wanted to, you know.
+
+Pallavi Badiger   10:16
+OK.
+Colin, one more thing. Just like our data is for the pod, our data is driven from driven from the database. Can we do this group also in the database we can fetch from there?
+
+Colin Moore   10:26
+Sure.
+Yes, and that that was exactly what I was going to suggest right now from from your issue.
+
+Pallavi Badiger   10:44
+Oh OK because see I'm checking of this PR back also that is that will solve the our permission groups and admin also but the main problem is URL.
+It will. It won't give the gatings.
+
+Colin Moore   11:01
+Yes.
+Yes.
+
+Pallavi Badiger   11:04
+So in in we we have every time we have to mention the decorators for the PR back.
+
+Colin Moore   11:13
+I see. I see.
+So what I would do 'cause I I like so can you pull up your like the GitHub issue?
+
+Pallavi Badiger   11:22
+Uh, OK.
+
+Colin Moore   11:28
+Yes.
+
+Pallavi Badiger   11:28
+Yeah, I have open this.
+
+Colin Moore   11:30
+So I think the only thing that I would do on this one, because I I like the approach, I I agree with you and I think you know everything here is correct. The only thing that I would do is make it database based instead of a static file. But I'm not going to force that. Like I said in the beginning, I'm going to let you choose. I'm just going to tell you.
+
+Pallavi Badiger   11:33
+Mhm.
+OK.
+Mm.
+
+Colin Moore   11:49
+You know from my perspective on the architecture side, but you know the decision I'm going to leave to you. So I want you to feel empowered in that way. So if you Scroll down a bit to where it shows the I think the the topic is like solution.
+
+Pallavi Badiger   11:52
+Yeah.
+Mm.
+
+Colin Moore   12:05
+Yeah.
+
+Pallavi Badiger   12:05
+Mhm.
+
+Colin Moore   12:06
+So where I would go here is you have two situations that you need to think through and these are two just totally different schools of thought. Neither one is right or wrong.
+
+Pallavi Badiger   12:09
+Hmm.
+Oh.
+Um.
+
+Colin Moore   12:20
+OK, so you could have person A say that you know permission and fix change very rarely.
+
+Pallavi Badiger   12:21
+OK.
+
+Colin Moore   12:27
+Right, which is most likely true.
+
+Pallavi Badiger   12:28
+Mm.
+
+Colin Moore   12:31
+But you'll have person B say even though they change rarely, if they ever do change, that requires an application update.
+
+Pallavi Badiger   12:32
+OK.
+Mm.
+Hmm.
+
+Colin Moore   12:40
+Right, because if if this dot dot py file would ever itself change then you would need to redeploy the code.
+
+Pallavi Badiger   12:41
+Mm.
+Hmm.
+
+Colin Moore   12:49
+And then person A is gonna come back and say, well, fine, well, you know what? If this ever changed, it probably is around a new feature that would require redeploying the code anyway.
+
+Pallavi Badiger   12:49
+Yes.
+Hmm.
+
+Colin Moore   13:01
+You see so and these two people are going to go back and forth for forever. What I the pattern that I typically follow for things like this goes this way what you have in that solution table for permission config.
+
+Pallavi Badiger   13:01
+Mm.
+Mm mm.
+
+Colin Moore   13:17
+If that was itself a table in the database.
+
+Pallavi Badiger   13:21
+Database. Yes, means that becomes a our source of truth. Truth of source. That one means database, not the code.
+
+Colin Moore   13:23
+That.
+Right, right. And you can still set reasonable defaults in the code. That's that's what I always do from from the rest of the Django app. You'll see I will still have some defaults in the code, but I will first try to get that data from the database.
+
+Pallavi Badiger   13:42
+Mhm.
+OK.
+
+Colin Moore   13:47
+But if it doesn't exist, I will have a reasonable fall back so that things don't break if something's not defined in the database.
+
+Pallavi Badiger   13:50
+Hmm.
+OK, yes, understand.
+
+Colin Moore   13:56
+So.
+And in that in that perspective, you can also do one more thing, which is the the thing that's going to be tricky. So if you go back to the Django admin screen.
+
+Pallavi Badiger   14:01
+Mm.
+Mhm.
+Yes.
+
+Colin Moore   14:13
+Yeah, and you'll you'll notice something so a user can be a part of multiple groups.
+Right. And so that's tough because what you essentially have to do is you have to think of it almost like a Venn diagram, like 2 overlapping circle circles.
+
+Pallavi Badiger   14:22
+Hmm.
+OK.
+
+Colin Moore   14:29
+Right. And so you could say there's an inheritance pattern.
+
+Pallavi Badiger   14:34
+Hmm.
+
+Colin Moore   14:35
+But there's also a hierarchy.
+So what does that mean? Let's say that I'm a member of recruiters group, but also bug managers.
+
+Pallavi Badiger   14:44
+Mm.
+OK.
+
+Colin Moore   14:47
+OK, so.
+Position A could be to say that the the groups have to logically be separate from each other.
+And that would be fine, but that that requires us to set some rules up. So for instance, bug managers has a specific defined function which only allows them to see bug things. So that way you can be a member of that group and you can see bugs. But then then the question becomes what? Who can I see bugs from everyone or just within my group?
+
+Pallavi Badiger   14:58
+OK.
+Mhm.
+Hmm.
+
+Colin Moore   15:18
+Right.
+
+Pallavi Badiger   15:19
+Yes, yeah, as of now bug. If I add anyone in the bug manager group, they can see anyone's, all of them, all of bugs, every user bugs.
+
+Colin Moore   15:29
+Right, right. And that that's probably the right behavior too, you know? But but but what we could do if if it's in the database, we get one more power out of it, because anything with the database we can still have middleware. And middleware doesn't always have to be to catch something, but it can also be to modify something.
+
+Pallavi Badiger   15:36
+Mm.
+OK.
+
+Colin Moore   15:51
+So imagine like for instance, right now in a view how we retrieve which groups someone's a part of.
+
+Pallavi Badiger   15:57
+Hmm.
+
+Colin Moore   15:58
+Imagine that instead of going directly and querying what groups they're part of and checking permissions.
+
+Pallavi Badiger   16:05
+Hmm.
+
+Colin Moore   16:05
+Imagine it hit a middle layer first.
+
+Pallavi Badiger   16:09
+OK.
+
+Colin Moore   16:10
+And what you would do in that middle layer would be to say what do recruiters group have in common with bug managers group? If I'm a art of both, what is my total combined ermissions?
+
+Pallavi Badiger   16:20
+Hmm.
+OK.
+
+Colin Moore   16:24
+And in that way you can solve a lot of the behavior that might be more unexpected. So for instance, let's say bug manager says that you are only able to do this. You're only able to view that bug report screen.
+
+Pallavi Badiger   16:38
+Mhm.
+
+Colin Moore   16:39
+And you know all all looks good and you can still see all the bug reports. But let's say that the let's say that I'm in the recruiters group as well. Well, maybe the recruiters group has bug reports turned off.
+
+Pallavi Badiger   16:54
+Yeah.
+
+Colin Moore   16:55
+Right, so you the permissions for the user is the sum total of the combination of all the groups that they're in.
+
+Pallavi Badiger   17:02
+Mhm.
+
+Colin Moore   17:03
+So it depends upon how you would approach it, because it might not be an issue at all. But if you would need to say I need to, you know kind of what I would call is flatten the permissions.
+
+Pallavi Badiger   17:09
+Hmm.
+Mhm.
+
+Colin Moore   17:16
+That would be a good approach to do it. So as long as everything's in the database, you can even look at the config that's in the database and say, OK, sum total, here's all the URL rules that apply for this user. Here's all the permissible things, and that can even help simplify the view logic too, so you don't have to go too crazy with decorators.
+
+Pallavi Badiger   17:21
+OK.
+Mhm.
+
+Colin Moore   17:36
+Actually abstract that to a middleware function.
+
+Pallavi Badiger   17:39
+OK.
+
+Colin Moore   17:39
+Um, so that you don't have to for every view, say you know this specific group, this specific group, this specific group.
+
+Pallavi Badiger   17:46
+Mhm.
+
+Colin Moore   17:48
+Um, so that that's one thing. The 2nd is how you wanna do the groups in general.
+So because of that user permissions block is so crazy and that's just that's just Django for you, right? I mean that's just how it is. There's not really a better way around it. What typically happens in order to manage this because it's too hard as you already saw like whenever you.
+
+Pallavi Badiger   18:04
+Mm-hmm.
+OK.
+No.
+
+Colin Moore   18:16
+Trying to make that group most recently.
+
+Pallavi Badiger   18:17
+Mm.
+
+Colin Moore   18:19
+Um, even if it's configurable via Django admin.
+You still pretty much need a developer to know which one of those user permissions to add over to the right hand side.
+
+Pallavi Badiger   18:25
+OK.
+Mhm.
+
+Colin Moore   18:32
+Right. So that's where like things like permission groups come in, but that's also where like the permissions config has. So you could plan them out strategically because if you go with this pattern of inheritance, so let's say that there's a group called recruiters as you have it.
+
+Pallavi Badiger   18:41
+Hmm.
+Mm.
+
+Colin Moore   18:51
+And recruiters is a second filtered by pods, which is already what you have.
+
+Pallavi Badiger   18:57
+Hmm.
+
+Colin Moore   18:58
+So I'm a member of the group of recruiters, but I'm also a member of the Google Pod. My first level of permissions is recruiters, and then me being a part of the Google Pod gives me different permissions within the recruiters group.
+
+Pallavi Badiger   19:11
+Mhm.
+
+Colin Moore   19:11
+To to go see the Google content.
+So what you can do is you can actually make them inheritable. So think of them almost like we're designing a class.
+
+Pallavi Badiger   19:16
+OK.
+Hmm.
+
+Colin Moore   19:25
+So, and you've already, uh, pretty much done this, just so you know.
+So you you've correctly done this. So imagine if I have a group called as like guests.
+
+Pallavi Badiger   19:35
+Mm.
+OK.
+
+Colin Moore   19:41
+OK, and guests has what? Guests have pretty easily definable permissions. They're pretty much view only on certain pages and certain models.
+
+Pallavi Badiger   19:50
+Hmm.
+
+Colin Moore   19:51
+But we could set that U one time.
+
+Pallavi Badiger   19:54
+OK.
+
+Colin Moore   19:55
+And we could say every user, regardless of what status they are, has those guest permissions.
+
+Pallavi Badiger   20:00
+Mhm.
+OK, guest permissions, yeah.
+Mhm.
+
+Colin Moore   20:10
+See the home screen? Maybe they'd get a different home screen, maybe it rots differently. But regardless, from the data access perspective, uh, the bare minimum baseline for everyone using the app is is this.
+
+Pallavi Badiger   20:20
+Mhm.
+
+Colin Moore   20:22
+Now imagine that guests is a very broad category, just like recruiters is.
+
+Pallavi Badiger   20:28
+Yes.
+
+Colin Moore   20:30
+So imagine not only am IA guest, but I'm also a hiring manager.
+Right. So that's what I mean. You can be very strategic with the groups and once you have inheritance down, things get a lot simpler because they get a lot less granular each time you wanna add a new one.
+
+Pallavi Badiger   20:48
+Hmm.
+
+Colin Moore   20:49
+So let's say an external hiring manager wants access to the platform to see their talent pipeline.
+
+Pallavi Badiger   20:55
+Mhm.
+
+Colin Moore   20:55
+OK. And so the external hiring manager comes in and says, hey, I wanna see this. And So what we could do on hand A, which we shouldn't do is say I'm gonna add a new group for you that says Cisco Hiring Manager.
+
+Pallavi Badiger   21:01
+Mm.
+Hmm.
+Hmm.
+
+Colin Moore   21:11
+And I'm going to create a new Google Hiring Manager pod.
+
+Pallavi Badiger   21:15
+OK.
+
+Colin Moore   21:16
+And you know, like that, it's really crazy all pretty fast.
+If you go instead and you say here's the guest group, the guest group has these default baseline things.
+
+Pallavi Badiger   21:22
+Um.
+Mhm.
+
+Colin Moore   21:28
+On top of that, a group for external hiring manager.
+
+Pallavi Badiger   21:31
+Yes.
+
+Colin Moore   21:33
+Which you don't even need to specify all the permissions that were already outlined in guest.
+Now you just need to say here's the other things beyond what's in guest because guest it's. That's what I mean by inheritance. You've already defined it once in guest. Now you're just adding on to it with the next group.
+
+Pallavi Badiger   21:39
+No.
+Mm.
+OK.
+
+Colin Moore   21:54
+So like a hiring manager, what makes them different than a normal guest? AKA what makes them different from a candidate?
+
+Pallavi Badiger   21:59
+Hmm.
+
+Colin Moore   22:03
+Well, they can view the talent pipeline screen. That's easy. And they can modify things on maybe the resume parser or job, not resume parser, excuse me, job parser screen.
+
+Pallavi Badiger   22:06
+Mm.
+Mhm.
+
+Colin Moore   22:16
+And maybe they can.
+Maybe we actually say no, you can't send emails to the candidates 'cause that would be fairly inappropriate to view.
+And so that means that instead of having to do this crazy thing where we have to think through all the different permissions that someone might need as a hiring manager, we can just say you need like these three because 90% of it is already covered by that guest users group.
+
+Pallavi Badiger   22:36
+Mhm.
+OK.
+
+Colin Moore   22:45
+And then likewise, you could keep guest users group. Everyone in the app is a member of that, no matter what their.
+
+Pallavi Badiger   22:51
+So our guest group is will be the base.
+
+Colin Moore   22:55
+Right, right.
+And then on top of that, let's say that I'm an internal person. Let's say I'm a recruiter.
+
+Pallavi Badiger   23:02
+Mm.
+Mhm.
+Yeah.
+
+Colin Moore   23:07
+Should I have the same permissions as a guest does? Of course, of course, but just as a base because it's fairly it's not really giving much actual information. It's like you can you can log into the app, you can see the home screen.
+
+Pallavi Badiger   23:11
+Yes.
+OK.
+Mhm.
+OK.
+Mm-hmm.
+
+Colin Moore   23:22
+But then maybe there's a role called as internal. And what does internal do? Internal says in general. Here's the screens that in in general internal person can access in addition to what they can see as a guest.
+
+Pallavi Badiger   23:26
+Hmm.
+Hmm.
+OK.
+
+Colin Moore   23:37
+And that's that's that inheritance pattern that'll simplify and flatten the groups out so that you don't need to generate so many. You've already started to do that. So like for instance, like user managers, what can they do? What bug managers, what can they do?
+
+Pallavi Badiger   23:42
+Mm.
+Hmm.
+Yeah.
+
+Colin Moore   23:54
+Um, if you think about it, you might have had to add permissions onto those.
+
+Pallavi Badiger   23:54
+Hmm.
+Hmm.
+
+Colin Moore   24:00
+Like a lot of permissions versus if you had one that was a baseline because they both have a ton of crossover.
+
+Pallavi Badiger   24:02
+Yes.
+Mm.
+Hmm.
+
+Colin Moore   24:10
+And make sure that everyone's a part of that group 1st and then just have more specific things that are only relevant for those two within. So for instance, user managers, they have the special privilege of giving to see the user page, you know, view, modify, maybe delete things like that.
+
+Pallavi Badiger   24:19
+Hmm.
+Hmm.
+OK.
+
+Colin Moore   24:31
+And for bug managers, same thing with bug reports page.
+
+Pallavi Badiger   24:35
+OK.
+
+Colin Moore   24:36
+But everything else they have in common and that way you could say that I am in the recruiters group plus in the guest group plus in the bug managers group and I'm a recruiter that can log into the app and then can also see the bug report screen.
+
+Pallavi Badiger   24:43
+Mm.
+OK.
+Mhm.
+
+Colin Moore   24:52
+And that way you don't have to go too crazy with picking out the permissions. You pretty much have to build your base classes once for the the user groups.
+
+Pallavi Badiger   25:01
+OK.
+Hmm.
+
+Colin Moore   25:04
+And then you're pretty much good to go.
+
+Pallavi Badiger   25:07
+OK.
+
+Colin Moore   25:11
+So, but the way that you have it, even on that permission config is actually pretty much perfectly set up to be a model. You know, like that's pretty much perfect already. It's it's already a model, it's just a more of like a a Jason format than it is.
+
+Pallavi Badiger   25:18
+Yeah.
+
+Colin Moore   25:26
+You know in a in model format, but everything that you have there is already you know there and and the nice thing is you can have one thing I would definitely would do is on the Django admin have things as like drop downs.
+
+Pallavi Badiger   25:29
+Hmm.
+Mm.
+
+Colin Moore   25:42
+And you can still have it because one of the things that becomes a problem, like let's say if we go back to that GitHub issue.
+
+Pallavi Badiger   25:49
+Hmm.
+
+Colin Moore   25:50
+Uh.
+Yeah, I think on the far left have, yeah.
+So one of the things that could be a problem is, let's say you don't want to have to manually type in any of these things.
+
+Pallavi Badiger   26:11
+OK.
+
+Colin Moore   26:13
+Right, like even like the only one with that you might is URL rules, because there's really not a way to do that without typing things in, you know. But for other things, having a drop down is a really helpful way.
+
+Pallavi Badiger   26:21
+Mm-hmm.
+
+Colin Moore   26:29
+That you can do in Django admin so that you can avoid typos or things that aren't working just because of some like simple config. And I I'm going to try to pull up something on my side so I can show you exactly that working for AI models so you can get an idea.
+
+Pallavi Badiger   26:30
+OK.
+Um.
+OK.
+Hmm.
+
+Colin Moore   26:48
+I see.
+Pull it up.
+Let me share my screen. Unfortunately, one thing of this isn't working, but you'll be able to get get the point of what I'm saying.
+
+Pallavi Badiger   27:23
+OK.
+OK.
+
+Colin Moore   27:29
+So for so for instance in this this is the AI deployment. This is an unused model that I created in. We don't need it. This is for when we really go crazy with AI stuff in the app.
+
+Pallavi Badiger   27:35
+Hmm.
+Mhm.
+
+Colin Moore   27:41
+Um, The thing is here that like if you think about Azure for a moment.
+
+Pallavi Badiger   27:47
+Hmm.
+
+Colin Moore   27:47
+And I I just want to walk you through. Maybe I'll try to share these on the screen at the same time. That'll give you the best idea.
+OK.
+So you see this is in Django admin right here.
+
+Pallavi Badiger   28:15
+OK, yes.
+
+Colin Moore   28:16
+So these these things are really easy to mistype, like for instance AI model. These are things that are hardcoded in the database.
+
+Pallavi Badiger   28:21
+Hmm.
+Mhm.
+
+Colin Moore   28:27
+But they don't reflect what's actually in Azure AI Foundry.
+
+Pallavi Badiger   28:31
+OK, ma'am.
+
+Colin Moore   28:33
+So even though this is airing out on me right now for some reason, the idea is here.
+
+Pallavi Badiger   28:37
+Mm.
+
+Colin Moore   28:39
+That I would click a subscription subscription in Azure ours.
+Is this one?
+
+Pallavi Badiger   28:47
+OK.
+
+Colin Moore   28:48
+So imagine that that populated with this subscription ID. I could select that one.
+And then at next it wants to resource group.
+
+Pallavi Badiger   28:55
+OK.
+Hmm.
+
+Colin Moore   28:58
+Resource group in Django admin. As soon as this one is clicked, it's going to use an API call.
+
+Pallavi Badiger   29:04
+Hmm.
+
+Colin Moore   29:05
+To go and access Azure.
+And display all these different resource groups that are from this subscription.
+And so so for instance I would choose Talent AI Stage RG because this is the stage environment on the right.
+
+Pallavi Badiger   29:15
+OK.
+Hmm.
+
+Colin Moore   29:22
+And then it wants the AI Foundry account. Where does that come from? Well, once again, just a simple Azure Terminal API call to say list all of the Azure Foundry accounts that are in there and look, we can find this one for instance.
+Tell Nai Stage India South.
+
+Pallavi Badiger   29:40
+Hmm.
+
+Colin Moore   29:43
+And so now this shows up and this is all dynamic. Nothing's hard coded, nothing's in the database, it's all live. And then finally from here the deployments. So from the deployments perspective, this is the equivalent of me needing to go to Azure AI Foundry.
+
+Pallavi Badiger   29:49
+OK.
+Yeah.
+Hmm.
+
+Colin Moore   30:04
+And look at.
+Choose a different.
+This one.
+That would be the same as me going to uh Azure AI Foundry and selecting.
+One of my two deployments that I have.
+So the pattern that I'm trying to show you here is that you can do some things live in in Django admin. You don't actually have to have it in the group. So for instance, like whenever we're talking about.
+
+Pallavi Badiger   30:37
+Hmm.
+
+Colin Moore   30:42
+This part.
+If you if you wanted to have this as a Django admin panel rather than having it like with the you know whole permissions list like it is right now.
+
+Pallavi Badiger   30:45
+OK.
+Mm mm.
+
+Colin Moore   30:55
+These things like intelligence dot can use AI matching, you can actually query that and group them together on the admin screen itself. All you have to do is tweak that admin dot I file.
+
+Pallavi Badiger   31:08
+OK, understood.
+
+Colin Moore   31:08
+So yeah, so maybe like you could say like you're a member of this group and then within this pod you have this and then you're also a member of this group. So you can do that live whenever you create things and that can help with some of the more dynamic parts of the permission config that you have here.
+
+Pallavi Badiger   31:18
+Hmm.
+Mhm.
+Yeah, yeah.
+
+Colin Moore   31:32
+So there's just one thing that you can look at if it's helpful. It's a cool, cool way to do it because this you can see how error prone this can be if you're trying to manually type it in. I mean just just look at how many things have to be perfect for AI models to even work.
+
+Pallavi Badiger   31:35
+Hmm.
+OK.
+Hmm.
+
+Colin Moore   31:48
+Um. So from like there's something called unified endpoints within and not even all the parameters are shown here. Um.
+But for this I need to have this perfect as the URL. I need to have the API version perfect. No typos whatsoever. That's that's one, only one.
+
+Pallavi Badiger   32:02
+Please.
+Thank you.
+
+Colin Moore   32:07
+Whenever it comes to secrets, I also need to say here are the secrets, here's the key, here's the. Is it active or not? There's like 10 different things that it has to touch just to form one API call request for AI models.
+
+Pallavi Badiger   32:09
+Mm.
+Hmm.
+Yes.
+
+Colin Moore   32:22
+Which means for me, there's a lot of places where things can go wrong if there's even one typo.
+
+Pallavi Badiger   32:24
+Mhm.
+Mm.
+
+Colin Moore   32:30
+So what I did here for AI deployments is I made it so that it is dynamic and can live query Azure for the current state so that you never have to manually type in the resource group or manually go and copy and paste big complicated strings like this.
+
+Pallavi Badiger   32:47
+OK.
+
+Colin Moore   32:47
+So might be relevant for what you're trying to do. Might not be, but at least wanted to show you that it's it's something possible.
+
+Pallavi Badiger   32:56
+Yeah.
+
+Colin Moore   32:57
+Uh.
+Other than that.
+That my only feedback was just on this. What you could do if you wanted just from the sake of trying it out. I know it'll be simpler to do with this to start. You can definitely do that and you know prove it out. It'll be easier to debug that way too.
+
+Pallavi Badiger   33:09
+Hmm.
+OK.
+OK.
+
+Colin Moore   33:16
+But my only suggestion, and like I said, you'll own the final decision. I'm not going to, you know, give you a thumbs down on anything. If you want to make this into a database, that would be my recommendation. But I'm going to let you make the call and and it's not like if you don't, if you don't do what I say, I'm going to be mad, no.
+
+Pallavi Badiger   33:35
+Oh.
+
+Colin Moore   33:35
+You're the you're the expert here Pallavi, so I want you to to take that. So but yeah that that's my only my only feedback on here would be if this can go to a database model that'll make it more robust with good defaults in the code.
+
+Pallavi Badiger   33:52
+OK.
+So what you are telling like instead of storing the all our configuration, so this values in directly into the database and so admin interface can dynamically fetch that values right?
+
+Colin Moore   34:11
+Right, right.
+
+Pallavi Badiger   34:13
+Yeah, OK, I will look into this.
+
+Colin Moore   34:16
+And.
+And you can see the same pattern in every single one of our other things that involves like configurations and settings. Not so much in Ambar's part of the code, but anything from me. Like for instance, here's base dot py. So let me let me actually show you prod dot PY.
+
+Pallavi Badiger   34:21
+Mhm.
+Mm.
+Mm.
+Hmm.
+OK.
+
+Colin Moore   34:38
+So for prod dot Pi there is something that says site URL.
+
+Pallavi Badiger   34:44
+Hmm.
+
+Colin Moore   34:45
+Now this is going to try to look for an environment variable called site URL.
+
+Pallavi Badiger   34:51
+M.
+Mhm.
+
+Colin Moore   34:53
+If this value exists, great, we'll use it.
+
+Pallavi Badiger   34:55
+OK, hmm.
+
+Colin Moore   34:58
+But if it doesn't exist, I have a fall back to a reasonable value that I know works.
+
+Pallavi Badiger   35:03
+Mm-hmm. For the default, OK.
+
+Colin Moore   35:06
+And what that means is that even if ENV is missing this one, the build doesn't fail.
+
+Pallavi Badiger   35:10
+Hmm.
+OK, yes, right.
+
+Colin Moore   35:14
+And so that's that's a really good pattern to have. But you have you have two options to consider for it, and they're kind of tricky. But what I what I'll tell you for it is you have two options. So option one, because you have to if you're saying that you're going to have a reasonable default.
+
+Pallavi Badiger   35:17
+Hmm.
+Hmm.
+Hmm.
+
+Colin Moore   35:32
+That's fine and this is this is able to be changed because remember if you do it in a migration, sometimes it makes sense to do things in migrations.
+
+Pallavi Badiger   35:32
+Hmm.
+Hmm.
+OK.
+
+Colin Moore   35:42
+So you'll see that sometimes the migrations are pre-populated, like if we look at some of those for AI models, because we always know that we're going to have certain things set up.
+
+Pallavi Badiger   35:45
+Yes.
+Hmm.
+Mhm.
+
+Colin Moore   35:51
+So you can choose to do a custom migration that already loads in things like this by default.
+
+Pallavi Badiger   35:55
+Mm.
+OK.
+
+Colin Moore   36:00
+Now the caveat to that, the big asterisk, is that you want to make sure that it's not super custom and that it's generic.
+
+Pallavi Badiger   36:08
+E.
+
+Colin Moore   36:10
+Because anything that's a model change in Django is going to trigger a migration and you don't want to say every time a user group gets added, I'm updating the defaults in that file and then generate a new migration every time a user group gets added. That's what I mean a reasonable default. So for instance, the base level classes that you don't.
+Wanna load in except at runtime. You can always have things loaded in afterwards with a management command. Uh, or you know otherwise.
+
+Pallavi Badiger   36:36
+Hmm.
+Yeah.
+
+Colin Moore   36:39
+But think about when I say reasonable defaults, things that are always true.
+
+Pallavi Badiger   36:46
+Yes.
+
+Colin Moore   36:46
+So and and you'll see even for for some of these you'll see that I can't say. For instance, here's one for allowed hosts. Look at this line. I look for the allowed hosts variable in the environment file, but for default you'll notice that I don't pre-populate this.
+
+Pallavi Badiger   36:56
+Mm.
+Hmm.
+
+Colin Moore   37:02
+I just leave it as blank.
+
+Pallavi Badiger   37:07
+E.
+
+Colin Moore   37:08
+And the reason why? Well, because I can't guarantee that allowed host is going to remain the same and I don't want to have to just guess, you know, because if allowed host is missing from the ENV, I actually want the application to fail 'cause that would be unsafe.
+
+Pallavi Badiger   37:14
+Hmm.
+Yeah.
+Yes, right.
+
+Colin Moore   37:27
+So like and like the same is true for like you know the AI models, AI models. There's some easy settings that I can set up that are, you know, generic to any model, like for instance temperature or like the context limits or the response type or length.
+
+Pallavi Badiger   37:31
+Hmm.
+
+Colin Moore   37:43
+Fine, but I don't have default model names. Why? Because model names change and I don't wanna run a migration every time you know Chat GPD comes up with a new version.
+
+Pallavi Badiger   37:43
+Mm.
+Hmm.
+
+Colin Moore   37:55
+So yeah, that's what I mean with reasonable defaults. Defaults where it makes sense to have a default where it's pretty much always true.
+Um.
+So, yeah.
+But this pattern is definitely in the code base. It's it's something that's a really good pattern in general for production because it stops you. The only problem with something like this is that granted that these do change slowly. And like I said, it's those two people arguing, you know, person A, person B.
+
+Pallavi Badiger   38:10
+Mhm.
+Hmm.
+
+Colin Moore   38:24
+They will never agree because there's always a comeback that person A can have with person B and vice versa.
+
+Pallavi Badiger   38:30
+Yes.
+
+Colin Moore   38:32
+The biggest weakness here, if we look at the facts, is that this one will require a Python code redeploy if it changes. Like I said, person A says that doesn't change that often, so no problem. Person B says, well, it's going to trigger a deploy. That's bad practice, Person A says.
+
+Pallavi Badiger   38:39
+Mm.
+
+Colin Moore   38:48
+Well, the feature changed anyway. And person B says, well, what if it didn't? How can you know? That's an assumption.
+
+Pallavi Badiger   38:57
+Hmm.
+
+Colin Moore   38:57
+And person A crosses his arms and says person B go go away. I don't want to talk to you anymore. I don't agree. But so my my solution to it is do both reasonable defaults in the code just like this is a fall back.
+
+Pallavi Badiger   39:10
+It.
+Mm.
+
+Colin Moore   39:13
+And then extend it in the database so it can be customized.
+
+Pallavi Badiger   39:13
+Yes.
+OK, we'll start with the simpler one.
+
+Colin Moore   39:24
+But yeah, even even whenever you're mm-hmm.
+
+Pallavi Badiger   39:24
+Which where it is this one? This one is for AI models right? So I will check that thing.
+
+Colin Moore   39:30
+Yes, yes, it's in AM models.
+
+Pallavi Badiger   39:34
+Mhm.
+
+Colin Moore   39:36
+Um, in AI models it's in all of the settings files within the the project settings directory.
+
+Pallavi Badiger   39:40
+Hmm.
+OK.
+
+Colin Moore   39:46
+And then let me find another one for you, because what what you'll see is that in any of the Django models I actually don't allow for, you know, like for instance, Django has like choices.
+
+Pallavi Badiger   39:58
+Hmm.
+Mhm.
+
+Colin Moore   40:11
+Find one in the model.
+Like this you see.
+You see?
+
+Pallavi Badiger   40:16
+Mhm.
+
+Colin Moore   40:17
+I actually, unless it's something where you're sure that this is everything you're ever going to need.
+
+Pallavi Badiger   40:18
+OK.
+
+Colin Moore   40:24
+You'll find that I don't do this.
+
+Pallavi Badiger   40:28
+Hmm.
+
+Colin Moore   40:29
+And I'll give you a good example of one. Um, there was one. I'm gonna try to remember what this was saying. I think it's probably for time zones. Yeah, and accounts.
+
+Pallavi Badiger   40:39
+Hmm.
+
+Colin Moore   40:39
+So let me show you on this. So let's find I think it's in core accounts.
+Where's my models?
+So this is 1 where this is a good example of exactly what I'm talking about. Do time zones change? No, we hope not, right? Time zones are pretty much fixed. So technically, technically you could come up with an exhaustive.
+
+Pallavi Badiger   41:11
+Mm.
+Mm.
+
+Colin Moore   41:25
+List of these time zones.
+
+Pallavi Badiger   41:27
+Mm.
+
+Colin Moore   41:29
+There's this IANA uh time zone database and it says exhaustive list of every time zone ever.
+
+Pallavi Badiger   41:37
+OK.
+
+Colin Moore   41:40
+Now I could sit here and I could just go like this and pull this entire thing into Django.
+
+Pallavi Badiger   41:48
+2.
+
+Colin Moore   41:50
+As maybe a Jason file or something.
+And that is the pattern that I'm saying I would not do.
+Because why?
+
+Pallavi Badiger   42:01
+OK.
+
+Colin Moore   42:02
+Now I have things that can go stale.
+
+Pallavi Badiger   42:03
+Mm.
+Hmm.
+
+Colin Moore   42:06
+So instead, if you look at the time zone model, I'll send you the path to this one so you can get to it easily. It's a good example.
+
+Pallavi Badiger   42:09
+Hmm.
+
+Colin Moore   42:32
+So the time zone, instead of having an exhaustive list, you can see that I defaulted to a database field.
+
+Pallavi Badiger   42:40
+OK.
+
+Colin Moore   42:41
+You know, and I don't have a hardcoded list of databases.
+
+Pallavi Badiger   42:44
+Hmm.
+
+Colin Moore   42:46
+But let's look at the migrations for a moment.
+Migration 20 is create time zone model dot high and migrations.
+
+Pallavi Badiger   42:56
+Yes, OK.
+
+Colin Moore   42:58
+And it just sets the fields.
+So no data here, just simple.
+
+Pallavi Badiger   43:06
+Mm.
+
+Colin Moore   43:06
+And check out Migration 21 though this one's special.
+Uh.
+
+Pallavi Badiger   43:11
+OK.
+K all the time.
+
+Colin Moore   43:13
+You see?
+In the migration itself, I created a second migration to populate that table with default data.
+
+Pallavi Badiger   43:24
+Mm.
+
+Colin Moore   43:25
+So this solves 2 problems at once. This solves problem A where I need things to be flexible after deployment so I don't have to redeploy the code just because I want to add in or remove a time zone.
+
+Pallavi Badiger   43:35
+Hmm.
+
+Colin Moore   43:35
+But it also solves roblem B where I'm starting U fresh and I don't want to sit there. I don't know about you, but I would never want to sit there in Django admin and have to manually Add all of these.
+You know, that would not be fun.
+
+Pallavi Badiger   43:47
+OK.
+
+Colin Moore   43:49
+And I you could say to me, Colin, you could just do a management command and I'm like lovey, you know, if you want to have a dedicated person for management commands on the team, that's when that works. But but for smaller things, if we know this is always going to be true because we chose reasonable defaults.
+
+Pallavi Badiger   43:50
+Hmm.
+And.
+And.
+
+Colin Moore   44:08
+Then we can say, yeah, this can just be a migration because it's going to be needed for everyone. So for instance, if I was to make it a management command, notice that you never had to manually touch anything whenever we made the change for time zones in the app.
+
+Pallavi Badiger   44:25
+Yes.
+
+Colin Moore   44:25
+Why? Because all you did was you applied the migrations on your local system.
+
+Pallavi Badiger   44:29
+Yeah.
+
+Colin Moore   44:30
+So this is a good approach for things that you know are reasonable, reliable, and won't change. And if they do change, it's not a big deal.
+
+Pallavi Badiger   44:39
+Hmm.
+
+Colin Moore   44:40
+So in this in this sense, these migrations only run one time.
+
+Pallavi Badiger   44:43
+Hmm.
+
+Colin Moore   44:45
+So it's just to seed the data properly.
+
+Pallavi Badiger   44:49
+Yeah, OK.
+
+Colin Moore   44:51
+Let me give you these as well.
+So it's a it's a good pattern to follow because it'll take care of two big issues and it'll keep both person A, person B happy. So you get to not have a giant file with all this stuff, you know, loaded in.
+
+Pallavi Badiger   45:15
+Hmm.
+No.
+Hmm.
+
+Colin Moore   45:24
+But you do get to have this data here without having to, you know, go and, you know, type each and every one of these in and set the defined values and everything like that.
+
+Pallavi Badiger   45:27
+Hmm.
+OK.
+
+Colin Moore   45:38
+So it's a it's a good pattern to follow. Um, that's what I do for pretty much everything that is config level in the app.
+
+Pallavi Badiger   45:45
+Hmm.
+
+Colin Moore   45:46
+Um, but I'll I'll put it this way. What what would be and what would not be a reasonable default here? Reasonable default could be things like you had like we were talking like the guest group or bug managers or user manager or recruiters. Those are good things 'cause those are definitely always gonna be in the app.
+
+Pallavi Badiger   46:02
+Hmm.
+
+Colin Moore   46:03
+What I wouldn't do is I wouldn't go to pod and set up a migration with default data for like Google and Cisco.
+
+Pallavi Badiger   46:07
+Mm.
+OK.
+
+Colin Moore   46:12
+Because even though those are definitely Bay one customers.
+
+Pallavi Badiger   46:17
+Hmm.
+
+Colin Moore   46:17
+That's not like a a thing that's that big of a burden to add on a new client.
+You know, it's not a guarantee, like let's say that we were trying to sell talent AI one day. Think of it that way. What is not specific to Bay one, but is specific to the app?
+
+Pallavi Badiger   46:29
+Mhm.
+Mm-hmm.
+
+Colin Moore   46:36
+Because just like AI models, I wouldn't want to pre-select like GPD 4.1. Whenever we started Talon AI, GPD 4.1 was brand new. Guess what? We're on GPD 5.2, you know? So if I would have that hard coded in a migration, then that would be Comdet code and that would need a migration to fix it.
+
+Pallavi Badiger   46:42
+Hmm.
+Mm.
+
+Colin Moore   46:56
+You can see the problem. We would always need another migration every time something changes.
+
+Pallavi Badiger   46:59
+Mm.
+
+Colin Moore   47:04
+So yeah, reasonable default, that's what that's what I mean. Things that are like fixed, that don't change, that are reliable and separate the purpose of the application from the person using it. So wouldn't make sense to pre-populate with Google Cisco pod. That could be a management command, you know, like that could be a management command. That would be fine.
+
+Pallavi Badiger   47:11
+Mhm.
+Hmm.
+
+Colin Moore   47:24
+But for things that are in migrations, it should be relative in terms of the rest of the app. So things that you know, regardless of the person using it, like let's say we sell this as a tool to someone and they're at a new company, they don't need to know about, you know, Cisco and Google. They might not even be clients, so.
+
+Pallavi Badiger   47:43
+Hmm.
+
+Colin Moore   47:43
+We could give them maybe a management command that goes to like a Jason file and says here populate all the candidates in bulk in the list or something like that.
+
+Pallavi Badiger   47:54
+OK.
+
+Colin Moore   48:00
+Does does that make sense for?
+
+Pallavi Badiger   48:01
+Yes, Colin, yes, got it. Yes. So defaults the which one will stable that defaults go to into the migrations and things like it might change like models or client groups.
+Not that things.
+
+Colin Moore   48:21
+Right, right. And you'll be able to see one more thing too. So even though I have things in migrations, you'll see another part of this.
+
+Pallavi Badiger   48:29
+Hmm.
+
+Colin Moore   48:34
+Let me see.
+Let me find it in the model.
+So if you look at the model or user preferences.
+Wrong app.
+For user references, notice that even though I have in the migration a default, I still am setting a default on the model itself.
+
+Pallavi Badiger   49:06
+OK.
+
+Colin Moore   49:07
+You see, so it's it's even in two places.
+
+Pallavi Badiger   49:08
+Yeah.
+
+Colin Moore   49:12
+And that's good, because that means that no matter what, we're in good shape. That's what I mean too. So if you put it as long as they're In Sync with each other.
+
+Pallavi Badiger   49:18
+Mhm.
+Mm.
+
+Colin Moore   49:21
+Then it's it's OK and so you can say.
+Maybe here?
+This is default UTC, so that must mean.
+
+Pallavi Badiger   49:33
+Mm.
+
+Colin Moore   49:35
+That I have UTC as a zone over here.
+
+Pallavi Badiger   49:41
+OK, yes.
+
+Colin Moore   49:42
+And and that's just, you know, default for everyone. So if I can't detect on your machine what time zone you're in or something fails or errors out.
+
+Pallavi Badiger   49:44
+See.
+Mm mm.
+
+Colin Moore   49:52
+Well, if I don't have a time zone, then what's going to happen? Well, now the rest of the apps aren't going to work right.
+
+Pallavi Badiger   49:58
+Hmm.
+
+Colin Moore   49:59
+Like you know my my timestamps will be off, notifications probably won't run. I won't definitely will not be able to access the calendar or transcripts because all the times won't be able to be set because there's no time zone specified. So that's why always have a fall back either at the model level or if it's even in the Python code you can do that.
+You can do that there too, and you saw both flavors of that. Uh today. So like even when I showed you the settings, that's a default in the Python code because it's not a model Uh configuration.
+
+Pallavi Badiger   50:22
+Mm.
+OK, but having these defaults in both the models and migrations, So what about this performance? Will it be impact?
+
+Colin Moore   50:40
+No, no, because remember for default, default only happens whenever a new row is created.
+
+Pallavi Badiger   50:40
+Yeah, so just.
+Hmm.
+
+Colin Moore   50:48
+So default only gets put in whenever you're first starting out when the row first gets created, assuming that the value has not been specified in time zone.
+
+Pallavi Badiger   51:00
+OK.
+
+Colin Moore   51:02
+You see, so like for instance, um, let me do this.
+Let's find here.
+See so user references dot time zone.
+
+Pallavi Badiger   51:26
+Yeah.
+
+Colin Moore   51:27
+And as long as the user preferences exist and it's not UTC.
+Then say using time zone from user preferences. Else if it is UTC then no problem, just use UTC because that's the default for the entire application.
+
+Pallavi Badiger   51:39
+Hmm.
+OK.
+
+Colin Moore   51:45
+So what that means is that like if I create a new user and I don't specify something like a time zone, it doesn't remain blank whenever it gets.
+
+Pallavi Badiger   51:45
+Hmm.
+Hmm.
+Yeah, it default one, OK.
+
+Colin Moore   51:57
+Yeah, but after that, whenever I'm trying to, you know, assign a user a new time zone.
+
+Pallavi Badiger   52:03
+Hmm.
+
+Colin Moore   52:04
+Now that's easy.
+Now I can say that user's time zone. Let me find this.
+User preferences.
+
+Pallavi Badiger   52:16
+Mm.
+
+Colin Moore   52:17
+Now I can say for instance this person.
+
+Pallavi Badiger   52:20
+Hmm.
+
+Colin Moore   52:21
+Their time zone. This should be a drop down realistically to that to that time zone table. It's that's that's one thing that I'll yell at myself about because I I set this up. This is exactly what I mean with typos because you could think like I want to do like IST, but that's not a valid.
+Identifier. That's exactly when I would use the dropdowns dynamically to query the back end instead of a a Xbox.
+
+Pallavi Badiger   52:38
+Uh, yeah.
+Mm.
+textbooks okay
+
+Colin Moore   52:49
+And so this is a good pattern to follow then, because that means that imagine if this was a drop down, I can list all the time zones, select the right one, and then at that point the default now doesn't matter 'cause I've now chosen the time zone manually.
+
+Pallavi Badiger   52:56
+Mm mm.
+Mm.
+
+Colin Moore   53:05
+And so then the whole app works fine as a result.
+
+Pallavi Badiger   53:10
+OK.
+
+Colin Moore   53:13
+So yeah, defaults and models are OK. Performance wise, no impact because this only happens on creation. This rules everything after creation and having that source of truth is really, really important because that way you know there's never a discrepancy later on in the app.
+
+Pallavi Badiger   53:18
+Mhm. OK.
+OK.
+
+Colin Moore   53:32
+So in fact that that was the issue with between Saurav and and Shalini originally when Shalini was doing the communication stuff for e-mail. Saurav was doing communications too and he was building the calendar.
+
+Pallavi Badiger   53:41
+Mhm, yeah.
+Oh, yes.
+
+Colin Moore   53:47
+And they were using different. So this there's this like I was showing these Ayana timestamps, the IANA timestamps.
+
+Pallavi Badiger   53:56
+Hmm.
+Um.
+
+Colin Moore   54:00
+And so Saurav was using type 1, Shalini was using type 2 and then the the the user's preference was getting set based upon whoever the you know person is and you know it would error out all of a sudden. But only if you noticed I I noticed for my testing I was like it's only airing out if I go to the calendar screen first.
+
+Pallavi Badiger   54:04
+OK.
+Mm mm.
+
+Colin Moore   54:20
+Saurav is telling me there's a problem, but Shalini's saying no problem.
+
+Pallavi Badiger   54:24
+OK, yes.
+
+Colin Moore   54:24
+Oh, why? Because Shalini's not going to the calendar app. Only Saurav is.
+
+Pallavi Badiger   54:30
+Yeah.
+
+Colin Moore   54:30
+So, yeah.
+But yeah, so hopefully, hopefully that all all make sense, but I can, I can go into this. Um.
+
+Pallavi Badiger   54:38
+It.
+Escalant. It's makes sense a lot.
+So I will refer these things.
+
+Colin Moore   54:50
+Other than that, I think your your issue is good and honestly you could even keep that issue exactly as is, prove it out with the config dot PY and then move it to a model. I'll let you. Like I said, I'll let you make that call because it might be nice to, you know, test it out that way without making.
+
+Pallavi Badiger   54:59
+Mhm.
+OK.
+
+Colin Moore   55:07
+Without getting too much in the weeds on the the database side, because once that works, then you'll very easily be able to use Cloud to help you know convert it over to a model. Once you have every everything worked out, it might be easier that way.
+
+Pallavi Badiger   55:12
+Mhm.
+Yes, yes, good.
+OK.
+I will go through this.
+
+Colin Moore   55:31
+Nice. Nice.
+Good. So I know, I know we've been doing this for a while, so don't worry, we're we're going to get into some some new topics once we're there. I took care of some things to help us out with what comes next.
+
+Pallavi Badiger   55:44
+OK.
+
+Colin Moore   55:51
+So 'cause I know you basically didn't get a chance to to do a couple of of things, so I I wanted to help you out 'cause this is a big task, this permission stuff.
+
+Pallavi Badiger   55:51
+Hmm.
+Yeah, it's OK.
+
+Colin Moore   56:04
+So once this is done, the next project that we're going to be kind of getting started on is this one with Singularity. So this is going to be a really cool. I think you'll you'll love this one because it's going to be so much easier than Talent AI, but so much more rewarding in a way.
+
+Pallavi Badiger   56:07
+Yes.
+Hmm.
+OK.
+Mhm.
+Mhm. OK.
+
+Colin Moore   56:22
+Um.
+So let me.
+Pull this up and then I'll share my screen.
+So remember long long while back we were talking about this like kind of internal website for projects.
+
+Pallavi Badiger   56:55
+Yes.
+
+Colin Moore   56:56
+So that we're still gonna do. I got everything set up for it.
+
+Pallavi Badiger   57:01
+Mm-hmm.
+
+Colin Moore   57:02
+So you don't have to do any of that, which is good. That'll be save you some, some, some bandwidth as well.
+
+Pallavi Badiger   57:08
+Mhm.
+Uh, the project name is singularity. OK, mm-hmm.
+
+Colin Moore   57:11
+And So what?
+Yes, so, so let me give you the the kind of overview of this.
+
+Pallavi Badiger   57:18
+Hmm.
+
+Colin Moore   57:19
+So it's part of it's coming from my pain, part of it's coming from sales pain, part of it's coming from leadership. So when we're talking about solutions.
+
+Pallavi Badiger   57:24
+Oh.
+Oh.
+Mm.
+
+Colin Moore   57:33
+And I'll cover this quick 'cause I wanna. I know it's already late for you, so I'll make sure we get off, but.
+
+Pallavi Badiger   57:39
+Mm-hmm.
+
+Colin Moore   57:40
+We we have a problem where the frankly the sales team is not used to selling AI.
+
+Pallavi Badiger   57:45
+OK.
+
+Colin Moore   57:46
+That's the core. Problem #2 is the sales team, you know and not I I I'll say this to the sales team and I do say this to the sales team. So don't think I'm just talking about.
+
+Pallavi Badiger   57:48
+Hmm.
+Hmm.
+
+Colin Moore   58:00
+Sales team is so unstructured it's not even funny.
+
+Pallavi Badiger   58:03
+Yeah.
+
+Colin Moore   58:04
+So, you know, people were asking me, hey, Colin, can you get on this call with the VP of Walmart? And I'm like, about what?
+
+Pallavi Badiger   58:11
+Hmm.
+
+Colin Moore   58:13
+And they're like about AI. And I said, great, what about AI? Like, you know, like what? What do you realistically want me to do? I can't go in blind to everything.
+
+Pallavi Badiger   58:23
+OK.
+
+Colin Moore   58:24
+And so the sales team's problem is they have a lot of different places where they get information in.
+
+Pallavi Badiger   58:30
+Mm.
+
+Colin Moore   58:30
+That they don't collect properly.
+
+Pallavi Badiger   58:34
+OK.
+
+Colin Moore   58:35
+And that leads to two things. First of all, whenever they meet with clients and they need to get us involved, we're going in pretty much blind. We're pretty much it's just like I told you. Imagine if I said to you, hey, Pallavi, can you make me some slides for a meeting with Walmart? And then you say, yeah, what about? And I say about AI.
+
+Pallavi Badiger   58:37
+Mm.
+Mhm.
+Hmm.
+
+Colin Moore   58:54
+We we can't be successful there. And I say what what kind of conversations did you already have? And the salesperson calls you and tells you in 2 minutes a very, very non-technical version of what they talked about.
+
+Pallavi Badiger   59:01
+M.
+Mm.
+Hmm.
+
+Colin Moore   59:08
+And you say, um, put yourself in my shoes. I say, why should I waste time on this? You know, in the best way. I never say that. That's not my mindset. But that's kind of the mindset you have to have with when you're talking about this, 'cause otherwise you're gonna try to solve all the world's problems.
+I say why essentially make me care about this? Is this going to give us some new revenue? Is this going to be, you know, a really good client project for us? Is this something we've already done where it's going to be very easy? And we call that as qualification.
+
+Pallavi Badiger   59:41
+Mhm.
+
+Colin Moore   59:42
+So qualification is that kind of like a grading rubric, you know, like a a test that we say is this opportunity ready for the AI team to get involved or is it still too early in the sales cycle?
+
+Pallavi Badiger   59:46
+Hmm.
+
+Colin Moore   59:57
+So problem A is they don't know how to sell AI. Problem B is that after the calls, they're not giving enough information for us to be successful.
+
+Pallavi Badiger   1:00:01
+Mm.
+Mhm.
+
+Colin Moore   1:00:09
+Then we go to problem C, which is on our side.
+
+Pallavi Badiger   1:00:13
+Hmm.
+
+Colin Moore   1:00:13
+How the heck do we keep all this up to date?
+
+Pallavi Badiger   1:00:17
+OK.
+Yes, mm-hmm.
+Hmm.
+
+Colin Moore   1:00:37
+And maybe you might look at this and say, why are they even doing Django permissions or or like this whole permissions research? That seems unnecessary. Well, it's because you don't understand the context of where it came from.
+
+Pallavi Badiger   1:00:49
+Mm.
+
+Colin Moore   1:00:50
+So the the the problem on the solutions and delivery side is that we have a burden to keep track of all the projects.
+
+Pallavi Badiger   1:01:00
+OK.
+
+Colin Moore   1:01:01
+Keep leadership informed.
+
+Pallavi Badiger   1:01:04
+Hmm.
+
+Colin Moore   1:01:04
+And then finally, we have a handoff back to sales at some point because once we do something really amazing, now the sales team wants to say, OK, what did you do so that we can go and sell this to more people?
+
+Pallavi Badiger   1:01:11
+Hmm.
+
+Colin Moore   1:01:19
+And right now, that's a huge problem because the sales team doesn't know enough about what we are doing or what we have done or what our capability is. So what do they do? They send me a message 30 times a day saying, can you give me PowerPoint slides talking about our capability?
+
+Pallavi Badiger   1:01:28
+Hmm.
+Hmm.
+
+Colin Moore   1:01:36
+And I say, Oh my gosh, that is just too much to deal with, 'cause we have so many different industries that it's, you know, really challenging.
+So how do we resolve this? This is where Singularity comes in. Why do I call Singularity? Because it's one place for everything.
+
+Pallavi Badiger   1:01:55
+OK.
+
+Colin Moore   1:01:57
+So the way that this would go, this will be a very simple UI and some cool AI features built in. The the way that this would go is there would be of course like a normal home screen.
+
+Pallavi Badiger   1:02:03
+Mhm.
+Mhm.
+
+Colin Moore   1:02:10
+And then a place where people can go and add on a new project.
+
+Pallavi Badiger   1:02:15
+OK.
+
+Colin Moore   1:02:17
+When they add in that new project, what do they need? Well, we give them fields and we'll we'll talk through this way more detail. I'm not trying to don't. Don't think you have to memorize this today because this will be its own repository.
+
+Pallavi Badiger   1:02:26
+Mhm.
+Yeah.
+
+Colin Moore   1:02:30
+But whenever they are, you know, saying there's a new AI project, what do we need to know? I need to know who the client is.
+
+Pallavi Badiger   1:02:37
+Hmm.
+
+Colin Moore   1:02:38
+I need to know who on our team is working with that client so there's a good, you know, anchor person and owner for the process.
+
+Pallavi Badiger   1:02:46
+Mhm.
+
+Colin Moore   1:02:46
+I need to know in general what it's about.
+And I need to know in general what kind of documentation do you have ready for me to support this?
+
+Pallavi Badiger   1:02:59
+Hmm, yes.
+
+Colin Moore   1:03:01
+So imagine that screen. Pretty easy. Just an intake screen, nothing more, just just a form.
+
+Pallavi Badiger   1:03:05
+Mhm.
+
+Colin Moore   1:03:09
+Well, at the bottom of that, imagine that I throw AI into this and I'll show you. I shouldn't show you, but I'm going to show you an example of an e-mail that I got.
+
+Pallavi Badiger   1:03:12
+Mm.
+OK.
+
+Colin Moore   1:03:20
+From someone and so you can see exactly how bad this is.
+Let me find.
+I don't don't think I'm just calling someone out, but I want you to see what the exactly the problem we're gonna solve with this.
+
+Pallavi Badiger   1:03:45
+No.
+
+Colin Moore   1:03:45
+Can you see my screen again?
+
+Pallavi Badiger   1:03:46
+Yes, yes, Colin.
+
+Colin Moore   1:03:48
+So this person said this is one of our internal sales. Hi Anuj and Khan. Tailored Brands VP and three senior directors are ready for us to meet them via Teams on Friday, Feb 20. They have an hour. Please let me know if this works.
+
+Pallavi Badiger   1:03:49
+Remote.
+Mm.
+Mhm, mhm.
+And.
+OK.
+Tailor brands.
+
+Colin Moore   1:04:09
+So.
+
+Pallavi Badiger   1:04:10
+Mhm.
+
+Colin Moore   1:04:11
+So, Pallavi, do you know who Taylor France is?
+
+Pallavi Badiger   1:04:14
+No, I don't know. I don't have idea.
+
+Colin Moore   1:04:20
+Me either. And do you know whose job it is to tell me who Taylor France is?
+
+Pallavi Badiger   1:04:21
+Yeah. So we, yeah, sales team. So we should get the context from him, from them.
+
+Colin Moore   1:04:24
+Sales team.
+Correct. Correct. And so imagine this. Imagine the bottom of this intake form in this Django app. If they give me something like this, what am I going to do with that? You know, like, what am I going to do? And you should have seen how I won't show you because it's kind of dirty laundry. But you know, the rest of this conversation went like me saying back, hey.
+
+Pallavi Badiger   1:04:34
+Mhm.
+Hmm.
+
+Colin Moore   1:04:50
+I need actual context. Like what are we even talking about? Don't tell me a VP. Why can't you give me a name and a title? Even a LinkedIn profile, you know? Why is that so hard? So what's true though is we waste so much time internally sending messages back and forth to each other whenever it's as simple as an AI chatbot coming in.
+
+Pallavi Badiger   1:04:57
+OK.
+Mm mm.
+Mm.
+
+Colin Moore   1:05:09
+And saying, hey, you told me this information, that's not enough. I need more. And before I'm even gonna agree to get on a call, I need you to provide that info.
+
+Pallavi Badiger   1:05:14
+Yes, night.
+Mm.
+Yeah.
+
+Colin Moore   1:05:21
+So the good thing here is this is a fairly simple interface. This is definitely one we already can use the what the patterns we already have inside of Talent AI because it's a fairly simple thing.
+
+Pallavi Badiger   1:05:26
+Hmm.
+Hmm.
+Hmm.
+
+Colin Moore   1:05:36
+And then maybe the next screen is tell me who of the internal team should be a part of this project.
+
+Pallavi Badiger   1:05:43
+Yes.
+
+Colin Moore   1:05:44
+And this is actually an even easier structure than what we had to do for pods, because my my philosophy here is going to be and people aren't going to like this, but I don't have to care because I'm I'm in control here.
+
+Pallavi Badiger   1:05:49
+Mm.
+
+Colin Moore   1:05:59
+My philosophy going forward with the sales stuff is everyone can see everything.
+
+Pallavi Badiger   1:06:03
+Hmm.
+
+Colin Moore   1:06:04
+And so sales team doesn't like that because for whatever reason, some sales people kind of get territorial in a way. They say like that's my client. I don't want you to see what we're doing with my client because I want to get the business.
+
+Pallavi Badiger   1:06:13
+OK.
+Mm.
+
+Colin Moore   1:06:19
+Well, I'm not gonna put up with that because it's anyone's business. It's not a a salesperson's business.
+
+Pallavi Badiger   1:06:25
+Yes.
+
+Colin Moore   1:06:25
+So you know, and I'm like, you know, that's the fun part. When we do applications like this, we can enforce business rules and business logic. So for in terms of people being added in, those are going to be people that get notified whenever the project changes or whenever something's due.
+
+Pallavi Badiger   1:06:29
+It.
+Yeah, mm.
+
+Colin Moore   1:06:43
+But it's not like it is in talent AI where we're trying to say from a security or privacy perspective, they can't access this.
+
+Pallavi Badiger   1:06:52
+OK.
+
+Colin Moore   1:06:53
+It's it's just just a matter of organization. Otherwise, you know, everyone can see everything. We don't need to worry about blocking. I want the sales team to break this habit of being territorial, and that's how we'll achieve it.
+
+Pallavi Badiger   1:06:56
+Mm.
+
+Colin Moore   1:07:08
+So OK, so I can add in the internal members of the team to the project and you know the project is not yet qualified, right? So the project we're still providing details.
+
+Pallavi Badiger   1:07:13
+Hmm.
+Yeah.
+
+Colin Moore   1:07:21
+And the idea is for the sales team not to wait until they need a meeting or they need something.
+
+Pallavi Badiger   1:07:22
+Mhm.
+OK.
+
+Colin Moore   1:07:29
+That's that's another big problem right now with the sales team. They're being very reactive, not proactive.
+
+Pallavi Badiger   1:07:33
+Mm-hmm.
+
+Colin Moore   1:07:37
+So what happens is I get an e-mail like this. This was sent to me. They wanted a meeting on the 20th. Guess what the 20th was. It was our annual kickoff event.
+
+Pallavi Badiger   1:07:37
+OK.
+Mm good, yeah.
+
+Colin Moore   1:07:46
+Yeah, so they let me know, you know, with maybe three days notice that I should be meeting with AVP and should have slides ready.
+
+Pallavi Badiger   1:07:56
+Hmm, yes.
+
+Colin Moore   1:07:57
+That's not OK.
+And the fact is that this opportunity wasn't qualified, which means we don't even know. So yeah, you can get a meeting. Great. How do we know it's even a good opportunity that makes sense for us?
+
+Pallavi Badiger   1:08:11
+Yes, right.
+
+Colin Moore   1:08:12
+Because that that's what we'll be able to solve with this too. So but before we get to that, the next screen is going to be a a really fun one for us and it's gonna be a fun one for Django. We already have everything to do this and it'll be called as like black hole.
+
+Pallavi Badiger   1:08:18
+Mm.
+Mhm.
+
+Colin Moore   1:08:28
+Why black hole? Because it's just another screen on the app. It's literally just a generic place to upload literally anything.
+
+Pallavi Badiger   1:08:35
+Hmm.
+
+Colin Moore   1:08:37
+And so if you wanna upload pictures, PowerPoints, PDFs, you know, transcripts, the sound files, whatever it might be.
+
+Pallavi Badiger   1:08:45
+OK.
+
+Colin Moore   1:08:46
+All we're doing is we have an upload portal for that project where anything that gets uploaded immediately gets put in a folder in BLOB storage, just like what we're doing today.
+
+Pallavi Badiger   1:08:50
+1.
+OK.
+
+Colin Moore   1:08:59
+OK. And so when we do that, the way to think is think about this as what's called blockchain.
+
+Pallavi Badiger   1:09:05
+Hmm.
+
+Colin Moore   1:09:08
+And for blockchain, what it means is at a point in time you have an immutable object of data.
+
+Pallavi Badiger   1:09:14
+OK.
+
+Colin Moore   1:09:15
+So every time you upload there is some chronology to it. Maybe when I upload something I need to say is this from today? Is this from last week? Because I need the timeline of when these things happened.
+
+Pallavi Badiger   1:09:17
+Um.
+Yes.
+
+Colin Moore   1:09:28
+And that's pretty much it. They can upload anything and we can let our back end utilities ingest those. You know, we don't have to really focus too much on how we're parsing or using that information. It's just a matter of having all those files.
+
+Pallavi Badiger   1:09:41
+Hmm.
+
+Colin Moore   1:09:43
+So then the sales team should be doing this while we are qualifying because it's totally possible that they gave great details on the first page and I say sounds interesting, but I need to see if they actually have money to pay us with.
+
+Pallavi Badiger   1:09:52
+Mhm.
+OK.
+
+Colin Moore   1:09:58
+Right, 'cause 'cause some people have great ideas, but they don't have any authority of their company to sign a contract. So it might be a really cool idea, but not worth our time because, you know, there's no business possibility there.
+
+Pallavi Badiger   1:10:04
+Hmm.
+
+Colin Moore   1:10:11
+But we basically give the sales team a way to upload things consistently to keep on building that context up.
+
+Pallavi Badiger   1:10:19
+Hmm.
+
+Colin Moore   1:10:20
+And they can do that before qualification happens. For us, it's again just AI qualification. So AI goes and looks at all the documents provided.
+
+Pallavi Badiger   1:10:26
+OK.
+Mm.
+Mm.
+3.
+
+Colin Moore   1:10:39
+It'll say back to the user, you know, hey, you know, great, we're 90% complete. Still need a little bit more information before we send this off to the AI team. Don't reach out to them on the site 'cause they're not gonna answer, but.
+Continue to do your job as a salesperson. Continue to gather information and upload it here. And whenever that lead gets qualified and we'll be transparent as to what's missing, right? Whenever we feel we have enough information that this looks like a real opportunity, then basically our team will get a detailed breakdown.
+
+Pallavi Badiger   1:11:00
+Mhm.
+Mm.
+
+Colin Moore   1:11:15
+Just AI generated of all the information so far and we can make a decision if we want to roceed forward with that meeting or not.
+
+Pallavi Badiger   1:11:24
+OK.
+
+Colin Moore   1:11:26
+So that takes care of about 80% of headache for the sales team and me.
+
+Pallavi Badiger   1:11:31
+Mm-hmm.
+
+Colin Moore   1:11:32
+Right there. That saves an enormous amount of time.
+
+Pallavi Badiger   1:11:36
+Mm.
+
+Colin Moore   1:11:37
+So what's what's the cool interesting part that comes next? Because that's that's great and that helps us for project intake, but it doesn't solve the rest. So let me give you a very quick overview of this. We'll go through this definitely again in far more detail.
+
+Pallavi Badiger   1:11:50
+Mm.
+
+Colin Moore   1:11:53
+Uh.
+
+Pallavi Badiger   1:11:53
+Mm.
+
+Colin Moore   1:11:55
+But I'll be very quick here 'cause I wanna get you.
+Off of the phone, it's late for you now.
+
+Pallavi Badiger   1:12:02
+No, it took it.
+
+Colin Moore   1:12:06
+So the next problem is whenever the sales team needs slides.
+
+Pallavi Badiger   1:12:10
+Hmm.
+
+Colin Moore   1:12:11
+And to be honest with you, our slides are ugly.
+
+Pallavi Badiger   1:12:15
+Hmm.
+
+Colin Moore   1:12:15
+I mean, some of them are OK, but there's a lot of slides where you can tell like this one.
+
+Pallavi Badiger   1:12:21
+OK, very missing is, yeah.
+
+Colin Moore   1:12:22
+That's not winning us 1,000,000 bucks, yeah.
+And worse than that, the other problem that I'm getting from people is people are straight up giving me completely. I'm not going to say any bad words here, but completely garbage use cases because they're going to ChatGPT and saying write me a case study for an AI project that they wanted.
+
+Pallavi Badiger   1:12:35
+Mhm.
+Oh.
+
+Colin Moore   1:12:47
+And then the problem is, uh, you imagine this. Imagine if I said OK, I'm gonna go to Claude and ask Claude anything and then come back to you and say, OK, give it to me tomorrow.
+
+Pallavi Badiger   1:12:57
+Hmm.
+
+Colin Moore   1:12:58
+Makes no sense. Makes no sense.
+
+Pallavi Badiger   1:13:00
+Yes, me.
+
+Colin Moore   1:13:01
+So for this sales team, it's the same problem where they were generating, you know, a bunch of documents and sharing them with customers. And you know, the one happened with Walmart. I had to, you know, I I've started to put my foot down. You'll you'll see I'm, I'm a lot more vocal, especially now that Suresh and Priya are here.
+
+Pallavi Badiger   1:13:10
+Mm.
+
+Colin Moore   1:13:19
+I said cancel the meeting.
+
+Pallavi Badiger   1:13:22
+OK.
+
+Colin Moore   1:13:22
+I understand it's with the VP of Walmart. Cancel it. Why? Because you told them that seriously, the sales team told them that we have a ready to go product, not like a solution that we can do, but a ready off the shelf product that we sell and provide as a service.
+
+Pallavi Badiger   1:13:25
+Hmm.
+Mm.
+Mm.
+Mm mm.
+
+Colin Moore   1:13:39
+That will give Walmart a chat bot for their whole website and give users preferences and suggestions for things to add to their cart.
+
+Pallavi Badiger   1:13:48
+Hmm.
+
+Colin Moore   1:13:49
+And they asked me to demo that within, uh, four hours of a meeting.
+
+Pallavi Badiger   1:13:55
+Yes.
+
+Colin Moore   1:13:56
+And I said, are you nuts?
+You know, where did that come from? Because I certainly never said that we had anything like that. And I'm not going to drop everything on the team to make up for you just making stuff up. I can't do that.
+
+Pallavi Badiger   1:14:09
+Mhm.
+
+Colin Moore   1:14:11
+So the reason was is that the sales team needs slides. That's that's what they do. They need slides and they need information.
+
+Pallavi Badiger   1:14:19
+Mm.
+
+Colin Moore   1:14:22
+So the bad way to go is to have things like Cloud or ChatGPT generate things for for clients and even things like Gamma dot AI or Canva. Yeah, they can give you slides. Did they mean anything? You know, like if I go to Gamma?
+
+Pallavi Badiger   1:14:34
+Mm.
+Mhm.
+Mm.
+
+Colin Moore   1:14:45
+Let's just.
+So you.
+Have you seen Gamma?
+
+Pallavi Badiger   1:14:55
+No.
+
+Colin Moore   1:14:57
+I'll show you. It's like 2 seconds. It's basically a game.
+
+Pallavi Badiger   1:14:57
+It's a OK is it generate a power paint?
+
+Colin Moore   1:15:02
+Yeah.
+
+Pallavi Badiger   1:15:04
+OK.
+
+Colin Moore   1:15:06
+So make me a sales deck for Sephora.
+
+Pallavi Badiger   1:15:12
+Mm-hmm.
+
+Colin Moore   1:15:13
+On Agentec AI or Bay one solutions. Now pretend that I'm a a salesperson that has no clue about AI.
+
+Pallavi Badiger   1:15:24
+Mhm.
+
+Colin Moore   1:15:25
+This sounds great.
+And let's say 5 cards, so 5 slides and I have Studio or Pro and I have default size. Let's go traditional and it'll be in English and it'll be a presentation. This sounds way too good to be true, right?
+
+Pallavi Badiger   1:15:36
+Mm.
+OK.
+Hmm.
+
+Colin Moore   1:15:43
+Let's see, let's say generate outline.
+This is a like the most popular app right now.
+And look, wow, it came up with these slides, this content. Oh my God, this is so beautiful. Let's let's just go ahead and say generate. I'm not even going to read it, because you know what? That was just so fast and so good.
+
+Pallavi Badiger   1:16:03
+M.
+Yeah, sorry.
+
+Colin Moore   1:16:08
+This is pretty much what's happening right now.
+
+Pallavi Badiger   1:16:11
+Yeah, it won't match with our actually we are we have built and.
+
+Colin Moore   1:16:16
+Right, right. And wow, look, it's it's so powerful and amazing. Woo, you know, what the heck? Like, come on, look, the Bay One solution. Sephora grade AI instantly. Agentic AI deploy agents in under 5 minutes.
+I mean, come on. Like, what am I supposed to do? You did like I would kill you guys, you know, like that would be horrible.
+You see, like this, this looks good if you're. I mean, frankly, you don't care about doing good work, but it's really bad. We just made-up metrics.
+
+Pallavi Badiger   1:16:48
+Mhm.
+Hmm.
+
+Colin Moore   1:16:53
+You know we can't. I never told it any of that. There's no way it could know any of this. We've never done anything like this. Deploy agents in under 5 minutes. We're gonna get ourselves in so much trouble, it's not even funny.
+You know, so that's the problem and the word for it is grounding.
+
+Pallavi Badiger   1:17:05
+Mm.
+No.
+
+Colin Moore   1:17:11
+So these are totally non grounded.
+
+Pallavi Badiger   1:17:12
+OK.
+Yeah.
+
+Colin Moore   1:17:16
+Now the good thing though, is that this is not PowerPoint, because PowerPoint is a living nightmare when it comes to designs.
+
+Pallavi Badiger   1:17:20
+Hmm.
+Mm-hmm.
+
+Colin Moore   1:17:25
+So even Claude does have a PowerPoint generation function, but it's not very good.
+
+Pallavi Badiger   1:17:28
+Hmm.
+Yes.
+
+Colin Moore   1:17:31
+And the designs always end U looking like this.
+
+Pallavi Badiger   1:17:36
+Yeah, right.
+
+Colin Moore   1:17:38
+So let me show you how we'll do this. And The thing is, this pairs right in with everything we've talked about so far.
+So from from a project, you know that I have access now to the whole history of all the documents, all the meetings, everything that's been uploaded by the sales team, things like that. So I have a very rich project context.
+
+Pallavi Badiger   1:17:46
+Mm.
+Mm.
+Hmm.
+OK.
+
+Colin Moore   1:18:04
+Then if I go back, my objective then has to be to say I need to give a master list of all the capabilities that we have at AI at A1 and all the projects, all of that detail that is that is my responsibility, yes.
+
+Pallavi Badiger   1:18:08
+Mm.
+Hmm.
+Yes.
+
+Colin Moore   1:18:20
+O What if I put that together? What if I actually build a bunch of structured markdown documents to do that? And so I did.
+
+Pallavi Badiger   1:18:28
+Hmm.
+
+Colin Moore   1:18:30
+So our currently seven solution areas are here.
+
+Pallavi Badiger   1:18:35
+Hmm, yes.
+
+Colin Moore   1:18:36
+Each each one of these is based on real things, and there's a lot more detail behind them.
+
+Pallavi Badiger   1:18:40
+Mm.
+
+Colin Moore   1:18:43
+But what this means is that there's a really good, true, meaningful source of truth for the sales team to go off of.
+
+Pallavi Badiger   1:18:43
+Mhm.
+OK.
+
+Colin Moore   1:18:53
+But what I don't want them to do is I don't want them to take this stuff, copy and paste it into PowerPoint and make an ugly slide like this.
+
+Pallavi Badiger   1:19:01
+OK.
+
+Colin Moore   1:19:02
+Yeah. And and also there's the problem of we have all these buckets. I'll tell you this literally happened today. I just had to kind of yell at someone today with Suresh because the sales team said we're meeting with a customer who's in the manufacturing space.
+
+Pallavi Badiger   1:19:05
+Mm.
+Mhm.
+Mm-hmm.
+
+Colin Moore   1:19:17
+And someone tried to throw them tech score.
+
+Pallavi Badiger   1:19:21
+OK.
+
+Colin Moore   1:19:22
+And I was like, what in the heck are you doing? Like, they're manufactured. They don't care about hiring. What does that even mean? I mean, it makes no sense. I mean, it would be like me trying to say, hey, Pallavi, are you in the market for the for a bridge? Do you want to buy a bridge or or do you want to buy a skyscraper?
+
+Pallavi Badiger   1:19:27
+M.
+Mhm.
+Mm.
+
+Colin Moore   1:19:42
+It makes no sense. I mean, it's just not relevant.
+But here's the thing. So we can use AI for this though. That's where we are able to use AI in a helpful, effective way. We can say here's what you got, here's all the use cases.
+
+Pallavi Badiger   1:19:51
+Mm.
+Mm.
+
+Colin Moore   1:19:58
+Here's all the project context. Here's who we're meeting with. Here's what their title is. Here's what their role is. Maybe we even have something that goes and does background research.
+
+Pallavi Badiger   1:19:58
+OK.
+
+Colin Moore   1:20:08
+And from that I want you to take these buckets and I want you to pick the ones that are actually relevant for this meeting.
+
+Pallavi Badiger   1:20:08
+OK.
+Mhm.
+Hmm.
+
+Colin Moore   1:20:16
+And I want you to then stick it on a slide and check this out.
+Both.
+
+Pallavi Badiger   1:20:26
+K.
+
+Colin Moore   1:20:30
+And quite literally all this is, is it's taking from this page. This was for a customer called Ariat. They do like boots and clothing.
+
+Pallavi Badiger   1:20:33
+Hmm.
+Hmm.
+Mm.
+
+Colin Moore   1:20:52
+So it chose the most the top five and it stuck it on a nice slide.
+
+Pallavi Badiger   1:20:58
+OK.
+
+Colin Moore   1:21:00
+And so the cool thing is these can be generated on demand. This is just HTML and it's just a template.
+
+Pallavi Badiger   1:21:05
+Mhm.
+OK.
+
+Colin Moore   1:21:09
+So because it's HTML, we can do some really cool things because we have so much more flexibility than what we have.
+
+Pallavi Badiger   1:21:16
+Mm.
+
+Colin Moore   1:21:19
+What we have with PowerPoint. So check out how I'm able to build these and maybe I'll show you the next slide over too so you can see enterprise AI solutions for buckets. When I go and I actually make the slide for it, it looks like this.
+
+Pallavi Badiger   1:21:31
+Mm.
+
+Colin Moore   1:21:36
+Nice. It actually looks real.
+
+Pallavi Badiger   1:21:36
+Hmm.
+
+Colin Moore   1:21:41
+And then finally this one for quality engineering. Nice looks good.
+
+Pallavi Badiger   1:21:46
+OK, you have doing with the HTML code.
+
+Colin Moore   1:21:50
+Right, right.
+
+Pallavi Badiger   1:21:51
+That's nice.
+
+Colin Moore   1:21:54
+And so, so here's the the fun part. So whenever I go and I build these, how what determines the design? Because you know just as well as I do, whenever you tell Cloud to go do something, sometimes it's great, sometimes it's horrible.
+For visual design.
+
+Pallavi Badiger   1:22:09
+Yeah.
+
+Colin Moore   1:22:12
+So what I did is I put together some templates.
+
+Pallavi Badiger   1:22:17
+Hmm.
+
+Colin Moore   1:22:17
+O for instance for a layout I have base temlates.
+
+Pallavi Badiger   1:22:21
+OK, hmm.
+
+Colin Moore   1:22:22
+That users can eck through, you see.
+
+Pallavi Badiger   1:22:26
+Yes.
+
+Colin Moore   1:22:29
+And then I also have a collection of controls.
+
+Pallavi Badiger   1:22:30
+Oh.
+Hmm.
+
+Colin Moore   1:22:34
+So UI elements that we like.
+
+Pallavi Badiger   1:22:39
+OK.
+
+Colin Moore   1:22:39
+Things that are really nice and brand aligned.
+And basically all I'm doing is I'm telling an agent to go and say here's what you have, here's a quick description of what each of these are. So either you can tell the user about these things, but just imagine I'm mixing and matching between layouts and the UI elements.
+
+Pallavi Badiger   1:22:54
+Hmm.
+Mhm.
+
+Colin Moore   1:23:03
+And from that, we know that it'll always look right. We know that the spacing will always be good. We we have all of those things in place.
+
+Pallavi Badiger   1:23:11
+Yes, I.
+
+Colin Moore   1:23:13
+And so whenever we generate a slide like this, we don't have to guess and we don't have to say, OK, Claude's going to make a random attempt and it's going to look totally different than the other slides, you know? So it does take some work to get here, but most of that work is done.
+
+Pallavi Badiger   1:23:28
+Hmm.
+
+Colin Moore   1:23:29
+And then how do we get this to PowerPoint? This is where I'm going to be a little bit of a smart. I don't know what the the the term would be, but you know what I'm getting at, I'm going to say.
+
+Pallavi Badiger   1:23:41
+Yes.
+
+Colin Moore   1:23:44
+The one thing that Gamma has right is that PowerPoint is way outdated and I'm sick of dealing with it.
+
+Pallavi Badiger   1:23:49
+Hmm, yeah.
+
+Colin Moore   1:23:50
+Think about when we were talking about resume formatter.
+
+Pallavi Badiger   1:23:53
+Hmm, yes.
+
+Colin Moore   1:23:55
+How much easier of a project would that have been if the requirement wasn't around Word?
+
+Pallavi Badiger   1:24:00
+Hmm.
+
+Colin Moore   1:24:02
+And so I asked people, you know, why did they want PowerPoint? And I hear back, oh, because it's a standard format.
+And I said, cool, I don't care because frankly, I'm not going to waste time making something that converts cleanly to PowerPoint. That's not a good use of the team's time, but I can do one easier thing.
+
+Pallavi Badiger   1:24:11
+Hmm.
+It.
+
+Colin Moore   1:24:23
+And it's so simple.
+Look, we're in PowerPoint. My slides here. How did I do that? It's just a picture. That's it.
+
+Pallavi Badiger   1:24:26
+Hmm.
+Yes.
+OK.
+
+Colin Moore   1:24:35
+See. So we don't even have to like try to build custom integration with PowerPoint or try to, you know, use some crazy XML code like what we were trying to do with Resume Formatter. This is just a picture, nothing more. And it's just essentially like using Playwright to go and do a screen grab of the HTML.
+
+Pallavi Badiger   1:24:44
+Mm.
+Mhm.
+
+Colin Moore   1:24:54
+File itself.
+
+Pallavi Badiger   1:24:55
+Hmm.
+Is.
+
+Colin Moore   1:24:59
+O.
+Why that works and how we would edit it then is you don't edit it in PowerPoint because obviously picture can't edit it.
+We would simply have it in the browser. So if I say I don't want the finance block on there, OK, go generate it, take a screenshot again or preview it in the browser ideally, and then when you're ready, screenshot to PowerPoint. Boom, we're done.
+
+Pallavi Badiger   1:25:13
+Mhm.
+Hmm.
+Hmm.
+OK, yeah.
+
+Colin Moore   1:25:24
+So in this way, in this way, we've just solved now the biggest gap of all and the biggest time sink of all, which is making beautiful slides to get us more business and to have the content on those slides actually be relevant.
+And real and meaningful so that we don't do things like tell the VP of Walmart that we can build a chat bot in overnight.
+
+Pallavi Badiger   1:25:40
+Hmm.
+Yes.
+Mm.
+
+Colin Moore   1:25:48
+So this will help everyone out. And this same thing, if you think about it, what I just said is true as well because even on our side, so let's say that after after we get away with, you know all the sales information, we have the context, we're actually starting the project.
+
+Pallavi Badiger   1:25:55
+Hmm.
+Hmm.
+
+Colin Moore   1:26:06
+I don't know about you, but I don't like sitting there and making slides for Suva.
+
+Pallavi Badiger   1:26:11
+Hmm.
+
+Colin Moore   1:26:11
+You know, I get to say that, but trust me, if you if you got an e-mail every day that said, you know, like, hey, let's have a meet and go through the slides, blah blah blah, it's a huge amount of work, especially as we do more and more projects and we are definitely getting more projects. So even for someone like us.
+We can go and we can say here we're going to keep things U to date with GitHub. If you want to know what the current state of talent AI is, look at GitHub. Look at the recent commits and Rs.
+
+Pallavi Badiger   1:26:39
+Yes.
+
+Colin Moore   1:26:40
+And use that as the context to build these slides U.
+
+Pallavi Badiger   1:26:44
+Mhm.
+
+Colin Moore   1:26:45
+And stick them on a nice slide. I hit the generate button. Now I'm ready for every meeting that I have with Suva and Yogesh.
+
+Pallavi Badiger   1:26:52
+Mhm.
+
+Colin Moore   1:26:53
+So the the cool thing is, is like this doesn't stop even there. Like you can use this for just about anything where you want to generate content and it's also not limited to just slides either. So even for case studies and things like that.
+In that aspect, we're we're able to.
+Now generate nice clean documents. They're just HTML and we convert them to PDF. Easy, we just rint them.
+
+Pallavi Badiger   1:27:21
+Yeah.
+
+Colin Moore   1:27:22
+Um.
+So we're able to generate all this and from what? Well, from all the project contents that we have stored. It's never just generated based upon, you know, AI guessing like like what Gamma is giving.
+
+Pallavi Badiger   1:27:35
+Hmm.
+
+Colin Moore   1:27:36
+So we can still have the beautiful slides, we can still have them quick, but instead of giving junk that looks good at the surface that, you know, honestly, I think people will probably see this and they spend more time editing these and then they'll get lazy and miss something.
+
+Pallavi Badiger   1:27:52
+Yes, mate.
+
+Colin Moore   1:27:53
+Uh.
+You know, because these things are so dangerous, I I try to tell people I'm like, I'm, I'm very close to just banning this at Bay one for things like gamma because you know, especially for AI products, I was like, hey, if the QA team wants to use this, that's fine.
+But if you're gonna tell me in my team that I'm now accountable to you putting 24/7 virtual, who's gonna be the virtual advisor? Like, you know, like, crazy, crazy.
+
+Pallavi Badiger   1:28:11
+Mm.
+Yeah.
+Yeah, but it's yours. The idea is very really smart for this simplifying things with the HTML slide approach only.
+
+Colin Moore   1:28:24
+And there's also, yes.
+So here's here'll be the our scope. So this will be where I'll end with you today. We're going to build this. We're going to start small flow, and this is not going to turn into another resume formatter. We're going to be in control of this the whole time.
+
+Pallavi Badiger   1:28:49
+Hmm. Okay.
+
+Colin Moore   1:28:50
+And my I I started to, I even told Suresh, our new CEO. I talked to him and I was like, I just want, you know, you to give me the screen light to say whatever I say goes. I'm never usually like that. But you know, for this sales team, I need to get them.
+
+Pallavi Badiger   1:29:01
+Mm.
+Mhm.
+
+Colin Moore   1:29:06
+You know, aligned and I need to get put kind of put what they say like herd the cats and we need to try to corral everyone and get them all in line because right now they are just kind of throwing out opportunities and missing things and.
+Um.
+But what we'll do is we'll start out slow even if we just get, you know, things like project ingestion, which like I said is just a form and and with some minor AI features that you know Tanusha can come in and Saurav can come in and even for you, you can definitely do this too.
+
+Pallavi Badiger   1:29:31
+Hmm.
+Hmm.
+
+Colin Moore   1:29:40
+Um.
+
+Pallavi Badiger   1:29:41
+OK.
+
+Colin Moore   1:29:43
+It will be much, much, much simpler and we'll start small with that. We'll get people using it and then we'll just roll things out incrementally. It won't be like everything has to be done from day one. I already set that expectation with everyone and I even from a timeline perspective, I told people this will get done when it gets done.
+
+Pallavi Badiger   1:29:46
+No.
+OK.
+Mhm.
+Hmm.
+
+Colin Moore   1:30:01
+Because because I don't in the best way, like I I don't have to do this. You know, I want to do this. I think this is really good for the organization as a whole. But I was like, let let me be very clear, there's no stakeholders other than me.
+
+Pallavi Badiger   1:30:02
+OK.
+Mm.
+Mm.
+
+Colin Moore   1:30:16
+You know, I don't want, you know, anyone to say when's this going to be ready. It's ready when it's ready. And my reason for that, I know that sounds bad, but my reason for it is that you would not even believe in the past couple of weeks. That's why, you know, even for us, we've had such a trouble meeting because I'm always busy.
+
+Pallavi Badiger   1:30:21
+OK.
+Mm.
+Yeah.
+Mhm.
+Um.
+Yes.
+
+Colin Moore   1:30:54
+You know, so that's that's what's driving all of this. That's why if I sound like I'm being a little bit harsh to the the sales team or otherwise, um, I'm not trying to be.
+
+Pallavi Badiger   1:31:00
+Uh.
+Really you have too much of patience, Colin, you have too much patience. How you will dealing with this, this kind of things or even you are explaining everything to us also. So you have lot of patience.
+
+Colin Moore   1:31:19
+Well, thank you. But I I think from from whenever I explain things to all of you or take the time, it's way better use of my time. I mean, but I'll, I'll tell you one thing that just happened. I got a call yesterday from the sales team at 4:00 PM my time.
+
+Pallavi Badiger   1:31:27
+Yeah.
+OK.
+
+Colin Moore   1:31:36
+So kind of towards the end of my work day.
+
+Pallavi Badiger   1:31:38
+Oh.
+
+Colin Moore   1:31:39
+And they said, hey, are you in California?
+
+Pallavi Badiger   1:31:41
+Mm.
+OK.
+
+Colin Moore   1:31:44
+And like, think about, like geographically speaking, whatever the furthest side of India is from you, just think of that. And they said, are you in California? It's like me asking you, hey, are you in the Maldives?
+
+Pallavi Badiger   1:31:51
+Hmm.
+
+Colin Moore   1:31:58
+And I just answered back. I was like, you know what? I'm just gonna answer. I said no. Are you in Pittsburgh?
+
+Pallavi Badiger   1:32:02
+Hmm.
+Hmm.
+
+Colin Moore   1:32:06
+And in Pennsylvania, on the other side of the country. And they said, Oh well, we have a meeting tomorrow. And I said, well, literally no one told me that there was a meeting. What is the meeting about? And they said, oh, I thought you would be here in person. And I said, why did you think that I would be here in person? I never even accepted an invite because no invite had been shared.
+
+Pallavi Badiger   1:32:14
+Hmm.
+Hmm.
+OK, yes.
+
+Colin Moore   1:32:27
+Right. So I'm like, this is just stupid. Like you you want me to?
+
+Pallavi Badiger   1:32:30
+But also you are managing this handling very nicely.
+
+Colin Moore   1:32:36
+Yeah, well, I mean.
+
+Pallavi Badiger   1:32:38
+And that much patience you have to answer for very calmly.
+
+Colin Moore   1:32:43
+But you know, it's it was a shame because I was like, look, you know, you're going to have to tell them, you know, obviously I can't be there in person. I was like, why? Why you told me today? You know, they knew about this last Tuesday and they only reached out yesterday. I was like, I can't even find. I'm not going to find a plane ticket because that's just not right.
+
+Pallavi Badiger   1:32:51
+Mhm.
+Shh.
+
+Colin Moore   1:33:02
+But even if I like it was life or death and I had to, I still wouldn't be able to get to California in time to to be there. So, you know, I was like, you're gonna have to reschedule it or figure something out. You know, I need, you know, we need to follow the process and.
+Part of this, when you give people a process, you know people like to talk about change management. But with something like sales, the reality is if you don't follow the process, it's not like engineering, right? Engineering and development, there's always going to be really smart people that do things completely wrong and are still productive.
+
+Pallavi Badiger   1:33:23
+Um.
+Yeah.
+Mhm, yeah.
+
+Colin Moore   1:33:36
+But when sales comes in, if you're not very organized, then you know there's no chance that you're getting business because the client can tell.
+
+Pallavi Badiger   1:33:42
+Mm.
+Yes, right. Yeah, sales is the first phase.
+
+Colin Moore   1:33:51
+So for me, I'm like, you know, it's not a matter of if they want to use it. If they don't use it, then don't. But I'm not gonna write you slides unless they come from this.
+
+Pallavi Badiger   1:34:00
+Mm-hmm.
+
+Colin Moore   1:34:00
+And if you wanna have a meeting about a project, I'm not gonna get on that meeting unless you've done this part first.
+
+Pallavi Badiger   1:34:07
+Yes.
+
+Colin Moore   1:34:07
+Um. And so the the new approach that I'm taking is they need something from us. We don't need something from them.
+
+Pallavi Badiger   1:34:12
+Hmm.
+
+Colin Moore   1:34:13
+Because that's the truth. That's the reality, right? It's almost like if the recruiters would come to you and say, hey, we're hiring for your team con, you know, give me the candidates.
+
+Pallavi Badiger   1:34:21
+OK.
+
+Colin Moore   1:34:22
+Like you're the recruiting team, why am I giving you candidates? Makes no sense. So anyway, last thing. So this product is called Singularity. It is everything in Django that we had from Talent AI.
+
+Pallavi Badiger   1:34:34
+Mm.
+
+Colin Moore   1:34:38
+And all I did was I stripped out things that were talent AI specific, but I kept majority of everything else.
+
+Pallavi Badiger   1:34:39
+OK.
+OK.
+
+Colin Moore   1:34:47
+So you'll see that a lot of things are now gone, like for instance in integrations, there's no more Jobdiva in here.
+
+Pallavi Badiger   1:34:51
+Mm.
+OK, yes, right.
+
+Colin Moore   1:34:55
+There's there's no more recruit recruitment app. There's no more.
+
+Pallavi Badiger   1:34:58
+Recruitment here.
+
+Colin Moore   1:35:00
+So basically this gave us everything that we already had in Django, but with no it's like a blank application. It still has the Phoenix theme, it still has some of the pages that we had before, but overall, overwhelmingly, it's just like a fresh starter app.
+
+Pallavi Badiger   1:35:04
+Mm.
+OK.
+
+Colin Moore   1:35:19
+So this will be a good place for us to start so we can get up and running quick. We don't have to redo all that work that we did for Talent AI, for authentication, for, you know, for Django, for Postgres.
+
+Pallavi Badiger   1:35:26
+Hmm.
+
+Colin Moore   1:35:33
+So once once you get everything straight with Talent AI, that's the last thing that I wanna pull in because this I pulled it over before we finished the permissions models.
+
+Pallavi Badiger   1:35:38
+Hmm.
+Mm.
+OK.
+
+Colin Moore   1:35:45
+I don't think we need all of it, but what we'll do whenever you're done on the Talent AI side is we'll talk together and see if that makes sense for us to pull into Singularity. Because what I'm going to do is I'm actually going to copy this repository and paste it and save it as like a base starter template for Django in general.
+
+Pallavi Badiger   1:35:55
+Mm-hmm.
+Hmm.
+OK.
+
+Colin Moore   1:36:07
+And so that way whenever new products come to us, we have a good place to start. We don't have to reinvent the wheel or try to, you know, strip things out every time. But like what we already have is like a really rock solid Django project because you think we have AI built in, we have BLOB storage built in, we've got, you know.
+
+Pallavi Badiger   1:36:17
+Mhm.
+
+Colin Moore   1:36:27
+Channels, web sockets, all this great stuff.
+
+Pallavi Badiger   1:36:29
+Yes.
+Hmm.
+
+Colin Moore   1:36:32
+So we'll be able to reuse every bit of it.
+
+Pallavi Badiger   1:36:34
+Yeah.
+
+Colin Moore   1:36:37
+OK.
+
+Pallavi Badiger   1:36:38
+OK, so last time you mentioned we are drop off from the parent AI, so it is going to hand over to the someone.
+What's the reason behind it?
+
+Colin Moore   1:36:48
+Yes, yes.
+Bandwidth. Bandwidth. So, so the reason is, and this was not a a small decision, you know, like this was a big thing 'cause we've been, we've been with this since the very beginning.
+
+Pallavi Badiger   1:36:59
+OK.
+Mhm.
+
+Colin Moore   1:37:08
+So the problem is that there's something wrong here if I show you with.
+The problem is that we are supposed to be the AI team. Now we are of course the AI team, like not not supposed to be, but of course we are.
+
+Pallavi Badiger   1:37:23
+Oh yeah.
+Hmm.
+
+Colin Moore   1:37:28
+There was this other side of the team that was with Ambar and his team.
+
+Pallavi Badiger   1:37:32
+Mm mm.
+
+Colin Moore   1:37:34
+And as as you know, we haven't exactly had much interaction with them. I I interact pretty much daily with Anbar. But because I don't, I don't have a different way to say this. Just keep this to yourself.
+
+Pallavi Badiger   1:37:38
+Mhm.
+OK.
+
+Colin Moore   1:37:47
+Amber and I don't really, uh, see eye to eye on a lot with AI.
+
+Pallavi Badiger   1:37:52
+Mhm.
+
+Colin Moore   1:37:52
+And he has a very different Tye of leadership with his team.
+
+Pallavi Badiger   1:37:56
+OK.
+
+Colin Moore   1:37:57
+So he's more of like, I I'm not saying like I'm the best. I I definitely have places where as a, you know, as a manager I can improve, as a director I can improve. But he's very much of the mindset that his team needs to do what they were hired to do. They don't really learn much. They don't really, you know.
+
+Pallavi Badiger   1:38:06
+Mm.
+Hmm.
+Mhm.
+
+Colin Moore   1:38:15
+Do more than what they already know.
+
+Pallavi Badiger   1:38:19
+OK.
+
+Colin Moore   1:38:21
+And his working style is like he's going to do 90% of the work and then he's going to give very small things. Like imagine if all I gave to you was, you know, here, add a button to this page and that's what was your work for the week.
+
+Pallavi Badiger   1:38:29
+Hmm.
+OK.
+
+Colin Moore   1:38:34
+So my point was that when we first started Talent AI, our team was supposed to be responsible for of course getting it up and running, getting the Django expertise, and then after that is done, after some transition period, we should focus only on the AI aspects of Talent AI.
+
+Pallavi Badiger   1:38:39
+Mm.
+Um.
+Yes.
+
+Colin Moore   1:38:52
+That never happened.
+That never happened. And so now it's March of 2026 and somehow, you know, there still has not been, you know, our team is still getting asked to do things like basic level Django things.
+
+Pallavi Badiger   1:39:01
+Hmm.
+
+Colin Moore   1:39:09
+And so I said, look, Talent AI is great. It's a really good internal tool.
+
+Pallavi Badiger   1:39:09
+OK.
+Mm.
+OK.
+
+Colin Moore   1:39:17
+But the fact is that I've got 20 customers lined up to work with us. That'll make us actual money now, not potential money, not, you know, guest money. And my team, I can't free them up to do that because we have such a burden on talent AI.
+
+Pallavi Badiger   1:39:24
+Hmm.
+Mm.
+Yeah.
+
+Colin Moore   1:39:35
+You know, so I said from me, I'm spending 60% of my time every week to talk about talent AI, get things assigned, you know, meet with leadership on this. At one point they wanted to meet four times a week about talent AI. And I was like, what are you going to learn from four times a week? Like we don't develop that fast, even with AI. That's not possible.
+
+Pallavi Badiger   1:39:38
+Mm.
+Hmm.
+Hmm.
+
+Colin Moore   1:39:54
+Um.
+
+Pallavi Badiger   1:39:54
+Hmm.
+
+Colin Moore   1:39:56
+So what I came to is I was like, look, the problem right now is that you have me and you have Amber and there's certain things that we don't see eye to eye on, but you can't have two owners for one project.
+
+Pallavi Badiger   1:40:07
+Yes.
+
+Colin Moore   1:40:07
+And I don't frankly care who it is, if it's me or him. I was like, I don't, I don't care. All I will say though, is that on my side, I'm the only one that's going to be able to, you know, work through and deliver on these big solutions projects. And Amber doesn't have anything else going on aside from Talent AI. It's just Talent AI that is.
+
+Pallavi Badiger   1:40:12
+Mm.
+Hmm.
+Hmm.
+
+Colin Moore   1:40:27
+Teams focused on.
+
+Pallavi Badiger   1:40:29
+Yeah.
+
+Colin Moore   1:40:31
+And so, you know, unfortunately there was also some issues within the team and half of the team got let go. So there are four people, two of them got let go. Why? You'll see as soon as this loads.
+
+Pallavi Badiger   1:40:33
+Mm.
+Mhm.
+OK.
+
+Colin Moore   1:40:45
+And you, hopefully at this point, you know me enough that I'm not just some mean grumpy guy that's like, you know, fire people. I'm never like them, but but you'll see here what was going on.
+
+Pallavi Badiger   1:40:46
+Hmm.
+Yeah.
+Yeah.
+
+Colin Moore   1:40:56
+Let me see why this is taking so long to load.
+
+Pallavi Badiger   1:41:01
+Yeah, it's open.
+
+Colin Moore   1:41:06
+If not, I'll show you in a different way.
+Come on.
+Well, anyway, well, while this is going, I'll show you. Basically, Long story short, our team has been doing literally over 95% of all code work in Talent AI.
+
+Pallavi Badiger   1:41:27
+Yeah.
+Hmm.
+
+Colin Moore   1:41:34
+And it doesn't make any sense because we have yourself and Shalini as our dedicated Python devs or dedicated Django devs, and you both do far more than that.
+
+Pallavi Badiger   1:41:42
+Hmm.
+Yeah.
+
+Colin Moore   1:41:45
+But his team also has two full stack steps.
+
+Pallavi Badiger   1:41:48
+OK.
+
+Colin Moore   1:41:50
+And my point to him was like, you know, my team, like, you know, I don't even have enough time to talk because we're doing so much for talent AI. This is totally backwards. We've got like 30 projects that we could potentially be working on doing, but we can't because we're doing the overwhelming majority of development for talent AI.
+
+Pallavi Badiger   1:41:58
+Mm.
+Mhm.
+OK.
+
+Colin Moore   1:42:12
+And my my point with it was like, let me see if I can just show it a different way. This is just taking way longer to load today. I don't know why.
+My my point with it was, you know, either we can focus our time on talent AI and we can keep on staying intimately involved and thus we're never going to be able to get out of it and move into solutions.
+
+Pallavi Badiger   1:42:32
+Hmm.
+Yes.
+Mhm.
+
+Colin Moore   1:42:40
+Or we need to break off, have a, you know, a true handoff for this, Dan Bard and his team and say, look, you know, you guys have kind of been, you know.
+
+Pallavi Badiger   1:42:44
+Hmm.
+Hmm.
+
+Colin Moore   1:42:53
+Unfortunately, in my opinion, you guys have kind of been riding the coattails a little bit and saying, oh, you know, our team will just take care of it 'cause they use AI to do it faster anyway.
+
+Pallavi Badiger   1:43:01
+Mm-hmm.
+
+Colin Moore   1:43:03
+Like, no, because you know what? Someone like yourself, Blavi, you're a perfect example of what they should have been doing this whole time.
+You know, you know, they never took the time to figure out, Claude. They never took the time to actually really learn this stuff. And you know, that's not something that I'm going to take on as my problem. You know, I I had offered, I'd spent probably collectively about 30 hours with them.
+
+Pallavi Badiger   1:43:10
+Hello.
+Hmm.
+Hmm.
+Mm-hmm.
+
+Colin Moore   1:43:26
+To train them on this, to teach them, to show them, you know, and and done so many different things. And I'm like, look, at the end of the day, I'm always here to teach. I'm always here to guide. I'm always here to mentor. But if you're not going to take it and you're not going to listen.
+
+Pallavi Badiger   1:43:30
+OK.
+Hmm.
+
+Colin Moore   1:43:42
+Then I can't justify continuing to waste my time.
+
+Pallavi Badiger   1:43:43
+Yes.
+
+Colin Moore   1:43:48
+So.
+
+Pallavi Badiger   1:43:48
+Yes, that's right.
+
+Colin Moore   1:43:51
+So from that perspective, that's why you know, I said look the team, if this pulled up, I'll show you someone has committed lifetime like 5000 lines of code.
+
+Pallavi Badiger   1:43:54
+Mm.
+Mm.
+
+Colin Moore   1:44:02
+Lifetime and uh, you know, almost a now a 10 month project.
+
+Pallavi Badiger   1:44:07
+Hmm.
+
+Colin Moore   1:44:07
+And there's another person on the team that had committed 200 lines of code.
+
+Pallavi Badiger   1:44:12
+OK.
+
+Colin Moore   1:44:14
+And I was like, so the team's not doing anything, you know, that's not OK at all. So this one loaded, this one should load soon then.
+Um.
+Let me see.
+I don't know why it's being so slow.
+If you ever want to look, go to the Insights tab and click on Contributors and then just give a look. Um.
+
+Pallavi Badiger   1:44:52
+Yeah.
+
+Colin Moore   1:44:52
+But you'll you'll see everything you need to. You need to see. Um.
+
+Pallavi Badiger   1:44:57
+OK.
+
+Colin Moore   1:44:58
+But it's just, you know, not correct the way that it's been happening, so.
+
+Pallavi Badiger   1:45:04
+Mm.
+
+Colin Moore   1:45:08
+That's that's why. So we didn't do anything wrong. It's just here we go. So look now I write a lot of code, you know that, but I'm at like 1.2 million lines of code added, you know, 380,000 lines of code edited.
+
+Pallavi Badiger   1:45:16
+Yes, right. Yeah.
+Hmm.
+Hmm, this.
+
+Colin Moore   1:45:25
+Now Ambar does a lot, but look, he's off by a factor of almost 10.
+
+Pallavi Badiger   1:45:30
+Hmm. Oh, yeah, unlike 60, yes.
+
+Colin Moore   1:45:34
+Yeah, that's, you know, that can't happen and you know, everyone else's side.
+
+Pallavi Badiger   1:45:39
+Huh.
+
+Colin Moore   1:45:42
+Durgesh is new, that's fine, and he hasn't been committing things properly. But you know, Gunjan, when she was here, she was here for, you know, up until February.
+
+Pallavi Badiger   1:45:52
+OK, good.
+
+Colin Moore   1:45:52
+And she's their main. She was their main AI person, and she barely did any work for this.
+
+Pallavi Badiger   1:45:58
+Mhm.
+
+Colin Moore   1:46:02
+So, and you know, Marcelan, same thing, you know, great guy, but you know, just not, uh, contributing, you know, and Tunisia is brand new. Vaishali has been doing her work in a separate repository. Um.
+
+Pallavi Badiger   1:46:05
+Hmm.
+Mm.
+Hmm, yeah.
+
+Colin Moore   1:46:16
+You know, and the other thing is too, whenever you see this ratio between red and green, that usually indicates when someone has really high quality code.
+
+Pallavi Badiger   1:46:21
+Hmm.
+OK.
+
+Colin Moore   1:46:25
+So you might notice up here like for Claude, you see how Claude has almost equal numbers.
+
+Pallavi Badiger   1:46:31
+Mm.
+
+Colin Moore   1:46:33
+So what that means is that the team is just basically using cloud the wrong way. Um.
+And so I I saw this and I was like, well, I mean, we're not even in the same ballpark. Like I'm literally doing like in some cases, 100 times more work than people.
+
+Pallavi Badiger   1:46:51
+Yes.
+
+Colin Moore   1:46:51
+And so I was like, you know, uh, I could, I could do this for talent AI or I could do this for real customer problems. You decide.
+
+Pallavi Badiger   1:46:56
+Mhm.
+Yeah.
+
+Colin Moore   1:47:02
+And of course, you know, leadership says, Yep, that doesn't make any sense. We're gonna make this, this team, we'll make that transition plan. We'll still stay involved, you know, in a nice way, but we'll shift our focus on solutions fully.
+
+Pallavi Badiger   1:47:14
+Hmm.
+
+Colin Moore   1:47:20
+So that's that's the big explanation. Just, you know, I I, I I shouldn't share something with that, but hopefully that makes sense now.
+
+Pallavi Badiger   1:47:24
+Yeah.
+Yeah, that's because I love this talent AII suddenly shocked why this is dropping off.
+
+Colin Moore   1:47:38
+No, no. I mean we we can still we we definitely can still do things and it's not like we have to stop. It's that uh, we don't have uh obligation is the right way to say. So like whenever like even for like the new search app.
+
+Pallavi Badiger   1:47:44
+OK.
+
+Colin Moore   1:47:53
+You know, I'm like, we can help with some things like there there's things that we can still be involved with, but I want to do it the right way this time. Do it for the AI features, you know, and I know you'll love, you know, the other products, so we'll be able to do it together too.
+
+Pallavi Badiger   1:47:54
+Mm.
+Yes.
+OK. Yeah, that's also nice.
+
+Colin Moore   1:48:11
+Uh.
+So yes. So it's not, yeah, it's not like we we aren't allowed to work on it or anything like that. It's just that I needed to kinda reset the score a little bit with everyone to say we're doing too much here and the other team's not contributing nearly as much.
+
+Pallavi Badiger   1:48:19
+Yeah.
+Hmm.
+Mm.
+Mhm.
+
+Colin Moore   1:48:29
+And they have to, because from my perspective, it's not my place to tell, you know, Amber and his team, hey, you got to grow and you got to learn. But I'm also can't be the person that, you know, pays for the bill because other people aren't learning the same tools.
+
+Pallavi Badiger   1:48:37
+Mhm.
+Yeah.
+
+Colin Moore   1:48:47
+So, but yeah, so that was your long answer. But yeah, it doesn't doesn't mean that we're like, you know, kicked off the project. It's totally voluntary.
+
+Pallavi Badiger   1:48:50
+Yeah, so we'll not get that much easily for teaching people anywhere. So we should learn the things. If someone is there for the teach, so we should learn the things.
+
+Colin Moore   1:49:06
+Yes. And you know that's that's why you know for me to say like whenever you know my recommendation for for the team, you know whenever we had to let two of them go, you got to understand like I'm not doing that lightly and I made a recommendation. I didn't demand anything but I said look.
+
+Pallavi Badiger   1:49:15
+Mm.
+
+Colin Moore   1:49:22
+You're essentially paying people to sit there and do nothing all day.
+
+Pallavi Badiger   1:49:26
+OK. Yeah.
+
+Colin Moore   1:49:27
+That is not helpful for their career. Like what? I was like, what's gonna happen to them if they would try to get a new job and they try to have a resume, they can't claim anything on the resume.
+Like you're you're actually hurting your people if you're not teaching them and giving them real responsibility. So you know, like like like Gunjan, I was like, she was at day one for two years and you know, we tried to redeploy her to a client project. She had some, let's say.
+
+Pallavi Badiger   1:49:44
+Yeah.
+Mm.
+
+Colin Moore   1:49:55
+Personal issues. She liked to say nasty things to her teammates. And you know, even whenever I I was like, hey, you can't, you can't use, you know, bad words at people in meetings and say that, you know, Colin's a blanking idiot.
+
+Pallavi Badiger   1:49:57
+Mhm.
+Um.
+
+Colin Moore   1:50:12
+On a team call, you can't do that.
+
+Pallavi Badiger   1:50:12
+No.
+
+Colin Moore   1:50:15
+And when you combine that with the fact that she's not even like contributing anything to the team and yet you have the chat with her and you say, hey, look, performance is not great. Also, even if performance was great, you treat your coworkers with respect. End of story.
+
+Pallavi Badiger   1:50:22
+Mm.
+Hmm.
+
+Colin Moore   1:50:31
+And you know, that didn't happen. And so, you know, I was like for Amber, I was like, look, you, I can't manage your team, but come on, man, this is management 101. If someone's gonna be a problem, I imagine if like, you know, you, you came to me tomorrow and said, Colin, I'm not gonna do any more work.
+
+Pallavi Badiger   1:50:31
+Okay.
+Hmm.
+
+Colin Moore   1:50:50
+I say, OK, Pallavi, well, we're going to have to talk about it. And imagine if I just never actually addressed it and you just kept getting paid every week and you never really got assigned anything because every time I talked to you, you told me to go, you know, kick rocks. That wouldn't be a good way, so.
+
+Pallavi Badiger   1:50:52
+Mm.
+Mm.
+Mhm.
+
+Colin Moore   1:51:07
+That's what I meant too with this team. I'm like, look, the only way, you know the team is actually going to be able to do something like talent AI is if you grow.
+
+Pallavi Badiger   1:51:14
+Yesterday.
+
+Colin Moore   1:51:15
+Otherwise, we're gonna be stuck now forever.
+
+Pallavi Badiger   1:51:18
+Yeah.
+
+Colin Moore   1:51:20
+But yeah, so don't worry. Yeah, the story. Don't worry.
+
+Pallavi Badiger   1:51:21
+Yes, yeah.
+
+Colin Moore   1:51:28
+OK, well, I do have to jump off. I have to run to the next one, but thank you for staying on. Thanks for listening to everything. Hopefully Singularity sounds cool to you.
+
+Pallavi Badiger   1:51:37
+Yeah.
+
+Colin Moore   1:51:37
+So I'll add you into that repo so you can start having a look, but I won't, you know, assign anything until we get the last bit for a talent AI resolved and then we'll shift focus to singularity and we'll have a lot of fun whenever we get to design that.
+
+Pallavi Badiger   1:51:52
+Yes, Kalin, sure.
+
+Colin Moore   1:51:54
+Well, take care. Have a good rest of the night and we'll connect soon.
+
+Pallavi Badiger   1:51:59
+OK, Colin. Thank you.
+
+Colin Moore   1:52:00
+Uh.
+
+Pallavi Badiger   1:52:01
+Bye, bye.
+
+Colin Moore stopped transcription

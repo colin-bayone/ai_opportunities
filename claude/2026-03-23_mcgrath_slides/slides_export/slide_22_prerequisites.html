@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 22: Prerequisites</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--purple-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 12px 40px 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+      flex-shrink: 0;
+    }
+
+    .lead {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+
+    /* Category rows */
+    .category-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .category-row {
+      display: flex;
+      gap: 0;
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(124,58,237,0.06);
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .category-left {
+      width: 180px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-right: 3px solid transparent;
+    }
+
+    .category-row.c1 .category-left { border-color: #4C1D95; background: rgba(76,29,149,0.06); }
+    .category-row.c2 .category-left { border-color: #5B21B6; background: rgba(91,33,182,0.06); }
+    .category-row.c3 .category-left { border-color: #7C3AED; background: rgba(124,58,237,0.06); }
+
+    .category-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .category-row.c1 .category-icon { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .category-row.c2 .category-icon { background: linear-gradient(135deg, #5B21B6, #7C3AED); }
+    .category-row.c3 .category-icon { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+
+    .category-name {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--primary);
+      line-height: 1.3;
+    }
+
+    .category-right {
+      flex: 1;
+      display: grid;
+      gap: 5px 20px;
+      padding: 10px 16px;
+      align-content: center;
+    }
+
+    .category-right.cols-2 { grid-template-columns: repeat(2, 1fr); }
+
+    .prereq-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 11px;
+      line-height: 1.45;
+      color: #475569;
+    }
+
+    .prereq-item i {
+      font-size: 10px;
+      margin-top: 3px;
+      width: 14px;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    .category-row.c1 .prereq-item i { color: #4C1D95; }
+    .category-row.c2 .prereq-item i { color: #5B21B6; }
+    .category-row.c3 .prereq-item i { color: #7C3AED; }
+
+    /* Footer note */
+    .footer-note {
+      margin-top: 8px;
+      flex-shrink: 0;
+      font-size: 10px;
+      color: var(--text-light);
+      font-style: italic;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-note i {
+      font-size: 10px;
+      color: var(--purple-accent);
+    }
+
+    /* Footer */
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>Prerequisites</h2>
+      <p class="lead">Items required from McGrath to ensure successful service delivery and transition</p>
+
+      <div class="category-rows">
+
+        <!-- System Access & Environments -->
+        <div class="category-row c1">
+          <div class="category-left">
+            <div class="category-icon"><i class="fa-solid fa-key"></i></div>
+            <div class="category-name">System Access & Environments</div>
+          </div>
+          <div class="category-right cols-2">
+            <div class="prereq-item">
+              <i class="fa-solid fa-server"></i>
+              <span>Provisioned access to Salesforce (Prod, Sandbox/UAT), CPQ, integration platforms, monitoring/logging tools, and ticketing systems</span>
+            </div>
+            <div class="prereq-item">
+              <i class="fa-solid fa-ticket"></i>
+              <span>Access to ticket history, incident reports, release notes, and known issue logs for baseline assessment</span>
+            </div>
+            <div class="prereq-item">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span>Access to product catalog, pricing rules, approval workflows, discount logic, and custom scripts within CPQ</span>
+            </div>
+            <div class="prereq-item">
+              <i class="fa-solid fa-clone"></i>
+              <span>Production replica environment available to simulate and recreate production issues</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Documentation & Data -->
+        <div class="category-row c2">
+          <div class="category-left">
+            <div class="category-icon"><i class="fa-solid fa-file-lines"></i></div>
+            <div class="category-name">Documentation & Data</div>
+          </div>
+          <div class="category-right cols-2">
+            <div class="prereq-item">
+              <i class="fa-solid fa-sitemap"></i>
+              <span>Availability of current solution architecture, data model, integration inventory, and CPQ configuration details</span>
+            </div>
+            <div class="prereq-item">
+              <i class="fa-solid fa-diagram-project"></i>
+              <span>Documentation of all real-time and batch integrations, including endpoints, error handling, and dependencies</span>
+            </div>
+            <div class="prereq-item">
+              <i class="fa-solid fa-database"></i>
+              <span>Sample datasets and reports to assess data quality, duplicates, and data integrity</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- People, Process & Governance -->
+        <div class="category-row c3">
+          <div class="category-left">
+            <div class="category-icon"><i class="fa-solid fa-users-gear"></i></div>
+            <div class="category-name">People, Process & Governance</div>
+          </div>
+          <div class="category-right cols-2">
+            <div class="prereq-item">
+              <i class="fa-solid fa-user-tag"></i>
+              <span>Named SPOCs from Business, IT, and Operations for discovery, validation, and ongoing clarifications</span>
+            </div>
+            <div class="prereq-item">
+              <i class="fa-solid fa-shield-halved"></i>
+              <span>Defined roles, access controls, audit requirements, and compliance guidelines</span>
+            </div>
+            <div class="prereq-item">
+              <i class="fa-solid fa-rocket"></i>
+              <span>Established release, deployment, and rollback processes (or alignment to define them)</span>
+            </div>
+            <div class="prereq-item">
+              <i class="fa-solid fa-handshake"></i>
+              <span>Access and escalation coordination with third-party vendors supporting integrations or add-ons</span>
+            </div>
+            <div class="prereq-item">
+              <i class="fa-solid fa-graduation-cap"></i>
+              <span>Structured knowledge transfer sessions and handover documentation from incumbent/implementation team</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-note">
+        <i class="fa-solid fa-circle-info"></i>
+        Prerequisites will be reviewed and confirmed during the on-boarding and discovery phase
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">22</div>
+    </div>
+  </div>
+</body>
+</html>

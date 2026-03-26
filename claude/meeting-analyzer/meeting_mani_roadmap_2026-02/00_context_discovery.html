@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Context Discovery - Mani Roadmap Meeting</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #a855f7;
+      --purple-dark: #5b21b6;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .cover-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e879f9;
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .cover-subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 48px;
+      max-width: 600px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 48px;
+      padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .cover-meta-item label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+
+    .cover-meta-item span {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .logo {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span { color: #e879f9; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .section { margin-bottom: 44px; }
+
+    .section-number {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--purple-dark);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      padding: 6px 14px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%);
+      border-radius: 4px;
+    }
+
+    h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 28px 0 14px;
+    }
+
+    p { margin-bottom: 16px; }
+
+    .lead {
+      font-size: 17px;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      padding: 10px 14px;
+      background: #5b21b6;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+
+    th:last-child { border-right: none; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border-left: 4px solid #a855f7;
+      padding: 20px 24px;
+      margin: 24px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    .footer {
+      text-align: center;
+      padding: 48px 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 64px;
+    }
+
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .footer-logo span { color: #a855f7; }
+
+    .footer p {
+      font-size: 13px;
+      color: var(--text-light);
+      margin: 0;
+    }
+
+    @media print {
+      @page {
+        size: 8.5in 11in;
+        margin: 0.5in;
+      }
+
+      body { font-size: 9pt; line-height: 1.4; }
+
+      .cover {
+        min-height: 0;
+        height: 10in;
+        padding: 50px;
+        page-break-after: always;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .cover h1 { font-size: 32pt; }
+      .cover-subtitle { font-size: 13pt; }
+
+      .container { padding: 0; max-width: 100%; }
+
+      .section {
+        margin-bottom: 24px;
+        page-break-inside: avoid;
+      }
+
+      h2 { font-size: 14pt; margin-bottom: 10px; page-break-after: avoid; }
+      h3 { font-size: 11pt; margin: 14px 0 8px; page-break-after: avoid; }
+      p { margin-bottom: 6px; }
+      .lead { font-size: 10pt; margin-bottom: 14px; }
+
+      table {
+        font-size: 8pt;
+        margin: 10px 0;
+        page-break-inside: avoid;
+      }
+
+      th, td {
+        padding: 6px 8px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .highlight-box {
+        padding: 12px 16px;
+        margin: 14px 0;
+        page-break-inside: avoid;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .footer {
+        margin-top: 20px;
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-label">CONTEXT DISCOVERY</div>
+      <h1>Mani Roadmap Meeting</h1>
+      <p class="cover-subtitle">Background research and context for BayOne's strategic engagement with Sephora on EDW modernization</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <label>Client</label>
+          <span>Sephora</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Date</label>
+          <span>February 2026</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Classification</label>
+          <span>Internal</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo">Bay<span>One</span> Solutions</div>
+  </div>
+
+  <div class="container">
+
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>Project Overview</h2>
+      <p class="lead">This transcript is from BayOne Solutions' engagement with Sephora regarding their enterprise data warehouse modernization program. BayOne is positioning to expand from a staffing relationship to a strategic AI and data engineering partnership.</p>
+
+      <p>Sephora is undertaking a 3-year EDW modernization from 2026-2028, migrating from SQL Server, Cognos, and DataStage to Databricks, Tableau, and ThoughtSpot. The scope includes approximately 6,000 reports, 8 SSAS cubes, and 800+ KPIs to migrate.</p>
+
+      <p>BayOne has an existing staffing relationship with Sephora and is seeking to add a solutions track focused on AI-assisted migration acceleration.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>Key People - Meeting Participants</h2>
+
+      <h3>Sephora</h3>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Role</th>
+          <th>Notes</th>
+        </tr>
+        <tr>
+          <td><strong>Mani Soundararajan</strong></td>
+          <td>VP - Marketing Tech, Data/AI, Reporting</td>
+          <td>Key decision-maker. Reports to Vlad (CIO). Wants proposal-led conversations.</td>
+        </tr>
+      </table>
+
+      <h3>BayOne</h3>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Role</th>
+        </tr>
+        <tr>
+          <td><strong>Zahra Syed</strong></td>
+          <td>Director, Strategic Accounts - Sales lead, primary relationship manager</td>
+        </tr>
+        <tr>
+          <td><strong>Neha Malhotra</strong></td>
+          <td>Head of Recruiting, Enterprise - Supporting staffing track</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>Key People - Referenced</h2>
+
+      <h3>Sephora Leadership</h3>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Role</th>
+          <th>Notes</th>
+        </tr>
+        <tr>
+          <td><strong>Andrew Ho</strong></td>
+          <td>Sr. Director - Influencer, Media, Marketing AI</td>
+          <td>Reports to Mani. Actively hiring.</td>
+        </tr>
+        <tr>
+          <td><strong>Ram</strong></td>
+          <td>Director - Acquisition & Retention</td>
+          <td>Reports to Mani. Top funnel, ads, digital marketing. Actively hiring.</td>
+        </tr>
+        <tr>
+          <td><strong>Rizwan Khan</strong></td>
+          <td>Director - CRM & Marketing Personalization</td>
+          <td>Reports to Mani. Hiring late Q1. Based in Chicago.</td>
+        </tr>
+        <tr>
+          <td><strong>Grishi Chakraborty</strong></td>
+          <td>Director, Data Engineering/BI</td>
+          <td>Reports to Andrew Ho. Primary technical contact. Actively hiring.</td>
+        </tr>
+        <tr>
+          <td><strong>Rajesh</strong></td>
+          <td>Leader - E-commerce</td>
+          <td>Digital personalization moved to his org. Testing Model 2 decentralization.</td>
+        </tr>
+        <tr>
+          <td><strong>David / Natalia</strong></td>
+          <td>Leaders - Stores</td>
+          <td>Testing Model 1 decentralization.</td>
+        </tr>
+        <tr>
+          <td><strong>Kalyan</strong></td>
+          <td>Leader - Supply Chain/Merchandising</td>
+          <td>Still centralized (legacy tech). Model 3.</td>
+        </tr>
+      </table>
+
+      <h3>BayOne</h3>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Role</th>
+        </tr>
+        <tr>
+          <td><strong>Colin Moore</strong></td>
+          <td>Director of AI - Technical lead, to be introduced to Mani</td>
+        </tr>
+        <tr>
+          <td><strong>Sithara</strong></td>
+          <td>Consultant - Recently placed with Alan at Sephora</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">04</div>
+      <h2>Relevant Systems and Tools</h2>
+      <table>
+        <tr>
+          <th>Tool</th>
+          <th>Context</th>
+        </tr>
+        <tr>
+          <td><strong>Databricks</strong></td>
+          <td>Target lakehouse platform for EDW modernization</td>
+        </tr>
+        <tr>
+          <td><strong>Cognos</strong></td>
+          <td>Legacy reporting platform being migrated from</td>
+        </tr>
+        <tr>
+          <td><strong>SQL Server</strong></td>
+          <td>Legacy EDW storage</td>
+        </tr>
+        <tr>
+          <td><strong>Tableau</strong></td>
+          <td>Target BI tool</td>
+        </tr>
+        <tr>
+          <td><strong>ThoughtSpot</strong></td>
+          <td>Target BI tool for self-service analytics</td>
+        </tr>
+        <tr>
+          <td><strong>DataStage</strong></td>
+          <td>Legacy ETL tool (IBM)</td>
+        </tr>
+        <tr>
+          <td><strong>SSAS Cubes</strong></td>
+          <td>Analytical layer - major migration blocker</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">05</div>
+      <h2>Prior BayOne Work Referenced</h2>
+      <table>
+        <tr>
+          <th>Project</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td><strong>Wayo</strong></td>
+          <td>AI project - employee portal / "Wayo finder" built by Colin</td>
+        </tr>
+        <tr>
+          <td><strong>Cisco</strong></td>
+          <td>Projects done by BayOne</td>
+        </tr>
+        <tr>
+          <td><strong>Recruiting 2.0</strong></td>
+          <td>AI-powered recruiting automation built by Colin's team</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">06</div>
+      <h2>Strategic Context</h2>
+      <p>BayOne's goal is to transition from being seen as a staffing firm to a strategic AI partner. This meeting served as intelligence-gathering to map the hiring landscape across Mani's org, understand rate expectations and talent preferences, create an opening for Colin to present an AI-assisted EDW modernization proposal, and identify specific use cases where AI could accelerate their migration.</p>
+
+      <div class="highlight-box">
+        <p><strong>Key insight from existing docs:</strong> Mani explicitly wants "proposal-led conversations" - he said "If someone comes with groundwork done and a proposal - that would be very productive."</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Internal Meeting Notes</p>
+    </div>
+  </div>
+</body>
+</html>

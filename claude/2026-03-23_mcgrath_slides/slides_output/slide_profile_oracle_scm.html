@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample Profile: Oracle SCM Functional Lead</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--purple-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 20px 40px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Title area */
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--purple-accent);
+      margin-bottom: 4px;
+      flex-shrink: 0;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 18px;
+      flex-shrink: 0;
+    }
+
+    .title-row h2 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .years-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 14px;
+      background: linear-gradient(135deg, rgba(76,29,149,0.08), rgba(168,85,247,0.12));
+      border: 1px solid rgba(124,58,237,0.18);
+      border-radius: 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple-dark);
+      white-space: nowrap;
+    }
+
+    /* Summary */
+    .profile-summary {
+      margin-bottom: 20px;
+      flex-shrink: 0;
+    }
+
+    .profile-summary p {
+      font-size: 13.5px;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .profile-summary p + p {
+      margin-top: 5px;
+    }
+
+    .profile-summary strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* Competencies */
+    .competencies-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--purple-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .competencies-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .competencies-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .competencies-list li {
+      font-size: 13.5px;
+      color: var(--text);
+      line-height: 1.55;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .competencies-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--purple-accent);
+    }
+
+    .competencies-list li strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    /* Footer */
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="section-label">Sample Profiles</div>
+      <div class="title-row">
+        <h2>Oracle SCM Functional Lead</h2>
+        <span class="years-badge">24+ Years</span>
+      </div>
+
+      <div class="profile-summary">
+        <p>A seasoned <strong>Oracle Supply Chain Functional Lead</strong> with 24+ years of experience across <strong>Oracle EBS and Oracle Fusion Cloud SCM</strong>, specializing in <strong>Order-to-Cash (OTC)</strong> and <strong>Procure-to-Pay / Source-to-Pay (PTP/STP)</strong>.</p>
+        <p>Deep expertise in global Oracle transformation programs, complex functional solution design, and end-to-end delivery across implementations, migrations, integrations, enhancements, and production support.</p>
+        <p>He has led multi-vendor teams for Fortune 100 clients, partnering with C-level stakeholders, driving design workshops, fit-gap analysis, solution architecture, CRPs/UAT, go-live planning, cutover, and hypercare.</p>
+        <p>He also has strong experience with <strong>Zuora subscription billing, Salesforce integrations, Oracle CPQ, and Oracle RMCS</strong>, enabling modern quote-to-cash and subscription revenue models.</p>
+      </div>
+
+      <div class="competencies-label">Core Competencies</div>
+      <ul class="competencies-list">
+        <li><strong>Oracle Cloud SCM:</strong> Order Management, Inventory, Advance Pricing, Shipping, Procurement, Suppliers, Costing</li>
+        <li><strong>End-to-End Tracks:</strong> OTC, PTP, STP, Issue-to-Resolution (Service Logistics)</li>
+        <li><strong>Integration Expertise:</strong> Salesforce, Zuora, 3PL, EDI (OpenText), Boomi, OIC, Oracle REST APIs</li>
+        <li><strong>Functional Architecture:</strong> Solution design, orchestration design, fit-gap analysis, conversion strategy, BR100/MD50</li>
+        <li><strong>Program Leadership:</strong> Multi-vendor management, planning, estimation, resource loading,</li>
+      </ul>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">40</div>
+    </div>
+  </div>
+
+</body>
+</html>

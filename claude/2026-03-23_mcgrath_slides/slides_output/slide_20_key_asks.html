@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 20: Key Asks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--purple-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 14px 40px 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+      flex-shrink: 0;
+    }
+
+    .lead {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+      flex-shrink: 0;
+    }
+
+    /* Asks grid: 2x2 card layout */
+    .asks-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .ask-card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 12px;
+      padding: 18px 20px;
+      box-shadow: 0 2px 8px rgba(124,58,237,0.05);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ask-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+
+    .ask-card:nth-child(1)::before { background: linear-gradient(90deg, #4C1D95, #5B21B6); }
+    .ask-card:nth-child(2)::before { background: linear-gradient(90deg, #5B21B6, #6D28D9); }
+    .ask-card:nth-child(3)::before { background: linear-gradient(90deg, #6D28D9, #7C3AED); }
+    .ask-card:nth-child(4)::before { background: linear-gradient(90deg, #7C3AED, #A855F7); }
+
+    .ask-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .ask-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .ask-card:nth-child(1) .ask-icon { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .ask-card:nth-child(2) .ask-icon { background: linear-gradient(135deg, #5B21B6, #6D28D9); }
+    .ask-card:nth-child(3) .ask-icon { background: linear-gradient(135deg, #6D28D9, #7C3AED); }
+    .ask-card:nth-child(4) .ask-icon { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+
+    .ask-header h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      line-height: 1.3;
+    }
+
+    .ask-number {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .ask-card:nth-child(1) .ask-number { color: #4C1D95; }
+    .ask-card:nth-child(2) .ask-number { color: #5B21B6; }
+    .ask-card:nth-child(3) .ask-number { color: #6D28D9; }
+    .ask-card:nth-child(4) .ask-number { color: #7C3AED; }
+
+    .ask-description {
+      font-size: 11.5px;
+      color: var(--text);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .ask-description strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    /* Footer */
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>Key Asks</h2>
+      <p class="lead">What BayOne needs from McGrath to ensure a successful engagement</p>
+
+      <div class="asks-grid">
+
+        <!-- Ask 1: Knowledge Transfer -->
+        <div class="ask-card">
+          <div class="ask-header">
+            <div class="ask-icon"><i class="fa-solid fa-users"></i></div>
+            <h3>Knowledge Transfer Facilitation</h3>
+          </div>
+          <p class="ask-description">Designate internal stakeholders to participate in structured KT sessions. Ensure <strong>documentation, runbooks, and tribal knowledge</strong> from the incumbent vendor are accessible to the BayOne team during the transition window.</p>
+        </div>
+
+        <!-- Ask 2: Environment & Infrastructure -->
+        <div class="ask-card">
+          <div class="ask-header">
+            <div class="ask-icon"><i class="fa-solid fa-key"></i></div>
+            <h3>Environment & Infrastructure Access</h3>
+          </div>
+          <p class="ask-description">Provision <strong>environment access, system credentials, VPN connectivity, and tooling licenses</strong> within the first two weeks of engagement. Assign infrastructure team contacts for access requests and escalations.</p>
+        </div>
+
+        <!-- Ask 3: Timely Information -->
+        <div class="ask-card">
+          <div class="ask-header">
+            <div class="ask-icon"><i class="fa-solid fa-share-nodes"></i></div>
+            <h3>Timely Information Sharing</h3>
+          </div>
+          <p class="ask-description">Coordinate with the incumbent vendor to ensure <strong>operational documentation, integration specifications, and support history</strong> are handed off on schedule. Identify a McGrath liaison to unblock information requests.</p>
+        </div>
+
+        <!-- Ask 4: Approvals -->
+        <div class="ask-card">
+          <div class="ask-header">
+            <div class="ask-icon"><i class="fa-solid fa-stamp"></i></div>
+            <h3>Approvals & Decision Cadence</h3>
+          </div>
+          <p class="ask-description">Establish a streamlined approval workflow for <strong>entry/exit criteria, software procurement, and access provisioning</strong>. Commit to defined turnaround times for sign-offs to keep the transition timeline on track.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">20</div>
+    </div>
+  </div>
+
+</body>
+</html>

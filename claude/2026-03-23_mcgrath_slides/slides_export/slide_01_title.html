@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 1: McGrath Support Proposal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100vh;
+      background: #fff;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Main content: split layout */
+    .slide-body {
+      flex: 1;
+      display: flex;
+      min-height: 0;
+    }
+
+    /* Left panel: text content */
+    .left-panel {
+      width: 58%;
+      padding: 36px 40px 20px;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .header-logo {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-logo span { color: var(--purple-accent); }
+
+    .tagline-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple-accent));
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.3px;
+    }
+
+    .proposal-title {
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+
+    .mcgrath-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .mcgrath-icon {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 13px;
+    }
+
+    .mcgrath-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: 0.5px;
+    }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+    }
+
+    .elevator-pitch {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.65;
+      margin-bottom: auto;
+    }
+
+    /* Right panel: visual treatment */
+    .right-panel {
+      width: 42%;
+      background: linear-gradient(135deg, var(--purple-darkest) 0%, var(--purple-dark) 30%, var(--purple-mid) 60%, var(--purple-bright) 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Abstract pattern overlay */
+    .right-panel::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -20%;
+      width: 80%;
+      height: 80%;
+      background: radial-gradient(circle, rgba(168,85,247,0.3) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .right-panel::after {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      left: -10%;
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(circle, rgba(232,121,249,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .right-visual {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .visual-icon-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .visual-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: rgba(255,255,255,0.7);
+      backdrop-filter: blur(4px);
+    }
+
+    .right-tagline {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.5;
+    }
+
+    .right-tagline strong {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    /* Stats bar */
+    .stats-bar {
+      display: flex;
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .stat-item {
+      flex: 1;
+      padding: 14px 20px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat-item:last-child {
+      border-right: none;
+    }
+
+    .stat-value {
+      font-size: 20px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    /* Footer */
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 10px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-body">
+      <!-- Left: Text Content -->
+      <div class="left-panel">
+        <div class="brand-row">
+          <div class="header-logo">Bay<span>One</span> Solutions</div>
+          <div class="tagline-badge">
+            <i class="fa-solid fa-hashtag" style="font-size: 9px;"></i>
+            TheFutureWorksHere
+          </div>
+        </div>
+
+        <h1 class="proposal-title">McGrath Support<br>Proposal</h1>
+
+        <div class="mcgrath-badge">
+          <div class="mcgrath-icon"><i class="fa-solid fa-gear"></i></div>
+          <span class="mcgrath-name">McGRATH RentCorp</span>
+        </div>
+
+        <div class="section-label">About BayOne</div>
+        <p class="elevator-pitch">
+          BayOne is a global Talent and Technology Solutions partner headquartered in the San Francisco Bay Area. We solve business problems, bridge talent gaps, and drive innovation for customers.
+        </p>
+      </div>
+
+      <!-- Right: Visual Panel -->
+      <div class="right-panel">
+        <div class="right-visual">
+          <div class="visual-icon-grid">
+            <div class="visual-icon"><i class="fa-solid fa-brain"></i></div>
+            <div class="visual-icon"><i class="fa-solid fa-code"></i></div>
+            <div class="visual-icon"><i class="fa-solid fa-cloud"></i></div>
+            <div class="visual-icon"><i class="fa-solid fa-chart-line"></i></div>
+            <div class="visual-icon"><i class="fa-solid fa-gears"></i></div>
+            <div class="visual-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="visual-icon"><i class="fa-solid fa-database"></i></div>
+            <div class="visual-icon"><i class="fa-solid fa-users"></i></div>
+            <div class="visual-icon"><i class="fa-solid fa-rocket"></i></div>
+          </div>
+          <p class="right-tagline">
+            <strong>Technology Solutions</strong><br>
+            that transform how enterprises operate
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-value">100+</div>
+        <div class="stat-label">Customers</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">1,000+</div>
+        <div class="stat-label">Projects</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">13</div>
+        <div class="stat-label">Years</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">Global</div>
+        <div class="stat-label">Americas, APAC</div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

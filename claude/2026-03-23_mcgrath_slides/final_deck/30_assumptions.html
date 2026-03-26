@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 22b: Assumptions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--purple-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 12px 40px 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+      flex-shrink: 0;
+    }
+
+    .lead {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 14px;
+      flex-shrink: 0;
+    }
+
+    /* Main layout */
+    .assumptions-layout {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-height: 0;
+    }
+
+    /* Volume Baseline Card */
+    .baseline-card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(124,58,237,0.06);
+      overflow: hidden;
+    }
+
+    .baseline-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      background: linear-gradient(135deg, rgba(76,29,149,0.06), rgba(168,85,247,0.06));
+      border-bottom: 1px solid rgba(124,58,237,0.1);
+    }
+
+    .baseline-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #4C1D95, #5B21B6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .baseline-header-text h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .baseline-header-text p {
+      font-size: 10.5px;
+      color: var(--text-light);
+      margin-top: 1px;
+    }
+
+    .baseline-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      padding: 0;
+    }
+
+    .metric-cell {
+      padding: 14px 18px;
+      text-align: center;
+      border-right: 1px solid rgba(124,58,237,0.08);
+    }
+
+    .metric-cell:last-child { border-right: none; }
+
+    .metric-cell .metric-value {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--purple-dark);
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+
+    .metric-cell .metric-label {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--text-light);
+      line-height: 1.4;
+    }
+
+    .metric-cell .metric-detail {
+      font-size: 9.5px;
+      color: var(--text-light);
+      margin-top: 3px;
+      line-height: 1.35;
+    }
+
+    /* Engagement Conditions */
+    .conditions-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .conditions-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .conditions-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      background: linear-gradient(135deg, #5B21B6, #7C3AED);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .conditions-header h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .conditions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      flex: 1;
+    }
+
+    .condition-card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 10px;
+      padding: 14px 16px;
+      box-shadow: 0 2px 6px rgba(124,58,237,0.06);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .condition-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+
+    .condition-card.cc1::before { background: linear-gradient(90deg, #4C1D95, #5B21B6); }
+    .condition-card.cc2::before { background: linear-gradient(90deg, #5B21B6, #7C3AED); }
+    .condition-card.cc3::before { background: linear-gradient(90deg, #7C3AED, #A855F7); }
+
+    .condition-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .condition-card-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .condition-card.cc1 .condition-card-icon { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .condition-card.cc2 .condition-card-icon { background: linear-gradient(135deg, #5B21B6, #7C3AED); }
+    .condition-card.cc3 .condition-card-icon { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+
+    .condition-card-header h4 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .condition-card p {
+      font-size: 11px;
+      line-height: 1.5;
+      color: #475569;
+      margin-bottom: 6px;
+    }
+
+    .condition-card .sub-items {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: auto;
+    }
+
+    .condition-card .sub-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 10px;
+      line-height: 1.4;
+      color: var(--text-light);
+    }
+
+    .condition-card.cc1 .sub-item i { color: #4C1D95; }
+    .condition-card.cc2 .sub-item i { color: #5B21B6; }
+    .condition-card.cc3 .sub-item i { color: #7C3AED; }
+
+    .condition-card .sub-item i {
+      font-size: 7px;
+      margin-top: 4px;
+      width: 10px;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    /* Footer */
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>Assumptions</h2>
+      <p class="lead">Baseline estimates used in the absence of ticket volume data; subject to validation during discovery</p>
+
+      <div class="assumptions-layout">
+
+        <!-- Volume & Complexity Baseline -->
+        <div class="baseline-card">
+          <div class="baseline-header">
+            <div class="baseline-icon"><i class="fa-solid fa-chart-bar"></i></div>
+            <div class="baseline-header-text">
+              <h3>Volume and Complexity Baseline</h3>
+              <p>In the absence of ticket volume, estimates are based on the following assumptions</p>
+            </div>
+          </div>
+          <div class="baseline-metrics">
+            <div class="metric-cell">
+              <div class="metric-value">~1,400</div>
+              <div class="metric-label">Monthly L2/L3 Tickets</div>
+            </div>
+            <div class="metric-cell">
+              <div class="metric-value">30 / 50 / 20</div>
+              <div class="metric-label">Complexity Ratio</div>
+              <div class="metric-detail">Simple / Medium / Complex</div>
+            </div>
+            <div class="metric-cell">
+              <div class="metric-value">1 / 3 / 8</div>
+              <div class="metric-label">Resolution Hours</div>
+              <div class="metric-detail">Simple / Medium / Complex</div>
+            </div>
+            <div class="metric-cell">
+              <div class="metric-value">&lt; 10%</div>
+              <div class="metric-label">P1/P2 Volume</div>
+              <div class="metric-detail">P3/P4 &gt; 90%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Engagement Conditions -->
+        <div class="conditions-section">
+          <div class="conditions-header">
+            <div class="conditions-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+            <h3>Engagement Conditions</h3>
+          </div>
+          <div class="conditions-grid">
+
+            <!-- Discovery & Baselining -->
+            <div class="condition-card cc1">
+              <div class="condition-card-header">
+                <div class="condition-card-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                <h4>Discovery & Baselining</h4>
+              </div>
+              <p>On-boarding and discovery phase will be used to baseline the data. Any deviations from the above will necessitate a change request.</p>
+            </div>
+
+            <!-- Resource Adjustments -->
+            <div class="condition-card cc2">
+              <div class="condition-card-header">
+                <div class="condition-card-icon"><i class="fa-solid fa-arrows-rotate"></i></div>
+                <h4>Resource Adjustments</h4>
+              </div>
+              <p>Actual resource count may be revised if:</p>
+              <div class="sub-items">
+                <div class="sub-item">
+                  <i class="fa-solid fa-circle"></i>
+                  <span>Ticket count deviates +/- 10% as specified</span>
+                </div>
+                <div class="sub-item">
+                  <i class="fa-solid fa-circle"></i>
+                  <span>Number of integrations differs from specified in the RFP document</span>
+                </div>
+                <div class="sub-item">
+                  <i class="fa-solid fa-circle"></i>
+                  <span>Most of the Mulesoft integration will migrate to OIC</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stakeholder Participation -->
+            <div class="condition-card cc3">
+              <div class="condition-card-header">
+                <div class="condition-card-icon"><i class="fa-solid fa-people-group"></i></div>
+                <h4>Stakeholder Participation</h4>
+              </div>
+              <p>All functional stakeholders will be available and actively engaged during the discovery phase (Phase 1) to ensure accurate scoping and successful knowledge transfer.</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">22</div>
+    </div>
+  </div>
+</body>
+</html>

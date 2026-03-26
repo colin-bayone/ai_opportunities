@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 27: Summary</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--purple-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 18px 40px 14px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 3px;
+      flex-shrink: 0;
+    }
+
+    .lead {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 18px;
+      flex-shrink: 0;
+    }
+
+    /* Three-card layout */
+    .summary-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .summary-card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 12px;
+      padding: 20px 18px;
+      box-shadow: 0 2px 8px rgba(124,58,237,0.06);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .summary-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+
+    .summary-card:nth-child(1)::before { background: linear-gradient(90deg, #4C1D95, #5B21B6); }
+    .summary-card:nth-child(2)::before { background: linear-gradient(90deg, #5B21B6, #7C3AED); }
+    .summary-card:nth-child(3)::before { background: linear-gradient(90deg, #7C3AED, #A855F7); }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .summary-card:nth-child(1) .card-icon { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .summary-card:nth-child(2) .card-icon { background: linear-gradient(135deg, #5B21B6, #7C3AED); }
+    .summary-card:nth-child(3) .card-icon { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+
+    .card-top h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.3;
+    }
+
+    .card-items {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .card-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--text);
+    }
+
+    .card-item i {
+      font-size: 11px;
+      margin-top: 3px;
+      width: 14px;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    .summary-card:nth-child(1) .card-item i { color: #4C1D95; }
+    .summary-card:nth-child(2) .card-item i { color: #5B21B6; }
+    .summary-card:nth-child(3) .card-item i { color: #7C3AED; }
+
+    .card-item strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 12px 40px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>Summary</h2>
+      <p class="lead">Three pillars of value for McGrath's managed services partnership</p>
+
+      <div class="summary-cards">
+
+        <!-- Vision -->
+        <div class="summary-card">
+          <div class="card-top">
+            <div class="card-icon"><i class="fa-solid fa-eye"></i></div>
+            <h3>Vision for Long-Term Partnership</h3>
+          </div>
+          <div class="card-items">
+            <div class="card-item">
+              <i class="fa-solid fa-shield-halved"></i>
+              <span><strong>Robust approach</strong> to managed services delivery with proven governance frameworks</span>
+            </div>
+            <div class="card-item">
+              <i class="fa-solid fa-book"></i>
+              <span><strong>Knowledge management</strong> systems that capture institutional expertise and accelerate onboarding</span>
+            </div>
+            <div class="card-item">
+              <i class="fa-solid fa-user-lock"></i>
+              <span><strong>Critical talent retention</strong> through employee engagement, career growth, and competitive compensation</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BayOne Investment -->
+        <div class="summary-card">
+          <div class="card-top">
+            <div class="card-icon"><i class="fa-solid fa-handshake"></i></div>
+            <h3>Investment from BayOne</h3>
+          </div>
+          <div class="card-items">
+            <div class="card-item">
+              <i class="fa-solid fa-users-gear"></i>
+              <span><strong>Pool of shadow resources</strong> to ensure continuity and reduce single points of failure</span>
+            </div>
+            <div class="card-item">
+              <i class="fa-solid fa-coins"></i>
+              <span><strong>Investment during transition</strong> and ongoing operations to reduce McGrath's ramp-up risk</span>
+            </div>
+            <div class="card-item">
+              <i class="fa-solid fa-tag"></i>
+              <span><strong>Competitive pricing</strong> for multi-year contract commitment with transparent cost structure</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Productivity Benefits -->
+        <div class="summary-card">
+          <div class="card-top">
+            <div class="card-icon"><i class="fa-solid fa-bolt"></i></div>
+            <h3>Productivity Benefits</h3>
+          </div>
+          <div class="card-items">
+            <div class="card-item">
+              <i class="fa-solid fa-layer-group"></i>
+              <span><strong>Multi-skilling and cross-utilization</strong> of team members to maximize coverage efficiency</span>
+            </div>
+            <div class="card-item">
+              <i class="fa-solid fa-chart-pie"></i>
+              <span><strong>Assured productivity benefits</strong> with measurable improvements in resolution time and throughput</span>
+            </div>
+            <div class="card-item">
+              <i class="fa-solid fa-robot"></i>
+              <span><strong>Support efficiencies through AI and automation</strong> to reduce repetitive manual effort</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">27</div>
+    </div>
+  </div>
+
+</body>
+</html>

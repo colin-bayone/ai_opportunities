@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 12: Measurement By Metrics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--purple-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 12px 40px 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+      flex-shrink: 0;
+    }
+
+    .lead {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 10px;
+      flex-shrink: 0;
+    }
+
+    /* Category rows */
+    .category-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .category-row {
+      display: flex;
+      gap: 0;
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(124,58,237,0.06);
+      overflow: hidden;
+    }
+
+    .category-row.large { flex: 3; }
+    .category-row.small { flex: 1; }
+
+    .category-left {
+      width: 200px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-right: 3px solid transparent;
+    }
+
+    .category-row.c1 .category-left { border-color: #4C1D95; background: rgba(76,29,149,0.06); }
+    .category-row.c2 .category-left { border-color: #5B21B6; background: rgba(91,33,182,0.06); }
+    .category-row.c3 .category-left { border-color: #7C3AED; background: rgba(124,58,237,0.06); }
+    .category-row.c4 .category-left { border-color: #A855F7; background: rgba(168,85,247,0.06); }
+
+    .category-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .category-row.c1 .category-icon { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .category-row.c2 .category-icon { background: linear-gradient(135deg, #5B21B6, #7C3AED); }
+    .category-row.c3 .category-icon { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+    .category-row.c4 .category-icon { background: linear-gradient(135deg, #A855F7, #C026D3); }
+
+    .category-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      line-height: 1.3;
+    }
+
+    .category-right {
+      flex: 1;
+      display: grid;
+      gap: 6px 16px;
+      padding: 10px 16px;
+      align-content: center;
+    }
+
+    .category-right.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .category-right.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .category-right.cols-1 { grid-template-columns: 1fr; }
+
+    .metric-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 11px;
+      line-height: 1.45;
+      color: #475569;
+    }
+
+    .metric-item i {
+      font-size: 9px;
+      margin-top: 3px;
+      width: 12px;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    .category-row.c1 .metric-item i { color: #4C1D95; }
+    .category-row.c2 .metric-item i { color: #5B21B6; }
+    .category-row.c3 .metric-item i { color: #7C3AED; }
+    .category-row.c4 .metric-item i { color: #A855F7; }
+
+    .metric-item strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    .metric-item .benefit {
+      color: var(--text-light);
+      font-size: 10px;
+    }
+
+    /* Footer note */
+    .footer-note {
+      margin-top: 8px;
+      flex-shrink: 0;
+      font-size: 10px;
+      color: var(--text-light);
+      font-style: italic;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-note i {
+      font-size: 10px;
+      color: var(--purple-accent);
+    }
+
+    /* Footer */
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>Measurement By Metrics</h2>
+      <p class="lead">10 KPIs across four categories to track support performance, efficiency, and customer satisfaction</p>
+
+      <div class="category-rows">
+
+        <!-- Incident Management (6 metrics) -->
+        <div class="category-row c1 large">
+          <div class="category-left">
+            <div class="category-icon"><i class="fa-solid fa-bell"></i></div>
+            <div class="category-name">Incident Management</div>
+          </div>
+          <div class="category-right cols-3">
+            <div class="metric-item">
+              <i class="fa-solid fa-clock"></i>
+              <span><strong>MTTR</strong><br><span class="benefit">Enhanced user experience, agent effectiveness</span></span>
+            </div>
+            <div class="metric-item">
+              <i class="fa-solid fa-hourglass-half"></i>
+              <span><strong>Case Age</strong><br><span class="benefit">Faster issue resolution</span></span>
+            </div>
+            <div class="metric-item">
+              <i class="fa-solid fa-right-left"></i>
+              <span><strong>Case Hops</strong><br><span class="benefit">Ownership and accountability</span></span>
+            </div>
+            <div class="metric-item">
+              <i class="fa-solid fa-list-check"></i>
+              <span><strong>Backlog</strong><br><span class="benefit">Stable systems</span></span>
+            </div>
+            <div class="metric-item">
+              <i class="fa-solid fa-phone"></i>
+              <span><strong>First Contact Resolution</strong><br><span class="benefit">Support effectiveness</span></span>
+            </div>
+            <div class="metric-item">
+              <i class="fa-solid fa-percent"></i>
+              <span><strong>Automation %</strong><br><span class="benefit">Reduced agent dependency</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Standard Processes (2 metrics) -->
+        <div class="category-row c2 small">
+          <div class="category-left">
+            <div class="category-icon"><i class="fa-solid fa-book-open"></i></div>
+            <div class="category-name">Standard Processes</div>
+          </div>
+          <div class="category-right cols-2">
+            <div class="metric-item">
+              <i class="fa-solid fa-clipboard-check"></i>
+              <span><strong>Playbook Adoption</strong><br><span class="benefit">Case hops reduction, productivity improvement</span></span>
+            </div>
+            <div class="metric-item">
+              <i class="fa-solid fa-database"></i>
+              <span><strong>Knowledge Repository Effectiveness</strong><br><span class="benefit">Process standardization</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Problem Management (1 metric) -->
+        <div class="category-row c3 small">
+          <div class="category-left">
+            <div class="category-icon"><i class="fa-solid fa-bug"></i></div>
+            <div class="category-name">Problem Management</div>
+          </div>
+          <div class="category-right cols-1">
+            <div class="metric-item">
+              <i class="fa-solid fa-arrow-trend-down"></i>
+              <span><strong>% of Incidents Eliminated</strong><br><span class="benefit">Stable systems through root cause resolution</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Customer Experience (1 metric) -->
+        <div class="category-row c4 small">
+          <div class="category-left">
+            <div class="category-icon"><i class="fa-solid fa-face-smile"></i></div>
+            <div class="category-name">Customer Experience</div>
+          </div>
+          <div class="category-right cols-1">
+            <div class="metric-item">
+              <i class="fa-solid fa-star"></i>
+              <span><strong>CSAT</strong><br><span class="benefit">Improved customer experience and satisfaction</span></span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-note">
+        <i class="fa-solid fa-circle-info"></i>
+        Relevant metrics will be discussed with the McGrath team and tracked throughout the engagement
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">12</div>
+    </div>
+  </div>
+</body>
+</html>

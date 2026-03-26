@@ -1,0 +1,134 @@
+ Write(claude/meeting-analyzer/meeting_sephora_technical_deep_dive_2026-03/scoping/track_a_cognos_mcp_demo.md)
+  ⎿  Updated claude/meeting-analyzer/meeting_sephora_technical_deep_dive_2026-03/scoping/track_a_cognos_mcp_demo.md with 53 additions and 24 removals                                                                                                                                                                                       
+       11    
+       12    ---
+       13    
+       14 -  ## What We Would Deliver
+       14 +  ## Demo Approach
+       15    
+       16 -  ### MCP Connector for Cognos
+       17 -  - Programmatic connection to Cognos via SDK
+       18 -  - Automated extraction of report metadata and SQL from Cognos Content Store
+       19 -  - Eliminates manual XML exports from Report Studio
+       16 +  ### Working with Exported XML
+       17    
+       18 +  For this demo, we will work with an exported Cognos report XML that you provide. The agents will:
+       19 +  
+       20 +  1. Parse the report definition and extract embedded SQL
+       21 +  2. Interpret the report structure, data sources, joins, and calculations
+       22 +  3. Convert SQL Server syntax to Databricks-compatible SQL
+       23 +  4. Remap table references to your target Databricks schema
+       24 +  5. Generate output ready for validation
+       25 +  
+       26 +  This approach aligns with what was discussed on the call: you provide the report XML, we produce converted output, and your team validates by pointing it to Databricks.
+       27 +  
+       28 +  ### About MCP Connectivity
+       29 +  
+       30 +  We can build the MCP connector for Cognos, but demonstrating live MCP connectivity requires access to a running Cognos environment. Since Cognos is a proprietary IBM product with no freely available Docker image or trial server we can spin up, we cannot test or demonstrate the MCP connector without environment access.
+       31 +  
+       32 +  **If you would like to see MCP working in the demo:**
+       33 +  - We would need access to your Cognos environment (API/SDK level)
+       34 +  - Based on the call discussion, this may not be feasible given security constraints
+       35 +  
+       36 +  **Without environment access:**
+       37 +  - We demonstrate the agent orchestration and conversion workflow using exported XML
+       38 +  - The MCP connector architecture can be shown and explained, but not executed live
+       39 +  - In production, the MCP connector would replace the manual XML export step
+       40 +  
+       41 +  ---
+       42 +  
+       43 +  ## What We Would Deliver
+       44 +  
+       45    ### Agent Orchestration
+       46    - Multiple specialized agents working together:
+       47 -    - **Extraction Agent** - Pulls report definition from Cognos
+       47      - **Parser Agent** - Interprets report structure, embedded SQL, and business logic
+       48      - **Conversion Agent** - Translates SQL Server syntax to Databricks-compatible SQL
+       49      - **Remapping Agent** - Maps source tables to target Databricks schema
+     ...
+       28    - **Orchestrator** coordinating handoffs between agents
+       29    - Visible task sequencing and dependency handling
+       30    
+       31 -  ### End-to-End Workflow
+       32 -  ```
+       33 -  Cognos Report → MCP Extraction → Parse Structure → Interpret SQL →
+       34 -  Convert Syntax → Remap to Target Schema → Generate Output → Validation
+       35 -  ```
+       31 +  ### MCP Connector for Cognos (Architecture)
+       32 +  - Programmatic connection to Cognos via SDK (Java/.NET)
+       33 +  - Automated extraction of report metadata and SQL from Cognos Content Store
+       34 +  - Would eliminate manual XML exports from Report Studio in production
+       35 +  - Can be built and demonstrated if environment access is provided
+       36    
+       37    ### Output
+       38    - Databricks-compatible SQL queries
+     ...
+       45    
+       46    | Item | Description | Who |
+       47    |------|-------------|-----|
+       48 -  | Cognos report XML | Full export from Report Studio (Finance folder recommended) | Gariashi / Vlad |
+       49 -  | Target Databricks schema | Catalog and table structure for remapping (what the Cognos report should point to after migration) | Sergey |
+       48 +  | Cognos report XML | Full export from Report Studio (Finance folder) | Gariashi / Vlad |
+       49 +  | Target Databricks schema | Catalog and table structure for remapping | Sergey |
+       50    
+       51 +  **Optional (for live MCP demonstration):**
+       52 +  
+       53 +  | Item | Description |
+       54 +  |------|-------------|
+       55 +  | Cognos environment access | API/SDK access to demonstrate live MCP connectivity |
+       56 +  
+       57    ---
+       58    
+       59    ## Demo Workflow
+       60    
+       61 -  1. **Agent 1 (Extraction)** connects to Cognos via MCP, pulls report definition
+       62 -  2. **Agent 2 (Parser)** dissects the report structure - identifies embedded SQL, data sources, joins, calculations
+       63 -  3. **Agent 3 (Conversion)** transforms SQL Server syntax to Databricks SQL (handling differences like identity columns, T-SQL functions, etc.)
+       64 -  4. **Agent 4 (Remapping)** maps old table references to new Databricks schema
+       65 -  5. **Orchestrator** coordinates handoffs, manages task sequencing, handles dependencies
+       61 +  1. **Input** - Exported Cognos report XML (provided by your team)
+       62 +  2. **Parser Agent** - Dissects the report structure, identifies embedded SQL, data sources, joins, calculations
+       63 +  3. **Conversion Agent** - Transforms SQL Server syntax to Databricks SQL (handling differences like identity columns, T-SQL functions, etc.)
+       64 +  4. **Remapping Agent** - Maps old table references to new Databricks schema
+       65 +  5. **Orchestrator** - Coordinates handoffs, manages task sequencing, handles dependencies
+       66    6. **Output** - Databricks-compatible report definition ready for validation
+       67    
+       68    Throughout: You'll see agents communicating, handing off work, and the orchestration layer managing the flow.
+     ...
+       67    
+       68    The demo will be considered successful if:
+       69    
+       70 -  1. The MCP connector successfully extracts report metadata and SQL from the provided Cognos XML without manual intervention
+       70 +  1. Agents successfully parse and interpret the Cognos report XML
+       71    2. Agent orchestration is visible - you can see agents handing off tasks, coordinating, and sequencing work
+       72    3. SQL conversion handles syntax differences between SQL Server and Databricks correctly
+       73    4. Output is remapped to your target Databricks schema
+     ...
+       78    ## Scope
+       79    
+       80    **In Scope:**
+       81 -  - Single Cognos report conversion
+       82 -  - MCP connector development for Cognos
+       81 +  - Single Cognos report conversion (from exported XML)
+       82    - Multi-agent orchestration demonstration
+       83    - SQL Server to Databricks SQL conversion
+       84    - Schema remapping to target Databricks environment
+       85    - Databricks-compatible output generation
+       86 +  - MCP connector architecture (demonstration requires environment access)
+       87    
+       88    **Out of Scope:**
+       89    - Multiple reports
+       90 -  - DataStage/ETL conversion
+       90 +  - DataStage/ETL conversion (separate track)
+       91    - Framework Manager model migration
+       92    - Content Store migration
+       93    - Production deployment
+     ...
+       100    
+       101    This demo shows our capability to build system integrations that automate legacy report migration through agent orchestration.
+       102    
+       103 -  The key differentiator is not code conversion, but how agents coordinate across multiple tools (Cognos, SQL parsing, Databricks) to automate the entire workflow without manual intervention at each step.
+       103 +  The key differentiator is not code conversion, but how agents coordinate to automate the entire workflow without manual intervention at each step.
+       104    
+       105 -  The MCP connector and agent orchestration patterns established here would extend to additional reports and use cases in a paid engagement.
+       105 +  The agent orchestration patterns established here would extend to additional reports and use cases in a paid engagement. With environment access, the MCP connector would complete the automation by eliminating manual XML exports entirely.

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 2: Executive Summary - Version B</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100vh;
+      background: #fff;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-logo span { color: var(--purple-accent); }
+
+    .header-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+    }
+
+    .slide-content {
+      flex: 1;
+      display: flex;
+      min-height: 0;
+    }
+
+    /* Left panel - bold AI positioning */
+    .left-panel {
+      width: 45%;
+      background: linear-gradient(135deg, var(--purple-darkest) 0%, var(--purple-dark) 40%, var(--purple-mid) 100%);
+      padding: 32px 34px 28px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .left-panel::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -30%;
+      width: 70%;
+      height: 70%;
+      background: radial-gradient(circle, rgba(168,85,247,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .left-panel::after {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      left: -15%;
+      width: 50%;
+      height: 50%;
+      background: radial-gradient(circle, rgba(232,121,249,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .left-panel > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .left-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 12px;
+    }
+
+    .left-panel h2 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+
+    .left-panel .hook-text {
+      font-size: 13.5px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.6;
+      margin-bottom: auto;
+    }
+
+    .left-panel .forward-text {
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.55;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 18px;
+      flex-shrink: 0;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--purple-glow);
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 9px;
+      color: rgba(255,255,255,0.85);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    /* Right panel - capability cards */
+    .right-panel {
+      width: 55%;
+      padding: 24px 32px 20px;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(180deg, #fdfcff 0%, #f9f7ff 100%);
+    }
+
+    .right-lead {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.55;
+      margin-bottom: 16px;
+      flex-shrink: 0;
+    }
+
+    .capability-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .capability-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.1);
+      border-radius: 10px;
+      padding: 12px 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+      flex: 1;
+      min-height: 0;
+    }
+
+    .capability-card .card-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #fff;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .capability-card:nth-child(1) .card-icon { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .capability-card:nth-child(2) .card-icon { background: linear-gradient(135deg, #5B21B6, #6D28D9); }
+    .capability-card:nth-child(3) .card-icon { background: linear-gradient(135deg, #6D28D9, #7C3AED); }
+    .capability-card:nth-child(4) .card-icon { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+    .capability-card:nth-child(5) .card-icon { background: linear-gradient(135deg, #A855F7, #C026D3); }
+
+    .capability-card .card-content h4 {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+
+    .capability-card .card-content ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .capability-card .card-content li {
+      font-size: 11px;
+      color: #475569;
+      line-height: 1.45;
+      padding-left: 12px;
+      position: relative;
+    }
+
+    .capability-card .card-content li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 6px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--purple-accent);
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 10px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-content">
+      <!-- Left: Bold AI positioning -->
+      <div class="left-panel">
+        <h2>AI-Driven Managed Services for McGrath's NextGen Platform</h2>
+
+        <p class="hook-text">
+          McGrath's NextGen platform, with its 70+ integrations, Oracle Fusion suite, Salesforce CPQ, and MuleSoft middleware, requires managed services where AI-driven operations are foundational.
+        </p>
+
+        <p class="hook-text">
+          BayOne builds intelligent operations into the support model from day one: automated failure pattern recognition, predictive SLA management, and continuous optimization across your entire integration landscape.
+        </p>
+
+        <p class="forward-text">
+          McGrath's NextGen platform represents a significant investment in operational modernization. BayOne ensures that investment compounds through continuous AI-driven optimization, proactive integration health management, and a partnership model designed to evolve as your platform matures.
+        </p>
+
+        <div class="stat-row">
+          <div class="stat">
+            <div class="stat-value">13</div>
+            <div class="stat-label">Years</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">100+</div>
+            <div class="stat-label">Customers</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">95.7%</div>
+            <div class="stat-label">SLA Compliance</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Capability cards -->
+      <div class="right-panel">
+        <p class="right-lead">
+          BayOne's AI playbook is embedded in how we deliver managed services. Combined with a discovery-first engagement model, we calibrate AI-driven operations to McGrath's specific environment and integration landscape.
+        </p>
+
+        <div class="capability-cards">
+          <div class="capability-card">
+            <div class="card-icon"><i class="fa-solid fa-bolt"></i></div>
+            <div class="card-content">
+              <h4>AI-Driven Incident Resolution</h4>
+              <ul>
+                <li>Automated failure pattern recognition and root cause attribution</li>
+                <li>Cross-system coverage across Oracle Fusion, MuleSoft, and Salesforce</li>
+              </ul>
+            </div>
+          </div>
+          <div class="capability-card">
+            <div class="card-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+            <div class="card-content">
+              <h4>Discovery-First Methodology</h4>
+              <ul>
+                <li>Maps McGrath's actual operational landscape before finalizing support models</li>
+                <li>Calibrated to real ticket patterns and integration dependencies</li>
+              </ul>
+            </div>
+          </div>
+          <div class="capability-card">
+            <div class="card-icon"><i class="fa-solid fa-chart-line"></i></div>
+            <div class="card-content">
+              <h4>Predictive SLA Management</h4>
+              <ul>
+                <li>Pattern-based analytics that surface risks before they become breaches</li>
+                <li>P1 response tracking with early warning on compliance trends</li>
+              </ul>
+            </div>
+          </div>
+          <div class="capability-card">
+            <div class="card-icon"><i class="fa-solid fa-database"></i></div>
+            <div class="card-content">
+              <h4>Full-Stack Oracle Fusion</h4>
+              <ul>
+                <li>Active delivery across SCM, ERP, CX, and EPM modules</li>
+                <li>Direct alignment with McGrath's NextGen architecture</li>
+              </ul>
+            </div>
+          </div>
+          <div class="capability-card">
+            <div class="card-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+            <div class="card-content">
+              <h4>Integration Health Monitoring</h4>
+              <ul>
+                <li>Proactive monitoring across 70+ integration points</li>
+                <li>MuleSoft, OIC, and cross-platform visibility</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

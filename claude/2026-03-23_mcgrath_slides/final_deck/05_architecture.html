@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NextGen Ecosystem Architecture</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-logo span { color: var(--purple-accent); }
+
+    .header-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+    }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 14px 36px 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+      flex-shrink: 0;
+    }
+
+    .slide-content .lead {
+      font-size: 11px;
+      color: var(--text-light);
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 10px 40px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    /* Architecture layout */
+    .arch-container {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* Top layer: 3 core systems */
+    .top-layer {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      flex-shrink: 0;
+    }
+
+    .core-system {
+      flex: 1;
+      background: #fff;
+      border: 1.5px solid rgba(124,58,237,0.2);
+      border-radius: 10px;
+      padding: 10px 14px;
+      position: relative;
+    }
+
+    .core-system.sf { border-top: 3px solid #4C1D95; }
+    .core-system.oracle { border-top: 3px solid #6D28D9; }
+    .core-system.recvue { border-top: 3px solid #A855F7; }
+
+    .core-system .sys-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #fff;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    .core-system.sf .sys-icon { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .core-system.oracle .sys-icon { background: linear-gradient(135deg, #5B21B6, #6D28D9); }
+    .core-system.recvue .sys-icon { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+
+    .core-system h4 {
+      display: inline;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      vertical-align: middle;
+    }
+
+    .core-system .sys-detail {
+      font-size: 10px;
+      color: var(--text-light);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    .core-system .sys-badge {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--purple-dark);
+      background: rgba(124,58,237,0.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-top: 4px;
+    }
+
+    /* Flow arrows between top systems */
+    .flow-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .flow-arrow .arrow-label {
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      white-space: nowrap;
+      background: #fff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(124,58,237,0.15);
+    }
+
+    .flow-arrow::before,
+    .flow-arrow::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      height: 1.5px;
+      background: var(--purple-accent);
+    }
+
+    .flow-arrow::before {
+      left: 0;
+      width: 14px;
+    }
+
+    .flow-arrow::after {
+      right: 0;
+      width: 14px;
+    }
+
+    /* Vertical connectors */
+    .connectors {
+      display: flex;
+      justify-content: center;
+      height: 14px;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .connectors::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 1.5px;
+      background: linear-gradient(180deg, rgba(124,58,237,0.3), rgba(124,58,237,0.15));
+    }
+
+    .connector-dots {
+      display: flex;
+      gap: 120px;
+      align-items: center;
+      height: 100%;
+    }
+
+    .connector-dot {
+      width: 4px;
+      height: 14px;
+      border-left: 1.5px dashed rgba(124,58,237,0.25);
+    }
+
+    /* Integration layer */
+    .integration-layer {
+      background: linear-gradient(135deg, var(--purple-darkest), var(--purple-dark));
+      border-radius: 8px;
+      padding: 10px 18px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .integration-layer .layer-title {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--purple-accent);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      white-space: nowrap;
+    }
+
+    .integration-layer .layer-items {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+
+    .integration-layer .layer-item {
+      font-size: 10px;
+      color: rgba(255,255,255,0.85);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 3px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .integration-layer .layer-item strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .integration-layer .rate-badge {
+      font-size: 9px;
+      font-weight: 600;
+      color: #fbbf24;
+      background: rgba(251,191,36,0.12);
+      border: 1px solid rgba(251,191,36,0.2);
+      padding: 3px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    /* Bottom layer: support systems */
+    .bottom-layer {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .support-system {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 8px;
+      padding: 8px 10px;
+      text-align: center;
+    }
+
+    .support-system .support-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 5px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .support-system:nth-child(1) .support-icon { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .support-system:nth-child(2) .support-icon { background: linear-gradient(135deg, #5B21B6, #6D28D9); }
+    .support-system:nth-child(3) .support-icon { background: linear-gradient(135deg, #6D28D9, #7C3AED); }
+    .support-system:nth-child(4) .support-icon { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+    .support-system:nth-child(5) .support-icon { background: linear-gradient(135deg, #A855F7, #C026D3); }
+    .support-system:nth-child(6) .support-icon { background: linear-gradient(135deg, #C026D3, #DB2777); }
+
+    .support-system h5 {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--primary);
+      line-height: 1.3;
+    }
+
+    .support-system .support-detail {
+      font-size: 9px;
+      color: var(--text-light);
+      margin-top: 2px;
+      line-height: 1.3;
+    }
+
+    /* Infrastructure bar */
+    .infra-bar {
+      background: linear-gradient(90deg, rgba(124,58,237,0.06), rgba(124,58,237,0.03));
+      border: 1px solid rgba(124,58,237,0.1);
+      border-radius: 6px;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .infra-bar .infra-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 5px;
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple-mid));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .infra-bar .infra-items {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .infra-bar .infra-item {
+      font-size: 9px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .infra-bar .infra-item i {
+      color: var(--purple-accent);
+      font-size: 8px;
+    }
+
+    .infra-bar .infra-sep {
+      width: 1px;
+      height: 14px;
+      background: rgba(124,58,237,0.15);
+    }
+
+    /* Spacing helper */
+    .layer-gap {
+      height: 8px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .layer-gap .vert-line {
+      display: flex;
+      gap: 60px;
+    }
+
+    .layer-gap .vert-line span {
+      display: block;
+      width: 1px;
+      height: 8px;
+      background: rgba(124,58,237,0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>High-Level NextGen Ecosystem Architecture</h2>
+      <p class="lead">12-13 connected systems &bull; 50+ integrations &bull; Complete ecosystem overhaul spanning CRM, ERP, billing, tax, portal and integration layers</p>
+
+      <div class="arch-container">
+
+        <!-- Top Layer: 3 Core Systems -->
+        <div class="top-layer">
+          <div class="core-system sf">
+            <div class="sys-icon"><i class="fa-solid fa-cloud"></i></div>
+            <h4>Salesforce CRM / CPQ / CLM</h4>
+            <div class="sys-detail">Sales, quoting, contract lifecycle</div>
+            <div class="sys-badge">280 active users</div>
+          </div>
+
+          <div class="flow-arrow">
+            <span class="arrow-label">Quote / Order &rarr;</span>
+          </div>
+
+          <div class="core-system oracle">
+            <div class="sys-icon"><i class="fa-solid fa-database"></i></div>
+            <h4>Oracle Fusion ERP</h4>
+            <div class="sys-detail">Finance, SCM, Procurement, O2C</div>
+            <div class="sys-badge">Core ERP</div>
+          </div>
+
+          <div class="flow-arrow">
+            <span class="arrow-label">&rarr; Billing</span>
+          </div>
+
+          <div class="core-system recvue">
+            <div class="sys-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+            <h4>RecVue</h4>
+            <div class="sys-detail">Billing and Revenue Management</div>
+            <div class="sys-badge">Complex rental model</div>
+          </div>
+        </div>
+
+        <!-- Connector -->
+        <div class="layer-gap">
+          <div class="vert-line"><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
+
+        <!-- Integration Layer -->
+        <div class="integration-layer">
+          <div class="layer-title">Integration Layer</div>
+          <div class="layer-items">
+            <div class="layer-item"><strong>MuleSoft</strong> ~32 APIs</div>
+            <div class="layer-item"><strong>OIC</strong> ~16 flows</div>
+            <div class="layer-item">Real-time + Batch</div>
+          </div>
+          <div class="rate-badge">~5% retry / failure rate</div>
+        </div>
+
+        <!-- Connector -->
+        <div class="layer-gap">
+          <div class="vert-line"><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
+
+        <!-- Bottom Layer: Support Systems -->
+        <div class="bottom-layer">
+          <div class="support-system">
+            <div class="support-icon"><i class="fa-solid fa-calculator"></i></div>
+            <h5>Avalara</h5>
+            <div class="support-detail">Tax Engine</div>
+          </div>
+          <div class="support-system">
+            <div class="support-icon"><i class="fa-solid fa-globe"></i></div>
+            <h5>Customer Hub</h5>
+            <div class="support-detail">Portal (PCI)</div>
+          </div>
+          <div class="support-system">
+            <div class="support-icon"><i class="fa-solid fa-building"></i></div>
+            <h5>NexSTAR</h5>
+            <div class="support-detail">Legacy ERP (VB&rarr;Java)</div>
+          </div>
+          <div class="support-system">
+            <div class="support-icon"><i class="fa-solid fa-snowflake"></i></div>
+            <h5>Snowflake</h5>
+            <div class="support-detail">Data Warehouse</div>
+          </div>
+          <div class="support-system">
+            <div class="support-icon"><i class="fa-solid fa-chart-bar"></i></div>
+            <h5>Oracle BI</h5>
+            <div class="support-detail">FRS / OTBI / BIP</div>
+          </div>
+          <div class="support-system">
+            <div class="support-icon"><i class="fa-solid fa-code-branch"></i></div>
+            <h5>Azure DevOps</h5>
+            <div class="support-detail">CI/CD</div>
+          </div>
+        </div>
+
+        <!-- Connector -->
+        <div class="layer-gap">
+          <div class="vert-line"><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
+
+        <!-- Infrastructure Bar -->
+        <div class="infra-bar">
+          <div class="infra-icon"><i class="fa-solid fa-server"></i></div>
+          <div class="infra-items">
+            <div class="infra-item"><i class="fa-solid fa-circle"></i> 5 SQL Servers + 7 Oracle ATP Databases</div>
+            <div class="infra-sep"></div>
+            <div class="infra-item"><i class="fa-solid fa-circle"></i> OCI + Azure</div>
+            <div class="infra-sep"></div>
+            <div class="infra-item"><i class="fa-solid fa-circle"></i> SOX / PCI / NIST Compliance</div>
+            <div class="infra-sep"></div>
+            <div class="infra-item"><i class="fa-solid fa-circle"></i> July 2026 MVP Go-Live</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+    </div>
+  </div>
+
+</body>
+</html>

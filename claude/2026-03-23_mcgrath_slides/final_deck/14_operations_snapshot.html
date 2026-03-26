@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 8: BayOne Operations Snapshot</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--purple-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 14px 40px 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+      flex-shrink: 0;
+    }
+
+    .lead {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 14px;
+      flex-shrink: 0;
+    }
+
+    /* Hero stats row */
+    .stats-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 14px;
+      flex-shrink: 0;
+    }
+
+    .stat-card {
+      flex: 1;
+      background: linear-gradient(135deg, var(--purple-darkest), var(--purple-dark));
+      border-radius: 10px;
+      padding: 14px 12px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -20%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(circle, rgba(168,85,247,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .stat-card .stat-icon {
+      font-size: 14px;
+      color: var(--purple-glow);
+      margin-bottom: 4px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat-card .stat-value {
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat-card .stat-label {
+      font-size: 9.5px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Detail sections: 2x2 grid */
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .detail-card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 10px;
+      padding: 12px 16px;
+      box-shadow: 0 2px 6px rgba(124,58,237,0.06);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .detail-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .detail-card.d1::before { background: linear-gradient(90deg, #4C1D95, #5B21B6); }
+    .detail-card.d2::before { background: linear-gradient(90deg, #5B21B6, #7C3AED); }
+    .detail-card.d3::before { background: linear-gradient(90deg, #7C3AED, #A855F7); }
+    .detail-card.d4::before { background: linear-gradient(90deg, #A855F7, #C026D3); }
+
+    .detail-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .detail-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .detail-card.d1 .detail-icon { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .detail-card.d2 .detail-icon { background: linear-gradient(135deg, #5B21B6, #7C3AED); }
+    .detail-card.d3 .detail-icon { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+    .detail-card.d4 .detail-icon { background: linear-gradient(135deg, #A855F7, #C026D3); }
+
+    .detail-header h3 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .detail-items {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .detail-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      font-size: 11px;
+      line-height: 1.45;
+      color: #475569;
+    }
+
+    .detail-item i {
+      font-size: 5px;
+      margin-top: 5px;
+      width: 8px;
+      flex-shrink: 0;
+    }
+
+    .detail-card.d1 .detail-item i { color: #4C1D95; }
+    .detail-card.d2 .detail-item i { color: #5B21B6; }
+    .detail-card.d3 .detail-item i { color: #7C3AED; }
+    .detail-card.d4 .detail-item i { color: #A855F7; }
+
+    /* Tags layout for services/tech */
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .tag {
+      padding: 3px 8px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 9.5px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>BayOne Operations Snapshot</h2>
+      <p class="lead">Proven operational scale across enterprise managed services engagements</p>
+
+      <!-- Hero stats row -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-cubes"></i></div>
+          <div class="stat-value">100+</div>
+          <div class="stat-label">Applications</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-star"></i></div>
+          <div class="stat-value">50+</div>
+          <div class="stat-label">P1/P2 Apps</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-ticket"></i></div>
+          <div class="stat-value">&gt;5K</div>
+          <div class="stat-label">Tickets / Quarter</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-chart-simple"></i></div>
+          <div class="stat-value">&gt;95%</div>
+          <div class="stat-label">SLA Adherence</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-thumbs-up"></i></div>
+          <div class="stat-value">&gt;4.4</div>
+          <div class="stat-label">CSAT Score</div>
+        </div>
+      </div>
+
+      <!-- 2x2 detail grid -->
+      <div class="details-grid">
+
+        <!-- Operating Model -->
+        <div class="detail-card d1">
+          <div class="detail-header">
+            <div class="detail-icon"><i class="fa-solid fa-building"></i></div>
+            <h3>Operating Model</h3>
+          </div>
+          <div class="detail-items">
+            <div class="detail-item">
+              <i class="fa-solid fa-circle"></i>
+              <span>100+ resources supporting IT operations across customer engagements</span>
+            </div>
+            <div class="detail-item">
+              <i class="fa-solid fa-circle"></i>
+              <span>24x7 shift coverage with follow-the-sun support capability</span>
+            </div>
+            <div class="detail-item">
+              <i class="fa-solid fa-circle"></i>
+              <span>90% resources at offshore locations, optimizing delivery costs</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Operational Excellence -->
+        <div class="detail-card d2">
+          <div class="detail-header">
+            <div class="detail-icon"><i class="fa-solid fa-award"></i></div>
+            <h3>Operational Excellence</h3>
+          </div>
+          <div class="detail-items">
+            <div class="detail-item">
+              <i class="fa-solid fa-circle"></i>
+              <span>Standard processes and templates for consistent service delivery</span>
+            </div>
+            <div class="detail-item">
+              <i class="fa-solid fa-circle"></i>
+              <span>Playbooks and knowledge management for rapid onboarding and resolution</span>
+            </div>
+            <div class="detail-item">
+              <i class="fa-solid fa-circle"></i>
+              <span>Process automation to reduce manual effort and improve accuracy</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div class="detail-card d3">
+          <div class="detail-header">
+            <div class="detail-icon"><i class="fa-solid fa-headset"></i></div>
+            <h3>Services</h3>
+          </div>
+          <div class="tag-row">
+            <span class="tag">Incident Management</span>
+            <span class="tag">Problem Management</span>
+            <span class="tag">Job Monitoring</span>
+            <span class="tag">Performance Monitoring</span>
+            <span class="tag">QE / ME Support</span>
+            <span class="tag">YE War Room</span>
+            <span class="tag">Change Management</span>
+            <span class="tag">Release Management</span>
+          </div>
+        </div>
+
+        <!-- Technology -->
+        <div class="detail-card d4">
+          <div class="detail-header">
+            <div class="detail-icon"><i class="fa-solid fa-microchip"></i></div>
+            <h3>Technology Stack</h3>
+          </div>
+          <div class="tag-row">
+            <span class="tag">ServiceNow</span>
+            <span class="tag">Zendesk</span>
+            <span class="tag">Jira</span>
+            <span class="tag">TeamViewer</span>
+            <span class="tag">MS Teams</span>
+            <span class="tag">Slack</span>
+            <span class="tag">Zoom</span>
+            <span class="tag">Google Workspace</span>
+            <span class="tag">Confluence</span>
+            <span class="tag">SharePoint</span>
+            <span class="tag">Python</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">08</div>
+    </div>
+  </div>
+
+</body>
+</html>

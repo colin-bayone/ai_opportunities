@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 6a: Transformation Journey</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--purple-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    /* Content */
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 12px 40px 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+      flex-shrink: 0;
+    }
+
+    .lead {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 10px;
+      flex-shrink: 0;
+    }
+
+    /* Journey container */
+    .journey-container {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      border-radius: 10px 10px 0 0;
+      overflow: hidden;
+    }
+
+    /* ============================================
+       Bridge bar: 3 horizontal layers
+       ============================================ */
+    .bridge-bar {
+      display: flex;
+      flex-shrink: 0;
+      flex: 4;
+      min-height: 0;
+    }
+
+    .bridge-layer {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 0 18px;
+      gap: 10px;
+    }
+
+    .bridge-layer:nth-child(1) { background: linear-gradient(135deg, #2e1065, #3b1584); }
+    .bridge-layer:nth-child(2) {
+      background: linear-gradient(135deg, #3b1584, #5b21b6);
+      border-left: 1px solid rgba(255,255,255,0.06);
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+    .bridge-layer:nth-child(3) { background: linear-gradient(135deg, #5b21b6, #7c3aed); }
+
+    .bridge-content { flex: 1; }
+
+    .bridge-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 5px;
+    }
+
+    .bridge-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .bridge-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .bridge-desc {
+      font-size: 10.5px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.4;
+      margin-bottom: 7px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .bridge-bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .bridge-bullets .b {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 10px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.4;
+    }
+
+    .bridge-bullets .b i {
+      font-size: 6px;
+      color: var(--purple-glow);
+      margin-top: 4px;
+      width: 8px;
+      flex-shrink: 0;
+    }
+
+    .bridge-bullets .b strong {
+      color: rgba(255,255,255,0.9);
+      font-weight: 600;
+    }
+
+    /* ============================================
+       Gradient flow strip: Today >>> Tomorrow
+       ============================================ */
+    .flow-strip {
+      height: 32px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(90deg, #f8fafc 0%, #f0ecf7 30%, #c4b5e0 50%, #7c3aed 80%, #6d28d9 100%);
+      position: relative;
+    }
+
+    .flow-strip .flow-left {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--purple-dark);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .flow-strip .flow-left i {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    .flow-strip .flow-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .flow-strip .flow-center i {
+      font-size: 11px;
+      color: #fff;
+    }
+
+    .flow-strip .flow-right {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .flow-strip .flow-right i {
+      font-size: 12px;
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* ============================================
+       Today / Tomorrow panels with arrow gutter
+       ============================================ */
+    .panels {
+      flex: 5;
+      min-height: 0;
+      display: flex;
+      position: relative;
+    }
+
+    .panel {
+      width: 50%;
+      padding: 12px 20px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .panel.today {
+      background: transparent;
+      padding-right: 38px;
+    }
+
+    .panel.tomorrow {
+      background: transparent;
+      padding-left: 38px;
+    }
+
+    .panel-items {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 16px;
+    }
+
+    .panel-items .panel-item:nth-child(5) {
+      grid-column: 1;
+    }
+
+    .panel-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .panel-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .panel.today .panel-dot { background: #e2e8f0; color: #94a3b8; }
+    .panel.tomorrow .panel-dot { background: linear-gradient(135deg, var(--purple-mid), var(--purple-bright)); color: #fff; }
+
+    .panel-item-text h4 { font-size: 11.5px; font-weight: 600; line-height: 1.3; }
+    .panel-item-text p { font-size: 10px; line-height: 1.35; margin-top: 1px; }
+
+    .panel.today .panel-item-text h4 { color: #64748b; }
+    .panel.today .panel-item-text p { color: #94a3b8; }
+    .panel.tomorrow .panel-item-text h4 { color: var(--primary); }
+    .panel.tomorrow .panel-item-text p { color: var(--text-light); }
+
+    /* Arrow gutter */
+    .arrow-gutter {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 40px;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      z-index: 2;
+    }
+
+    .arrow-gutter .gutter-line {
+      width: 2px;
+      flex: 1;
+      background: linear-gradient(180deg, var(--purple-accent), rgba(168,85,247,0.15));
+    }
+
+    .arrow-gutter .gutter-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple-accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 12px rgba(124,58,237,0.3);
+      flex-shrink: 0;
+    }
+
+    .arrow-gutter .gutter-circle i { font-size: 14px; color: #fff; }
+
+    .arrow-gutter .gutter-line-bottom {
+      width: 2px;
+      flex: 1;
+      background: linear-gradient(180deg, rgba(168,85,247,0.15), var(--purple-accent));
+    }
+
+    /* Footer */
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>Transformation Journey</h2>
+      <p class="lead">NextGen goes beyond Oracle Fusion migration. It's a complete ecosystem overhaul across CRM, ERP, billing, tax, customer portal, and 50+ integration points.</p>
+
+      <div class="journey-container">
+
+        <!-- Bridge bar: 3 horizontal layers -->
+        <div class="bridge-bar">
+          <div class="bridge-layer">
+            <div class="bridge-content">
+              <div class="bridge-top">
+                <div class="bridge-icon"><i class="fa-solid fa-compress"></i></div>
+                <div class="bridge-title">Simplify & Streamline</div>
+              </div>
+              <div class="bridge-desc">Consolidate fragmented systems and reduce integration complexity</div>
+              <div class="bridge-bullets">
+                <div class="b"><i class="fa-solid fa-circle"></i> <strong>Unify middleware</strong> across MuleSoft and OIC</div>
+                <div class="b"><i class="fa-solid fa-circle"></i> <strong>Consolidate monitoring</strong> for 50+ integrations</div>
+                <div class="b"><i class="fa-solid fa-circle"></i> <strong>Eliminate overlap</strong> in vendor platforms</div>
+              </div>
+            </div>
+          </div>
+          <div class="bridge-layer">
+            <div class="bridge-content">
+              <div class="bridge-top">
+                <div class="bridge-icon"><i class="fa-solid fa-ruler"></i></div>
+                <div class="bridge-title">Standardize</div>
+              </div>
+              <div class="bridge-desc">Align to Oracle Fusion best practices and industry patterns</div>
+              <div class="bridge-bullets">
+                <div class="b"><i class="fa-solid fa-circle"></i> <strong>Oracle Fusion standards</strong> across four cloud suites</div>
+                <div class="b"><i class="fa-solid fa-circle"></i> <strong>Integration SLAs</strong> with consistent error handling</div>
+                <div class="b"><i class="fa-solid fa-circle"></i> <strong>Change advisory</strong> and release governance</div>
+              </div>
+            </div>
+          </div>
+          <div class="bridge-layer">
+            <div class="bridge-content">
+              <div class="bridge-top">
+                <div class="bridge-icon"><i class="fa-solid fa-robot"></i></div>
+                <div class="bridge-title">Automate</div>
+              </div>
+              <div class="bridge-desc">Replace manual workflows with AI-driven operations</div>
+              <div class="bridge-bullets">
+                <div class="b"><i class="fa-solid fa-circle"></i> <strong>AI-powered triage</strong> and root cause analysis</div>
+                <div class="b"><i class="fa-solid fa-circle"></i> <strong>Automated testing</strong> for quarterly Oracle patches</div>
+                <div class="b"><i class="fa-solid fa-circle"></i> <strong>Proactive alerting</strong> before user impact</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gradient flow strip -->
+        <div class="flow-strip">
+          <div class="flow-left"><i class="fa-solid fa-circle-exclamation"></i> Today</div>
+          <div class="flow-center">
+            <i class="fa-solid fa-chevron-right"></i>
+            <i class="fa-solid fa-chevron-right"></i>
+            <i class="fa-solid fa-chevron-right"></i>
+          </div>
+          <div class="flow-right"><i class="fa-solid fa-circle-check"></i> Tomorrow</div>
+        </div>
+
+        <!-- Today / Tomorrow panels -->
+        <div class="panels">
+          <div class="panel today">
+            <div class="panel-items">
+              <div class="panel-item"><div class="panel-dot"><i class="fa-solid fa-server"></i></div><div class="panel-item-text"><h4>Heavily Customized Environment</h4><p>Nexstar, custom Java apps, legacy configs</p></div></div>
+              <div class="panel-item"><div class="panel-dot"><i class="fa-solid fa-arrows-to-dot"></i></div><div class="panel-item-text"><h4>50+ Integration Touchpoints</h4><p>Synchronous patterns, brittle dependencies</p></div></div>
+              <div class="panel-item"><div class="panel-dot"><i class="fa-solid fa-cubes"></i></div><div class="panel-item-text"><h4>Complex Multi-System Landscape</h4><p>Four Oracle suites, Salesforce CPQ, RecVue</p></div></div>
+              <div class="panel-item"><div class="panel-dot"><i class="fa-solid fa-hand"></i></div><div class="panel-item-text"><h4>Limited Self-Service</h4><p>Manual tickets, reactive support</p></div></div>
+              <div class="panel-item"><div class="panel-dot"><i class="fa-solid fa-lock"></i></div><div class="panel-item-text"><h4>Scalability Constraints</h4><p>Point-to-point, manual testing</p></div></div>
+            </div>
+          </div>
+          <div class="arrow-gutter">
+            <div class="gutter-line"></div>
+            <div class="gutter-circle"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="gutter-line-bottom"></div>
+          </div>
+          <div class="panel tomorrow">
+            <div class="panel-items">
+              <div class="panel-item"><div class="panel-dot"><i class="fa-solid fa-coins"></i></div><div class="panel-item-text"><h4>Reduced Total Cost of Ownership</h4><p>Consolidated monitoring, automated triage</p></div></div>
+              <div class="panel-item"><div class="panel-dot"><i class="fa-solid fa-certificate"></i></div><div class="panel-item-text"><h4>Industry-Standard Processes</h4><p>Oracle Fusion best practices, unified middleware</p></div></div>
+              <div class="panel-item"><div class="panel-dot"><i class="fa-solid fa-gauge-high"></i></div><div class="panel-item-text"><h4>Reduced Cycle Time</h4><p>AI-driven resolution, proactive detection</p></div></div>
+              <div class="panel-item"><div class="panel-dot"><i class="fa-solid fa-user-gear"></i></div><div class="panel-item-text"><h4>Enriched Self-Service</h4><p>Automated billing, knowledge systems</p></div></div>
+              <div class="panel-item"><div class="panel-dot"><i class="fa-solid fa-rocket"></i></div><div class="panel-item-text"><h4>Faster Time to Market</h4><p>Agile delivery, rapid partner integration</p></div></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">06</div>
+    </div>
+  </div>
+
+</body>
+</html>

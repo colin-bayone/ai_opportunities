@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 2: Executive Summary - Version C</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-logo span { color: var(--purple-accent); }
+
+    .header-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+    }
+
+    .slide-content {
+      flex: 1;
+      display: flex;
+      min-height: 0;
+    }
+
+    /* Left panel - capability list */
+    .left-panel {
+      width: 35%;
+      padding: 28px 24px;
+      background: linear-gradient(180deg, #fdfcff 0%, #f9f7ff 100%);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .left-panel h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+
+    .solution-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .solution-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.1);
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+
+    .solution-item .icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .solution-item:nth-child(1) .icon { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .solution-item:nth-child(2) .icon { background: linear-gradient(135deg, #5B21B6, #6D28D9); }
+    .solution-item:nth-child(3) .icon { background: linear-gradient(135deg, #6D28D9, #7C3AED); }
+    .solution-item:nth-child(4) .icon { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+
+    .solution-item span {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    /* Forward-looking at bottom of left panel */
+    .left-forward {
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid rgba(124,58,237,0.1);
+      font-size: 10.5px;
+      color: var(--text-light);
+      line-height: 1.55;
+      font-style: italic;
+    }
+
+    .left-forward strong {
+      color: var(--purple-mid);
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    /* Right panel - evidence */
+    .right-panel {
+      width: 65%;
+      padding: 24px 32px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .evidence-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      flex-shrink: 0;
+    }
+
+    .evidence-header .badge {
+      padding: 5px 12px;
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple-bright));
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .evidence-header h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* Lead credibility text */
+    .evidence-lead {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 14px;
+      flex-shrink: 0;
+    }
+
+    .evidence-lead strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* Evidence box */
+    .evidence-content {
+      flex: 1;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 22px 16px;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    .evidence-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .evidence-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .evidence-item .check {
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple-accent));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #fff;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .evidence-item p {
+      font-size: 11.5px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .evidence-item strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* Value proposition text below evidence */
+    .value-prop {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--text-light);
+      line-height: 1.55;
+      flex-shrink: 0;
+    }
+
+    /* Stats footer */
+    .evidence-footer {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 32px;
+      flex-shrink: 0;
+    }
+
+    .evidence-stat {
+      text-align: center;
+    }
+
+    .evidence-stat .value {
+      font-size: 24px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .evidence-stat .label {
+      font-size: 9px;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 10px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <!-- Left: Capability list -->
+      <div class="left-panel">
+        <h3>Our Capabilities</h3>
+        <div class="solution-list">
+          <div class="solution-item">
+            <div class="icon"><i class="fa-solid fa-database"></i></div>
+            <span>Oracle Fusion Managed Services</span>
+          </div>
+          <div class="solution-item">
+            <div class="icon"><i class="fa-solid fa-brain"></i></div>
+            <span>AI-Driven Operations</span>
+          </div>
+          <div class="solution-item">
+            <div class="icon"><i class="fa-solid fa-plug"></i></div>
+            <span>Integration Management</span>
+          </div>
+          <div class="solution-item">
+            <div class="icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+            <span>Discovery &amp; Optimization</span>
+          </div>
+        </div>
+
+        <p class="left-forward">
+          From discovery through steady-state operations, BayOne's AI-driven framework continuously improves resolution times, reduces recurring incidents, and identifies optimization opportunities.
+        </p>
+      </div>
+
+      <!-- Right: Evidence -->
+      <div class="right-panel">
+        <div class="evidence-header">
+          <h2>Executive Summary</h2>
+        </div>
+
+        <p class="evidence-lead">
+          <strong>Thirteen years. Over 100 enterprise customers. A 95.7% SLA compliance rate</strong> across Oracle managed services engagements. BayOne has built its practice at the intersection of Oracle Fusion delivery and AI-driven operations, and McGrath's NextGen transformation sits squarely in that intersection.
+        </p>
+
+        <div class="evidence-content">
+          <div class="evidence-list">
+            <div class="evidence-item">
+              <span class="check"><i class="fa-solid fa-check" style="font-size: 9px;"></i></span>
+              <p><strong>95.7% SLA compliance</strong> sustained across enterprise Oracle HCM managed services with P1 response times consistently under 15 minutes</p>
+            </div>
+            <div class="evidence-item">
+              <span class="check"><i class="fa-solid fa-check" style="font-size: 9px;"></i></span>
+              <p><strong>Oracle Fusion full-suite coverage:</strong> Active delivery experience across SCM, ERP, CX, and EPM</p>
+            </div>
+            <div class="evidence-item">
+              <span class="check"><i class="fa-solid fa-check" style="font-size: 9px;"></i></span>
+              <p><strong>50+ integration support capability:</strong> MuleSoft, OIC, and cross-platform integration management across Salesforce, Oracle, and third-party systems</p>
+            </div>
+            <div class="evidence-item">
+              <span class="check"><i class="fa-solid fa-check" style="font-size: 9px;"></i></span>
+              <p><strong>AI-driven operations as standard practice:</strong> Automated incident triage, pattern-based failure attribution, and predictive SLA management embedded in delivery methodology</p>
+            </div>
+          </div>
+
+          <p class="value-prop">
+            McGrath's environment (Oracle Fusion, Salesforce CPQ/CLM, MuleSoft and OIC integrations, and Avalara tax orchestration) requires a managed services partner with demonstrable depth. BayOne brings active Oracle Fusion experience across every module in McGrath's stack, combined with AI-driven operations that move support toward proactive optimization.
+          </p>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">02</div>
+    </div>
+  </div>
+
+</body>
+</html>

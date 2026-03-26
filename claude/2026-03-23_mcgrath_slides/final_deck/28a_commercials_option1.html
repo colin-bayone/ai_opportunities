@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Managed Service Commercials - Option 1: Standard Tier</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--purple-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 14px 40px 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .lead {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+      flex-shrink: 0;
+    }
+
+    .pricing-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-height: 0;
+    }
+
+    /* ===== BAR CHART ===== */
+    .chart-area {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 32px;
+      padding: 0 40px 0;
+      position: relative;
+    }
+
+    /* Horizontal baseline aligned with top of bar-lower (34px from bottom) */
+    .chart-area::after {
+      content: '';
+      position: absolute;
+      bottom: 34px;
+      left: 40px;
+      right: 40px;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .bar-group {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      max-width: 160px;
+      z-index: 1;
+    }
+
+    /* Upper part: value + bar, pushed to bottom */
+    .bar-upper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .bar-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+      white-space: nowrap;
+      letter-spacing: -0.3px;
+    }
+
+    .bar-value.highlight {
+      color: var(--purple-darkest);
+      font-size: 15px;
+    }
+
+    .bar {
+      width: 100%;
+      border-radius: 6px 6px 0 0;
+      background: linear-gradient(180deg, var(--purple-accent) 0%, var(--purple-mid) 100%);
+    }
+
+    /* Heights proportional to values (Year 1 $4,867,200 = 200px) */
+    /* $759,200 / $4,867,200 = 15.6% */
+    .bar-group:nth-child(1) .bar { height: 22px; }
+    .bar-group:nth-child(2) .bar { height: 140px; }
+    .bar-group:nth-child(3) .bar { height: 116px; }
+    .bar-group:nth-child(4) .bar { height: 88px; }
+
+    /* Lower part: label + optional savings, fixed height so all bars share the same baseline */
+    .bar-lower {
+      height: 34px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      flex-shrink: 0;
+    }
+
+    .bar-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 8px;
+    }
+
+    .bar-savings {
+      font-size: 10px;
+      font-weight: 600;
+      color: #059669;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .bar-savings i { font-size: 8px; }
+
+    /* Empty spacer to keep bars aligned with table columns 1-4 */
+    .chart-spacer {
+      flex: 1;
+      max-width: 160px;
+    }
+
+    /* ===== PRICING TABLE ===== */
+    .pricing-table-wrapper {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(124,58,237,0.06);
+      flex-shrink: 0;
+    }
+
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .pricing-table thead th {
+      background: linear-gradient(135deg, var(--purple-darkest), var(--purple-dark));
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 10px 16px;
+      text-align: center;
+      letter-spacing: 0.3px;
+    }
+
+    .pricing-table tbody td {
+      padding: 10px 16px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -0.2px;
+    }
+
+    .pricing-table tbody td.total-cell {
+      background: linear-gradient(135deg, rgba(46,16,101,0.06), rgba(109,40,217,0.08));
+      color: var(--purple-darkest);
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .pricing-table tbody tr.savings-row td {
+      padding: 4px 16px 8px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #059669;
+      border-top: none;
+    }
+
+    /* ===== KEY CALLOUTS ===== */
+    .callouts-section {
+      flex-shrink: 0;
+    }
+
+    .callouts-header {
+      margin-bottom: 6px;
+    }
+
+    .callouts-header h3 {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--purple-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .callouts-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .callout-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .callout-item i {
+      color: var(--purple-accent);
+      font-size: 8px;
+      margin-top: 4px;
+      width: 12px;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    /* Footer */
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>Managed Service Commercials: Option 1</h2>
+      <p class="lead">Three-year investment summary with year-over-year optimization savings</p>
+
+      <div class="pricing-section">
+
+        <!-- Bar Chart -->
+        <div class="chart-area">
+
+          <div class="bar-group">
+            <div class="bar-upper">
+              <div class="bar-value">$ 759,200</div>
+              <div class="bar"></div>
+            </div>
+            <div class="bar-lower">
+              <div class="bar-label">Phase 1</div>
+            </div>
+          </div>
+
+          <div class="bar-group">
+            <div class="bar-upper">
+              <div class="bar-value highlight">$ 4,867,200</div>
+              <div class="bar"></div>
+            </div>
+            <div class="bar-lower">
+              <div class="bar-label">Year 1</div>
+            </div>
+          </div>
+
+          <div class="bar-group">
+            <div class="bar-upper">
+              <div class="bar-value">$ 4,027,296</div>
+              <div class="bar"></div>
+            </div>
+            <div class="bar-lower">
+              <div class="bar-label">Year 2</div>
+              <div class="bar-savings"><i class="fa-solid fa-arrow-down"></i> 17% savings</div>
+            </div>
+          </div>
+
+          <div class="bar-group">
+            <div class="bar-upper">
+              <div class="bar-value">$ 3,051,585</div>
+              <div class="bar"></div>
+            </div>
+            <div class="bar-lower">
+              <div class="bar-label">Year 3</div>
+              <div class="bar-savings"><i class="fa-solid fa-arrow-down"></i> 24% savings</div>
+            </div>
+          </div>
+
+          <div class="chart-spacer"></div>
+
+        </div>
+
+        <!-- Pricing Table -->
+        <div class="pricing-table-wrapper">
+          <table class="pricing-table">
+            <thead>
+              <tr>
+                <th>Phase 1</th>
+                <th>Year 1</th>
+                <th>Year 2</th>
+                <th>Year 3</th>
+                <th>Total Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>$ 759,200</td>
+                <td>$ 4,867,200</td>
+                <td>$ 4,027,296</td>
+                <td>$ 3,051,585</td>
+                <td class="total-cell">$ 12,705,281</td>
+              </tr>
+              <tr class="savings-row">
+                <td></td>
+                <td></td>
+                <td><i class="fa-solid fa-arrow-trend-down" style="font-size:9px; margin-right:3px;"></i>Year 2 savings 17%</td>
+                <td><i class="fa-solid fa-arrow-trend-down" style="font-size:9px; margin-right:3px;"></i>Year 3 savings 24%</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Key Callouts -->
+        <div class="callouts-section">
+          <div class="callouts-header">
+            <h3>Key Callouts</h3>
+          </div>
+          <div class="callouts-list">
+            <div class="callout-item">
+              <i class="fa-solid fa-circle-dot"></i>
+              <span>Pricing assumes a bundled managed services scope and associated efficiencies. Pricing for individual service components may vary if selected separately.</span>
+            </div>
+            <div class="callout-item">
+              <i class="fa-solid fa-circle-dot"></i>
+              <span>Year over year cost & resource optimization includes efficiency gains from stabilization, automation and process maturity</span>
+            </div>
+            <div class="callout-item">
+              <i class="fa-solid fa-circle-dot"></i>
+              <span>In the absence of ticket volume for any technology stack, pricing is derived based on few assumptions listed in the assumptions section</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">21a</div>
+    </div>
+  </div>
+</body>
+</html>

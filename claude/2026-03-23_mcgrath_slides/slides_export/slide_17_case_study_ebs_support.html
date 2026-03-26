@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 17: Case Study - Oracle EBS Support</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--purple-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 12px 40px 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 2px;
+      flex-shrink: 0;
+    }
+
+    .cs-badge {
+      padding: 4px 10px;
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple-bright));
+      border-radius: 5px;
+      font-size: 9px;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      flex-shrink: 0;
+    }
+
+    .title-row h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+
+    .lead {
+      font-size: 11.5px;
+      color: var(--text-light);
+      margin-bottom: 10px;
+      flex-shrink: 0;
+    }
+
+    .cs-sections {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* Business Scenario */
+    .scenario-section {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      flex-shrink: 0;
+    }
+
+    .section-header {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--purple-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section-header i {
+      font-size: 10px;
+      color: var(--purple-accent);
+    }
+
+    .scenario-text {
+      font-size: 11px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* Stat highlights bar */
+    .stats-bar {
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .stat-card {
+      flex: 1;
+      background: linear-gradient(135deg, rgba(76,29,149,0.05), rgba(168,85,247,0.07));
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 8px;
+      padding: 8px 12px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--purple-mid);
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 9.5px;
+      font-weight: 500;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+
+    /* Services / Projects two-column */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .col-card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 10px;
+      padding: 12px 14px;
+      box-shadow: 0 2px 6px rgba(124,58,237,0.06);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .col-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .col-card.services::before { background: linear-gradient(90deg, #4C1D95, #5B21B6); }
+    .col-card.projects::before { background: linear-gradient(90deg, #7C3AED, #A855F7); }
+
+    .col-card .col-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .col-card .col-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .col-card.services .col-icon { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .col-card.projects .col-icon { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+
+    .col-card h3 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .col-card .items {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .col-card .item {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      font-size: 10.5px;
+      line-height: 1.45;
+      color: #475569;
+    }
+
+    .col-card .item i {
+      font-size: 8px;
+      margin-top: 3px;
+      width: 10px;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    .col-card.services .item i { color: #4C1D95; }
+    .col-card.projects .item i { color: #7C3AED; }
+
+    .col-card .item strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="title-row">
+        <span class="cs-badge">Case Study</span>
+        <h2>Oracle EBS Support</h2>
+      </div>
+      <p class="lead">Global Technology Enterprise: 12+ year partnership across 30+ sites, from on-premise EBS to Cloud transformation</p>
+
+      <div class="cs-sections">
+
+        <!-- Business Scenario -->
+        <div class="scenario-section">
+          <div class="section-header"><i class="fa-solid fa-building"></i> Business Scenario</div>
+          <p class="scenario-text">A global leader in materials, networking, and laser technologies across industrial, communications, electronics, and instrumentation sectors partnered with BayOne to support day-to-day business operations across more than 30 global sites. BayOne has served as a long-term technology partner for over 12 years, providing ongoing operational support and guiding the enterprise through its digital transformation from Oracle on-premise systems to modern cloud-based applications.</p>
+        </div>
+
+        <!-- Stat highlights -->
+        <div class="stats-bar">
+          <div class="stat-card">
+            <div class="stat-value">12+</div>
+            <div class="stat-label">Years of Partnership</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">30+</div>
+            <div class="stat-label">Global Sites Supported</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">90%</div>
+            <div class="stat-label">Offshore Delivery</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">10+</div>
+            <div class="stat-label">Oracle Modules Covered</div>
+          </div>
+        </div>
+
+        <!-- Services / Projects -->
+        <div class="two-col">
+
+          <div class="col-card services">
+            <div class="col-header">
+              <div class="col-icon"><i class="fa-solid fa-wrench"></i></div>
+              <h3>Services</h3>
+            </div>
+            <div class="items">
+              <div class="item">
+                <i class="fa-solid fa-headset"></i>
+                <span><strong>Day-to-day operations</strong> support on Oracle EBS 11i and R12</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-arrow-up-right-dots"></i>
+                <span><strong>EBS upgrade</strong> from 11i to R12.2.10</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-code-merge"></i>
+                <span><strong>Legacy system mergers</strong> on Oracle Unified instance (EBS and Fusion) for acquired companies</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-cubes"></i>
+                <span>Supporting <strong>Finance, EPM, HCM, Procurement, Manufacturing, WMS, Transportation, and Field Service</strong> modules</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-rotate"></i>
+                <span>Managing <strong>monthly/quarterly upgrades</strong>, regression testing, and smoke testing</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-file-lines"></i>
+                <span><strong>BIP reporting</strong> on EBS and Fusion, plus QuickView (Qview) development</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-cloud"></i>
+                <span>Partner on <strong>Oracle Cloud Transformation</strong> journey</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-card projects">
+            <div class="col-header">
+              <div class="col-icon"><i class="fa-solid fa-trophy"></i></div>
+              <h3>Projects Delivered</h3>
+            </div>
+            <div class="items">
+              <div class="item">
+                <i class="fa-solid fa-database"></i>
+                <span><strong>Data migration during M&A</strong> activities across multiple acquisitions</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-globe"></i>
+                <span><strong>Functional and technical activities</strong> during migration and merger of sites globally</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-plug"></i>
+                <span><strong>Technical integration</strong> with Kardex and Oracle EBS for Germany operations</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-sitemap"></i>
+                <span><strong>Procurement approval hierarchies</strong> based on new MOA rules using AME</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-earth-americas"></i>
+                <span><strong>Global site support</strong> with 90% loading from India delivery center</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span><strong>Export compliance implementation</strong> across different Oracle system instances</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">17</div>
+    </div>
+  </div>
+</body>
+</html>

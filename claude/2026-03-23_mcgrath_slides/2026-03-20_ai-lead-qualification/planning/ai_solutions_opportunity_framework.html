@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Solutions Opportunity Management Framework</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .cover-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e879f9;
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .cover-subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 48px;
+      max-width: 600px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 48px;
+      padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .cover-meta-item label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+
+    .cover-meta-item span {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .logo {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span { color: #e879f9; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .section { margin-bottom: 64px; }
+
+    .section-number {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      padding: 6px 14px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%);
+      border-radius: 4px;
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 32px 0 16px;
+    }
+
+    h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 24px 0 12px;
+    }
+
+    p { margin-bottom: 16px; }
+
+    .lead {
+      font-size: 18px;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border-left: 4px solid #a855f7;
+      padding: 24px 28px;
+      margin: 32px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    .highlight-box ul {
+      margin: 12px 0 0 20px;
+      padding: 0;
+    }
+
+    .highlight-box li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      padding: 14px 16px;
+      background: #5b21b6;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+
+    th:last-child { border-right: none; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    ul.item-list {
+      margin: 0 0 16px 20px;
+      padding: 0;
+    }
+
+    ul.item-list li {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin: 24px 0;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      padding: 28px;
+    }
+
+    .card h4 {
+      margin-top: 0;
+      color: var(--purple-mid);
+    }
+
+    .card ul {
+      margin: 0 0 0 20px;
+      padding: 0;
+    }
+
+    .card li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .card p {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .card p:last-child { margin-bottom: 0; }
+
+    .footer {
+      text-align: center;
+      padding: 48px 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 64px;
+    }
+
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .footer-logo span { color: #a855f7; }
+
+    .footer p {
+      font-size: 13px;
+      color: var(--text-light);
+      margin: 0;
+    }
+
+    @media print {
+      @page {
+        size: 8.5in 11in;
+        margin: 0.4in;
+      }
+
+      body { font-size: 9pt; line-height: 1.4; }
+
+      .cover {
+        min-height: 0;
+        height: 10in;
+        padding: 50px;
+        page-break-after: always;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .cover h1 { font-size: 32pt; }
+      .cover-subtitle { font-size: 13pt; }
+
+      .container { padding: 0; max-width: 100%; }
+
+      .section {
+        margin-bottom: 20px;
+        page-break-inside: avoid;
+      }
+
+      h2 { font-size: 14pt; margin-bottom: 10px; page-break-after: avoid; }
+      h3 { font-size: 11pt; margin: 14px 0 8px; page-break-after: avoid; }
+      h4 { font-size: 10pt; margin: 10px 0 6px; page-break-after: avoid; }
+      p { margin-bottom: 6px; }
+      .lead { font-size: 10pt; margin-bottom: 14px; }
+
+      table {
+        font-size: 8pt;
+        margin: 10px 0;
+        page-break-inside: avoid;
+      }
+
+      th, td {
+        padding: 6px 8px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .highlight-box {
+        padding: 12px 16px;
+        margin: 14px 0;
+        page-break-inside: avoid;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .two-col {
+        gap: 16px;
+      }
+
+      .card {
+        padding: 16px;
+        page-break-inside: avoid;
+      }
+
+      .footer {
+        margin-top: 20px;
+        padding: 16px;
+      }
+
+      .section-number {
+        break-after: avoid;
+        page-break-after: avoid;
+      }
+
+      tr {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-label">Internal Framework</div>
+      <h1>AI Solutions Opportunity Management Framework</h1>
+      <p class="cover-subtitle">Standards, processes, and accountability structures for identifying, qualifying, and delivering AI solutions engagements</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <label>Prepared For</label>
+          <span>BayOne Solutions Leadership</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Date</label>
+          <span>March 2026</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Classification</label>
+          <span>Internal / Confidential</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo">Bay<span>One</span> Solutions</div>
+  </div>
+
+  <div class="container">
+
+    <!-- Section 01: Purpose and Scope -->
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>Purpose and Scope</h2>
+      <p class="lead">This framework establishes the standards, processes, and accountability structures for how BayOne Solutions identifies, qualifies, prioritizes, and staffs AI solutions opportunities.</p>
+      <p>It applies to all client-facing AI engagements from initial lead identification through project delivery and post-engagement review.</p>
+      <p>The framework addresses the full lifecycle of an AI solutions opportunity:</p>
+      <ul class="item-list">
+        <li>How leads enter the pipeline and what information must accompany them</li>
+        <li>How opportunities are qualified before technical resources are engaged</li>
+        <li>How meetings are scheduled, scoped, and staffed</li>
+        <li>How client-facing materials are created, reviewed, and approved</li>
+        <li>How capacity is managed and scaled to meet demand</li>
+        <li>How performance is measured to ensure continuous improvement</li>
+      </ul>
+      <p>This document is intended for leadership, sales, solutions, and delivery teams. It is a living document and will be updated as the organization matures its AI practice.</p>
+    </div>
+
+    <!-- Section 02: Guiding Principles -->
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>Guiding Principles</h2>
+      <p class="lead">The following principles underpin every element of this framework.</p>
+
+      <div class="highlight-box">
+        <p><strong>Problem-first engagement.</strong> Successful AI engagements start with understanding the client's problem, not presenting capabilities. The conversation should begin with what the client needs, not what BayOne offers. Every meeting should be structured so the client is sharing more than BayOne is presenting.</p>
+      </div>
+
+      <div class="highlight-box">
+        <p><strong>Honesty about capability.</strong> BayOne is building its AI practice and should own that transparently. The organization will not represent capabilities, case studies, or products that do not exist. All claims to clients must be grounded in verified, completed work.</p>
+      </div>
+
+      <div class="highlight-box">
+        <p><strong>Qualification before involvement.</strong> Technical resources are the closing mechanism, not the opening mechanism. Their involvement begins after a lead has been qualified, not before. Pulling technical resources into unqualified conversations wastes capacity that should be directed toward real opportunities.</p>
+      </div>
+
+      <div class="highlight-box">
+        <p><strong>Discipline over speed.</strong> A well-prepared meeting with the right people will always outperform a hastily assembled one. It is better to reschedule than to walk in unprepared. Process discipline protects both BayOne's reputation and the client's time.</p>
+      </div>
+
+      <div class="highlight-box">
+        <p><strong>Fewer, better opportunities.</strong> Pursuing a smaller number of well-qualified opportunities and delivering exceptional results will generate more long-term revenue than chasing every possible lead. Quality of pipeline matters more than volume of pipeline.</p>
+      </div>
+    </div>
+
+    <!-- Section 03: Systems and Infrastructure -->
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>Systems and Infrastructure</h2>
+      <p class="lead">All opportunity information must be centralized in a single authoritative system, with clear protocols governing how teams communicate and coordinate around opportunities.</p>
+
+      <h3>03.1 Single Source of Truth: Salesforce</h3>
+      <p>All opportunity information must be tracked in Salesforce. This is non-negotiable.</p>
+      <p>Salesforce is already deployed within BayOne and provides the capabilities needed for opportunity tracking, pipeline visibility, and reporting. The longer the organization operates outside of a formal CRM, the harder it becomes to establish the discipline required to scale the AI practice.</p>
+
+      <h4>What Must Be in Salesforce</h4>
+      <ul class="item-list">
+        <li>All active and prospective AI opportunities with current status</li>
+        <li>Client contact information, role, and decision-making authority</li>
+        <li>Notes from client interactions and meetings</li>
+        <li>Qualification status and supporting documentation</li>
+        <li>Internal team assignments and ownership</li>
+        <li>Opportunity value estimates and priority classification</li>
+      </ul>
+
+      <h4>What Salesforce Enables</h4>
+      <ul class="item-list">
+        <li>Asynchronous visibility across sales, solutions, and leadership without requiring meetings or email chains</li>
+        <li>Built-in reporting and dashboards for pipeline health, conversion rates, and capacity planning</li>
+        <li>Accountability through auditable records of opportunity progression</li>
+        <li>Elimination of duplicate tracking in emails, spreadsheets, and Teams chats</li>
+      </ul>
+
+      <p><strong>Other tools feed into Salesforce, not the other way around.</strong> Meeting planners, intake forms, and other supporting tools may serve as data entry points, but Salesforce remains the authoritative record. If it is not in Salesforce, it does not exist for the purposes of this framework.</p>
+
+      <h3>03.2 Communication Protocol</h3>
+      <p>Teams chats and email threads are appropriate for quick coordination and informal discussion. They are not appropriate for tracking opportunities, recording client interactions, or managing pipeline.</p>
+      <p>The current pattern of creating Teams channels with large distribution lists for visibility on individual opportunities must be replaced by Salesforce records that are visible to all relevant parties without requiring active notification.</p>
+      <p>Calls and meetings should be scheduled with purpose and should occur when there is sufficient information to make them productive. A call is not a substitute for doing the qualification work first. If the required information has not been gathered, there is no point in scheduling a call, even internally.</p>
+    </div>
+
+    <!-- Section 04: Lead Qualification Framework -->
+    <div class="section">
+      <div class="section-number">04</div>
+      <h2>Lead Qualification Framework</h2>
+      <p class="lead">No technical resource should be engaged on an opportunity until the following qualification criteria have been met. This is the responsibility of the sales team, with sign-off from sales leadership.</p>
+
+      <h3>04.1 Minimum Information Requirements</h3>
+      <p>Before an opportunity is escalated beyond the sales team, the following must be documented in Salesforce:</p>
+      <ul class="item-list">
+        <li><strong>Client identity:</strong> Company name, industry, and relevant context about the organization</li>
+        <li><strong>Contact details:</strong> Name, title, role, and LinkedIn profile (at minimum) of the primary client contact</li>
+        <li><strong>Problem statement or area of interest:</strong> What is the client looking to solve, explore, or improve? This must be specific. "Interested in AI" is not a problem statement.</li>
+        <li><strong>Meeting history:</strong> Summary of all conversations held with the client to date, including what was discussed and what was shared</li>
+        <li><strong>Source of the opportunity:</strong> How was this lead identified? Referral, existing relationship, inbound inquiry, outbound outreach, or other</li>
+        <li><strong>Supporting documentation:</strong> Any relevant materials (emails, meeting notes, client-provided documents) uploaded to the Salesforce record</li>
+      </ul>
+
+      <h3>04.2 Decision-Maker Qualification</h3>
+      <p>The sales team must determine whether the client contact has decision-making authority sufficient to fund and approve work with BayOne.</p>
+      <p>Key questions:</p>
+      <ul class="item-list">
+        <li>Can this person authorize a contract or project engagement?</li>
+        <li>Do they control or influence the budget that would fund this work?</li>
+        <li>Are they at a seniority level where they can make strategic platform or vendor decisions?</li>
+      </ul>
+      <p>A mid-level manager expressing interest is not equivalent to a decision-maker with budget authority. If the primary contact lacks authority, the sales team must identify who does have that authority and whether they are engaged in the conversation.</p>
+
+      <h3>04.3 Financial Qualification and Opportunity Sizing</h3>
+      <p>Interest alone does not justify technical involvement. There must be a tangible revenue opportunity.</p>
+      <ul class="item-list">
+        <li>Is there an actual project or initiative that could result in a paid engagement?</li>
+        <li>What is the estimated value of this opportunity to BayOne (per quarter or per engagement)?</li>
+        <li>Does the potential revenue justify the investment of time and resources?</li>
+      </ul>
+      <p>Opportunities below a defined minimum value threshold should be handled by the sales team without escalation to technical resources unless there is a compelling strategic justification (see 04.4).</p>
+
+      <h3>04.4 Priority Assessment</h3>
+      <p>Priority is determined by a combination of financial value, strategic alignment, and delivery feasibility. It is not determined solely by the enthusiasm of the salesperson or the seniority of the client contact.</p>
+
+      <p><strong>Financial value:</strong> Larger opportunities take priority over smaller ones, all else being equal.</p>
+
+      <p><strong>Strategic value with guardrails:</strong> Some lower-value work creates legitimate inroads at a client that lead to larger engagements. This is valid only when:</p>
+      <ul class="item-list">
+        <li>There is tangible, verifiable evidence of broader opportunity (not speculation)</li>
+        <li>A decision-maker with authority to expand the relationship is part of the conversation</li>
+        <li>The strategic path from the current opportunity to the larger one is articulable and credible</li>
+      </ul>
+      <p>Strategic value is not a blank check. Vague assertions about potential future work do not qualify as strategic justification unless backed by specific, documented evidence.</p>
+
+      <p><strong>Delivery feasibility:</strong> Priority must account for current team capacity and competing obligations. A high-value opportunity that the team cannot deliver on is not a viable priority. (See Section 08 for capacity planning.)</p>
+
+      <h3>04.5 Supply Qualification</h3>
+      <p>Demand qualification (is this a real opportunity?) must be paired with supply qualification (can we deliver?).</p>
+      <p>Before committing to an opportunity, the following must be assessed:</p>
+      <ul class="item-list">
+        <li>Does the team have the skills and experience to deliver this work?</li>
+        <li>What is the current workload, and can this be absorbed without impacting existing commitments?</li>
+        <li>What is the expected timeline, and is it realistic given current capacity?</li>
+        <li>If additional resources are needed, where will they come from and how quickly can they be onboarded?</li>
+      </ul>
+      <p>An opportunity that passes demand qualification but fails supply qualification should not be committed to. It should be flagged for the steering committee to assess whether capacity can be built or whether the opportunity should be deferred.</p>
+
+      <h3>04.6 Capability Overlap Assessment</h3>
+      <p>Opportunities that overlap significantly with work BayOne has already completed carry a lower qualification threshold because they require less effort and deliver higher confidence in execution.</p>
+
+      <table>
+        <tr>
+          <th>Overlap Level</th>
+          <th>Description</th>
+          <th>Qualification Threshold</th>
+        </tr>
+        <tr>
+          <td><strong>High overlap</strong></td>
+          <td>The opportunity closely resembles a completed project in terms of technology, industry context, or solution type. The team can move quickly and confidently.</td>
+          <td>Lower qualification bar</td>
+        </tr>
+        <tr>
+          <td><strong>Moderate overlap</strong></td>
+          <td>Some elements are familiar, but meaningful new work is required.</td>
+          <td>Standard qualification bar</td>
+        </tr>
+        <tr>
+          <td><strong>No overlap</strong></td>
+          <td>This is entirely new territory. Requires strong financial or strategic justification to pursue.</td>
+          <td>Higher qualification bar</td>
+        </tr>
+      </table>
+
+      <div class="highlight-box">
+        <p><strong>Important distinction:</strong> The overlap assessment must be based on a curated solutions portfolio of verified, completed work. Staffing engagements, where BayOne placed an individual into a predefined role managed by the client, are fundamentally different from solutions engagements, where BayOne designed, built, and delivered a solution. These two engagement types must not be conflated when assessing capability overlap.</p>
+      </div>
+
+      <h3>04.7 Sales Leadership Sign-Off</h3>
+      <p>A designated sales leader must formally sign off on an opportunity before it is escalated to the technical team or before the technical team is asked to participate in any client meeting.</p>
+      <p>This sign-off confirms that:</p>
+      <ul class="item-list">
+        <li>All minimum information requirements (04.1) have been met</li>
+        <li>Decision-maker qualification (04.2) has been verified</li>
+        <li>Financial qualification (04.3) has been assessed</li>
+        <li>The opportunity record in Salesforce is complete and current</li>
+      </ul>
+      <p>Individual salespeople do not have a direct escalation path to the technical team. All escalations route through the designated sales leader, who is accountable for the quality and completeness of what is brought forward.</p>
+    </div>
+
+    <!-- Section 05: Roles and Responsibilities -->
+    <div class="section">
+      <div class="section-number">05</div>
+      <h2>Roles and Responsibilities</h2>
+      <p class="lead">Clear role boundaries ensure that each team contributes at the right stage of the opportunity lifecycle, with appropriate escalation paths and accountability.</p>
+
+      <h3>05.1 Sales Team</h3>
+      <p>The sales team owns the first four stages of the opportunity lifecycle: identification, qualification, initial conversation, and handoff to the technical team.</p>
+
+      <h4>Responsibilities</h4>
+      <ul class="item-list">
+        <li>Identify and source leads through all available channels</li>
+        <li>Qualify leads by completing all requirements in Section 04</li>
+        <li>Conduct initial conversations with clients to understand their needs, without making promises or commitments about what BayOne will present, deliver, or demonstrate</li>
+        <li>Document all client interactions and opportunity details in Salesforce</li>
+        <li>Record outcomes of all meetings, including internal pre-meetings and post-meeting debriefs</li>
+        <li>Maintain the Salesforce record as the opportunity progresses</li>
+      </ul>
+
+      <h4>Boundaries</h4>
+      <ul class="item-list">
+        <li>Sales does not scope solutions, propose timelines, or recommend engagement structures (such as pilot durations or team compositions). That is the responsibility of the solutions team after qualification.</li>
+        <li>Sales does not commit the technical team's time, deliverables, or participation without prior approval from the technical team.</li>
+        <li>Sales does not represent capabilities, case studies, or products that have not been verified and approved by the solutions team.</li>
+      </ul>
+      <p>If a client asks about technical capabilities, demos, or specific deliverables, the appropriate response is to confirm with the technical team and follow up. No promises are made on the spot.</p>
+
+      <h3>05.2 Sales Leadership</h3>
+      <p>The designated sales leader serves as the quality gate between the sales team and the technical team.</p>
+      <h4>Responsibilities</h4>
+      <ul class="item-list">
+        <li>Review and sign off on opportunities before they are escalated to the technical team</li>
+        <li>Verify that qualification criteria have been met and that the Salesforce record is complete</li>
+        <li>Filter premature, overstated, or unqualified opportunities before they consume technical resources</li>
+        <li>Ensure that the sales team is following the framework and maintaining documentation standards</li>
+      </ul>
+
+      <h3>05.3 Pre-Sales / Technical Sales</h3>
+      <p>For opportunities that have been qualified but do not require senior technical leadership, a pre-sales engineer or technical sales resource should be the first point of technical engagement.</p>
+      <h4>Appropriate For</h4>
+      <ul class="item-list">
+        <li>Qualified opportunities that need technical explanation but not strategic direction</li>
+        <li>Meetings where the client has a defined problem and wants to understand approach options</li>
+        <li>Technical questions and answers that do not require solution architecture</li>
+      </ul>
+      <p>This tier exists to prevent every AI-adjacent conversation from escalating to the most senior technical resource. Not all technical meetings require the same level of involvement.</p>
+
+      <h3>05.4 Solutions Team</h3>
+      <p>The solutions team engages on opportunities that have been fully qualified and require strategic scoping, solution architecture, or senior technical leadership.</p>
+      <h4>Appropriate For</h4>
+      <ul class="item-list">
+        <li>High-value, complex opportunities requiring solution design</li>
+        <li>Discovery sessions with confirmed problem statements, budgets, and decision-makers</li>
+        <li>Engagements where the approach and scope need to be architected</li>
+      </ul>
+      <h4>Additional Ownership</h4>
+      <ul class="item-list">
+        <li>Technical quality review of all AI-related client-facing materials (see Section 07)</li>
+        <li>Maintenance of the curated solutions portfolio and capability documentation</li>
+        <li>Post-engagement case study development and portfolio updates (see Section 10)</li>
+      </ul>
+
+      <h3>05.5 Meeting Staffing Guidelines</h3>
+      <p>Meetings should be staffed at the appropriate level. The seniority of BayOne attendees should correspond to the seniority and nature of the client engagement.</p>
+
+      <table>
+        <tr>
+          <th>Meeting Type</th>
+          <th>BayOne Attendees</th>
+        </tr>
+        <tr>
+          <td>Initial exploration, no qualified problem</td>
+          <td>Sales team only</td>
+        </tr>
+        <tr>
+          <td>Qualified opportunity, technical Q&amp;A needed</td>
+          <td>Sales + pre-sales / technical sales</td>
+        </tr>
+        <tr>
+          <td>Qualified opportunity, solution scoping</td>
+          <td>Sales + solutions lead</td>
+        </tr>
+        <tr>
+          <td>Executive-level strategic discussion</td>
+          <td>Sales leadership + solutions lead + executive sponsor as appropriate</td>
+        </tr>
+      </table>
+
+      <p>Leadership should not be pulled into meetings where their presence is not warranted by the seniority of the client stakeholders or the strategic importance of the engagement. Matching attendee levels to client levels is essential for professional credibility.</p>
+    </div>
+
+    <!-- Section 06: Meeting Standards -->
+    <div class="section">
+      <div class="section-number">06</div>
+      <h2>Meeting Standards</h2>
+      <p class="lead">Meetings with clients are the primary mechanism through which BayOne establishes credibility and advances opportunities. They must be conducted with discipline, preparation, and clear accountability.</p>
+
+      <h3>06.1 Scheduling Discipline</h3>
+      <ul class="item-list">
+        <li>Meetings with clients that require technical team participation must be scheduled with a minimum of <strong>72 hours (weekday) advance notice</strong> for the technical team to prepare.</li>
+        <li>Meetings must be placed on the calendar at the time they are requested, not minutes before they occur.</li>
+        <li>Internal availability must be confirmed before a meeting is proposed to a client.</li>
+        <li>The opportunity must be qualified (per Section 04) before a meeting is scheduled.</li>
+        <li>Scheduling a meeting does not override an existing commitment. If a new meeting conflicts with an existing one, the conflict must be resolved through a prioritization discussion, not by assuming the technical team will adjust.</li>
+      </ul>
+
+      <h3>06.2 Scope Lock</h3>
+      <p>The scope of a meeting is defined at the time it is scheduled and recorded in Salesforce. This includes:</p>
+      <ul class="item-list">
+        <li>The topic and objective of the meeting</li>
+        <li>What BayOne will present or discuss</li>
+        <li>What the client is expected to share</li>
+        <li>Who from BayOne will attend and in what capacity</li>
+      </ul>
+      <p>Once agreed upon internally, the meeting scope cannot be changed unilaterally. If the scope changes after internal alignment (for example, if new information from the client shifts the focus), the meeting must be reconvened or rescheduled with the revised scope agreed upon by all internal participants.</p>
+      <p>Sales cannot agree to a scope change with the client and then inform the technical team after the fact. That is a scope violation, and the technical team reserves the right to decline participation if the meeting no longer matches what was agreed upon.</p>
+
+      <h3>06.3 Internal Pre-Meeting and Post-Meeting</h3>
+      <p><strong>Pre-meeting:</strong> Every client meeting involving technical resources must be preceded by an internal alignment meeting. This ensures all attendees understand the agenda, their role, and the desired outcome.</p>
+      <p><strong>Post-meeting:</strong> A debrief should follow every client meeting to capture key takeaways, action items, and next steps. The sales team is responsible for documenting this in the Salesforce record. The solutions team can enable documentation through tools and templates, but the business ownership of recording client interactions belongs to sales.</p>
+    </div>
+
+    <!-- Section 07: Content and Materials Governance -->
+    <div class="section">
+      <div class="section-number">07</div>
+      <h2>Content and Materials Governance</h2>
+      <p class="lead">All client-facing materials must meet brand, accuracy, and quality standards before distribution. This section defines the ownership model and review process.</p>
+
+      <h3>07.1 Slide and Presentation Ownership</h3>
+      <p>Client-facing slide decks and presentations are jointly owned and maintained by the Marketing organization and the AI Solutions organization.</p>
+      <ul class="item-list">
+        <li>Marketing owns brand standards, visual design, and formatting compliance</li>
+        <li>AI Solutions owns technical accuracy, capability claims, and content relevance</li>
+      </ul>
+
+      <h4>Rules for Client-Facing Slides</h4>
+      <ul class="item-list">
+        <li>All slides used in client meetings must come from the approved, curated library maintained by these two organizations</li>
+        <li>If a required deck does not exist, it must be requested at least <strong>one week in advance</strong> of the meeting. No exceptions.</li>
+        <li>Salespeople may customize approved decks at their own discretion for specific client contexts</li>
+        <li>Neither Marketing nor AI Solutions will create custom one-off decks for individual meetings</li>
+        <li>Decks that do not originate from the approved library should not be used in client settings</li>
+      </ul>
+
+      <h3>07.2 Quality Gates</h3>
+      <p>All AI-related client-facing materials must pass through two review gates before distribution to clients:</p>
+
+      <div class="two-col">
+        <div class="card">
+          <h4>Gate 1: Brand and Style Review (Marketing)</h4>
+          <ul>
+            <li>Ensures compliance with BayOne brand guidelines, formatting standards, and professional presentation quality</li>
+            <li>Minimum <strong>5 business days</strong> notice for review</li>
+            <li>Covers all visual and editorial standards</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Gate 2: Technical Accuracy Review (AI Solutions)</h4>
+          <ul>
+            <li>Ensures all technical claims, capability statements, and case study references are accurate and verifiable</li>
+            <li>Applies to slide decks, case studies, proposals, capability summaries, and any document that references AI solutions</li>
+            <li>AI-assisted review tools may be used to streamline this process and prevent bottlenecking</li>
+          </ul>
+        </div>
+      </div>
+
+      <p>Materials that have not passed both gates are not approved for client distribution.</p>
+
+      <h3>07.3 Case Studies and Capability Claims</h3>
+      <p>All case studies must be based on verified, completed work. The following are explicitly prohibited:</p>
+      <ul class="item-list">
+        <li>Case studies generated by AI tools without grounding in actual project work</li>
+        <li>Case studies based on staffing engagements reframed as solutions engagements</li>
+        <li>Capability claims for products, demos, or accelerators that do not exist</li>
+        <li>Metrics, statistics, or performance claims that are not derived from actual project outcomes</li>
+      </ul>
+      <p>If a client asks about capabilities that BayOne does not currently have, the honest response is to acknowledge where the organization currently stands and redirect the conversation to where BayOne can genuinely add value.</p>
+    </div>
+
+    <!-- Section 08: Capacity Planning and Strategic Scaling -->
+    <div class="section">
+      <div class="section-number">08</div>
+      <h2>Capacity Planning and Strategic Scaling</h2>
+      <p class="lead">Sustainable growth requires deliberate decisions about how to build, source, and manage delivery capacity in alignment with pipeline demand.</p>
+
+      <h3>08.1 Capacity as a Qualification Factor</h3>
+      <p>Every opportunity assessment must include a supply qualification check (Section 04.5). Opportunities that pass demand qualification but exceed current delivery capacity should be flagged, not committed to. Overcommitting degrades delivery quality across all engagements and damages client relationships.</p>
+
+      <h3>08.2 Strategic Scaling Decisions</h3>
+      <p>As the AI practice grows, the organization must make deliberate decisions about how to build capacity. These decisions fall into four categories:</p>
+
+      <div class="two-col">
+        <div class="card">
+          <h4>Build Internally</h4>
+          <p>Capabilities that are core to BayOne's AI practice and will be used repeatedly across engagements should be developed in-house. These represent long-term investments in organizational competency.</p>
+        </div>
+        <div class="card">
+          <h4>Engage Partners for Immediate Needs</h4>
+          <p>When a qualified opportunity requires skills or capacity the internal team does not currently have, partner organizations can fill the gap. This is appropriate for near-term delivery needs.</p>
+        </div>
+        <div class="card">
+          <h4>Plan for Longer-Term Development</h4>
+          <p>Some capabilities are not immediately needed but will become core over time. These should be placed on a hiring and development roadmap.</p>
+        </div>
+        <div class="card">
+          <h4>Maintain as Permanently External</h4>
+          <p>Some capabilities are highly specialized, one-off, or outside BayOne's strategic focus. These should always be sourced externally through partners.</p>
+        </div>
+      </div>
+
+      <p>Adding partner capacity without limit recreates the bottleneck problem externally. The organization must draw a clear line between what should be built internally and what should remain external.</p>
+
+      <h3>08.3 Proactive Capacity Roadmap</h3>
+      <p>Capacity planning should be proactive. The current pipeline provides sufficient visibility to begin strategic workforce planning. Waiting for every future opportunity to be confirmed before planning capacity results in chronic reactive hiring, which perpetuates the bottleneck.</p>
+      <p>The steering committee (Section 09) is responsible for maintaining the capacity roadmap and ensuring that hiring and partner decisions align with pipeline priorities.</p>
+    </div>
+
+    <!-- Section 09: Governance Structure -->
+    <div class="section">
+      <div class="section-number">09</div>
+      <h2>Governance Structure</h2>
+      <p class="lead">Strategic oversight of the AI solutions pipeline requires a defined governance structure with clear authority, cadence, and accountability.</p>
+
+      <h3>09.1 Steering Committee</h3>
+      <p>A steering committee must be established to provide strategic oversight of the AI solutions pipeline, resource allocation, and priority decisions.</p>
+
+      <h4>Composition</h4>
+      <p>No more than five members, including:</p>
+      <ul class="item-list">
+        <li>Committee lead (recommended: CTO, who holds organizational authority over both technical delivery and strategic direction)</li>
+        <li>Solutions lead</li>
+        <li>VP of Sales or designated sales leadership representative</li>
+        <li>One additional leadership representative as needed</li>
+        <li>One additional delivery or operations representative as needed</li>
+      </ul>
+
+      <h4>Cadence</h4>
+      <p>Weekly or biweekly, at the discretion of the committee lead.</p>
+
+      <h4>Agenda</h4>
+      <ul class="item-list">
+        <li>Review current project queue and delivery status</li>
+        <li>Review new opportunities that have entered the pipeline</li>
+        <li>Prioritize opportunities and assign them to the appropriate delivery track</li>
+        <li>Assess team capacity and resource allocation against current and projected demand</li>
+        <li>Make go/no-go decisions on opportunities that require capacity trade-offs</li>
+        <li>Review and update the capacity roadmap (Section 08.3)</li>
+      </ul>
+
+      <h3>09.2 Weekly Operational Stand-Up</h3>
+      <p>A weekly stand-up meeting brings together representatives from sales, solutions, and delivery to coordinate near-term activity.</p>
+      <h4>Purpose</h4>
+      <ul class="item-list">
+        <li>Review what is coming down the pipeline for the current and upcoming week</li>
+        <li>Address items that need immediate attention or reprioritization</li>
+        <li>Identify conflicts, blockers, or resource gaps before they become emergencies</li>
+        <li>Ensure all teams have visibility into what is happening across the organization</li>
+      </ul>
+      <p>This meeting should be brief and operational. It is not a strategy session. Strategic decisions are made in the steering committee.</p>
+    </div>
+
+    <!-- Section 10: Sales Enablement and Training -->
+    <div class="section">
+      <div class="section-number">10</div>
+      <h2>Sales Enablement and Training</h2>
+      <p class="lead">Salespeople who represent AI solutions to clients must have the knowledge and discipline to do so accurately and credibly.</p>
+
+      <h3>10.1 AI Literacy Requirement</h3>
+      <p>Salespeople who are expected to identify and qualify AI opportunities must complete a structured internal training program before they are authorized to represent AI solutions to clients.</p>
+      <p>This training should cover:</p>
+      <ul class="item-list">
+        <li>Foundational AI concepts and terminology relevant to BayOne's service areas</li>
+        <li>BayOne's current AI solutions portfolio, including what the organization can and cannot do</li>
+        <li>The distinction between solutions engagements and staffing engagements</li>
+        <li>How to identify AI-relevant opportunities vs. general technology requests</li>
+        <li>The lead qualification process defined in this framework</li>
+        <li>Common pitfalls and misconceptions that damage client trust</li>
+      </ul>
+
+      <h3>10.2 Evaluation and Verification</h3>
+      <p>Training must include a formal evaluation to verify that participants have absorbed the material and can apply it in practice. The evaluation should be:</p>
+      <ul class="item-list">
+        <li>Objective, with clear and consistent criteria applied to all participants</li>
+        <li>Practical, focused on whether the salesperson can perform qualification effectively</li>
+        <li>Fair, with no room for subjective judgment or the appearance of favoritism</li>
+      </ul>
+      <p>The specific format of the evaluation will be determined in collaboration with the Learning and Development organization. The key requirement is that completion of training must be verifiable, not assumed.</p>
+
+      <h3>10.3 Ongoing Enablement</h3>
+      <p>AI knowledge does not remain static. The solutions team will provide regular updates to the sales organization:</p>
+      <ul class="item-list">
+        <li>Periodic briefings on active projects, completed milestones, and new capabilities</li>
+        <li>Updated talking points that salespeople can use in client conversations</li>
+        <li>Refreshed capability documentation as the solutions portfolio evolves</li>
+      </ul>
+      <p>These updates replace the current pattern where individual salespeople contact the solutions team ad hoc for background information. A regular cadence of proactive updates reduces the volume of reactive requests.</p>
+    </div>
+
+    <!-- Section 11: Performance Measurement -->
+    <div class="section">
+      <div class="section-number">11</div>
+      <h2>Performance Measurement</h2>
+      <p class="lead">Sales performance related to AI solutions should be measured on outcomes, not activity volume. Metrics must align with the framework's emphasis on qualification quality, delivery success, and sustainable growth.</p>
+
+      <h3>11.1 Outcome-Based KPIs</h3>
+
+      <div class="two-col">
+        <div class="card">
+          <h4>Metrics That Matter</h4>
+          <ul>
+            <li>Revenue generated from qualified, delivered AI engagements</li>
+            <li>Conversion rate from lead to qualified opportunity (measures qualification quality)</li>
+            <li>Conversion rate from qualified opportunity to delivered engagement</li>
+            <li>Growth within existing accounts (expansion of scope, follow-on projects)</li>
+            <li>Client satisfaction and engagement health</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Metrics That Should Not Be Primary</h4>
+          <ul>
+            <li>Number of meetings held</li>
+            <li>Number of leads submitted (without regard to quality)</li>
+            <li>Number of MSAs signed (without associated project revenue)</li>
+          </ul>
+        </div>
+      </div>
+
+      <p>If performance metrics reward volume (meetings, MSAs, accounts claimed), the incentive structure will continue to drive the behaviors this framework is designed to correct. Metrics must align with the framework's emphasis on qualification quality, delivery success, and sustainable growth.</p>
+    </div>
+
+    <!-- Section 12: Post-Engagement Feedback Loop -->
+    <div class="section">
+      <div class="section-number">12</div>
+      <h2>Post-Engagement Feedback Loop</h2>
+      <p class="lead">Completed engagements must feed back into the organization's portfolio, capability documentation, and qualification process to create compounding value over time.</p>
+
+      <h3>12.1 Portfolio and Capability Updates</h3>
+      <p>After each delivered project, or upon reaching significant milestones within an active project, the solutions team will:</p>
+      <ul class="item-list">
+        <li>Develop a case study based on verified outcomes and deliverables</li>
+        <li>Update the curated solutions portfolio to reflect the new capability</li>
+        <li>Expand the capabilities deck used by the sales team</li>
+        <li>Assess how the completed work creates overlap with potential future opportunities (per Section 04.6)</li>
+      </ul>
+      <p>This is the responsibility of the solutions team and occurs as a standard part of the engagement lifecycle, not as an ad hoc request.</p>
+
+      <h3>12.2 Continuous Improvement</h3>
+      <p>The feedback loop does not wait for project completion. Milestones reached during active engagements can and should feed back into the portfolio. A project that is 60% complete with demonstrated results is already a credible reference point.</p>
+      <p>This continuous loop is what transforms individual projects into compounding organizational capability. Each completed engagement makes the next related one easier to qualify, faster to deliver, and more credible to sell.</p>
+    </div>
+
+    <!-- Section 13: Enforcement and Adoption -->
+    <div class="section">
+      <div class="section-number">13</div>
+      <h2>Enforcement and Adoption</h2>
+      <p class="lead">The framework requires organizational commitment, process-based enforcement, and a realistic adoption timeline to succeed.</p>
+
+      <h3>13.1 Leadership Endorsement</h3>
+      <p>This framework requires formal endorsement from organizational leadership. The policies defined here, particularly around commitment authority (Section 05.1), content governance (Section 07), and qualification gates (Section 04), must be established as organizational standards, not individual preferences.</p>
+
+      <h3>13.2 Process-Based Enforcement</h3>
+      <p>The AI solutions team will support all requests that follow the framework. Specifically:</p>
+      <ul class="item-list">
+        <li>Slides and presentation materials will be provided for meetings that have been qualified and scheduled per the framework</li>
+        <li>Technical resources will participate in meetings that meet the qualification, scheduling, and scope requirements defined above</li>
+        <li>Case studies and capability materials will be generated from the curated portfolio and made available through the approved process</li>
+      </ul>
+      <p>Requests that have not followed the framework will be redirected to the appropriate step in the process. This is not punitive. The framework is designed to produce better outcomes for all parties. Following the process results in better-prepared meetings, more relevant materials, higher client satisfaction, and stronger close rates.</p>
+
+      <h3>13.3 Adoption Timeline</h3>
+      <p>Behavioral change takes time. The organization should expect a transition period of three to four months before the framework is fully embedded in daily operations. During this period:</p>
+      <ul class="item-list">
+        <li>Training and enablement activities will prepare the team</li>
+        <li>The framework will be introduced incrementally, starting with the highest-impact elements</li>
+        <li>Feedback will be collected and incorporated to refine the process</li>
+        <li>Consistent reinforcement from leadership is essential to establishing the new standard</li>
+      </ul>
+      <p>The goal is to make following the framework easier than working around it. When the process is supported by the right tools, the right training, and the right incentives, adoption becomes natural.</p>
+    </div>
+
+    <!-- Appendix A -->
+    <div class="section">
+      <div class="section-number">APPENDIX A</div>
+      <h2>Qualification Checklist Summary</h2>
+      <p class="lead">For quick reference, the following must be confirmed before the technical team is engaged.</p>
+
+      <table>
+        <tr>
+          <th>#</th>
+          <th>Criteria</th>
+          <th>Owner</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Client identity, industry, and context documented in Salesforce</td>
+          <td>Sales</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Primary contact name, title, role, and profile identified</td>
+          <td>Sales</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Specific problem statement or area of interest articulated (not "interested in AI")</td>
+          <td>Sales</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Meeting history and notes documented in Salesforce</td>
+          <td>Sales</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Decision-maker with budget authority identified</td>
+          <td>Sales</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Estimated opportunity value assessed</td>
+          <td>Sales</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Strategic priority classification assigned</td>
+          <td>Sales + Sales Leadership</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Capability overlap assessed against curated solutions portfolio</td>
+          <td>Solutions</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Supply qualification confirmed (team capacity and skills)</td>
+          <td>Solutions + Steering Committee</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Sales leadership sign-off completed</td>
+          <td>Sales Leadership</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Appendix B -->
+    <div class="section">
+      <div class="section-number">APPENDIX B</div>
+      <h2>Meeting Scheduling Checklist</h2>
+      <p class="lead">All meetings involving technical team participation must satisfy the following requirements before being confirmed.</p>
+
+      <table>
+        <tr>
+          <th>#</th>
+          <th>Requirement</th>
+          <th>Responsible</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Opportunity qualified per Section 04</td>
+          <td>Sales + Sales Leadership</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Internal availability confirmed for all required attendees</td>
+          <td>Sales</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Meeting placed on calendar with minimum 72 hours weekday notice</td>
+          <td>Sales</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Meeting scope, objective, and attendee roles documented</td>
+          <td>Sales</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Scope recorded in Salesforce</td>
+          <td>Sales</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Internal pre-meeting scheduled</td>
+          <td>Sales or meeting lead</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Client-facing materials reviewed and approved (if applicable)</td>
+          <td>Marketing + Solutions</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Post-meeting debrief scheduled</td>
+          <td>Sales or meeting lead</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Appendix C -->
+    <div class="section">
+      <div class="section-number">APPENDIX C</div>
+      <h2>Content Approval Workflow</h2>
+      <p class="lead">The following workflow governs the creation, review, and approval of all AI-related client-facing materials.</p>
+
+      <table>
+        <tr>
+          <th>Step</th>
+          <th>Action</th>
+          <th>Owner</th>
+          <th>Lead Time</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Request new deck or materials (if not in library)</td>
+          <td>Requestor</td>
+          <td>7+ business days before meeting</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Draft created from curated portfolio and templates</td>
+          <td>AI Solutions + Marketing</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Brand and style review</td>
+          <td>Marketing</td>
+          <td>5 business days</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Technical accuracy review</td>
+          <td>AI Solutions</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Final approval</td>
+          <td>Marketing + AI Solutions</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Deck available for use</td>
+          <td>Requestor</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Customization by salesperson (optional, at own discretion)</td>
+          <td>Sales</td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Internal / Confidential</p>
+    </div>
+  </div>
+</body>
+</html>

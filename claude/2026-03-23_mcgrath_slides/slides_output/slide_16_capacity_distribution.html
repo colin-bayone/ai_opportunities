@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 16: Proposed Capacity Distribution & Ticket Volume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--purple-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 12px 40px 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+      flex-shrink: 0;
+    }
+
+    .lead {
+      font-size: 11px;
+      color: var(--text-light);
+      margin-bottom: 10px;
+      flex-shrink: 0;
+    }
+
+    /* Phase chevron headers */
+    .phase-headers {
+      display: flex;
+      gap: 0;
+      flex-shrink: 0;
+      margin-bottom: 8px;
+      margin-left: 76px;
+    }
+
+    .phase-header {
+      flex: 1;
+      position: relative;
+      padding: 8px 16px 8px 22px;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%, 10px 50%);
+      margin-left: -10px;
+      text-align: center;
+    }
+
+    .phase-header:first-child {
+      margin-left: 0;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%);
+      padding-left: 12px;
+      border-radius: 6px 0 0 6px;
+    }
+
+    .phase-header:last-child {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 10px 50%);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .phase-header:nth-child(1) { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .phase-header:nth-child(2) { background: linear-gradient(135deg, #5B21B6, #6D28D9); }
+    .phase-header:nth-child(3) { background: linear-gradient(135deg, #6D28D9, #7C3AED); }
+    .phase-header:nth-child(4) { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+
+    .phase-header .phase-name {
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    /* Scenario bands */
+    .bands-area {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .scenario-band {
+      display: grid;
+      grid-template-columns: 74px repeat(4, 1fr);
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(124,58,237,0.06);
+      position: relative;
+      overflow: hidden;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .scenario-band::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 4px;
+      z-index: 1;
+    }
+
+    .scenario-band.med::before { background: linear-gradient(180deg, #7C3AED, #A855F7); }
+    .scenario-band.high::before { background: linear-gradient(180deg, #2e1065, #4C1D95); }
+
+    /* High band has a subtle tint to distinguish from Medium */
+    .scenario-band.high {
+      background: linear-gradient(135deg, rgba(46,16,101,0.02), rgba(76,29,149,0.04));
+    }
+
+    /* Band label */
+    .band-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 6px 8px 10px;
+      border-right: 1px solid #f1f5f9;
+    }
+
+    .scenario-band.med .band-label {
+      background: linear-gradient(180deg, rgba(124,58,237,0.04), rgba(168,85,247,0.06));
+    }
+
+    .scenario-band.high .band-label {
+      background: linear-gradient(180deg, rgba(46,16,101,0.06), rgba(76,29,149,0.08));
+    }
+
+    .band-name {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+    }
+
+    .scenario-band.med .band-name { color: #7C3AED; }
+    .scenario-band.high .band-name { color: #2e1065; }
+
+    /* Phase cells */
+    .phase-cell {
+      padding: 12px 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .phase-cell + .phase-cell {
+      border-left: 1px solid #f1f5f9;
+    }
+
+    /* Zone 1: Team composition - two-column onsite/offshore */
+    .team-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      margin-bottom: 3px;
+    }
+
+    .team-col {
+      text-align: center;
+    }
+
+    .team-label {
+      font-size: 8.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: var(--text-light);
+      margin-bottom: 1px;
+    }
+
+    .team-label i {
+      font-size: 7.5px;
+      margin-right: 2px;
+      opacity: 0.6;
+    }
+
+    .team-num {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    .scenario-band.med .team-num {
+      background: linear-gradient(135deg, #6D28D9, #A855F7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .scenario-band.high .team-num {
+      background: linear-gradient(135deg, #2e1065, #5B21B6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .team-total {
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--text-light);
+      text-align: center;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    /* Zone 2: Effort split */
+    .effort-split {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .effort-item { text-align: center; }
+
+    .effort-pct {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .effort-item.support .effort-pct { color: var(--purple-bright); }
+    .effort-item.enh .effort-pct { color: var(--purple-accent); }
+
+    .effort-type {
+      font-size: 7.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: var(--text-light);
+      margin-top: 1px;
+    }
+
+    .effort-divider {
+      font-size: 11px;
+      color: #cbd5e1;
+      margin: 0 2px;
+      align-self: flex-start;
+      margin-top: 2px;
+    }
+
+    /* Zone 3: Output metrics */
+    .cell-metric {
+      font-size: 10px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .cell-metric strong {
+      font-weight: 700;
+      color: var(--purple-dark);
+    }
+
+    /* Phase 1 purpose text */
+    .cell-purpose {
+      font-size: 10px;
+      color: var(--text);
+      line-height: 1.45;
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* Callouts bar - two-column grid, prominent */
+    .callouts-bar {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 28px;
+      margin-top: 8px;
+      padding: 8px 14px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .callout {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 10px;
+      line-height: 1.45;
+      color: var(--text);
+    }
+
+    .callout i {
+      font-size: 5px;
+      color: var(--purple-accent);
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+
+    /* Footer */
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 6px 40px 10px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>Proposed Capacity Distribution & Ticket Volume</h2>
+      <p class="lead">Two scaling scenarios across four operational phases, trending from transition to steady-state optimization</p>
+
+      <!-- Phase chevrons -->
+      <div class="phase-headers">
+        <div class="phase-header">
+          <div class="phase-name">Phase 1: Discovery</div>
+        </div>
+        <div class="phase-header">
+          <div class="phase-name">Year 1</div>
+        </div>
+        <div class="phase-header">
+          <div class="phase-name">Year 2</div>
+        </div>
+        <div class="phase-header">
+          <div class="phase-name">Year 3</div>
+        </div>
+      </div>
+
+      <div class="bands-area">
+
+        <!-- MEDIUM SCENARIO -->
+        <div class="scenario-band med">
+          <div class="band-label"><span class="band-name">Medium</span></div>
+
+          <!-- Phase 1 -->
+          <div class="phase-cell">
+            <div class="team-grid">
+              <div class="team-col">
+                <div class="team-label"><i class="fa-solid fa-building"></i> Onsite</div>
+                <div class="team-num">9</div>
+              </div>
+              <div class="team-col">
+                <div class="team-label"><i class="fa-solid fa-globe"></i> Offshore</div>
+                <div class="team-num">3</div>
+              </div>
+            </div>
+            <div class="team-total">12 total</div>
+            <div class="cell-purpose">Transition: onboarding, knowledge acquisition</div>
+          </div>
+
+          <!-- Y1 -->
+          <div class="phase-cell">
+            <div class="team-grid">
+              <div class="team-col">
+                <div class="team-label"><i class="fa-solid fa-building"></i> Onsite</div>
+                <div class="team-num">9</div>
+              </div>
+              <div class="team-col">
+                <div class="team-label"><i class="fa-solid fa-globe"></i> Offshore</div>
+                <div class="team-num">22</div>
+              </div>
+            </div>
+            <div class="team-total">31 total</div>
+            <div class="effort-split">
+              <div class="effort-item support">
+                <div class="effort-pct">90%</div>
+                <div class="effort-type">Support</div>
+              </div>
+              <div class="effort-divider">/</div>
+              <div class="effort-item enh">
+                <div class="effort-pct">10%</div>
+                <div class="effort-type">Enhancement</div>
+              </div>
+            </div>
+            <div class="cell-metric"><strong>~3,300</strong> tickets/qtr</div>
+            <div class="cell-metric"><strong>1,500</strong> enh hrs/qtr</div>
+          </div>
+
+          <!-- Y2 -->
+          <div class="phase-cell">
+            <div class="team-grid">
+              <div class="team-col">
+                <div class="team-label"><i class="fa-solid fa-building"></i> Onsite</div>
+                <div class="team-num">6</div>
+              </div>
+              <div class="team-col">
+                <div class="team-label"><i class="fa-solid fa-globe"></i> Offshore</div>
+                <div class="team-num">20</div>
+              </div>
+            </div>
+            <div class="team-total">26 total</div>
+            <div class="effort-split">
+              <div class="effort-item support">
+                <div class="effort-pct">85%</div>
+                <div class="effort-type">Support</div>
+              </div>
+              <div class="effort-divider">/</div>
+              <div class="effort-item enh">
+                <div class="effort-pct">15%</div>
+                <div class="effort-type">Enhancement</div>
+              </div>
+            </div>
+            <div class="cell-metric"><strong>~2,500</strong> tickets/qtr</div>
+            <div class="cell-metric"><strong>2,000</strong> enh hrs/qtr</div>
+          </div>
+
+          <!-- Y3 -->
+          <div class="phase-cell">
+            <div class="team-grid">
+              <div class="team-col">
+                <div class="team-label"><i class="fa-solid fa-building"></i> Onsite</div>
+                <div class="team-num">3</div>
+              </div>
+              <div class="team-col">
+                <div class="team-label"><i class="fa-solid fa-globe"></i> Offshore</div>
+                <div class="team-num">18</div>
+              </div>
+            </div>
+            <div class="team-total">21 total</div>
+            <div class="effort-split">
+              <div class="effort-item support">
+                <div class="effort-pct">70%</div>
+                <div class="effort-type">Support</div>
+              </div>
+              <div class="effort-divider">/</div>
+              <div class="effort-item enh">
+                <div class="effort-pct">30%</div>
+                <div class="effort-type">Enhancement</div>
+              </div>
+            </div>
+            <div class="cell-metric"><strong>~1,800</strong> tickets/qtr</div>
+            <div class="cell-metric"><strong>3,000</strong> enh hrs/qtr</div>
+          </div>
+        </div>
+
+        <!-- HIGH SCENARIO -->
+        <div class="scenario-band high">
+          <div class="band-label"><span class="band-name">High</span></div>
+
+          <!-- Phase 1 -->
+          <div class="phase-cell">
+            <div class="team-grid">
+              <div class="team-col">
+                <div class="team-label"><i class="fa-solid fa-building"></i> Onsite</div>
+                <div class="team-num">11</div>
+              </div>
+              <div class="team-col">
+                <div class="team-label"><i class="fa-solid fa-globe"></i> Offshore</div>
+                <div class="team-num">12</div>
+              </div>
+            </div>
+            <div class="team-total">23 total</div>
+            <div class="cell-purpose">Transition: onboarding, knowledge acquisition</div>
+          </div>
+
+          <!-- Y1 -->
+          <div class="phase-cell">
+            <div class="team-grid">
+              <div class="team-col">
+                <div class="team-label"><i class="fa-solid fa-building"></i> Onsite</div>
+                <div class="team-num">11</div>
+              </div>
+              <div class="team-col">
+                <div class="team-label"><i class="fa-solid fa-globe"></i> Offshore</div>
+                <div class="team-num">26</div>
+              </div>
+            </div>
+            <div class="team-total">37 total</div>
+            <div class="effort-split">
+              <div class="effort-item support">
+                <div class="effort-pct">90%</div>
+                <div class="effort-type">Support</div>
+              </div>
+              <div class="effort-divider">/</div>
+              <div class="effort-item enh">
+                <div class="effort-pct">10%</div>
+                <div class="effort-type">Enhancement</div>
+              </div>
+            </div>
+            <div class="cell-metric"><strong>~3,900</strong> tickets/qtr</div>
+            <div class="cell-metric"><strong>2,000</strong> enh hrs/qtr</div>
+          </div>
+
+          <!-- Y2 -->
+          <div class="phase-cell">
+            <div class="team-grid">
+              <div class="team-col">
+                <div class="team-label"><i class="fa-solid fa-building"></i> Onsite</div>
+                <div class="team-num">7</div>
+              </div>
+              <div class="team-col">
+                <div class="team-label"><i class="fa-solid fa-globe"></i> Offshore</div>
+                <div class="team-num">24</div>
+              </div>
+            </div>
+            <div class="team-total">31 total</div>
+            <div class="effort-split">
+              <div class="effort-item support">
+                <div class="effort-pct">85%</div>
+                <div class="effort-type">Support</div>
+              </div>
+              <div class="effort-divider">/</div>
+              <div class="effort-item enh">
+                <div class="effort-pct">15%</div>
+                <div class="effort-type">Enhancement</div>
+              </div>
+            </div>
+            <div class="cell-metric"><strong>~3,000</strong> tickets/qtr</div>
+            <div class="cell-metric"><strong>2,500</strong> enh hrs/qtr</div>
+          </div>
+
+          <!-- Y3 -->
+          <div class="phase-cell">
+            <div class="team-grid">
+              <div class="team-col">
+                <div class="team-label"><i class="fa-solid fa-building"></i> Onsite</div>
+                <div class="team-num">4</div>
+              </div>
+              <div class="team-col">
+                <div class="team-label"><i class="fa-solid fa-globe"></i> Offshore</div>
+                <div class="team-num">18</div>
+              </div>
+            </div>
+            <div class="team-total">22 total</div>
+            <div class="effort-split">
+              <div class="effort-item support">
+                <div class="effort-pct">70%</div>
+                <div class="effort-type">Support</div>
+              </div>
+              <div class="effort-divider">/</div>
+              <div class="effort-item enh">
+                <div class="effort-pct">30%</div>
+                <div class="effort-type">Enhancement</div>
+              </div>
+            </div>
+            <div class="cell-metric"><strong>~1,800</strong> tickets/qtr</div>
+            <div class="cell-metric"><strong>3,500</strong> enh hrs/qtr</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Callouts - full width, two-column grid, prominent -->
+      <div class="callouts-bar">
+        <div class="callout"><i class="fa-solid fa-circle"></i><span>BayOne handles +/- 5% seasonal spikes (month end, quarter end)</span></div>
+        <div class="callout"><i class="fa-solid fa-circle"></i><span>One integrated team for all support services</span></div>
+        <div class="callout"><i class="fa-solid fa-circle"></i><span>Automation reduces case volume, shifting effort toward enhancements</span></div>
+        <div class="callout"><i class="fa-solid fa-circle"></i><span>Resource count indicative; excludes PMO and automation office</span></div>
+        <div class="callout"><i class="fa-solid fa-circle"></i><span>Burst capacity (variable workforce) available for unexpected spikes</span></div>
+      </div>
+
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">16</div>
+    </div>
+  </div>
+
+</body>
+</html>

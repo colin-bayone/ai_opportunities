@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 16: Case Study - Oracle ERP Reporting</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--purple-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 12px 40px 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 2px;
+      flex-shrink: 0;
+    }
+
+    .cs-badge {
+      padding: 4px 10px;
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple-bright));
+      border-radius: 5px;
+      font-size: 9px;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      flex-shrink: 0;
+    }
+
+    .title-row h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+
+    .lead {
+      font-size: 11.5px;
+      color: var(--text-light);
+      margin-bottom: 10px;
+      flex-shrink: 0;
+    }
+
+    .cs-sections {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* Business Scenario + Technical Architecture side-by-side */
+    .top-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .scenario-section {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+
+    .section-header {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--purple-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section-header i {
+      font-size: 10px;
+      color: var(--purple-accent);
+    }
+
+    .scenario-text {
+      font-size: 10.5px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .scenario-challenges {
+      margin-top: 5px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .scenario-challenges .challenge {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 10px;
+      color: #475569;
+      line-height: 1.4;
+    }
+
+    .scenario-challenges .challenge i {
+      font-size: 6px;
+      color: var(--text-light);
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    /* Technical Architecture section */
+    .arch-section {
+      background: linear-gradient(135deg, rgba(76,29,149,0.05), rgba(168,85,247,0.07));
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+
+    .arch-flow {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      padding: 6px 10px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 6px;
+    }
+
+    .arch-flow .step {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--purple-dark);
+      white-space: nowrap;
+    }
+
+    .arch-flow .arrow {
+      font-size: 8px;
+      color: var(--purple-accent);
+    }
+
+    .arch-capabilities {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .arch-capabilities .cap {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 10px;
+      color: #475569;
+      line-height: 1.4;
+    }
+
+    .arch-capabilities .cap i {
+      font-size: 8px;
+      color: var(--purple-accent);
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    /* Solution / Outcomes two-column */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .col-card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 10px;
+      padding: 12px 14px;
+      box-shadow: 0 2px 6px rgba(124,58,237,0.06);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .col-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .col-card.solution::before { background: linear-gradient(90deg, #4C1D95, #5B21B6); }
+    .col-card.benefits::before { background: linear-gradient(90deg, #7C3AED, #A855F7); }
+
+    .col-card .col-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .col-card .col-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .col-card.solution .col-icon { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .col-card.benefits .col-icon { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+
+    .col-card h3 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .col-card .items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      flex: 1;
+    }
+
+    .col-card .item {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      font-size: 10.5px;
+      line-height: 1.45;
+      color: #475569;
+    }
+
+    .col-card .item i {
+      font-size: 8px;
+      margin-top: 3px;
+      width: 10px;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    .col-card.solution .item i { color: #4C1D95; }
+    .col-card.benefits .item i { color: #7C3AED; }
+
+    .col-card .item strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    .metric {
+      font-weight: 700;
+      color: var(--purple-mid);
+    }
+
+    /* Key report areas sub-section */
+    .report-areas {
+      margin-top: 6px;
+      padding-top: 6px;
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px 10px;
+    }
+
+    .report-area {
+      font-size: 9.5px;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .report-area strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="title-row">
+        <span class="cs-badge">Case Study</span>
+        <h2>Accelerating Reporting for Oracle Fusion ERP</h2>
+      </div>
+      <p class="lead">Global Manufacturing Enterprise: Custom BI Publisher reporting across Finance and Supply Chain</p>
+
+      <div class="cs-sections">
+
+        <!-- Top row: Scenario + Architecture -->
+        <div class="top-row">
+          <div class="scenario-section">
+            <div class="section-header"><i class="fa-solid fa-building"></i> Business Scenario</div>
+            <p class="scenario-text">Global manufacturing enterprise implemented Oracle Fusion Cloud ERP across Finance and Supply Chain. Stakeholders required custom reports for reconciliation, regulatory reporting, and operational decision making.</p>
+            <div class="scenario-challenges">
+              <div class="challenge"><i class="fa-solid fa-circle"></i> Limited visibility into supplier liabilities and customer receivables</div>
+              <div class="challenge"><i class="fa-solid fa-circle"></i> Finance teams relying on manual Excel reconciliation</div>
+              <div class="challenge"><i class="fa-solid fa-circle"></i> Integration reporting required for CRM and tax platforms</div>
+            </div>
+          </div>
+
+          <div class="arch-section">
+            <div class="section-header"><i class="fa-solid fa-diagram-project"></i> Technical Architecture</div>
+            <div class="arch-flow">
+              <span class="step">ERP Data</span>
+              <i class="arrow fa-solid fa-chevron-right"></i>
+              <span class="step">BIP Data Model (SQL)</span>
+              <i class="arrow fa-solid fa-chevron-right"></i>
+              <span class="step">RTF Templates</span>
+              <i class="arrow fa-solid fa-chevron-right"></i>
+              <span class="step">Automated Bursting</span>
+            </div>
+            <div class="arch-capabilities">
+              <div class="cap"><i class="fa-solid fa-clock"></i> Automated report scheduling</div>
+              <div class="cap"><i class="fa-solid fa-envelope"></i> Email bursting to stakeholders</div>
+              <div class="cap"><i class="fa-solid fa-plug"></i> Integration extracts for downstream systems</div>
+              <div class="cap"><i class="fa-solid fa-chart-bar"></i> Finance reconciliation dashboards</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Solution / Outcomes -->
+        <div class="two-col">
+
+          <div class="col-card solution">
+            <div class="col-header">
+              <div class="col-icon"><i class="fa-solid fa-wrench"></i></div>
+              <h3>Solution Approach</h3>
+            </div>
+            <div class="items">
+              <div class="item">
+                <i class="fa-solid fa-file-code"></i>
+                <span><strong>25+ custom BI Publisher reports</strong> across Finance and SCM modules</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-database"></i>
+                <span><strong>Custom BIP data models</strong> and SQL queries for complex reporting needs</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-file-lines"></i>
+                <span><strong>Business-friendly RTF layouts</strong> with automated bursting and email distribution</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-right-left"></i>
+                <span><strong>Integration extracts</strong> for downstream systems across business units</span>
+              </div>
+            </div>
+            <div class="report-areas">
+              <div class="report-area"><strong>Finance:</strong> AP Aging, AR, Trial Balance</div>
+              <div class="report-area"><strong>Procurement:</strong> POs, Supplier Spend</div>
+              <div class="report-area"><strong>Inventory:</strong> Stock on Hand, Valuation</div>
+              <div class="report-area"><strong>Order Mgmt:</strong> Status, Fulfillment</div>
+            </div>
+          </div>
+
+          <div class="col-card benefits">
+            <div class="col-header">
+              <div class="col-icon"><i class="fa-solid fa-trophy"></i></div>
+              <h3>Business Outcomes</h3>
+            </div>
+            <div class="items">
+              <div class="item">
+                <i class="fa-solid fa-arrow-trend-down"></i>
+                <span><span class="metric">40% reduction</span> in manual reconciliation effort</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-eye"></i>
+                <span><strong>Real-time financial visibility</strong> across all business units</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span><strong>Faster month-end closing cycles</strong> through automated reporting</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-handshake"></i>
+                <span>Improved <strong>supplier and customer reporting</strong> transparency</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-gears"></i>
+                <span>Seamless integration reporting with <strong>SCM, CRM, and analytics tools</strong></span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">16</div>
+    </div>
+  </div>
+</body>
+</html>

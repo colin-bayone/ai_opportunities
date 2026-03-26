@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 2: Executive Summary - Hybrid</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-logo span { color: var(--purple-accent); }
+
+    .header-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+    }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+    }
+
+    /* Left: Lead + Differentiators */
+    .left-panel {
+      width: 42%;
+      padding: 24px 26px;
+      background: linear-gradient(180deg, #fdfcff 0%, #f9f7ff 100%);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .left-panel h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .left-lead {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .left-lead strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* Key differentiators */
+    .differentiators {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .diff-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 10px 14px;
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.1);
+      border-radius: 10px;
+    }
+
+    .diff-item .diff-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: #fff;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .diff-item:nth-child(1) .diff-icon { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .diff-item:nth-child(2) .diff-icon { background: linear-gradient(135deg, #5B21B6, #6D28D9); }
+    .diff-item:nth-child(3) .diff-icon { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+
+    .diff-item .diff-text h4 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+
+    .diff-item .diff-text p {
+      font-size: 10.5px;
+      color: var(--text-light);
+      line-height: 1.45;
+    }
+
+    /* Scope-at-a-glance strip */
+    .scope-strip {
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid rgba(124,58,237,0.1);
+      display: flex;
+      gap: 10px;
+    }
+
+    .scope-item {
+      flex: 1;
+      background: linear-gradient(135deg, var(--purple-darkest), var(--purple-dark));
+      border-radius: 8px;
+      padding: 8px 10px;
+      text-align: center;
+    }
+
+    .scope-item .scope-value {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    .scope-item .scope-label {
+      font-size: 8.5px;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    .stat .stat-label {
+      font-size: 8.5px;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    /* Right: Evidence + Value */
+    .right-panel {
+      width: 58%;
+      padding: 24px 30px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .right-panel .section-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--purple-dark);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+    }
+
+    /* Evidence list */
+    .evidence-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .evidence-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .evidence-item .check {
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple-accent));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .evidence-item .check i {
+      font-size: 9px;
+    }
+
+    .evidence-item p {
+      font-size: 12.5px;
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    .evidence-item strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* Value proposition bar */
+    .value-section {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .value-section .section-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .value-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .value-card {
+      background: rgba(124,58,237,0.04);
+      border: 1px solid rgba(124,58,237,0.1);
+      border-radius: 8px;
+      padding: 8px 12px;
+      text-align: center;
+    }
+
+    .value-card .vc-value {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--purple-dark);
+      line-height: 1.2;
+    }
+
+    .value-card .vc-label {
+      font-size: 9px;
+      color: var(--text-light);
+      margin-top: 2px;
+      line-height: 1.3;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 10px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <!-- Left: Positioning + Differentiators -->
+      <div class="left-panel">
+        <h2>Executive Summary</h2>
+
+        <p class="left-lead">
+          BayOne proposes a governance-led Managed Services Partnership for McGrath's NextGen ecosystem, with <strong>five resources already embedded</strong> in MGRC's transformation program and <strong>Day 1 operational readiness</strong> across the full stack.
+        </p>
+
+        <div class="differentiators">
+          <div class="diff-item">
+            <div class="diff-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="diff-text">
+              <h4>Zero-Risk Transition</h4>
+              <p>5 embedded resources eliminate $300-500K in knowledge transfer costs</p>
+            </div>
+          </div>
+          <div class="diff-item">
+            <div class="diff-icon"><i class="fa-solid fa-sitemap"></i></div>
+            <div class="diff-text">
+              <h4>Governance-Led Operations</h4>
+              <p>Strategic, tactical, and operational tiers with SLA-driven accountability</p>
+            </div>
+          </div>
+          <div class="diff-item">
+            <div class="diff-icon"><i class="fa-solid fa-layer-group"></i></div>
+            <div class="diff-text">
+              <h4>13 Solution Towers</h4>
+              <p>Full coverage across Oracle Fusion, Salesforce, 70+ integrations, and infrastructure</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="scope-strip">
+          <div class="scope-item">
+            <div class="scope-value">13</div>
+            <div class="scope-label">Solution Towers</div>
+          </div>
+          <div class="scope-item">
+            <div class="scope-value">70+</div>
+            <div class="scope-label">Integrations</div>
+          </div>
+          <div class="scope-item">
+            <div class="scope-value">Jul '26</div>
+            <div class="scope-label">MVP Go-Live</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Evidence + Value -->
+      <div class="right-panel">
+        <div class="section-label">Why BayOne for McGrath</div>
+
+        <div class="evidence-list">
+          <div class="evidence-item">
+            <span class="check"><i class="fa-solid fa-check"></i></span>
+            <p><strong>Embedded team continuity:</strong> Five resources already operating within MGRC's NextGen program, with institutional knowledge no competitor can replicate</p>
+          </div>
+          <div class="evidence-item">
+            <span class="check"><i class="fa-solid fa-check"></i></span>
+            <p><strong>Oracle Fusion full-suite delivery:</strong> Active managed services across SCM, ERP, EPM, CX, FSM, EPBCS, and ARCS</p>
+          </div>
+          <div class="evidence-item">
+            <span class="check"><i class="fa-solid fa-check"></i></span>
+            <p><strong>Integration depth:</strong> MuleSoft, OIC, and cross-platform management across 70+ integration points connecting Salesforce, Oracle, and third-party systems</p>
+          </div>
+          <div class="evidence-item">
+            <span class="check"><i class="fa-solid fa-check"></i></span>
+            <p><strong>AI-driven operations:</strong> Automated incident triage, pattern-based failure attribution, and predictive SLA management built into the delivery model</p>
+          </div>
+          <div class="evidence-item">
+            <span class="check"><i class="fa-solid fa-check"></i></span>
+            <p><strong>Post go-live phased approach:</strong> Hypercare through stabilization through optimization, designed for MGRC's July 2026 MVP timeline</p>
+          </div>
+        </div>
+
+        <div class="value-section">
+          <div class="section-label">3-Year Value Trajectory</div>
+          <div class="value-cards">
+            <div class="value-card">
+              <div class="vc-value">Year 1</div>
+              <div class="vc-label">Transition, stabilization, baseline SLAs</div>
+            </div>
+            <div class="value-card">
+              <div class="vc-value">20%</div>
+              <div class="vc-label">Year 2 cost savings through automation</div>
+            </div>
+            <div class="value-card">
+              <div class="vc-value">27%</div>
+              <div class="vc-label">Year 3 savings via maturity and multi-skilling</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">02</div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bridge Section Prototypes: 5 Options</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .page-header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .page-subtitle {
+      font-size: 12px;
+      color: var(--text-light);
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    /* Prototype grid */
+    .prototypes-row {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .prototype {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .proto-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--purple-dark);
+    }
+
+    .proto-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .proto-desc {
+      font-size: 10px;
+      color: var(--text-light);
+      text-align: center;
+      max-width: 200px;
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+
+    /* Context wrapper: today stub | bridge | tomorrow stub */
+    .context-frame {
+      display: flex;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(124,58,237,0.12);
+      box-shadow: 0 2px 10px rgba(124,58,237,0.08);
+    }
+
+    .stub-today {
+      width: 50px;
+      background: #f8fafc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-size: 9px;
+      font-weight: 600;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .stub-tomorrow {
+      width: 50px;
+      background: linear-gradient(180deg, #fdfcff, #f5f0ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--purple-mid);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .bridge-box {
+      width: 200px;
+      height: 440px;
+      overflow: hidden;
+    }
+
+    /* ============================================
+       OPTION A: Platform Stack (Seamless Layers)
+       ============================================ */
+    .opt-a {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .opt-a .layer {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 16px;
+      position: relative;
+    }
+
+    .opt-a .layer:first-child {
+      background: linear-gradient(135deg, #2e1065, #3b1584);
+    }
+
+    .opt-a .layer:nth-child(2) {
+      background: linear-gradient(135deg, #3b1584, #5b21b6);
+    }
+
+    .opt-a .layer:last-child {
+      background: linear-gradient(135deg, #5b21b6, #7c3aed);
+    }
+
+    .opt-a .layer-inner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .opt-a .layer-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .opt-a .layer-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .opt-a .layer-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .opt-a .layer-desc {
+      font-size: 9px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.35;
+      margin-top: 2px;
+    }
+
+    .opt-a .layer-divider {
+      position: absolute;
+      bottom: 0;
+      left: 16px;
+      right: 16px;
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* ============================================
+       OPTION B: Numbered Vertical Timeline
+       ============================================ */
+    .opt-b {
+      background: linear-gradient(180deg, var(--purple-dark) 0%, var(--purple-mid) 50%, var(--purple-bright) 100%);
+      height: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 30px 14px;
+      gap: 36px;
+    }
+
+    /* Vertical line */
+    .opt-b::before {
+      content: '';
+      position: absolute;
+      top: 18%;
+      bottom: 18%;
+      left: 33px;
+      width: 3px;
+      background: linear-gradient(180deg, rgba(168,85,247,0.3), rgba(232,121,249,0.5), rgba(168,85,247,0.3));
+      border-radius: 2px;
+    }
+
+    .timeline-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .node-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple-accent), var(--purple-glow));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(168,85,247,0.4);
+    }
+
+    .node-content {
+      padding-top: 2px;
+    }
+
+    .node-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .node-desc {
+      font-size: 9px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.35;
+      margin-top: 3px;
+    }
+
+    /* ============================================
+       OPTION C: Directional Arrow Flow
+       ============================================ */
+    .opt-c {
+      background: linear-gradient(180deg, var(--purple-dark) 0%, var(--purple-mid) 50%, var(--purple-bright) 100%);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 20px 0 20px 0;
+      gap: 12px;
+    }
+
+    .arrow-item {
+      clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%);
+      padding: 16px 32px 16px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-right: 0;
+    }
+
+    .arrow-item:nth-child(1) {
+      background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(255,255,255,0.18));
+    }
+
+    .arrow-item:nth-child(2) {
+      background: linear-gradient(90deg, rgba(255,255,255,0.10), rgba(255,255,255,0.22));
+    }
+
+    .arrow-item:nth-child(3) {
+      background: linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0.26));
+    }
+
+    .arrow-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .arrow-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .arrow-title {
+      font-size: 10px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .arrow-desc {
+      font-size: 8.5px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.3;
+      margin-top: 1px;
+    }
+
+    /* ============================================
+       OPTION D: Spine & Glow Nodes
+       ============================================ */
+    .opt-d {
+      background: linear-gradient(180deg, var(--purple-dark) 0%, var(--purple-mid) 50%, var(--purple-bright) 100%);
+      height: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 14px;
+      gap: 0;
+    }
+
+    /* Central vertical spine */
+    .opt-d::before {
+      content: '';
+      position: absolute;
+      top: 15%;
+      bottom: 15%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      background: linear-gradient(180deg,
+        rgba(168,85,247,0.2),
+        rgba(232,121,249,0.6),
+        rgba(168,85,247,0.2)
+      );
+      border-radius: 2px;
+    }
+
+    .glow-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .glow-circle {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.9), rgba(232,121,249,0.9));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #fff;
+      box-shadow:
+        0 0 24px rgba(168,85,247,0.5),
+        0 0 48px rgba(168,85,247,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+
+    .glow-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: #fff;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .glow-sublabel {
+      font-size: 8.5px;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      line-height: 1.3;
+      max-width: 140px;
+    }
+
+    /* ============================================
+       OPTION E: Content-Rich Accent Cards
+       ============================================ */
+    .opt-e {
+      background: linear-gradient(180deg, var(--purple-dark) 0%, var(--purple-mid) 50%, var(--purple-bright) 100%);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 16px 12px;
+      gap: 10px;
+    }
+
+    .opt-e .bridge-heading {
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      margin-bottom: 4px;
+    }
+
+    .accent-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 14px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(4px);
+    }
+
+    .accent-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+    }
+
+    .accent-card:nth-child(2)::before {
+      background: linear-gradient(180deg, #a855f7, #c084fc);
+    }
+
+    .accent-card:nth-child(3)::before {
+      background: linear-gradient(180deg, #c084fc, #d8b4fe);
+    }
+
+    .accent-card:nth-child(4)::before {
+      background: linear-gradient(180deg, #d8b4fe, #e879f9);
+    }
+
+    .accent-card .card-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .accent-card .card-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--purple-glow);
+      flex-shrink: 0;
+    }
+
+    .accent-card .card-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .accent-card .card-desc {
+      font-size: 9.5px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.5;
+      padding-left: 42px;
+    }
+
+    .accent-card .card-stat {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+      margin-left: 42px;
+      padding: 3px 8px;
+      background: rgba(168,85,247,0.2);
+      border-radius: 4px;
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--purple-glow);
+    }
+
+    .accent-card .card-stat i {
+      font-size: 8px;
+    }
+
+    /* Section divider */
+    .section-divider {
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(124,58,237,0.3), transparent);
+      margin: 48px 0 36px;
+    }
+
+    /* Full context preview */
+    .full-context {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .full-context h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .full-context .note {
+      font-size: 11px;
+      color: var(--text-light);
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <h1>Bridge Section Prototypes</h1>
+  </div>
+  <p class="page-subtitle">Five approaches for the center "Path Forward" panel in slide 6a. Each shown at actual bridge dimensions (200px x 440px) with Today/Tomorrow stubs for context.</p>
+
+  <div class="prototypes-row">
+
+    <!-- ========== OPTION A ========== -->
+    <div class="prototype">
+      <div class="proto-label">A</div>
+      <div class="proto-name">Platform Stack</div>
+      <p class="proto-desc">Seamless gradient layers. Architectural, solid. Each lever is a foundation band.</p>
+      <div class="context-frame">
+        <div class="stub-today">Today</div>
+        <div class="bridge-box">
+          <div class="opt-a">
+            <div class="layer">
+              <div class="layer-inner">
+                <div class="layer-icon"><i class="fa-solid fa-compress"></i></div>
+                <div class="layer-text">
+                  <div class="layer-title">Simplify &<br>Streamline</div>
+                  <div class="layer-desc">Reduce complexity across 50+ integration touchpoints</div>
+                </div>
+              </div>
+              <div class="layer-divider"></div>
+            </div>
+            <div class="layer">
+              <div class="layer-inner">
+                <div class="layer-icon"><i class="fa-solid fa-ruler"></i></div>
+                <div class="layer-text">
+                  <div class="layer-title">Standardize</div>
+                  <div class="layer-desc">Adopt Oracle Fusion best practices and unified patterns</div>
+                </div>
+              </div>
+              <div class="layer-divider"></div>
+            </div>
+            <div class="layer">
+              <div class="layer-inner">
+                <div class="layer-icon"><i class="fa-solid fa-robot"></i></div>
+                <div class="layer-text">
+                  <div class="layer-title">Automate</div>
+                  <div class="layer-desc">AI-driven operations replacing manual workflows</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="stub-tomorrow">Tomorrow</div>
+      </div>
+    </div>
+
+    <!-- ========== OPTION B ========== -->
+    <div class="prototype">
+      <div class="proto-label">B</div>
+      <div class="proto-name">Numbered Timeline</div>
+      <p class="proto-desc">Vertical progression with numbered steps. Sequential, clear, ordered.</p>
+      <div class="context-frame">
+        <div class="stub-today">Today</div>
+        <div class="bridge-box">
+          <div class="opt-b">
+            <div class="timeline-node">
+              <div class="node-number">01</div>
+              <div class="node-content">
+                <div class="node-title">Simplify &<br>Streamline</div>
+                <div class="node-desc">Reduce complexity across 50+ integration touchpoints</div>
+              </div>
+            </div>
+            <div class="timeline-node">
+              <div class="node-number">02</div>
+              <div class="node-content">
+                <div class="node-title">Standardize</div>
+                <div class="node-desc">Adopt Oracle Fusion best practices and unified patterns</div>
+              </div>
+            </div>
+            <div class="timeline-node">
+              <div class="node-number">03</div>
+              <div class="node-content">
+                <div class="node-title">Automate</div>
+                <div class="node-desc">AI-driven operations replacing manual workflows</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="stub-tomorrow">Tomorrow</div>
+      </div>
+    </div>
+
+    <!-- ========== OPTION C ========== -->
+    <div class="prototype">
+      <div class="proto-label">C</div>
+      <div class="proto-name">Arrow Flow</div>
+      <p class="proto-desc">Right-pointing chevrons implying movement from Today toward Tomorrow.</p>
+      <div class="context-frame">
+        <div class="stub-today">Today</div>
+        <div class="bridge-box">
+          <div class="opt-c">
+            <div class="arrow-item">
+              <div class="arrow-icon"><i class="fa-solid fa-compress"></i></div>
+              <div class="arrow-text">
+                <div class="arrow-title">Simplify &<br>Streamline</div>
+                <div class="arrow-desc">Reduce integration complexity</div>
+              </div>
+            </div>
+            <div class="arrow-item">
+              <div class="arrow-icon"><i class="fa-solid fa-ruler"></i></div>
+              <div class="arrow-text">
+                <div class="arrow-title">Standardize</div>
+                <div class="arrow-desc">Oracle Fusion best practices</div>
+              </div>
+            </div>
+            <div class="arrow-item">
+              <div class="arrow-icon"><i class="fa-solid fa-robot"></i></div>
+              <div class="arrow-text">
+                <div class="arrow-title">Automate</div>
+                <div class="arrow-desc">AI-driven operations</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="stub-tomorrow">Tomorrow</div>
+      </div>
+    </div>
+
+    <!-- ========== OPTION D ========== -->
+    <div class="prototype">
+      <div class="proto-label">D</div>
+      <div class="proto-name">Spine & Glow</div>
+      <p class="proto-desc">Glowing nodes on a vertical spine. Elegant, minimal, visually striking.</p>
+      <div class="context-frame">
+        <div class="stub-today">Today</div>
+        <div class="bridge-box">
+          <div class="opt-d">
+            <div class="glow-node">
+              <div class="glow-circle"><i class="fa-solid fa-compress"></i></div>
+              <div class="glow-label">Simplify &<br>Streamline</div>
+              <div class="glow-sublabel">Reduce complexity across 50+ integration touchpoints</div>
+            </div>
+            <div class="glow-node">
+              <div class="glow-circle"><i class="fa-solid fa-ruler"></i></div>
+              <div class="glow-label">Standardize</div>
+              <div class="glow-sublabel">Oracle Fusion best practices and unified patterns</div>
+            </div>
+            <div class="glow-node">
+              <div class="glow-circle"><i class="fa-solid fa-robot"></i></div>
+              <div class="glow-label">Automate</div>
+              <div class="glow-sublabel">AI-driven operations replacing manual workflows</div>
+            </div>
+          </div>
+        </div>
+        <div class="stub-tomorrow">Tomorrow</div>
+      </div>
+    </div>
+
+    <!-- ========== OPTION E ========== -->
+    <div class="prototype">
+      <div class="proto-label">E</div>
+      <div class="proto-name">Enriched Cards</div>
+      <p class="proto-desc">Content-rich cards with accent bars. More detail per lever, grounded in specifics.</p>
+      <div class="context-frame">
+        <div class="stub-today">Today</div>
+        <div class="bridge-box">
+          <div class="opt-e">
+            <div class="bridge-heading">The Path Forward</div>
+            <div class="accent-card">
+              <div class="card-top">
+                <div class="card-icon"><i class="fa-solid fa-compress"></i></div>
+                <div class="card-title">Simplify &<br>Streamline</div>
+              </div>
+              <div class="card-desc">Consolidate monitoring, reduce integration touchpoints, eliminate redundant vendor overlap</div>
+              <div class="card-stat"><i class="fa-solid fa-arrows-to-dot"></i> 50+ integrations simplified</div>
+            </div>
+            <div class="accent-card">
+              <div class="card-top">
+                <div class="card-icon"><i class="fa-solid fa-ruler"></i></div>
+                <div class="card-title">Standardize</div>
+              </div>
+              <div class="card-desc">Adopt Oracle Fusion best practices, unify middleware patterns, align to industry standards</div>
+              <div class="card-stat"><i class="fa-solid fa-certificate"></i> Oracle Fusion aligned</div>
+            </div>
+            <div class="accent-card">
+              <div class="card-top">
+                <div class="card-icon"><i class="fa-solid fa-robot"></i></div>
+                <div class="card-title">Automate</div>
+              </div>
+              <div class="card-desc">AI-driven triage, automated regression testing, proactive monitoring across the stack</div>
+              <div class="card-stat"><i class="fa-solid fa-bolt"></i> AI-powered operations</div>
+            </div>
+          </div>
+        </div>
+        <div class="stub-tomorrow">Tomorrow</div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

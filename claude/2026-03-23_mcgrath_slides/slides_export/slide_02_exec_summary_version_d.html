@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 2: Executive Summary - Version D</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-logo span { color: var(--purple-accent); }
+
+    .header-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+    }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 24px 40px 16px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+
+    /* Opening paragraph */
+    .exec-lead {
+      font-size: 12.5px;
+      color: var(--text);
+      line-height: 1.65;
+      margin-bottom: 20px;
+      flex-shrink: 0;
+      max-width: 960px;
+    }
+
+    .exec-lead strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* 4 pillar cards */
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .pillar {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 12px;
+      padding: 16px 18px;
+      box-shadow: 0 2px 8px rgba(124,58,237,0.06);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pillar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+
+    .pillar:nth-child(1)::before { background: linear-gradient(90deg, #4C1D95, #5B21B6); }
+    .pillar:nth-child(2)::before { background: linear-gradient(90deg, #5B21B6, #6D28D9); }
+    .pillar:nth-child(3)::before { background: linear-gradient(90deg, #7C3AED, #A855F7); }
+    .pillar:nth-child(4)::before { background: linear-gradient(90deg, #A855F7, #C026D3); }
+
+    .pillar .pillar-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .pillar:nth-child(1) .pillar-icon { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .pillar:nth-child(2) .pillar-icon { background: linear-gradient(135deg, #5B21B6, #6D28D9); }
+    .pillar:nth-child(3) .pillar-icon { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+    .pillar:nth-child(4) .pillar-icon { background: linear-gradient(135deg, #A855F7, #C026D3); }
+
+    .pillar h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .pillar p {
+      font-size: 11px;
+      color: var(--text);
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .pillar p strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    /* Value bar */
+    .value-bar {
+      margin-top: 16px;
+      background: linear-gradient(135deg, var(--purple-darkest), var(--purple-dark));
+      border-radius: 8px;
+      padding: 12px 22px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    .value-bar .value-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--purple-accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .value-bar .value-text {
+      font-size: 11.5px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.5;
+    }
+
+    .value-bar .value-text strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 10px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>Executive Summary</h2>
+
+      <p class="exec-lead">
+        BayOne Solutions proposes a governance-led Managed Services Partnership for McGrath RentCorp's NextGen ecosystem. With <strong>five resources already embedded</strong> within MGRC's transformation program, BayOne offers a zero-risk transition, eliminating <strong>$300-500K in knowledge transfer costs</strong> and delivering Day 1 operational readiness across Oracle Fusion, Salesforce, MuleSoft, OIC, and the full integration layer.
+      </p>
+
+      <div class="pillars">
+        <!-- Pillar 1: Embedded Advantage -->
+        <div class="pillar">
+          <div class="pillar-icon"><i class="fa-solid fa-users"></i></div>
+          <h4>Embedded Advantage</h4>
+          <p><strong>5 resources inside MGRC today</strong> with institutional knowledge no competitor can replicate. Zero ramp-up, zero knowledge transfer risk.</p>
+        </div>
+
+        <!-- Pillar 2: Governance-Led MSP -->
+        <div class="pillar">
+          <div class="pillar-icon"><i class="fa-solid fa-sitemap"></i></div>
+          <h4>Governance-Led MSP</h4>
+          <p>One accountable partner with <strong>SLA-driven operations</strong> across strategic, tactical, and operational governance tiers.</p>
+        </div>
+
+        <!-- Pillar 3: Post Go-Live Focus -->
+        <div class="pillar">
+          <div class="pillar-icon"><i class="fa-solid fa-arrows-spin"></i></div>
+          <h4>Post Go-Live Focus</h4>
+          <p>Hypercare, Stabilization, then Optimization. <strong>Phased model designed</strong> for MGRC's July 2026 MVP go-live timeline.</p>
+        </div>
+
+        <!-- Pillar 4: Full Stack Coverage -->
+        <div class="pillar">
+          <div class="pillar-icon"><i class="fa-solid fa-layer-group"></i></div>
+          <h4>Full Stack Coverage</h4>
+          <p><strong>13 solution towers</strong> spanning Oracle Fusion, Salesforce CPQ, 70+ integrations, NexSTAR, BI, and infrastructure.</p>
+        </div>
+      </div>
+
+      <div class="value-bar">
+        <div class="value-label">Proposed Value</div>
+        <div class="value-text">3-year engagement with progressive cost optimization: <strong>20% savings in Year 2, 27% in Year 3</strong> through automation, process maturity, and multi-skilling.</div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">02</div>
+    </div>
+  </div>
+
+</body>
+</html>

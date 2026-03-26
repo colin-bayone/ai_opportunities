@@ -1,0 +1,1653 @@
+
+ ▐▛███▜▌   Claude Code v2.0.53
+▝▜█████▛▘  Opus 4.5 · Claude Max
+  ▘▘ ▝▝    ~/programming/cisco_projects/cicd
+
+> I need help improving recruiter guides for 4 engineering roles we're 
+hiring for a Cisco consulting engagement. A previous Claude session did 
+research but made poor edits, so we're starting fresh with you.
+
+  Start by reading these files in order:
+
+  1. /home/cmoore/programming/cisco_projects/cicd/claude/2026-02-04_recruite
+r-guides/planning/00_handoff_to_next_session.md - Context from last session,
+ what went wrong, key learnings, your instructions
+  2. /home/cmoore/programming/cisco_projects/cicd/claude/2026-02-04_recruite
+r-guides/research/ - Three research docs on AI engineer landscape, recruiter
+ search strategies, and Cisco project context
+  3. /home/cmoore/programming/cisco_projects/cicd/CLAUDE.md - Project-wide 
+instructions and documentation system
+
+  The 4 roles (JDs in /deliverables/jd_*.md):
+  - Senior AI Solutions Engineer (onsite San Jose, client-facing)
+  - Automation Engineer (onsite San Jose, client-facing)
+  - AI Engineer (offshore, chat/dashboard focus)
+  - Agentic AI Engineer (offshore, autonomous systems/self-healing)
+
+  Current recruiter guides are in 
+/deliverables/job_descriptions/recruiter_guides/ - they exist but the search
+ strings and tech stacks are weak and need rewriting.
+
+  What I need:
+  - Go one role at a time, starting with Senior AI Solutions Engineer
+  - Ask me targeted questions before making edits
+  - Use the research to inform your work, don't just parrot what I say
+  - Think in tiers: must-have → preferred → nice-to-have
+  - Think in synonyms for non-technical recruiters
+
+  Key context:
+  - Cisco environment: on-prem, Python-heavy, Airflow + Jenkins + Bazel, 
+PostgreSQL + pgvector
+  - LLM APIs: Claude and OpenAI (not self-hosted models)
+  - This is production systems work, not research/POC
+  - Budget: ~$100K/quarter, team of Colin (tech lead, remote) + 2 onshore + 
+2 offshore
+
+  Read the files first, then let's start with Senior AI Solutions Engineer. 
+
+● I'll read through those files now to get the full context.
+
+● Read(claude/2026-02-04_recruiter-guides/planning/00_handoff_to_next_session.md
+      )
+  ⎿  Read 102 lines
+
+● Search(pattern: "/home/cmoore/programming/cisco_projects/cicd/claude/2026-02-0
+  ⎿  Found 0 files 
+
+● Let me try finding those research files with a broader search:
+
+● Search(pattern: "**/2026-02-04_recruiter-guides/research/*")
+  ⎿  Found 3 files (ctrl+o to expand)
+
+● Bash(ls -la /home/cmoore/programming/cisco_projects/cicd/claude/2026-02-04_rec
+      ruiter-guides/)
+  ⎿  total 24                                       
+     drwxr-xr-x 6 cmoore cmoore 4096 Feb  4 09:02 .
+     drwxr-xr-x 4 cmoore cmoore 4096 Feb  4 09:02 ..
+     … +4 lines (ctrl+o to expand)
+
+● Read(claude/2026-02-04_recruiter-guides/research/01_ai_engineer_landscape_2026
+      .md)
+  ⎿  Read 154 lines
+
+● Read(claude/2026-02-04_recruiter-guides/research/02_recruiter_search_strategie
+      s.md)
+  ⎿  Read 161 lines
+
+● Read(claude/2026-02-04_recruiter-guides/research/03_cisco_project_context.md)
+  ⎿  Read 131 lines
+
+● Now let me read the current JD and recruiter guide for Senior AI Solutions
+   Engineer:
+
+● Read(claude/2026-02-02_resource-planning/deliverables/jd_senior_ai_solutions_e
+      ngineer.md)
+  ⎿  Read 111 lines
+
+● Search(pattern: "**/recruiter_guides/*senior*")
+  ⎿  Found 1 file (ctrl+o to expand)
+
+● Read(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recruit
+      er_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Read 178 lines
+
+● Good, I've read everything. Here's my assessment of the current Senior AI
+  Solutions Engineer recruiter guide:
+
+  What's working:
+  - Structure is clean and print-friendly
+  - Must-haves are mostly on target (LLM, Python, RAG, client-facing)
+  - Warning signs and questions are solid
+
+  What needs work:
+
+  1. Search strings are flat, not tiered. They're all OR-heavy, so
+  recruiters get noise. Should be: Layer 1 (narrow must-haves), Layer 2 (add
+   preferred), Layer 3 (broaden if needed).
+  2. "Target companies" search is backwards. Lists specific AI companies
+  (Anthropic, OpenAI, Hugging Face) but your research says industries >
+  companies, and 100+ employee companies are ideal. Someone from Anthropic
+  probably isn't looking for this role.
+  3. Missing Cisco environment context in searches. No Airflow, Jenkins, or
+  "developer tools" keywords. This role specifically needs people
+  comfortable with CI/CD integration.
+  4. ChromaDB is listed but your research flags it as "prototyping only -
+  not production scale." Sends wrong signal.
+  5. Missing observability tools as signals. Research says
+  LangSmith/Langfuse signal depth of experience. Not in strong signals or
+  keywords.
+  6. Synonym groups aren't explicit. Non-technical recruiters need (Claude 
+  OR Anthropic) and (OpenAI OR GPT OR GPT-4) spelled out as equivalent
+  terms, not scattered.
+
+  ---
+  Before I rewrite, a few targeted questions:
+
+  1. Salary range? The research shows Senior AI (L5+) at $280K-$400K. What's
+   BayOne's actual range for this role? This affects which talent pool to
+  target.
+  2. Consulting background weight? Current guide emphasizes consulting firms
+   heavily. Is that a true must-have, or would you take someone from
+  enterprise ML platform teams who's never done consulting but has strong
+  client skills?
+  3. CI/CD experience weight? JD says "preferred." Should search strings
+  include Airflow/Jenkins/Bazel as Layer 1 (must-have) or Layer 2
+  (nice-to-have)?
+  4. On-prem as screening criterion? Research says "only cloud-native
+  experience" is a warning sign. Should this be elevated to a must-have
+  filter in searches (e.g., explicit "on-prem" OR "enterprise" keywords)?
+
+> Not really sure what to make of this because there's a lot of things going
+ on here.
+
+Why would salary range be part of this? That is none of your concern. 
+Consulting background is not a must-have; it simply was meant to be an 
+industry alignment thing, but I do not want to put too much weight on it.
+
+I would be more than happy for someone with an enterprise team, the 
+client-side nature of it is more about them being an extremely strong 
+communicator in both verbal and written communication as well as 
+presentation skills and in general personal skills to build rapport. That 
+does favor people with consulting background, but that can also just be any 
+standard good person from literally any background.
+
+For CI/CD experience, yes it is preferred, but it should be a nice-to-have. 
+And to be honest, we should separate because there's some things in that are
+ far more common than others and their synonyms as well. I don't think cloud
+ native experience only is a warning sign; I just think whenever we're 
+talking about hosting, we don't want people that can only work in a pampered
+ cloud environment.
+
+I don't think you're thinking correctly about this. I want to know that 
+they're capable of working within an on-prem environment. We're literally 
+just using APIs; the only difference with on-prem is deployment. If they're 
+a profile that relies crazy heavy on external cloud services only and never 
+actually builds anything themselves, that would be a problem.
+
+I'll give you an example: someone who has done Azure AI search but has no 
+clue on how to do vector search without using Azure AI search. That's what 
+I'm talking about when I say a pampered cloud environment. Does that make 
+sense? 
+
+● Yes, that makes sense. The warning sign isn't "cloud experience" - it's
+  dependency on managed abstractions without understanding the fundamentals.
+
+  Someone who's built RAG with Pinecone AND understands how embeddings,
+  similarity search, and indexing actually work = fine.
+
+  Someone who's only ever used Azure AI Search as a black box and couldn't
+  set up pgvector or explain cosine similarity = problem.
+
+  The test is: "Can they build it themselves, or do they only know how to
+  configure a managed service?"
+
+  ---
+  Revised approach for this guide:
+
+  1. Reframe "client-facing" as communication/presentation skills, not
+  consulting background. Consulting becomes one signal among many, not a
+  search priority.
+  2. Warning signs: Change "only cloud-native experience" to something like
+  "relies on managed AI services without understanding underlying mechanics"
+   - and give recruiters a screening question to test this.
+  3. CI/CD tools: Move to nice-to-have tier, group by commonality:
+    - Common: Jenkins, GitHub Actions
+    - Less common: Airflow, Bazel, GitLab CI
+  4. Search strings: Restructure as tiered layers, remove the "target
+  companies" search that lists AI labs.
+
+  One more clarifying question before I draft:
+
+  For the "fundamentals vs managed service" distinction - what's a good
+  screening question a non-technical recruiter could ask? Something like
+  "Have you ever set up a vector database from scratch, or only used managed
+   services?" Or is there a better way to surface this?
+
+> Definitely a better way to surface this. I think the real answer for 
+screening questions on this might not be at the recruiter level because 
+again they're going to be non-technical people, so they're going to be 
+asking vanilla questions and not really understanding their answer.
+
+One option we have is to request that they record all meetings on Teams. The
+ other thing we could suggest is to give them questions that don't really 
+require a follow-up and are just kind of like canary questions that 
+immediately tell us if someone's bullshitting. For instance, for your "Have 
+you ever set up a vector database from scratch or only use managed 
+services?" question? That would be a very poor one because the candidate 
+could just say, "Oh yeah, I've done that and I use PGvector, Milvus, and 
+Wavy8." That doesn't tell us anything. Anyone can say boss words.
+
+What we should say is, "When selecting a vector database, what's important?"
+ or ask them specific things about key abilities and what would be a good 
+fit given a scenario. But something that is not too long or complicated, or 
+requires too much additional explanation. Something the recruiters could 
+fire off as a question and get a clear response back on without ambiguity. 
+And... Something that actually gives us indication of their actual depth. 
+Not just can they name off platforms and buzzwords, but also not asking them
+ super technical questions and screening just kind of a litmus test to check
+ to the action of the hell they're talking about.
+
+Okay. Thank you very much for your attention. 
+
+● Got it. Canary questions where the shape of the answer reveals depth, not
+  the specific content. Recruiter doesn't need to evaluate the tech - they
+  just note whether the candidate reasoned through trade-offs or listed
+  buzzwords.
+
+  Here's what I'll draft for the revised guide:
+
+  ---
+  Screening Questions (canary style):
+
+  1. "When selecting a vector database for a project, what factors do you
+  consider?"
+    - Shallow: names databases
+    - Deep: talks about trade-offs (scale, latency, filtering needs, ops
+  burden, existing infrastructure)
+  2. "What problems show up in production AI that you don't see in
+  prototypes?"
+    - Shallow: generic ("it's harder")
+    - Deep: specific failure modes, monitoring gaps, cost surprises,
+  latency, user trust
+  3. "If a client asked you to ship an AI feature in 2 weeks, how would you
+  respond?"
+    - Shallow: "sure" or "no"
+    - Deep: scoping conversation, MVP definition, what can/can't be done,
+  risk communication
+  4. "How do you test an AI system when the outputs aren't deterministic?"
+    - Shallow: "I run it a few times"
+    - Deep: evaluation frameworks, edge cases, regression tests, human
+  review loops
+
+  ---
+  Other changes I'll make:
+  - Remove consulting-heavy emphasis; reframe as communication/presentation
+  skills
+  - Warning sign becomes "relies on managed AI services without
+  understanding mechanics"
+  - CI/CD as nice-to-have tier, grouped by commonality
+  - Search strings restructured as Layer 1/2/3
+  - Kill the "target companies" search listing AI labs
+
+  Want me to proceed with the full rewrite, or review any of these questions
+   first?
+
+> Proceed with the full rewrite. In addition to the screening questions, 
+your shallow and deep are piss poor. Again, this is a non-technical 
+recruiter, I am not going to remind you of this again. Why could you not be 
+bothered to give more than a few words in those sections? How in the fuck 
+would my non-technical recruiter know what an ops burden is or know what a 
+generic answer is to what problems show up in production AI that you don't 
+see in prototype? You really need to come back and think about this. Here is
+ what I want you to do: You can generate your screening questions, then I 
+want you to self-critique them. 
+
+● You're right. Let me actually think about this properly.
+
+  ---
+  Screening Questions - Self-Critique:
+
+  1. "When selecting a vector database for a project, what factors do you 
+  consider?"
+
+  Draft shallow/deep:
+  - Shallow: names databases
+  - Deep: talks about trade-offs (scale, latency, filtering needs, ops
+  burden, existing infrastructure)
+
+  Critique: "Ops burden" is jargon. "Trade-offs" is vague. A non-technical
+  recruiter reading "talks about trade-offs" still doesn't know what to
+  listen for. What does a trade-off SOUND like? How would they recognize it?
+
+  Rewrite:
+  - ✗ WEAK: Lists database names (Pinecone, Weaviate, pgvector) without
+  explaining WHY they'd pick one over another. Short answer, no reasoning.
+  - ✓ GOOD: Says "it depends" and explains WHAT it depends on - like how
+  much data, how fast it needs to be, what the team already uses, budget.
+  You hear them weighing options, not just naming things.
+
+  ---
+  2. "What problems show up in production AI that you don't see in 
+  prototypes?"
+
+  Draft shallow/deep:
+  - Shallow: generic ("it's harder")
+  - Deep: specific failure modes, monitoring gaps, cost surprises, latency,
+  user trust
+
+  Critique: "Specific failure modes" and "monitoring gaps" are meaningless
+  to a non-technical recruiter. They can't distinguish a generic answer from
+   a specific one if they don't know the domain.
+
+  Rewrite - actually, the question itself is flawed. A recruiter can't
+  evaluate whether "the model sometimes hallucinates under load" is a real
+  answer or bullshit.
+
+  Better question: "Tell me about a time something went wrong with an AI
+  system in production. What happened and what did you do?"
+
+  Now it's a story question. Recruiter can observe:
+  - ✗ WEAK: Can't recall a specific situation. Gives theoretical answers
+  ("sometimes models give wrong outputs") instead of a real story.
+  - ✓ GOOD: Tells a specific story with details - what broke, how they found
+   out, what they did. You can tell they actually lived through it, not
+  reciting a textbook.
+
+  ---
+  3. "If a client asked you to ship an AI feature in 2 weeks, how would you 
+  respond?"
+
+  Draft shallow/deep:
+  - Shallow: "sure" or "no"
+  - Deep: scoping conversation, MVP definition, what can/can't be done, risk
+   communication
+
+  Critique: "Scoping conversation" and "MVP definition" are
+  consultant-speak. And it's hypothetical - easy to give a rehearsed answer.
+
+  Better question: "Tell me about a time a client or stakeholder had
+  unrealistic expectations about AI. How did you handle it?"
+
+  - ✗ WEAK: Can't recall a specific situation. Or describes just agreeing
+  with whatever the client wanted. Or avoided the conversation.
+  - ✓ GOOD: Describes a real situation - what the client expected, how they
+  understood what the client actually needed, how they communicated what was
+   realistic. Shows they can push back respectfully.
+
+  ---
+  4. "How do you test an AI system when the outputs aren't deterministic?"
+
+  Draft shallow/deep:
+  - Shallow: "I run it a few times"
+  - Deep: evaluation frameworks, edge cases, regression tests, human review
+  loops
+
+  Critique: "Evaluation frameworks" and "regression tests" require technical
+   context to evaluate. Recruiter can't tell if "I use pytest with fixtures"
+   is good or not.
+
+  Simpler question: "How do you know if an AI feature is working correctly
+  after you ship it?"
+
+  - ✗ WEAK: Vague answers like "we test it" or "users tell us." Can't
+  describe any systematic approach.
+  - ✓ GOOD: Describes a process - how they track whether it's working, what
+  they look at, how they catch problems before users do. Has structure to
+  their answer, not just "we check it."
+
+  ---
+  One more I'll add for client skills:
+
+  5. "Can you explain [most complex thing on their resume] to me like I'm 
+  not technical?"
+
+  - ✗ WEAK: Uses jargon, gets frustrated, talks down to you, or can't
+  simplify it at all.
+  - ✓ GOOD: Uses analogies, checks if you're following, adjusts based on
+  your reactions. Patient and clear.
+
+  This one the recruiter can directly evaluate because they ARE the
+  non-technical audience.
+
+  ---
+  Now I'll proceed with the full rewrite using these corrected questions.
+
+● Write(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recrui
+       ter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 150 additions and 58 removals
+
+           -  Built features using Claude API or OpenAI API in production
+           -  </li>
+           -  Django, or Flask; comfortable with async code</li>
+           -  management, structured outputs, few-shot patterns</li>
+           - equivalent orchestration framework</li>
+           -  retrieval-augmented generation</li>
+           - Consulting, professional services, or stakeholder-heavy 
+           - roles</li>
+           +  Built features using Claude/OpenAI APIs that real users 
+           +  rely on</li>
+           +  Django, or Flask; comfortable building APIs and services
+           +  </li>
+           +  management, structured outputs, handling 
+           +  when the AI gives bad answers</li>
+           + search/retrieval systems, understands how vector search 
+           + works (not just used a managed service)</li>
+           + writing, comfortable presenting, builds rapport easily</li>
+           -  production (not just prototypes)</li>
+           - (Accenture, Deloitte, Slalom, etc.)</li>
+           +  users depend on (not just demos/prototypes)</li>
+           + clearly to non-technical people</li>
+           + working directly with clients/stakeholders</li>
+             conversational AI</li>
+           - tools</li>
+             (Claude Code, Cursor, Copilot)</li>
+           - experience</li>
+           + themselves (pgvector, Pinecone, Qdrant)</li>
+           + or similar monitoring tools</li>
+           -  , no production deployment</li>
+           - LLM failures or non-determinism</li>
+           - external clients or stakeholders</li>
+           - demoing work</li>
+           - (AWS/Azure dependent)</li>
+           +   - never deployed anything users relied on</li>
+           + work, only how to configure them</li>
+           + services (e.g., uses Azure AI Search but couldn't set up 
+           + vector search without it)</li>
+           + clients, stakeholders, or people outside their team</li>
+           + defensive when asked to explain</li>
+           + built vs. what their team built</li>
+           +  </div>
+           - prototype to production."</li>
+           - inconsistent or wrong outputs?"</li>
+           -  decision to a non-technical client."</li>
+           - they fit into your workflow?"</li>
+           -  </div>
+           + margin-bottom: 10px;">Record all screening calls. These 
+           + questions reveal depth without requiring technical 
+           + evaluation. Note their answers verbatim for technical 
+           + review.</p>
+           + database for a project, what factors do you consider?"</p>
+           +  (Pinecone, Weaviate, pgvector) without explaining WHY 
+           + they'd pick one over another. Short answer, no 
+           + reasoning.</p>
+           + and explains WHAT it depends on - size of data, speed 
+           + requirements, what the team already uses, budget. You hear 
+           + them weighing options, not just naming things.</p>
+           + something went wrong with an AI system in production. What 
+           + happened and what did you do?"</p>
+           + specific situation. Gives theoretical answers ("sometimes 
+           + models give wrong outputs") instead of a real story.</p>
+           + story with details - what broke, how they found out, what 
+           + they did. You can tell they actually lived through it.</p>
+           + client or stakeholder had unrealistic expectations about AI.
+           +  How did you handle it?"</p>
+           + specific situation. Or just agreed with whatever the client 
+           + wanted. Or avoided the hard conversation.</p>
+           + situation - what the client expected, how they figured out 
+           + what was actually needed, how they communicated what was 
+           + realistic. Pushed back respectfully.</p>
+           + feature is working correctly after you ship it?"</p>
+           + "we test it" or "users tell us if it's broken." No 
+           + process.</p>
+           +  how they track quality, what they measure, how they catch 
+           + problems before users complain. Structured answer.</p>
+           + complex thing on their resume] to me like I'm not 
+           + technical?"</p>
+           + frustrated, talks down to you, or can't simplify it.</p>
+           + checks if you're following, adjusts based on your reactions.
+           +  Patient and clear. (You can judge this directly.)</p>
+           + (Tiered)</div>
+           + margin-bottom: 8px;">Start with Layer 1. If too few results 
+           + (&lt;20), move to Layer 2. Still struggling? Use Layer 
+           + 3.</p>
+           -  OR "production") AND ("LangChain" OR "LangGraph" OR 
+           - "LlamaIndex") AND ("prompt engineering" OR "RAG" OR 
+           - "retrieval augmented")<br><br>
+           -  "solutions architect" OR "technical consultant") AND 
+           - ("generative AI" OR "LLM" OR "GPT-4" OR "Claude") -recruiter
+           -  -sales<br><br>
+           - OR "ML Solutions Engineer" OR "Applied AI Engineer" OR "LLM 
+           - Engineer"<br><br>
+           -  Slalom OR Cognizant OR Infosys OR Wipro OR "Big 4") AND 
+           - ("generative AI" OR "LLM" OR "ChatGPT" OR "OpenAI")<br><br>
+           - "pgvector" OR "embeddings" OR "semantic search") AND 
+           - ("LangChain" OR "LlamaIndex") AND Python<br><br>
+           - Cohere OR "AI21" OR Weights&Biases OR Scale OR Hugging Face)
+           -  AND (engineer OR developer)
+           + here):</span>
+           + Python AND (LangChain OR LangGraph OR LlamaIndex OR RAG) AND
+           +  (production OR shipped OR deployed)<br><br>
+           + "applied scientist" OR "senior software engineer") AND 
+           + Python AND (LLM OR "large language model" OR "generative AI"
+           +  OR Claude OR OpenAI)<br><br>
+           +  AND Python AND ("generative AI" OR LLM OR GPT OR ChatGPT OR
+           +  Claude) AND (API OR backend OR production)<br><br>
+           + to any layer):</span>
+           + "presented" OR "cross-functional")
+           +  Groups for Recruiters</div>
+           + margin-bottom: 8px;">These terms mean the same thing or come
+           +  from the same company. Use OR between them in searches.</p>
+           + company</span><br>
+           + class="synonym-note">← same provider</span><br><br>
+           + "vector database" OR "vector DB")<br><br>
+           + class="synonym-note">← related ecosystem, not 
+           + identical</span><br><br>
+           -   to Search</div>
+           -  :</strong></div>
+           +  (search for these):</strong></div>
+           - 0;"><strong>RAG/Retrieval:</strong></div>
+           - ecosystem:</strong></div>
+           + (bonus points):</strong></div>
+           + (nice-to-have, not required):</strong></div>
+           + margin-bottom: 8px;">Look for people from these types of 
+           + companies/teams, not specific company names. 100+ employee 
+           + companies are ideal.</p>
+           + teams</span>
+           + Deloitte, Slalom, Thoughtworks)</span>
+           + not pre-seed)</span>
+
+● Done. Key changes:
+
+  Screening Questions:
+  - Rewrote all weak/good indicators in plain language a recruiter can
+  actually observe
+  - Added the "explain it to me" question where the recruiter IS the
+  evaluation mechanism
+  - Added note to record all calls for technical review
+
+  Structure:
+  - Tiered search strings (Layer 1/2/3) with clear instructions
+  - Explicit synonym groups with notes ("same company", "related ecosystem")
+  - Split tech stack into must-have vs nice-to-have tiers
+  - Moved consulting to secondary tag in Target Backgrounds
+
+  Content fixes:
+  - Removed the "target companies" search listing AI labs
+  - Warning sign now has concrete example (Azure AI Search)
+  - "Strong communicator" replaced "client-facing experience" in must-haves
+  - Added LangSmith/Langfuse as depth signals
+  - Removed ChromaDB
+
+  Ready for feedback or move to Automation Engineer?
+
+> Pretty good. Just switch the order of Strong skills and nice to have 
+background. Basically the top row should be Must-have skills, then 
+nice-to-have background, and then underneath of it should be strong signals,
+ then warning signs 
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 11 additions and 11 removals
+
+           + Background</div>
+             users depend on (not just demos/prototypes)</li>
+           - Background</div>
+             margin-bottom: 10px;">Record all screening calls. These 
+             questions reveal depth without requiring technical 
+             evaluation. Note their answers verbatim for technical 
+             review.</p>
+
+● Done. Top row is now Must-Have Skills | Nice-to-Have Background, bottom
+  row is Strong Signals | Warning Signs.
+
+  Ready for Automation Engineer?
+
+> No, I still think that in your must-have and nice-to-have sections, you 
+haven't given much technical depth that matches either the job description 
+or the position requirements based upon the project requirements. You have 
+again gotten far too basic. 
+
+● You're right. Let me look at the JD and project requirements again and
+  give you something with actual technical depth.
+
+  Looking at the JD and project context:
+
+  Must-haves I'm missing or underselling:
+  - Years of experience (5+ software, 3+ AI, 1+ LLM)
+  - LangChain/LangGraph specifically (not just "orchestration")
+  - Chat interface / conversational AI (capability C - cross-pipeline
+  visibility)
+  - Log analysis and failure diagnosis (capability B - gate failures)
+  - Testing non-deterministic AI outputs
+  - API integration patterns
+  - pgvector specifically (confirmed stack)
+
+  Nice-to-haves I'm missing:
+  - Specific tools: Airflow, Jenkins, Grafana (all confirmed stack)
+  - Agentic AI / tool-calling patterns
+  - NLP beyond LLMs (text processing, parsing, classification)
+  - On-prem deployment (not vague "enterprise")
+
+  Let me rewrite:
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 15 additions and 10 removals
+
+           - Built features using Claude/OpenAI APIs that real users rely
+           -  on</li>
+           -  Django, or Flask; comfortable building APIs and services
+           -  </li>
+           - management, structured outputs, handling when the AI gives 
+           - bad answers</li>
+           - search/retrieval systems, understands how vector search 
+           - works (not just used a managed service)</li>
+           - writing, comfortable presenting, builds rapport easily</li>
+           +  AI/ML, 1+ year LLMs</strong> – Production experience, not 
+           + research or coursework</li>
+           +  Django, async patterns, building APIs and data pipelines
+           +  </li>
+           +  AI pipelines with orchestration frameworks; understands 
+           + chains, agents, memory</li>
+           + window management, few-shot learning, structured outputs, 
+           + output parsing, handling LLM failures</li>
+           + retrieval systems with pgvector, Pinecone, or Qdrant; 
+           + understands embeddings, chunking, similarity search</li>
+           +  interfaces or NL query systems; conversation history, 
+           + multi-turn context</li>
+           + systems</strong> – Strategies for testing AI outputs that 
+           + vary; evaluation frameworks</li>
+           + writing, comfortable presenting, explains technical concepts
+           +  to non-technical audiences</li>
+             Background</div>
+           + diagnosis</strong> – Parsing logs, root cause analysis, 
+           + observability tooling</li>
+           + Airflow, GitHub Actions, GitLab CI</li>
+           + Building monitoring and visualization dashboards</li>
+           + autonomous agents, multi-step reasoning, LangGraph 
+           + agents</li>
+           +  systems without cloud service dependencies</li>
+           + processing, parsing, search, classification beyond LLM 
+           + APIs</li>
+           + mentoring other engineers</li>
+
+● Updated. Must-haves now include:
+  - Specific years (5+ software, 3+ AI, 1+ LLM)
+  - LangChain/LangGraph explicitly
+  - Conversational AI / chat interfaces
+  - Testing non-deterministic systems
+  - More specific RAG (pgvector, chunking, embeddings)
+
+  Nice-to-haves now include:
+  - Log analysis / failure diagnosis (maps to capability B)
+  - Specific CI/CD tools (Jenkins, Airflow)
+  - Grafana dashboards
+  - Agentic AI / tool-calling
+  - On-prem deployment specifically
+  - NLP fundamentals beyond LLMs
+
+  How's that?
+
+> Much better, but this document is very ugly. Please give it a facelift 
+while keeping it minimalist and clean and stickign with the3 theme specs. 
+
+● Let me check the BayOne design spec first:
+
+● Read(specs/bayone-design-spec.md)
+  ⎿  Read 661 lines
+
+● Now I'll rewrite with proper BayOne styling - numbered sections, proper
+  color palette, no emojis, cleaner hierarchy:
+
+● Write(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recrui
+       ter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 500 additions and 176 removals
+
+             initial-scale=1.0">
+             Engineer</title>
+           -  href="https://fonts.googleapis.com/css2?family=Inter:wght@
+           -  400;500;600;700&display=swap" rel="stylesheet">
+           +  href="https://fonts.googleapis.com/css2?family=Inter:wght@
+           +  300;400;500;600;700&display=swap" rel="stylesheet">
+           +  BlinkMacSystemFont, sans-serif;
+           -  }
+           - gap: 16px; }
+           + var(--green); }
+           + var(--red); }
+           + rgba(124,58,237,0.04) 0%, rgba(168,85,247,0.06) 100%);
+           + rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.12) 100%);
+           - }
+           -  | Client-facing | AI + LLM Focus</span>
+           +  | Client-facing | AI/LLM Focus</div>
+           -  AI/ML, 1+ year LLMs</strong> – Production experience, not 
+           - research or coursework</li>
+           - Django, async patterns, building APIs and data 
+           - pipelines</li>
+           -  AI pipelines with orchestration frameworks; understands 
+           - chains, agents, memory</li>
+           - window management, few-shot learning, structured outputs, 
+           - output parsing, handling LLM failures</li>
+           - retrieval systems with pgvector, Pinecone, or Qdrant; 
+           - understands embeddings, chunking, similarity search</li>
+           -  interfaces or NL query systems; conversation history, 
+           - multi-turn context</li>
+           - systems</strong> – Strategies for testing AI outputs that 
+           - vary; evaluation frameworks</li>
+           - writing, comfortable presenting, explains technical concepts
+           -  to non-technical audiences</li>
+           + AI/ML, 1+ year LLMs</strong>
+           + research or coursework only</div>
+           + patterns, APIs and data pipelines</div>
+           + orchestration; understands chains, agents, memory</div>
+           + few-shot learning, structured outputs, handling 
+           + failures</div>
+           + pgvector, Pinecone, or Qdrant; understands embeddings and 
+           + chunking</div>
+           + query systems; conversation history, multi-turn 
+           + context</div>
+           + systems</strong>
+           + outputs that vary; evaluation approaches</div>
+           + presenting, explains technical concepts to non-technical 
+           + audiences</div>
+             Background</div>
+           - diagnosis</strong> – Parsing logs, root cause analysis, 
+           - observability tooling</li>
+           - Airflow, GitHub Actions, GitLab CI</li>
+           - Building monitoring and visualization dashboards</li>
+           - autonomous agents, multi-step reasoning, LangGraph 
+           - agents</li>
+           -  systems without cloud service dependencies</li>
+           - processing, parsing, search, classification beyond LLM 
+           - APIs</li>
+           - mentoring other engineers</li>
+           + analysis, observability tooling</div>
+           + Actions, GitLab CI</div>
+           + visualization dashboards</div>
+           + agents, multi-step reasoning</div>
+           + cloud service dependencies</div>
+           + search, classification beyond LLM APIs</div>
+           + engineers</div>
+           -  Shipped AI features that real users depend on (not just 
+           -  demos/prototypes)</li>
+           -  Can explain technical concepts clearly to non-technical 
+           -  people</li>
+           -  Experience presenting to or working directly 
+           -  with clients/stakeholders</li>
+           -  Built chat interfaces or conversational AI</li>
+           -  Uses AI coding tools daily (Claude Code, Cursor, 
+           -  Copilot)</li>
+           -  Has set up vector databases themselves (pgvector, Pinecone,
+           -   Qdrant)</li>
+           -  Mentions LangSmith, Langfuse, or similar monitoring
+           -   tools</li>
+           +  Shipped AI features that real users depend on (not just 
+           +  demos)</li>
+           +  Can explain technical concepts clearly to non-technical 
+           +  people</li>
+           +  with clients/stakeholders</li>
+           +   systems</li>
+           +  Uses AI coding tools daily (Claude Code, Cursor, 
+           +  Copilot)</li>
+           +  Has set up vector databases themselves (pgvector, Pinecone,
+           +   Qdrant)</li>
+           +  observability tools</li>
+           -   - never deployed anything users relied on</li>
+           -  Can't explain how their AI tools work, only how to 
+           -  configure them</li>
+           -  Relies entirely on managed services (e.g., uses Azure AI 
+           -  Search but couldn't set up vector search without it)</li>
+           -  No experience working with clients, stakeholders, 
+           -  or people outside their team</li>
+           -  Uncomfortable presenting or gets defensive when asked to 
+           -  explain</li>
+           -  Vague about what they personally built vs. what their team 
+           -  built</li>
+           +  never deployed for real users</li>
+           +  Can't explain how their AI tools work, only how to 
+           +  configure them</li>
+           +  Relies entirely on managed services (e.g., uses Azure AI 
+           +  Search but couldn't set up vector search without it)</li>
+           +  or people outside their team</li>
+           +  Uncomfortable presenting or gets defensive when asked to 
+           +  explain</li>
+           +  Vague about what they personally built vs. what their team 
+           +  built</li>
+           -  size: 9pt; color: #64748b; margin-bottom: 10px;
+           -  ">Record all screening calls. These questions reveal depth 
+           -  without requiring technical evaluation. Note their 
+           -  answers verbatim for technical review.</p>
+           +  ">Record all screening calls. These questions reveal depth 
+           +  without requiring technical evaluation. Note 
+           +  answers verbatim for technical review.</p>
+           -   class="question-text">"When selecting a vector database 
+           -  for a project, what factors do you consider?"</p>
+           -  (Pinecone, Weaviate, pgvector) without explaining WHY 
+           - they'd pick one over another. Short answer, no 
+           - reasoning.</p>
+           - and explains WHAT it depends on - size of data, speed 
+           - requirements, what the team already uses, budget. You hear 
+           - them weighing options, not just naming things.</p>
+           +   class="question-text">"When selecting a vector database 
+           +  for a project, what factors do you consider?"</div>
+           + pgvector) without explaining WHY they'd pick one. Short 
+           + answer, no reasoning.
+           + on: size of data, speed requirements, what the team already 
+           + uses, budget. Weighs options.
+           -   class="question-text">"Tell me about a time something went
+           -   wrong with an AI system in production. What happened
+           -   and what did you do?"</p>
+           - specific situation. Gives theoretical answers ("sometimes 
+           - models give wrong outputs") instead of a real story.</p>
+           - story with details - what broke, how they found out, what 
+           - they did. You can tell they actually lived through it.</p>
+           +   class="question-text">"Tell me about a time something went
+           +   wrong with an AI system in production. What happened?"</
+           +  div>
+           + theoretical answers ("sometimes models give wrong outputs") 
+           + instead of a real story.
+           + broke, how they found out, what they did. You can tell they 
+           + actually lived through it.
+           -   class="question-text">"Tell me about a time a client or 
+           -  stakeholder had unrealistic expectations about AI. How did 
+           -  you handle it?"</p>
+           - specific situation. Or just agreed with whatever the client 
+           - wanted. Or avoided the hard conversation.</p>
+           - situation - what the client expected, how they figured out 
+           - what was actually needed, how they communicated what was 
+           - realistic. Pushed back respectfully.</p>
+           +   class="question-text">"Tell me about a time a client or 
+           +  stakeholder had unrealistic expectations about AI. How did 
+           +  you handle it?"</div>
+           + agreed with whatever the client wanted. Or avoided the 
+           + conversation entirely.
+           + expected, how they understood what was actually needed, how 
+           + they communicated what was realistic.
+           -   class="question-text">"How do you know if an AI feature is
+           -   working correctly after you ship it?"</p>
+           - "we test it" or "users tell us if it's broken." No 
+           - process.</p>
+           -  how they track quality, what they measure, how they catch 
+           - problems before users complain. Structured answer.</p>
+           +   class="question-text">"How do you know if an AI feature is
+           +   working correctly after you ship it?"</div>
+           + us if it's broken." No systematic process described.
+           + what they measure, how they catch problems before users 
+           + complain. Structured answer.
+           -   class="question-text">"Can you explain [most complex thing
+           -   on their resume] to me like I'm not technical?"</p>
+           - frustrated, talks down to you, or can't simplify it.</p>
+           - checks if you're following, adjusts based on your reactions.
+           -  Patient and clear. (You can judge this directly.)</p>
+           +   class="question-text">"Can you explain [most complex thing
+           +   on their resume] to me like I'm not technical?"</div>
+           + you, or can't simplify it at all.
+           + adjusts based on your reactions. Patient and clear. (You can
+           +  evaluate this directly.)
+           - (Tiered)</div>
+           - margin-bottom: 8px;">Start with Layer 1. If too few results 
+           - (&lt;20), move to Layer 2. Still struggling? Use Layer 
+           - 3.</p>
+           - here):</span>
+           - Python AND (LangChain OR LangGraph OR LlamaIndex OR RAG) AND
+           -  (production OR shipped OR deployed)<br><br>
+           + Strings</div>
+           + precise). If fewer than 20 results, try Layer 2. Still 
+           + struggling? Use Layer 3.</p>
+           - "applied scientist" OR "senior software engineer") AND 
+           - Python AND (LLM OR "large language model" OR "generative AI"
+           -  OR Claude OR OpenAI)<br><br>
+           +  1fr; gap: 12px;">
+           + (Start Here)</div>
+           + engineer" OR "LLM engineer") AND Python AND (LangChain OR 
+           + LangGraph OR LlamaIndex OR RAG) AND (production OR shipped 
+           + OR deployed)</div>
+           -  AND Python AND ("generative AI" OR LLM OR GPT OR ChatGPT OR
+           -  Claude) AND (API OR backend OR production)<br><br>
+           + Titles</div>
+           + engineer" OR "solutions engineer" OR "applied scientist" OR 
+           + "senior software engineer") AND Python AND (LLM OR "large 
+           + language model" OR "generative AI" OR Claude OR 
+           + OpenAI)</div>
+           - to any layer):</span>
+           - "presented" OR "cross-functional")
+           + Net</div>
+           + OR "backend engineer" OR "full stack") AND Python AND 
+           + ("generative AI" OR LLM OR GPT OR ChatGPT OR Claude) AND 
+           + (API OR backend OR production)</div>
+           + Filter (Add to Any Layer)</div>
+           + "client-facing" OR stakeholder OR presented OR 
+           + "cross-functional")</div>
+           - Recruiters</div>
+           - margin-bottom: 8px;">These terms mean the same thing or come
+           -  from the same company. Use OR between them in searches.</p>
+           - company</span><br>
+           - class="synonym-note">← same provider</span><br><br>
+           - "vector database" OR "vector DB")<br><br>
+           - class="synonym-note">← related ecosystem, not 
+           - identical</span><br><br>
+           + searches. They refer to the same thing or related 
+           + ecosystem.</p>
+           + class="synonym-note">same company</span><br>
+           + ChatGPT)</code> <span class="synonym-note">same 
+           + provider</span>
+           +  OR Milvus OR "vector database")</code>
+           + LlamaIndex)</code> <span class="synonym-note">related, not 
+           + identical</span>
+           - (search for these):</strong></div>
+           - (bonus points):</strong></div>
+           + These)</div>
+           - (nice-to-have, not required):</strong></div>
+           + Points)</div>
+           + search</span>
+           -  size: 9pt; color: #64748b; margin-bottom: 8px;
+           -  ">Look for people from these types of companies/teams, not 
+           -  specific company names. 100+ employee companies are 
+           -  ideal.</p>
+           - teams</span>
+           - Deloitte, Slalom, Thoughtworks)</span>
+           - not pre-seed)</span>
+           +  ">Look for people from these types of companies/teams, not 
+           +  specific company names. 100+ employee companies are 
+           +  ideal.</p>
+           + teams</span>
+           + teams</span>
+           + Deloitte, Slalom, Thoughtworks)</span>
+           + A-C, not pre-seed)</span>
+
+● Done. Key visual changes:
+
+  - Numbered sections (01-09) per design spec
+  - Purple palette from brand guidelines
+  - Replaced emojis with styled colored dots (green/red)
+  - Question blocks use highlight-box gradient style
+  - Two-column layout for weak/good answer indicators
+  - Code styling for search strings in synonym groups
+  - Clean Inter typography with proper hierarchy
+  - Consistent spacing and subtle borders
+
+  Take a look and let me know if you want adjustments.
+
+> It looks much better overall, but I think the section number badges are a 
+little bit Distracting and not needed for this. Why don't you try one more 
+time? 
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 9 removals
+
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 2 removals
+
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 2 removals
+
+             Background</div>
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 2 removals
+
+             (not just demos)</li>
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 2 removals
+
+             deployed for real users</li>
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 2 removals
+
+             These questions reveal depth without requiring technical 
+             evaluation. Note answers verbatim for technical review.</p>
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 2 removals
+
+             Strings</div>
+             precise). If fewer than 20 results, try Layer 2. Still 
+             struggling? Use Layer 3.</p>
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 2 removals
+
+             searches. They refer to the same thing or related 
+             ecosystem.</p>
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 2 removals
+
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 2 removals
+
+             types of companies/teams, not specific company names. 100+ 
+             employee companies are ideal.</p>
+
+● Done - removed all the section number badges. Cleaner now.
+
+> Consulting (Accenture, Deloitte, Slalom, Thoughtworks)
+AI startups (Series A-C, not pre-seed)  These are really weird to be honest.
+ Why those specific companies? And why would my non-technical recruiter know
+ what pre-seed AI start-ups are? Please take another fresh look at this 
+document. I'm getting really, really frustrated with you. I think what we 
+need to do for the future documents is create them as markdowns first before
+ we move into HTML mode because this is honestly just not working for me. 
+It's like you can't holistically look at the document with fresh eyes. Make 
+these changes. I'm going to warn you right now. I'm going to create another 
+Claude session specifically meant to harass and challenge you so you better 
+have a good mind of quality or else that Claude session is going to slam you
+ senseless. 
+
+● You're right. Let me actually look at this fresh.
+
+  Target Backgrounds section is broken:
+  - "Consulting (Accenture, Deloitte, Slalom, Thoughtworks)" - Arbitrary
+  company names. Why these four? A recruiter doesn't need a random list.
+  - "AI startups (Series A-C, not pre-seed)" - VC jargon. A recruiter has no
+   idea what this means.
+  - "Enterprise ML platform teams" - Vague jargon
+  - "B2B SaaS with AI features" - More jargon
+
+  This whole section doesn't help a recruiter DO anything. Let me rewrite it
+   as actionable guidance in plain language:
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 19 additions and 11 removals
+
+           - types of companies/teams, not specific company names. 100+ 
+           - employee companies are ideal.</p>
+           - teams</span>
+           - teams</span>
+           - Deloitte, Slalom, Thoughtworks)</span>
+           - A-C, not pre-seed)</span>
+           +  to Look for in Work History</div>
+           + preferred</strong>
+           + production systems and team collaboration, not just solo 
+           + side projects</div>
+           + on</strong>
+           + internal experiments - actual products or tools people 
+           + depended on</div>
+           +  other engineers, reviewing code, coordinating work</div>
+           + are a plus</strong>
+           + services, customer success engineering, or internal roles 
+           + that required presenting to leadership</div>
+
+● Let me also check the Nice-to-Have section for jargon issues:
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 1 addition and 1 removal
+
+           - analysis, observability tooling</div>
+           + system logs to figure out why something broke</div>
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 1 addition and 1 removal
+
+           - agents, multi-step reasoning</div>
+           + on their own, make decisions, work through problems 
+           + step-by-step</div>
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 1 addition and 1 removal
+
+           - search, classification beyond LLM APIs</div>
+           + processing skills, not just using ChatGPT-style APIs</div>
+
+● Done. Changes made:
+  1. Replaced "Target Backgrounds" (jargon tags) with "What to Look for in
+  Work History" (plain English guidance)
+  2. Fixed "Log analysis" description - was jargon, now plain
+  3. Fixed "Agentic AI" description - was jargon, now plain
+  4. Fixed "NLP fundamentals" description - was jargon, now plain
+
+  For the remaining 3 roles, I'll do markdown first so we can nail the
+  content before touching HTML. That's a better workflow.
+
+  Ready for your critique session - and ready to move to Automation Engineer
+   when you are.
+
+> Almost good here. Maybe add one more item to the top that requests the 
+recruiter to enable transcription and share transcripts when possible if it 
+is a Teams meeting with the candidate. Phrase this nicely: It's not a 
+requirement; just something that would be helpful so I can assist with 
+pre-screening more effectively. 
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 4 additions
+
+             Client-facing | AI/LLM Focus</div>
+           + var(--bg-subtle); border: 1px solid var(--border); 
+           + border-radius: 6px; padding: 12px 14px; margin-bottom: 20px;
+           +  font-size: 9pt; color: var(--text);">
+           + pre-screening:</strong> If your screening call is on Teams, 
+           + please enable transcription and share the transcript 
+           + afterward. This helps our technical team review candidates 
+           + more effectively. Not required, but appreciated!
+
+● Added a note box at the top requesting Teams transcription - friendly, not
+   demanding. Ready for Automation Engineer?
+
+> Yes, ready. 
+
+● Let me read the Automation Engineer JD and current recruiter guide first:
+
+● Search(pattern: "**/jd_automation_engineer*.md")
+  ⎿  Found 1 file (ctrl+o to expand)
+
+● Search(pattern: "**/recruiter_guide*automation*.html")
+  ⎿  Found 1 file (ctrl+o to expand)
+
+● Read(claude/2026-02-02_resource-planning/deliverables/jd_automation_engineer.m
+      d)
+  ⎿  Read 117 lines
+
+● Read(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recruit
+      er_guides/recruiter_guide_automation_engineer.html)
+  ⎿  Read 184 lines
+
+● Let me draft this in markdown first. Looking at the current guide, I see
+  the same problems:
+  - Specific company names as "targets" (Google, Meta, Netflix...)
+  - No weak/good indicators on questions
+  - Emojis
+  - Missing nice-to-have tier
+  - "Target backgrounds" with arbitrary company/team combos
+
+  Key differences for this role vs Senior AI Solutions Engineer:
+  - 60% CI/CD focus, only 15% client-facing (vs 25% for Senior AI)
+  - Airflow/Jenkins/Bazel are core, not LLMs
+  - Systems integration focus - connecting disparate tools
+  - 4+ years software, 3+ years CI/CD specifically
+
+● Write(claude/2026-02-04_recruiter-guides/drafts/automation_engineer_recruiter_
+       guide.md)
+  ⎿  Wrote 166 lines to claude/2026-02-04_recruiter-guides/drafts/automatio
+     _engineer_recruiter_guide.md
+     # Recruiter Guide: Automation Engineer
+     **On-site San Jose, CA | Client-facing | CI/CD + Integration Focus**
+     ---
+     **Helpful for pre-screening:** If your screening call is on Teams,
+     please enable transcription and share the transcript afterward. This
+     helps our technical team review candidates more effectively. Not
+     required, but appreciated!
+     ---
+     … +156 lines (ctrl+o to expand)
+
+● Done. Markdown draft is at /claude/2026-02-04_recruiter-guides/drafts/auto
+  mation_engineer_recruiter_guide.md
+
+  Key things I changed from the original:
+
+  1. Explained jargon - Added "What This Means" column for technical terms
+  2. Removed company name lists - No more "Google (build/release teams)"
+  arbitrary targeting
+  3. Added weak/good indicators - All screening questions now have
+  plain-language signals
+  4. Added domain knowledge question - "What's the difference between
+  Airflow and Jenkins?" tests real understanding
+  5. Tiered search strings - Layer 1/2/3 structure
+  6. Replaced Target Backgrounds - Now "What to Look for in Work History"
+  with actionable guidance
+  7. Separated must-have vs nice-to-have - Clear tiers
+
+  Notable for this role vs Senior AI Solutions Engineer:
+  - Less client-facing (15% vs 25%), so less emphasis on presentation skills
+  - Focus on integration/debugging across systems
+  - Airflow/Jenkins are core, LLMs are not required
+  - "Legacy systems" experience matters here
+
+  Review the markdown and let me know what needs adjusting before I convert
+  to HTML.
+
+> Go ahead and query and convert to HTML now, and I will review the HTML. It
+ is easier for me to look at. 
+
+● Write(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recrui
+       ter_guides/recruiter_guide_automation_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_automation_engineer.html with 495
+     additions and 122 removals
+
+             initial-scale=1.0">
+           -  href="https://fonts.googleapis.com/css2?family=Inter:wght@
+           -  400;500;600;700&display=swap" rel="stylesheet">
+           +  href="https://fonts.googleapis.com/css2?family=Inter:wght@
+           +  300;400;500;600;700&display=swap" rel="stylesheet">
+           +  BlinkMacSystemFont, sans-serif;
+           -  }
+           - gap: 16px; }
+           + var(--green); }
+           + var(--red); }
+           + rgba(124,58,237,0.04) 0%, rgba(168,85,247,0.06) 100%);
+           + rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.12) 100%);
+           + .note-box {
+           -  | Client-facing | CI/CD + Integration Focus</span>
+           +  | Client-facing | CI/CD + Integration Focus</div>
+           + screening call is on Teams, please enable transcription and 
+           + share the transcript afterward. This helps our technical 
+           + team review candidates more effectively. Not required, but 
+           + appreciated!
+           - development, Airflow APIs, workflow orchestration</li>
+           - configuration, plugin development, or API integration</li>
+           - pipelines, ETL, API development</li>
+           - understanding of build/test/deploy workflows</li>
+           - design, data modeling, Postgres experience</li>
+           - Comfortable working directly with external teams</li>
+           + CI/CD</strong>
+           + automation, not just used them as a developer</div>
+           + tasks in sequence. Should have built workflows in it, not 
+           + just used dashboards</div>
+           + pipelines or built integrations, not just clicked 
+           + "run"</div>
+           + data pipelines, and backend services</div>
+           + complex queries, work with PostgreSQL</div>
+           + systems - pulling data from one, transforming, pushing to 
+           + another</div>
+           + explaining technical systems to others</div>
+           + Background</div>
+           + companies. Also: Gradle, Buck, Pants</div>
+           + to visualize system health</div>
+           + GitHub events (PRs, commits, etc.)</div>
+           +  data centers, not just cloud</div>
+           +  help other developers be productive</div>
+           + old, poorly-documented systems</div>
+           -  Built integrations between multiple CI/CD systems</li>
+           - developer productivity background</li>
+           - or professional services</li>
+           - (Bazel, Gradle, Make)</li>
+           -  Uses AI coding tools daily (Claude Code, Cursor, 
+           -  Copilot)</li>
+           - environment experience</li>
+           +  Built integrations between multiple CI/CD systems
+           +   (not just used one tool)</li>
+           + "platform engineering" teams</li>
+           + (enough CI/CD complexity)</li>
+           +  figure things out</li>
+           +  Uses AI coding tools daily (Claude Code, Cursor, 
+           +  Copilot)</li>
+           + systems</li>
+           -  never built pipelines</li>
+           - multiple integrated systems</li>
+           - work or when to use them</li>
+           - documentation</li>
+           - environments (no legacy integration)</li>
+           +  or configured pipelines</li>
+           + use it vs other tools</li>
+           + legacy integration experience</li>
+           + documented</li>
+           + the team built</li>
+           +  immediate team</li>
+           -  orchestrate?"</li>
+           - systems?"</li>
+           - system that had poor documentation."</li>
+           - they fit into your workflow?"</li>
+           + These questions reveal depth without requiring technical 
+           + evaluation. Note answers verbatim for technical review.</p>
+           +  you built. What did it do and why did you choose 
+           + Airflow?"</div>
+           + answers like "it ran some jobs." Doesn't know why Airflow 
+           + was chosen vs other options.
+           + what tasks ran, in what order, what happened if something 
+           + failed. Can explain why Airflow made sense for that use 
+           + case.
+           + you had to integrate with a system that had poor 
+           + documentation. How did you figure it out?"</div>
+           +  just asked someone else. Or got frustrated and gave up.
+           + system (reading code, testing APIs, tracing logs), what 
+           + didn't work, how they eventually figured it out.
+           + between Airflow and Jenkins? When would you use each?"</div>
+           +  the same. Gives a textbook definition without real 
+           + understanding.
+           + code changes) while Airflow is for scheduled workflows 
+           + (time-based or dependency-based). Gives examples of when 
+           + each makes sense.
+           + you had to debug an issue that involved multiple systems. 
+           + How did you track down the problem?"</div>
+           +  "I looked at the logs" with no detail.
+           + which systems, how they narrowed it down, what tools they 
+           + used, how they confirmed the fix worked.
+           + complex thing on their resume] to me like I'm not 
+           + technical?"</div>
+           +  it.
+           + you're following. Patient and clear. (You can evaluate this 
+           + directly.)
+             Strings</div>
+           - "Airflow DAG" OR "Airflow operator") AND ("Python") AND 
+           - (built OR developed OR designed) -"data analyst"<br><br>
+           -  OR "Jenkinsfile" OR "Jenkins API") AND ("integration" OR 
+           - "automation") AND Python -"QA" -"tester"<br><br>
+           -  OR "Developer Productivity" OR "DevEx Engineer" OR "Build 
+           - Engineer" OR "Release Engineer" OR "CI/CD Engineer"<br><br>
+           - (engineer OR developer) AND (build OR CI OR 
+           - monorepo)<br><br>
+           - "large-scale" OR "monorepo") AND ("CI/CD" OR "build system")
+           -  AND ("Jenkins" OR "Airflow") AND Python<br><br>
+           - Netflix OR Uber OR Lyft OR Stripe OR Airbnb) AND ("build" OR
+           -  "platform" OR "infrastructure" OR "developer productivity")
+           + precise). If fewer than 20 results, try Layer 2. Still 
+           + struggling? Use Layer 3.</p>
+           +  1fr; gap: 12px;">
+           + (Start Here)</div>
+           + Airflow") AND ("Jenkins") AND Python AND (built OR developed
+           +  OR integration)</div>
+           + Titles</div>
+           + OR "DevOps Engineer" OR "Build Engineer" OR "CI/CD Engineer"
+           +  OR "Release Engineer") AND Python AND (Airflow OR Jenkins 
+           + OR pipeline)</div>
+           + Net</div>
+           + OR "backend engineer") AND Python AND ("CI/CD" OR automation
+           +  OR pipeline OR Jenkins OR Airflow) AND (integration OR 
+           + built OR developed)</div>
+           + Filter (Add to Any Layer)</div>
+           + "client-facing" OR stakeholder OR "cross-functional")</div>
+           - infrastructure)</span>
+           - productivity)</span>
+           + searches - they're related tools.</p>
+           + "Argo Workflows" OR Temporal)</code>
+           +  OR CircleCI OR BuildKite)</code>
+           + Make)</code>
+           -   to Search</div>
+           - 8px;"><strong>Orchestration:</strong></div>
+           - 0;"><strong>CI/CD:</strong></div>
+           - systems:</strong></div>
+           - 0;"><strong>Data/Backend:</strong></div>
+           + These)</div>
+           + Points)</div>
+           + History</div>
+           +  have complex CI/CD - not enough scale to need it</div>
+           + it</strong>
+           +  never configured or built pipelines themselves</div>
+           + experience</strong>
+           + systems together, not just worked in one silo</div>
+           + systems</strong>
+           + enterprise systems - not everything is new and clean</div>
+           + interaction</strong>
+           + client-facing - they need to communicate with external 
+           + teams</div>
+
+● Done. HTML is ready for review. Same structure as Senior AI Solutions
+  Engineer but content tailored for CI/CD focus:
+
+  - Airflow/Jenkins as core skills (with plain-language explanations)
+  - Domain knowledge question: "What's the difference between Airflow and
+  Jenkins?"
+  - Integration and debugging across systems emphasized
+  - No company name lists
+  - All questions have weak/good indicators
+  - Teams transcription note included
+
+> you said "Bazel or similar build tools
+Build systems used at large companies. Also: Gradle, Buck, Pants" Gradle is 
+literally for Android development, is it not? What are Buck and what are 
+Pants? I have no idea what you're talking about here for the requirements. 
+In addition, we have failed to mention that they should have ideally prior 
+experience working with AI. Once again, on all of these requirements, we are
+ missing out on the fundamental capability that is required from all of 
+these positions: that they can effectively use AI pair programming to 
+accelerate their work and have used things like Claude Code Codex or similar
+ before. I am not looking for people that are using GitHub Copilot or are 
+not using AI tools at all. Again similar to what we just got done fixing, it
+ feels like there is a total misalignment between the project requirements 
+and the job description that we created for this position. As a result, you 
+have one chance to fix this. But, as I said, I'm going to have another cloud
+ session to go over your code with high scrutiny to fully understand. And 
+come back and slam you, especially if I have to repeat myself again. Am I 
+clear? 
+
+● Yes, you're clear. I made several errors:
+
+  1. Gradle - You're right, it's primarily Java/Android. Not relevant here.
+  2. Buck/Pants - Obscure tools I shouldn't have listed. If you don't know
+  them, recruiters certainly won't.
+  3. AI pair programming - I buried this as a "strong signal" when it's a
+  MUST-HAVE. This person works alongside AI engineers and integrates with AI
+   systems.
+  4. Specifically Claude Code/Cursor - Not just "any AI tool" or
+  Copilot-only users.
+
+  Let me fix this properly:
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_automation_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_automation_engineer.html with 10
+     additions and 2 removals
+             explaining technical systems to others</div>
+           + Cursor, or similar agentic AI tools daily. Not just 
+           + autocomplete (Copilot) - should be comfortable with AI that 
+           + writes and edits code autonomously</div>
+           + systems</strong>
+           + AI features, or worked alongside AI engineers. Understands 
+           + how AI components fit into larger systems</div>
+             Background</div>
+           - companies. Also: Gradle, Buck, Pants</div>
+           + for large codebases. Less common but valuable</div>
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_automation_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_automation_engineer.html with 3
+     additions and 1 removal
+             "platform engineering" teams</li>
+             (enough CI/CD complexity)</li>
+              figure things out</li>
+           - Cursor, Copilot)</li>
+           + specific ways Claude Code or Cursor changed their 
+           + workflow</li>
+             systems</li>
+           + components or alongside AI engineers</li>
+             use it vs other tools</li>
+             legacy integration experience</li>
+             documented</li>
+           +  autocomplete (Copilot alone)</li>
+             the team built</li>
+              immediate team</li>
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_automation_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_automation_engineer.html with 14
+     additions
+           +  you use, and how have they changed the way you work?"</div>
+           + autocomplete like Copilot. Can't describe specific ways it 
+           + changed their workflow. Dismissive about AI assistance.
+           + tools. Gives specific examples of how it changed their work 
+           + - faster debugging, writing tests, exploring unfamiliar 
+           + codebases. Enthusiastic about the productivity gains.
+             complex thing on their resume] to me like I'm not 
+             technical?"</div>
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_automation_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_automation_engineer.html with 5
+     additions and 2 removals
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_automation_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_automation_engineer.html with 4
+     additions
+           + programming" OR "agentic AI")</code>
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_automation_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_automation_engineer.html with 5
+     additions
+             Filter (Add to Any Layer)</div>
+             "client-facing" OR stakeholder OR "cross-functional")</div>
+           + (Add to Any Layer)</div>
+           + Cursor OR "AI pair programming" OR "agentic AI" OR 
+           + "AI-assisted")</div>
+
+● Now let me also fix the Senior AI Solutions Engineer guide - I made the
+  same mistake there, treating AI pair programming as a "signal" instead of
+  a must-have:
+
+● Read(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recruit
+      er_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Read 80 lines
+
+● Search(pattern: "AI coding tools|Claude Code|Cursor|Copilot", path:
+        "claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html",
+        output_mode: "content")
+  ⎿  Found 1 line (ctrl+o to expand)
+
+● Read(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recruit
+      er_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Read 120 lines
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 4 additions
+
+             presenting, explains technical concepts to non-technical 
+             audiences</div>
+           + Cursor, or similar agentic AI tools daily. Not just 
+           + autocomplete (Copilot) - should be comfortable with AI that 
+           + writes and edits code autonomously</div>
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 2 additions and 1 removal
+
+             non-technical people</li>
+             clients/stakeholders</li>
+             systems</li>
+           - Cursor, Copilot)</li>
+           + specific ways Claude Code or Cursor changed their 
+           + workflow</li>
+             (pgvector, Pinecone, Qdrant)</li>
+             observability tools</li>
+             deployed for real users</li>
+              to configure them</li>
+              Azure AI Search but couldn't set up vector search without 
+             it)</li>
+           +  autocomplete (Copilot alone)</li>
+             outside their team</li>
+              asked to explain</li>
+              their team built</li>
+
+● Search(pattern: "most complex thing on their resume", path:
+        "claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html",
+        output_mode: "content")
+  ⎿  Found 18 lines (ctrl+o to expand)
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 14 additions
+
+           +  you use, and how have they changed the way you work?"</div>
+           + autocomplete like Copilot. Can't describe specific ways it 
+           + changed their workflow. Dismissive about AI assistance.
+           + tools. Gives specific examples of how it changed their work 
+           + - faster debugging, writing tests, exploring unfamiliar 
+           + codebases. Enthusiastic about the productivity gains.
+             complex thing on their resume] to me like I'm not 
+             technical?"</div>
+
+● Search(pattern: "Must-Have.*Search for These", path:
+        "claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html",
+        output_mode: "content")
+  ⎿  Found 16 lines (ctrl+o to expand)
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 2 additions
+
+
+● Search(pattern: "Communication Filter", path:
+        "claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html",
+        output_mode: "content")
+  ⎿  Found 7 lines (ctrl+o to expand)
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 5 additions
+
+             Filter (Add to Any Layer)</div>
+             "client-facing" OR stakeholder OR presented OR 
+             "cross-functional")</div>
+           + (Add to Any Layer)</div>
+           + Cursor OR "AI pair programming" OR "agentic AI" OR 
+           + "AI-assisted")</div>
+
+● Search(pattern: "Python Frameworks", path:
+        "claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html",
+        output_mode: "content")
+  ⎿  Found 7 lines (ctrl+o to expand)
+
+● Update(claude/2026-02-02_resource-planning/deliverables/job_descriptions/recru
+        iter_guides/recruiter_guide_senior_ai_solutions_engineer.html)
+  ⎿  Updated claude/2026-02-02_resource-planning/deliverables/job_descripti
+     ns/recruiter_guides/recruiter_guide_senior_ai_solutions_engineer.html
+     with 4 additions
+
+           + programming" OR "agentic AI")</code>
+
+● Done. Fixed both guides. Here's what changed:
+
+  Automation Engineer:
+  - Added "AI pair programming proficiency" to Must-Have (Claude
+  Code/Cursor, not just Copilot)
+  - Added "Experience working with AI systems" to Must-Have (works alongside
+   AI engineers)
+  - Fixed Bazel description - removed Gradle (Android), Buck, Pants
+  (obscure)
+  - Added screening question about AI tools with weak/good indicators
+  - Added AI warning sign: "Doesn't use AI coding tools, or only uses basic
+  autocomplete"
+  - Updated Strong Signal to be specific about Claude Code/Cursor enthusiasm
+  - Added AI tools to Tech Stack Keywords and Synonym Groups
+  - Added AI Tools Filter to search strings
+
+  Senior AI Solutions Engineer (also fixed):
+  - Added "AI pair programming proficiency" to Must-Have
+  - Added same screening question about AI tools
+  - Added same warning sign about not using AI tools
+  - Updated all the same sections for consistency
+
+  Both roles now clearly require Claude Code/Cursor-level AI tool
+  proficiency as a must-have, not a nice-to-have signal.
+
+
+

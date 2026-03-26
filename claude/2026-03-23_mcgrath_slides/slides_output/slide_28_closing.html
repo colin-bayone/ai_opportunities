@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 28: Closing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top visual panel: substitute for team photo */
+    .visual-panel {
+      flex: 5;
+      background: linear-gradient(135deg, var(--purple-darkest) 0%, var(--purple-dark) 25%, var(--purple-mid) 50%, var(--purple-bright) 75%, var(--purple-accent) 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Decorative gradient orbs */
+    .visual-panel::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -15%;
+      width: 70%;
+      height: 90%;
+      background: radial-gradient(circle, rgba(168,85,247,0.3) 0%, transparent 65%);
+      border-radius: 50%;
+    }
+
+    .visual-panel::after {
+      content: '';
+      position: absolute;
+      bottom: -25%;
+      left: -10%;
+      width: 55%;
+      height: 70%;
+      background: radial-gradient(circle, rgba(232,121,249,0.2) 0%, transparent 65%);
+      border-radius: 50%;
+    }
+
+    .visual-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .visual-icon-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+
+    .visual-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: rgba(255,255,255,0.55);
+      backdrop-filter: blur(4px);
+    }
+
+    .visual-icon.center {
+      background: rgba(255,255,255,0.15);
+      border-color: rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.85);
+      font-size: 22px;
+    }
+
+    /* Bottom section: logo + hashtag */
+    .closing-content {
+      flex: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 40px;
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .closing-logo {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .closing-logo span {
+      color: var(--purple-accent);
+    }
+
+    .logo-line {
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--purple-accent), var(--purple-glow));
+      border-radius: 1px;
+    }
+
+    .hashtag {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+    }
+
+    .hashtag .highlight {
+      color: var(--purple-bright);
+    }
+
+    /* Footer */
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 10px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+
+    <!-- Visual panel: team photo substitute -->
+    <div class="visual-panel">
+      <div class="visual-content">
+        <div class="visual-icon-grid">
+          <div class="visual-icon"><i class="fa-solid fa-users"></i></div>
+          <div class="visual-icon"><i class="fa-solid fa-brain"></i></div>
+          <div class="visual-icon center"><i class="fa-solid fa-heart"></i></div>
+          <div class="visual-icon"><i class="fa-solid fa-code"></i></div>
+          <div class="visual-icon"><i class="fa-solid fa-globe"></i></div>
+          <div class="visual-icon"><i class="fa-solid fa-chart-line"></i></div>
+          <div class="visual-icon"><i class="fa-solid fa-gears"></i></div>
+          <div class="visual-icon center"><i class="fa-solid fa-rocket"></i></div>
+          <div class="visual-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <div class="visual-icon"><i class="fa-solid fa-lightbulb"></i></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Logo + Hashtag -->
+    <div class="closing-content">
+      <div class="logo-row">
+        <div class="logo-line"></div>
+        <div class="closing-logo">Bay<span>One</span> Solutions</div>
+        <div class="logo-line"></div>
+      </div>
+      <div class="hashtag">#TheFutureWorks<span class="highlight">Here</span></div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">28</div>
+    </div>
+  </div>
+
+</body>
+</html>

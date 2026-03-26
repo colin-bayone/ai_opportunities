@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meeting Breakdown - Mani 2026 Roadmap Discussion</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #a855f7;
+      --purple-dark: #5b21b6;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .cover-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e879f9;
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .cover-subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 48px;
+      max-width: 600px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 48px;
+      padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .cover-meta-item label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+
+    .cover-meta-item span { font-size: 15px; font-weight: 500; }
+
+    .logo {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span { color: #e879f9; }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 80px 40px; }
+
+    .section { margin-bottom: 44px; }
+
+    .section-number {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--purple-dark);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      padding: 6px 14px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%);
+      border-radius: 4px;
+    }
+
+    h2 { font-size: 28px; font-weight: 700; color: var(--primary); margin-bottom: 20px; letter-spacing: -0.5px; }
+    h3 { font-size: 18px; font-weight: 600; color: var(--primary); margin: 28px 0 14px; }
+    h4 { font-size: 15px; font-weight: 600; color: var(--primary); margin: 20px 0 10px; }
+    p { margin-bottom: 16px; }
+
+    .lead { font-size: 17px; color: var(--text-light); line-height: 1.8; margin-bottom: 28px; }
+
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+
+    th {
+      text-align: left;
+      padding: 10px 14px;
+      background: #5b21b6;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+
+    th:last-child { border-right: none; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+
+    td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border-left: 4px solid #a855f7;
+      padding: 20px 24px;
+      margin: 24px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    .quote-block {
+      background: var(--bg-subtle);
+      border-left: 3px solid var(--accent);
+      padding: 12px 16px;
+      margin: 10px 0;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+    }
+
+    .priority-high {
+      background: #fef9c3;
+      color: #854d0e;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .priority-medium {
+      background: #e0e7ff;
+      color: #3730a3;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .insight-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin: 24px 0;
+    }
+
+    .insight-card {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .insight-card h4 { margin: 0 0 12px 0; font-size: 14px; color: var(--accent); }
+
+    .footer {
+      text-align: center;
+      padding: 48px 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 64px;
+    }
+
+    .footer-logo { font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+    .footer-logo span { color: #a855f7; }
+    .footer p { font-size: 13px; color: var(--text-light); margin: 0; }
+
+    @media print {
+      @page { size: 8.5in 11in; margin: 0.5in; }
+      body { font-size: 9pt; line-height: 1.4; }
+      .cover { min-height: 0; height: 10in; padding: 50px; page-break-after: always; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .cover h1 { font-size: 32pt; }
+      .cover-subtitle { font-size: 13pt; }
+      .container { padding: 0; max-width: 100%; }
+      .section { margin-bottom: 24px; page-break-inside: avoid; }
+      h2 { font-size: 14pt; margin-bottom: 10px; page-break-after: avoid; }
+      h3 { font-size: 11pt; margin: 14px 0 8px; page-break-after: avoid; }
+      p { margin-bottom: 6px; }
+      .lead { font-size: 10pt; margin-bottom: 14px; }
+      table { font-size: 8pt; margin: 10px 0; page-break-inside: avoid; }
+      th, td { padding: 6px 8px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .highlight-box, .quote-block { padding: 12px 16px; margin: 14px 0; page-break-inside: avoid; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .insight-grid { gap: 12px; }
+      .footer { margin-top: 20px; padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-label">MEETING SUMMARY</div>
+      <h1>Mani 2026 Roadmap Discussion</h1>
+      <p class="cover-subtitle">Comprehensive roadmap discovery and relationship building for BayOne's strategic engagement with Sephora</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <label>Date</label>
+          <span>February 2026</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Location</label>
+          <span>Sephora Offices (FSC)</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Classification</label>
+          <span>Internal</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo">Bay<span>One</span> Solutions</div>
+  </div>
+
+  <div class="container">
+
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>Participants</h2>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Organization</th>
+          <th>Role in Meeting</th>
+        </tr>
+        <tr>
+          <td><strong>Mani Soundararajan</strong></td>
+          <td>Sephora</td>
+          <td>Primary speaker - sharing roadmap and org structure</td>
+        </tr>
+        <tr>
+          <td><strong>Zahra Syed</strong></td>
+          <td>BayOne</td>
+          <td>Lead interviewer - gathering intel, positioning AI practice</td>
+        </tr>
+        <tr>
+          <td><strong>Neha Malhotra</strong></td>
+          <td>BayOne</td>
+          <td>Supporting - staffing/recruiting perspective</td>
+        </tr>
+      </table>
+
+      <div class="highlight-box">
+        <p><strong>Transcription Note:</strong> Speech-to-text corrections applied throughout: "money" to Mani, "Karishi/Gashi" to Grishi, "Rajesha" to Rajesh, "Zara" to Zahra, "Lamo/Al 2/AO 2" to Wayo, "C school" to Cisco, "d bricks" to Databricks, "Kobos" to Cognos.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>Executive Summary</h2>
+      <p class="lead">Mani provided a comprehensive overview of his 2026 organizational restructuring and major initiatives, revealing significant opportunities for BayOne.</p>
+
+      <p>The meeting revealed five key themes: a major organizational shift with reporting being decentralized from Mani's central team into domain engineering teams; the EDW Modernization as a 3-year project to migrate from legacy SQL Server and Cognos to Databricks with explicit interest in AI acceleration; marketing initiatives restructured under three leaders; an active hiring landscape across multiple teams with clear rate expectations; and genuine AI opportunity with Mani explicitly interested in AI help for EDW migration acceleration.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>Discussion Topics</h2>
+
+      <h3>Organizational Restructuring - Reporting Democratization</h3>
+      <p>Mani explained a major 2026 initiative: decentralizing reporting from his central team into domain engineering teams. Under the current state, one centralized reporting team handles everything. In the future state, reports become embedded within domain teams while Mani's team transitions to lean governance, framework standardization, SME advisory support, and data validation.</p>
+
+      <table>
+        <tr>
+          <th>Model</th>
+          <th>Domain</th>
+          <th>Structure</th>
+          <th>Timeline</th>
+        </tr>
+        <tr>
+          <td><strong>Model 1</strong></td>
+          <td>Stores (David/Natalia)</td>
+          <td>Delivery owned by Stores; Mani provides SME oversight</td>
+          <td>~1 year to stabilize</td>
+        </tr>
+        <tr>
+          <td><strong>Model 2</strong></td>
+          <td>E-commerce - Omni (Rajesh)</td>
+          <td>Grishi still hiring manager, engineers execute in Rajesh's org</td>
+          <td>Full transition by June/July 2026</td>
+        </tr>
+        <tr>
+          <td><strong>Model 3</strong></td>
+          <td>Supply Chain/Merchandising (Kalyan)</td>
+          <td>Remains centralized under Grishi</td>
+          <td>Transitions later once legacy tech modernized</td>
+        </tr>
+      </table>
+
+      <div class="quote-block">
+        <p>"Reports will be part of those individual domain engineering use cases itself. Because that's the right thing to do, because they know their business, they know their project... report is just actually reporting what they have done. So it doesn't have to be done by another separate team."</p>
+      </div>
+
+      <h3>EDW Modernization Project</h3>
+      <p>Mani described the major multi-year project starting in 2026. The scope involves re-engineering all reports from the past 15-20 years, representing thousands of reports in legacy technologies including IBM Cognos and SQL Server. The target platform is Databricks with Tableau and ThoughtSpot for visualization, with some Cognos retained using a modernized data layer. The timeline is a 3-year project from 2026-2028, with attempts to accelerate to 2027 or early 2028.</p>
+
+      <div class="quote-block">
+        <p>"If we go report by report, it will take a long time for us. So we are saying, what would be an easier way, what would be the right way, like efficient way to do this. Instead of going report by report, can we do something like maybe if we do this, we can finish off three reports at one shot... six reports at one shot, so we can expedite the delivery."</p>
+      </div>
+
+      <h4>AI Opportunities Explicitly Mentioned</h4>
+      <p>Mani identified three specific areas where AI could help: batch migration acceleration to migrate multiple reports at once instead of one-by-one; codebase analysis using AI to scan legacy Cognos code and surface buried business logic; and proactive risk identification using AI to analyze the codebase and flag areas to watch.</p>
+
+      <div class="quote-block">
+        <p>"Those things we are looking for AI to come and help to say, okay, look at the codebase, look at things, see actually, come up with, AI would itself proactively come and tell us, like these things are something to watch out for."</p>
+      </div>
+
+      <h3>Marketing Organization Structure</h3>
+      <p>Mani outlined his restructured marketing organization with three major areas. The first area is Top Funnel for Acquisition and Retention under Ram, covering advertisements including digital billboards, TV ads, digital marketing, and social media, with two major projects planned for 2026 and active hiring underway. The second area under Andrew Ho covers Influencer, Media, and Marketing AI, with two to three projects for 2026 and influencer marketing as a strategic priority. The third area under Rizwan Khan covers CRM and Personalization, with marketing personalization as a major 2026 project and hiring opening late Q1.</p>
+
+      <h3>Expectations for Colin</h3>
+      <p>Zahra pitched Colin and BayOne's AI capabilities. Mani responded positively but with clear expectations.</p>
+
+      <div class="quote-block">
+        <p>"If that person comes with a little bit of groundwork done, instead of coming and asking 'hey, what is this? What are you guys doing?' Sort of that, to keep that, that person can come with groundwork, talking to the teams and all that and then coming with a certain proposal, that would be great. So that would be a very productive discussion."</p>
+      </div>
+
+      <h3>Rate Expectations and Hiring</h3>
+      <p>Mani provided clear guidance on rates. For remote workers not in office, the acceptable range is $105 and below at nearshore rates. For in-office workers, the range is $105-115 depending on experience. The previously acceptable $120 rate is no longer available.</p>
+
+      <div class="quote-block">
+        <p>"If it is coming to like 100 to 105 and above, they are actually, I've told the team, they should be in the office. If the people are not in the office, then we cannot go with that rate anymore."</p>
+      </div>
+
+      <p>On location preferences, Mani is agnostic to location if the rate fits, open to anywhere in the US including Canada with PST preferred. He noted emerging talent hubs in Oklahoma, Kansas City, and Utah, and expressed less enthusiasm for India-only talent.</p>
+
+      <div class="quote-block">
+        <p>"You definitely find better talent here and nearshore because India is just like sometimes feels like bodies than actual problem solvers. And there's such a churn."</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">04</div>
+      <h2>Decisions Made</h2>
+      <table>
+        <tr>
+          <th>Decision</th>
+          <th>Made By</th>
+          <th>Impact</th>
+        </tr>
+        <tr>
+          <td>Reporting decentralization proceeds in 2026</td>
+          <td>Mani</td>
+          <td>Multiple entry points for BayOne across domain teams</td>
+        </tr>
+        <tr>
+          <td>Rate ceiling of $120 only for on-site</td>
+          <td>Mani</td>
+          <td>BayOne must adjust pricing expectations</td>
+        </tr>
+        <tr>
+          <td>Colin meeting to be scheduled</td>
+          <td>Zahra/Mani</td>
+          <td>AI engagement opportunity opens</td>
+        </tr>
+        <tr>
+          <td>Two skill profiles to be sent</td>
+          <td>Mani</td>
+          <td>BayOne can pre-pipeline candidates</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">05</div>
+      <h2>Commitments</h2>
+
+      <h3>BayOne Commitments</h3>
+      <table>
+        <tr>
+          <th>Owner</th>
+          <th>Commitment</th>
+          <th>Timing</th>
+        </tr>
+        <tr>
+          <td><strong>Zahra</strong></td>
+          <td>Take AI/EDW use cases back to Colin</td>
+          <td>Near-term</td>
+        </tr>
+        <tr>
+          <td><strong>Zahra/Colin</strong></td>
+          <td>Come back with proposal/one-pager</td>
+          <td>Before Colin meets Mani</td>
+        </tr>
+        <tr>
+          <td><strong>Neha</strong></td>
+          <td>Follow up with Ram on hiring</td>
+          <td>Immediate</td>
+        </tr>
+        <tr>
+          <td><strong>Neha</strong></td>
+          <td>Follow up with Andrew on SOW</td>
+          <td>Immediate</td>
+        </tr>
+        <tr>
+          <td><strong>Zahra/Neha</strong></td>
+          <td>Pipeline full stack + AI candidates</td>
+          <td>Once profiles received</td>
+        </tr>
+      </table>
+
+      <h3>Sephora Commitments</h3>
+      <table>
+        <tr>
+          <th>Owner</th>
+          <th>Commitment</th>
+          <th>Timing</th>
+        </tr>
+        <tr>
+          <td><strong>Mani</strong></td>
+          <td>Send two skill profile types</td>
+          <td>Soon</td>
+        </tr>
+        <tr>
+          <td><strong>Mani</strong></td>
+          <td>Connect Colin with relevant teams</td>
+          <td>After proposal received</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">06</div>
+      <h2>Open Items</h2>
+      <table>
+        <tr>
+          <th>Item</th>
+          <th>Owner</th>
+          <th>Priority</th>
+        </tr>
+        <tr>
+          <td>Colin to prepare AI-assisted EDW proposal</td>
+          <td>Colin/BayOne</td>
+          <td><span class="priority-high">High</span></td>
+        </tr>
+        <tr>
+          <td>Get sample reports from Grishi</td>
+          <td>BayOne</td>
+          <td><span class="priority-high">High</span></td>
+        </tr>
+        <tr>
+          <td>Understand Databricks' current proposal</td>
+          <td>BayOne</td>
+          <td><span class="priority-medium">Medium</span></td>
+        </tr>
+        <tr>
+          <td>Follow up with Ram (back from India ~19th)</td>
+          <td>Neha</td>
+          <td><span class="priority-medium">Medium</span></td>
+        </tr>
+        <tr>
+          <td>Clarify Andrew Ho SOW status</td>
+          <td>Neha</td>
+          <td><span class="priority-medium">Medium</span></td>
+        </tr>
+        <tr>
+          <td>Check Grishi hiring status (currently on hold)</td>
+          <td>Neha</td>
+          <td><span class="priority-medium">Medium</span></td>
+        </tr>
+        <tr>
+          <td>Identify home for two WIT full stack developers</td>
+          <td>Zahra</td>
+          <td><span class="priority-medium">Medium</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">07</div>
+      <h2>Strategic Implications</h2>
+
+      <div class="insight-grid">
+        <div class="insight-card">
+          <h4>AI Solutions Track</h4>
+          <p>Mani explicitly wants a proposal-led conversation about AI acceleration for EDW modernization. This is a genuine need, not polite interest.</p>
+        </div>
+        <div class="insight-card">
+          <h4>Staffing Landscape</h4>
+          <p>Multiple active hiring managers with clear rate expectations. Rate ceiling has tightened to $105-115, with $120+ only for on-site.</p>
+        </div>
+        <div class="insight-card">
+          <h4>Positioning Insight</h4>
+          <p>Come prepared with specific proposal, not discovery questions. Reference existing work (Wayo, Cisco) to build credibility.</p>
+        </div>
+        <div class="insight-card">
+          <h4>Risk to Monitor</h4>
+          <p>Databricks already in conversation about AI tools. Grishi hiring currently on hold for unclear reasons.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Internal Meeting Notes</p>
+    </div>
+  </div>
+</body>
+</html>
