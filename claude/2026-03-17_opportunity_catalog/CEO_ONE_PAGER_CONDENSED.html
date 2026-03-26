@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BayOne Active Work Streams - One Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.4;
+      font-size: 11px;
+      background: var(--white);
+      padding: 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 3px solid var(--purple-mid);
+    }
+
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+    }
+
+    .header .subtitle {
+      font-size: 13px;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    .header .date {
+      font-size: 11px;
+      color: var(--text-light);
+      margin-top: 4px;
+    }
+
+    .summary-stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 20px;
+      padding: 12px;
+      background: var(--bg-subtle);
+      border-radius: 8px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--purple-mid);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    .client-block {
+      margin-bottom: 18px;
+      page-break-inside: avoid;
+    }
+
+    .client-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%);
+      padding: 10px 16px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 0;
+      font-size: 10px;
+    }
+
+    th {
+      text-align: left;
+      padding: 6px 10px;
+      background: var(--bg-subtle);
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 9px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      border-bottom: 2px solid var(--purple-accent);
+    }
+
+    th:last-child { border-right: none; }
+
+    td {
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.3;
+    }
+
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    .project-name {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .status-active {
+      background: rgba(34, 197, 94, 0.1);
+      color: #16a34a;
+    }
+
+    .status-poc {
+      background: rgba(168, 85, 247, 0.1);
+      color: #7c3aed;
+    }
+
+    .status-discussion {
+      background: rgba(251, 191, 36, 0.1);
+      color: #d97706;
+    }
+
+    .status-early {
+      background: rgba(100, 116, 139, 0.1);
+      color: #64748b;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-logo {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .footer-logo span { color: #a855f7; }
+
+    .footer-note {
+      font-size: 9px;
+      color: var(--text-light);
+      margin-top: 4px;
+    }
+
+    @media print {
+      @page {
+        size: 8.5in 11in;
+        margin: 0.5in;
+      }
+
+      body {
+        padding: 0;
+        font-size: 8pt;
+      }
+
+      .header h1 { font-size: 20pt; }
+      .header .subtitle { font-size: 10pt; }
+      .client-name { font-size: 11pt; }
+      table { font-size: 7.5pt; }
+      th { font-size: 7pt; }
+
+      .client-block, table, tr {
+        page-break-inside: avoid;
+      }
+
+      th, .client-name, .summary-stats {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>BayOne Active Work Streams</h1>
+    <div class="subtitle">Executive Summary</div>
+    <div class="date">March 17, 2026</div>
+  </div>
+
+  <div class="client-block">
+    <div class="client-name">CISCO (4 Projects)</div>
+    <table>
+      <tr>
+        <th style="width: 28%;">Project</th>
+        <th style="width: 12%;">Status</th>
+        <th style="width: 12%;">Effort</th>
+        <th style="width: 45%;">Key Details</th>
+      </tr>
+      <tr>
+        <td class="project-name">NX-OS CI/CD Pipeline Improvement</td>
+        <td><span class="status-badge status-active">Active</span></td>
+        <td>High</td>
+        <td>Multi-phase AI-driven tooling for CI/CD pipeline. Phase 1: Developer Box + Branch Health. Team of 5 onboarding. SOW renewal April 2026.</td>
+      </tr>
+      <tr>
+        <td class="project-name">UI Conversion (EPNM to EMS)</td>
+        <td><span class="status-badge status-poc">POC</span></td>
+        <td>Med-Low</td>
+        <td>Converting 250+ legacy UI screens to microservices. Highly reusable with strong interest. Waiting on hardware/code access.</td>
+      </tr>
+      <tr>
+        <td class="project-name">Nexus Dashboard Testing</td>
+        <td><span class="status-badge status-discussion">Discussion</span></td>
+        <td>Med-High</td>
+        <td>Automate 30K-40K daily test analysis (3-4 hr/day bottleneck). Graph topology approach. Address after current POCs. Highly reusable.</td>
+      </tr>
+      <tr>
+        <td class="project-name">MDS Code Modernization</td>
+        <td><span class="status-badge status-active">Active</span></td>
+        <td>Med-High</td>
+        <td>Java Swing to React/Go (1,432 files, 242K LOC). Related to UI Conversion. Gaurav liaison. Colin in Bay Area 3/23.</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="client-block">
+    <div class="client-name">SEPHORA (3 Projects)</div>
+    <table>
+      <tr>
+        <th style="width: 28%;">Project</th>
+        <th style="width: 12%;">Status</th>
+        <th style="width: 12%;">Effort</th>
+        <th style="width: 45%;">Key Details</th>
+      </tr>
+      <tr>
+        <td class="project-name">EDW Modernization Program</td>
+        <td><span class="status-badge status-poc">POC</span></td>
+        <td>POC: Med-Low<br>Full: Med-High</td>
+        <td>3-year program (6K reports, 8 SSAS cubes, 800+ KPIs). Reduce timeline to 1.5 yrs or less. POC delivery 3/31. High CIO visibility.</td>
+      </tr>
+      <tr>
+        <td class="project-name">Staffing / Talent Acquisition</td>
+        <td><span class="status-badge status-active">Active</span></td>
+        <td>Medium</td>
+        <td>Building AI team for Ravi Pandey. 100% acceptance rate with Sephora. Abhinav Gupta placed. Strong relationship built on quality.</td>
+      </tr>
+      <tr>
+        <td class="project-name">AI-Assisted Dev Tooling</td>
+        <td><span class="status-badge status-discussion">Discussion</span></td>
+        <td>TBD</td>
+        <td>Claude Code skills/agents for eng/QA teams. Ravi evolved from arm's length to open to technical partnership.</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="client-block">
+    <div class="client-name">LAM RESEARCH (1 Project)</div>
+    <table>
+      <tr>
+        <th style="width: 28%;">Project</th>
+        <th style="width: 12%;">Status</th>
+        <th style="width: 12%;">Effort</th>
+        <th style="width: 45%;">Key Details</th>
+      </tr>
+      <tr>
+        <td class="project-name">Custom NER/Redaction for IP</td>
+        <td><span class="status-badge status-discussion">Discovery</span></td>
+        <td>TBD</td>
+        <td>Suspended all AI org-wide (IP concerns). Need detection/redaction (&lt;1% false positive). Enterprise-grade tooling approach. Follow-up with Daniel pending.</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="client-block">
+    <div class="client-name">SITIME (1 Project)</div>
+    <table>
+      <tr>
+        <th style="width: 28%;">Project</th>
+        <th style="width: 12%;">Status</th>
+        <th style="width: 12%;">Effort</th>
+        <th style="width: 45%;">Key Details</th>
+      </tr>
+      <tr>
+        <td class="project-name">Salesforce CRM Query Layer</td>
+        <td><span class="status-badge status-early">Early</span></td>
+        <td>TBD</td>
+        <td>AI layer for parametric product catalog queries. Investigating Impinger AI partnership (low-value work). Needs technical discovery.</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="client-block">
+    <div class="client-name">TAILORED BRANDS (2 Projects)</div>
+    <table>
+      <tr>
+        <th style="width: 28%;">Project</th>
+        <th style="width: 12%;">Status</th>
+        <th style="width: 12%;">Effort</th>
+        <th style="width: 45%;">Key Details</th>
+      </tr>
+      <tr>
+        <td class="project-name">AI Adoption in Engineering</td>
+        <td><span class="status-badge status-early">Exploratory</span></td>
+        <td>TBD</td>
+        <td>Training/enablement for dev teams. Surej-identified entry point. Part of broader workforce upskilling initiative. Early stage discussions.</td>
+      </tr>
+      <tr>
+        <td class="project-name">Platform Migration (AI-Enabled)</td>
+        <td><span class="status-badge status-early">Exploratory</span></td>
+        <td>TBD</td>
+        <td>Legacy platform with hundreds of integration wrappers. Agentic approach. Impinger AI partnership potential. Early stage.</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="footer">
+    <div class="footer-logo">Bay<span>One</span> Solutions</div>
+    <div class="footer-note">Confidential · March 17, 2026</div>
+  </div>
+</body>
+</html>

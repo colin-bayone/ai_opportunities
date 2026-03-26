@@ -1,0 +1,173 @@
+# Slide 4 - Visual Elements
+
+### Row 1
+- **Type:** Logo
+  - **Position:** Row 1, Column 1
+  - **Description:** A light blue atomic symbol with a central nucleus and three orbiting electrons.
+  - **Text:** React
+- **Type:** Logo
+  - **Position:** Row 1, Column 2
+  - **Description:** A red shield with a large stylized letter 'A' in the center.
+  - **Text:** ANGULAR
+- **Type:** Logo
+  - **Position:** Row 1, Column 3
+  - **Description:** An icon of a steaming brown coffee cup on a saucer.
+  - **Text:** Java
+- **Type:** Logo
+  - **Position:** Row 1, Column 4
+  - **Description:** A logo featuring two intertwined snakes, one blue and one yellow.
+  - **Text:** python™
+- **Type:** Logo
+  - **Position:** Row 1, Column 5
+  - **Description:** A gray cloud outline with an orange smile-like arrow underneath.
+  - **Text:** aws
+- **Type:** Logo
+  - **Position:** Row 1, Column 6
+  - **Description:** An orange 3D box icon with an arrow pointing out, next to an orange Greek letter lambda (λ).
+  - **Text:** AWS Lambda
+- **Type:** Logo
+  - **Position:** Row 1, Column 7
+  - **Description:** A stack of blue, horizontal discs forming a cylinder.
+  - **Text:** amazon DynamoDB
+
+### Row 2
+- **Type:** Logo
+  - **Position:** Row 2, Column 1
+  - **Description:** A small yellow elephant mascot next to the stylized, black-and-white word "hadoop".
+  - **Text:** hadoop
+- **Type:** Logo
+  - **Position:** Row 2, Column 2
+  - **Description:** A geometric logo with gold, gray, and white hexagonal and triangular shapes.
+  - **Text:** HIBERNATE
+- **Type:** Logo
+  - **Position:** Row 2, Column 3
+  - **Description:** A stylized eye with long eyelashes, a blue iris, and a white sunburst for a pupil.
+  - **Text:** cassandra
+- **Type:** Logo
+  - **Position:** Row 2, Column 4
+  - **Description:** A green shield with a green leaf in the center.
+  - **Text:** mongoDB
+- **Type:** Logo
+  - **Position:** Row 2, Column 5
+  - **Description:** The head of a blue elephant, stylized.
+  - **Text:** PostgreSQL
+- **Type:** Logo
+  - **Position:** Row 2, Column 6
+  - **Description:** A light blue asterisk or snowflake symbol.
+  - **Text:** snowflake
+- **Type:** Logo
+  - **Position:** Row 2, Column 7
+  - **Description:** A red, three-dimensional cube-like shape with various geometric shapes on its faces.
+  - **Text:** redis
+
+### Row 3
+- **Type:** Logo
+  - **Position:** Row 3, Column 1
+  - **Description:** A blue whale carrying blue shipping containers on its back.
+  - **Text:** docker
+- **Type:** Logo
+  - **Position:** Row 3, Column 2
+  - **Description:** A blue heptagon, representing a ship's helm or wheel.
+  - **Text:** kubernetes
+- **Type:** Logo
+  - **Position:** Row 3, Column 3
+  - **Description:** Three black circles connected by lines to a central point, which is also a circle.
+  - **Text:** kafka
+- **Type:** Logo
+  - **Position:** Row 3, Column 4
+  - **Description:** The word "GO" in a stylized, bold, light blue font with speed lines.
+  - **Text:** GO
+- **Type:** Logo
+  - **Position:** Row 3, Column 5
+  - **Description:** The word "teradata" in a gray, lowercase, sans-serif font, with an orange dot at the end.
+  - **Text:** teradata.
+- **Type:** Logo
+  - **Position:** Row 3, Column 6
+  - **Description:** A purple, abstract hexagonal logo made of three distinct block shapes.
+  - **Text:** HashiCorp Terraform
+- **Type:** Logo
+  - **Position:** Row 3, Column 7
+  - **Description:** A blue hexagon containing a white magnifying glass icon with a bar chart inside the lens.
+  - **Text:** Google BigQuery
+
+### Row 4
+- **Type:** Logo
+  - **Position:** Row 4, Column 1
+  - **Description:** A green square with the letters "Se" inside.
+  - **Text:** Selenium⁴
+- **Type:** Logo
+  - **Position:** Row 4, Column 2
+  - **Description:** The word "JUnit" with "J" in green and "Unit" in red.
+  - **Text:** JUnit
+- **Type:** Logo
+  - **Position:** Row 4, Column 3
+  - **Description:** The word "TestNG" with "Test" in orange and "NG" in red.
+  - **Text:** TestNG
+- **Type:** Logo
+  - **Position:** Row 4, Column 4
+  - **Description:** The word "mockito" in green, with a glass of mojito (with lime and mint) representing the letter 'o'.
+  - **Text:** mockito
+- **Type:** Logo
+  - **Position:** Row 4, Column 5
+  - **Description:** A red and yellow feather next to the stylized text "JMeter".
+  - **Text:** APACHE JMeter™
+- **Type:** Logo
+  - **Position:** Row 4, Column 6
+  - **Description:** An orange circle containing a stylized white figure in a spacesuit.
+  - **Text:** POSTMAN
+- **Type:** Logo
+  - **Position:** Row 4, Column 7
+  - **Description:** A circular logo with swirls of purple, blue, and teal.
+  - **Text:** appium
+- **Type:** Logo
+  - **Position:** Row 4, Column 8
+  - **Description:** A blue dolphin jumping over the text.
+  - **Text:** MySQL
+
+### Row 5
+- **Type:** Logo
+  - **Position:** Row 5, Column 1
+  - **Description:** A red icon consisting of three stacked, stylized horizontal lines.
+  - **Text:** Scala
+- **Type:** Logo
+  - **Position:** Row 5, Column 2
+  - **Description:** An orange five-pointed star with a stylized 'S' inside.
+  - **Text:** APACHE Spark™
+- **Type:** Logo
+  - **Position:** Row 5, Column 3
+  - **Description:** An orange, rounded square containing the white silhouette of a swift bird in flight.
+  - **Text:** Swift
+- **Type:** Logo
+  - **Position:** Row 5, Column 4
+  - **Description:** The words "ORACLE" and "DATABASE" in a red, sans-serif font.
+  - **Text:** ORACLE® DATABASE
+- **Type:** Logo
+  - **Position:** Row 5, Column 5
+  - **Description:** A purple hexagon containing the text "C#".
+  - **Text:** C#
+- **Type:** Logo
+  - **Position:** Row 5, Column 6
+  - **Description:** A green hexagon containing a power-on symbol that morphs into a leaf sprout.
+  - **Text:** spring boot
+- **Type:** Logo
+  - **Position:** Row 5, Column 7
+  - **Description:** A yellow, shield-like pentagon with the letters "JS" inside.
+  - **Text:** JavaScript
+- **Type:** Logo
+  - **Position:** Row 5, Column 8
+  - **Description:** A pink hexagon formed by nodes and connecting lines.
+  - **Text:** GraphQL
+- **Type:** Logo
+  - **Position:** Row 5, Column 9
+  - **Description:** A cartoon drawing of a butler with a mustache, wearing a suit and bow tie.
+  - **Text:** Jenkins
+- **Type:** Logo
+  - **Position:** Row 5, Column 10
+  - **Description:** A purple, stylized capital 'K' next to the word "Kotlin".
+  - **Text:** K Kotlin
+
+### Other Visual Elements
+- **Type:** Graphic Banner
+  - **Position:** Bottom of the slide
+  - **Description:** A footer area with a wavy, abstract background in shades of purple and lavender.
+  - **Text:** BAYONE #TheFutureWorksHere.
