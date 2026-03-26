@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Structure Mockup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #a855f7;
+      --purple-dark: #5b21b6;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--bg-subtle);
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--white);
+      padding: 48px;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .section-number {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 32px 0 14px;
+    }
+
+    p { margin-bottom: 16px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      padding: 14px 16px;
+      background: var(--purple-dark);
+      color: var(--white);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    .dynamics-section {
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+
+    .dynamics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin: 24px 0;
+    }
+
+    .dynamics-card {
+      background: var(--bg-subtle);
+      border-radius: 8px;
+      padding: 24px;
+    }
+
+    .dynamics-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .dynamics-card p {
+      font-size: 14px;
+      color: var(--text);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .org-chart {
+      margin: 32px 0;
+      padding: 32px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.04) 0%, rgba(168,85,247,0.06) 100%);
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .org-row {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 24px;
+    }
+
+    .org-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .org-row.middle {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: start;
+      gap: 24px;
+    }
+
+    .org-row.middle .left {
+      justify-self: end;
+    }
+
+    .org-row.middle .center {
+      justify-self: center;
+    }
+
+    .org-box {
+      background: var(--white);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 28px;
+      text-align: center;
+    }
+
+    .org-box.primary {
+      background: var(--purple-dark);
+      border-color: var(--purple-dark);
+      padding: 20px 40px;
+    }
+
+    .org-box.primary strong {
+      color: var(--white);
+      font-size: 16px;
+    }
+
+    .org-box.lead {
+      border-color: var(--accent);
+    }
+
+    .org-box.oversight {
+      border-style: dashed;
+      border-color: var(--text-light);
+    }
+
+    .org-box strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .org-box span {
+      font-size: 12px;
+      color: var(--text-light);
+    }
+
+    /* Vertical line from Cisco down */
+    .org-box.primary::after {
+      content: '';
+      position: absolute;
+      bottom: -26px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 24px;
+      background: var(--accent);
+    }
+
+    .org-box.primary {
+      position: relative;
+    }
+
+    /* Vertical line from Senior Engineer down */
+    .org-box.lead {
+      position: relative;
+    }
+
+    .org-box.lead::after {
+      content: '';
+      position: absolute;
+      bottom: -26px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 24px;
+      background: var(--accent);
+    }
+
+    /* Dashed line from Colin connecting right */
+    .org-box.oversight {
+      position: relative;
+    }
+
+    .org-box.oversight::after {
+      content: '';
+      position: absolute;
+      right: -26px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 2px;
+      border-top: 2px dashed var(--text-light);
+    }
+
+    /* Bottom row with horizontal connector bar */
+    .org-row.bottom {
+      position: relative;
+      padding-top: 16px;
+    }
+
+    .org-row.bottom::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 75.5%;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    /* Vertical lines from each offshore box going up */
+    .org-row.bottom .org-box {
+      position: relative;
+    }
+
+    .org-row.bottom .org-box::before {
+      content: '';
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 16px;
+      background: var(--accent);
+    }
+
+    .version-label {
+      background: var(--accent);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="version-label">MOCKUP A - Cards + Flow Diagram</div>
+    <div class="section-number">02</div>
+    <h2>Team Structure</h2>
+
+    <p>The team combines an on-site technical leader who interfaces with Cisco directly, with an offshore implementation team that brings specialized expertise in backend integration, application development, and AI.</p>
+
+    <table>
+      <tr>
+        <th>Role</th>
+        <th>Location</th>
+        <th>Description</th>
+        <th>Start</th>
+      </tr>
+      <tr>
+        <td><strong>Senior Engineer</strong></td>
+        <td>Onshore (Bay Area)</td>
+        <td>Technical leadership and primary Cisco interface</td>
+        <td>Q1</td>
+      </tr>
+      <tr>
+        <td><strong>Backend/Integration Engineer</strong></td>
+        <td>Offshore</td>
+        <td>Data pipelines, API integrations, Airflow expertise</td>
+        <td>Q1</td>
+      </tr>
+      <tr>
+        <td><strong>AI Engineer</strong></td>
+        <td>Offshore</td>
+        <td>NLP, chat interface, failure diagnosis AI</td>
+        <td>Q1</td>
+      </tr>
+      <tr>
+        <td><strong>UI/Application Developer</strong></td>
+        <td>Offshore</td>
+        <td>Dashboards, unified interface, frontend development</td>
+        <td>Q1</td>
+      </tr>
+      <tr>
+        <td><strong>Agentic AI Specialist</strong></td>
+        <td>Offshore</td>
+        <td>Self-healing systems, autonomous decision logic</td>
+        <td>Q2</td>
+      </tr>
+    </table>
+
+    <div class="dynamics-section">
+      <h3>Leadership and Team Dynamics</h3>
+
+      <p>Colin Moore (Director of AI, BayOne) provides technical oversight for the engagement and is available to Cisco for escalations and strategic discussions. The Senior Engineer serves as the primary day-to-day interface, coordinating between Cisco and the offshore implementation team.</p>
+
+      <div class="org-chart">
+        <!-- Cisco at top -->
+        <div class="org-row">
+          <div class="org-box primary">
+            <strong>Cisco</strong>
+          </div>
+        </div>
+
+        <!-- Colin (left, dashed) and Senior Engineer (center, solid) -->
+        <div class="org-row middle">
+          <div class="left">
+            <div class="org-box oversight">
+              <strong>Colin Moore</strong>
+              <span>Strategic Oversight</span>
+            </div>
+          </div>
+          <div class="center">
+            <div class="org-box lead">
+              <strong>Senior Engineer</strong>
+              <span>Onshore / Bay Area</span>
+            </div>
+          </div>
+          <div></div>
+        </div>
+
+        <!-- Offshore team -->
+        <div class="org-row bottom">
+          <div class="org-box">
+            <strong>Backend Engineer</strong>
+            <span>Offshore</span>
+          </div>
+          <div class="org-box">
+            <strong>AI Engineer</strong>
+            <span>Offshore</span>
+          </div>
+          <div class="org-box">
+            <strong>UI Developer</strong>
+            <span>Offshore</span>
+          </div>
+          <div class="org-box">
+            <strong>Agentic Specialist</strong>
+            <span>Offshore (Q2)</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="dynamics-grid">
+        <div class="dynamics-card">
+          <h4>Onshore Role</h4>
+          <p>The Senior Engineer is based in the Bay Area with direct access to Cisco teams. This role handles day-to-day coordination, unblocks issues that require organizational navigation, and ensures the offshore team has the context they need to execute effectively.</p>
+        </div>
+        <div class="dynamics-card">
+          <h4>Offshore Role</h4>
+          <p>The offshore team brings deep technical specialization in backend integration, AI/ML, and application development. They execute the implementation work, surfacing technical decisions and progress through the Senior Engineer.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container" style="margin-top: 40px;">
+    <div class="version-label">MOCKUP B - Prose Only</div>
+    <div class="section-number">02</div>
+    <h2>Team Structure</h2>
+
+    <p>The team combines an on-site technical leader who interfaces with Cisco directly, with an offshore implementation team that brings specialized expertise in backend integration, application development, and AI.</p>
+
+    <table>
+      <tr>
+        <th>Role</th>
+        <th>Location</th>
+        <th>Description</th>
+        <th>Start</th>
+      </tr>
+      <tr>
+        <td><strong>Senior Engineer</strong></td>
+        <td>Onshore (Bay Area)</td>
+        <td>Technical leadership and primary Cisco interface</td>
+        <td>Q1</td>
+      </tr>
+      <tr>
+        <td><strong>Backend/Integration Engineer</strong></td>
+        <td>Offshore</td>
+        <td>Data pipelines, API integrations, Airflow expertise</td>
+        <td>Q1</td>
+      </tr>
+      <tr>
+        <td><strong>AI Engineer</strong></td>
+        <td>Offshore</td>
+        <td>NLP, chat interface, failure diagnosis AI</td>
+        <td>Q1</td>
+      </tr>
+      <tr>
+        <td><strong>UI/Application Developer</strong></td>
+        <td>Offshore</td>
+        <td>Dashboards, unified interface, frontend development</td>
+        <td>Q1</td>
+      </tr>
+      <tr>
+        <td><strong>Agentic AI Specialist</strong></td>
+        <td>Offshore</td>
+        <td>Self-healing systems, autonomous decision logic</td>
+        <td>Q2</td>
+      </tr>
+    </table>
+
+    <h3>Leadership and Team Dynamics</h3>
+
+    <p>Colin Moore (Director of AI, BayOne) provides technical oversight for the engagement. The onshore Senior Engineer is based in the Bay Area with direct access to Cisco teams. This role handles day-to-day coordination, unblocks issues that require organizational navigation, and ensures the offshore team has the context they need to execute effectively.</p>
+
+    <p>The offshore team brings deep technical specialization—backend integration, AI/ML, and application development—and executes the implementation work. The Senior Engineer translates Cisco's requirements and feedback to the offshore team, while the offshore team surfaces technical decisions and progress back through the Senior Engineer. This structure keeps Cisco interfacing with a single point of contact while leveraging specialized offshore capacity for execution.</p>
+
+    <p>The team collectively brings Airflow expertise, DevOps capabilities, and proficiency with AI-assisted development tools.</p>
+  </div>
+</body>
+</html>

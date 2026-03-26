@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EDW Modernization - AI Acceleration Framework</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #334155;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(139,92,246,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .cover-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .cover-subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 48px;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 48px;
+      padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .cover-meta-item label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+
+    .cover-meta-item span {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .logo {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .logo span { color: #a855f7; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .section { margin-bottom: 64px; }
+
+    .section-number {
+      font-size: 12px;
+      font-weight: 600;
+      color: #a855f7;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #0f172a;
+      margin: 32px 0 16px;
+    }
+
+    h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #0f172a;
+      margin: 24px 0 12px;
+    }
+
+    p { margin-bottom: 16px; }
+
+    .lead {
+      font-size: 18px;
+      color: #64748b;
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      padding: 14px 16px;
+      background: #5b21b6;
+      color: #fff;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: #f8fafc; }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border-left: 4px solid #a855f7;
+      padding: 24px 28px;
+      margin: 32px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    .idea-card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      padding: 28px;
+      margin: 24px 0;
+      box-shadow: 0 1px 3px rgba(124,58,237,0.06);
+    }
+
+    .idea-card h4 {
+      margin-top: 0;
+      color: #5b21b6;
+    }
+
+    .idea-card p {
+      margin-bottom: 0;
+      color: #334155;
+    }
+
+    .challenge-item {
+      margin-bottom: 24px;
+    }
+
+    .challenge-item h4 {
+      color: #5b21b6;
+      margin-bottom: 8px;
+    }
+
+    .challenge-item p {
+      margin-bottom: 0;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 48px 40px;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 64px;
+    }
+
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 12px;
+    }
+
+    .footer-logo span { color: #a855f7; }
+
+    .footer p {
+      font-size: 13px;
+      color: #64748b;
+      margin: 0;
+    }
+
+    @media print {
+      @page {
+        size: 8.5in 11in;
+        margin: 0.5in;
+      }
+
+      body { font-size: 10pt; line-height: 1.5; }
+
+      .cover {
+        min-height: 0;
+        height: 10in;
+        padding: 60px;
+        page-break-after: always;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .cover h1 { font-size: 36pt; }
+      .cover-subtitle { font-size: 14pt; }
+
+      .container { padding: 0; max-width: 100%; }
+      .section { margin-bottom: 28px; }
+
+      h2 { font-size: 20pt; margin-bottom: 16px; }
+      h3 { font-size: 14pt; margin: 20px 0 12px; }
+      h4 { font-size: 11pt; margin: 16px 0 8px; }
+      p { margin-bottom: 10px; }
+      .lead { font-size: 12pt; margin-bottom: 20px; }
+
+      table { font-size: 9pt; margin: 16px 0; }
+      th, td { padding: 10px 12px; }
+
+      .idea-card { padding: 20px; margin: 16px 0; }
+
+      th, .cover, .highlight-box, .idea-card {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .section-number { break-after: avoid; }
+      h1, h2, h3, h4 { break-after: avoid; break-inside: avoid; }
+      table, tr, .idea-card, .highlight-box { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-label">Working Session</div>
+      <h1>EDW Modernization</h1>
+      <p class="cover-subtitle">AI Acceleration Framework</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <label>Date</label>
+          <span>February 25, 2026</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Program</label>
+          <span>Enterprise Data Warehouse Re-engineering</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo">Bay<span>One</span> Solutions</div>
+  </div>
+
+  <div class="container">
+
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>Our Understanding</h2>
+
+      <h3>The Initiative</h3>
+      <p>Sephora is in year one of a three-year EDW re-engineering program. This is explicitly a re-engineering effort rather than a lift-and-shift migration, which means the team is rebuilding data pipelines and reporting assets for modern architecture rather than simply moving existing code to a new platform.</p>
+      <p>The source environment consists of SQL Server databases, IBM Cognos for reporting, and IBM DataStage for ETL orchestration. The target state is Databricks as the data platform, running on Microsoft Azure. The Cognos front-end is being retained during the transition to minimize change management disruption for business users who rely on familiar interfaces and workflows.</p>
+      <p>The guiding philosophy is progress over perfection. The semantic layer will be addressed pragmatically rather than allowing it to slow momentum on the core data platform work.</p>
+
+      <h3>Scale</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Asset Category</th>
+            <th>Volume</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cognos Reports</td>
+            <td>6,000+</td>
+          </tr>
+          <tr>
+            <td>SSAS Cubes</td>
+            <td>8</td>
+          </tr>
+          <tr>
+            <td>KPIs</td>
+            <td>800+</td>
+          </tr>
+          <tr>
+            <td>Dimensions</td>
+            <td>300</td>
+          </tr>
+          <tr>
+            <td>Source Systems</td>
+            <td>20+</td>
+          </tr>
+          <tr>
+            <td>Program Duration</td>
+            <td>3 years (targeting 2027-2028 completion)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Track-Based Execution</h3>
+      <p>The program is organized into tracks by business domain. The Finance track is near completion and has served as the proving ground for establishing architectural patterns, accelerator tooling, and methodology. The patterns that emerged from Finance will carry forward into the remaining tracks.</p>
+      <p>Merchandising and Supply Chain are positioned as the next tracks to begin. Additional domains including Stores and E-commerce will follow. The track-based approach allows the team to apply lessons learned from each completed track to subsequent work.</p>
+
+      <h3>The Challenges</h3>
+
+      <div class="challenge-item">
+        <h4>Scale Exceeds Manual Capacity</h4>
+        <p>Processing 6,000 reports individually is not feasible within the program timeline. The team needs to find ways to group similar reports and process them together, identifying common structures and patterns that allow batch re-engineering rather than handling each report as a unique effort. Without this, the math simply does not work for a three-year completion.</p>
+      </div>
+
+      <div class="challenge-item">
+        <h4>Buried Business Logic</h4>
+        <p>Fifteen to twenty years of business rules are embedded in Cognos report definitions, SSAS cube calculations, DataStage transformations, and stored procedures. The original developers who implemented this logic are no longer with the organization. Documentation is outdated where it exists at all. This accumulated logic needs to be surfaced, understood, and validated before it can be re-engineered, and doing this manually for thousands of assets is prohibitively time-consuming.</p>
+      </div>
+
+      <div class="challenge-item">
+        <h4>SME Bandwidth Constraint</h4>
+        <p>The subject matter experts who understand the business logic and can validate re-engineered outputs are the same people responsible for keeping production systems running. This creates a fundamental constraint on program velocity. The modernization effort cannot consume all of their time because day-to-day operations cannot pause. Any acceleration approach needs to reduce the burden on these constrained resources rather than adding to their workload.</p>
+      </div>
+
+      <div class="challenge-item">
+        <h4>Validation Burden</h4>
+        <p>Every phase of re-engineering requires human verification. Logic extraction needs SME confirmation that business rules were captured correctly. Source-to-target mapping needs engineering review. Transformation outputs need quality assurance. Final reports need business user sign-off that numbers match expectations. The cumulative validation burden across thousands of assets creates a significant throughput constraint.</p>
+      </div>
+
+      <div class="challenge-item">
+        <h4>Timeline Pressure</h4>
+        <p>The program targets completion by 2027 or early 2028. The Finance track has proven that the architectural patterns and methodology work. The remaining question is whether those patterns can scale across Merchandising, Supply Chain, Stores, and E-commerce without proportionally scaling the team. AI acceleration is being evaluated as a means to achieve this scale.</p>
+      </div>
+
+      <h3>Current AI Tooling</h3>
+      <p>The team is actively using Lutra and Flow for AI-assisted automation. Databricks AI capabilities are under evaluation. Various partner accelerators have been assessed. Each tool has specific strengths, and the team has spent recent months determining which tools are best suited for which use cases.</p>
+      <p>Any additional tooling or methodology should complement what already exists rather than adding fragmentation. The goal is integration with the current strategy, not another siloed solution.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>AI Acceleration Ideas</h2>
+      <p class="lead">The following approaches address the specific constraints of this program. Each is designed to reduce SME burden, enable batch processing, or surface hidden complexity before it becomes a blocker.</p>
+
+      <div class="idea-card">
+        <h4>Report Similarity Clustering</h4>
+        <p>Analyze Cognos report metadata including columns, joins, filters, and output structures to group reports by structural similarity. Reports that share the same underlying data sources and similar query patterns can be re-engineered together as a batch rather than handled individually. A cluster of forty reports that all pull from the same three tables with similar filter logic can be addressed as a family, with one solution pattern applied across the group. This directly enables the goal of processing multiple reports in a single pass rather than treating each as unique.</p>
+      </div>
+
+      <div class="idea-card">
+        <h4>Business Logic Extraction</h4>
+        <p>Parse Cognos report definitions and embedded SQL to extract calculations, filters, and business rules into a structured, readable catalog. The logic that currently exists only inside report XML and stored procedures becomes visible and documented. This accelerates SME review because experts can validate extracted rules in a readable format rather than tracing through legacy code. It also reduces the risk of losing critical business rules during re-engineering because the logic is explicitly captured rather than implicitly embedded.</p>
+      </div>
+
+      <div class="idea-card">
+        <h4>Dependency Mapping</h4>
+        <p>Trace the relationships between source tables, views, ETL jobs, reports, and cubes to create a complete dependency graph. Before deprecating any source table or modifying any transformation, the team can see exactly what downstream assets are affected. This prevents the surprises that slow down re-engineering efforts when unexpected dependencies surface mid-project. It also enables confident decision-making about sequencing and prioritization because the impact of each change is visible upfront.</p>
+      </div>
+
+      <div class="idea-card">
+        <h4>Schema Mapping Validation</h4>
+        <p>Automate source-to-target column mapping with confidence scoring based on name matching, data type compatibility, and sample value comparison. High-confidence mappings can proceed with minimal review. Low-confidence mappings are flagged for SME attention with specific reasons for the uncertainty. This focuses human effort on the cases that actually require human judgment rather than requiring manual review of every mapping regardless of complexity.</p>
+      </div>
+
+      <div class="idea-card">
+        <h4>KPI Lineage Tracing</h4>
+        <p>Map the 800+ KPIs back to their source calculations across reports, cubes, and pipelines. Identify cases where the same KPI is calculated differently in different places, which creates data quality issues and confusion for business users. This analysis is a prerequisite for establishing a clean semantic layer because standardizing KPI definitions requires first understanding the current state of variation. The output provides a clear remediation roadmap for KPI consolidation.</p>
+      </div>
+
+      <div class="idea-card">
+        <h4>Change Impact Analysis</h4>
+        <p>Before making any change to source systems, tables, or transformation logic, simulate the downstream impact across the entire reporting portfolio. This allows the team to make changes with confidence rather than discovering broken reports after deployment. It also supports deprecation decisions by showing exactly which assets depend on components being considered for retirement, enabling informed conversations about what to preserve versus what to sunset.</p>
+      </div>
+
+      <div class="idea-card">
+        <h4>Documentation Generation</h4>
+        <p>Generate documentation for undocumented stored procedures, DataStage jobs, and Cognos report logic based on code analysis. The institutional knowledge that currently exists only in legacy code becomes explicit and reviewable. This is particularly valuable for onboarding new team members who need to understand systems built by developers no longer with the organization. It also supports SME validation by providing a readable description of what each component does.</p>
+      </div>
+
+      <div class="idea-card">
+        <h4>Consolidation Detection</h4>
+        <p>Identify reports that perform nearly identical functions with minor variations in filters, groupings, or output formats. Organizations accumulate redundant reports over time as different teams request similar outputs without visibility into what already exists. Surfacing these consolidation opportunities reduces the total volume of assets that need to be re-engineered because duplicative reports can be consolidated into single parameterized solutions. This simplifies both the migration effort and the target state.</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Prepared for Sephora</p>
+    </div>
+  </div>
+</body>
+</html>

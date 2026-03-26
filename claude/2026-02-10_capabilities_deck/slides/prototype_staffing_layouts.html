@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staffing Section Options</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f5f5f5;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 40px;
+    }
+
+    .option-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--purple-bright);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .option {
+      background: white;
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 40px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      max-width: 900px;
+    }
+
+    /* Option A: Two columns - Leadership | Pods */
+    .staffing-a {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .staffing-a .column {
+      padding: 16px 20px;
+      border-radius: 8px;
+    }
+
+    .staffing-a .column:first-child {
+      background: linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(168,85,247,0.12) 100%);
+      border-left: 3px solid var(--purple-accent);
+    }
+
+    .staffing-a .column:last-child {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+    }
+
+    .staffing-a h4 {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-mid);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .staffing-a p {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .staffing-a .pod-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .staffing-a .pod-tag {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--primary);
+    }
+
+    /* Option B: Icon row */
+    .staffing-b {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border-radius: 8px;
+    }
+
+    .staffing-b .leadership {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-right: 24px;
+      border-right: 1px solid rgba(124,58,237,0.2);
+    }
+
+    .staffing-b .leadership i {
+      font-size: 20px;
+      color: var(--purple-accent);
+    }
+
+    .staffing-b .leadership-text h4 {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .staffing-b .leadership-text p {
+      font-size: 10px;
+      color: var(--text-light);
+    }
+
+    .staffing-b .pods {
+      display: flex;
+      gap: 16px;
+    }
+
+    .staffing-b .pod {
+      text-align: center;
+    }
+
+    .staffing-b .pod i {
+      font-size: 16px;
+      color: var(--purple-mid);
+      margin-bottom: 4px;
+    }
+
+    .staffing-b .pod span {
+      display: block;
+      font-size: 9px;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* Option C: Compact inline with pills */
+    .staffing-c {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 20px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .staffing-c .label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--purple-mid);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .staffing-c .divider {
+      width: 1px;
+      height: 24px;
+      background: var(--border);
+    }
+
+    .staffing-c .desc {
+      font-size: 11px;
+      color: var(--text);
+      flex: 1;
+    }
+
+    .staffing-c .pills {
+      display: flex;
+      gap: 6px;
+    }
+
+    .staffing-c .pill {
+      background: white;
+      border: 1px solid rgba(124,58,237,0.15);
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--purple-mid);
+    }
+
+    /* Option D: Visual diagram style */
+    .staffing-d {
+      padding: 20px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border-radius: 8px;
+    }
+
+    .staffing-d h4 {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--purple-mid);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+
+    .staffing-d .diagram {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .staffing-d .onshore-box {
+      background: white;
+      border: 2px solid var(--purple-accent);
+      border-radius: 8px;
+      padding: 12px 16px;
+      text-align: center;
+    }
+
+    .staffing-d .onshore-box i {
+      font-size: 18px;
+      color: var(--purple-accent);
+      margin-bottom: 4px;
+    }
+
+    .staffing-d .onshore-box span {
+      display: block;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .staffing-d .onshore-box small {
+      font-size: 9px;
+      color: var(--text-light);
+    }
+
+    .staffing-d .arrow {
+      color: var(--purple-accent);
+      font-size: 20px;
+    }
+
+    .staffing-d .offshore-box {
+      flex: 1;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+    }
+
+    .staffing-d .offshore-box span {
+      display: block;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .staffing-d .pod-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .staffing-d .pod-item {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 9px;
+      font-weight: 500;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .staffing-d .pod-item i {
+      font-size: 10px;
+      color: var(--purple-mid);
+    }
+
+    /* Option E: Simple two-line with emphasis */
+    .staffing-e {
+      padding: 14px 20px;
+      background: var(--bg-subtle);
+      border-left: 3px solid var(--purple-accent);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .staffing-e .line1 {
+      font-size: 12px;
+      color: var(--primary);
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .staffing-e .line1 strong {
+      color: var(--purple-mid);
+    }
+
+    .staffing-e .line2 {
+      font-size: 11px;
+      color: var(--text-light);
+    }
+
+    .staffing-e .line2 span {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* Option F: Horizontal cards */
+    .staffing-f {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+
+    .staffing-f .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .staffing-f .card.highlight {
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple-bright));
+      border: none;
+      color: white;
+    }
+
+    .staffing-f .card i {
+      font-size: 16px;
+      margin-bottom: 6px;
+      color: var(--purple-mid);
+    }
+
+    .staffing-f .card.highlight i {
+      color: white;
+    }
+
+    .staffing-f .card span {
+      display: block;
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    .staffing-f .card.highlight span {
+      color: white;
+    }
+
+    .staffing-f .card small {
+      display: block;
+      font-size: 8px;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+
+    .staffing-f .card.highlight small {
+      color: rgba(255,255,255,0.8);
+    }
+  </style>
+</head>
+<body>
+  <h1>Staffing Section Options</h1>
+
+  <!-- Option A -->
+  <div class="option-label">Option A: Two Columns</div>
+  <div class="option">
+    <div class="staffing-a">
+      <div class="column">
+        <h4>Leadership</h4>
+        <p>Senior onshore leadership providing strategic direction and client partnership</p>
+      </div>
+      <div class="column">
+        <h4>Flexible Delivery Pods</h4>
+        <p>Scalable offshore teams that grow with your needs</p>
+        <div class="pod-tags">
+          <span class="pod-tag">AI/ML</span>
+          <span class="pod-tag">Data Engineering</span>
+          <span class="pod-tag">Full-Stack</span>
+          <span class="pod-tag">UI/UX</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option B -->
+  <div class="option-label">Option B: Icon Row</div>
+  <div class="option">
+    <div class="staffing-b">
+      <div class="leadership">
+        <i class="fa-solid fa-user-tie"></i>
+        <div class="leadership-text">
+          <h4>Senior Onshore Leadership</h4>
+          <p>Strategic direction & client partnership</p>
+        </div>
+      </div>
+      <div class="pods">
+        <div class="pod">
+          <i class="fa-solid fa-brain"></i>
+          <span>AI/ML</span>
+        </div>
+        <div class="pod">
+          <i class="fa-solid fa-database"></i>
+          <span>Data Eng</span>
+        </div>
+        <div class="pod">
+          <i class="fa-solid fa-code"></i>
+          <span>Full-Stack</span>
+        </div>
+        <div class="pod">
+          <i class="fa-solid fa-palette"></i>
+          <span>UI/UX</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option C -->
+  <div class="option-label">Option C: Compact Inline</div>
+  <div class="option">
+    <div class="staffing-c">
+      <div class="label">Staffing</div>
+      <div class="divider"></div>
+      <div class="desc">Senior onshore leadership + scalable offshore delivery</div>
+      <div class="pills">
+        <span class="pill">AI/ML</span>
+        <span class="pill">Data</span>
+        <span class="pill">Dev</span>
+        <span class="pill">UX</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option D -->
+  <div class="option-label">Option D: Visual Diagram</div>
+  <div class="option">
+    <div class="staffing-d">
+      <h4>Staffing Model</h4>
+      <div class="diagram">
+        <div class="onshore-box">
+          <i class="fa-solid fa-user-tie"></i>
+          <span>Onshore Lead</span>
+          <small>Strategy & Client</small>
+        </div>
+        <i class="fa-solid fa-arrow-right arrow"></i>
+        <div class="offshore-box">
+          <span>Scalable Offshore Pods</span>
+          <div class="pod-row">
+            <div class="pod-item"><i class="fa-solid fa-brain"></i> AI/ML</div>
+            <div class="pod-item"><i class="fa-solid fa-database"></i> Data Engineering</div>
+            <div class="pod-item"><i class="fa-solid fa-code"></i> Full-Stack</div>
+            <div class="pod-item"><i class="fa-solid fa-palette"></i> UI/UX</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option E -->
+  <div class="option-label">Option E: Simple Two-Line</div>
+  <div class="option">
+    <div class="staffing-e">
+      <div class="line1"><strong>Senior onshore leadership</strong> paired with scalable offshore delivery</div>
+      <div class="line2">Flexible pods: <span>AI/ML</span> · <span>Data Engineering</span> · <span>Full-Stack</span> · <span>UI/UX</span></div>
+    </div>
+  </div>
+
+  <!-- Option F -->
+  <div class="option-label">Option F: Horizontal Cards</div>
+  <div class="option">
+    <div class="staffing-f">
+      <div class="card highlight">
+        <i class="fa-solid fa-user-tie"></i>
+        <span>Leadership</span>
+        <small>Onshore</small>
+      </div>
+      <div class="card">
+        <i class="fa-solid fa-brain"></i>
+        <span>AI/ML</span>
+        <small>Offshore</small>
+      </div>
+      <div class="card">
+        <i class="fa-solid fa-database"></i>
+        <span>Data Eng</span>
+        <small>Offshore</small>
+      </div>
+      <div class="card">
+        <i class="fa-solid fa-code"></i>
+        <span>Full-Stack</span>
+        <small>Offshore</small>
+      </div>
+      <div class="card">
+        <i class="fa-solid fa-palette"></i>
+        <span>UI/UX</span>
+        <small>Offshore</small>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

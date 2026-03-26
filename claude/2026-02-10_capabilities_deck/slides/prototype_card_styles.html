@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Style - Option C with Color Differentiation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #e8e6eb;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2e1065;
+            margin-bottom: 40px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        /* Tech grid - 3x2 like the real slide */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        /* Base card styles */
+        .tech-card {
+            background: white;
+            border: 1px solid rgba(124,58,237,0.1);
+            border-radius: 8px;
+            padding: 18px 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .card-header h3 {
+            font-size: 12px;
+            font-weight: 600;
+            color: #0f172a;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .card-header i {
+            font-size: 14px;
+        }
+
+        .tech-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .tech-list li {
+            font-size: 11px;
+            color: #334155;
+            padding: 4px 0;
+            padding-left: 14px;
+            position: relative;
+        }
+
+        .tech-list li:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+        }
+
+        /* Different icon colors, bullet colors, and bottom border per card */
+        .card-1 .card-header i { color: #5B21B6; }
+        .card-1 .tech-list li:before { background: #5B21B6; }
+        .card-1 { border-bottom: 3px solid #5B21B6; }
+
+        .card-2 .card-header i { color: #6D28D9; }
+        .card-2 .tech-list li:before { background: #6D28D9; }
+        .card-2 { border-bottom: 3px solid #6D28D9; }
+
+        .card-3 .card-header i { color: #7C3AED; }
+        .card-3 .tech-list li:before { background: #7C3AED; }
+        .card-3 { border-bottom: 3px solid #7C3AED; }
+
+        .card-4 .card-header i { color: #8B5CF6; }
+        .card-4 .tech-list li:before { background: #8B5CF6; }
+        .card-4 { border-bottom: 3px solid #8B5CF6; }
+
+        .card-5 .card-header i { color: #A855F7; }
+        .card-5 .tech-list li:before { background: #A855F7; }
+        .card-5 { border-bottom: 3px solid #A855F7; }
+
+        .card-6 .card-header i { color: #C084FC; }
+        .card-6 .tech-list li:before { background: #C084FC; }
+        .card-6 { border-bottom: 3px solid #C084FC; }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Option C: Colored Icons with Differentiation</h1>
+
+        <div class="tech-grid">
+            <div class="tech-card card-1">
+                <div class="card-header">
+                    <i class="fa-solid fa-brain"></i>
+                    <h3>GenAI & LLM</h3>
+                </div>
+                <ul class="tech-list">
+                    <li>Custom model fine-tuning</li>
+                    <li>RAG architectures</li>
+                    <li>Prompt engineering</li>
+                    <li>Multi-model orchestration</li>
+                    <li>Local LLM deployment</li>
+                </ul>
+            </div>
+
+            <div class="tech-card card-2">
+                <div class="card-header">
+                    <i class="fa-solid fa-robot"></i>
+                    <h3>Agent Frameworks</h3>
+                </div>
+                <ul class="tech-list">
+                    <li>LangGraph</li>
+                    <li>CrewAI</li>
+                    <li>AutoGen</li>
+                    <li>Model Context Protocol (MCP)</li>
+                    <li>Custom agent architectures</li>
+                </ul>
+            </div>
+
+            <div class="tech-card card-3">
+                <div class="card-header">
+                    <i class="fa-solid fa-eye"></i>
+                    <h3>Computer Vision</h3>
+                </div>
+                <ul class="tech-list">
+                    <li>R-CNN, YOLO architectures</li>
+                    <li>Defect detection systems</li>
+                    <li>Multi-modal vision-language</li>
+                    <li>Edge deployment</li>
+                    <li>Real-time inference</li>
+                </ul>
+            </div>
+
+            <div class="tech-card card-4">
+                <div class="card-header">
+                    <i class="fa-solid fa-database"></i>
+                    <h3>Data Engineering</h3>
+                </div>
+                <ul class="tech-list">
+                    <li>ETL pipeline design</li>
+                    <li>Apache Kafka, Spark</li>
+                    <li>Vector databases</li>
+                    <li>Data quality frameworks</li>
+                    <li>Real-time streaming</li>
+                </ul>
+            </div>
+
+            <div class="tech-card card-5">
+                <div class="card-header">
+                    <i class="fa-solid fa-cloud"></i>
+                    <h3>Cloud & MLOps</h3>
+                </div>
+                <ul class="tech-list">
+                    <li>Azure, AWS, GCP</li>
+                    <li>Kubernetes orchestration</li>
+                    <li>CI/CD for ML</li>
+                    <li>Model monitoring</li>
+                    <li>A/B testing infrastructure</li>
+                </ul>
+            </div>
+
+            <div class="tech-card card-6">
+                <div class="card-header">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <h3>ML & Optimization</h3>
+                </div>
+                <ul class="tech-list">
+                    <li>XGBoost, LightGBM</li>
+                    <li>Reinforcement learning</li>
+                    <li>Time-series forecasting</li>
+                    <li>SHAP explainability</li>
+                    <li>Digital twin integration</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recruiter Guide: AI Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple-mid: #5b21b6;
+      --purple-accent: #a855f7;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --green: #16a34a;
+      --red: #dc2626;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.5;
+      font-size: 10pt;
+      max-width: 8.5in;
+      margin: 0 auto;
+      padding: 0.5in;
+    }
+
+    .header {
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--purple-accent);
+    }
+
+    .header-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--purple-accent);
+      margin-bottom: 4px;
+    }
+
+    h1 {
+      font-size: 22pt;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-size: 11px;
+      color: var(--text-light);
+    }
+
+    .section-title {
+      font-size: 12pt;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .full-width { grid-column: 1 / -1; }
+
+    .skill-list {
+      list-style: none;
+      margin: 0;
+    }
+
+    .skill-list li {
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 9.5pt;
+    }
+
+    .skill-list li:last-child { border-bottom: none; }
+
+    .skill-list strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .skill-list .detail {
+      color: var(--text-light);
+      font-size: 9pt;
+    }
+
+    .signal-list {
+      list-style: none;
+      margin: 0;
+    }
+
+    .signal-list li {
+      padding: 5px 0 5px 16px;
+      position: relative;
+      font-size: 9.5pt;
+    }
+
+    .signal-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .signal-list.positive li::before { background: var(--green); }
+    .signal-list.negative li::before { background: var(--red); }
+
+    .question-block {
+      background: linear-gradient(135deg, rgba(124,58,237,0.04) 0%, rgba(168,85,247,0.06) 100%);
+      border-left: 3px solid var(--purple-accent);
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .question-text {
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 10pt;
+      margin-bottom: 8px;
+    }
+
+    .signal-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      font-size: 8.5pt;
+      line-height: 1.4;
+    }
+
+    .signal-label {
+      font-weight: 600;
+      font-size: 8pt;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .signal-weak .signal-label { color: var(--red); }
+    .signal-good .signal-label { color: var(--green); }
+    .signal-weak, .signal-good { color: var(--text); }
+
+    .search-card {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .search-card-title {
+      font-size: 9pt;
+      font-weight: 600;
+      color: var(--purple-mid);
+      margin-bottom: 8px;
+    }
+
+    .search-string {
+      font-family: 'SF Mono', 'Consolas', monospace;
+      font-size: 8pt;
+      line-height: 1.5;
+      color: var(--text);
+      word-break: break-word;
+    }
+
+    .tag-section { margin-bottom: 12px; }
+
+    .tag-label {
+      font-size: 9pt;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.12) 100%);
+      color: var(--purple-mid);
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 8.5pt;
+      font-weight: 500;
+    }
+
+    .tag-secondary {
+      display: inline-block;
+      background: var(--bg-subtle);
+      color: var(--text);
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 8.5pt;
+      border: 1px solid var(--border);
+    }
+
+    .synonym-box {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 14px;
+    }
+
+    .synonym-group {
+      margin-bottom: 8px;
+    }
+
+    .synonym-group:last-child { margin-bottom: 0; }
+
+    .synonym-group strong {
+      font-size: 8.5pt;
+      color: var(--primary);
+    }
+
+    .synonym-group code {
+      font-family: 'SF Mono', 'Consolas', monospace;
+      font-size: 8pt;
+      color: var(--text);
+      background: white;
+      padding: 1px 4px;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+    }
+
+    .section-intro {
+      font-size: 9pt;
+      color: var(--text-light);
+      margin-bottom: 10px;
+    }
+
+    .note-box {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 14px;
+      margin-bottom: 20px;
+      font-size: 9pt;
+      color: var(--text);
+    }
+
+    .note-box strong {
+      color: var(--primary);
+    }
+
+    @media print {
+      body { padding: 0; }
+      @page { size: 8.5in 11in; margin: 0.4in; }
+      .question-block, .search-card, .tag, .synonym-box, .note-box {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-label">Recruiter Guide</div>
+    <h1>AI Engineer</h1>
+    <div class="subtitle">Remote (Offshore) | Chat Interface + Dashboard Focus</div>
+  </div>
+
+  <div class="note-box">
+    <strong>Helpful for pre-screening:</strong> If your screening call is on Teams, please enable transcription and share the transcript afterward. This helps our technical team review candidates more effectively. Not required, but appreciated!
+  </div>
+
+  <div class="grid">
+    <div>
+      <div class="section-title">Must-Have Skills</div>
+      <ul class="skill-list">
+        <li>
+          <strong>4-6+ years AI/NLP production experience</strong>
+          <div class="detail">Built AI systems that real users relied on, not just research or coursework</div>
+        </li>
+        <li>
+          <strong>LangChain or LangGraph</strong>
+          <div class="detail">Orchestration frameworks for building AI pipelines; understands chains and agents</div>
+        </li>
+        <li>
+          <strong>Python backend development</strong>
+          <div class="detail">FastAPI or Django, APIs, data processing pipelines</div>
+        </li>
+        <li>
+          <strong>Prompt engineering</strong>
+          <div class="detail">Context management, few-shot learning, structured outputs, handling when AI gives bad answers</div>
+        </li>
+        <li>
+          <strong>Chat interface experience</strong>
+          <div class="detail">Built conversational AI or natural language query systems; conversation history, multi-turn context</div>
+        </li>
+        <li>
+          <strong>RAG and vector search</strong>
+          <div class="detail">Built retrieval systems with pgvector, Pinecone, or similar; understands embeddings</div>
+        </li>
+        <li>
+          <strong>On-prem deployment capability</strong>
+          <div class="detail">Can deploy and maintain AI services without relying on cloud-managed services</div>
+        </li>
+        <li>
+          <strong>AI pair programming proficiency</strong>
+          <div class="detail">Actively uses Claude Code, Cursor, or similar agentic AI tools daily. Not just autocomplete (Copilot) - should be comfortable with AI that writes and edits code autonomously</div>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="section-title">Nice-to-Have Background</div>
+      <ul class="skill-list">
+        <li>
+          <strong>Dashboard / data visualization</strong>
+          <div class="detail">Built monitoring dashboards or analytics interfaces (React, Streamlit, Grafana)</div>
+        </li>
+        <li>
+          <strong>Log analysis experience</strong>
+          <div class="detail">Parsed logs, analyzed failures, built tools that help debug issues</div>
+        </li>
+        <li>
+          <strong>CI/CD familiarity</strong>
+          <div class="detail">Understands build pipelines, test automation, deployment workflows</div>
+        </li>
+        <li>
+          <strong>Streaming/real-time</strong>
+          <div class="detail">WebSockets, server-sent events, streaming LLM responses</div>
+        </li>
+        <li>
+          <strong>NLP fundamentals</strong>
+          <div class="detail">Text processing, parsing, search beyond just LLM APIs</div>
+        </li>
+        <li>
+          <strong>Strong async communication</strong>
+          <div class="detail">Remote work requires clear written updates across time zones</div>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="section-title">Strong Signals</div>
+      <ul class="signal-list positive">
+        <li>Built chat interfaces or conversational AI that shipped to production</li>
+        <li>Enthusiastic about AI tools - can describe specific ways Claude Code or Cursor changed their workflow</li>
+        <li>Dashboard or data visualization experience</li>
+        <li>Strong written communication (critical for remote/offshore)</li>
+        <li>Experience working with distributed teams across time zones</li>
+        <li>Has deployed AI services themselves, not just handed off to DevOps</li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="section-title">Warning Signs</div>
+      <ul class="signal-list negative">
+        <li>Only notebook/research experience - never deployed for real users</li>
+        <li>Can't explain how they test AI systems with variable outputs</li>
+        <li>Poor written communication (critical for remote work)</li>
+        <li>Doesn't use AI coding tools, or only uses basic autocomplete (Copilot alone)</li>
+        <li>Needs constant direction, not self-starting</li>
+        <li>Vague about what they personally built vs what the team built</li>
+      </ul>
+    </div>
+
+    <div class="full-width">
+      <div class="section-title">Screening Questions</div>
+      <p class="section-intro">Record all screening calls. These questions reveal depth without requiring technical evaluation. Note answers verbatim for technical review.</p>
+
+      <div class="question-block">
+        <div class="question-text">"Describe an AI-powered feature you built that went to production. What did it do and who used it?"</div>
+        <div class="signal-row">
+          <div class="signal-weak">
+            <div class="signal-label">Weak Answer</div>
+            Vague description without specifics. Describes a demo, prototype, or hackathon project. Says "the team built it" without clarifying their personal role.
+          </div>
+          <div class="signal-good">
+            <div class="signal-label">Good Answer</div>
+            Specific feature with concrete details - what problem it solved, what technologies they used, how many users or what scale. Clear about what THEY built vs the team.
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text">"How do you test AI features when the outputs aren't deterministic?"</div>
+        <div class="signal-row">
+          <div class="signal-weak">
+            <div class="signal-label">Weak Answer</div>
+            Can't explain an approach, or says "you can't really test AI." No structured methodology.
+          </div>
+          <div class="signal-good">
+            <div class="signal-label">Good Answer</div>
+            Describes specific approaches - evaluation datasets, human review processes, regression testing on known examples, monitoring production quality. Has actually thought about this problem.
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text">"Have you built any chat interfaces? Walk me through how conversation history and context work."</div>
+        <div class="signal-row">
+          <div class="signal-weak">
+            <div class="signal-label">Weak Answer</div>
+            Never built chat interfaces, or can't explain how they handle multi-turn conversations. Vague about architecture.
+          </div>
+          <div class="signal-good">
+            <div class="signal-label">Good Answer</div>
+            Explains how they store conversation history, manage context windows, handle when context gets too long. Can describe real implementation decisions they made.
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text">"What AI coding tools do you use, and how have they changed the way you work?"</div>
+        <div class="signal-row">
+          <div class="signal-weak">
+            <div class="signal-label">Weak Answer</div>
+            Doesn't use AI tools, or only mentions basic autocomplete like Copilot. Can't describe specific ways it changed their workflow. Dismissive about AI assistance.
+          </div>
+          <div class="signal-good">
+            <div class="signal-label">Good Answer</div>
+            Uses Claude Code, Cursor, or similar agentic tools. Gives specific examples of how it changed their work - faster debugging, writing tests, exploring unfamiliar codebases. Enthusiastic about the productivity gains.
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text">"How do you stay on track and communicate progress when working remotely with a team in different time zones?"</div>
+        <div class="signal-row">
+          <div class="signal-weak">
+            <div class="signal-label">Weak Answer</div>
+            No experience with remote/distributed work. Depends on synchronous meetings for everything. Poor at written updates.
+          </div>
+          <div class="signal-good">
+            <div class="signal-label">Good Answer</div>
+            Describes specific practices - written daily updates, async documentation, proactive communication about blockers. Has worked this way before and has systems that work.
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text">"Can you explain [most complex thing on their resume] to me like I'm not technical?"</div>
+        <div class="signal-row">
+          <div class="signal-weak">
+            <div class="signal-label">Weak Answer</div>
+            Uses jargon, gets frustrated, or can't simplify it.
+          </div>
+          <div class="signal-good">
+            <div class="signal-label">Good Answer</div>
+            Uses plain language and analogies. Checks if you're following. Patient and clear. (You can evaluate this directly.)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="full-width">
+      <div class="section-title">LinkedIn Search Strings</div>
+      <p class="section-intro">Start with Layer 1 (most precise). If fewer than 20 results, try Layer 2. Still struggling? Use Layer 3.</p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <div class="search-card">
+          <div class="search-card-title">Layer 1 — Narrow (Start Here)</div>
+          <div class="search-string">("AI engineer" OR "LLM engineer" OR "ML engineer") AND Python AND (LangChain OR LangGraph OR "RAG" OR retrieval) AND (chat OR conversational OR dashboard) AND (production OR shipped)</div>
+        </div>
+
+        <div class="search-card">
+          <div class="search-card-title">Layer 2 — Broader Titles</div>
+          <div class="search-string">("software engineer" OR "full stack" OR "backend engineer") AND Python AND (LLM OR "generative AI" OR OpenAI OR Claude) AND (FastAPI OR Django OR React OR "Next.js") AND (chat OR dashboard OR "user interface")</div>
+        </div>
+
+        <div class="search-card">
+          <div class="search-card-title">Layer 3 — Widest Net</div>
+          <div class="search-string">("software engineer" OR developer) AND Python AND ("generative AI" OR LLM OR GPT OR ChatGPT OR OpenAI) AND (API OR backend OR frontend) -"data scientist" -research -intern -junior</div>
+        </div>
+
+        <div class="search-card">
+          <div class="search-card-title">AI Tools Filter (Add to Any Layer)</div>
+          <div class="search-string">AND ("Claude Code" OR Cursor OR "AI pair programming" OR "agentic AI")</div>
+        </div>
+
+        <div class="search-card">
+          <div class="search-card-title">Communication Filter (Add to Any Layer)</div>
+          <div class="search-string">AND (consulting OR "client-facing" OR stakeholder OR "cross-functional" OR documentation)</div>
+        </div>
+
+        <div class="search-card">
+          <div class="search-card-title">Offshore Location Filter (If Needed)</div>
+          <div class="search-string">AND (India OR Bangalore OR Hyderabad OR Pune OR Chennai OR Mumbai OR Delhi OR remote)</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-title">Synonym Groups</div>
+      <p class="section-intro">Use OR between these in searches - they're related tools or mean similar things.</p>
+      <div class="synonym-box">
+        <div class="synonym-group">
+          <strong>LLM Providers:</strong><br>
+          <code>(Claude OR Anthropic)</code><br>
+          <code>(OpenAI OR GPT OR "GPT-4" OR ChatGPT)</code>
+        </div>
+        <div class="synonym-group">
+          <strong>Orchestration:</strong><br>
+          <code>(LangChain OR LangGraph OR LlamaIndex)</code>
+        </div>
+        <div class="synonym-group">
+          <strong>Vector Databases:</strong><br>
+          <code>(pgvector OR Pinecone OR Qdrant OR Weaviate)</code>
+        </div>
+        <div class="synonym-group">
+          <strong>Python Frameworks:</strong><br>
+          <code>(FastAPI OR Django OR Flask)</code>
+        </div>
+        <div class="synonym-group">
+          <strong>AI Coding Tools:</strong><br>
+          <code>("Claude Code" OR Cursor OR "AI pair programming")</code>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-title">Tech Stack Keywords</div>
+
+      <div class="tag-section">
+        <div class="tag-label">Must-Have (Search for These)</div>
+        <div class="tag-group">
+          <span class="tag">Python</span>
+          <span class="tag">LangChain</span>
+          <span class="tag">LangGraph</span>
+          <span class="tag">OpenAI API</span>
+          <span class="tag">Claude API</span>
+          <span class="tag">RAG</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">chat interface</span>
+          <span class="tag">Claude Code</span>
+          <span class="tag">Cursor</span>
+        </div>
+      </div>
+
+      <div class="tag-section">
+        <div class="tag-label">Nice-to-Have (Bonus Points)</div>
+        <div class="tag-group">
+          <span class="tag-secondary">pgvector</span>
+          <span class="tag-secondary">Pinecone</span>
+          <span class="tag-secondary">React</span>
+          <span class="tag-secondary">Streamlit</span>
+          <span class="tag-secondary">Grafana</span>
+          <span class="tag-secondary">WebSocket</span>
+          <span class="tag-secondary">streaming</span>
+          <span class="tag-secondary">embeddings</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="full-width">
+      <div class="section-title">What to Look for in Work History</div>
+      <ul class="skill-list">
+        <li>
+          <strong>Company size 100+ employees preferred</strong>
+          <div class="detail">Large enough to have real production systems, not just side projects</div>
+        </li>
+        <li>
+          <strong>Built AI features that went to production</strong>
+          <div class="detail">Not just research, demos, or internal experiments - actual products users relied on</div>
+        </li>
+        <li>
+          <strong>Experience with remote/distributed teams</strong>
+          <div class="detail">This is an offshore role - they need to work independently across time zones</div>
+        </li>
+        <li>
+          <strong>Chat or conversational AI experience</strong>
+          <div class="detail">The role builds chat interfaces - prior experience is valuable</div>
+        </li>
+        <li>
+          <strong>Self-directed work style</strong>
+          <div class="detail">Look for evidence they can make progress without constant oversight</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

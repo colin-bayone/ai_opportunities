@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Style Options - BayOne</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 24px;
+      color: var(--primary);
+      margin-bottom: 40px;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .option {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .option-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-mid);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    /* Shared list styling */
+    .tech-list {
+      list-style: none;
+      margin-top: 12px;
+    }
+
+    .tech-list li {
+      font-size: 12px;
+      color: var(--text);
+      padding: 4px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tech-list li::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      background: var(--purple-accent);
+      border-radius: 50%;
+    }
+
+    /* ========== OPTION A: Large number watermark ========== */
+    .card-a {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-a .watermark {
+      position: absolute;
+      top: -8px;
+      right: 8px;
+      font-size: 64px;
+      font-weight: 700;
+      color: rgba(168, 85, 247, 0.08);
+      line-height: 1;
+    }
+
+    .card-a h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-a h3 i {
+      color: var(--purple-accent);
+    }
+
+    /* ========== OPTION B: Icon in corner circle ========== */
+    .card-b {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 18px;
+      position: relative;
+    }
+
+    .card-b .corner-icon {
+      position: absolute;
+      top: -12px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple-accent));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 14px;
+      box-shadow: 0 2px 8px rgba(124,58,237,0.3);
+    }
+
+    .card-b h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      padding-right: 30px;
+    }
+
+    /* ========== OPTION C: Bottom accent bar ========== */
+    .card-c {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-c::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-mid), var(--purple-accent));
+    }
+
+    .card-c h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-c h3 i {
+      color: var(--purple-accent);
+    }
+
+    /* ========== OPTION D: Inset left stripe ========== */
+    .card-d {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 18px 16px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-d::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      bottom: 12px;
+      left: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--purple-mid), var(--purple-accent));
+      border-radius: 0 2px 2px 0;
+    }
+
+    .card-d h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-d h3 i {
+      color: var(--purple-accent);
+    }
+
+    /* ========== OPTION E: Tag/pill header ========== */
+    .card-e {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 18px;
+    }
+
+    .card-e .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, rgba(91,33,182,0.1), rgba(168,85,247,0.1));
+      border: 1px solid rgba(124,58,237,0.15);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-mid);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .card-e .tag i {
+      font-size: 11px;
+    }
+
+    /* ========== OPTION F: Two-tone split ========== */
+    .card-f {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .card-f .card-header {
+      background: linear-gradient(135deg, rgba(91,33,182,0.06), rgba(168,85,247,0.04));
+      padding: 12px 18px;
+      border-bottom: 1px solid rgba(124,58,237,0.08);
+    }
+
+    .card-f h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-f h3 i {
+      color: var(--purple-mid);
+    }
+
+    .card-f .card-body {
+      padding: 12px 18px;
+    }
+
+  </style>
+</head>
+<body>
+  <h1>Card Style Options</h1>
+
+  <div class="options-grid">
+    <!-- Option A: Large number watermark -->
+    <div class="option">
+      <div class="option-label">Option A: Number Watermark</div>
+      <div class="card-a">
+        <span class="watermark">01</span>
+        <h3><i class="fa-solid fa-brain"></i> GenAI & LLM</h3>
+        <ul class="tech-list">
+          <li>Custom model fine-tuning</li>
+          <li>RAG architectures</li>
+          <li>Prompt engineering</li>
+          <li>Multi-model orchestration</li>
+          <li>Local LLM deployment</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Option B: Icon in corner circle -->
+    <div class="option">
+      <div class="option-label">Option B: Corner Icon Badge</div>
+      <div class="card-b">
+        <div class="corner-icon"><i class="fa-solid fa-brain"></i></div>
+        <h3>GenAI & LLM</h3>
+        <ul class="tech-list">
+          <li>Custom model fine-tuning</li>
+          <li>RAG architectures</li>
+          <li>Prompt engineering</li>
+          <li>Multi-model orchestration</li>
+          <li>Local LLM deployment</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Option C: Bottom accent bar -->
+    <div class="option">
+      <div class="option-label">Option C: Bottom Accent Bar</div>
+      <div class="card-c">
+        <h3><i class="fa-solid fa-brain"></i> GenAI & LLM</h3>
+        <ul class="tech-list">
+          <li>Custom model fine-tuning</li>
+          <li>RAG architectures</li>
+          <li>Prompt engineering</li>
+          <li>Multi-model orchestration</li>
+          <li>Local LLM deployment</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Option D: Inset left stripe -->
+    <div class="option">
+      <div class="option-label">Option D: Inset Left Stripe</div>
+      <div class="card-d">
+        <h3><i class="fa-solid fa-brain"></i> GenAI & LLM</h3>
+        <ul class="tech-list">
+          <li>Custom model fine-tuning</li>
+          <li>RAG architectures</li>
+          <li>Prompt engineering</li>
+          <li>Multi-model orchestration</li>
+          <li>Local LLM deployment</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Option E: Tag/pill header -->
+    <div class="option">
+      <div class="option-label">Option E: Pill Tag Header</div>
+      <div class="card-e">
+        <div class="tag"><i class="fa-solid fa-brain"></i> GenAI & LLM</div>
+        <ul class="tech-list">
+          <li>Custom model fine-tuning</li>
+          <li>RAG architectures</li>
+          <li>Prompt engineering</li>
+          <li>Multi-model orchestration</li>
+          <li>Local LLM deployment</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Option F: Two-tone split -->
+    <div class="option">
+      <div class="option-label">Option F: Two-Tone Header</div>
+      <div class="card-f">
+        <div class="card-header">
+          <h3><i class="fa-solid fa-brain"></i> GenAI & LLM</h3>
+        </div>
+        <div class="card-body">
+          <ul class="tech-list">
+            <li>Custom model fine-tuning</li>
+            <li>RAG architectures</li>
+            <li>Prompt engineering</li>
+            <li>Multi-model orchestration</li>
+            <li>Local LLM deployment</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

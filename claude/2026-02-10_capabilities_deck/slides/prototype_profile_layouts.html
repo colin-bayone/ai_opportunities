@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Layout Options</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f5f5f5;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 40px;
+    }
+
+    .option-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--purple-bright);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      margin: 0 auto 60px;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .header-logo span { color: var(--purple-accent); }
+
+    .header-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 16px 40px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+
+    .avatar-placeholder {
+      background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #94a3b8;
+      flex-shrink: 0;
+    }
+
+    /* ============ OPTION A: Classic Two-Column ============ */
+    .content-a {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 32px;
+      padding: 28px 44px;
+      overflow: hidden;
+    }
+
+    .content-a .left-col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .content-a .avatar-placeholder {
+      width: 100px;
+      height: 100px;
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+
+    .content-a .name {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+
+    .content-a .role {
+      font-size: 13px;
+      color: var(--purple-mid);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .content-a .bio {
+      font-size: 11px;
+      color: var(--text);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    .content-a .background {
+      font-size: 10px;
+      color: var(--text-light);
+      line-height: 1.6;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .content-a .right-col h3 {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--purple-mid);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 12px;
+    }
+
+    .content-a .project {
+      margin-bottom: 14px;
+    }
+
+    .content-a .project h4 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .content-a .project p {
+      font-size: 10px;
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    /* ============ OPTION B: Narrow Sidebar, Wide Content ============ */
+    .content-b {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 28px;
+      padding: 24px 40px;
+      overflow: hidden;
+    }
+
+    .content-b .sidebar {
+      border-right: 1px solid var(--border);
+      padding-right: 24px;
+    }
+
+    .content-b .avatar-placeholder {
+      width: 80px;
+      height: 80px;
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .content-b .name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+
+    .content-b .role {
+      font-size: 11px;
+      color: var(--purple-mid);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .content-b .sidebar-note {
+      font-size: 9px;
+      color: var(--text-light);
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    .content-b .main-content .bio {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .content-b .main-content h3 {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--purple-mid);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 10px;
+    }
+
+    .content-b .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .content-b .project {
+      padding: 10px 12px;
+      background: var(--bg-subtle);
+      border-radius: 6px;
+      border-left: 2px solid var(--purple-accent);
+    }
+
+    .content-b .project h4 {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .content-b .project p {
+      font-size: 9px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .content-b .background-bar {
+      margin-top: 14px;
+      font-size: 10px;
+      color: var(--text-light);
+      line-height: 1.6;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ============ OPTION C: Full Width, Flowing Text ============ */
+    .content-c {
+      flex: 1;
+      padding: 24px 48px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .content-c .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 18px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .content-c .avatar-placeholder {
+      width: 72px;
+      height: 72px;
+      font-size: 28px;
+    }
+
+    .content-c .header-text .name {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .content-c .header-text .role {
+      font-size: 13px;
+      color: var(--purple-mid);
+      font-weight: 500;
+    }
+
+    .content-c .bio {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 16px;
+      column-count: 2;
+      column-gap: 32px;
+    }
+
+    .content-c h3 {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--purple-mid);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 10px;
+    }
+
+    .content-c .projects-flow {
+      column-count: 2;
+      column-gap: 24px;
+    }
+
+    .content-c .project {
+      break-inside: avoid;
+      margin-bottom: 12px;
+    }
+
+    .content-c .project h4 {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 3px;
+    }
+
+    .content-c .project p {
+      font-size: 10px;
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    /* ============ OPTION D: Document Style ============ */
+    .content-d {
+      flex: 1;
+      padding: 28px 56px;
+      overflow: hidden;
+    }
+
+    .content-d .top-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+
+    .content-d .avatar-placeholder {
+      width: 88px;
+      height: 88px;
+      font-size: 36px;
+    }
+
+    .content-d .intro-block {
+      flex: 1;
+    }
+
+    .content-d .name {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+
+    .content-d .role {
+      font-size: 14px;
+      color: var(--purple-mid);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .content-d .bio {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .content-d h3 {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--purple-mid);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .content-d .projects-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 20px;
+    }
+
+    .content-d .project h4 {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 3px;
+    }
+
+    .content-d .project p {
+      font-size: 10px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .content-d .background-section {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .content-d .background-section h3 {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 6px;
+    }
+
+    .content-d .background-section p {
+      font-size: 10px;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <h1>Profile Layout Options</h1>
+
+  <!-- OPTION A: Classic Two-Column -->
+  <div class="option-label">Option A: Classic Two-Column</div>
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">Enterprise AI Capabilities</div>
+    </div>
+    <div class="content-a">
+      <div class="left-col">
+        <div class="avatar-placeholder"><i class="fa-solid fa-user"></i></div>
+        <div class="name">Colin Moore</div>
+        <div class="role">Director of AI</div>
+        <p class="bio">
+          AI/ML engineering leader with deep experience building and deploying enterprise-scale AI systems that operate reliably under commercial-grade requirements. Leads technical strategy and manages AI/ML engineering teams at BayOne Solutions.
+        </p>
+        <p class="bio">
+          Previously Global AI/ML Manager at Coherent Corporation, where he established and led the company's AI Center of Excellence, managing a global team of 30+ AI engineers across US, EU, and APAC.
+        </p>
+        <p class="background">
+          Early career in biomedical engineering (photoacoustic flowmetry for melanoma detection) and battery R&D (lithium-sulfur cathode materials). Three patents, technology sale to GM. Technical advisor on AI deployment risks.
+        </p>
+      </div>
+      <div class="right-col">
+        <h3>Representative Projects</h3>
+        <div class="project">
+          <h4>Context-Aware Code Review System</h4>
+          <p>AI code review tool that ingests organizational coding standards, architectural patterns, and examples to build context. Integrates into VS Code and Visual Studio, dramatically reducing false positives and increasing engineer trust.</p>
+        </div>
+        <div class="project">
+          <h4>Enterprise GenAI Platform</h4>
+          <p>FedRAMP-authorized Azure-hosted LLM platform serving 40,000+ users across Aerospace & Defense and manufacturing. Role-based access via Entra/Azure AD, 25+ languages, cost-optimized Kubernetes.</p>
+        </div>
+        <div class="project">
+          <h4>High-Stakes Process Optimization</h4>
+          <p>Multi-model ML system for advanced materials manufacturing where each run cost $3M. Gradient-boosted prediction, temporal CNNs for early warning, PPO reinforcement learning trained in digital twins. Yield: 65% → 82%.</p>
+        </div>
+        <div class="project">
+          <h4>Global Data Pipeline Architecture</h4>
+          <p>Enterprise ETL processing ~10TB daily from 70+ on-premises databases across 9 countries plus Oracle Cloud. Real-time streaming dashboards with full data auditability.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">12</div>
+    </div>
+  </div>
+
+  <!-- OPTION B: Narrow Sidebar -->
+  <div class="option-label">Option B: Narrow Sidebar, Wide Content</div>
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">Enterprise AI Capabilities</div>
+    </div>
+    <div class="content-b">
+      <div class="sidebar">
+        <div class="avatar-placeholder"><i class="fa-solid fa-user"></i></div>
+        <div class="name">Colin Moore</div>
+        <div class="role">Director of AI</div>
+        <p class="sidebar-note">Hands-on technical leadership on AI architecture and implementation for this engagement.</p>
+      </div>
+      <div class="main-content">
+        <p class="bio">
+          AI/ML engineering leader with deep experience building and deploying enterprise-scale AI systems. Previously Global AI/ML Manager at Coherent Corporation, establishing their AI Center of Excellence with a 30+ engineer global team across US, EU, and APAC, building a portfolio of 60+ AI initiatives.
+        </p>
+        <h3>Representative Projects</h3>
+        <div class="projects-grid">
+          <div class="project">
+            <h4>Context-Aware Code Review</h4>
+            <p>AI code review ingesting org standards and patterns. VS Code/Visual Studio integration. Dramatically reduced false positives.</p>
+          </div>
+          <div class="project">
+            <h4>Enterprise GenAI Platform</h4>
+            <p>FedRAMP-authorized LLM platform, 40K+ users across A&D and manufacturing. Role-based access, 25+ languages.</p>
+          </div>
+          <div class="project">
+            <h4>High-Stakes Process Optimization</h4>
+            <p>Multi-model ML for $3M production runs. Digital twin validation, SHAP explainability. Yield improved 65% → 82%.</p>
+          </div>
+          <div class="project">
+            <h4>Global Data Pipeline</h4>
+            <p>~10TB daily ETL from 70+ databases across 9 countries. Real-time streaming dashboards, full auditability.</p>
+          </div>
+        </div>
+        <p class="background-bar">
+          <strong>Background:</strong> Biomedical engineering (photoacoustic melanoma detection), battery R&D (lithium-sulfur cathodes). Three patents, technology sale to GM. Technical advisor on AI deployment risks to legal, compliance, and cybersecurity teams.
+        </p>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">12</div>
+    </div>
+  </div>
+
+  <!-- OPTION C: Full Width Flowing -->
+  <div class="option-label">Option C: Full Width, Flowing Text</div>
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">Enterprise AI Capabilities</div>
+    </div>
+    <div class="content-c">
+      <div class="profile-header">
+        <div class="avatar-placeholder"><i class="fa-solid fa-user"></i></div>
+        <div class="header-text">
+          <div class="name">Colin Moore</div>
+          <div class="role">Director of AI, BayOne Solutions</div>
+        </div>
+      </div>
+      <p class="bio">
+        AI/ML engineering leader with deep experience building and deploying enterprise-scale AI systems that operate reliably under commercial-grade requirements. Previously Global AI/ML Manager at Coherent Corporation, where he established and led the company's AI Center of Excellence—managing a global team of 30+ AI engineers and data scientists distributed across US, EU, and APAC, building a portfolio of 60+ AI initiatives. Early career in biomedical engineering (photoacoustic flowmetry for melanoma detection) and battery R&D (lithium-sulfur cathode materials resulting in three patents and a technology sale to GM). Technical advisor on AI deployment risks.
+      </p>
+      <h3>Representative Projects</h3>
+      <div class="projects-flow">
+        <div class="project">
+          <h4>Context-Aware Code Review System</h4>
+          <p>AI code review tool that ingests organizational coding standards, architectural patterns, and examples. VS Code and Visual Studio integration, dramatically reducing false positives.</p>
+        </div>
+        <div class="project">
+          <h4>Enterprise GenAI Platform</h4>
+          <p>FedRAMP-authorized Azure-hosted LLM platform serving 40,000+ users across A&D and manufacturing. Role-based access, 25+ languages, cost-optimized Kubernetes.</p>
+        </div>
+        <div class="project">
+          <h4>High-Stakes Process Optimization</h4>
+          <p>Multi-model ML for advanced materials manufacturing ($3M per run). Gradient-boosted prediction, temporal CNNs, PPO RL trained in digital twins. Yield: 65% → 82%.</p>
+        </div>
+        <div class="project">
+          <h4>Global Data Pipeline Architecture</h4>
+          <p>Enterprise ETL processing ~10TB daily from 70+ databases across 9 countries. Real-time streaming dashboards with full auditability.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">12</div>
+    </div>
+  </div>
+
+  <!-- OPTION D: Document Style -->
+  <div class="option-label">Option D: Document Style</div>
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">Enterprise AI Capabilities</div>
+    </div>
+    <div class="content-d">
+      <div class="top-row">
+        <div class="avatar-placeholder"><i class="fa-solid fa-user"></i></div>
+        <div class="intro-block">
+          <div class="name">Colin Moore</div>
+          <div class="role">Director of AI</div>
+          <p class="bio">
+            AI/ML engineering leader with deep experience building and deploying enterprise-scale AI systems that operate reliably under commercial-grade requirements. Previously Global AI/ML Manager at Coherent Corporation, where he established and led the company's AI Center of Excellence—managing a global team of 30+ AI engineers across US, EU, and APAC, building a portfolio of 60+ AI initiatives.
+          </p>
+        </div>
+      </div>
+      <h3>Representative Projects</h3>
+      <div class="projects-list">
+        <div class="project">
+          <h4>Context-Aware Code Review</h4>
+          <p>AI code review ingesting org standards and architectural patterns. VS Code/Visual Studio integration, dramatically reducing false positives and increasing engineer trust.</p>
+        </div>
+        <div class="project">
+          <h4>Enterprise GenAI Platform</h4>
+          <p>FedRAMP-authorized LLM platform, 40K+ users across A&D and manufacturing. Role-based access via Entra/Azure AD, 25+ languages, cost-optimized K8s.</p>
+        </div>
+        <div class="project">
+          <h4>High-Stakes Process Optimization</h4>
+          <p>Multi-model ML for $3M production runs. Gradient-boosted models, temporal CNNs, PPO RL trained in digital twins. Yield improved 65% → 82%.</p>
+        </div>
+        <div class="project">
+          <h4>Global Data Pipeline</h4>
+          <p>~10TB daily ETL from 70+ databases across 9 countries plus Oracle Cloud. Real-time streaming dashboards, full data auditability.</p>
+        </div>
+      </div>
+      <div class="background-section">
+        <h3>Background</h3>
+        <p>Biomedical engineering (photoacoustic flowmetry for melanoma detection), battery R&D (lithium-sulfur cathode materials—three patents, technology sale to GM). Technical advisor on AI deployment risks to legal, compliance, and cybersecurity teams.</p>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">12</div>
+    </div>
+  </div>
+
+</body>
+</html>
