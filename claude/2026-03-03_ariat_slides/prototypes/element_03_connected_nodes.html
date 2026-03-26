@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Element: Connected Nodes Graph</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #0f172a 0%, #1e1b4b 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 40px;
+    }
+
+    .graph-container {
+      position: relative;
+      width: 500px;
+      height: 400px;
+    }
+
+    /* Connection lines */
+    .connection {
+      position: absolute;
+      background: linear-gradient(90deg, rgba(168,85,247,0.3), rgba(168,85,247,0.6));
+      height: 2px;
+      transform-origin: left center;
+    }
+
+    /* Node base */
+    .node {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .node-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #5b21b6, #7c3aed);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: #fff;
+      box-shadow:
+        0 0 20px rgba(124, 58, 237, 0.4),
+        0 0 40px rgba(124, 58, 237, 0.2);
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+
+    .node-circle.center {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      font-size: 28px;
+      box-shadow:
+        0 0 30px rgba(168, 85, 247, 0.5),
+        0 0 60px rgba(168, 85, 247, 0.3);
+    }
+
+    .node-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: #e2e8f0;
+      text-align: center;
+      max-width: 80px;
+    }
+
+    /* Position nodes */
+    .node.center { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .node.top { top: 10%; left: 50%; transform: translateX(-50%); }
+    .node.top-right { top: 25%; right: 10%; }
+    .node.bottom-right { bottom: 25%; right: 10%; }
+    .node.bottom { bottom: 10%; left: 50%; transform: translateX(-50%); }
+    .node.bottom-left { bottom: 25%; left: 10%; }
+    .node.top-left { top: 25%; left: 10%; }
+
+    /* Animated pulse */
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    .pulse-ring {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: pulse 3s infinite;
+    }
+
+    .pulse-ring:nth-child(2) {
+      width: 140px;
+      height: 140px;
+      animation-delay: 0.5s;
+    }
+
+    .pulse-ring:nth-child(3) {
+      width: 180px;
+      height: 180px;
+      animation-delay: 1s;
+    }
+
+    /* SVG for proper lines */
+    .lines-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .lines-svg line {
+      stroke: url(#purpleGradient);
+      stroke-width: 2;
+      opacity: 0.5;
+    }
+
+    /* Data flow dots */
+    @keyframes flowDot {
+      0% { offset-distance: 0%; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { offset-distance: 100%; opacity: 0; }
+    }
+
+    .flow-dot {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #e879f9;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #e879f9;
+    }
+  </style>
+</head>
+<body>
+  <div class="graph-container">
+    <!-- Pulse rings around center -->
+    <div class="pulse-ring"></div>
+    <div class="pulse-ring"></div>
+    <div class="pulse-ring"></div>
+
+    <!-- SVG Lines -->
+    <svg class="lines-svg" viewBox="0 0 500 400">
+      <defs>
+        <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#5b21b6;stop-opacity:0.3" />
+          <stop offset="50%" style="stop-color:#a855f7;stop-opacity:0.8" />
+          <stop offset="100%" style="stop-color:#5b21b6;stop-opacity:0.3" />
+        </linearGradient>
+      </defs>
+      <!-- Center to outer nodes -->
+      <line x1="250" y1="200" x2="250" y2="60" />
+      <line x1="250" y1="200" x2="420" y2="100" />
+      <line x1="250" y1="200" x2="420" y2="300" />
+      <line x1="250" y1="200" x2="250" y2="340" />
+      <line x1="250" y1="200" x2="80" y2="300" />
+      <line x1="250" y1="200" x2="80" y2="100" />
+    </svg>
+
+    <!-- Nodes -->
+    <div class="node center">
+      <div class="node-circle center">&#x2B22;</div>
+    </div>
+
+    <div class="node top">
+      <div class="node-circle">&#x2699;</div>
+      <div class="node-label">Developer Productivity</div>
+    </div>
+
+    <div class="node top-right">
+      <div class="node-circle">&#x2630;</div>
+      <div class="node-label">Enterprise Automation</div>
+    </div>
+
+    <div class="node bottom-right">
+      <div class="node-circle">&#x2261;</div>
+      <div class="node-label">Data & Analytics</div>
+    </div>
+
+    <div class="node bottom">
+      <div class="node-circle">&#x2709;</div>
+      <div class="node-label">Document Intelligence</div>
+    </div>
+
+    <div class="node bottom-left">
+      <div class="node-circle">&#x2295;</div>
+      <div class="node-label">Applied AI</div>
+    </div>
+
+    <div class="node top-left">
+      <div class="node-circle">&#x2713;</div>
+      <div class="node-label">Operations</div>
+    </div>
+  </div>
+</body>
+</html>

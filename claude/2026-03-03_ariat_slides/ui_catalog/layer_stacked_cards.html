@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UI Element: Stacked Layer Cards</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 60px;
+      margin: 0;
+      padding: 40px;
+    }
+
+    /* Style 1: Offset stack */
+    .offset-stack {
+      position: relative;
+      width: 320px;
+      height: 200px;
+    }
+
+    .offset-card {
+      position: absolute;
+      width: 280px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border: 1px solid #e2e8f0;
+    }
+
+    .offset-card:nth-child(1) {
+      top: 0;
+      left: 0;
+      z-index: 3;
+      border-left: 4px solid #5b21b6;
+    }
+
+    .offset-card:nth-child(2) {
+      top: 20px;
+      left: 20px;
+      z-index: 2;
+      border-left: 4px solid #7c3aed;
+    }
+
+    .offset-card:nth-child(3) {
+      top: 40px;
+      left: 40px;
+      z-index: 1;
+      border-left: 4px solid #a855f7;
+    }
+
+    .offset-card h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: #0f172a;
+      margin: 0 0 6px 0;
+    }
+
+    .offset-card p {
+      font-size: 11px;
+      color: #64748b;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    /* Style 2: Platform layers */
+    .platform-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      width: 400px;
+    }
+
+    .platform-layer {
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .platform-layer:nth-child(1) {
+      background: linear-gradient(135deg, #5b21b6, #7c3aed);
+      color: #fff;
+      border-radius: 12px 12px 0 0;
+    }
+
+    .platform-layer:nth-child(2) {
+      background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+      color: #fff;
+    }
+
+    .platform-layer:nth-child(3) {
+      background: linear-gradient(135deg, #a855f7, #c084fc);
+      color: #fff;
+      border-radius: 0 0 12px 12px;
+    }
+
+    .platform-layer .icon {
+      font-size: 18px;
+    }
+
+    .platform-layer .label {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* Style 3: Foundation visual */
+    .foundation-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .foundation-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .foundation-block {
+      padding: 14px 24px;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #334155;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    }
+
+    .foundation-base {
+      padding: 12px 60px;
+      background: linear-gradient(135deg, #5b21b6, #7c3aed);
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="offset-stack">
+    <div class="offset-card">
+      <h4>Pattern Clustering</h4>
+      <p>Group similar items for batch processing</p>
+    </div>
+    <div class="offset-card">
+      <h4>Confidence Scoring</h4>
+      <p>Route work by validation tier</p>
+    </div>
+    <div class="offset-card">
+      <h4>Dependency Mapping</h4>
+      <p>Trace relationships before changes</p>
+    </div>
+  </div>
+
+  <div class="platform-stack">
+    <div class="platform-layer">
+      <div class="icon">&#x2699;</div>
+      <div class="label">Solution Layer</div>
+    </div>
+    <div class="platform-layer">
+      <div class="icon">&#x2630;</div>
+      <div class="label">Integration Layer</div>
+    </div>
+    <div class="platform-layer">
+      <div class="icon">&#x2261;</div>
+      <div class="label">Foundation Layer</div>
+    </div>
+  </div>
+
+  <div class="foundation-stack">
+    <div class="foundation-row">
+      <div class="foundation-block">DevOps</div>
+      <div class="foundation-block">Automation</div>
+      <div class="foundation-block">Analytics</div>
+    </div>
+    <div class="foundation-row">
+      <div class="foundation-block">Documents</div>
+      <div class="foundation-block">Operations</div>
+    </div>
+    <div class="foundation-base">70% Reusable Architecture</div>
+  </div>
+
+</body>
+</html>

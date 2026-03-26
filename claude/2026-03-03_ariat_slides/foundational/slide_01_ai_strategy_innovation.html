@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 1: AI Strategy and Innovation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-logo span { color: var(--purple-accent); }
+
+    .header-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+    }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 14px 40px 12px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+      flex-shrink: 0;
+    }
+
+    .slide-content .lead {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 12px 40px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 1200px;
+      margin: 0 auto 16px;
+    }
+
+    .cards-grid.four-col {
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 1500px;
+    }
+
+    .cards-grid.two-col {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 820px;
+    }
+
+    /* Card Styles */
+    .card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 14px;
+      padding: 14px 18px;
+      box-shadow: 0 2px 10px rgba(124,58,237,0.06);
+    }
+
+    .card .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .card .icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .card.dev .icon { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .card.auto .icon { background: linear-gradient(135deg, #5B21B6, #7C3AED); }
+    .card.data .icon { background: linear-gradient(135deg, #7C3AED, #8B5CF6); }
+    .card.doc .icon { background: linear-gradient(135deg, #8B5CF6, #A855F7); }
+    .card.agent .icon { background: linear-gradient(135deg, #A855F7, #C026D3); }
+
+    .card.agent .icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: #fff;
+      stroke-width: 2;
+    }
+
+    .card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .card .tagline {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.4;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card .items {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .card .item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 11px;
+      line-height: 1.5;
+      color: #475569;
+    }
+
+    .card .item i {
+      color: var(--purple-accent);
+      font-size: 11px;
+      margin-top: 3px;
+      width: 14px;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    .card .item strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">Enterprise AI Capabilities</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>AI Strategy and Innovation</h2>
+      <p class="lead">Comprehensive AI capabilities across development, automation, data, and operations</p>
+
+      <!-- Top Row: 3 Cards -->
+      <div class="cards-grid">
+
+        <!-- Card 1: Developer Productivity -->
+        <div class="card dev">
+          <div class="header">
+            <div class="icon"><i class="fa-solid fa-code"></i></div>
+            <h3>Developer Productivity</h3>
+          </div>
+          <p class="tagline">Accelerate engineering velocity with AI tools that integrate into existing workflows and understand your codebase.</p>
+          <div class="items">
+            <div class="item">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <span><strong>AI Copilots</strong> trained on your codebase with context-aware suggestions.</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-code-compare"></i>
+              <span><strong>Intelligent Code Review</strong> that catches architectural issues, not just syntax errors.</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-diagram-project"></i>
+              <span><strong>CI/CD Pipeline Intelligence</strong> that diagnoses failures and monitors branch health.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Enterprise Automation -->
+        <div class="card auto">
+          <div class="header">
+            <div class="icon"><i class="fa-solid fa-gears"></i></div>
+            <h3>Enterprise Automation</h3>
+          </div>
+          <p class="tagline">Move beyond brittle RPA to adaptive automation that connects enterprise applications and learns from interactions.</p>
+          <div class="items">
+            <div class="item">
+              <i class="fa-solid fa-bolt"></i>
+              <span><strong>Intelligent Process Automation</strong> that handles exceptions and adapts to changing inputs.</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-plug"></i>
+              <span><strong>Enterprise App Integrations</strong> connecting Salesforce, ServiceNow, Jira, and more.</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-envelope-open-text"></i>
+              <span><strong>Email & Document Automation</strong> with AI-powered intake and classification.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Data & Analytics -->
+        <div class="card data">
+          <div class="header">
+            <div class="icon"><i class="fa-solid fa-chart-column"></i></div>
+            <h3>Data & Analytics</h3>
+          </div>
+          <p class="tagline">Transform data into actionable intelligence with pipelines, natural language access, and predictive capabilities.</p>
+          <div class="items">
+            <div class="item">
+              <i class="fa-solid fa-database"></i>
+              <span><strong>Pipeline Engineering</strong> with Spark, Kafka, Airflow, Snowflake for real-time and batch processing.</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-chart-line"></i>
+              <span><strong>Predictive Analytics</strong> for forecasting and optimization with explainable outputs.</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-vector-square"></i>
+              <span><strong>Vector & Embedding Infrastructure</strong> powering RAG and AI applications.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Row: 2 Cards -->
+      <div class="cards-grid" style="grid-template-columns: repeat(2, 1fr);">
+
+        <!-- Card 4: Document Intelligence -->
+        <div class="card doc">
+          <div class="header">
+            <div class="icon"><i class="fa-solid fa-file-lines"></i></div>
+            <h3>Document Intelligence</h3>
+          </div>
+          <p class="tagline">Unlock knowledge trapped in unstructured documents for AI systems.</p>
+          <div class="items">
+            <div class="item">
+              <i class="fa-solid fa-book-open"></i>
+              <span><strong>RAG Knowledge Systems</strong> with citations and source grounding.</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-file-import"></i>
+              <span><strong>Intelligent Processing</strong> that extracts content from complex layouts.</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-file-export"></i>
+              <span><strong>Document Generation</strong> for contracts, reports, and compliance documents.</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-layer-group"></i>
+              <span><strong>Multi-Modal Understanding</strong> across text, images, charts, and diagrams.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: Agentic AI -->
+        <div class="card agent">
+          <div class="header">
+            <div class="icon"><i data-lucide="sparkles"></i></div>
+            <h3>Agentic AI</h3>
+          </div>
+          <p class="tagline">Autonomous AI agents that reason, plan, and execute complex tasks with modern orchestration.</p>
+          <div class="items">
+            <div class="item">
+              <i class="fa-solid fa-cubes"></i>
+              <span><strong>Agent Swarms</strong> with parallel execution, coordination, and dynamic task distribution.</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-diagram-project"></i>
+              <span><strong>Multi-Agent Frameworks</strong> built on LangGraph, CrewAI, and Semantic Kernel.</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-plug-circle-bolt"></i>
+              <span><strong>MCP & A2A Protocols</strong> for agent-to-tool and agent-to-agent communication.</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-brain"></i>
+              <span><strong>Reasoning & Planning</strong> with chain-of-thought execution and human-in-the-loop.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">01</div>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

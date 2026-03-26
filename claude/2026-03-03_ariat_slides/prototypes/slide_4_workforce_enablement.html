@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 4: Workforce Enablement</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-logo span { color: var(--purple-accent); }
+
+    .header-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+    }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 20px 44px 16px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+      flex-shrink: 0;
+    }
+
+    .slide-content .lead {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+      flex-shrink: 0;
+      max-width: 800px;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 12px 40px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+
+    /* Three Column Cards + Highlight Box */
+    .content-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .cards-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      padding: 18px 16px;
+      box-shadow: 0 2px 8px rgba(124,58,237,0.08);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+
+    .card.skill::before { background: linear-gradient(90deg, #4C1D95, #5B21B6); }
+    .card.knowledge::before { background: linear-gradient(90deg, #6D28D9, #7C3AED); }
+    .card.culture::before { background: linear-gradient(90deg, #A855F7, #C026D3); }
+
+    .card .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .card .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .card.skill .card-icon { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .card.knowledge .card-icon { background: linear-gradient(135deg, #6D28D9, #7C3AED); }
+    .card.culture .card-icon { background: linear-gradient(135deg, #A855F7, #C026D3); }
+
+    .card h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--primary);
+      line-height: 1.3;
+    }
+
+    .card .tagline {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .card .items {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .card .item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 11px;
+      line-height: 1.5;
+      color: #475569;
+    }
+
+    .card .item i {
+      font-size: 10px;
+      margin-top: 3px;
+      width: 14px;
+      flex-shrink: 0;
+    }
+
+    .card.skill .item i { color: #4C1D95; }
+    .card.knowledge .item i { color: #6D28D9; }
+    .card.culture .item i { color: #A855F7; }
+
+    .card .item strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    /* Highlight Box */
+    .highlight-box {
+      background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple-mid) 50%, var(--purple-bright) 100%);
+      border-radius: 10px;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    .highlight-box .icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .highlight-box .text h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .highlight-box .text p {
+      font-size: 12px;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.5;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">Enterprise AI Capabilities</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>Workforce Enablement</h2>
+      <p class="lead">AI accelerates skill development, preserves institutional knowledge, and strengthens organizational culture across distributed teams.</p>
+
+      <div class="content-layout">
+        <div class="cards-row">
+
+          <!-- Card 1: Skill Development -->
+          <div class="card skill">
+            <div class="card-header">
+              <div class="card-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+              <h3>Accelerated Skill Development</h3>
+            </div>
+            <p class="tagline">AI-powered learning paths personalize development to role, experience, and pace.</p>
+            <div class="items">
+              <div class="item">
+                <i class="fa-solid fa-route"></i>
+                <span><strong>Personalized Learning Paths</strong> adapt to individual skills and career goals.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-chart-line"></i>
+                <span><strong>Skills Gap Analysis</strong> provides real-time workforce capability visibility.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-robot"></i>
+                <span><strong>AI Coaching Platforms</strong> deliver continuous, scalable mentorship.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-clock"></i>
+                <span><strong>Reduced Time-to-Proficiency</strong> through targeted, adaptive content.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Knowledge Preservation -->
+          <div class="card knowledge">
+            <div class="card-header">
+              <div class="card-icon"><i class="fa-solid fa-book-open"></i></div>
+              <h3>Knowledge Preservation</h3>
+            </div>
+            <p class="tagline">Capture institutional knowledge before it walks out the door.</p>
+            <div class="items">
+              <div class="item">
+                <i class="fa-solid fa-database"></i>
+                <span><strong>RAG Knowledge Bases</strong> answer questions with context and citations.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-user-tie"></i>
+                <span><strong>Expert Insight Extraction</strong> captures tribal knowledge in hours, not weeks.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-arrows-rotate"></i>
+                <span><strong>Self-Healing Systems</strong> identify and fill documentation gaps automatically.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span><strong>Intelligent Search</strong> reduces time spent finding answers.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Cultural Cohesion -->
+          <div class="card culture">
+            <div class="card-header">
+              <div class="card-icon"><i class="fa-solid fa-handshake"></i></div>
+              <h3>Cultural Cohesion</h3>
+            </div>
+            <p class="tagline">Build and maintain culture across distributed, global teams.</p>
+            <div class="items">
+              <div class="item">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span><strong>Sentiment Analysis</strong> monitors engagement across distributed teams.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-comments"></i>
+                <span><strong>Communication Facilitation</strong> builds relationships across time zones.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-award"></i>
+                <span><strong>Recognition Systems</strong> reinforce values consistently across locations.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-bell"></i>
+                <span><strong>Early Warning Models</strong> identify disengagement before attrition.</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Highlight Box -->
+        <div class="highlight-box">
+          <div class="icon"><i class="fa-solid fa-globe"></i></div>
+          <div class="text">
+            <h4>AI as the Great Unifier</h4>
+            <p>When teams span time zones and geographies, AI becomes the connective tissue. Consistent standards, shared knowledge, unified culture - regardless of where people sit.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">04</div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UI Element: Icon Feature Strips</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 50px;
+      margin: 0;
+      padding: 40px;
+    }
+
+    /* Style 1: Simple icon row */
+    .icon-row {
+      display: flex;
+      gap: 32px;
+    }
+
+    .icon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-item .icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #5b21b6, #7c3aed);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: #fff;
+    }
+
+    .icon-item .label {
+      font-size: 11px;
+      color: #64748b;
+      text-align: center;
+    }
+
+    /* Style 2: Connected strip */
+    .connected-strip {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      padding: 16px 24px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .strip-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .strip-item .icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #5b21b6, #7c3aed);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    .strip-item .label {
+      font-size: 12px;
+      font-weight: 500;
+      color: #334155;
+    }
+
+    .strip-connector {
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, #a855f7, #5b21b6);
+      margin: 0 8px;
+    }
+
+    /* Style 3: Badge strip */
+    .badge-strip {
+      display: flex;
+      gap: 12px;
+      padding: 12px 20px;
+      background: linear-gradient(135deg, #1e1b4b, #312e81);
+      border-radius: 10px;
+    }
+
+    .badge-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 6px;
+      border: 1px solid rgba(168,85,247,0.3);
+    }
+
+    .badge-item .icon {
+      font-size: 16px;
+      color: #a855f7;
+    }
+
+    .badge-item .label {
+      font-size: 11px;
+      font-weight: 500;
+      color: #e2e8f0;
+    }
+
+    /* Style 4: Minimal inline */
+    .minimal-strip {
+      display: flex;
+      gap: 24px;
+    }
+
+    .minimal-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .minimal-item .dot {
+      width: 8px;
+      height: 8px;
+      background: linear-gradient(135deg, #5b21b6, #a855f7);
+      border-radius: 50%;
+    }
+
+    .minimal-item .label {
+      font-size: 12px;
+      color: #475569;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="icon-row">
+    <div class="icon-item">
+      <div class="icon">&#x2699;</div>
+      <div class="label">DevOps</div>
+    </div>
+    <div class="icon-item">
+      <div class="icon">&#x2630;</div>
+      <div class="label">Automation</div>
+    </div>
+    <div class="icon-item">
+      <div class="icon">&#x2261;</div>
+      <div class="label">Analytics</div>
+    </div>
+    <div class="icon-item">
+      <div class="icon">&#x2709;</div>
+      <div class="label">Documents</div>
+    </div>
+    <div class="icon-item">
+      <div class="icon">&#x2295;</div>
+      <div class="label">Operations</div>
+    </div>
+  </div>
+
+  <div class="connected-strip">
+    <div class="strip-item">
+      <div class="icon">&#x2699;</div>
+      <div class="label">Cluster</div>
+    </div>
+    <div class="strip-connector"></div>
+    <div class="strip-item">
+      <div class="icon">&#x2630;</div>
+      <div class="label">Pattern</div>
+    </div>
+    <div class="strip-connector"></div>
+    <div class="strip-item">
+      <div class="icon">&#x2713;</div>
+      <div class="label">Validate</div>
+    </div>
+  </div>
+
+  <div class="badge-strip">
+    <div class="badge-item">
+      <div class="icon">&#x2699;</div>
+      <div class="label">Graph Topology</div>
+    </div>
+    <div class="badge-item">
+      <div class="icon">&#x2630;</div>
+      <div class="label">Batch Processing</div>
+    </div>
+    <div class="badge-item">
+      <div class="icon">&#x2713;</div>
+      <div class="label">Confidence Routing</div>
+    </div>
+  </div>
+
+  <div class="minimal-strip">
+    <div class="minimal-item">
+      <div class="dot"></div>
+      <div class="label">Impact analysis</div>
+    </div>
+    <div class="minimal-item">
+      <div class="dot"></div>
+      <div class="label">Dependency mapping</div>
+    </div>
+    <div class="minimal-item">
+      <div class="dot"></div>
+      <div class="label">Cascade detection</div>
+    </div>
+    <div class="minimal-item">
+      <div class="dot"></div>
+      <div class="label">Lineage tracing</div>
+    </div>
+  </div>
+
+</body>
+</html>

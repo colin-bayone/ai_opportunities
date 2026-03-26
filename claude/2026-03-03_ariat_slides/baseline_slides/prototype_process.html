@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Process Flow Prototypes - BayOne</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: #f1f5f9;
+      padding: 40px;
+    }
+
+    .prototype-section {
+      background: #fff;
+      max-width: 900px;
+      margin: 0 auto 40px;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .prototype-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--purple-accent);
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 32px;
+    }
+
+    /* ============================================
+       OPTION A: Timeline with gradient line
+       Big-4 style horizontal progression
+       ============================================ */
+    .timeline-a {
+      position: relative;
+      padding: 40px 0 20px;
+    }
+
+    .timeline-a::before {
+      content: '';
+      position: absolute;
+      top: 60px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-mid) 0%, var(--purple-accent) 50%, var(--purple-glow) 100%);
+      border-radius: 2px;
+    }
+
+    .timeline-a-items {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .timeline-a-item {
+      flex: 1;
+      text-align: center;
+      position: relative;
+    }
+
+    .timeline-a-item::before {
+      content: '';
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 14px;
+      background: #fff;
+      border: 3px solid var(--purple-mid);
+      border-radius: 50%;
+      z-index: 2;
+    }
+
+    .timeline-a-item:first-child::before { border-color: var(--purple-mid); }
+    .timeline-a-item:nth-child(2)::before { border-color: var(--purple-bright); }
+    .timeline-a-item:nth-child(3)::before { border-color: var(--purple-accent); }
+    .timeline-a-item:last-child::before { border-color: var(--purple-glow); }
+
+    .timeline-a-num {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 1px;
+      margin-bottom: 28px;
+    }
+
+    .timeline-a-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .timeline-a-desc {
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    /* ============================================
+       OPTION B: Stacked cards with connector
+       More visual weight, vertical rhythm
+       ============================================ */
+    .process-b {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+
+    .process-b::before {
+      content: '';
+      position: absolute;
+      top: 32px;
+      left: 12.5%;
+      right: 12.5%;
+      height: 2px;
+      background: linear-gradient(90deg,
+        var(--purple-mid) 0%,
+        var(--purple-bright) 33%,
+        var(--purple-accent) 66%,
+        var(--purple-glow) 100%
+      );
+    }
+
+    .process-b-item {
+      text-align: center;
+      position: relative;
+      padding: 0 12px;
+    }
+
+    .process-b-badge {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 20px;
+      background: linear-gradient(135deg, var(--purple-darkest) 0%, var(--purple-mid) 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .process-b-badge span {
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .process-b-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .process-b-desc {
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    /* ============================================
+       OPTION C: Chevron / arrow style
+       Classic consulting infographic
+       ============================================ */
+    .process-c {
+      display: flex;
+      gap: 0;
+    }
+
+    .process-c-item {
+      flex: 1;
+      position: relative;
+      padding: 24px 32px 24px 40px;
+      background: var(--bg-subtle);
+      clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%, 0 100%, 20px 50%);
+      margin-left: -20px;
+    }
+
+    .process-c-item:first-child {
+      margin-left: 0;
+      clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%, 0 100%);
+      padding-left: 24px;
+      background: linear-gradient(135deg, var(--purple-darkest) 0%, var(--purple-dark) 100%);
+      color: #fff;
+    }
+
+    .process-c-item:nth-child(2) {
+      background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple-mid) 100%);
+      color: #fff;
+    }
+
+    .process-c-item:nth-child(3) {
+      background: linear-gradient(135deg, var(--purple-mid) 0%, var(--purple-bright) 100%);
+      color: #fff;
+    }
+
+    .process-c-item:last-child {
+      background: linear-gradient(135deg, var(--purple-bright) 0%, var(--purple-accent) 100%);
+      color: #fff;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 20px 50%);
+    }
+
+    .process-c-num {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      opacity: 0.7;
+      margin-bottom: 4px;
+    }
+
+    .process-c-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .process-c-desc {
+      font-size: 12px;
+      opacity: 0.85;
+    }
+
+    /* ============================================
+       OPTION D: Minimal line with dots
+       Clean, understated, sophisticated
+       ============================================ */
+    .process-d {
+      position: relative;
+      padding: 0 0 0 0;
+    }
+
+    .process-d-line {
+      display: flex;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .process-d-dot {
+      width: 12px;
+      height: 12px;
+      background: var(--purple-mid);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .process-d-connector {
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, var(--purple-mid), var(--purple-accent));
+    }
+
+    .process-d-items {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .process-d-item {
+      flex: 1;
+      padding-right: 24px;
+    }
+
+    .process-d-item:last-child {
+      padding-right: 0;
+    }
+
+    .process-d-num {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--purple-accent);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .process-d-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .process-d-desc {
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    /* ============================================
+       OPTION E: Concentric / layered approach
+       Shows progression as building layers
+       ============================================ */
+    .process-e {
+      display: flex;
+      align-items: stretch;
+      gap: 2px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .process-e-item {
+      flex: 1;
+      padding: 28px 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .process-e-item:nth-child(1) { background: var(--purple-darkest); }
+    .process-e-item:nth-child(2) { background: var(--purple-dark); }
+    .process-e-item:nth-child(3) { background: var(--purple-mid); }
+    .process-e-item:nth-child(4) { background: var(--purple-bright); }
+
+    .process-e-num {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 12px;
+    }
+
+    .process-e-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .process-e-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.5;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="prototype-section">
+    <div class="prototype-label">Option A</div>
+    <h2>Timeline with Gradient Line</h2>
+    <div class="timeline-a">
+      <div class="timeline-a-items">
+        <div class="timeline-a-item">
+          <div class="timeline-a-num">01</div>
+          <div class="timeline-a-title">Discovery</div>
+          <div class="timeline-a-desc">Understand your stack</div>
+        </div>
+        <div class="timeline-a-item">
+          <div class="timeline-a-num">02</div>
+          <div class="timeline-a-title">POC</div>
+          <div class="timeline-a-desc">Prove value quickly</div>
+        </div>
+        <div class="timeline-a-item">
+          <div class="timeline-a-num">03</div>
+          <div class="timeline-a-title">Production</div>
+          <div class="timeline-a-desc">Scale and harden</div>
+        </div>
+        <div class="timeline-a-item">
+          <div class="timeline-a-num">04</div>
+          <div class="timeline-a-title">Operations</div>
+          <div class="timeline-a-desc">Monitor and optimize</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="prototype-section">
+    <div class="prototype-label">Option B</div>
+    <h2>Badge Cards with Connector</h2>
+    <div class="process-b">
+      <div class="process-b-item">
+        <div class="process-b-badge"><span>1</span></div>
+        <div class="process-b-title">Discovery</div>
+        <div class="process-b-desc">Understand your stack</div>
+      </div>
+      <div class="process-b-item">
+        <div class="process-b-badge"><span>2</span></div>
+        <div class="process-b-title">POC</div>
+        <div class="process-b-desc">Prove value quickly</div>
+      </div>
+      <div class="process-b-item">
+        <div class="process-b-badge"><span>3</span></div>
+        <div class="process-b-title">Production</div>
+        <div class="process-b-desc">Scale and harden</div>
+      </div>
+      <div class="process-b-item">
+        <div class="process-b-badge"><span>4</span></div>
+        <div class="process-b-title">Operations</div>
+        <div class="process-b-desc">Monitor and optimize</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="prototype-section">
+    <div class="prototype-label">Option C</div>
+    <h2>Chevron / Arrow Progression</h2>
+    <div class="process-c">
+      <div class="process-c-item">
+        <div class="process-c-num">01</div>
+        <div class="process-c-title">Discovery</div>
+        <div class="process-c-desc">Understand your stack</div>
+      </div>
+      <div class="process-c-item">
+        <div class="process-c-num">02</div>
+        <div class="process-c-title">POC</div>
+        <div class="process-c-desc">Prove value quickly</div>
+      </div>
+      <div class="process-c-item">
+        <div class="process-c-num">03</div>
+        <div class="process-c-title">Production</div>
+        <div class="process-c-desc">Scale and harden</div>
+      </div>
+      <div class="process-c-item">
+        <div class="process-c-num">04</div>
+        <div class="process-c-title">Operations</div>
+        <div class="process-c-desc">Monitor and optimize</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="prototype-section">
+    <div class="prototype-label">Option D</div>
+    <h2>Minimal Line with Large Numbers</h2>
+    <div class="process-d">
+      <div class="process-d-line">
+        <div class="process-d-dot"></div>
+        <div class="process-d-connector"></div>
+        <div class="process-d-dot"></div>
+        <div class="process-d-connector"></div>
+        <div class="process-d-dot"></div>
+        <div class="process-d-connector"></div>
+        <div class="process-d-dot"></div>
+      </div>
+      <div class="process-d-items">
+        <div class="process-d-item">
+          <div class="process-d-num">01</div>
+          <div class="process-d-title">Discovery</div>
+          <div class="process-d-desc">Understand your stack</div>
+        </div>
+        <div class="process-d-item">
+          <div class="process-d-num">02</div>
+          <div class="process-d-title">POC</div>
+          <div class="process-d-desc">Prove value quickly</div>
+        </div>
+        <div class="process-d-item">
+          <div class="process-d-num">03</div>
+          <div class="process-d-title">Production</div>
+          <div class="process-d-desc">Scale and harden</div>
+        </div>
+        <div class="process-d-item">
+          <div class="process-d-num">04</div>
+          <div class="process-d-title">Operations</div>
+          <div class="process-d-desc">Monitor and optimize</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="prototype-section">
+    <div class="prototype-label">Option E</div>
+    <h2>Gradient Bar Segments</h2>
+    <div class="process-e">
+      <div class="process-e-item">
+        <div class="process-e-num">01</div>
+        <div class="process-e-title">Discovery</div>
+        <div class="process-e-desc">Understand your stack</div>
+      </div>
+      <div class="process-e-item">
+        <div class="process-e-num">02</div>
+        <div class="process-e-title">POC</div>
+        <div class="process-e-desc">Prove value quickly</div>
+      </div>
+      <div class="process-e-item">
+        <div class="process-e-num">03</div>
+        <div class="process-e-title">Production</div>
+        <div class="process-e-desc">Scale and harden</div>
+      </div>
+      <div class="process-e-item">
+        <div class="process-e-num">04</div>
+        <div class="process-e-title">Operations</div>
+        <div class="process-e-desc">Monitor and optimize</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

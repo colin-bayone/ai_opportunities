@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Variations - AI for HR</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 48px;
+    }
+
+    h1 {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .variations-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .variation {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .variation-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    /* ==================== */
+    /* A: ORIGINAL (Tagline + Bold Leads) */
+    /* ==================== */
+    .card-a {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 2px 10px rgba(124,58,237,0.06);
+    }
+
+    .card-a .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .card-a .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #fff;
+      background: linear-gradient(135deg, #4C1D95, #6D28D9);
+      flex-shrink: 0;
+    }
+
+    .card-a h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .card-a .tagline {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-a .items {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card-a .item {
+      font-size: 12px;
+      line-height: 1.55;
+      color: #475569;
+    }
+
+    .card-a .item strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    /* ==================== */
+    /* B: CHECKMARK LIST */
+    /* ==================== */
+    .card-b {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 2px 10px rgba(124,58,237,0.06);
+    }
+
+    .card-b .header {
+      margin-bottom: 16px;
+    }
+
+    .card-b h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .card-b .subtitle {
+      font-size: 12px;
+      color: var(--text-light);
+    }
+
+    .card-b .check-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card-b .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .card-b .check-icon {
+      width: 18px;
+      height: 18px;
+      background: linear-gradient(135deg, #4C1D95, #6D28D9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 10px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ==================== */
+    /* C: VERTICAL ACCENT (No Icon) */
+    /* ==================== */
+    .card-c {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px 20px 20px 24px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .card-c::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, #4C1D95, #A855F7);
+    }
+
+    .card-c h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .card-c .items {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .card-c .item {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .card-c .item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 6px;
+      width: 5px;
+      height: 5px;
+      background: var(--purple-accent);
+      border-radius: 50%;
+    }
+
+    /* ==================== */
+    /* D: 2x2 INTERNAL GRID */
+    /* ==================== */
+    .card-d {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 2px 10px rgba(124,58,237,0.06);
+    }
+
+    .card-d .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .card-d .badge {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #4C1D95, #6D28D9);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .card-d h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .card-d .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .card-d .grid-item {
+      padding: 12px;
+      background: #faf9fc;
+      border-radius: 8px;
+      border-left: 3px solid var(--purple-accent);
+    }
+
+    .card-d .grid-item .label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-dark);
+      margin-bottom: 4px;
+    }
+
+    .card-d .grid-item .desc {
+      font-size: 10px;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    /* ==================== */
+    /* E: NUMBERED MINI-FLOW */
+    /* ==================== */
+    .card-e {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 2px 10px rgba(124,58,237,0.06);
+    }
+
+    .card-e h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .card-e .flow {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      padding: 0 10px;
+    }
+
+    .card-e .flow::before {
+      content: '';
+      position: absolute;
+      top: 14px;
+      left: 40px;
+      right: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, #4C1D95, #6D28D9, #A855F7);
+    }
+
+    .card-e .flow-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-e .flow-step .num {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, #4C1D95, #6D28D9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(124,58,237,0.3);
+    }
+
+    .card-e .flow-step .label {
+      font-size: 9px;
+      font-weight: 500;
+      color: var(--text);
+      text-align: center;
+      max-width: 60px;
+      line-height: 1.3;
+    }
+
+    /* ==================== */
+    /* F: PILL TAGS */
+    /* ==================== */
+    .card-f {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 2px 10px rgba(124,58,237,0.06);
+    }
+
+    .card-f .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .card-f .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #fff;
+      background: linear-gradient(135deg, #4C1D95, #6D28D9);
+      flex-shrink: 0;
+    }
+
+    .card-f h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .card-f .tagline {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .card-f .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .card-f .pill {
+      padding: 6px 12px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(168,85,247,0.08));
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--purple-dark);
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>AI for HR - Card Variations</h1>
+
+  <div class="variations-grid">
+
+    <!-- A: Original (Tagline + Bold Leads) -->
+    <div class="variation">
+      <div class="variation-label">A: Original (Tagline + Bold Leads)</div>
+      <div class="card-a">
+        <div class="header">
+          <div class="icon">&#x263A;</div>
+          <h3>AI for HR</h3>
+        </div>
+        <p class="tagline">Streamline talent operations from recruiting through retention with intelligent automation.</p>
+        <div class="items">
+          <div class="item"><strong>Recruiting Automation</strong> with AI-powered candidate screening and pipeline management.</div>
+          <div class="item"><strong>Onboarding Workflows</strong> that automate document processing and new hire setup.</div>
+          <div class="item"><strong>Policy Q&A Assistants</strong> providing instant answers from HR documentation.</div>
+          <div class="item"><strong>Workforce Analytics</strong> for attrition prediction and skills gap analysis.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- B: Checkmark List -->
+    <div class="variation">
+      <div class="variation-label">B: Checkmark List</div>
+      <div class="card-b">
+        <div class="header">
+          <h3>AI for HR</h3>
+          <div class="subtitle">Talent operations automation</div>
+        </div>
+        <div class="check-list">
+          <div class="check-item">
+            <div class="check-icon">&#x2713;</div>
+            <span>AI-powered candidate screening and pipeline management</span>
+          </div>
+          <div class="check-item">
+            <div class="check-icon">&#x2713;</div>
+            <span>Automated onboarding with document processing</span>
+          </div>
+          <div class="check-item">
+            <div class="check-icon">&#x2713;</div>
+            <span>Policy Q&A assistants for instant HR answers</span>
+          </div>
+          <div class="check-item">
+            <div class="check-icon">&#x2713;</div>
+            <span>Workforce analytics for attrition and skills gaps</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C: Vertical Accent (No Icon) -->
+    <div class="variation">
+      <div class="variation-label">C: Vertical Accent (Minimal)</div>
+      <div class="card-c">
+        <h3>AI for HR</h3>
+        <div class="items">
+          <div class="item">Recruiting automation with AI-powered candidate screening</div>
+          <div class="item">Onboarding workflows with automated document processing</div>
+          <div class="item">Policy Q&A assistants for instant HR answers</div>
+          <div class="item">Workforce analytics for attrition prediction</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D: 2x2 Internal Grid -->
+    <div class="variation">
+      <div class="variation-label">D: 2x2 Internal Grid</div>
+      <div class="card-d">
+        <div class="header">
+          <div class="badge">HR</div>
+          <h3>AI for HR</h3>
+        </div>
+        <div class="grid">
+          <div class="grid-item">
+            <div class="label">Recruiting</div>
+            <div class="desc">AI-powered candidate screening and pipeline management</div>
+          </div>
+          <div class="grid-item">
+            <div class="label">Onboarding</div>
+            <div class="desc">Automated document processing and new hire setup</div>
+          </div>
+          <div class="grid-item">
+            <div class="label">Policy Q&A</div>
+            <div class="desc">Instant answers from HR documentation</div>
+          </div>
+          <div class="grid-item">
+            <div class="label">Analytics</div>
+            <div class="desc">Attrition prediction and skills gap analysis</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- E: Numbered Mini-Flow -->
+    <div class="variation">
+      <div class="variation-label">E: Numbered Mini-Flow</div>
+      <div class="card-e">
+        <h3>AI for HR</h3>
+        <div class="flow">
+          <div class="flow-step">
+            <div class="num">1</div>
+            <div class="label">Recruiting Automation</div>
+          </div>
+          <div class="flow-step">
+            <div class="num">2</div>
+            <div class="label">Onboarding Workflows</div>
+          </div>
+          <div class="flow-step">
+            <div class="num">3</div>
+            <div class="label">Policy Q&A</div>
+          </div>
+          <div class="flow-step">
+            <div class="num">4</div>
+            <div class="label">Workforce Analytics</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- F: Pill Tags -->
+    <div class="variation">
+      <div class="variation-label">F: Tagline + Pill Tags</div>
+      <div class="card-f">
+        <div class="header">
+          <div class="icon">&#x263A;</div>
+          <h3>AI for HR</h3>
+        </div>
+        <p class="tagline">Streamline talent operations from recruiting through retention with intelligent automation.</p>
+        <div class="pills">
+          <div class="pill">Recruiting Automation</div>
+          <div class="pill">Onboarding Workflows</div>
+          <div class="pill">Policy Q&A</div>
+          <div class="pill">Workforce Analytics</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

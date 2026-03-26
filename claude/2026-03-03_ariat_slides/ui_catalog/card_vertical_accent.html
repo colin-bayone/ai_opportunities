@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UI Element: Vertical Accent Cards</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 40px;
+    }
+
+    .accent-cards {
+      display: flex;
+      gap: 16px;
+    }
+
+    .accent-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      width: 200px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .accent-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, #5b21b6, #a855f7);
+    }
+
+    .accent-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #0f172a;
+      margin: 0 0 8px 0;
+    }
+
+    .accent-card p {
+      font-size: 12px;
+      color: #64748b;
+      margin: 0;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="accent-cards">
+    <div class="accent-card">
+      <h4>Developer Productivity</h4>
+      <p>Codebase intelligence, impact analysis, CI/CD acceleration</p>
+    </div>
+    <div class="accent-card">
+      <h4>Enterprise Automation</h4>
+      <p>Multi-agent orchestration, adaptive workflows</p>
+    </div>
+    <div class="accent-card">
+      <h4>Data & Analytics</h4>
+      <p>Dependency mapping, metric lineage, change simulation</p>
+    </div>
+  </div>
+</body>
+</html>

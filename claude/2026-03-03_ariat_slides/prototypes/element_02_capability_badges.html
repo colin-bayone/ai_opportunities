@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Element: Capability Badges</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      margin: 0;
+      padding: 40px;
+    }
+
+    h3 {
+      font-size: 14px;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 0 0 16px 0;
+    }
+
+    /* Style 1: Pill badges */
+    .badge-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .badge-pill {
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(124, 58, 237, 0.3);
+    }
+
+    .badge-pill.outline {
+      background: transparent;
+      border: 1.5px solid #7c3aed;
+      color: #5b21b6;
+      box-shadow: none;
+    }
+
+    /* Style 2: Icon badges */
+    .icon-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #334155;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+
+    .icon-badge .icon {
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, #6d28d9, #a855f7);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #fff;
+    }
+
+    /* Style 3: Hexagon badges */
+    .hex-container {
+      display: flex;
+      gap: 8px;
+    }
+
+    .hex-badge {
+      width: 70px;
+      height: 80px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .hex-badge::before {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 34px;
+      background: linear-gradient(135deg, #5b21b6, #7c3aed);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .hex-badge::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 34px;
+      background: linear-gradient(135deg, #5b21b6, #7c3aed);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(60deg);
+    }
+
+    .hex-badge .hex-third {
+      position: absolute;
+      width: 60px;
+      height: 34px;
+      background: linear-gradient(135deg, #5b21b6, #7c3aed);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-60deg);
+    }
+
+    .hex-badge .hex-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: #fff;
+    }
+
+    .hex-badge .hex-icon {
+      font-size: 18px;
+    }
+
+    .hex-badge .hex-label {
+      font-size: 8px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Style 4: Stacked capability cards */
+    .stack-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px 20px;
+      width: 280px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .stack-card .card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .stack-card .card-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #5b21b6, #7c3aed);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .stack-card .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .stack-card .card-capabilities {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .stack-card .cap-tag {
+      padding: 4px 10px;
+      background: #f1f5f9;
+      border-radius: 4px;
+      font-size: 11px;
+      color: #475569;
+    }
+
+    /* Style 5: Checkmark list */
+    .check-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: #334155;
+    }
+
+    .check-icon {
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, #5b21b6, #7c3aed);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+
+    section {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <section>
+    <h3>Style 1: Pill Badges</h3>
+    <div class="badge-row">
+      <span class="badge-pill">Graph Topology</span>
+      <span class="badge-pill">Multi-Agent</span>
+      <span class="badge-pill">Batch Processing</span>
+      <span class="badge-pill outline">Confidence Scoring</span>
+      <span class="badge-pill outline">Air-Gapped</span>
+    </div>
+  </section>
+
+  <section>
+    <h3>Style 2: Icon Badges</h3>
+    <div class="badge-row">
+      <div class="icon-badge">
+        <div class="icon">&#x2697;</div>
+        Pattern Clustering
+      </div>
+      <div class="icon-badge">
+        <div class="icon">&#x21C4;</div>
+        Dependency Mapping
+      </div>
+      <div class="icon-badge">
+        <div class="icon">&#x2713;</div>
+        Tiered Validation
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>Style 3: Hexagon Badges</h3>
+    <div class="hex-container">
+      <div class="hex-badge">
+        <div class="hex-third"></div>
+        <div class="hex-content">
+          <div class="hex-icon">&#x2699;</div>
+          <div class="hex-label">DevOps</div>
+        </div>
+      </div>
+      <div class="hex-badge">
+        <div class="hex-third"></div>
+        <div class="hex-content">
+          <div class="hex-icon">&#x2630;</div>
+          <div class="hex-label">Data</div>
+        </div>
+      </div>
+      <div class="hex-badge">
+        <div class="hex-third"></div>
+        <div class="hex-content">
+          <div class="hex-icon">&#x2709;</div>
+          <div class="hex-label">Docs</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>Style 4: Stacked Card with Tags</h3>
+    <div class="stack-card">
+      <div class="card-header">
+        <div class="card-icon">&#x2699;</div>
+        <div class="card-title">Developer Productivity</div>
+      </div>
+      <div class="card-capabilities">
+        <span class="cap-tag">Codebase intelligence</span>
+        <span class="cap-tag">Impact analysis</span>
+        <span class="cap-tag">CI/CD acceleration</span>
+        <span class="cap-tag">Cascade detection</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>Style 5: Checkmark List</h3>
+    <div class="check-list">
+      <div class="check-item">
+        <div class="check-icon">&#x2713;</div>
+        Process six reports in one pass instead of individually
+      </div>
+      <div class="check-item">
+        <div class="check-icon">&#x2713;</div>
+        Extract logic from legacy systems automatically
+      </div>
+      <div class="check-item">
+        <div class="check-icon">&#x2713;</div>
+        Route exceptions by confidence level
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

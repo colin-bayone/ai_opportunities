@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layout: Two-Column Detail Rows</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-logo span { color: var(--purple-accent); }
+
+    .header-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+    }
+
+    .slide-content {
+      flex: 1;
+      padding: 28px 48px 24px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .slide-content .lead {
+      font-size: 14px;
+      color: var(--text-light);
+      margin-bottom: 24px;
+    }
+
+    .slide-footer {
+      padding: 16px 40px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+
+    /* Two-Column Detail Rows */
+    .detail-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex: 1;
+    }
+
+    .detail-row {
+      display: flex;
+      gap: 0;
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.18);
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(124,58,237,0.08);
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .detail-row .left {
+      width: 260px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      border-right: 3px solid transparent;
+    }
+
+    .detail-row.r1 .left { border-color: #4C1D95; background: rgba(76,29,149,0.08); }
+    .detail-row.r2 .left { border-color: #5B21B6; background: rgba(91,33,182,0.08); }
+    .detail-row.r3 .left { border-color: #7C3AED; background: rgba(124,58,237,0.08); }
+    .detail-row.r4 .left { border-color: #A855F7; background: rgba(168,85,247,0.08); }
+
+    .detail-row .icon-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .detail-row.r1 .icon-circle { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .detail-row.r2 .icon-circle { background: linear-gradient(135deg, #5B21B6, #7C3AED); }
+    .detail-row.r3 .icon-circle { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+    .detail-row.r4 .icon-circle { background: linear-gradient(135deg, #A855F7, #C026D3); }
+
+    .detail-row .left-text h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 3px;
+    }
+
+    .detail-row .left-text .tagline {
+      font-size: 11px;
+      color: var(--text-light);
+      line-height: 1.4;
+    }
+
+    .detail-row .right {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 18px;
+      padding: 16px 20px;
+      align-content: center;
+    }
+
+    .detail-row .item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 12px;
+      line-height: 1.5;
+      color: #475569;
+    }
+
+    .detail-row .item i {
+      font-size: 11px;
+      margin-top: 2px;
+      width: 14px;
+      flex-shrink: 0;
+    }
+
+    .detail-row.r1 .item i { color: #4C1D95; }
+    .detail-row.r2 .item i { color: #5B21B6; }
+    .detail-row.r3 .item i { color: #7C3AED; }
+    .detail-row.r4 .item i { color: #A855F7; }
+
+    .detail-row .item strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">Enterprise AI Capabilities</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>Two-Column Detail Rows Layout</h2>
+      <p class="lead">Four items with colored left column, vertical separator, and 2-column detail grid</p>
+
+      <div class="detail-rows">
+
+        <div class="detail-row r1">
+          <div class="left">
+            <div class="icon-circle"><i class="fa-solid fa-layer-group"></i></div>
+            <div class="left-text">
+              <h3>Capability One</h3>
+              <p class="tagline">Brief description of the capability and what it enables.</p>
+            </div>
+          </div>
+          <div class="right">
+            <div class="item">
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Feature A</strong> with supporting detail text.</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Feature B</strong> with supporting detail text.</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Feature C</strong> with supporting detail text.</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Feature D</strong> with supporting detail text.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-row r2">
+          <div class="left">
+            <div class="icon-circle"><i class="fa-solid fa-route"></i></div>
+            <div class="left-text">
+              <h3>Capability Two</h3>
+              <p class="tagline">Brief description of the capability and what it enables.</p>
+            </div>
+          </div>
+          <div class="right">
+            <div class="item">
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Feature A</strong> with supporting detail text.</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Feature B</strong> with supporting detail text.</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Feature C</strong> with supporting detail text.</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Feature D</strong> with supporting detail text.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-row r3">
+          <div class="left">
+            <div class="icon-circle"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+            <div class="left-text">
+              <h3>Capability Three</h3>
+              <p class="tagline">Brief description of the capability and what it enables.</p>
+            </div>
+          </div>
+          <div class="right">
+            <div class="item">
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Feature A</strong> with supporting detail text.</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Feature B</strong> with supporting detail text.</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Feature C</strong> with supporting detail text.</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Feature D</strong> with supporting detail text.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-row r4">
+          <div class="left">
+            <div class="icon-circle"><i class="fa-solid fa-robot"></i></div>
+            <div class="left-text">
+              <h3>Capability Four</h3>
+              <p class="tagline">Brief description of the capability and what it enables.</p>
+            </div>
+          </div>
+          <div class="right">
+            <div class="item">
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Feature A</strong> with supporting detail text.</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Feature B</strong> with supporting detail text.</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Feature C</strong> with supporting detail text.</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Feature D</strong> with supporting detail text.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">00</div>
+    </div>
+  </div>
+
+</body>
+</html>

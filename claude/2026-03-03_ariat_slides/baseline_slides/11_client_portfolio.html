@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Portfolio - BayOne Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 14px;
+      background: #e8e6eb;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      position: relative;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.06),
+        0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-logo span { color: var(--purple-accent); }
+
+    .header-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+    }
+
+    /* Content - centered layout */
+    .slide-content {
+      flex: 1;
+      padding: 40px 60px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
+
+    .tagline {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+      margin-bottom: 24px;
+    }
+
+    .tagline span {
+      color: var(--purple-bright);
+    }
+
+    /* Tiered Logo Display */
+    .logo-display {
+      text-align: center;
+    }
+
+    .tier-1 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 50px;
+      margin-bottom: 36px;
+    }
+
+    .tier-1 img {
+      height: 44px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .tier-2 {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 24px 36px;
+    }
+
+    .tier-2 img {
+      height: 26px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    /* Footer */
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 16px 40px 16px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .slide {
+        max-width: 100%;
+        aspect-ratio: auto;
+        min-height: 100vh;
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">Enterprise AI Capabilities</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="tagline">Trusted by <span>industry leaders</span> across sectors</div>
+
+      <div class="logo-display">
+        <!-- Tier 1: Flagship logos -->
+        <div class="tier-1">
+          <img src="logos/cisco.png" alt="Cisco">
+          <img src="logos/google.png" alt="Google">
+          <img src="logos/salesforce.png" alt="Salesforce">
+          <img src="logos/walmart.png" alt="Walmart">
+        </div>
+
+        <!-- Tier 2: All other logos -->
+        <div class="tier-2">
+          <img src="logos/servicenow.png" alt="ServiceNow">
+          <img src="logos/snowflake.png" alt="Snowflake">
+          <img src="logos/vmware.png" alt="VMware">
+          <img src="logos/atlassian.png" alt="Atlassian">
+          <img src="logos/ebay.png" alt="eBay">
+          <img src="logos/doordash.png" alt="DoorDash">
+          <img src="logos/jpmorgan.png" alt="JP Morgan">
+          <img src="logos/wellsfargo.png" alt="Wells Fargo">
+          <img src="logos/prudential.png" alt="Prudential">
+          <img src="logos/unitedhealthcare.png" alt="UnitedHealthcare">
+          <img src="logos/bcbs.png" alt="Blue Cross Blue Shield">
+          <img src="logos/gilead.png" alt="Gilead">
+          <img src="logos/questdiagnostics.png" alt="Quest Diagnostics">
+          <img src="logos/coherent.png" alt="Coherent">
+          <img src="logos/appliedmaterials.png" alt="Applied Materials">
+          <img src="logos/albertsons.png" alt="Albertsons">
+          <img src="logos/intel.png" alt="Intel">
+          <img src="logos/starbucks.png" alt="Starbucks">
+          <img src="logos/sephora.png" alt="Sephora">
+          <img src="logos/rei.png" alt="REI">
+          <img src="logos/rivian.png" alt="Rivian">
+          <img src="logos/att.png" alt="AT&T">
+          <img src="logos/sony.png" alt="Sony">
+          <img src="logos/northropgrumman.svg" alt="Northrop Grumman">
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">11</div>
+    </div>
+  </div>
+</body>
+</html>

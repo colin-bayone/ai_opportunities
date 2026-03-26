@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 3: Quality Engineering - Layout Options</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 40px;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .slide-container {
+      margin-bottom: 60px;
+    }
+
+    /* Slide frame */
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-logo span { color: var(--purple-accent); }
+
+    .header-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+    }
+
+    .slide-content {
+      flex: 1;
+      padding: 28px 48px 20px;
+      overflow: hidden;
+    }
+
+    .slide-content h2 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .slide-content .lead {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .slide-footer {
+      padding: 14px 40px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+
+    /* ==================== */
+    /* OPTION A: Numbered Sections with Watermark */
+    /* ==================== */
+    .numbered-sections {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 24px;
+    }
+
+    .numbered-section {
+      position: relative;
+      padding: 16px 16px 16px 56px;
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.1);
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+
+    .numbered-section .watermark {
+      position: absolute;
+      top: 8px;
+      left: 10px;
+      font-size: 36px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: 0.3;
+      line-height: 1;
+    }
+
+    .numbered-section .icon-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .numbered-section.s1 .icon-badge { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .numbered-section.s2 .icon-badge { background: linear-gradient(135deg, #5B21B6, #7C3AED); }
+    .numbered-section.s3 .icon-badge { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+    .numbered-section.s4 .icon-badge { background: linear-gradient(135deg, #A855F7, #C026D3); }
+
+    .numbered-section h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .numbered-section .tagline {
+      font-size: 11px;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .numbered-section .items {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 12px;
+    }
+
+    .numbered-section .item {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 10px;
+      line-height: 1.45;
+      color: #475569;
+    }
+
+    .numbered-section .item i {
+      color: var(--purple-accent);
+      font-size: 9px;
+      margin-top: 2px;
+      width: 12px;
+      flex-shrink: 0;
+    }
+
+    .numbered-section .item strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    /* ==================== */
+    /* OPTION B: Two-Column Detail Rows */
+    /* ==================== */
+    .detail-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .detail-row {
+      display: flex;
+      gap: 20px;
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.1);
+      border-radius: 10px;
+      padding: 14px 18px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+
+    .detail-row .left {
+      width: 180px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      border-right: 2px solid transparent;
+      padding-right: 18px;
+    }
+
+    .detail-row.r1 .left { border-color: #4C1D95; }
+    .detail-row.r2 .left { border-color: #5B21B6; }
+    .detail-row.r3 .left { border-color: #7C3AED; }
+    .detail-row.r4 .left { border-color: #A855F7; }
+
+    .detail-row .icon-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .detail-row.r1 .icon-circle { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .detail-row.r2 .icon-circle { background: linear-gradient(135deg, #5B21B6, #7C3AED); }
+    .detail-row.r3 .icon-circle { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+    .detail-row.r4 .icon-circle { background: linear-gradient(135deg, #A855F7, #C026D3); }
+
+    .detail-row .left h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+
+    .detail-row .left .tagline {
+      font-size: 10px;
+      color: var(--text-light);
+      line-height: 1.4;
+    }
+
+    .detail-row .right {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 14px;
+      align-content: center;
+    }
+
+    .detail-row .item {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 10px;
+      line-height: 1.45;
+      color: #475569;
+    }
+
+    .detail-row .item i {
+      color: var(--purple-accent);
+      font-size: 9px;
+      margin-top: 2px;
+      width: 12px;
+      flex-shrink: 0;
+    }
+
+    .detail-row .item strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    /* ==================== */
+    /* OPTION C: Horizontal Flow + Expandable Detail */
+    /* ==================== */
+    .flow-detail-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .flow-bar {
+      display: flex;
+      gap: 0;
+    }
+
+    .flow-item {
+      flex: 1;
+      position: relative;
+      padding: 12px 20px 12px 28px;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%, 12px 50%);
+      margin-left: -12px;
+      text-align: center;
+    }
+
+    .flow-item:first-child {
+      margin-left: 0;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%);
+      padding-left: 16px;
+      border-radius: 6px 0 0 6px;
+    }
+
+    .flow-item:last-child {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 12px 50%);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .flow-item:nth-child(1) { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .flow-item:nth-child(2) { background: linear-gradient(135deg, #5B21B6, #7C3AED); }
+    .flow-item:nth-child(3) { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+    .flow-item:nth-child(4) { background: linear-gradient(135deg, #A855F7, #C026D3); }
+
+    .flow-item .num {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 2px;
+    }
+
+    .flow-item .title {
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .detail-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .detail-card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.1);
+      border-radius: 8px;
+      padding: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+      position: relative;
+    }
+
+    .detail-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .detail-card.c1::before { background: linear-gradient(90deg, #4C1D95, #5B21B6); }
+    .detail-card.c2::before { background: linear-gradient(90deg, #5B21B6, #7C3AED); }
+    .detail-card.c3::before { background: linear-gradient(90deg, #7C3AED, #A855F7); }
+    .detail-card.c4::before { background: linear-gradient(90deg, #A855F7, #C026D3); }
+
+    .detail-card .tagline {
+      font-size: 10px;
+      color: var(--text);
+      line-height: 1.45;
+      margin-bottom: 8px;
+    }
+
+    .detail-card .items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .detail-card .item {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 9px;
+      line-height: 1.4;
+      color: #475569;
+    }
+
+    .detail-card .item i {
+      color: var(--purple-accent);
+      font-size: 8px;
+      margin-top: 2px;
+      width: 10px;
+      flex-shrink: 0;
+    }
+
+    .detail-card .item strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- OPTION A: Numbered Sections with Icon Badge -->
+  <div class="slide-container">
+    <div class="section-label">Option A: Numbered Sections with Icon Badge</div>
+    <div class="slide">
+      <div class="slide-header">
+        <div class="header-logo">Bay<span>One</span> Solutions</div>
+        <div class="header-title">Enterprise AI Capabilities</div>
+      </div>
+
+      <div class="slide-content">
+        <h2>Next-Generation Quality Engineering</h2>
+        <p class="lead">Four AI acceleration capabilities that transform manual testing operations</p>
+
+        <div class="numbered-sections">
+          <div class="numbered-section s1">
+            <div class="icon-badge"><i class="fa-solid fa-layer-group"></i></div>
+            <h3>Test Case Clustering</h3>
+            <p class="tagline">Group similar test cases by structure, dependencies, and data requirements to process families together.</p>
+            <div class="items">
+              <div class="item">
+                <i class="fa-solid fa-object-group"></i>
+                <span><strong>Similarity Analysis</strong> groups 1,000 individual tests into 30-40 manageable families.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-clone"></i>
+                <span><strong>Pattern Application</strong> applies one automation template across each test family.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-users-gear"></i>
+                <span><strong>Batch Processing</strong> enables teams to address multiple tests simultaneously.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-gauge-high"></i>
+                <span><strong>60-70% Reduction</strong> in manual test creation effort through family-based automation.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="numbered-section s2">
+            <div class="icon-badge"><i class="fa-solid fa-route"></i></div>
+            <h3>Intelligent Routing</h3>
+            <p class="tagline">AI scores test automation confidence to route work to appropriate skill levels automatically.</p>
+            <div class="items">
+              <div class="item">
+                <i class="fa-solid fa-check-double"></i>
+                <span><strong>High Confidence</strong> cases auto-approve and route to junior execution.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-user-check"></i>
+                <span><strong>Senior Review</strong> receives only low-confidence cases requiring expertise.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-arrows-split-up-and-left"></i>
+                <span><strong>Skill Matching</strong> directs work to the right level without manual triage.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-arrow-trend-up"></i>
+                <span><strong>40-50% Improvement</strong> in validation throughput with intelligent distribution.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="numbered-section s3">
+            <div class="icon-badge"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+            <h3>Pattern Detection</h3>
+            <p class="tagline">Extract testing patterns from similar components to auto-generate tests for new features.</p>
+            <div class="items">
+              <div class="item">
+                <i class="fa-solid fa-code-branch"></i>
+                <span><strong>Pattern Extraction</strong> identifies reusable test structures from existing components.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span><strong>Auto-Generation</strong> creates test cases for new features using learned patterns.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-clipboard-check"></i>
+                <span><strong>Compliance Validation</strong> verifies through pattern adherence, not individual testing.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-bolt"></i>
+                <span><strong>80% Faster</strong> test creation with consistent coverage across similar features.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="numbered-section s4">
+            <div class="icon-badge"><i class="fa-solid fa-diagram-project"></i></div>
+            <h3>Dependency Mapping</h3>
+            <p class="tagline">Map relationships between features, test cases, and data to enable smart regression selection.</p>
+            <div class="items">
+              <div class="item">
+                <i class="fa-solid fa-sitemap"></i>
+                <span><strong>Relationship Graph</strong> traces connections between code, tests, and data dependencies.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-bell"></i>
+                <span><strong>Impact Detection</strong> instantly identifies affected tests when code changes.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-filter"></i>
+                <span><strong>Smart Selection</strong> runs only relevant regression tests, not everything.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-clock"></i>
+                <span><strong>40-50% Reduction</strong> in regression execution time through targeted testing.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div class="slide-footer-bar"></div>
+        <div class="slide-number">03</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION B: Two-Column Detail Rows -->
+  <div class="slide-container">
+    <div class="section-label">Option B: Two-Column Detail Rows</div>
+    <div class="slide">
+      <div class="slide-header">
+        <div class="header-logo">Bay<span>One</span> Solutions</div>
+        <div class="header-title">Enterprise AI Capabilities</div>
+      </div>
+
+      <div class="slide-content">
+        <h2>Next-Generation Quality Engineering</h2>
+        <p class="lead">Four AI acceleration capabilities that transform manual testing operations</p>
+
+        <div class="detail-rows">
+          <div class="detail-row r1">
+            <div class="left">
+              <div class="icon-circle"><i class="fa-solid fa-layer-group"></i></div>
+              <div>
+                <h3>Test Case Clustering</h3>
+                <p class="tagline">Group similar test cases by structure, dependencies, and data requirements.</p>
+              </div>
+            </div>
+            <div class="right">
+              <div class="item">
+                <i class="fa-solid fa-object-group"></i>
+                <span><strong>Similarity Analysis</strong> groups 1,000 tests into 30-40 families.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-clone"></i>
+                <span><strong>Pattern Application</strong> applies one template across each family.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-users-gear"></i>
+                <span><strong>Batch Processing</strong> addresses multiple tests simultaneously.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-gauge-high"></i>
+                <span><strong>60-70% Reduction</strong> in manual test creation effort.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-row r2">
+            <div class="left">
+              <div class="icon-circle"><i class="fa-solid fa-route"></i></div>
+              <div>
+                <h3>Intelligent Routing</h3>
+                <p class="tagline">AI scores confidence to route work to appropriate skill levels.</p>
+              </div>
+            </div>
+            <div class="right">
+              <div class="item">
+                <i class="fa-solid fa-check-double"></i>
+                <span><strong>High Confidence</strong> cases auto-approve for junior execution.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-user-check"></i>
+                <span><strong>Senior Review</strong> receives only low-confidence cases.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-arrows-split-up-and-left"></i>
+                <span><strong>Skill Matching</strong> directs work without manual triage.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-arrow-trend-up"></i>
+                <span><strong>40-50% Improvement</strong> in validation throughput.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-row r3">
+            <div class="left">
+              <div class="icon-circle"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+              <div>
+                <h3>Pattern Detection</h3>
+                <p class="tagline">Extract patterns from similar components to auto-generate tests.</p>
+              </div>
+            </div>
+            <div class="right">
+              <div class="item">
+                <i class="fa-solid fa-code-branch"></i>
+                <span><strong>Pattern Extraction</strong> identifies reusable test structures.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span><strong>Auto-Generation</strong> creates tests using learned patterns.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-clipboard-check"></i>
+                <span><strong>Compliance Validation</strong> verifies via pattern adherence.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-bolt"></i>
+                <span><strong>80% Faster</strong> test creation with consistent coverage.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-row r4">
+            <div class="left">
+              <div class="icon-circle"><i class="fa-solid fa-diagram-project"></i></div>
+              <div>
+                <h3>Dependency Mapping</h3>
+                <p class="tagline">Map relationships between features, tests, and data.</p>
+              </div>
+            </div>
+            <div class="right">
+              <div class="item">
+                <i class="fa-solid fa-sitemap"></i>
+                <span><strong>Relationship Graph</strong> traces code-test-data connections.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-bell"></i>
+                <span><strong>Impact Detection</strong> identifies affected tests instantly.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-filter"></i>
+                <span><strong>Smart Selection</strong> runs only relevant regression tests.</span>
+              </div>
+              <div class="item">
+                <i class="fa-solid fa-clock"></i>
+                <span><strong>40-50% Reduction</strong> in regression execution time.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div class="slide-footer-bar"></div>
+        <div class="slide-number">03</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION C: Horizontal Flow + Detail Cards -->
+  <div class="slide-container">
+    <div class="section-label">Option C: Chevron Flow + Detail Cards Below</div>
+    <div class="slide">
+      <div class="slide-header">
+        <div class="header-logo">Bay<span>One</span> Solutions</div>
+        <div class="header-title">Enterprise AI Capabilities</div>
+      </div>
+
+      <div class="slide-content">
+        <h2>Next-Generation Quality Engineering</h2>
+        <p class="lead">Four AI acceleration capabilities that transform manual testing operations</p>
+
+        <div class="flow-detail-layout">
+          <div class="flow-bar">
+            <div class="flow-item">
+              <div class="num">01</div>
+              <div class="title">Test Case Clustering</div>
+            </div>
+            <div class="flow-item">
+              <div class="num">02</div>
+              <div class="title">Intelligent Routing</div>
+            </div>
+            <div class="flow-item">
+              <div class="num">03</div>
+              <div class="title">Pattern Detection</div>
+            </div>
+            <div class="flow-item">
+              <div class="num">04</div>
+              <div class="title">Dependency Mapping</div>
+            </div>
+          </div>
+
+          <div class="detail-cards">
+            <div class="detail-card c1">
+              <p class="tagline">Group similar test cases by structure, dependencies, and data requirements to process families together.</p>
+              <div class="items">
+                <div class="item">
+                  <i class="fa-solid fa-object-group"></i>
+                  <span><strong>Similarity Analysis</strong> groups 1,000 tests into 30-40 families.</span>
+                </div>
+                <div class="item">
+                  <i class="fa-solid fa-clone"></i>
+                  <span><strong>Pattern Application</strong> applies one template across each family.</span>
+                </div>
+                <div class="item">
+                  <i class="fa-solid fa-users-gear"></i>
+                  <span><strong>Batch Processing</strong> addresses multiple tests simultaneously.</span>
+                </div>
+                <div class="item">
+                  <i class="fa-solid fa-gauge-high"></i>
+                  <span><strong>60-70% Reduction</strong> in manual test creation effort.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="detail-card c2">
+              <p class="tagline">AI scores test automation confidence to route work to appropriate skill levels automatically.</p>
+              <div class="items">
+                <div class="item">
+                  <i class="fa-solid fa-check-double"></i>
+                  <span><strong>High Confidence</strong> cases auto-approve for junior execution.</span>
+                </div>
+                <div class="item">
+                  <i class="fa-solid fa-user-check"></i>
+                  <span><strong>Senior Review</strong> receives only low-confidence cases.</span>
+                </div>
+                <div class="item">
+                  <i class="fa-solid fa-arrows-split-up-and-left"></i>
+                  <span><strong>Skill Matching</strong> directs work without manual triage.</span>
+                </div>
+                <div class="item">
+                  <i class="fa-solid fa-arrow-trend-up"></i>
+                  <span><strong>40-50% Improvement</strong> in validation throughput.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="detail-card c3">
+              <p class="tagline">Extract testing patterns from similar components to auto-generate tests for new features.</p>
+              <div class="items">
+                <div class="item">
+                  <i class="fa-solid fa-code-branch"></i>
+                  <span><strong>Pattern Extraction</strong> identifies reusable test structures.</span>
+                </div>
+                <div class="item">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i>
+                  <span><strong>Auto-Generation</strong> creates tests using learned patterns.</span>
+                </div>
+                <div class="item">
+                  <i class="fa-solid fa-clipboard-check"></i>
+                  <span><strong>Compliance Validation</strong> verifies via pattern adherence.</span>
+                </div>
+                <div class="item">
+                  <i class="fa-solid fa-bolt"></i>
+                  <span><strong>80% Faster</strong> test creation with consistent coverage.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="detail-card c4">
+              <p class="tagline">Map relationships between features, test cases, and data to enable smart regression selection.</p>
+              <div class="items">
+                <div class="item">
+                  <i class="fa-solid fa-sitemap"></i>
+                  <span><strong>Relationship Graph</strong> traces code-test-data connections.</span>
+                </div>
+                <div class="item">
+                  <i class="fa-solid fa-bell"></i>
+                  <span><strong>Impact Detection</strong> identifies affected tests instantly.</span>
+                </div>
+                <div class="item">
+                  <i class="fa-solid fa-filter"></i>
+                  <span><strong>Smart Selection</strong> runs only relevant regression tests.</span>
+                </div>
+                <div class="item">
+                  <i class="fa-solid fa-clock"></i>
+                  <span><strong>40-50% Reduction</strong> in regression execution time.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div class="slide-footer-bar"></div>
+        <div class="slide-number">03</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

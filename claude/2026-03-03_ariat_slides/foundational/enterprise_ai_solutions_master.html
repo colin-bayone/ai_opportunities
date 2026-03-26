@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 2: Enterprise AI Solutions - Cards</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f1f0f3;
+      min-height: 100vh;
+      padding: 48px;
+    }
+
+    h1 {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Card Styles */
+    .card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 16px;
+      padding: 24px;
+      padding-top: 28px;
+      box-shadow: 0 2px 10px rgba(124,58,237,0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+
+    .card.hr::before { background: linear-gradient(90deg, #4C1D95, #5B21B6); }
+    .card.finance::before { background: linear-gradient(90deg, #5B21B6, #7C3AED); }
+    .card.legal::before { background: linear-gradient(90deg, #7C3AED, #A855F7); }
+    .card.marketing::before { background: linear-gradient(90deg, #A855F7, #C026D3); }
+
+    .card .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .card .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .card.hr .icon { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .card.finance .icon { background: linear-gradient(135deg, #5B21B6, #7C3AED); }
+    .card.legal .icon { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+    .card.marketing .icon { background: linear-gradient(135deg, #A855F7, #C026D3); }
+
+    .card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .card .tagline {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .card .gradient-divider {
+      height: 2px;
+      background: linear-gradient(90deg, var(--purple-mid), var(--purple-accent), transparent);
+      margin-bottom: 14px;
+      border-radius: 1px;
+    }
+
+    .card .items {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 16px;
+    }
+
+    .card .item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12px;
+      line-height: 1.55;
+      color: #475569;
+    }
+
+    .card .item i {
+      color: var(--purple-accent);
+      font-size: 12px;
+      margin-top: 3px;
+      width: 14px;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    .card .item strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Slide 2: Enterprise AI Solutions</h1>
+
+  <div class="cards-grid">
+
+    <!-- Human Resources -->
+    <div class="card hr">
+      <div class="header">
+        <div class="icon"><i class="fa-solid fa-user-group"></i></div>
+        <h3>Human Resources</h3>
+      </div>
+      <p class="tagline">Streamline talent operations from recruiting through retention with intelligent automation.</p>
+      <div class="gradient-divider"></div>
+      <div class="items">
+        <div class="item">
+          <i class="fa-solid fa-user-plus"></i>
+          <span><strong>Recruiting Automation</strong> with AI-powered candidate screening and pipeline management.</span>
+        </div>
+        <div class="item">
+          <i class="fa-solid fa-clipboard-check"></i>
+          <span><strong>Onboarding Workflows</strong> that automate document processing and new hire setup.</span>
+        </div>
+        <div class="item">
+          <i class="fa-solid fa-comment-dots"></i>
+          <span><strong>Policy Q&A Assistants</strong> providing instant answers from HR documentation.</span>
+        </div>
+        <div class="item">
+          <i class="fa-solid fa-chart-line"></i>
+          <span><strong>Workforce Analytics</strong> for attrition prediction and skills gap analysis.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Finance -->
+    <div class="card finance">
+      <div class="header">
+        <div class="icon"><i class="fa-solid fa-coins"></i></div>
+        <h3>Finance</h3>
+      </div>
+      <p class="tagline">Accelerate financial operations with intelligent document processing and predictive insights.</p>
+      <div class="gradient-divider"></div>
+      <div class="items">
+        <div class="item">
+          <i class="fa-solid fa-receipt"></i>
+          <span><strong>Expense Processing</strong> with automated receipt extraction, policy validation, and approval routing.</span>
+        </div>
+        <div class="item">
+          <i class="fa-solid fa-file-invoice-dollar"></i>
+          <span><strong>Invoice Automation</strong> for AP processing with intelligent matching and exception handling.</span>
+        </div>
+        <div class="item">
+          <i class="fa-solid fa-file-lines"></i>
+          <span><strong>Financial Reporting</strong> with automated reconciliation and close cycle acceleration.</span>
+        </div>
+        <div class="item">
+          <i class="fa-solid fa-magnifying-glass-chart"></i>
+          <span><strong>Forecasting & Anomaly Detection</strong> for cash flow prediction and fraud prevention.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Legal -->
+    <div class="card legal">
+      <div class="header">
+        <div class="icon"><i class="fa-solid fa-scale-balanced"></i></div>
+        <h3>Legal</h3>
+      </div>
+      <p class="tagline">Transform contract operations and compliance workflows with intelligent review and monitoring.</p>
+      <div class="gradient-divider"></div>
+      <div class="items">
+        <div class="item">
+          <i class="fa-solid fa-file-contract"></i>
+          <span><strong>Contract Review</strong> with automated clause extraction, risk identification, and comparison.</span>
+        </div>
+        <div class="item">
+          <i class="fa-solid fa-arrows-spin"></i>
+          <span><strong>Contract Lifecycle Management</strong> from drafting through renewal with automated tracking.</span>
+        </div>
+        <div class="item">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span><strong>Compliance Monitoring</strong> for regulatory tracking, policy adherence, and risk assessment.</span>
+        </div>
+        <div class="item">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span><strong>Legal Knowledge Search</strong> across contracts, precedents, and regulatory guidance.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Marketing -->
+    <div class="card marketing">
+      <div class="header">
+        <div class="icon"><i class="fa-solid fa-bullhorn"></i></div>
+        <h3>Marketing</h3>
+      </div>
+      <p class="tagline">Scale content creation and campaign optimization with AI-powered marketing intelligence.</p>
+      <div class="gradient-divider"></div>
+      <div class="items">
+        <div class="item">
+          <i class="fa-solid fa-pen-fancy"></i>
+          <span><strong>Content Generation</strong> for campaigns, product descriptions, and social media at scale.</span>
+        </div>
+        <div class="item">
+          <i class="fa-solid fa-user-tag"></i>
+          <span><strong>Personalization Engines</strong> delivering tailored experiences across web and email.</span>
+        </div>
+        <div class="item">
+          <i class="fa-solid fa-robot"></i>
+          <span><strong>Campaign Automation</strong> with intelligent scheduling, A/B optimization, and performance prediction.</span>
+        </div>
+        <div class="item">
+          <i class="fa-solid fa-chart-pie"></i>
+          <span><strong>Marketing Analytics</strong> with attribution modeling and ROI dashboards.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
