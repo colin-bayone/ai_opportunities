@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cisco MDS Modernization - Proof of Concept</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #a855f7;
+      --purple-dark: #5b21b6;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+    
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+    
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+    
+    .cover-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e879f9;
+      margin-bottom: 24px;
+    }
+    
+    .cover h1 {
+      font-size: 56px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+    
+    .cover-subtitle {
+      font-size: 22px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 48px;
+      max-width: 600px;
+    }
+    
+    .cover-meta {
+      display: flex;
+      gap: 48px;
+      padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+    
+    .cover-meta-item label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+    
+    .cover-meta-item span {
+      font-size: 15px;
+      font-weight: 500;
+    }
+    
+    .logo {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+    
+    .logo span { color: #e879f9; }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+    
+    .section { margin-bottom: 56px; }
+    
+    .section-number {
+      font-size: 12px;
+      font-weight: 600;
+      color: #a855f7;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+    
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+    
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 32px 0 16px;
+    }
+    
+    p { margin-bottom: 16px; }
+    
+    .lead {
+      font-size: 18px;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+    
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border-left: 4px solid #a855f7;
+      padding: 24px 28px;
+      margin: 32px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .highlight-box p:last-child { margin-bottom: 0; }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14px;
+    }
+    
+    th {
+      text-align: left;
+      padding: 14px 16px;
+      background: #5b21b6;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+    
+    th:last-child { border-right: none; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+    
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: var(--bg-subtle); }
+    
+    .timeline-card {
+      background: var(--white);
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      padding: 28px;
+      margin: 24px 0;
+      box-shadow: 0 1px 3px rgba(124,58,237,0.06);
+    }
+    
+    .timeline-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    
+    .timeline-badge {
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: var(--white);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    
+    .timeline-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    
+    .timeline-note {
+      background: rgba(124,58,237,0.06);
+      padding: 14px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--text);
+      margin-top: 16px;
+    }
+    
+    .deliverable-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin: 24px 0;
+    }
+    
+    .deliverable-item {
+      background: linear-gradient(135deg, rgba(124,58,237,0.04) 0%, rgba(168,85,247,0.06) 100%);
+      border: 1px solid rgba(124,58,237,0.1);
+      border-radius: 10px;
+      padding: 20px;
+    }
+    
+    .deliverable-item h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    
+    .deliverable-item p {
+      font-size: 13px;
+      color: var(--text-light);
+      margin: 0;
+      line-height: 1.5;
+    }
+    
+    .duration-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 100%);
+      color: var(--white);
+      padding: 16px 24px;
+      border-radius: 10px;
+      margin: 24px 0;
+    }
+    
+    .duration-badge .number {
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1;
+    }
+    
+    .duration-badge .label {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+    
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin: 24px 0;
+    }
+    
+    .summary-table {
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 32px 0;
+      border: 1px solid var(--border);
+    }
+    
+    .summary-table th {
+      background: #5b21b6;
+    }
+    
+    .summary-table tr:nth-child(even) {
+      background: var(--bg-subtle);
+    }
+    
+    .footer {
+      text-align: center;
+      padding: 48px 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 64px;
+    }
+    
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    
+    .footer-logo span { color: #a855f7; }
+    
+    .footer p {
+      font-size: 13px;
+      color: var(--text-light);
+      margin: 0;
+    }
+
+    @media print {
+      @page { 
+        size: 8.5in 11in; 
+        margin: 0.4in;
+      }
+      
+      body { font-size: 9pt; line-height: 1.4; }
+      
+      .cover { 
+        min-height: 0;
+        height: 10in;
+        padding: 50px;
+        page-break-after: always;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      
+      .cover h1 { font-size: 36pt; }
+      .cover-subtitle { font-size: 14pt; }
+      .cover-meta { padding-top: 32px; gap: 32px; }
+      
+      .logo { bottom: 50px; right: 50px; }
+      
+      .container { 
+        padding: 0; 
+        max-width: 100%;
+      }
+      
+      .section { margin-bottom: 20px; }
+      
+      h2 { font-size: 18pt; margin-bottom: 12px; }
+      h3 { font-size: 12pt; margin: 16px 0 8px; }
+      p { margin-bottom: 8px; }
+      .lead { font-size: 11pt; margin-bottom: 16px; line-height: 1.5; }
+      
+      .timeline-card {
+        padding: 16px;
+        margin: 12px 0;
+        page-break-inside: avoid;
+      }
+      
+      .deliverable-grid { gap: 10px; margin: 16px 0; }
+      .deliverable-item { padding: 12px; }
+      .deliverable-item h4 { font-size: 10pt; }
+      .deliverable-item p { font-size: 9pt; }
+      
+      table { 
+        font-size: 8pt;
+        margin: 12px 0;
+      }
+      
+      th, td {
+        padding: 8px 10px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      
+      .highlight-box {
+        padding: 14px 18px;
+        margin: 16px 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      
+      .duration-badge {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      
+      .two-col { gap: 20px; }
+      
+      .summary-table {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      
+      .footer { 
+        margin-top: 20px;
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-label">Proof of Concept Proposal</div>
+      <h1>Cisco MDS Codebase Modernization</h1>
+      <p class="cover-subtitle">A three-week engagement to demonstrate methodology, tooling, and delivery standards</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <label>Prepared For</label>
+          <span>Cisco Systems</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Duration</label>
+          <span>3 Weeks</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Classification</label>
+          <span>Confidential</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo">Bay<span>One</span> Solutions</div>
+  </div>
+
+  <div class="container">
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>Executive Summary</h2>
+      <p class="lead">BayOne proposes a three-week proof of concept engagement to demonstrate our codebase modernization methodology. This engagement will provide Cisco with direct visibility into our analytical approach, delivery quality, and operating cadence prior to committing to the full modernization effort.</p>
+      
+      <div class="highlight-box">
+        <p>The POC can be executed against the MDS Element Manager codebase or against a comparable legacy Java application provided by BayOne. Both approaches demonstrate identical methodology and deliverable quality.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>Scope</h2>
+      <p>The proof of concept applies our modernization workflow to a representative slice of code. This includes automated codebase analysis, knowledge graph generation, and sample code conversion through our agentic pipeline.</p>
+      
+      <h3>Codebase Options</h3>
+      <table>
+        <tr><th style="width:15%">Option</th><th>Description</th><th style="width:30%">Prerequisites</th></tr>
+        <tr><td><strong>Option A</strong></td><td>Analysis and conversion performed on a designated portion of the MDS Element Manager codebase</td><td>Repository access, designated Cisco point of contact</td></tr>
+        <tr><td><strong>Option B</strong></td><td>Analysis and conversion performed on a comparable legacy Java application provided by BayOne</td><td>None</td></tr>
+      </table>
+      
+      <p>Option A provides findings directly applicable to the MDS modernization project. Option B allows immediate commencement without access dependencies.</p>
+      
+      <h3>Out of Scope</h3>
+      <p>Hardware integration and SNMP communication validation are not included in the POC. The focus is on demonstrating the codebase analysis and conversion workflow. Hardware interface testing would occur during the full engagement with appropriate access to MDS switches or simulation environments.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>Deliverables</h2>
+      
+      <div class="deliverable-grid">
+        <div class="deliverable-item">
+          <h4>Knowledge Graph</h4>
+          <p>Visual mapping of code structure, module relationships, and dependency chains for the analyzed portion</p>
+        </div>
+        <div class="deliverable-item">
+          <h4>Codebase Analysis Report</h4>
+          <p>Documented findings including structural patterns, dead code candidates, third-party dependencies, and complexity assessment</p>
+        </div>
+        <div class="deliverable-item">
+          <h4>Sample Conversion</h4>
+          <p>Representative code converted to target architecture with accompanying decision documentation</p>
+        </div>
+        <div class="deliverable-item">
+          <h4>Architecture Observations</h4>
+          <p>Preliminary observations relevant to the broader modernization effort</p>
+        </div>
+      </div>
+      
+      <div class="deliverable-item" style="margin-top:0">
+        <h4>Reporting Framework</h4>
+        <p>Sample weekly status report demonstrating progress tracking, metrics, and decision logging</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">04</div>
+      <h2>Engagement Model</h2>
+      <p>Throughout the POC, Cisco will receive structured communication consistent with our full engagement model.</p>
+      
+      <table>
+        <tr><th style="width:30%">Component</th><th>Description</th></tr>
+        <tr><td><strong>Weekly Status Report</strong></td><td>Written update including completed items, in-progress work, blockers, and quantified progress metrics</td></tr>
+        <tr><td><strong>Decision Documentation</strong></td><td>All technical and architectural decisions logged with rationale</td></tr>
+        <tr><td><strong>Direct Access</strong></td><td>Designated point of contact available for questions and clarifications</td></tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">05</div>
+      <h2>Timeline</h2>
+      
+      <div class="timeline-card">
+        <h3 style="margin:0 0 16px 0">Option A: Cisco Codebase</h3>
+        <table style="margin:0">
+          <tr><th style="width:50%">Milestone</th><th>Timing</th></tr>
+          <tr><td>Kickoff and repository access</td><td>Day 1</td></tr>
+          <tr><td>Onsite discovery session with Cisco team</td><td>Days 2–3</td></tr>
+          <tr><td>Initial analysis complete</td><td>Day 10</td></tr>
+          <tr><td>Draft deliverables</td><td>Day 17</td></tr>
+          <tr><td>Final deliverables</td><td>Day 21</td></tr>
+        </table>
+        <div class="timeline-note">
+          <strong>Note:</strong> Work performed during the POC rolls directly into the full engagement. This is effectively the beginning of Phase 1 (Discovery), not a separate evaluation period. Time invested here counts toward the overall project timeline.
+        </div>
+      </div>
+      
+      <div class="timeline-card">
+        <h3 style="margin:0 0 16px 0">Option B: BayOne-Provided Codebase</h3>
+        <table style="margin:0">
+          <tr><th style="width:50%">Milestone</th><th>Timing</th></tr>
+          <tr><td>Kickoff</td><td>Day 1</td></tr>
+          <tr><td>Initial analysis complete</td><td>Day 7</td></tr>
+          <tr><td>Draft deliverables</td><td>Day 14</td></tr>
+          <tr><td>Final deliverables</td><td>Day 21</td></tr>
+        </table>
+        <div class="timeline-note">
+          <strong>Note:</strong> Work is purely demonstration and does not contribute to the MDS project timeline. It demonstrates methodology and delivery quality but would not carry forward into the full engagement.
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">06</div>
+      <h2>Expectations</h2>
+      
+      <p>This proof of concept demonstrates methodology, tooling, and delivery standards on a bounded slice of work. Findings and converted code from a small portion of the codebase are directionally useful but not a substitute for the full engagement.</p>
+      
+      <div class="highlight-box">
+        <p>Complete modernization requires system-wide architectural coordination, end-to-end conversion, integration validation, and hardening. The POC provides a representative sample of how that work is executed.</p>
+      </div>
+      
+      <p>The POC phase involves standing up the workflow, learning context, and producing demonstration-quality deliverables. Once the full system is deployed and we move into execution mode, velocity increases significantly as the team, tooling, and codebase understanding are all in place.</p>
+    </div>
+
+    <div class="section">
+      <h2>Summary</h2>
+      <div class="summary-table">
+        <table>
+          <tr><th>Element</th><th>Detail</th></tr>
+          <tr><td>Duration</td><td>3 weeks (21 days)</td></tr>
+          <tr><td>Codebase Options</td><td>MDS Element Manager (Option A) or BayOne-provided Java application (Option B)</td></tr>
+          <tr><td>Key Deliverables</td><td>Knowledge graph, analysis report, sample conversion, architecture observations</td></tr>
+          <tr><td>Engagement Model</td><td>Weekly status reports, decision documentation, direct access to team</td></tr>
+          <tr><td>Outcome</td><td>Direct visibility into methodology, quality, and operating cadence</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Confidential — Prepared for Cisco Systems</p>
+    </div>
+  </div>
+</body>
+</html>
