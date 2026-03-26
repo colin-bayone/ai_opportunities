@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{SLIDE_TITLE}} - BayOne Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #334155;
+    }
+
+    .slide {
+      min-height: 100vh;
+      padding: 60px 80px;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      position: relative;
+    }
+
+    .slide-number {
+      position: absolute;
+      top: 40px;
+      left: 40px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #a855f7;
+      letter-spacing: 2px;
+    }
+
+    .slide-header {
+      margin-bottom: 48px;
+      padding-left: 40px;
+    }
+
+    .slide-header h1 {
+      font-size: 40px;
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .slide-header p {
+      font-size: 18px;
+      color: #64748b;
+      max-width: 700px;
+    }
+
+    .slide-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 40px;
+    }
+
+    /* Two-column layout */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    /* Three-column layout */
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    /* Content card */
+    .content-card {
+      background: linear-gradient(135deg, rgba(124,58,237,0.04) 0%, rgba(168,85,247,0.06) 100%);
+      border: 1px solid rgba(124,58,237,0.1);
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .content-card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 16px;
+    }
+
+    .content-card p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #334155;
+    }
+
+    /* Icon circle */
+    .icon-circle {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: #fff;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    /* Bullet list */
+    .bullet-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .bullet-list li {
+      font-size: 18px;
+      line-height: 1.6;
+      padding: 12px 0;
+      padding-left: 32px;
+      position: relative;
+      color: #334155;
+    }
+
+    .bullet-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 8px;
+      height: 8px;
+      background: #a855f7;
+      border-radius: 50%;
+    }
+
+    .slide-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 24px;
+      border-top: 1px solid #e2e8f0;
+      margin-top: auto;
+    }
+
+    .footer-logo {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .footer-logo span { color: #a855f7; }
+
+    .footer-page {
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    @media print {
+      @page {
+        size: 11in 8.5in;
+        margin: 0;
+      }
+
+      .slide {
+        min-height: 0;
+        height: 8.5in;
+        padding: 40px 60px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .slide-header h1 { font-size: 32pt; }
+      .slide-header p { font-size: 14pt; }
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-number">{{SLIDE_NUMBER}}</div>
+
+    <div class="slide-header">
+      <h1>{{SLIDE_TITLE}}</h1>
+      <p>{{SLIDE_SUBTITLE}}</p>
+    </div>
+
+    <div class="slide-content">
+      <!-- Choose one of these layouts: -->
+
+      <!-- Option 1: Three-column cards -->
+      <div class="three-col">
+        <div class="content-card">
+          <div class="icon-circle">1</div>
+          <h3>{{CARD_1_TITLE}}</h3>
+          <p>{{CARD_1_BODY}}</p>
+        </div>
+        <div class="content-card">
+          <div class="icon-circle">2</div>
+          <h3>{{CARD_2_TITLE}}</h3>
+          <p>{{CARD_2_BODY}}</p>
+        </div>
+        <div class="content-card">
+          <div class="icon-circle">3</div>
+          <h3>{{CARD_3_TITLE}}</h3>
+          <p>{{CARD_3_BODY}}</p>
+        </div>
+      </div>
+
+      <!-- Option 2: Bullet list (uncomment to use)
+      <ul class="bullet-list">
+        <li>{{BULLET_1}}</li>
+        <li>{{BULLET_2}}</li>
+        <li>{{BULLET_3}}</li>
+        <li>{{BULLET_4}}</li>
+      </ul>
+      -->
+
+      <!-- Option 3: Two-column layout (uncomment to use)
+      <div class="two-col">
+        <div class="content-card">
+          <h3>{{LEFT_TITLE}}</h3>
+          <p>{{LEFT_BODY}}</p>
+        </div>
+        <div class="content-card">
+          <h3>{{RIGHT_TITLE}}</h3>
+          <p>{{RIGHT_BODY}}</p>
+        </div>
+      </div>
+      -->
+    </div>
+
+    <div class="slide-footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <div class="footer-page">{{SLIDE_NUMBER}}</div>
+    </div>
+  </div>
+</body>
+</html>
