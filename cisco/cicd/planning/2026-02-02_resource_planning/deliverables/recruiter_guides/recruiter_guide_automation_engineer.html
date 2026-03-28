@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recruiter Guide: Automation Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple-mid: #5b21b6;
+      --purple-accent: #a855f7;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --green: #16a34a;
+      --red: #dc2626;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.5;
+      font-size: 10pt;
+      max-width: 8.5in;
+      margin: 0 auto;
+      padding: 0.5in;
+    }
+
+    .header {
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--purple-accent);
+    }
+
+    .header-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--purple-accent);
+      margin-bottom: 4px;
+    }
+
+    h1 {
+      font-size: 22pt;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-size: 11px;
+      color: var(--text-light);
+    }
+
+    .section-title {
+      font-size: 12pt;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .full-width { grid-column: 1 / -1; }
+
+    .skill-list {
+      list-style: none;
+      margin: 0;
+    }
+
+    .skill-list li {
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 9.5pt;
+    }
+
+    .skill-list li:last-child { border-bottom: none; }
+
+    .skill-list strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .skill-list .detail {
+      color: var(--text-light);
+      font-size: 9pt;
+    }
+
+    .signal-list {
+      list-style: none;
+      margin: 0;
+    }
+
+    .signal-list li {
+      padding: 5px 0 5px 16px;
+      position: relative;
+      font-size: 9.5pt;
+    }
+
+    .signal-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .signal-list.positive li::before { background: var(--green); }
+    .signal-list.negative li::before { background: var(--red); }
+
+    .question-block {
+      background: linear-gradient(135deg, rgba(124,58,237,0.04) 0%, rgba(168,85,247,0.06) 100%);
+      border-left: 3px solid var(--purple-accent);
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .question-text {
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 10pt;
+      margin-bottom: 8px;
+    }
+
+    .signal-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      font-size: 8.5pt;
+      line-height: 1.4;
+    }
+
+    .signal-label {
+      font-weight: 600;
+      font-size: 8pt;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .signal-weak .signal-label { color: var(--red); }
+    .signal-good .signal-label { color: var(--green); }
+    .signal-weak, .signal-good { color: var(--text); }
+
+    .search-card {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .search-card-title {
+      font-size: 9pt;
+      font-weight: 600;
+      color: var(--purple-mid);
+      margin-bottom: 8px;
+    }
+
+    .search-string {
+      font-family: 'SF Mono', 'Consolas', monospace;
+      font-size: 8pt;
+      line-height: 1.5;
+      color: var(--text);
+      word-break: break-word;
+    }
+
+    .tag-section { margin-bottom: 12px; }
+
+    .tag-label {
+      font-size: 9pt;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.12) 100%);
+      color: var(--purple-mid);
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 8.5pt;
+      font-weight: 500;
+    }
+
+    .tag-secondary {
+      display: inline-block;
+      background: var(--bg-subtle);
+      color: var(--text);
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 8.5pt;
+      border: 1px solid var(--border);
+    }
+
+    .synonym-box {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 14px;
+    }
+
+    .synonym-group {
+      margin-bottom: 8px;
+    }
+
+    .synonym-group:last-child { margin-bottom: 0; }
+
+    .synonym-group strong {
+      font-size: 8.5pt;
+      color: var(--primary);
+    }
+
+    .synonym-group code {
+      font-family: 'SF Mono', 'Consolas', monospace;
+      font-size: 8pt;
+      color: var(--text);
+      background: white;
+      padding: 1px 4px;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+    }
+
+    .section-intro {
+      font-size: 9pt;
+      color: var(--text-light);
+      margin-bottom: 10px;
+    }
+
+    .note-box {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 14px;
+      margin-bottom: 20px;
+      font-size: 9pt;
+      color: var(--text);
+    }
+
+    .note-box strong {
+      color: var(--primary);
+    }
+
+    @media print {
+      body { padding: 0; }
+      @page { size: 8.5in 11in; margin: 0.4in; }
+      .question-block, .search-card, .tag, .synonym-box, .note-box {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-label">Recruiter Guide</div>
+    <h1>Automation Engineer</h1>
+    <div class="subtitle">On-site San Jose, CA | Client-facing | CI/CD + Integration Focus</div>
+  </div>
+
+  <div class="note-box">
+    <strong>Helpful for pre-screening:</strong> If your screening call is on Teams, please enable transcription and share the transcript afterward. This helps our technical team review candidates more effectively. Not required, but appreciated!
+  </div>
+
+  <div class="grid">
+    <div>
+      <div class="section-title">Must-Have Skills</div>
+      <ul class="skill-list">
+        <li>
+          <strong>4+ years software engineering, 3+ years CI/CD</strong>
+          <div class="detail">Has built pipelines and automation, not just used them as a developer</div>
+        </li>
+        <li>
+          <strong>Apache Airflow experience</strong>
+          <div class="detail">Airflow schedules and runs tasks in sequence. Should have built workflows in it, not just used dashboards</div>
+        </li>
+        <li>
+          <strong>Jenkins experience</strong>
+          <div class="detail">Should have configured pipelines or built integrations, not just clicked "run"</div>
+        </li>
+        <li>
+          <strong>Python backend development</strong>
+          <div class="detail">Comfortable building APIs, data pipelines, and backend services</div>
+        </li>
+        <li>
+          <strong>SQL and database skills</strong>
+          <div class="detail">Can design tables, write complex queries, work with PostgreSQL</div>
+        </li>
+        <li>
+          <strong>Integration experience</strong>
+          <div class="detail">Has connected multiple systems - pulling data from one, transforming, pushing to another</div>
+        </li>
+        <li>
+          <strong>Strong communicator</strong>
+          <div class="detail">Clear writing, comfortable explaining technical systems to others</div>
+        </li>
+        <li>
+          <strong>AI pair programming proficiency</strong>
+          <div class="detail">Actively uses Claude Code, Cursor, or similar agentic AI tools daily. Not just autocomplete (Copilot) - should be comfortable with AI that writes and edits code autonomously</div>
+        </li>
+        <li>
+          <strong>Experience working with AI systems</strong>
+          <div class="detail">Has built integrations with AI features, or worked alongside AI engineers. Understands how AI components fit into larger systems</div>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="section-title">Nice-to-Have Background</div>
+      <ul class="skill-list">
+        <li>
+          <strong>Bazel experience</strong>
+          <div class="detail">Google's build system, used for large codebases. Less common but valuable</div>
+        </li>
+        <li>
+          <strong>Grafana dashboards</strong>
+          <div class="detail">Built monitoring dashboards to visualize system health</div>
+        </li>
+        <li>
+          <strong>GitHub APIs / webhooks</strong>
+          <div class="detail">Automated things based on GitHub events (PRs, commits, etc.)</div>
+        </li>
+        <li>
+          <strong>On-prem deployment</strong>
+          <div class="detail">Deployed systems in corporate data centers, not just cloud</div>
+        </li>
+        <li>
+          <strong>Platform engineering background</strong>
+          <div class="detail">Worked on internal tools that help other developers be productive</div>
+        </li>
+        <li>
+          <strong>Working with legacy systems</strong>
+          <div class="detail">Comfortable integrating with old, poorly-documented systems</div>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="section-title">Strong Signals</div>
+      <ul class="signal-list positive">
+        <li>Built integrations between multiple CI/CD systems (not just used one tool)</li>
+        <li>Has worked on "developer productivity" or "platform engineering" teams</li>
+        <li>Experience at companies with 100+ engineers (enough CI/CD complexity)</li>
+        <li>Comfortable with incomplete documentation - can figure things out</li>
+        <li>Enthusiastic about AI tools - can describe specific ways Claude Code or Cursor changed their workflow</li>
+        <li>Has debugged issues that span multiple systems</li>
+        <li>Has worked on projects that involved AI components or alongside AI engineers</li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="section-title">Warning Signs</div>
+      <ul class="signal-list negative">
+        <li>Only used CI/CD as a developer - never built or configured pipelines</li>
+        <li>Can't explain what Airflow does or when you'd use it vs other tools</li>
+        <li>Only worked in brand-new environments - no legacy integration experience</li>
+        <li>Uncomfortable when things aren't well documented</li>
+        <li>Doesn't use AI coding tools, or only uses basic autocomplete (Copilot alone)</li>
+        <li>Vague about what they personally built vs what the team built</li>
+        <li>No experience working with people outside their immediate team</li>
+      </ul>
+    </div>
+
+    <div class="full-width">
+      <div class="section-title">Screening Questions</div>
+      <p class="section-intro">Record all screening calls. These questions reveal depth without requiring technical evaluation. Note answers verbatim for technical review.</p>
+
+      <div class="question-block">
+        <div class="question-text">"Describe an Airflow DAG you built. What did it do and why did you choose Airflow?"</div>
+        <div class="signal-row">
+          <div class="signal-weak">
+            <div class="signal-label">Weak Answer</div>
+            Can't describe a specific DAG. Gives vague answers like "it ran some jobs." Doesn't know why Airflow was chosen vs other options.
+          </div>
+          <div class="signal-good">
+            <div class="signal-label">Good Answer</div>
+            Describes a specific workflow with details - what tasks ran, in what order, what happened if something failed. Can explain why Airflow made sense for that use case.
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text">"Tell me about a time you had to integrate with a system that had poor documentation. How did you figure it out?"</div>
+        <div class="signal-row">
+          <div class="signal-weak">
+            <div class="signal-label">Weak Answer</div>
+            Can't recall a specific situation. Or says they just asked someone else. Or got frustrated and gave up.
+          </div>
+          <div class="signal-good">
+            <div class="signal-label">Good Answer</div>
+            Tells a specific story - how they explored the system (reading code, testing APIs, tracing logs), what didn't work, how they eventually figured it out.
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text">"What's the difference between Airflow and Jenkins? When would you use each?"</div>
+        <div class="signal-row">
+          <div class="signal-weak">
+            <div class="signal-label">Weak Answer</div>
+            Can't explain the difference, or thinks they're the same. Gives a textbook definition without real understanding.
+          </div>
+          <div class="signal-good">
+            <div class="signal-label">Good Answer</div>
+            Explains Jenkins is for CI/CD (triggered by code changes) while Airflow is for scheduled workflows (time-based or dependency-based). Gives examples of when each makes sense.
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text">"Tell me about a time you had to debug an issue that involved multiple systems. How did you track down the problem?"</div>
+        <div class="signal-row">
+          <div class="signal-weak">
+            <div class="signal-label">Weak Answer</div>
+            Can't recall a specific situation. Or just says "I looked at the logs" with no detail.
+          </div>
+          <div class="signal-good">
+            <div class="signal-label">Good Answer</div>
+            Walks through a specific debugging journey - which systems, how they narrowed it down, what tools they used, how they confirmed the fix worked.
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text">"What AI coding tools do you use, and how have they changed the way you work?"</div>
+        <div class="signal-row">
+          <div class="signal-weak">
+            <div class="signal-label">Weak Answer</div>
+            Doesn't use AI tools, or only mentions basic autocomplete like Copilot. Can't describe specific ways it changed their workflow. Dismissive about AI assistance.
+          </div>
+          <div class="signal-good">
+            <div class="signal-label">Good Answer</div>
+            Uses Claude Code, Cursor, or similar agentic tools. Gives specific examples of how it changed their work - faster debugging, writing tests, exploring unfamiliar codebases. Enthusiastic about the productivity gains.
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text">"Can you explain [most complex thing on their resume] to me like I'm not technical?"</div>
+        <div class="signal-row">
+          <div class="signal-weak">
+            <div class="signal-label">Weak Answer</div>
+            Uses jargon, gets frustrated, or can't simplify it.
+          </div>
+          <div class="signal-good">
+            <div class="signal-label">Good Answer</div>
+            Uses plain language and analogies. Checks if you're following. Patient and clear. (You can evaluate this directly.)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="full-width">
+      <div class="section-title">LinkedIn Search Strings</div>
+      <p class="section-intro">Start with Layer 1 (most precise). If fewer than 20 results, try Layer 2. Still struggling? Use Layer 3.</p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <div class="search-card">
+          <div class="search-card-title">Layer 1 — Narrow (Start Here)</div>
+          <div class="search-string">("Apache Airflow" OR Airflow) AND Jenkins AND Python AND (integration OR automation OR pipeline OR built OR developed)</div>
+        </div>
+
+        <div class="search-card">
+          <div class="search-card-title">Layer 2 — Broader Titles</div>
+          <div class="search-string">("Platform Engineer" OR "DevOps Engineer" OR "Build Engineer" OR "CI/CD Engineer" OR "Release Engineer") AND Python AND (Airflow OR Jenkins OR pipeline)</div>
+        </div>
+
+        <div class="search-card">
+          <div class="search-card-title">Layer 3 — Widest Net</div>
+          <div class="search-string">("software engineer" OR "backend engineer") AND Python AND ("CI/CD" OR automation OR pipeline OR Jenkins OR Airflow) AND (integration OR built OR developed) -QA -tester -"test automation" -SDET</div>
+        </div>
+
+        <div class="search-card">
+          <div class="search-card-title">Communication Filter (Add to Any Layer)</div>
+          <div class="search-string">AND (consulting OR "client-facing" OR stakeholder OR "cross-functional")</div>
+        </div>
+
+        <div class="search-card">
+          <div class="search-card-title">AI Tools Filter (Add to Any Layer)</div>
+          <div class="search-string">AND ("Claude Code" OR Cursor OR "AI pair programming" OR "agentic AI" OR "AI-assisted")</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-title">Synonym Groups</div>
+      <p class="section-intro">Use OR between these in searches - they're related tools.</p>
+      <div class="synonym-box">
+        <div class="synonym-group">
+          <strong>Workflow Orchestration:</strong><br>
+          <code>(Airflow OR Prefect OR Dagster OR Luigi OR "Argo Workflows" OR Temporal)</code>
+        </div>
+        <div class="synonym-group">
+          <strong>CI/CD Systems:</strong><br>
+          <code>(Jenkins OR "GitHub Actions" OR "GitLab CI" OR CircleCI OR BuildKite)</code>
+        </div>
+        <div class="synonym-group">
+          <strong>Build Systems:</strong><br>
+          <code>(Bazel OR "build system" OR monorepo)</code>
+        </div>
+        <div class="synonym-group">
+          <strong>Database:</strong><br>
+          <code>(PostgreSQL OR Postgres OR MySQL)</code>
+        </div>
+        <div class="synonym-group">
+          <strong>AI Coding Tools:</strong><br>
+          <code>("Claude Code" OR Cursor OR "AI pair programming" OR "agentic AI")</code>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-title">Tech Stack Keywords</div>
+
+      <div class="tag-section">
+        <div class="tag-label">Must-Have (Search for These)</div>
+        <div class="tag-group">
+          <span class="tag">Python</span>
+          <span class="tag">Airflow</span>
+          <span class="tag">Jenkins</span>
+          <span class="tag">CI/CD</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">API integration</span>
+          <span class="tag">data pipeline</span>
+          <span class="tag">Claude Code</span>
+          <span class="tag">Cursor</span>
+        </div>
+      </div>
+
+      <div class="tag-section">
+        <div class="tag-label">Nice-to-Have (Bonus Points)</div>
+        <div class="tag-group">
+          <span class="tag-secondary">Bazel</span>
+          <span class="tag-secondary">Grafana</span>
+          <span class="tag-secondary">GitHub Actions</span>
+          <span class="tag-secondary">Docker</span>
+          <span class="tag-secondary">Kubernetes</span>
+          <span class="tag-secondary">LangChain</span>
+          <span class="tag-secondary">LLM</span>
+          <span class="tag-secondary">AI integration</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="full-width">
+      <div class="section-title">What to Look for in Work History</div>
+      <ul class="skill-list">
+        <li>
+          <strong>Company size 100+ employees</strong>
+          <div class="detail">Smaller companies often don't have complex CI/CD - not enough scale to need it</div>
+        </li>
+        <li>
+          <strong>Built automation, not just used it</strong>
+          <div class="detail">Many developers use CI/CD but never configured or built pipelines themselves</div>
+        </li>
+        <li>
+          <strong>Integration or platform team experience</strong>
+          <div class="detail">Shows they've connected systems together, not just worked in one silo</div>
+        </li>
+        <li>
+          <strong>Experience with messy/legacy systems</strong>
+          <div class="detail">Our client has mature enterprise systems - not everything is new and clean</div>
+        </li>
+        <li>
+          <strong>Some client or stakeholder interaction</strong>
+          <div class="detail">This role is 15% client-facing - they need to communicate with external teams</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

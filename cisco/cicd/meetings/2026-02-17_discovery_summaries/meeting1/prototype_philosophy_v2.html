@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prototype V2: Philosophy Section</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --primary: #0f172a;
+  --accent: #a855f7;
+  --purple-dark: #5b21b6;
+  --text: #334155;
+  --text-light: #64748b;
+  --border: #e2e8f0;
+  --bg-subtle: #f8fafc;
+  --white: #ffffff;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 15px;
+  background: var(--bg-subtle);
+  padding: 40px;
+}
+
+.prototype-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--purple-dark);
+  padding: 6px 12px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.prototype-section {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 32px;
+  margin-bottom: 40px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.prototype-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ============================================
+   OPTION G — Headline + Takeaways + Evidence
+   Clear hierarchy: statement → what it means → proof
+   ============================================ */
+
+.g-container {
+  max-width: 700px;
+}
+
+.g-headline {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.g-takeaways {
+  margin-bottom: 16px;
+}
+
+.g-takeaway {
+  display: flex;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.g-takeaway:last-child {
+  border-bottom: none;
+}
+
+.g-takeaway-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--purple-dark);
+  min-width: 120px;
+  flex-shrink: 0;
+}
+
+.g-takeaway-text {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.g-evidence {
+  background: var(--bg-subtle);
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+.g-evidence strong {
+  color: var(--text);
+}
+
+/* ============================================
+   OPTION H — Two-column: Expectation / Implication
+   Left: What Cisco said | Right: What it means for us
+   ============================================ */
+
+.h-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.h-header {
+  background: var(--purple-dark);
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 10px 16px;
+}
+
+.h-cell {
+  background: var(--white);
+  padding: 12px 16px;
+  font-size: 14px;
+}
+
+.h-cell.subtle {
+  background: var(--bg-subtle);
+}
+
+.h-cell strong {
+  color: var(--primary);
+}
+
+.h-cell em {
+  font-style: normal;
+  color: var(--text-light);
+  font-size: 13px;
+}
+
+/* ============================================
+   OPTION I — Numbered priorities with context
+   Clear 1-2-3 ordering, each with meaning
+   ============================================ */
+
+.i-list {
+  counter-reset: priorities;
+}
+
+.i-item {
+  display: flex;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.i-item:last-child {
+  border-bottom: none;
+}
+
+.i-number {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  min-width: 32px;
+}
+
+.i-content {
+  flex: 1;
+}
+
+.i-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.i-desc {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.i-quote {
+  font-size: 13px;
+  color: var(--text-light);
+  font-style: italic;
+  margin-top: 6px;
+}
+
+/* ============================================
+   OPTION J — Bold statement with inline evidence
+   One strong paragraph, quotes woven in naturally
+   ============================================ */
+
+.j-statement {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text);
+}
+
+.j-statement strong {
+  color: var(--primary);
+}
+
+.j-statement .inline-quote {
+  background: linear-gradient(135deg, rgba(168,85,247,0.08) 0%, rgba(168,85,247,0.12) 100%);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-style: italic;
+}
+
+/* ============================================
+   OPTION K — Key insight card format
+   Matches the insight-card style but for principles
+   ============================================ */
+
+.k-header {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--purple-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.k-main {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--primary);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.k-details {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.k-detail {
+  padding: 12px;
+  background: var(--bg-subtle);
+  border-radius: 6px;
+}
+
+.k-detail-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--purple-dark);
+  margin-bottom: 4px;
+}
+
+.k-detail-text {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.k-footer {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+  color: var(--text);
+}
+
+.k-footer em {
+  font-style: italic;
+  color: var(--text-light);
+}
+
+/* ============================================
+   OPTION L — Scannable list with bold leads
+   Fast to scan, clear what each point means
+   ============================================ */
+
+.l-intro {
+  font-size: 15px;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.l-list {
+  list-style: none;
+}
+
+.l-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.l-list li:last-child {
+  border-bottom: none;
+}
+
+.l-list strong {
+  color: var(--primary);
+}
+
+.l-list .evidence {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="prototype-label">Prototype V2 — Clarity First</div>
+  <h1 style="font-size: 28px; margin-bottom: 8px; color: var(--primary);">Working Relationship Principles</h1>
+  <p style="color: var(--text-light); margin-bottom: 32px;">Focus: Takeaways first, quotes as evidence</p>
+
+  <!-- OPTION G -->
+  <div class="prototype-section">
+    <div class="prototype-title">OPTION G — Headline + Takeaways + Evidence</div>
+
+    <div class="g-container">
+      <div class="g-headline">Srinivas wants a collaborative technical partnership, not a vendor relationship.</div>
+
+      <div class="g-takeaways">
+        <div class="g-takeaway">
+          <div class="g-takeaway-label">Disagreement</div>
+          <div class="g-takeaway-text">Challenge ideas openly. Disagreement is expected and welcomed, even in large meetings.</div>
+        </div>
+        <div class="g-takeaway">
+          <div class="g-takeaway-label">Communication</div>
+          <div class="g-takeaway-text">Engineer-to-engineer, direct. No gatekeepers, no formality required.</div>
+        </div>
+        <div class="g-takeaway">
+          <div class="g-takeaway-label">Technical bar</div>
+          <div class="g-takeaway-text">Build everything for extensibility. Design for agentic infrastructure from day one.</div>
+        </div>
+      </div>
+
+      <div class="g-evidence">
+        <strong>His words:</strong> "You can always correct me — even in peak meetings. Once you start working, it's engineer-to-engineer. You'll find a good partner."
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION H -->
+  <div class="prototype-section">
+    <div class="prototype-title">OPTION H — Two-column: What they said / What it means</div>
+
+    <div class="h-grid">
+      <div class="h-header">Cisco's Expectation</div>
+      <div class="h-header">What This Means for BayOne</div>
+
+      <div class="h-cell"><strong>Open disagreement</strong> — "correct me anywhere, even in peak meetings"</div>
+      <div class="h-cell subtle">Challenge ideas directly. Don't soften feedback or wait for private moments.</div>
+
+      <div class="h-cell"><strong>Engineer-to-engineer</strong> — "you'll find a good partner"</div>
+      <div class="h-cell subtle">Skip formality. Go direct to technical contacts, not through managers.</div>
+
+      <div class="h-cell"><strong>Extensibility first</strong> — "ready for agentic infrastructure"</div>
+      <div class="h-cell subtle">Every feature we build should be designed for future AI agent integration.</div>
+    </div>
+  </div>
+
+  <!-- OPTION I -->
+  <div class="prototype-section">
+    <div class="prototype-title">OPTION I — Numbered priorities</div>
+
+    <div class="i-list">
+      <div class="i-item">
+        <div class="i-number">1</div>
+        <div class="i-content">
+          <div class="i-title">Disagreement is expected</div>
+          <div class="i-desc">Challenge ideas openly, even in large meetings. This is a technical partnership where pushback is valued.</div>
+          <div class="i-quote">"You can always correct me — even in peak meetings."</div>
+        </div>
+      </div>
+      <div class="i-item">
+        <div class="i-number">2</div>
+        <div class="i-content">
+          <div class="i-title">Direct communication</div>
+          <div class="i-desc">Engineer-to-engineer, no gatekeepers. Skip the formality and go straight to technical contacts.</div>
+        </div>
+      </div>
+      <div class="i-item">
+        <div class="i-number">3</div>
+        <div class="i-content">
+          <div class="i-title">Build for extensibility</div>
+          <div class="i-desc">Every feature should be designed for future agentic infrastructure from day one.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION J -->
+  <div class="prototype-section">
+    <div class="prototype-title">OPTION J — Prose paragraph with inline evidence</div>
+
+    <p class="j-statement">
+      <strong>This is a collaborative technical partnership, not a vendor relationship.</strong> Srinivas explicitly values disagreement — <span class="inline-quote">"correct me anywhere, even in peak meetings"</span> — and expects direct, engineer-to-engineer communication without gatekeepers. On technical approach, everything we build should be designed for extensibility and future agentic infrastructure from day one.
+    </p>
+  </div>
+
+  <!-- OPTION K -->
+  <div class="prototype-section">
+    <div class="prototype-title">OPTION K — Key insight format with details</div>
+
+    <div class="k-header">Working Relationship</div>
+    <div class="k-main">Srinivas wants a collaborative technical partnership where disagreement is welcomed and communication is direct.</div>
+
+    <div class="k-details">
+      <div class="k-detail">
+        <div class="k-detail-title">On Disagreement</div>
+        <div class="k-detail-text">Challenge openly, even in large meetings. Pushback is valued.</div>
+      </div>
+      <div class="k-detail">
+        <div class="k-detail-title">On Communication</div>
+        <div class="k-detail-text">Engineer-to-engineer. No gatekeepers or formality required.</div>
+      </div>
+      <div class="k-detail">
+        <div class="k-detail-title">On Technical Bar</div>
+        <div class="k-detail-text">Build for extensibility. Design for agentic infrastructure.</div>
+      </div>
+    </div>
+
+    <div class="k-footer">
+      His words: <em>"You can always correct me — even in peak meetings. You'll find a good partner."</em>
+    </div>
+  </div>
+
+  <!-- OPTION L -->
+  <div class="prototype-section">
+    <div class="prototype-title">OPTION L — Scannable list with bold leads</div>
+
+    <p class="l-intro">Srinivas outlined expectations for how Cisco and BayOne will work together:</p>
+
+    <ul class="l-list">
+      <li>
+        <strong>Disagreement is expected.</strong> Challenge ideas openly — don't wait for private moments or soften feedback.
+        <span class="evidence">"You can always correct me — even in peak meetings."</span>
+      </li>
+      <li>
+        <strong>Communication is direct.</strong> Engineer-to-engineer, no gatekeepers. Skip formality and go straight to technical contacts.
+      </li>
+      <li>
+        <strong>Build for the future.</strong> Every feature should be designed for extensibility and agentic infrastructure from day one.
+      </li>
+    </ul>
+  </div>
+
+</body>
+</html>

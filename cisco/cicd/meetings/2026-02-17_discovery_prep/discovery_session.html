@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discovery Session - NX-OS CI/CD Pipeline Improvement</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #a855f7;
+      --purple-dark: #5b21b6;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .cover-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e879f9;
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .cover-subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 48px;
+      max-width: 600px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 48px;
+      padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .cover-meta-item label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+
+    .cover-meta-item span {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .logo {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span { color: #e879f9; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .section { margin-bottom: 56px; }
+
+    .section-number {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--purple-dark);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      padding: 6px 14px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%);
+      border-radius: 4px;
+    }
+
+    h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 28px 0 14px;
+    }
+
+    p { margin-bottom: 16px; }
+
+    .lead {
+      font-size: 17px;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border-left: 4px solid #a855f7;
+      padding: 20px 24px;
+      margin: 24px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      padding: 12px 14px;
+      background: #5b21b6;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+
+    th:last-child { border-right: none; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    .question-list {
+      margin: 16px 0;
+      padding-left: 0;
+      list-style: none;
+      counter-reset: question-counter;
+    }
+
+    .question-list li {
+      counter-increment: question-counter;
+      padding: 10px 0 10px 40px;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .question-list li:last-child {
+      border-bottom: none;
+    }
+
+    .question-list li::before {
+      content: counter(question-counter) ".";
+      position: absolute;
+      left: 0;
+      font-weight: 600;
+      color: var(--accent);
+      font-size: 14px;
+    }
+
+    .priority-blocking {
+      background: #fef2f2;
+      color: #991b1b;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .priority-high {
+      background: #fef9c3;
+      color: #854d0e;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .priority-medium {
+      background: #e0e7ff;
+      color: #3730a3;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .tbd-badge {
+      background: var(--bg-subtle);
+      color: var(--text-light);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      font-style: italic;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 48px 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 64px;
+    }
+
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .footer-logo span { color: #a855f7; }
+
+    .footer p {
+      font-size: 13px;
+      color: var(--text-light);
+      margin: 0;
+    }
+
+    @media print {
+      @page {
+        size: 8.5in 11in;
+        margin: 0.5in;
+      }
+
+      body { font-size: 9pt; line-height: 1.4; }
+
+      .cover {
+        min-height: 0;
+        height: 10in;
+        padding: 50px;
+        page-break-after: always;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .cover h1 { font-size: 32pt; }
+      .cover-subtitle { font-size: 13pt; }
+
+      .container { padding: 0; max-width: 100%; }
+
+      .section {
+        margin-bottom: 24px;
+        page-break-inside: avoid;
+      }
+
+      h2 { font-size: 14pt; margin-bottom: 10px; page-break-after: avoid; }
+      h3 { font-size: 11pt; margin: 14px 0 8px; page-break-after: avoid; }
+      p { margin-bottom: 6px; }
+      .lead { font-size: 10pt; margin-bottom: 14px; }
+
+      table {
+        font-size: 8pt;
+        margin: 10px 0;
+        page-break-inside: avoid;
+      }
+
+      th, td {
+        padding: 6px 8px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .question-list li {
+        padding: 6px 0 6px 32px;
+        font-size: 9pt;
+      }
+
+      .highlight-box {
+        padding: 12px 16px;
+        margin: 14px 0;
+        page-break-inside: avoid;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .footer {
+        margin-top: 20px;
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-label">Discovery Session</div>
+      <h1>NX-OS CI/CD Pipeline Improvement</h1>
+      <p class="cover-subtitle">Phase 1 Discovery: Developer Box (Item A) and Branch Health (Item F)</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <label>Prepared For</label>
+          <span>Cisco Systems</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Date</label>
+          <span>February 17, 2026</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Classification</label>
+          <span>Confidential</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo">Bay<span>One</span> Solutions</div>
+  </div>
+
+  <div class="container">
+
+    <div class="section">
+      <div class="section-number">CONTEXT</div>
+      <h2>Purpose of This Session</h2>
+      <p class="lead">On January 16, 2026, Cisco selected Item A (Developer Box) and Item F (Branch Health/ CD Health) as Phase 1 priorities. This document outlines what we need to understand and what we need from Cisco to begin meaningful work.</p>
+
+      <div class="highlight-box">
+        <p><strong>Cisco Q3 began January 26, 2026.</strong> To ensure delivery aligns with Cisco's fiscal calendar, we propose that the engagement timeline begin on the date we have meaningful access to systems and designated Cisco contacts. This allows us to commit to realistic deliverables without timeline slippage due to onboarding delays.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>Access Requirements</h2>
+      <p>For BayOne to begin discovery and development work, we need Cisco to provide the following. Each item requires a Cisco owner who can drive it to completion.</p>
+
+      <h3>System Access</h3>
+      <table>
+        <tr>
+          <th>System</th>
+          <th>What We Need</th>
+          <th>Cisco Owner</th>
+        </tr>
+        <tr>
+          <td><strong>Jenkins</strong></td>
+          <td>Read access to job configurations, build logs, and historical data</td>
+          <td><span class="tbd-badge">TBD</span></td>
+        </tr>
+        <tr>
+          <td><strong>Apache Airflow</strong></td>
+          <td>Read access to DAGs, task logs, and execution history</td>
+          <td><span class="tbd-badge">TBD</span></td>
+        </tr>
+        <tr>
+          <td><strong>CAT</strong></td>
+          <td>Access to view gate configurations and branch settings</td>
+          <td><span class="tbd-badge">TBD</span></td>
+        </tr>
+        <tr>
+          <td><strong>DevX Platform</strong></td>
+          <td>Access to PR metadata and pipeline status</td>
+          <td><span class="tbd-badge">TBD</span></td>
+        </tr>
+        <tr>
+          <td><strong>Grafana</strong></td>
+          <td>Access to existing dashboards and underlying data sources</td>
+          <td><span class="tbd-badge">TBD</span></td>
+        </tr>
+        <tr>
+          <td><strong>GitHub Enterprise</strong></td>
+          <td>Read access to relevant repositories</td>
+          <td><span class="tbd-badge">TBD</span></td>
+        </tr>
+        <tr>
+          <td><strong>Issue Tracking</strong></td>
+          <td>Access to pipeline-related tickets and escalation workflows (if applicable)</td>
+          <td><span class="tbd-badge">TBD</span></td>
+        </tr>
+      </table>
+
+      <h3>Questions for Cisco</h3>
+      <ol class="question-list">
+        <li>Is there an internal ticketing system (ServiceNow, Jira, etc.) we should use to request access? If so, who can grant us access to that system and guide us through the process?</li>
+        <li>Who is the single point of contact responsible for ensuring BayOne team members receive access?</li>
+        <li>What is the typical turnaround time for access provisioning?</li>
+        <li>What is the network access model for external contractors? (VPN credentials, IP whitelisting, etc.)</li>
+        <li>Who initiates the network access process, and what information do you need from us to start it?</li>
+        <li>Are there different access tiers for onshore vs. offshore team members?</li>
+        <li>Who initiates the background check process - does Cisco send us forms, or do we need to contact someone specific?</li>
+        <li>Can we begin non-sensitive discovery work while background checks are in progress?</li>
+        <li>Will BayOne developers receive Cisco-managed machines, or use their own with VPN access?</li>
+        <li>How can we test developer-side tooling if we don't have the same local environment as Cisco engineers?</li>
+        <li>Is there a staging or dev environment for CI/CD tooling where we can safely test changes before production?</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>Infrastructure & Deployment</h2>
+      <p>Cisco previously asked us "what servers do you need" - to answer that, we need to understand the on-prem deployment environment.</p>
+
+      <h3>Questions for Cisco</h3>
+      <ol class="question-list" style="counter-reset: question-counter 11;">
+        <li>What is the process for provisioning on-prem servers for this project? Do we spec requirements and Cisco provisions, or is there a self-service model?</li>
+        <li>What database options are available on-prem? (PostgreSQL, MySQL, Oracle, etc.)</li>
+        <li>Are there existing shared services we should leverage, or should we plan for isolated infrastructure?</li>
+        <li>Is there a preferred deployment pattern? (containers, VMs, bare metal)</li>
+        <li>Where does raw pipeline data currently live? (data warehouse, direct database, Prometheus TSDB, etc.)</li>
+        <li>What is the logging stack? (ELK, Splunk, Graylog, etc.)</li>
+        <li>What are the data retention policies - how far back can historical analysis go?</li>
+        <li>Should we deploy our work to Cisco's existing Airflow instance, or stand up a separate instance for isolation?</li>
+        <li>If using the existing Airflow instance, who is the Airflow SME we should coordinate with?</li>
+        <li>What version of Airflow is currently deployed?</li>
+        <li>What AI/LLM services are available to us? (specific providers, model versions)</li>
+        <li>Are there restrictions on what data we can send to these APIs? (code snippets, log data, error messages)</li>
+        <li>Are there rate limits or cost considerations we should design around?</li>
+        <li>Is there an internal AI platform team we should coordinate with?</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>Cisco Team Contacts</h2>
+      <p>We need designated contacts in several areas to ensure we can move forward without bottlenecks.</p>
+
+      <table>
+        <tr>
+          <th>Area</th>
+          <th>Role Needed</th>
+          <th>Why</th>
+          <th>Cisco Contact</th>
+        </tr>
+        <tr>
+          <td><strong>Developer Workflow</strong></td>
+          <td>Lead + IC</td>
+          <td>Understand day-to-day developer experience, local testing practices, pain points</td>
+          <td><span class="tbd-badge">TBD</span></td>
+        </tr>
+        <tr>
+          <td><strong>Repository & Code Standards</strong></td>
+          <td>Lead-level</td>
+          <td>Understand code review process, contribution guidelines, PR standards</td>
+          <td><span class="tbd-badge">TBD</span></td>
+        </tr>
+        <tr>
+          <td><strong>Deployment / Builds</strong></td>
+          <td>SME</td>
+          <td>Understand official build process, release management, CD pipeline (the "Red Box")</td>
+          <td><span class="tbd-badge">TBD</span></td>
+        </tr>
+        <tr>
+          <td><strong>Airflow / Orchestration</strong></td>
+          <td>SME</td>
+          <td>Understand DAG patterns, job dependencies, operational practices</td>
+          <td><span class="tbd-badge">TBD</span></td>
+        </tr>
+        <tr>
+          <td><strong>CAT / Gate Config</strong></td>
+          <td>SME</td>
+          <td>Understand gate logic, branch policies, approval workflows</td>
+          <td><span class="tbd-badge">TBD</span></td>
+        </tr>
+        <tr>
+          <td><strong>Observability / Grafana</strong></td>
+          <td>SME</td>
+          <td>Understand existing dashboards, data sources, metric schemas for Branch Health work</td>
+          <td><span class="tbd-badge">TBD</span></td>
+        </tr>
+        <tr>
+          <td><strong>Infrastructure / DevOps</strong></td>
+          <td>SME</td>
+          <td>Coordinate server provisioning, network access, deployment</td>
+          <td><span class="tbd-badge">TBD</span></td>
+        </tr>
+      </table>
+
+      <h3>Questions for Cisco</h3>
+      <ol class="question-list" style="counter-reset: question-counter 25;">
+        <li>Can you identify contacts for each of these areas before or during this session?</li>
+        <li>What is the expected availability of these contacts during discovery? (hours per week)</li>
+        <li>Is there a single discovery coordinator on Cisco's side who can help us navigate to the right people?</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <div class="section-number">04</div>
+      <h2>Technical Understanding</h2>
+
+      <h3>Developer Box (Item A)</h3>
+      <p>We need to understand the current state before designing instrumentation.</p>
+      <ol class="question-list" style="counter-reset: question-counter 28;">
+        <li>Can we schedule a walkthrough of the local development workflow? (developer writes code, runs tests, submits PR)</li>
+        <li>What testing frameworks are used locally? (pyATS, pytest, custom frameworks)</li>
+        <li>How standardized is the local dev environment across teams, or does it vary significantly?</li>
+        <li>What specific telemetry data would be most valuable? (test names, pass/fail, duration, coverage metrics)</li>
+        <li>What is the appetite for a lightweight agent on developer machines vs. alternative collection mechanisms?</li>
+      </ol>
+
+      <h3>Branch Health / CD Health (Item F)</h3>
+      <ol class="question-list" style="counter-reset: question-counter 33;">
+        <li>What specific information do release leads need that they lack today?</li>
+        <li>Are there existing dashboards or reports for release leads, or is this capability net new?</li>
+        <li>What does "automated follow-up identification" look like in practice? (WebEx notifications, Jira tickets, email escalations)</li>
+        <li>What criteria distinguish actionable failures from noise that shouldn't trigger follow-up?</li>
+      </ol>
+
+      <h3>Internal Documentation</h3>
+      <ol class="question-list" style="counter-reset: question-counter 37;">
+        <li>Is there existing documentation on the 39 gates - what each gate checks, expected inputs/outputs, common failure modes?</li>
+        <li>Is there documentation on CDT (Context Driven Testing) architecture and how it integrates with the pipeline?</li>
+        <li>Are there internal developer standards or contribution guidelines we should review?</li>
+        <li>Where does this documentation live, and can we get access?</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <div class="section-number">05</div>
+      <h2>Scale & Metrics</h2>
+      <p>We need baseline data to size our solution and measure success.</p>
+      <ol class="question-list" style="counter-reset: question-counter 41;">
+        <li>Approximately how many PRs are submitted per day/week?</li>
+        <li>How many active developers submit PRs?</li>
+        <li>How many branches are actively maintained?</li>
+        <li>How many repositories are in scope for this work?</li>
+        <li>What is the current average PR merge time (end-to-end)?</li>
+        <li>What are the top 5 most common gate failure points?</li>
+        <li>Can we query this data from existing sources (Grafana, databases), or does new instrumentation need to be built?</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <div class="section-number">06</div>
+      <h2>Scope Boundaries</h2>
+
+      <h3>Internal AI Code Review Project</h3>
+      <p>We understand Cisco has an internal AI code review project going live soon.</p>
+      <ol class="question-list" style="counter-reset: question-counter 48;">
+        <li>What is the scope of that project, and where does it overlap with Items A-F?</li>
+        <li>Should our work integrate with that project, extend it, or remain separate?</li>
+        <li>Who owns that project, and should we coordinate with them?</li>
+      </ol>
+
+      <h3>CDT Clarification</h3>
+      <p>CDT was described as "already solved" but also noted as having gaps.</p>
+      <ol class="question-list" style="counter-reset: question-counter 51;">
+        <li>What specific gaps exist in CDT's current coverage tracking?</li>
+        <li>Is condition-level coverage (vs. function-level) the primary gap, or is there something else?</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <div class="section-number">07</div>
+      <h2>Operational Considerations</h2>
+
+      <h3>Change Management</h3>
+      <ol class="question-list" style="counter-reset: question-counter 53;">
+        <li>Is there a Change Advisory Board (CAB) or approval process for deploying new tools to production pipelines?</li>
+        <li>What is the rollback process if our tooling causes issues?</li>
+      </ol>
+
+      <h3>Incident Management</h3>
+      <ol class="question-list" style="counter-reset: question-counter 55;">
+        <li>If our deployed tooling causes problems, who do we contact?</li>
+        <li>What is the incident management process we should be aware of?</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <div class="section-number">08</div>
+      <h2>Working Rhythm & Reporting</h2>
+      <ol class="question-list" style="counter-reset: question-counter 57;">
+        <li>What are Cisco's expectations for progress reporting? (weekly status, bi-weekly demos, ad-hoc updates)</li>
+        <li>What format works best? (written updates, slide decks, live demos)</li>
+        <li>Who should receive status updates, and who has authority to approve direction changes?</li>
+        <li>If helpful, we can propose a reporting cadence - would that be useful?</li>
+        <li>What channel should BayOne use for day-to-day technical questions? (WebEx space, email distribution list, etc.)</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <div class="section-number">09</div>
+      <h2>Timeline Alignment</h2>
+
+      <p><strong>Current State:</strong> Cisco Q3 is January 26, 2026 - present. BayOne onboarding is in progress with access and contacts pending.</p>
+
+      <div class="highlight-box">
+        <p><strong>Proposal:</strong> We recommend defining the engagement start date as the date we have: (1) system access provisioned, (2) designated Cisco SME contacts identified and available, and (3) background check clearance or approval to begin non-sensitive work. This ensures our delivery commitments are realistic and tied to actual working time.</p>
+      </div>
+
+      <ol class="question-list" style="counter-reset: question-counter 62;">
+        <li>What are Cisco's delivery expectations for Q3?</li>
+        <li>Given current onboarding status, is there flexibility on timeline, or should we adjust scope to fit available time?</li>
+        <li>What is the realistic target date for BayOne to have meaningful access?</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <div class="section-number">SUMMARY</div>
+      <h2>What We Need From Cisco</h2>
+
+      <table>
+        <tr>
+          <th>Category</th>
+          <th>Items Needed</th>
+          <th>Priority</th>
+        </tr>
+        <tr>
+          <td><strong>Access</strong></td>
+          <td>System access to Jenkins, Airflow, CAT, DevX, Grafana, GitHub Enterprise</td>
+          <td><span class="priority-blocking">Blocking</span></td>
+        </tr>
+        <tr>
+          <td><strong>Access</strong></td>
+          <td>Network/VPN access for BayOne team</td>
+          <td><span class="priority-blocking">Blocking</span></td>
+        </tr>
+        <tr>
+          <td><strong>Access</strong></td>
+          <td>Background check initiation</td>
+          <td><span class="priority-blocking">Blocking</span></td>
+        </tr>
+        <tr>
+          <td><strong>Contacts</strong></td>
+          <td>Single discovery coordinator</td>
+          <td><span class="priority-high">High</span></td>
+        </tr>
+        <tr>
+          <td><strong>Contacts</strong></td>
+          <td>SMEs for Developer, Repo, Deployment, Airflow, CAT, Grafana, Infrastructure</td>
+          <td><span class="priority-high">High</span></td>
+        </tr>
+        <tr>
+          <td><strong>Infrastructure</strong></td>
+          <td>Clarity on server provisioning process</td>
+          <td><span class="priority-high">High</span></td>
+        </tr>
+        <tr>
+          <td><strong>Infrastructure</strong></td>
+          <td>AI/LLM service availability and restrictions</td>
+          <td><span class="priority-high">High</span></td>
+        </tr>
+        <tr>
+          <td><strong>Infrastructure</strong></td>
+          <td>Data infrastructure details (logging stack, retention)</td>
+          <td><span class="priority-high">High</span></td>
+        </tr>
+        <tr>
+          <td><strong>Environment</strong></td>
+          <td>Staging/dev environment for testing our tooling</td>
+          <td><span class="priority-high">High</span></td>
+        </tr>
+        <tr>
+          <td><strong>Documentation</strong></td>
+          <td>Access to internal docs on gates, CDT, developer standards</td>
+          <td><span class="priority-medium">Medium</span></td>
+        </tr>
+        <tr>
+          <td><strong>Metrics</strong></td>
+          <td>Baseline data on PR volume, merge times, failure rates</td>
+          <td><span class="priority-medium">Medium</span></td>
+        </tr>
+        <tr>
+          <td><strong>Clarity</strong></td>
+          <td>Boundary with internal AI code review project</td>
+          <td><span class="priority-medium">Medium</span></td>
+        </tr>
+        <tr>
+          <td><strong>Operational</strong></td>
+          <td>Change management and incident escalation processes</td>
+          <td><span class="priority-medium">Medium</span></td>
+        </tr>
+        <tr>
+          <td><strong>Timeline</strong></td>
+          <td>Agreed start date tied to access provisioning</td>
+          <td><span class="priority-high">High</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">NEXT STEPS</div>
+      <h2>Actions to Confirm</h2>
+
+      <table>
+        <tr>
+          <th>Action</th>
+          <th>Owner</th>
+          <th>Target Date</th>
+        </tr>
+        <tr>
+          <td>Identify Cisco discovery coordinator</td>
+          <td>Cisco</td>
+          <td><span class="tbd-badge">TBD</span></td>
+        </tr>
+        <tr>
+          <td>Initiate access provisioning</td>
+          <td>Cisco</td>
+          <td><span class="tbd-badge">TBD</span></td>
+        </tr>
+        <tr>
+          <td>Initiate background check process</td>
+          <td>Cisco</td>
+          <td><span class="tbd-badge">TBD</span></td>
+        </tr>
+        <tr>
+          <td>Provide SME contact list</td>
+          <td>Cisco</td>
+          <td><span class="tbd-badge">TBD</span></td>
+        </tr>
+        <tr>
+          <td>Schedule developer workflow walkthrough</td>
+          <td>Cisco + BayOne</td>
+          <td><span class="tbd-badge">TBD</span></td>
+        </tr>
+        <tr>
+          <td>Confirm AI/LLM service availability</td>
+          <td>Cisco</td>
+          <td><span class="tbd-badge">TBD</span></td>
+        </tr>
+        <tr>
+          <td>Confirm staging environment availability</td>
+          <td>Cisco</td>
+          <td><span class="tbd-badge">TBD</span></td>
+        </tr>
+        <tr>
+          <td>Agree on engagement start date</td>
+          <td>Cisco + BayOne</td>
+          <td><span class="tbd-badge">TBD</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Confidential - Prepared for Cisco Systems</p>
+    </div>
+  </div>
+</body>
+</html>

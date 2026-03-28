@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NX-OS CI/CD Pipeline Improvement - Resource Plan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #a855f7;
+      --purple-dark: #5b21b6;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .cover-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e879f9;
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .cover-subtitle {
+      font-size: 22px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 48px;
+      max-width: 600px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 48px;
+      padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .cover-meta-item label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+
+    .cover-meta-item span {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .logo {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span { color: #e879f9; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .section { margin-bottom: 56px; }
+
+    .section-number {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--purple-dark);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      padding: 6px 14px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%);
+      border-radius: 4px;
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 32px 0 16px;
+    }
+
+    h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 24px 0 12px;
+    }
+
+    p { margin-bottom: 16px; }
+
+    .lead {
+      font-size: 18px;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border-left: 4px solid #a855f7;
+      padding: 24px 28px;
+      margin: 32px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      padding: 14px 16px;
+      background: #5b21b6;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+
+    th:last-child { border-right: none; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    .quarter-card {
+      background: var(--white);
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      padding: 28px;
+      margin: 24px 0;
+      box-shadow: 0 1px 3px rgba(124,58,237,0.06);
+    }
+
+    .quarter-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .quarter-badge {
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: var(--white);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .quarter-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .quarter-cost {
+      margin-left: auto;
+      font-size: 18px;
+      font-weight: 600;
+      color: #7c3aed;
+    }
+
+    .deliverable-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .deliverable-item {
+      background: linear-gradient(135deg, rgba(124,58,237,0.04) 0%, rgba(168,85,247,0.06) 100%);
+      border: 1px solid rgba(124,58,237,0.1);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .deliverable-item h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 0 0 8px 0;
+    }
+
+    .deliverable-item p {
+      font-size: 13px;
+      color: var(--text-light);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .team-note {
+      background: rgba(124,58,237,0.06);
+      padding: 14px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--text);
+      margin-top: 16px;
+    }
+
+    .summary-table {
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 32px 0;
+      border: 1px solid var(--border);
+    }
+
+    .summary-table th {
+      background: #5b21b6;
+    }
+
+    .summary-table tr:nth-child(even) {
+      background: var(--bg-subtle);
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin: 32px 0;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, rgba(124,58,237,0.06) 0%, rgba(168,85,247,0.04) 100%);
+      border: 1px solid rgba(124,58,237,0.1);
+      padding: 24px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: #7c3aed;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-light);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .system-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .system-item {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      text-align: center;
+    }
+
+    .system-item strong {
+      display: block;
+      font-size: 13px;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .system-item span {
+      font-size: 11px;
+      color: var(--text-light);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 48px 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 64px;
+    }
+
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .footer-logo span { color: #a855f7; }
+
+    .footer p {
+      font-size: 13px;
+      color: var(--text-light);
+      margin: 0;
+    }
+
+    /* Org Chart Styles */
+    .org-chart {
+      margin: 32px 0;
+      padding: 32px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.04) 0%, rgba(168,85,247,0.06) 100%);
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .org-row {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 24px;
+    }
+
+    .org-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .org-row.middle {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: start;
+      gap: 24px;
+    }
+
+    .org-row.middle .left {
+      justify-self: end;
+    }
+
+    .org-row.middle .center {
+      justify-self: center;
+    }
+
+    .org-row.middle .org-box {
+      min-height: 70px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .org-box {
+      background: var(--white);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 28px;
+      text-align: center;
+    }
+
+    .org-box.primary {
+      background: var(--purple-dark);
+      border-color: var(--purple-dark);
+      padding: 20px 40px;
+    }
+
+    .org-box.primary strong {
+      color: var(--white);
+      font-size: 16px;
+    }
+
+    .org-box.lead {
+      border-color: var(--accent);
+    }
+
+    .org-box.oversight {
+      border-style: dashed;
+      border-color: var(--text-light);
+    }
+
+    .org-box strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .org-box span {
+      font-size: 12px;
+      color: var(--text-light);
+    }
+
+    /* Vertical line from Cisco down */
+    .org-box.primary::after {
+      content: '';
+      position: absolute;
+      bottom: -26px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 24px;
+      background: var(--accent);
+    }
+
+    .org-box.primary {
+      position: relative;
+    }
+
+    /* Vertical line from Senior Solutions Engineer down */
+    .org-box.lead {
+      position: relative;
+    }
+
+    .org-box.lead::after {
+      content: '';
+      position: absolute;
+      bottom: -59px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 57px;
+      background: var(--accent);
+    }
+
+    /* Dashed line from Colin connecting right */
+    .org-box.oversight {
+      position: relative;
+    }
+
+    .org-box.oversight::after {
+      content: '';
+      position: absolute;
+      right: -26px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 2px;
+      border-top: 2px dashed var(--text-light);
+    }
+
+    /* Bottom row with horizontal connector bar */
+    .org-row.bottom {
+      position: relative;
+      padding-top: 16px;
+    }
+
+    .org-row.bottom::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 85%;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    /* Vertical lines from each offshore box going up */
+    .org-row.bottom .org-box {
+      position: relative;
+    }
+
+    .org-row.bottom .org-box::before {
+      content: '';
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 16px;
+      background: var(--accent);
+    }
+
+    .dynamics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin: 24px 0;
+    }
+
+    .dynamics-card {
+      background: var(--bg-subtle);
+      border-radius: 8px;
+      padding: 24px;
+    }
+
+    .dynamics-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 0 0 12px 0;
+    }
+
+    .dynamics-card p {
+      font-size: 14px;
+      color: var(--text);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    @media print {
+      @page {
+        size: 8.5in 11in;
+        margin: 0.4in;
+      }
+
+      body { font-size: 9pt; line-height: 1.4; }
+
+      .cover {
+        min-height: 0;
+        height: 10in;
+        padding: 50px;
+        page-break-after: always;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .cover h1 { font-size: 32pt; }
+      .cover-subtitle { font-size: 14pt; }
+      .cover-meta { padding-top: 32px; gap: 32px; }
+
+      .logo { bottom: 50px; right: 50px; }
+
+      .container {
+        padding: 0;
+        max-width: 100%;
+      }
+
+      .section { margin-bottom: 20px; }
+
+      .section-number {
+        page-break-after: avoid;
+        break-after: avoid;
+      }
+
+      h2 {
+        font-size: 16pt;
+        margin-bottom: 12px;
+        page-break-after: avoid;
+        page-break-before: avoid;
+        break-before: avoid;
+      }
+      h3 { font-size: 11pt; margin: 14px 0 8px; page-break-after: avoid; }
+      h4 { font-size: 10pt; margin: 12px 0 6px; page-break-after: avoid; }
+      p { margin-bottom: 8px; }
+      .lead { font-size: 10pt; margin-bottom: 16px; line-height: 1.5; }
+
+      .quarter-card {
+        padding: 16px;
+        margin: 12px 0;
+        page-break-inside: avoid;
+      }
+
+      .org-chart {
+        page-break-inside: avoid;
+      }
+
+      table {
+        page-break-inside: avoid;
+      }
+
+      .highlight-box {
+        page-break-inside: avoid;
+      }
+
+      .deliverable-grid {
+        page-break-inside: avoid;
+      }
+
+      .dynamics-grid {
+        page-break-inside: avoid;
+      }
+
+      .deliverable-grid { gap: 10px; margin: 14px 0; }
+      .deliverable-item { padding: 12px; }
+      .deliverable-item h4 { font-size: 9pt; }
+      .deliverable-item p { font-size: 8pt; }
+
+      .stat-grid { gap: 12px; margin: 20px 0; }
+      .stat-card { padding: 14px; }
+      .stat-value { font-size: 20pt; }
+      .stat-label { font-size: 8pt; }
+
+      .system-grid { gap: 8px; }
+      .system-item { padding: 10px; }
+      .system-item strong { font-size: 9pt; }
+      .system-item span { font-size: 8pt; }
+
+      table {
+        font-size: 8pt;
+        margin: 12px 0;
+      }
+
+      th, td {
+        padding: 8px 10px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .highlight-box {
+        padding: 14px 18px;
+        margin: 14px 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .summary-table {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .footer {
+        margin-top: 20px;
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-label">Resource Plan</div>
+      <h1>NX-OS CI/CD Pipeline Improvement Initiative</h1>
+      <p class="cover-subtitle">Improving developer productivity through visibility, integration, AI-assisted diagnosis, and automation</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <label>Prepared For</label>
+          <span>Cisco Systems</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Date</label>
+          <span>February 2026</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Classification</label>
+          <span>Confidential</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo">Bay<span>One</span> Solutions</div>
+  </div>
+
+  <div class="container">
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>Executive Summary</h2>
+      <p>BayOne proposes a year-long engagement to improve Cisco's NX-OS CI/CD pipeline through six integrated capability areas. The engagement addresses challenges across the development lifecycle: from lack of visibility into local developer testing, through fragmented cross-pipeline status information, to manual failure triage and limited automation for corrective actions.</p>
+
+      <p>The work is phased to build incrementally, with each quarter's deliverables providing the foundation for the next. A team of five begins in Q1, combining on-site and offshore resources. Team composition may adjust over time as we establish working patterns and delivery needs evolve.</p>
+
+      <h3>Capability Areas</h3>
+      <table>
+        <tr>
+          <th>Item</th>
+          <th>Area</th>
+          <th>Enhancement</th>
+        </tr>
+        <tr>
+          <td><strong>A</strong></td>
+          <td>Developer Box</td>
+          <td>Telemetry, coverage tracking, AI-assisted debugging</td>
+        </tr>
+        <tr>
+          <td><strong>B</strong></td>
+          <td>Gate Failures</td>
+          <td>AI diagnosis, root cause analysis, suggested fixes</td>
+        </tr>
+        <tr>
+          <td><strong>C</strong></td>
+          <td>Cross Pipeline</td>
+          <td>Unified interface, single pane of glass, natural language queries</td>
+        </tr>
+        <tr>
+          <td><strong>D</strong></td>
+          <td>Coverage Tracking</td>
+          <td>Condition-level coverage confirmation for PRs</td>
+        </tr>
+        <tr>
+          <td><strong>E</strong></td>
+          <td>Self-Healing</td>
+          <td>Automated corrective actions, governance framework</td>
+        </tr>
+        <tr>
+          <td><strong>F</strong></td>
+          <td>Branch Health</td>
+          <td>Dashboards, failure attribution, automated follow-up</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>Team Structure</h2>
+      <p>The team combines on-site engineers who interface with Cisco directly, with an offshore implementation team that brings specialized expertise in AI and automation. This structure represents our starting point; as we establish working patterns and the project matures, the team composition may evolve to best serve delivery needs.</p>
+
+      <table>
+        <tr>
+          <th>Role</th>
+          <th>Location</th>
+          <th>Description</th>
+          <th>Start</th>
+        </tr>
+        <tr>
+          <td><strong>Colin Moore</strong><br><strong style="font-size: 12px;">Technical Lead</strong><br><span style="font-size: 12px; color: var(--accent);">Director of AI, BayOne</span></td>
+          <td>Remote</td>
+          <td>Technical leadership, Cisco leadership interface, project accountability</td>
+          <td>Q1</td>
+        </tr>
+        <tr>
+          <td><strong>Senior AI Solutions Engineer</strong></td>
+          <td>Onshore, San Jose</td>
+          <td>AI solution development, AI-driven analysis, hands-on engineering</td>
+          <td>Q1</td>
+        </tr>
+        <tr>
+          <td><strong>Automation Engineer</strong></td>
+          <td>Onshore, San Jose</td>
+          <td>CI/CD integration, data pipelines, intelligent automation, Airflow and Jenkins expertise</td>
+          <td>Q1</td>
+        </tr>
+        <tr>
+          <td><strong>AI Engineer</strong></td>
+          <td>Offshore, India</td>
+          <td>Chat interface development, AI feature implementation, dashboard development</td>
+          <td>Q1</td>
+        </tr>
+        <tr>
+          <td><strong>Agentic AI Engineer</strong></td>
+          <td>Offshore, India</td>
+          <td>Self-healing systems, autonomous decision logic, agentic AI patterns</td>
+          <td>Q1</td>
+        </tr>
+      </table>
+
+      <h3>Leadership and Team Dynamics</h3>
+
+      <p>Colin Moore (Director of AI, BayOne) serves as Technical Lead with full project accountability, working hands-on with the team. He is the primary point of contact for Cisco leadership, while the onshore team handles day-to-day interactions, working directly with Cisco engineering to drive execution.</p>
+
+      <div style="margin: 32px 0; padding: 32px; background: linear-gradient(135deg, rgba(124,58,237,0.04) 0%, rgba(168,85,247,0.06) 100%); border-radius: 12px;">
+
+        <!-- Top: Cisco and Colin -->
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 24px;">
+          <div style="background: var(--purple-dark); color: white; padding: 20px 48px; border-radius: 8px; font-weight: 700; font-size: 18px;">
+            Cisco
+          </div>
+          <div style="font-size: 20px; color: var(--accent);">↑</div>
+          <div style="background: white; border: 2px solid var(--accent); padding: 16px 28px; border-radius: 8px; text-align: center;">
+            <strong style="display: block; font-size: 14px; color: var(--primary); margin-bottom: 2px;">Colin Moore</strong>
+            <span style="display: block; font-size: 11px; color: var(--text-light); margin-bottom: 2px;">Director of AI, BayOne</span>
+            <span style="font-size: 12px; color: var(--accent); font-weight: 500;">Technical Lead</span>
+          </div>
+        </div>
+
+        <!-- Arrows pointing up to Colin -->
+        <div style="display: flex; justify-content: center; gap: 120px; margin-bottom: 8px;">
+          <div style="font-size: 20px; color: var(--accent);">↑</div>
+          <div style="font-size: 20px; color: var(--accent);">↑</div>
+        </div>
+
+        <!-- Bottom: Two team groups side by side -->
+        <div style="display: flex; justify-content: center; gap: 32px;">
+
+          <!-- Onshore Team Group -->
+          <div style="background: rgba(124,58,237,0.06); border: 1px solid rgba(124,58,237,0.15); border-radius: 12px; padding: 20px 24px;">
+            <div style="font-size: 11px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 14px; text-align: center;">Onshore Team</div>
+            <div style="display: flex; gap: 14px;">
+              <div style="background: white; border: 2px solid var(--border); padding: 14px 20px; border-radius: 8px; text-align: center;">
+                <strong style="display: block; font-size: 13px; color: var(--primary); margin-bottom: 4px;">Sr AI Solutions Engineer</strong>
+                <span style="font-size: 11px; color: var(--text-light);">Onshore / On-site</span>
+              </div>
+              <div style="background: white; border: 2px solid var(--border); padding: 14px 20px; border-radius: 8px; text-align: center;">
+                <strong style="display: block; font-size: 13px; color: var(--primary); margin-bottom: 4px;">Automation Engineer</strong>
+                <span style="font-size: 11px; color: var(--text-light);">Onshore / On-site</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Offshore Team Group -->
+          <div style="background: rgba(124,58,237,0.06); border: 1px solid rgba(124,58,237,0.15); border-radius: 12px; padding: 20px 24px;">
+            <div style="font-size: 11px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 14px; text-align: center;">Offshore Team</div>
+            <div style="display: flex; gap: 14px;">
+              <div style="background: white; border: 2px solid var(--border); padding: 14px 20px; border-radius: 8px; text-align: center;">
+                <strong style="display: block; font-size: 13px; color: var(--primary); margin-bottom: 4px;">AI Engineer</strong>
+                <span style="font-size: 11px; color: var(--text-light);">Offshore</span>
+              </div>
+              <div style="background: white; border: 2px solid var(--border); padding: 14px 20px; border-radius: 8px; text-align: center;">
+                <strong style="display: block; font-size: 13px; color: var(--primary); margin-bottom: 4px;">Agentic AI Engineer</strong>
+                <span style="font-size: 11px; color: var(--text-light);">Offshore</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="dynamics-grid">
+        <div class="dynamics-card">
+          <h4>Onshore Team</h4>
+          <p>The Senior AI Solutions Engineer and Automation Engineer build the core AI and integration capabilities on-site. They develop AI-driven analysis features, implement CI/CD integrations with Airflow and Jenkins, and build data pipelines. They serve as the day-to-day Cisco interface.</p>
+        </div>
+        <div class="dynamics-card">
+          <h4>Offshore Team</h4>
+          <p>The AI Engineer and Agentic AI Engineer build the chat interface, dashboards, and self-healing systems. They develop AI features and implement the autonomous decision logic that powers the system.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>Quarterly Roadmap</h2>
+
+      <div class="quarter-card">
+        <h3 style="margin-top:0">Q1: Discovery + Developer Box + Branch Health</h3>
+
+        <h4>Discovery Phase (3-4 Weeks)</h4>
+        <p>Before implementation begins, the team will conduct a structured discovery phase requiring approximately 8-12 hours of Cisco team involvement, spread as convenient. The remainder of discovery time is independent research into the codebase and existing systems. Discovery produces a confirmed scope document with refined estimates based on actual system understanding.</p>
+
+        <div class="deliverable-grid">
+          <div class="deliverable-item">
+            <h4>A: Developer Box</h4>
+            <p>Telemetry system to capture local test runs with pass/fail, duration, and coverage metrics. Data pipeline to store and surface results. Condition-level coverage tracking.</p>
+          </div>
+          <div class="deliverable-item">
+            <h4>F: Branch Health</h4>
+            <p>Consolidated dashboard for release leads showing status, failure trends, and blockers. Failure attribution logic. Automated follow-up triggers.</p>
+          </div>
+        </div>
+
+        <div class="highlight-box">
+          <p><strong>Prerequisites:</strong> System access to CAT, DevX, Jenkins, Airflow, Grafana, and relevant codebases. A designated Cisco contact who can unblock administrative hurdles and answer questions.</p>
+        </div>
+      </div>
+
+      <div class="quarter-card">
+        <h3 style="margin-top:0">Q2: Unified Interface / Cross-Pipeline Visibility</h3>
+
+        <h4>C: Unified Interface</h4>
+        <p>Information is currently scattered across multiple systems with no unified view. Engineers submit PRs and have no easy way to monitor progress. This deliverable requires integration with six Cisco systems, each with its own APIs, data schemas, and access patterns:</p>
+
+        <div class="system-grid">
+          <div class="system-item">
+            <strong>CAT</strong>
+            <span>Gate configurations</span>
+          </div>
+          <div class="system-item">
+            <strong>DevX Platform</strong>
+            <span>PR metadata</span>
+          </div>
+          <div class="system-item">
+            <strong>Jenkins</strong>
+            <span>CI checks</span>
+          </div>
+          <div class="system-item">
+            <strong>Apache Airflow</strong>
+            <span>Long-running jobs</span>
+          </div>
+          <div class="system-item">
+            <strong>Grafana</strong>
+            <span>Analytics</span>
+          </div>
+          <div class="system-item">
+            <strong>GitHub</strong>
+            <span>Source control</span>
+          </div>
+        </div>
+
+        <div class="deliverable-grid">
+          <div class="deliverable-item">
+            <h4>API Integration Layer</h4>
+            <p>Connections to all systems with unified authentication and data normalization across different schemas.</p>
+          </div>
+          <div class="deliverable-item">
+            <h4>Single Pane of Glass</h4>
+            <p>Web interface showing consolidated PR status across all branches with blockers and next actions.</p>
+          </div>
+          <div class="deliverable-item">
+            <h4>Unified Data Layer</h4>
+            <p>Common data model that abstracts underlying system differences.</p>
+          </div>
+          <div class="deliverable-item">
+            <h4>Chat Interface</h4>
+            <p>Natural language queries: "Where is my PR?" or "Why did this fail?"</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="quarter-card">
+        <h3 style="margin-top:0">Q3: AI Diagnosis + Coverage Tracking</h3>
+
+        <div class="deliverable-grid">
+          <div class="deliverable-item">
+            <h4>B: Gate Failures / AI Diagnosis</h4>
+            <p>Log analysis pipeline for Jenkins and Airflow. AI-driven root cause identification. Suggested fixes for human review based on codebase understanding.</p>
+          </div>
+          <div class="deliverable-item">
+            <h4>D: Coverage Tracking</h4>
+            <p>Condition-level coverage tracking beyond function-level. PR coverage confirmation showing what was tested vs. not tested.</p>
+          </div>
+        </div>
+
+        <p>There are 39 gates in the PR validation process. When a gate fails, engineers must manually investigate. AI diagnosis will analyze failure patterns and logs to identify likely causes and suggest fixes for human review. Coverage tracking will confirm that specific code changes in a PR were actually exercised by tests.</p>
+
+      </div>
+
+      <div class="quarter-card">
+        <h3 style="margin-top:0">Q4: Self-Healing / Automated Corrective Actions</h3>
+
+        <h4>E: Self-Healing</h4>
+        <p>For failures that don't require human judgment, engineers still have to manually intervene. Self-healing means automated retry for transient failures and automated simple corrections for well-defined issues. All actions are taken within a defined governance framework and are logged, auditable, and reversible.</p>
+
+        <div class="highlight-box">
+          <p><strong>Governance Framework:</strong> Before any automated actions can be implemented, a governance framework must be defined collaboratively with Cisco. This includes determining what types of failures can be auto-corrected, what actions the system can take, and how audit and accountability work.</p>
+        </div>
+
+        <div class="deliverable-grid">
+          <div class="deliverable-item">
+            <h4>Action Triggers</h4>
+            <p>Integration with Jenkins and Airflow for automated retries and corrections.</p>
+          </div>
+          <div class="deliverable-item">
+            <h4>Decision Logic</h4>
+            <p>AI-driven determination of which action to take based on failure type and governance rules.</p>
+          </div>
+          <div class="deliverable-item">
+            <h4>Safety Mechanisms</h4>
+            <p>Limits on automated actions, circuit breakers, and human escalation when confidence is low.</p>
+          </div>
+          <div class="deliverable-item">
+            <h4>Audit Visibility</h4>
+            <p>All actions logged with full context and surfaced in the unified interface.</p>
+          </div>
+        </div>
+
+        <h4>Timeline Considerations</h4>
+        <p>E is unique because it requires organizational alignment beyond technical implementation. The governance framework involves policy decisions, stakeholder buy-in, and risk acceptance. We recommend beginning governance conversations in Q2-Q3 in parallel with other work.</p>
+
+        <p>Ideally, governance should be established before Q3 to allow sufficient implementation time. Delays in governance decisions beyond the start of Q4 will impact the delivery timeline. This deliverable is a joint responsibility between BayOne and Cisco.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">04</div>
+      <h2>Next Steps</h2>
+
+      <table>
+        <tr>
+          <th>Owner</th>
+          <th>Action</th>
+          <th>Details</th>
+        </tr>
+        <tr>
+          <td><strong>Cisco</strong></td>
+          <td>System Access</td>
+          <td>Provide team access to CAT, DevX, Jenkins, Airflow, Grafana, and relevant repositories</td>
+        </tr>
+        <tr>
+          <td><strong>Cisco</strong></td>
+          <td>Designated Contact</td>
+          <td>Identify a primary engineering contact for discovery sessions (8-12 hours during first 3-4 weeks)</td>
+        </tr>
+        <tr>
+          <td><strong>Cisco</strong></td>
+          <td>Infrastructure Discussion</td>
+          <td>Clarify infrastructure ownership and deployment environment constraints</td>
+        </tr>
+        <tr>
+          <td><strong>BayOne</strong></td>
+          <td>Discovery Kickoff</td>
+          <td>3-4 week structured discovery to confirm scope, validate assumptions, and produce refined estimates</td>
+        </tr>
+        <tr>
+          <td><strong>BayOne</strong></td>
+          <td>Target Start</td>
+          <td>Upon access grant and contact designation</td>
+        </tr>
+      </table>
+      <div style="height: 40px;"></div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Confidential — Prepared for Cisco Systems</p>
+    </div>
+  </div>
+</body>
+</html>

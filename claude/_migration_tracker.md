@@ -15,7 +15,7 @@
 | 6 | `2026-02-11_skill-forge-creation` | Tooling | `claude/` (keep) | No migration needed |
 | 7 | `2026-02-17_cisco-meeting-summaries` | Cisco | `cisco/` | Pending |
 | 8 | `2026-02-17_discovery-call-prep` | Cisco | `cisco/` | Pending |
-| 9 | `2026-02-20_mcgrath_rfp` | McGrath | `mcgrath/` | Pending |
+| 9 | `2026-02-20_mcgrath_rfp` | McGrath | `mcgrath/` | **DONE** (2026-03-28) |
 | 10 | `2026-02-20_meeting-analyzer-hook-redesign` | Tooling | `claude/` (keep) | No migration needed |
 | 11 | `2026-02-20_ui-conversion-discovery` | Cisco (EPNM) | `cisco/` | Pending |
 | 12 | `2026-02-23_rfp-questions-skill` | Tooling | `claude/` (keep) | No migration needed |
@@ -33,7 +33,7 @@
 | 24 | `2026-03-19_pptx_extractor_skill` | Tooling | `claude/` (keep) | No migration needed |
 | 25 | `2026-03-20_big4_lam_problem_restatement` | Lam Research | `lam_research/` | **DONE** (2026-03-28) |
 | 26 | `2026-03-20_lam-research` | Lam Research | `lam_research/` | **DONE** (2026-03-28) |
-| 27 | `2026-03-23_mcgrath_slides` | McGrath + BayOne | Split: `mcgrath/` + `bayone/processes/` | Pending |
+| 27 | `2026-03-23_mcgrath_slides` | McGrath + BayOne | Split: `mcgrath/` + `bayone/processes/` | **DONE** (2026-03-28) |
 | 28 | `SESSIONS/` | Archive | `claude/` (keep) | No migration needed |
 | 29 | `meeting-analyzer/` | Sephora | `sephora/` | Pending |
 | 30 | `meetings/` | Cisco | `cisco/` | Pending |
@@ -42,7 +42,7 @@
 
 | Status | Count |
 |--------|-------|
-| **DONE** | 6 (Ariat 3, Lam Research 2, Tailored Brands 1) |
+| **DONE** | 9 (Ariat 3, Lam Research 2, Tailored Brands 1, McGrath 2, McGrath+BayOne split 1) |
 | **No migration needed** (tooling/archive stays in claude/) | 5 |
 | **Pending** | 22 |
 
