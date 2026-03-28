@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 13: Why BayOne?</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--purple-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 14px 40px 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+      flex-shrink: 0;
+    }
+
+    .lead {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 14px;
+      flex-shrink: 0;
+    }
+
+    /* Section label */
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--purple-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* Card grids */
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+      flex-shrink: 0;
+    }
+
+    .readiness-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .why-card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 10px;
+      padding: 14px 16px;
+      box-shadow: 0 2px 6px rgba(124,58,237,0.06);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .why-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .why-card.e1::before { background: linear-gradient(90deg, #4C1D95, #5B21B6); }
+    .why-card.e2::before { background: linear-gradient(90deg, #5B21B6, #6D28D9); }
+    .why-card.e3::before { background: linear-gradient(90deg, #6D28D9, #7C3AED); }
+    .why-card.e4::before { background: linear-gradient(90deg, #7C3AED, #A855F7); }
+    .why-card.r1::before { background: linear-gradient(90deg, #4C1D95, #5B21B6); }
+    .why-card.r2::before { background: linear-gradient(90deg, #5B21B6, #7C3AED); }
+    .why-card.r3::before { background: linear-gradient(90deg, #7C3AED, #A855F7); }
+
+    .card-icon-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .card-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .why-card.e1 .card-icon { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .why-card.e2 .card-icon { background: linear-gradient(135deg, #5B21B6, #6D28D9); }
+    .why-card.e3 .card-icon { background: linear-gradient(135deg, #6D28D9, #7C3AED); }
+    .why-card.e4 .card-icon { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+    .why-card.r1 .card-icon { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .why-card.r2 .card-icon { background: linear-gradient(135deg, #5B21B6, #7C3AED); }
+    .why-card.r3 .card-icon { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+
+    .why-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      line-height: 1.3;
+    }
+
+    .why-card p {
+      font-size: 12px;
+      color: #475569;
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .why-card p strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    /* Footer */
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>Why BayOne?</h2>
+      <p class="lead">Proven Oracle managed services expertise with the team, processes, and readiness to deliver from day one</p>
+
+      <!-- IT Operations & Maintenance Expertise -->
+      <div class="section-label">IT Operations & Maintenance Service Expertise</div>
+      <div class="expertise-grid">
+
+        <div class="why-card e1">
+          <div class="card-icon-row">
+            <div class="card-icon"><i class="fa-solid fa-building"></i></div>
+            <h3>Prior Managed Services Experience</h3>
+          </div>
+          <p>End-to-end expertise through the <strong>full Oracle application lifecycle</strong>, including implementation, stabilization, and long-term support operations.</p>
+        </div>
+
+        <div class="why-card e2">
+          <div class="card-icon-row">
+            <div class="card-icon"><i class="fa-solid fa-chart-column"></i></div>
+            <h3>Data & Analytics Projects</h3>
+          </div>
+          <p>Multiple <strong>data and analytics projects</strong> delivered successfully across enterprise customers, with expertise in Oracle BI, reporting, and dashboards.</p>
+        </div>
+
+        <div class="why-card e3">
+          <div class="card-icon-row">
+            <div class="card-icon"><i class="fa-solid fa-user-tie"></i></div>
+            <h3>Oracle Fusion Subject Matter Experts</h3>
+          </div>
+          <p>Dedicated <strong>Oracle Fusion SMEs</strong> with deep functional and technical knowledge across HCM, ERP, SCM, and integration modules.</p>
+        </div>
+
+        <div class="why-card e4">
+          <div class="card-icon-row">
+            <div class="card-icon"><i class="fa-solid fa-users"></i></div>
+            <h3>Enterprise Customer Portfolio</h3>
+          </div>
+          <p>Currently managing <strong>similar managed services</strong> for other enterprise and hi-tech customers with proven delivery track records.</p>
+        </div>
+
+      </div>
+
+      <!-- Execution Readiness -->
+      <div class="section-label">Execution Readiness</div>
+      <div class="readiness-grid">
+
+        <div class="why-card r1">
+          <div class="card-icon-row">
+            <div class="card-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <h3>100% Day 1 Readiness</h3>
+          </div>
+          <p><strong>Day 1 ready team</strong> with location flexibility, Oracle Fusion SMEs, and support engineers prepared for immediate deployment on the McGrath engagement.</p>
+        </div>
+
+        <div class="why-card r2">
+          <div class="card-icon-row">
+            <div class="card-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <h3>Training Academy</h3>
+          </div>
+          <p>Structured onboarding program to train resources on <strong>client tools, environment, policies</strong>, and application support processes for rapid ramp-up.</p>
+        </div>
+
+        <div class="why-card r3">
+          <div class="card-icon-row">
+            <div class="card-icon"><i class="fa-solid fa-tag"></i></div>
+            <h3>Competitive Pricing & Investment</h3>
+          </div>
+          <p>BayOne investment in delivering the <strong>best customer experience</strong> with contingency planning and a pricing model aligned to value delivery.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">13</div>
+    </div>
+  </div>
+</body>
+</html>

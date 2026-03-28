@@ -23,7 +23,7 @@
 | 14 | `2026-03-03_ariat_slides` | Ariat | `ariat/` | **DONE** (2026-03-28) |
 | 15 | `2026-03-04_big4_slide1_review` | Ariat | `ariat/` | **DONE** (2026-03-28) |
 | 16 | `2026-03-04_big4_slide_titles` | Ariat | `ariat/` | **DONE** (2026-03-28) |
-| 17 | `2026-03-04_tailored-brands-prep` | Tailored Brands | `tailored_brands/` | Pending |
+| 17 | `2026-03-04_tailored-brands-prep` | Tailored Brands | `tailored_brands/` | **DONE** (2026-03-28) |
 | 18 | `2026-03-05_big4_meeting4_html` | Sephora | `sephora/` (or skip — empty stub) | Pending |
 | 19 | `2026-03-05_big4_neha_email` | Sephora | `sephora/` | Pending |
 | 20 | `2026-03-05_big4_sephora_technical_deep_dive` | Sephora | `sephora/` | Pending |
@@ -31,8 +31,8 @@
 | 22 | `2026-03-16_ai-manager-jd` | BayOne | `bayone/hiring/` | Pending |
 | 23 | `2026-03-17_opportunity_catalog` | BayOne | `bayone/positioning/` | Pending |
 | 24 | `2026-03-19_pptx_extractor_skill` | Tooling | `claude/` (keep) | No migration needed |
-| 25 | `2026-03-20_big4_lam_problem_restatement` | Lam Research | `lam_research/` | Pending |
-| 26 | `2026-03-20_lam-research` | Lam Research | `lam_research/` | Pending |
+| 25 | `2026-03-20_big4_lam_problem_restatement` | Lam Research | `lam_research/` | **DONE** (2026-03-28) |
+| 26 | `2026-03-20_lam-research` | Lam Research | `lam_research/` | **DONE** (2026-03-28) |
 | 27 | `2026-03-23_mcgrath_slides` | McGrath + BayOne | Split: `mcgrath/` + `bayone/processes/` | Pending |
 | 28 | `SESSIONS/` | Archive | `claude/` (keep) | No migration needed |
 | 29 | `meeting-analyzer/` | Sephora | `sephora/` | Pending |
@@ -42,7 +42,7 @@
 
 | Status | Count |
 |--------|-------|
-| **DONE** | 3 (Ariat) |
+| **DONE** | 6 (Ariat 3, Lam Research 2, Tailored Brands 1) |
 | **No migration needed** (tooling/archive stays in claude/) | 5 |
 | **Pending** | 22 |
 

@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 5: RFP Scope Summary</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-logo span { color: var(--purple-accent); }
+
+    .header-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+    }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 12px 40px 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+      flex-shrink: 0;
+    }
+
+    .lead {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 10px;
+      flex-shrink: 0;
+    }
+
+    /* Service Cards Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 3fr 4fr;
+      gap: 10px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .service-card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 10px;
+      padding: 14px 16px;
+      box-shadow: 0 2px 6px rgba(124,58,237,0.06);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+
+    .service-card.s1::before { background: linear-gradient(90deg, #4C1D95, #5B21B6); }
+    .service-card.s2::before { background: linear-gradient(90deg, #5B21B6, #6D28D9); }
+    .service-card.s3::before { background: linear-gradient(90deg, #6D28D9, #7C3AED); }
+    .service-card.s4::before { background: linear-gradient(90deg, #7C3AED, #A855F7); }
+    .service-card.s5::before { background: linear-gradient(90deg, #A855F7, #C026D3); }
+    .service-card.s6::before { background: linear-gradient(90deg, #C026D3, #DB2777); }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 7px;
+    }
+
+    .card-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .service-card.s1 .card-icon { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .service-card.s2 .card-icon { background: linear-gradient(135deg, #5B21B6, #6D28D9); }
+    .service-card.s3 .card-icon { background: linear-gradient(135deg, #6D28D9, #7C3AED); }
+    .service-card.s4 .card-icon { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+    .service-card.s5 .card-icon { background: linear-gradient(135deg, #A855F7, #C026D3); }
+    .service-card.s6 .card-icon { background: linear-gradient(135deg, #C026D3, #DB2777); }
+
+    .card-header h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      line-height: 1.3;
+    }
+
+    .service-card .items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      flex: 1;
+    }
+
+    .service-card .item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 11.5px;
+      line-height: 1.5;
+      color: #475569;
+    }
+
+    .service-card .item i {
+      font-size: 10px;
+      margin-top: 3px;
+      width: 14px;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    .service-card.s1 .item i { color: #4C1D95; }
+    .service-card.s2 .item i { color: #5B21B6; }
+    .service-card.s3 .item i { color: #6D28D9; }
+    .service-card.s4 .item i { color: #7C3AED; }
+    .service-card.s5 .item i { color: #A855F7; }
+    .service-card.s6 .item i { color: #C026D3; }
+
+    .service-card .item strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    /* Bottom Section: Coverage & Out of Scope */
+    .bottom-bar {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+
+    .coverage-card {
+      flex: 1;
+      background: linear-gradient(135deg, rgba(76,29,149,0.06), rgba(168,85,247,0.08));
+      border: 1px solid rgba(124,58,237,0.18);
+      border-radius: 8px;
+      padding: 9px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .coverage-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple-accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .coverage-content h4 {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+
+    .coverage-items {
+      display: flex;
+      gap: 16px;
+    }
+
+    .coverage-items span {
+      font-size: 10px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .coverage-items span i {
+      color: var(--purple-accent);
+      font-size: 7px;
+    }
+
+    .out-of-scope-card {
+      width: 260px;
+      flex-shrink: 0;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 9px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .oos-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+      background: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--text-light);
+      flex-shrink: 0;
+    }
+
+    .out-of-scope-content h4 {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-light);
+      margin-bottom: 2px;
+    }
+
+    .out-of-scope-content p {
+      font-size: 10px;
+      color: var(--text-light);
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>RFP Scope Summary</h2>
+      <p class="lead">Our understanding of McGrath's NextGen managed services requirements</p>
+
+      <div class="services-grid">
+
+        <!-- TOP ROW: 4-bullet cards -->
+
+        <!-- Enhancements -->
+        <div class="service-card s1">
+          <div class="card-header">
+            <div class="card-icon"><i class="fa-solid fa-arrow-up-right-dots"></i></div>
+            <h3>Enhancements</h3>
+          </div>
+          <div class="items">
+            <div class="item">
+              <i class="fa-solid fa-list-check"></i>
+              <span><strong>MVP backlog</strong> execution and prioritization</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-sliders"></i>
+              <span><strong>Configuration improvements</strong> to existing workflows</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-hourglass-half"></i>
+              <span><strong>&lt;40 hrs per unit</strong> effort changes</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-puzzle-piece"></i>
+              <span><strong>Functional and technical</strong> configuration across Oracle Fusion modules</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quarterly Releases & Testing -->
+        <div class="service-card s2">
+          <div class="card-header">
+            <div class="card-icon"><i class="fa-solid fa-calendar-check"></i></div>
+            <h3>Quarterly Releases & Testing</h3>
+          </div>
+          <div class="items">
+            <div class="item">
+              <i class="fa-solid fa-rotate"></i>
+              <span><strong>Oracle Fusion quarterly patches</strong> applied and validated</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-vial"></i>
+              <span><strong>Regression testing</strong> across impacted modules</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-circle-check"></i>
+              <span><strong>Production validation</strong> post-deployment</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-flask"></i>
+              <span><strong>Sandbox coordination</strong> and impact assessment before deployment</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Integration Troubleshooting -->
+        <div class="service-card s3">
+          <div class="card-header">
+            <div class="card-icon"><i class="fa-solid fa-plug-circle-bolt"></i></div>
+            <h3>Integration Troubleshooting</h3>
+          </div>
+          <div class="items">
+            <div class="item">
+              <i class="fa-solid fa-diagram-project"></i>
+              <span><strong>50+ integrations</strong> monitored across the stack</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <span><strong>Root cause analysis</strong> on integration failures</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-rotate-right"></i>
+              <span><strong>MuleSoft/OIC layer</strong> process restart and recovery</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-people-arrows"></i>
+              <span><strong>Vendor escalation</strong> coordination with Oracle, Salesforce, MuleSoft</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTTOM ROW: 5-bullet cards -->
+
+        <!-- Operational Support -->
+        <div class="service-card s4">
+          <div class="card-header">
+            <div class="card-icon"><i class="fa-solid fa-headset"></i></div>
+            <h3>Operational Support</h3>
+          </div>
+          <div class="items">
+            <div class="item">
+              <i class="fa-solid fa-desktop"></i>
+              <span><strong>Monitoring systems</strong> across production environments</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-arrows-spin"></i>
+              <span><strong>Managing integrations</strong> and restarting workflows</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-ticket"></i>
+              <span><strong>Ticket management</strong> with defined SLA response</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-sitemap"></i>
+              <span><strong>L1/L2/L3 tiered triage</strong> w/ defined escalation paths</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-clipboard-list"></i>
+              <span><strong>FreshService ticketing</strong> integration with monthly metric reports</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bug Fixes -->
+        <div class="service-card s5">
+          <div class="card-header">
+            <div class="card-icon"><i class="fa-solid fa-bug"></i></div>
+            <h3>Bug Fixes</h3>
+          </div>
+          <div class="items">
+            <div class="item">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <span><strong>Post go-live defects</strong> identified after production deployment</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-wrench"></i>
+              <span><strong>Implementation defects</strong> from initial rollout requiring remediation</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-gauge-high"></i>
+              <span><strong>Severity-based triage</strong> (P1-P4) with SLA response targets</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-building"></i>
+              <span><strong>Vendor SR management</strong> and escalation to Oracle, Salesforce, MuleSoft</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-book"></i>
+              <span><strong>Knowledge base updates</strong> from every resolved defect</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Value Added Services -->
+        <div class="service-card s6">
+          <div class="card-header">
+            <div class="card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+            <h3>Value Added Services</h3>
+          </div>
+          <div class="items">
+            <div class="item">
+              <i class="fa-solid fa-robot"></i>
+              <span><strong>Automation</strong> to streamline repetitive support tasks</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-brain"></i>
+              <span><strong>AI-driven efficiencies</strong> to reduce support effort</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-book-open"></i>
+              <span><strong>Knowledge management</strong> and documentation improvements</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-microscope"></i>
+              <span><strong>QA automation</strong> framework to replace manual testing</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-bolt"></i>
+              <span><strong>Performance tuning</strong> and proactive optimization</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="bottom-bar">
+        <div class="coverage-card">
+          <div class="coverage-icon"><i class="fa-solid fa-clock"></i></div>
+          <div class="coverage-content">
+            <h4>Coverage & SLAs</h4>
+            <div class="coverage-items">
+              <span><i class="fa-solid fa-circle"></i> 5 am &ndash; 5 pm PST coverage</span>
+              <span><i class="fa-solid fa-circle"></i> 24 hrs P1 Support</span>
+            </div>
+          </div>
+        </div>
+        <div class="out-of-scope-card">
+          <div class="oos-icon"><i class="fa-solid fa-ban"></i></div>
+          <div class="out-of-scope-content">
+            <h4>Out of Scope</h4>
+            <p>Engineering development (separate SOW)</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">05</div>
+    </div>
+  </div>
+
+</body>
+</html>

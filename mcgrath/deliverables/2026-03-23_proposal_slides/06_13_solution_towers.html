@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>13 Solution Towers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-logo span { color: var(--purple-accent); }
+
+    .header-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+    }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 10px 36px 6px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+      flex-shrink: 0;
+    }
+
+    .slide-content .lead {
+      font-size: 11px;
+      color: var(--text-light);
+      margin-bottom: 6px;
+      flex-shrink: 0;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 6px 40px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    /* Table styles */
+    .towers-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .towers-table thead th {
+      font-size: 9px;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 6px 10px;
+      text-align: left;
+      background: linear-gradient(135deg, var(--purple-darkest), var(--purple-dark));
+    }
+
+    .towers-table thead th:first-child {
+      border-radius: 6px 0 0 0;
+      width: 28px;
+      text-align: center;
+    }
+
+    .towers-table thead th:last-child {
+      border-radius: 0 6px 0 0;
+      width: 56px;
+      text-align: center;
+    }
+
+    .towers-table thead th:nth-child(2) {
+      width: 240px;
+    }
+
+    .towers-table tbody tr {
+      transition: background 0.15s;
+    }
+
+    .towers-table tbody tr:nth-child(odd) {
+      background: #fff;
+    }
+
+    .towers-table tbody tr:nth-child(even) {
+      background: rgba(124,58,237,0.03);
+    }
+
+    .towers-table tbody td {
+      font-size: 10px;
+      color: var(--text);
+      padding: 4px 10px;
+      border-bottom: 1px solid rgba(124,58,237,0.06);
+      line-height: 1.4;
+      vertical-align: middle;
+    }
+
+    .towers-table tbody td:first-child {
+      text-align: center;
+      font-weight: 700;
+      color: var(--purple-dark);
+      font-size: 10px;
+    }
+
+    .towers-table tbody td:last-child {
+      text-align: center;
+    }
+
+    .towers-table tbody tr:last-child td:first-child {
+      border-radius: 0 0 0 6px;
+    }
+
+    .towers-table tbody tr:last-child td:last-child {
+      border-radius: 0 0 6px 0;
+    }
+
+    .tower-name {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* Status badges */
+    .badge {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .badge.bid {
+      color: var(--purple-dark);
+      background: rgba(124,58,237,0.1);
+    }
+
+    .badge.bid-star {
+      color: #b45309;
+      background: rgba(245,158,11,0.12);
+      border: 1px solid rgba(245,158,11,0.2);
+    }
+
+    /* Legend */
+    .legend {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 9px;
+      color: var(--text-light);
+    }
+
+    /* Row accent bars */
+    .row-accent {
+      width: 3px;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>13 Solution Towers &mdash; Full Scope Coverage</h2>
+      <p class="lead">Complete managed services coverage across McGrath's NextGen ecosystem</p>
+
+      <table class="towers-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Solution Tower</th>
+            <th>Scope</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="tower-name">Oracle Fusion (+FSM, EPBCS, ARCS)</span></td>
+            <td>Finance, SCM, Procurement, Mfg, O2C, HCM, Field Service, Planning</td>
+            <td><span class="badge bid">Bid</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="tower-name">Salesforce (CRM, CPQ, CLM)</span></td>
+            <td>280 active users, Gearset CI/CD, DocuSign, D&amp;B, Zilliant</td>
+            <td><span class="badge bid">Bid</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="tower-name">Oracle Integration Cloud (OIC)</span></td>
+            <td>~16 integration flows connecting Oracle ecosystem</td>
+            <td><span class="badge bid">Bid</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><span class="tower-name">MuleSoft</span></td>
+            <td>~32 integrations, API management, Salesforce middleware</td>
+            <td><span class="badge bid">Bid</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><span class="tower-name">RecVue</span></td>
+            <td>Billing and revenue management with complex rental model</td>
+            <td><span class="badge bid-star">Bid*</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><span class="tower-name">Oracle Cloud Infrastructure (OCI)</span></td>
+            <td>ATP databases, backend SaaS infrastructure</td>
+            <td><span class="badge bid">Bid</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><span class="tower-name">Oracle BI Tools (FRS, OTBI, BIP)</span></td>
+            <td>Financial reporting, ad-hoc analytics, automated distribution</td>
+            <td><span class="badge bid">Bid</span></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><span class="tower-name">Snowflake / Rivery / SplashBI / Tableau</span></td>
+            <td>Data warehouse, ETL, analytics, visualization</td>
+            <td><span class="badge bid-star">Bid*</span></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><span class="tower-name">Avalara</span></td>
+            <td>Tax calculation across Salesforce, NexSTAR, RecVue</td>
+            <td><span class="badge bid">Bid</span></td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><span class="tower-name">NexSTAR (Custom Legacy ERP)</span></td>
+            <td>30+ year legacy TRS-RenTelco, VB-to-Java conversion</td>
+            <td><span class="badge bid-star">Bid*</span></td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td><span class="tower-name">SQL Server / Oracle ATP Databases</span></td>
+            <td>5 SQL Servers + 7 ATP databases, 24x7 DBA monitoring</td>
+            <td><span class="badge bid">Bid</span></td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td><span class="tower-name">Customer Hub (nopCommerce)</span></td>
+            <td>PCI-scoped customer portal, credit card transactions</td>
+            <td><span class="badge bid-star">Bid*</span></td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td><span class="tower-name">Azure DevOps</span></td>
+            <td>Environment management, CI/CD, deployment services</td>
+            <td><span class="badge bid">Bid</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="legend">
+        <div class="legend-item">
+          <span class="badge bid">Bid</span>
+          Full coverage
+        </div>
+        <div class="legend-item">
+          <span class="badge bid-star">Bid*</span>
+          Specialist staffing refined during Phase 1
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+    </div>
+  </div>
+
+</body>
+</html>

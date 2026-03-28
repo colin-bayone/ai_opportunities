@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 10: Operational Maturity & Value Transformation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--purple-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 10px 40px 6px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+      flex-shrink: 0;
+    }
+
+    .lead {
+      font-size: 11px;
+      color: var(--text-light);
+      margin-bottom: 10px;
+      flex-shrink: 0;
+    }
+
+    /* Phase columns layout */
+    .phases-container {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Phase header row with chevrons */
+    .phase-headers {
+      display: flex;
+      gap: 0;
+      flex-shrink: 0;
+      margin-bottom: 8px;
+    }
+
+    .phase-header {
+      flex: 1;
+      position: relative;
+      padding: 8px 16px 8px 22px;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%, 10px 50%);
+      margin-left: -10px;
+      text-align: center;
+    }
+
+    .phase-header:first-child {
+      margin-left: 0;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%);
+      padding-left: 12px;
+      border-radius: 6px 0 0 6px;
+    }
+
+    .phase-header:last-child {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 10px 50%);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .phase-header:nth-child(1) { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .phase-header:nth-child(2) { background: linear-gradient(135deg, #5B21B6, #6D28D9); }
+    .phase-header:nth-child(3) { background: linear-gradient(135deg, #6D28D9, #7C3AED); }
+    .phase-header:nth-child(4) { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+
+    .phase-header .phase-name {
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    .phase-header .phase-timeline {
+      font-size: 9px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.6);
+      margin-top: 1px;
+    }
+
+    /* Phase data columns */
+    .phase-data {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .phase-column {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 8px;
+      padding: 10px 12px;
+      box-shadow: 0 2px 6px rgba(124,58,237,0.06);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .phase-column::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+    }
+
+    .phase-column:nth-child(1)::before { background: #4C1D95; }
+    .phase-column:nth-child(2)::before { background: #5B21B6; }
+    .phase-column:nth-child(3)::before { background: #6D28D9; }
+    .phase-column:nth-child(4)::before { background: #7C3AED; }
+
+    /* Team sizing section */
+    .team-section {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .team-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .team-label {
+      font-size: 8.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-light);
+      width: 48px;
+      flex-shrink: 0;
+    }
+
+    .team-value {
+      font-size: 22px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+    }
+
+    .team-icon {
+      font-size: 10px;
+      color: var(--purple-accent);
+    }
+
+    /* Workload section */
+    .workload-section {
+      padding-top: 5px;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    .workload-label {
+      font-size: 8px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-light);
+      margin-bottom: 3px;
+    }
+
+    .workload-text {
+      font-size: 9.5px;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    .workload-text strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    /* Support vs Enhancement bar */
+    .ratio-section {
+      padding-top: 5px;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    .ratio-label {
+      font-size: 8px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-light);
+      margin-bottom: 3px;
+    }
+
+    .ratio-bar {
+      display: flex;
+      height: 16px;
+      border-radius: 4px;
+      overflow: hidden;
+      font-size: 8px;
+      font-weight: 600;
+    }
+
+    .ratio-support {
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple-bright));
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ratio-enhancement {
+      background: linear-gradient(135deg, var(--purple-accent), var(--purple-glow));
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ratio-legend {
+      display: flex;
+      gap: 8px;
+      margin-top: 3px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 7.5px;
+      color: var(--text-light);
+    }
+
+    .legend-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 2px;
+    }
+
+    .legend-dot.support { background: var(--purple-mid); }
+    .legend-dot.enhancement { background: var(--purple-accent); }
+
+    /* Key callouts */
+    .callouts-bar {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+      padding: 6px 10px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .callout-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 5px;
+      font-size: 8.5px;
+      line-height: 1.35;
+      color: var(--text);
+    }
+
+    .callout-item i {
+      font-size: 7px;
+      color: var(--purple-accent);
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 6px 40px 10px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>Operational Maturity & Value Transformation</h2>
+      <p class="lead">Progressive shift from transition support to enhancement-driven operations over three years</p>
+
+      <div class="phases-container">
+
+        <!-- Phase header chevrons -->
+        <div class="phase-headers">
+          <div class="phase-header">
+            <div class="phase-name">On-board</div>
+            <div class="phase-timeline">Q1</div>
+          </div>
+          <div class="phase-header">
+            <div class="phase-name">Stabilize</div>
+            <div class="phase-timeline">Y1 Q1 to Y1 Q4</div>
+          </div>
+          <div class="phase-header">
+            <div class="phase-name">Optimize</div>
+            <div class="phase-timeline">Y2 Q1 to Y2 Q4</div>
+          </div>
+          <div class="phase-header">
+            <div class="phase-name">Steady State</div>
+            <div class="phase-timeline">Y3 Q1 to Y3 Q4</div>
+          </div>
+        </div>
+
+        <!-- Phase data columns -->
+        <div class="phase-data">
+
+          <!-- On-board -->
+          <div class="phase-column">
+            <div class="team-section">
+              <div class="team-row">
+                <span class="team-label"><i class="fa-solid fa-building team-icon"></i> Onsite</span>
+                <span class="team-value">9</span>
+              </div>
+              <div class="team-row">
+                <span class="team-label"><i class="fa-solid fa-globe team-icon"></i> Offshore</span>
+                <span class="team-value">3</span>
+              </div>
+            </div>
+            <div class="workload-section">
+              <div class="workload-label">Focus</div>
+              <div class="workload-text">Transition team: onboarding, knowledge acquisition</div>
+            </div>
+          </div>
+
+          <!-- Stabilize -->
+          <div class="phase-column">
+            <div class="team-section">
+              <div class="team-row">
+                <span class="team-label"><i class="fa-solid fa-building team-icon"></i> Onsite</span>
+                <span class="team-value">9</span>
+              </div>
+              <div class="team-row">
+                <span class="team-label"><i class="fa-solid fa-globe team-icon"></i> Offshore</span>
+                <span class="team-value">22</span>
+              </div>
+            </div>
+            <div class="workload-section">
+              <div class="workload-label">Capacity</div>
+              <div class="workload-text"><strong>~3,300</strong> tickets + <strong>1,500</strong> enh hrs/qtr</div>
+            </div>
+            <div class="ratio-section">
+              <div class="ratio-label">Support vs Enhancement</div>
+              <div class="ratio-bar">
+                <div class="ratio-support" style="width: 90%;">90%</div>
+                <div class="ratio-enhancement" style="width: 10%;">10%</div>
+              </div>
+              <div class="ratio-legend">
+                <div class="legend-item"><div class="legend-dot support"></div> Support</div>
+                <div class="legend-item"><div class="legend-dot enhancement"></div> Enhancement</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Optimize -->
+          <div class="phase-column">
+            <div class="team-section">
+              <div class="team-row">
+                <span class="team-label"><i class="fa-solid fa-building team-icon"></i> Onsite</span>
+                <span class="team-value">6</span>
+              </div>
+              <div class="team-row">
+                <span class="team-label"><i class="fa-solid fa-globe team-icon"></i> Offshore</span>
+                <span class="team-value">20</span>
+              </div>
+            </div>
+            <div class="workload-section">
+              <div class="workload-label">Capacity</div>
+              <div class="workload-text"><strong>~2,500</strong> tickets + <strong>2,000</strong> enh hrs/qtr</div>
+            </div>
+            <div class="ratio-section">
+              <div class="ratio-label">Support vs Enhancement</div>
+              <div class="ratio-bar">
+                <div class="ratio-support" style="width: 85%;">85%</div>
+                <div class="ratio-enhancement" style="width: 15%;">15%</div>
+              </div>
+              <div class="ratio-legend">
+                <div class="legend-item"><div class="legend-dot support"></div> Support</div>
+                <div class="legend-item"><div class="legend-dot enhancement"></div> Enhancement</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Steady State -->
+          <div class="phase-column">
+            <div class="team-section">
+              <div class="team-row">
+                <span class="team-label"><i class="fa-solid fa-building team-icon"></i> Onsite</span>
+                <span class="team-value">3</span>
+              </div>
+              <div class="team-row">
+                <span class="team-label"><i class="fa-solid fa-globe team-icon"></i> Offshore</span>
+                <span class="team-value">20</span>
+              </div>
+            </div>
+            <div class="workload-section">
+              <div class="workload-label">Capacity</div>
+              <div class="workload-text"><strong>~1,800</strong> tickets + <strong>3,000</strong> enh hrs/qtr</div>
+            </div>
+            <div class="ratio-section">
+              <div class="ratio-label">Support vs Enhancement</div>
+              <div class="ratio-bar">
+                <div class="ratio-support" style="width: 70%;">70%</div>
+                <div class="ratio-enhancement" style="width: 30%;">30%</div>
+              </div>
+              <div class="ratio-legend">
+                <div class="legend-item"><div class="legend-dot support"></div> Support</div>
+                <div class="legend-item"><div class="legend-dot enhancement"></div> Enhancement</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Key callouts -->
+        <div class="callouts-bar">
+          <div class="callout-item">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>BayOne handles +/- 5% seasonal spikes (month end, quarter end)</span>
+          </div>
+          <div class="callout-item">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Automation reduces operational case volume, shifting effort toward enhancements</span>
+          </div>
+          <div class="callout-item">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>One integrated team for all support services</span>
+          </div>
+          <div class="callout-item">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Resource count is indicative (excludes PMO and automation office)</span>
+          </div>
+          <div class="callout-item">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Burst capacity available for unexpected or unplanned spikes</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">10</div>
+    </div>
+  </div>
+
+</body>
+</html>

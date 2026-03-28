@@ -8,17 +8,42 @@
 
 ## Directory Structure
 
-- `context/` — Source materials (call prep, meeting transcripts, debrief recordings)
-- `project/` — Structured knowledge (blockchain-style research sets, use case analyses)
-- `planning/` — Strategy, session handoffs, skill notes
-- `deliverables/` — Client-facing outputs (problem restatement HTML)
+```
+lam_research/
+  org_chart.md                                  Living people map (updated per meeting)
+  context/
+    2026-03-12_source_transcripts/              3 raw transcripts:
+      lam_call_prep (1).txt                       Pre-call prep document
+      lam_meeting_3122026.txt                     Discovery call transcript
+      anuj_and_colin_after_call1.txt              Post-call debrief (candid, unfiltered)
+  project/
+    2026-03-12_research/                        Blockchain-style research (append-only, numbered)
+      00_methodology_2026-03-20.md                Documentation methodology
+      01-02_changes_2026-03-12.md                 Bridge: hypothesis validation/invalidation
+      set_01_call_prep/                           5 files: company profile, question bank, tech ref, people, summary
+      set_02_discovery_call/                      8 files: people, topic map, use cases, infrastructure, dynamics, etc.
+      set_02a_debrief/                            4 files: candid takes, internal assessment, action items, summary
+      set_03_discussion/                          7 files: technical approach (3 rounds), strategy, open needs, clarifications
+    2026-03-20_quality_review/                  Big Four QA of problem restatement deliverable
+      critique.md                                 19/19 compliance checks passed, 2 minor phrasing fixes
+      source_analysis.md                          All claims verified against transcripts
+  planning/
+    2026-03-20_session/                         Session handoff + skill notes
+  deliverables/
+    2026-03-12_discovery_call/                  Client-facing outputs
+      problem_restatement.md / .html              Core deliverable: 9-section problem understanding
+      preliminary_approach.md / .html             Technical approach options
+      information_request.md / .html              Specific asks for Lam team
+      followup_email_draft.md                     Email draft for next steps
+      README.md                                   Deliverable context/navigation
+```
 
-## Related Session Folders (in `claude/`)
+## Source Session Folders (in `claude/`, marked _MIGRATED)
 
-| Session | Content | Status |
-|---------|---------|--------|
-| `claude/2026-03-20_lam-research` | Full discovery: 3 analytical sets (prep, call, debrief), 42 files, blockchain-style | Complete |
-| `claude/2026-03-20_big4_lam_problem_restatement` | Big Four QA review of problem restatement deliverable | Minor revision needed |
+| Session | Content Migrated To | Status |
+|---------|-------------------|--------|
+| `claude/2026-03-20_lam-research` | All content (context, research, planning, deliverables) | Migrated 2026-03-28 |
+| `claude/2026-03-20_big4_lam_problem_restatement` | project/2026-03-20_quality_review/ | Migrated 2026-03-28 |
 
 ## Problem Context
 
@@ -39,3 +64,4 @@
 | Daniel | Technical Lead | Key for follow-up technical discussion |
 | Pat/Pratik | Supporting | "Awesome" per Colin |
 | Jason Callahan | CISO | Security context |
+| Anuj Sehgal | BayOne VP of Sales | Deal driver, "start small, embed, scale" strategy |
