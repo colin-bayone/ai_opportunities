@@ -18,11 +18,14 @@ The repo is organized by **client/opportunity** at the top level, with a shared 
 
 Each client directory follows a similar pattern of `context/` (source materials), `project/` or `docs/` (structured knowledge), `planning/` (strategy), and `deliverables/` (outputs):
 
-- **`sephora/`** — EDW Modernization engagement (largest, most structured). Has its own `00_index.md` navigation file.
-- **`cisco/`** — CI/CD consulting engagement.
-- **`mcgrath/`** — RFP response (managed services). `rfp_docs/` contains the source RFP, analysis, and developed questions.
+- **`sephora/`** — EDW Modernization engagement (largest, most structured). Has its own `00_index.md` navigation file. 7 related session folders in `claude/`.
+- **`cisco/`** — CI/CD consulting engagement (NX-OS pipeline improvement) + EPNM-to-EMS UI conversion (separate engagement). 6 related session folders.
+- **`mcgrath/`** — RFP response (managed services). `rfp_docs/` contains the source RFP, analysis, and developed questions. Slide deck rebuild in `claude/`.
+- **`ariat/`** — India GCC setup (scaling 30→200 people, 18 months). Primary opportunity: managed testing transformation. Has `00_index.md`. 3 related session folders.
+- **`lam_research/`** — IP protection / NER-redaction for $17B semiconductor company. Discovery complete March 2026. Has `00_index.md`. 2 related session folders.
+- **`tailored_brands/`** — Discovery meeting prep for Men's Wearhouse / Joseph A. Bank parent ($75M tech investment, QA gaps).
 - **`zeblock/`** — Zeblok partnership exploration. Executive summary HTML deliverables.
-- **`tailored_brands/`** — Meeting transcripts from discovery calls.
+- **`bayone/`** — Internal BayOne AI practice materials: `processes/` (AI lead qualification framework), `positioning/` (capabilities deck, portfolio catalog), `hiring/` (Technical Manager JD). Has `00_index.md`.
 
 ## Key Files
 

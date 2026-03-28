@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Prototype - Document Intelligence</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f1f0f3;
+      min-height: 100vh;
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 48px;
+    }
+
+    h1 {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .options {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .option-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    /* ===================== */
+    /* OPTION A: Structured List */
+    /* ===================== */
+    .card-a {
+      width: 320px;
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(124,58,237,0.06);
+    }
+
+    .card-a .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: #fff;
+      background: linear-gradient(135deg, #A855F7, #C026D3);
+      margin-bottom: 16px;
+    }
+
+    .card-a h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .card-a .lead {
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .card-a .capabilities {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card-a .capability {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .card-a .capability .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--purple-accent);
+      border-radius: 50%;
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    .card-a .capability span {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* ===================== */
+    /* OPTION B: Two-tier with bold leads */
+    /* ===================== */
+    .card-b {
+      width: 320px;
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(124,58,237,0.06);
+    }
+
+    .card-b .header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .card-b .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #fff;
+      background: linear-gradient(135deg, #A855F7, #C026D3);
+      flex-shrink: 0;
+    }
+
+    .card-b h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .card-b .items {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .card-b .item {
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    .card-b .item strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    /* ===================== */
+    /* OPTION C: Compact grid */
+    /* ===================== */
+    .card-c {
+      width: 360px;
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(124,58,237,0.06);
+    }
+
+    .card-c .header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .card-c .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #fff;
+      background: linear-gradient(135deg, #A855F7, #C026D3);
+      flex-shrink: 0;
+    }
+
+    .card-c h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .card-c .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .card-c .grid-item {
+      padding: 12px;
+      background: #faf9fc;
+      border-radius: 8px;
+      border-left: 3px solid var(--purple-accent);
+    }
+
+    .card-c .grid-item .label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-dark);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .card-c .grid-item .desc {
+      font-size: 11px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* ===================== */
+    /* COMBINED: Tagline + Bold Leads */
+    /* ===================== */
+    .card-combined {
+      width: 340px;
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(124,58,237,0.08);
+    }
+
+    .card-combined .header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .card-combined .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #fff;
+      background: linear-gradient(135deg, #A855F7, #C026D3);
+      flex-shrink: 0;
+    }
+
+    .card-combined h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .card-combined .tagline {
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-combined .items {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .card-combined .item {
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--text);
+    }
+
+    .card-combined .item strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Document Intelligence - Card Layout Options</h1>
+
+  <!-- COMBINED VERSION -->
+  <div style="margin-bottom: 32px;">
+    <div class="option-label" style="color: #16a34a;">Combined: Tagline + Bold Leads</div>
+    <div class="card-combined">
+      <div class="header">
+        <div class="icon"><i class="fa-solid fa-file-lines"></i></div>
+        <h3>Document Intelligence</h3>
+      </div>
+      <p class="tagline">Unlock knowledge trapped in unstructured documents and make it accessible to AI systems.</p>
+      <div class="items">
+        <div class="item">
+          <strong>RAG Knowledge Systems</strong> that answer questions with citations and maintain accuracy through source grounding.
+        </div>
+        <div class="item">
+          <strong>Intelligent Processing</strong> that extracts content from complex layouts using deterministic and vision-based methods.
+        </div>
+        <div class="item">
+          <strong>Document Generation</strong> for contracts, reports, and compliance documents with approval workflows.
+        </div>
+        <div class="item">
+          <strong>Multi-Modal Understanding</strong> across text, images, charts, and diagrams with cross-modal search.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="options">
+
+    <!-- OPTION A: Structured List -->
+    <div>
+      <div class="option-label">Option A: Lead + List</div>
+      <div class="card-a">
+        <div class="icon"><i class="fa-solid fa-file-lines"></i></div>
+        <h3>Document Intelligence</h3>
+        <p class="lead">Unlock knowledge trapped in unstructured documents and make it accessible to AI systems.</p>
+        <div class="capabilities">
+          <div class="capability">
+            <div class="dot"></div>
+            <span>RAG assistants with citations and source grounding</span>
+          </div>
+          <div class="capability">
+            <div class="dot"></div>
+            <span>Vision-based extraction for complex layouts</span>
+          </div>
+          <div class="capability">
+            <div class="dot"></div>
+            <span>Automated contract and report generation</span>
+          </div>
+          <div class="capability">
+            <div class="dot"></div>
+            <span>Multi-modal search across text, images, and charts</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPTION B: Bold leads -->
+    <div>
+      <div class="option-label">Option B: Bold Leads</div>
+      <div class="card-b">
+        <div class="header">
+          <div class="icon"><i class="fa-solid fa-file-lines"></i></div>
+          <h3>Document Intelligence</h3>
+        </div>
+        <div class="items">
+          <div class="item">
+            <strong>RAG Knowledge Systems</strong> that answer questions with citations and maintain accuracy through source grounding.
+          </div>
+          <div class="item">
+            <strong>Intelligent Processing</strong> that extracts content from complex layouts using deterministic and vision-based methods.
+          </div>
+          <div class="item">
+            <strong>Document Generation</strong> for contracts, reports, and compliance documents with approval workflows.
+          </div>
+          <div class="item">
+            <strong>Multi-Modal Understanding</strong> across text, images, charts, and diagrams with cross-modal search.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPTION C: Grid -->
+    <div>
+      <div class="option-label">Option C: 2x2 Grid</div>
+      <div class="card-c">
+        <div class="header">
+          <div class="icon"><i class="fa-solid fa-file-lines"></i></div>
+          <h3>Document Intelligence</h3>
+        </div>
+        <div class="grid">
+          <div class="grid-item">
+            <div class="label">RAG Systems</div>
+            <div class="desc">Answer questions with citations and source grounding</div>
+          </div>
+          <div class="grid-item">
+            <div class="label">Processing</div>
+            <div class="desc">Extract from complex layouts using vision-based methods</div>
+          </div>
+          <div class="grid-item">
+            <div class="label">Generation</div>
+            <div class="desc">Contracts, reports, and compliance documents</div>
+          </div>
+          <div class="grid-item">
+            <div class="label">Multi-Modal</div>
+            <div class="desc">Search across text, images, charts, and diagrams</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

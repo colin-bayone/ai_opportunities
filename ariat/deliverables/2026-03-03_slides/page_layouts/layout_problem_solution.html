@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Layout: Problem to Solution</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-logo span { color: var(--purple-accent); }
+
+    .header-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+    }
+
+    .slide-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Problem section - muted */
+    .problem-section {
+      background: #f8fafc;
+      padding: 28px 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .problem-section .section-label {
+      color: #94a3b8;
+    }
+
+    .problem-section h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #64748b;
+      margin-bottom: 12px;
+    }
+
+    .problem-points {
+      display: flex;
+      gap: 32px;
+    }
+
+    .problem-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .problem-point .x-icon {
+      width: 20px;
+      height: 20px;
+      background: #e2e8f0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #94a3b8;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .problem-point p {
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    /* Solution section - vibrant */
+    .solution-section {
+      flex: 1;
+      background: linear-gradient(180deg, #fdfcff 0%, #f9f7ff 100%);
+      padding: 28px 48px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .solution-section .section-label {
+      color: var(--purple-mid);
+    }
+
+    .solution-section h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+
+    .solution-cards {
+      display: flex;
+      gap: 16px;
+      flex: 1;
+    }
+
+    .solution-card {
+      flex: 1;
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .solution-card .icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple-bright));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .solution-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .solution-card p {
+      font-size: 12px;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    .slide-footer {
+      padding: 16px 40px;
+      background: #fff;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">Enterprise AI Capabilities</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="problem-section">
+        <div class="section-label">The Challenge</div>
+        <h3>The gap between AI ambition and AI execution</h3>
+        <div class="problem-points">
+          <div class="problem-point">
+            <span class="x-icon">&#x2717;</span>
+            <p>Pilots that never reach production</p>
+          </div>
+          <div class="problem-point">
+            <span class="x-icon">&#x2717;</span>
+            <p>One-off solutions that don't scale</p>
+          </div>
+          <div class="problem-point">
+            <span class="x-icon">&#x2717;</span>
+            <p>Vendor lock-in and proprietary platforms</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="solution-section">
+        <div class="section-label">Our Approach</div>
+        <h3>Production-ready AI with reusable architecture</h3>
+        <div class="solution-cards">
+          <div class="solution-card">
+            <div class="icon">&#x2699;</div>
+            <h4>Developer Productivity</h4>
+            <p>AI copilots, code review, agentic DevOps</p>
+          </div>
+          <div class="solution-card">
+            <div class="icon">&#x2630;</div>
+            <h4>Enterprise Automation</h4>
+            <p>Intelligent process automation, workflows</p>
+          </div>
+          <div class="solution-card">
+            <div class="icon">&#x2261;</div>
+            <h4>Data & Analytics</h4>
+            <p>Pipeline engineering, conversational BI</p>
+          </div>
+          <div class="solution-card">
+            <div class="icon">&#x2709;</div>
+            <h4>Document Intelligence</h4>
+            <p>RAG systems, document processing</p>
+          </div>
+          <div class="solution-card">
+            <div class="icon">&#x2295;</div>
+            <h4>Applied AI</h4>
+            <p>Vision, maintenance, sovereign deploy</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">04</div>
+    </div>
+  </div>
+</body>
+</html>

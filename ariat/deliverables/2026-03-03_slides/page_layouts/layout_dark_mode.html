@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Layout: Dark Mode</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #1a1625;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(135deg, #1e1b2e 0%, var(--purple-darkest) 50%, #1a1625 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), 0 0 60px rgba(139, 92, 246, 0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      border-bottom: 1px solid rgba(168, 85, 247, 0.15);
+    }
+
+    .header-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .header-logo span { color: var(--purple-accent); }
+
+    .header-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.5px;
+    }
+
+    .slide-content {
+      flex: 1;
+      padding: 40px 48px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .lead {
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 32px;
+    }
+
+    /* Solution grid */
+    .solution-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      flex: 1;
+    }
+
+    .solution-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(168, 85, 247, 0.15);
+      border-radius: 12px;
+      padding: 24px 16px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.2s ease;
+    }
+
+    .solution-card:hover {
+      background: rgba(168, 85, 247, 0.08);
+      border-color: rgba(168, 85, 247, 0.3);
+    }
+
+    .solution-card .icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple-accent));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: #fff;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 16px rgba(139, 92, 246, 0.3);
+    }
+
+    .solution-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .solution-card p {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.5;
+    }
+
+    /* Accent glow effects */
+    .solution-card:nth-child(1) .icon { box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4); }
+    .solution-card:nth-child(3) .icon { box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4); }
+    .solution-card:nth-child(5) .icon { box-shadow: 0 4px 20px rgba(232, 121, 249, 0.4); }
+
+    .slide-footer {
+      padding: 16px 40px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-mid), var(--purple-accent), var(--purple-glow), var(--purple-accent), var(--purple-mid));
+      border-radius: 2px;
+      box-shadow: 0 0 12px rgba(168, 85, 247, 0.5);
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">Enterprise AI Capabilities</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>Enterprise AI Capabilities</h2>
+      <p class="lead">Production-ready solutions across the AI lifecycle</p>
+
+      <div class="solution-grid">
+        <div class="solution-card">
+          <div class="icon">&#x2699;</div>
+          <h4>Developer Productivity</h4>
+          <p>AI copilots, code review, agentic DevOps</p>
+        </div>
+        <div class="solution-card">
+          <div class="icon">&#x2630;</div>
+          <h4>Enterprise Automation</h4>
+          <p>Process automation, workflows</p>
+        </div>
+        <div class="solution-card">
+          <div class="icon">&#x2261;</div>
+          <h4>Data & Analytics</h4>
+          <p>Pipelines, conversational BI</p>
+        </div>
+        <div class="solution-card">
+          <div class="icon">&#x2709;</div>
+          <h4>Document Intelligence</h4>
+          <p>RAG, document processing</p>
+        </div>
+        <div class="solution-card">
+          <div class="icon">&#x2295;</div>
+          <h4>Applied AI</h4>
+          <p>Vision, sovereign deployment</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">04</div>
+    </div>
+  </div>
+</body>
+</html>

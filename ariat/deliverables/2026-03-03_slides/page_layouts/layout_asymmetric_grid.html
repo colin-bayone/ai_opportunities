@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Layout: Asymmetric Grid</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-logo span { color: var(--purple-accent); }
+
+    .header-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+    }
+
+    .slide-content {
+      flex: 1;
+      padding: 32px 48px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 24px;
+    }
+
+    /* Asymmetric grid */
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 16px;
+      flex: 1;
+    }
+
+    /* Featured card spans 2 rows */
+    .featured-card {
+      grid-row: span 2;
+      background: linear-gradient(135deg, var(--purple-darkest) 0%, var(--purple-mid) 100%);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      color: #fff;
+    }
+
+    .featured-card .icon {
+      width: 56px;
+      height: 56px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .featured-card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .featured-card p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 20px;
+    }
+
+    .featured-card .tags {
+      margin-top: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .featured-card .tag {
+      padding: 6px 12px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    /* Supporting cards */
+    .supporting-card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .supporting-card .icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple-bright));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .supporting-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .supporting-card p {
+      font-size: 12px;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    .slide-footer {
+      padding: 16px 40px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">Enterprise AI Capabilities</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>Solution Overview</h2>
+
+      <div class="grid-container">
+        <div class="featured-card">
+          <div class="icon">&#x2699;</div>
+          <h3>Developer Productivity</h3>
+          <p>Transform how your engineering teams work with AI-powered tooling across the development lifecycle. From intelligent code assistance to automated testing and deployment.</p>
+          <div class="tags">
+            <span class="tag">AI Copilots</span>
+            <span class="tag">Code Review</span>
+            <span class="tag">Agentic DevOps</span>
+            <span class="tag">CI/CD</span>
+          </div>
+        </div>
+
+        <div class="supporting-card">
+          <div class="icon">&#x2630;</div>
+          <h4>Enterprise Automation</h4>
+          <p>Intelligent process automation and workflow orchestration</p>
+        </div>
+
+        <div class="supporting-card">
+          <div class="icon">&#x2261;</div>
+          <h4>Data & Analytics</h4>
+          <p>Pipeline engineering and conversational BI</p>
+        </div>
+
+        <div class="supporting-card">
+          <div class="icon">&#x2709;</div>
+          <h4>Document Intelligence</h4>
+          <p>RAG systems and document processing</p>
+        </div>
+
+        <div class="supporting-card">
+          <div class="icon">&#x2295;</div>
+          <h4>Applied AI & Operations</h4>
+          <p>Computer vision and sovereign deployment</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">04</div>
+    </div>
+  </div>
+</body>
+</html>

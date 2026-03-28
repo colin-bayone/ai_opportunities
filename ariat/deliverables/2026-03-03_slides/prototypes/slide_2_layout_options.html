@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 2: Enterprise AI Solutions - Layout Options</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 40px;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .slide-container {
+      margin-bottom: 60px;
+    }
+
+    /* ==================== */
+    /* SLIDE FRAME */
+    /* ==================== */
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-logo span { color: var(--purple-accent); }
+
+    .header-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+    }
+
+    .slide-content {
+      flex: 1;
+      padding: 32px 48px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .slide-content .lead {
+      font-size: 14px;
+      color: var(--text-light);
+      margin-bottom: 28px;
+    }
+
+    .slide-footer {
+      padding: 16px 40px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+
+    /* ==================== */
+    /* OPTION D: HORIZONTAL STRIP */
+    /* ==================== */
+    .horizontal-strip {
+      display: flex;
+      gap: 20px;
+      flex: 1;
+    }
+
+    .strip-card {
+      flex: 1;
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .strip-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--purple-mid), var(--purple-accent));
+    }
+
+    .strip-card.hr::before { background: linear-gradient(90deg, #4C1D95, #5B21B6); }
+    .strip-card.finance::before { background: linear-gradient(90deg, #5B21B6, #7C3AED); }
+    .strip-card.legal::before { background: linear-gradient(90deg, #7C3AED, #A855F7); }
+    .strip-card.marketing::before { background: linear-gradient(90deg, #A855F7, #C026D3); }
+
+    .strip-card .num {
+      font-size: 28px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    .strip-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .strip-card .items {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .strip-card .item {
+      font-size: 11px;
+      color: var(--text);
+      line-height: 1.5;
+      padding-left: 12px;
+      position: relative;
+    }
+
+    .strip-card .item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 6px;
+      width: 4px;
+      height: 4px;
+      background: var(--purple-accent);
+      border-radius: 50%;
+    }
+
+    /* ==================== */
+    /* OPTION E: TIMELINE/JOURNEY */
+    /* ==================== */
+    .journey-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .journey-track {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+
+    .journey-track::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: 80px;
+      right: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #4C1D95, #5B21B6, #7C3AED, #A855F7, #C026D3);
+      border-radius: 2px;
+    }
+
+    .journey-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 200px;
+      position: relative;
+    }
+
+    .journey-node .badge {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 16px rgba(124, 58, 237, 0.3);
+      position: relative;
+      z-index: 1;
+    }
+
+    .journey-node.hr .badge { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .journey-node.finance .badge { background: linear-gradient(135deg, #5B21B6, #7C3AED); }
+    .journey-node.legal .badge { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+    .journey-node.marketing .badge { background: linear-gradient(135deg, #A855F7, #C026D3); }
+
+    .journey-node .content {
+      text-align: center;
+    }
+
+    .journey-node h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .journey-node .items {
+      font-size: 11px;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* ==================== */
+    /* OPTION E2: JOURNEY WITH CARDS BELOW */
+    /* ==================== */
+    .journey-v2-track {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    .journey-v2-track::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 60px;
+      right: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #4C1D95, #5B21B6, #7C3AED, #A855F7, #C026D3);
+      border-radius: 2px;
+    }
+
+    .journey-v2-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 220px;
+    }
+
+    .journey-v2-node .dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 2px 8px rgba(124, 58, 237, 0.25);
+    }
+
+    .journey-v2-node.hr .dot { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .journey-v2-node.finance .dot { background: linear-gradient(135deg, #5B21B6, #7C3AED); }
+    .journey-v2-node.legal .dot { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+    .journey-v2-node.marketing .dot { background: linear-gradient(135deg, #A855F7, #C026D3); }
+
+    .journey-v2-node .card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.1);
+      border-radius: 10px;
+      padding: 16px;
+      width: 100%;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+
+    .journey-v2-node .card h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .journey-v2-node .card .items {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .journey-v2-node .card .item {
+      font-size: 10px;
+      color: var(--text);
+      line-height: 1.5;
+      padding-left: 10px;
+      position: relative;
+    }
+
+    .journey-v2-node .card .item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 5px;
+      width: 3px;
+      height: 3px;
+      background: var(--purple-accent);
+      border-radius: 50%;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- OPTION D: Horizontal Strip -->
+  <div class="slide-container">
+    <div class="section-label">Option D: Horizontal Strip with Numbered Cards</div>
+    <div class="slide">
+      <div class="slide-header">
+        <div class="header-logo">Bay<span>One</span> Solutions</div>
+        <div class="header-title">Enterprise AI Solutions</div>
+      </div>
+
+      <div class="slide-content">
+        <h2>Enterprise AI Solutions</h2>
+        <p class="lead">AI-powered automation across your core business functions</p>
+
+        <div class="horizontal-strip">
+          <div class="strip-card hr">
+            <div class="num">01</div>
+            <h4>AI for HR</h4>
+            <div class="items">
+              <div class="item">Recruiting automation</div>
+              <div class="item">Onboarding workflows</div>
+              <div class="item">Policy Q&A assistants</div>
+              <div class="item">Workforce analytics</div>
+            </div>
+          </div>
+
+          <div class="strip-card finance">
+            <div class="num">02</div>
+            <h4>AI for Finance</h4>
+            <div class="items">
+              <div class="item">Expense processing</div>
+              <div class="item">Invoice automation</div>
+              <div class="item">Financial reporting</div>
+              <div class="item">Forecasting & anomaly detection</div>
+            </div>
+          </div>
+
+          <div class="strip-card legal">
+            <div class="num">03</div>
+            <h4>AI for Legal</h4>
+            <div class="items">
+              <div class="item">Contract review & CLM</div>
+              <div class="item">Compliance monitoring</div>
+              <div class="item">Risk assessment</div>
+              <div class="item">Legal knowledge search</div>
+            </div>
+          </div>
+
+          <div class="strip-card marketing">
+            <div class="num">04</div>
+            <h4>AI for Marketing</h4>
+            <div class="items">
+              <div class="item">Content generation</div>
+              <div class="item">Personalization engines</div>
+              <div class="item">Campaign automation</div>
+              <div class="item">Marketing analytics</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div class="slide-footer-bar"></div>
+        <div class="slide-number">02</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION E: Timeline/Journey -->
+  <div class="slide-container">
+    <div class="section-label">Option E: Connected Journey with Cards</div>
+    <div class="slide">
+      <div class="slide-header">
+        <div class="header-logo">Bay<span>One</span> Solutions</div>
+        <div class="header-title">Enterprise AI Solutions</div>
+      </div>
+
+      <div class="slide-content">
+        <h2>Enterprise AI Solutions</h2>
+        <p class="lead">AI-powered automation across your core business functions</p>
+
+        <div class="journey-container">
+          <div class="journey-v2-track">
+            <div class="journey-v2-node hr">
+              <div class="dot">HR</div>
+              <div class="card">
+                <h4>AI for HR</h4>
+                <div class="items">
+                  <div class="item">Recruiting automation</div>
+                  <div class="item">Onboarding workflows</div>
+                  <div class="item">Policy Q&A assistants</div>
+                  <div class="item">Workforce analytics</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="journey-v2-node finance">
+              <div class="dot">FIN</div>
+              <div class="card">
+                <h4>AI for Finance</h4>
+                <div class="items">
+                  <div class="item">Expense processing</div>
+                  <div class="item">Invoice automation</div>
+                  <div class="item">Financial reporting</div>
+                  <div class="item">Forecasting & anomaly detection</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="journey-v2-node legal">
+              <div class="dot">LEG</div>
+              <div class="card">
+                <h4>AI for Legal</h4>
+                <div class="items">
+                  <div class="item">Contract review & CLM</div>
+                  <div class="item">Compliance monitoring</div>
+                  <div class="item">Risk assessment</div>
+                  <div class="item">Legal knowledge search</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="journey-v2-node marketing">
+              <div class="dot">MKT</div>
+              <div class="card">
+                <h4>AI for Marketing</h4>
+                <div class="items">
+                  <div class="item">Content generation</div>
+                  <div class="item">Personalization engines</div>
+                  <div class="item">Campaign automation</div>
+                  <div class="item">Marketing analytics</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div class="slide-footer-bar"></div>
+        <div class="slide-number">02</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

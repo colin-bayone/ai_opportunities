@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 3: Next-Generation Quality Engineering - Cards</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f1f0f3;
+      min-height: 100vh;
+      padding: 48px;
+    }
+
+    h1 {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Card Styles */
+    .card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 16px;
+      padding: 24px;
+      padding-top: 28px;
+      box-shadow: 0 2px 10px rgba(124,58,237,0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+
+    .card.clustering::before { background: linear-gradient(90deg, #4C1D95, #5B21B6); }
+    .card.routing::before { background: linear-gradient(90deg, #5B21B6, #7C3AED); }
+    .card.pattern::before { background: linear-gradient(90deg, #7C3AED, #A855F7); }
+    .card.dependency::before { background: linear-gradient(90deg, #A855F7, #C026D3); }
+
+    .card .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .card .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .card.clustering .icon { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .card.routing .icon { background: linear-gradient(135deg, #5B21B6, #7C3AED); }
+    .card.pattern .icon { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+    .card.dependency .icon { background: linear-gradient(135deg, #A855F7, #C026D3); }
+
+    .card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .card .tagline {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .card .gradient-divider {
+      height: 2px;
+      background: linear-gradient(90deg, var(--purple-mid), var(--purple-accent), transparent);
+      margin-bottom: 14px;
+      border-radius: 1px;
+    }
+
+    .card .items {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 16px;
+    }
+
+    .card .item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12px;
+      line-height: 1.55;
+      color: #475569;
+    }
+
+    .card .item i {
+      color: var(--purple-accent);
+      font-size: 12px;
+      margin-top: 3px;
+      width: 14px;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    .card .item strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Slide 3: Next-Generation Quality Engineering</h1>
+
+  <div class="cards-grid">
+
+    <!-- Test Case Clustering -->
+    <div class="card clustering">
+      <div class="header">
+        <div class="icon"><i class="fa-solid fa-layer-group"></i></div>
+        <h3>Test Case Clustering</h3>
+      </div>
+      <p class="tagline">Group similar test cases by structure, dependencies, and data requirements to process families together.</p>
+      <div class="gradient-divider"></div>
+      <div class="items">
+        <div class="item">
+          <i class="fa-solid fa-object-group"></i>
+          <span><strong>Similarity Analysis</strong> groups 1,000 individual tests into 30-40 manageable families.</span>
+        </div>
+        <div class="item">
+          <i class="fa-solid fa-clone"></i>
+          <span><strong>Pattern Application</strong> applies one automation template across each test family.</span>
+        </div>
+        <div class="item">
+          <i class="fa-solid fa-users-gear"></i>
+          <span><strong>Batch Processing</strong> enables teams to address multiple tests simultaneously.</span>
+        </div>
+        <div class="item">
+          <i class="fa-solid fa-gauge-high"></i>
+          <span><strong>60-70% Reduction</strong> in manual test creation effort through family-based automation.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Intelligent Routing -->
+    <div class="card routing">
+      <div class="header">
+        <div class="icon"><i class="fa-solid fa-route"></i></div>
+        <h3>Intelligent Routing</h3>
+      </div>
+      <p class="tagline">AI scores test automation confidence to route work to appropriate skill levels automatically.</p>
+      <div class="gradient-divider"></div>
+      <div class="items">
+        <div class="item">
+          <i class="fa-solid fa-check-double"></i>
+          <span><strong>High Confidence</strong> cases auto-approve and route to junior execution.</span>
+        </div>
+        <div class="item">
+          <i class="fa-solid fa-user-check"></i>
+          <span><strong>Senior Review</strong> receives only low-confidence cases requiring expertise.</span>
+        </div>
+        <div class="item">
+          <i class="fa-solid fa-arrows-split-up-and-left"></i>
+          <span><strong>Skill Matching</strong> directs work to the right level without manual triage.</span>
+        </div>
+        <div class="item">
+          <i class="fa-solid fa-arrow-trend-up"></i>
+          <span><strong>40-50% Improvement</strong> in validation throughput with intelligent distribution.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pattern Detection -->
+    <div class="card pattern">
+      <div class="header">
+        <div class="icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+        <h3>Pattern Detection</h3>
+      </div>
+      <p class="tagline">Extract testing patterns from similar components to auto-generate tests for new features.</p>
+      <div class="gradient-divider"></div>
+      <div class="items">
+        <div class="item">
+          <i class="fa-solid fa-code-branch"></i>
+          <span><strong>Pattern Extraction</strong> identifies reusable test structures from existing components.</span>
+        </div>
+        <div class="item">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          <span><strong>Auto-Generation</strong> creates test cases for new features using learned patterns.</span>
+        </div>
+        <div class="item">
+          <i class="fa-solid fa-clipboard-check"></i>
+          <span><strong>Compliance Validation</strong> verifies through pattern adherence, not individual testing.</span>
+        </div>
+        <div class="item">
+          <i class="fa-solid fa-bolt"></i>
+          <span><strong>80% Faster</strong> test creation with consistent coverage across similar features.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dependency Mapping -->
+    <div class="card dependency">
+      <div class="header">
+        <div class="icon"><i class="fa-solid fa-diagram-project"></i></div>
+        <h3>Dependency Mapping</h3>
+      </div>
+      <p class="tagline">Map relationships between features, test cases, and data to enable smart regression selection.</p>
+      <div class="gradient-divider"></div>
+      <div class="items">
+        <div class="item">
+          <i class="fa-solid fa-sitemap"></i>
+          <span><strong>Relationship Graph</strong> traces connections between code, tests, and data dependencies.</span>
+        </div>
+        <div class="item">
+          <i class="fa-solid fa-bell"></i>
+          <span><strong>Impact Detection</strong> instantly identifies affected tests when code changes.</span>
+        </div>
+        <div class="item">
+          <i class="fa-solid fa-filter"></i>
+          <span><strong>Smart Selection</strong> runs only relevant regression tests, not everything.</span>
+        </div>
+        <div class="item">
+          <i class="fa-solid fa-clock"></i>
+          <span><strong>40-50% Reduction</strong> in regression execution time through targeted testing.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

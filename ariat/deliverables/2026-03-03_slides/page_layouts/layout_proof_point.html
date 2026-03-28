@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Layout: Proof Point</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-logo span { color: var(--purple-accent); }
+
+    .header-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+    }
+
+    .slide-content {
+      flex: 1;
+      display: flex;
+    }
+
+    /* Left panel - compact solution list */
+    .left-panel {
+      width: 35%;
+      padding: 28px 24px;
+      background: linear-gradient(180deg, #fdfcff 0%, #f9f7ff 100%);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .left-panel h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+
+    .solution-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .solution-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.1);
+      border-radius: 8px;
+    }
+
+    .solution-item .icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple-bright));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .solution-item span {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    /* Right panel - proof point / evidence */
+    .right-panel {
+      width: 65%;
+      padding: 28px 32px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .evidence-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .evidence-header .badge {
+      padding: 6px 12px;
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple-bright));
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .evidence-header h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .evidence-content {
+      flex: 1;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .evidence-content h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+
+    .evidence-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .evidence-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .evidence-item .check {
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple-accent));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #fff;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .evidence-item p {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .evidence-item strong {
+      color: var(--primary);
+    }
+
+    .evidence-footer {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 24px;
+    }
+
+    .evidence-stat {
+      text-align: center;
+    }
+
+    .evidence-stat .value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--purple-mid);
+    }
+
+    .evidence-stat .label {
+      font-size: 11px;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .slide-footer {
+      padding: 16px 40px;
+      background: #fff;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">Enterprise AI Capabilities</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="left-panel">
+        <h3>Solution Areas</h3>
+        <div class="solution-list">
+          <div class="solution-item">
+            <div class="icon">&#x2699;</div>
+            <span>Developer Productivity</span>
+          </div>
+          <div class="solution-item">
+            <div class="icon">&#x2630;</div>
+            <span>Enterprise Automation</span>
+          </div>
+          <div class="solution-item">
+            <div class="icon">&#x2261;</div>
+            <span>Data & Analytics</span>
+          </div>
+          <div class="solution-item">
+            <div class="icon">&#x2709;</div>
+            <span>Document Intelligence</span>
+          </div>
+          <div class="solution-item">
+            <div class="icon">&#x2295;</div>
+            <span>Applied AI</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-panel">
+        <div class="evidence-header">
+          <span class="badge">In Practice</span>
+          <h2>How We Deliver</h2>
+        </div>
+
+        <div class="evidence-content">
+          <h4>Production-Ready Approach</h4>
+          <div class="evidence-list">
+            <div class="evidence-item">
+              <span class="check">&#x2713;</span>
+              <p><strong>Reusable architecture</strong> adapted to your environment, not built from scratch each time</p>
+            </div>
+            <div class="evidence-item">
+              <span class="check">&#x2713;</span>
+              <p><strong>Pattern detection</strong> across your existing systems to identify automation opportunities</p>
+            </div>
+            <div class="evidence-item">
+              <span class="check">&#x2713;</span>
+              <p><strong>Dependency mapping</strong> to understand impact before making changes</p>
+            </div>
+            <div class="evidence-item">
+              <span class="check">&#x2713;</span>
+              <p><strong>Confidence-based routing</strong> for human-in-the-loop on edge cases</p>
+            </div>
+          </div>
+
+          <div class="evidence-footer">
+            <div class="evidence-stat">
+              <div class="value">70%</div>
+              <div class="label">Reusable</div>
+            </div>
+            <div class="evidence-stat">
+              <div class="value">30%</div>
+              <div class="label">Custom</div>
+            </div>
+            <div class="evidence-stat">
+              <div class="value">3</div>
+              <div class="label">Phases</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">04</div>
+    </div>
+  </div>
+</body>
+</html>

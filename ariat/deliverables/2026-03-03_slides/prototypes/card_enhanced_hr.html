@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Enhanced - AI for HR</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e8e6eb;
+      min-height: 100vh;
+      padding: 48px;
+    }
+
+    h1 {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .variations-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .variation {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .variation-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    /* ==================== */
+    /* BASE CARD STYLES */
+    /* ==================== */
+    .card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 2px 10px rgba(124,58,237,0.06);
+    }
+
+    .card .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .card .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #fff;
+      background: linear-gradient(135deg, #4C1D95, #6D28D9);
+      flex-shrink: 0;
+    }
+
+    .card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .card .tagline {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card .items {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card .item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12px;
+      line-height: 1.55;
+      color: #475569;
+    }
+
+    .card .item strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    /* ==================== */
+    /* ENHANCEMENT A: Gradient Top Strip + Numbered Items */
+    /* ==================== */
+    .card-a {
+      position: relative;
+      overflow: hidden;
+      padding-top: 28px;
+    }
+
+    .card-a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #4C1D95, #6D28D9, #A855F7);
+    }
+
+    .card-a .item-num {
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, #4C1D95, #6D28D9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ==================== */
+    /* ENHANCEMENT B: Category Pill Badge + Checkmark Items */
+    /* ==================== */
+    .card-b .header {
+      margin-bottom: 8px;
+    }
+
+    .card-b .category-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.1), rgba(168,85,247,0.1));
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--purple-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+
+    .card-b .category-pill::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--purple-accent);
+      border-radius: 50%;
+    }
+
+    .card-b .item-check {
+      width: 18px;
+      height: 18px;
+      background: linear-gradient(135deg, #4C1D95, #6D28D9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 10px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ==================== */
+    /* ENHANCEMENT C: Gradient Divider + Mini Hex Badges */
+    /* ==================== */
+    .card-c .tagline {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 12px;
+    }
+
+    .card-c .gradient-divider {
+      height: 2px;
+      background: linear-gradient(90deg, #4C1D95, #A855F7, transparent);
+      margin-bottom: 14px;
+      border-radius: 1px;
+    }
+
+    .card-c .item-hex {
+      width: 22px;
+      height: 22px;
+      background: linear-gradient(135deg, #4C1D95, #6D28D9);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ==================== */
+    /* ENHANCEMENT D: Full Treatment (Strip + Pill + Divider + Numbers) */
+    /* ==================== */
+    .card-d {
+      position: relative;
+      overflow: hidden;
+      padding-top: 28px;
+    }
+
+    .card-d::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #4C1D95, #6D28D9, #A855F7, #C026D3);
+    }
+
+    .card-d .header {
+      margin-bottom: 8px;
+    }
+
+    .card-d .category-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.1), rgba(168,85,247,0.1));
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--purple-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+
+    .card-d .category-pill::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--purple-accent);
+      border-radius: 50%;
+    }
+
+    .card-d .tagline {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 12px;
+    }
+
+    .card-d .gradient-divider {
+      height: 2px;
+      background: linear-gradient(90deg, #4C1D95, #A855F7, transparent);
+      margin-bottom: 14px;
+      border-radius: 1px;
+    }
+
+    .card-d .item-num {
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, #4C1D95, #6D28D9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ==================== */
+    /* ENHANCEMENT E: Bottom Metric Strip */
+    /* ==================== */
+    .card-e .metrics-strip {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .card-e .metric {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      padding: 6px 12px;
+      background: #faf9fc;
+      border-radius: 6px;
+      border: 1px solid rgba(124,58,237,0.1);
+    }
+
+    .card-e .metric .value {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--purple-dark);
+    }
+
+    .card-e .metric .label {
+      font-size: 10px;
+      color: var(--text-light);
+    }
+
+    /* ==================== */
+    /* ENHANCEMENT F: Accent Bar + Capability Tags Footer */
+    /* ==================== */
+    .card-f {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-f::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, #4C1D95, #6D28D9, #A855F7);
+    }
+
+    .card-f .capability-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .card-f .cap-tag {
+      padding: 4px 10px;
+      background: #faf9fc;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--purple-dark);
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>AI for HR - Enhanced with UI Catalog Elements</h1>
+
+  <!-- Icon Picker -->
+  <div style="max-width: 900px; margin: 0 auto 40px; background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+
+    <!-- Font Awesome -->
+    <div style="font-size: 11px; font-weight: 600; color: var(--purple-accent); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px;">Font Awesome - HR Icons</div>
+    <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px;">
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i class="fa-solid fa-users"></i></div>
+        <span style="font-size: 9px; color: #64748b;">users</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i class="fa-solid fa-user-group"></i></div>
+        <span style="font-size: 9px; color: #64748b;">user-group</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i class="fa-solid fa-people-group"></i></div>
+        <span style="font-size: 9px; color: #64748b;">people-group</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i class="fa-solid fa-user-plus"></i></div>
+        <span style="font-size: 9px; color: #64748b;">user-plus</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i class="fa-solid fa-user-tie"></i></div>
+        <span style="font-size: 9px; color: #64748b;">user-tie</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i class="fa-solid fa-id-badge"></i></div>
+        <span style="font-size: 9px; color: #64748b;">id-badge</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i class="fa-solid fa-id-card"></i></div>
+        <span style="font-size: 9px; color: #64748b;">id-card</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i class="fa-solid fa-address-card"></i></div>
+        <span style="font-size: 9px; color: #64748b;">address-card</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i class="fa-solid fa-handshake"></i></div>
+        <span style="font-size: 9px; color: #64748b;">handshake</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i class="fa-solid fa-building-user"></i></div>
+        <span style="font-size: 9px; color: #64748b;">building-user</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i class="fa-solid fa-clipboard-user"></i></div>
+        <span style="font-size: 9px; color: #64748b;">clipboard-user</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i class="fa-solid fa-user-gear"></i></div>
+        <span style="font-size: 9px; color: #64748b;">user-gear</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i class="fa-solid fa-users-gear"></i></div>
+        <span style="font-size: 9px; color: #64748b;">users-gear</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i class="fa-solid fa-sitemap"></i></div>
+        <span style="font-size: 9px; color: #64748b;">sitemap</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i class="fa-solid fa-network-wired"></i></div>
+        <span style="font-size: 9px; color: #64748b;">network-wired</span>
+      </div>
+
+    </div>
+
+    <!-- Lucide -->
+    <div style="font-size: 11px; font-weight: 600; color: var(--purple-accent); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px;">Lucide - HR Icons</div>
+    <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i data-lucide="users" style="width: 20px; height: 20px;"></i></div>
+        <span style="font-size: 9px; color: #64748b;">users</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i data-lucide="user-plus" style="width: 20px; height: 20px;"></i></div>
+        <span style="font-size: 9px; color: #64748b;">user-plus</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i data-lucide="user-check" style="width: 20px; height: 20px;"></i></div>
+        <span style="font-size: 9px; color: #64748b;">user-check</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i data-lucide="user-cog" style="width: 20px; height: 20px;"></i></div>
+        <span style="font-size: 9px; color: #64748b;">user-cog</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i data-lucide="contact" style="width: 20px; height: 20px;"></i></div>
+        <span style="font-size: 9px; color: #64748b;">contact</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i data-lucide="contact-2" style="width: 20px; height: 20px;"></i></div>
+        <span style="font-size: 9px; color: #64748b;">contact-2</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i data-lucide="briefcase" style="width: 20px; height: 20px;"></i></div>
+        <span style="font-size: 9px; color: #64748b;">briefcase</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i data-lucide="clipboard-list" style="width: 20px; height: 20px;"></i></div>
+        <span style="font-size: 9px; color: #64748b;">clipboard-list</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i data-lucide="id-card" style="width: 20px; height: 20px;"></i></div>
+        <span style="font-size: 9px; color: #64748b;">id-card</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i data-lucide="badge-check" style="width: 20px; height: 20px;"></i></div>
+        <span style="font-size: 9px; color: #64748b;">badge-check</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i data-lucide="handshake" style="width: 20px; height: 20px;"></i></div>
+        <span style="font-size: 9px; color: #64748b;">handshake</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; background: linear-gradient(135deg, #4C1D95, #6D28D9);"><i data-lucide="building-2" style="width: 20px; height: 20px;"></i></div>
+        <span style="font-size: 9px; color: #64748b;">building-2</span>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="variations-grid">
+
+    <!-- A: Gradient Top Strip + Numbered Items -->
+    <div class="variation">
+      <div class="variation-label">A: Gradient Strip + Numbered Items</div>
+      <div class="card card-a">
+        <div class="header">
+          <div class="icon">&#x263A;</div>
+          <h3>AI for HR</h3>
+        </div>
+        <p class="tagline">Streamline talent operations from recruiting through retention with intelligent automation.</p>
+        <div class="items">
+          <div class="item">
+            <div class="item-num">1</div>
+            <span><strong>Recruiting Automation</strong> with AI-powered candidate screening and pipeline management.</span>
+          </div>
+          <div class="item">
+            <div class="item-num">2</div>
+            <span><strong>Onboarding Workflows</strong> that automate document processing and new hire setup.</span>
+          </div>
+          <div class="item">
+            <div class="item-num">3</div>
+            <span><strong>Policy Q&A Assistants</strong> providing instant answers from HR documentation.</span>
+          </div>
+          <div class="item">
+            <div class="item-num">4</div>
+            <span><strong>Workforce Analytics</strong> for attrition prediction and skills gap analysis.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- B: Category Pill + Checkmarks -->
+    <div class="variation">
+      <div class="variation-label">B: Category Pill + Checkmark Items</div>
+      <div class="card card-b">
+        <div class="category-pill">Human Resources</div>
+        <div class="header">
+          <div class="icon">&#x263A;</div>
+          <h3>AI for HR</h3>
+        </div>
+        <p class="tagline">Streamline talent operations from recruiting through retention with intelligent automation.</p>
+        <div class="items">
+          <div class="item">
+            <div class="item-check">&#x2713;</div>
+            <span><strong>Recruiting Automation</strong> with AI-powered candidate screening and pipeline management.</span>
+          </div>
+          <div class="item">
+            <div class="item-check">&#x2713;</div>
+            <span><strong>Onboarding Workflows</strong> that automate document processing and new hire setup.</span>
+          </div>
+          <div class="item">
+            <div class="item-check">&#x2713;</div>
+            <span><strong>Policy Q&A Assistants</strong> providing instant answers from HR documentation.</span>
+          </div>
+          <div class="item">
+            <div class="item-check">&#x2713;</div>
+            <span><strong>Workforce Analytics</strong> for attrition prediction and skills gap analysis.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C: Gradient Divider + Hex Badges -->
+    <div class="variation">
+      <div class="variation-label">C: Gradient Divider + Hex Badges</div>
+      <div class="card card-c">
+        <div class="header">
+          <div class="icon">&#x263A;</div>
+          <h3>AI for HR</h3>
+        </div>
+        <p class="tagline">Streamline talent operations from recruiting through retention with intelligent automation.</p>
+        <div class="gradient-divider"></div>
+        <div class="items">
+          <div class="item">
+            <div class="item-hex">R</div>
+            <span><strong>Recruiting Automation</strong> with AI-powered candidate screening and pipeline management.</span>
+          </div>
+          <div class="item">
+            <div class="item-hex">O</div>
+            <span><strong>Onboarding Workflows</strong> that automate document processing and new hire setup.</span>
+          </div>
+          <div class="item">
+            <div class="item-hex">P</div>
+            <span><strong>Policy Q&A Assistants</strong> providing instant answers from HR documentation.</span>
+          </div>
+          <div class="item">
+            <div class="item-hex">W</div>
+            <span><strong>Workforce Analytics</strong> for attrition prediction and skills gap analysis.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D: Full Treatment -->
+    <div class="variation">
+      <div class="variation-label">D: Full Treatment (Strip + Divider + Numbers)</div>
+      <div class="card card-d">
+        <div class="header">
+          <div class="icon"><i class="fa-solid fa-user-group"></i></div>
+          <h3>Human Resources</h3>
+        </div>
+        <p class="tagline">Streamline talent operations from recruiting through retention with intelligent automation.</p>
+        <div class="gradient-divider"></div>
+        <div class="items">
+          <div class="item">
+            <div class="item-num">1</div>
+            <span><strong>Recruiting Automation</strong> with AI-powered candidate screening and pipeline management.</span>
+          </div>
+          <div class="item">
+            <div class="item-num">2</div>
+            <span><strong>Onboarding Workflows</strong> that automate document processing and new hire setup.</span>
+          </div>
+          <div class="item">
+            <div class="item-num">3</div>
+            <span><strong>Policy Q&A Assistants</strong> providing instant answers from HR documentation.</span>
+          </div>
+          <div class="item">
+            <div class="item-num">4</div>
+            <span><strong>Workforce Analytics</strong> for attrition prediction and skills gap analysis.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- E: Bottom Metric Strip -->
+    <div class="variation">
+      <div class="variation-label">E: Original + Bottom Metrics</div>
+      <div class="card card-e">
+        <div class="header">
+          <div class="icon">&#x263A;</div>
+          <h3>AI for HR</h3>
+        </div>
+        <p class="tagline">Streamline talent operations from recruiting through retention with intelligent automation.</p>
+        <div class="items">
+          <div class="item"><strong>Recruiting Automation</strong> with AI-powered candidate screening and pipeline management.</div>
+          <div class="item"><strong>Onboarding Workflows</strong> that automate document processing and new hire setup.</div>
+          <div class="item"><strong>Policy Q&A Assistants</strong> providing instant answers from HR documentation.</div>
+          <div class="item"><strong>Workforce Analytics</strong> for attrition prediction and skills gap analysis.</div>
+        </div>
+        <div class="metrics-strip">
+          <div class="metric">
+            <span class="value">4</span>
+            <span class="label">capabilities</span>
+          </div>
+          <div class="metric">
+            <span class="value">E2E</span>
+            <span class="label">talent lifecycle</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- F: Left Accent Bar + Capability Tags -->
+    <div class="variation">
+      <div class="variation-label">F: Left Accent + Capability Tags</div>
+      <div class="card card-f">
+        <div class="header">
+          <div class="icon">&#x263A;</div>
+          <h3>AI for HR</h3>
+        </div>
+        <p class="tagline">Streamline talent operations from recruiting through retention with intelligent automation.</p>
+        <div class="items">
+          <div class="item"><strong>Recruiting Automation</strong> with AI-powered candidate screening and pipeline management.</div>
+          <div class="item"><strong>Onboarding Workflows</strong> that automate document processing and new hire setup.</div>
+          <div class="item"><strong>Policy Q&A Assistants</strong> providing instant answers from HR documentation.</div>
+          <div class="item"><strong>Workforce Analytics</strong> for attrition prediction and skills gap analysis.</div>
+        </div>
+        <div class="capability-tags">
+          <span class="cap-tag">Recruiting</span>
+          <span class="cap-tag">Onboarding</span>
+          <span class="cap-tag">Policy Q&A</span>
+          <span class="cap-tag">Analytics</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+
+</body>
+</html>

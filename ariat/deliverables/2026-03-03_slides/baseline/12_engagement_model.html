@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engagement Model - BayOne Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 14px;
+      background: #e8e6eb;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      position: relative;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.06),
+        0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-logo span { color: var(--purple-accent); }
+
+    .header-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+    }
+
+    /* Content */
+    .slide-content {
+      flex: 1;
+      padding: 24px 48px 16px;
+      overflow: hidden;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .section-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #5B21B6, #7C3AED);
+      color: #fff;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-mid);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+    }
+
+    .lead {
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 18px;
+      max-width: 800px;
+    }
+
+    /* Phase cards - 3 column */
+    .phase-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .phase-card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.1);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .phase-card h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .phase-number {
+      width: 26px;
+      height: 26px;
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: #fff;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .phase-card p {
+      font-size: 11px;
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    /* Different colors per phase */
+    .phase-card:nth-child(1) { border-bottom: 3px solid #5B21B6; }
+    .phase-card:nth-child(2) { border-bottom: 3px solid #7C3AED; }
+    .phase-card:nth-child(3) { border-bottom: 3px solid #A855F7; }
+
+    /* Commercial models - 3 column */
+    .models-section h3 {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-mid);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+    }
+
+    .model-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .model-item {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+
+    .model-item h4 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .model-item h4 i {
+      font-size: 11px;
+      color: var(--purple-accent);
+    }
+
+    .model-item p {
+      font-size: 11px;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    /* Staffing/Delivery section */
+    .delivery-section h3 {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-mid);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+    }
+
+    .gradient-bar {
+      height: 8px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+
+    .bar-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .bar-labels span {
+      font-size: 10px;
+      color: var(--text-light);
+    }
+
+    .delivery-benefits {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .delivery-benefit {
+      font-size: 10px;
+      color: var(--text);
+      text-align: center;
+    }
+
+    .delivery-benefit strong {
+      display: block;
+      color: var(--primary);
+      font-size: 11px;
+      margin-bottom: 2px;
+    }
+
+    /* Footer */
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 16px 40px 16px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .slide {
+        max-width: 100%;
+        aspect-ratio: auto;
+        min-height: 100vh;
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">Enterprise AI Capabilities</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="section-header">
+        <div class="section-icon"><i class="fa-solid fa-arrows-spin"></i></div>
+        <div>
+          <div class="section-label">How We Work</div>
+          <h2>Engagement Model</h2>
+        </div>
+      </div>
+
+      <p class="lead">
+        We meet you where you are. Whether you need a focused discovery sprint, a proof of concept, or full production deployment, we structure engagements to deliver value at each phase.
+      </p>
+
+      <div class="phase-grid">
+        <div class="phase-card">
+          <h3><div class="phase-number">1</div> Discovery</h3>
+          <p>
+            Understand your stack, identify quick wins, and map the path to value. We assess your data, infrastructure, and team capabilities to design a realistic roadmap.
+          </p>
+        </div>
+        <div class="phase-card">
+          <h3><div class="phase-number">2</div> Proof of Concept</h3>
+          <p>
+            Build a working solution that proves value with real data. POCs are designed to answer specific questions and de-risk production investment.
+          </p>
+        </div>
+        <div class="phase-card">
+          <h3><div class="phase-number">3</div> Production</h3>
+          <p>
+            Scale, harden, and integrate. Production deployments include monitoring, security review, user training, and documentation for handoff.
+          </p>
+        </div>
+      </div>
+
+      <div class="models-section">
+        <h3>Commercial Models</h3>
+        <div class="model-grid">
+          <div class="model-item">
+            <h4><i class="fa-solid fa-clock"></i> Time & Materials</h4>
+            <p>Flexible engagement for discovery and exploratory work. Pay for time, adjust scope as needed.</p>
+          </div>
+          <div class="model-item">
+            <h4><i class="fa-solid fa-bullseye"></i> Fixed Price</h4>
+            <p>Milestone-based delivery for well-defined scopes. Clear deliverables, predictable budget.</p>
+          </div>
+          <div class="model-item">
+            <h4><i class="fa-solid fa-gears"></i> Managed Service</h4>
+            <p>Ongoing operations and optimization. We run and improve the system over time.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="delivery-section">
+        <h3>Delivery Models</h3>
+        <div class="gradient-bar"></div>
+        <div class="bar-labels">
+          <span>Full Onshore</span>
+          <span>Hybrid</span>
+          <span>Offshore-Led</span>
+        </div>
+        <div class="delivery-benefits">
+          <div class="delivery-benefit"><strong>Accessibility</strong>On-site, local time zone</div>
+          <div class="delivery-benefit"><strong>Balance</strong>Top talent + cost efficiency</div>
+          <div class="delivery-benefit"><strong>Scale</strong>24hr coverage, best cost</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">12</div>
+    </div>
+  </div>
+</body>
+</html>

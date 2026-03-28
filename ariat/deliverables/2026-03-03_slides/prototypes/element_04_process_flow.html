@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Element: Process Flow Strip</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 60px;
+      margin: 0;
+      padding: 40px;
+    }
+
+    h3 {
+      font-size: 14px;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 0 0 20px 0;
+      text-align: center;
+    }
+
+    /* Style 1: Arrow flow */
+    .arrow-flow {
+      display: flex;
+      align-items: center;
+    }
+
+    .arrow-step {
+      display: flex;
+      align-items: center;
+    }
+
+    .arrow-box {
+      background: linear-gradient(135deg, #5b21b6, #7c3aed);
+      color: #fff;
+      padding: 14px 24px;
+      font-size: 13px;
+      font-weight: 500;
+      position: relative;
+    }
+
+    .arrow-box::after {
+      content: '';
+      position: absolute;
+      right: -20px;
+      top: 0;
+      border: 22px solid transparent;
+      border-left: 20px solid #7c3aed;
+      border-right: none;
+    }
+
+    .arrow-step:last-child .arrow-box::after {
+      display: none;
+    }
+
+    .arrow-step:last-child .arrow-box {
+      border-radius: 0 6px 6px 0;
+    }
+
+    .arrow-step:first-child .arrow-box {
+      border-radius: 6px 0 0 6px;
+    }
+
+    .arrow-connector {
+      width: 24px;
+    }
+
+    /* Style 2: Numbered steps */
+    .numbered-flow {
+      display: flex;
+      gap: 40px;
+    }
+
+    .numbered-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+    }
+
+    .numbered-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: calc(50% + 30px);
+      width: calc(100% - 20px);
+      height: 2px;
+      background: linear-gradient(90deg, #a855f7, #6d28d9);
+    }
+
+    .step-number {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #5b21b6, #7c3aed);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+    }
+
+    .step-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: #334155;
+      text-align: center;
+      max-width: 80px;
+    }
+
+    /* Style 3: Compact inline */
+    .inline-flow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .inline-item {
+      font-size: 13px;
+      font-weight: 500;
+      color: #5b21b6;
+    }
+
+    .inline-arrow {
+      color: #a855f7;
+      font-size: 16px;
+    }
+
+    /* Style 4: Timeline */
+    .timeline {
+      display: flex;
+      position: relative;
+      padding: 20px 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #5b21b6, #7c3aed, #a855f7);
+      border-radius: 2px;
+      transform: translateY(-50%);
+    }
+
+    .timeline-point {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+    }
+
+    .timeline-dot {
+      width: 16px;
+      height: 16px;
+      background: #fff;
+      border: 4px solid #7c3aed;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .timeline-label {
+      position: absolute;
+      top: 28px;
+      font-size: 11px;
+      font-weight: 500;
+      color: #475569;
+      white-space: nowrap;
+    }
+
+    .timeline-point:nth-child(even) .timeline-label {
+      top: auto;
+      bottom: 28px;
+    }
+
+    section {
+      width: 100%;
+      max-width: 700px;
+    }
+  </style>
+</head>
+<body>
+
+  <section>
+    <h3>Style 1: Arrow Flow</h3>
+    <div class="arrow-flow">
+      <div class="arrow-step">
+        <div class="arrow-box">Discovery</div>
+        <div class="arrow-connector"></div>
+      </div>
+      <div class="arrow-step">
+        <div class="arrow-box">POC</div>
+        <div class="arrow-connector"></div>
+      </div>
+      <div class="arrow-step">
+        <div class="arrow-box">Production</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>Style 2: Numbered Steps</h3>
+    <div class="numbered-flow">
+      <div class="numbered-step">
+        <div class="step-number">1</div>
+        <div class="step-label">Cluster Similar Items</div>
+      </div>
+      <div class="numbered-step">
+        <div class="step-number">2</div>
+        <div class="step-label">Extract Patterns</div>
+      </div>
+      <div class="numbered-step">
+        <div class="step-number">3</div>
+        <div class="step-label">Batch Process</div>
+      </div>
+      <div class="numbered-step">
+        <div class="step-number">4</div>
+        <div class="step-label">Validate & Deploy</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>Style 3: Compact Inline</h3>
+    <div class="inline-flow">
+      <span class="inline-item">Analyze</span>
+      <span class="inline-arrow">&#x2192;</span>
+      <span class="inline-item">Cluster</span>
+      <span class="inline-arrow">&#x2192;</span>
+      <span class="inline-item">Process</span>
+      <span class="inline-arrow">&#x2192;</span>
+      <span class="inline-item">Validate</span>
+      <span class="inline-arrow">&#x2192;</span>
+      <span class="inline-item">Deploy</span>
+    </div>
+  </section>
+
+  <section>
+    <h3>Style 4: Timeline</h3>
+    <div class="timeline">
+      <div class="timeline-point">
+        <div class="timeline-dot"></div>
+        <div class="timeline-label">Map Dependencies</div>
+      </div>
+      <div class="timeline-point">
+        <div class="timeline-dot"></div>
+        <div class="timeline-label">Detect Patterns</div>
+      </div>
+      <div class="timeline-point">
+        <div class="timeline-dot"></div>
+        <div class="timeline-label">Score Confidence</div>
+      </div>
+      <div class="timeline-point">
+        <div class="timeline-dot"></div>
+        <div class="timeline-label">Route Work</div>
+      </div>
+      <div class="timeline-point">
+        <div class="timeline-dot"></div>
+        <div class="timeline-label">Human Review</div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

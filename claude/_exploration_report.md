@@ -567,4 +567,749 @@ TOOLING cluster:
 
 ---
 
-*Report continues with Batch 3 below after checkpoint.*
+## Batch 3: Folders 11-15
+
+---
+
+### 11. `2026-02-20_ui-conversion-discovery` -> **CISCO (secondary opportunity)**
+
+**Client:** Cisco — EPNM-to-EMS UI Conversion POC (Guhan/Selva stakeholders)
+**Type:** Discovery + proposal development
+**Purpose:** Complete discovery and proposal phase for UI conversion engagement spanning Feb 9 - March 26, 2026. Five iterations of POC proposal (v1-v5) with quality reviews. Separate from the NX-OS CI/CD work (different Cisco team).
+
+**File Tree:**
+```
+2026-02-20_ui-conversion-discovery/
+  (root — 11 files)
+    ui_conversion_poc_proposal_v5.html          (var)   Production-ready proposal — final approved version
+    ui_conversion_poc_proposal_v4.html          (var)   Fourth iteration
+    00_project_references.md                    (var)   Master reference linking all project materials
+    01_engagement_structure.md                  (var)   Engagement phases and team structure
+    (+ 7 more root-level reference/proposal files)
+  planning/                                     (19 files)
+    proposal iterations v1-v5 with quality reviews, critique documents,
+    version comparisons, pattern scans, style compliance checks
+  research/                                     (6 files)
+    Technical analysis (EPNM architecture, EMS requirements) and
+    strategic research (competitive landscape, pricing models)
+  source/                                       (3 files)
+    meeting transcripts (Guhan/Selva calls) + BayOne style guide
+  engagement/                                   (23 files)
+    Blockchain-style documentation, org chart, pricing models,
+    engagement timeline, team composition, risk assessment
+```
+
+**62 files, ~5,300+ lines.** 5 proposal versions, 5+ quality review passes over 54 days.
+**Cross-refs:** Separate from NX-OS CI/CD (#3, #4, #7, #8). Different Cisco contacts (Guhan, Selva vs. Anand, Srinivas).
+**Suggested home:** `cisco/` (under a separate engagement subfolder from NX-OS)
+
+---
+
+### 12. `2026-02-23_rfp-questions-skill` -> **TOOLING**
+
+**Client:** BayOne Internal — skill development
+**Type:** Skill architecture and specification
+**Purpose:** Convert McGrath RFP workflow lessons into automated, hook-enforced Claude Code skill. 6-phase workflow with 9 specialized agents and exit code 2 compliance enforcement.
+
+**File Tree:**
+```
+2026-02-23_rfp-questions-skill/
+  progress/
+    00_status.md                                (2.7K)  Work tracker — planning done, code gen done, Phase 0
+                                                        PDF/Excel extension added. File manifest for generation.
+  decisions/
+    01_architecture_decisions.md                 (4.7K)  10 decisions: Sonnet min / Opus for analysis, agent
+                                                        teams, hook enforcement (exit code 2), 6-phase folders,
+                                                        Big4 optional polish, interactive review 3-5 items,
+                                                        explicit decision recording, all workers read-only
+  planning/
+    01_skill_architecture.md                    (11K)   ** COMPREHENSIVE SPEC ** — 6-phase workflow with 12+
+                                                        gates, 9 agents (5 Opus, 4 Sonnet), state.json schema
+                                                        (200 lines), stop hook pseudocode, Big4 integration
+```
+
+**3 files, ~18.4 KB.** 10 architectural decisions, 9 agents, 6 phases, 12+ decision gates.
+**Cross-refs:** Built from `2026-02-20_mcgrath_rfp` requirements. Pattern reference: django-forge-v2.
+**Suggested home:** `claude/` or `tooling/`
+
+---
+
+### 13. `2026-02-26_sephora-hiring` -> **SEPHORA**
+
+**Client:** Sephora — ML/Data Engineering hiring (hiring manager: Ravi)
+**Type:** JD creation + candidate evaluation
+**Purpose:** Split Ravi's unicorn Senior ML Engineer JD into 3 specialized roles (ML Engineer, Data Engineer, Full-Stack Unicorn). Also produced recruiter feedback for Anushree Joshi (Senior AI Solutions Engineer candidate).
+
+**File Tree:**
+```
+2026-02-26_sephora-hiring/
+  00_jd_creation_plan.md                        (9.4K)  Master plan: 3-role split, 8-phase execution,
+                                                        golden rules (stage before approve)
+  01_skill_classifications.md                   (9.5K)  Must-have vs nice-to-have matrix per role across
+                                                        10+ skill categories. Universal: AI pair programming.
+  candidate_guide/
+    anushree_joshi_recruiter_feedback.md         (5.5K)  RECOMMEND ADVANCE. Standout: MCP expertise
+                                                        (embedding-based 100+ tool matching), 9 strengths
+    anushree_joshi_recruiter_feedback.html       (14K)   BayOne-branded HTML version
+  staging/
+    jd_ml_engineer_additions.md                 (7.1K)  Title: "ML Engineer", restructured responsibilities
+                                                        (50% ML Dev, 30% MLOps, 20% Team). AWAITING APPROVAL.
+    jd_ml_engineer_removals.md                  (7.3K)  9 AI Engineer sections to remove. AWAITING APPROVAL.
+    jd_ml_engineer_repetition_fixes.md          (6.9K)  "ML" reduced from ~30 to ~6 occurrences. AWAITING APPROVAL.
+```
+
+**7 files, ~60 KB.** 3 JDs planned, 1 in staging (ML Engineer), candidate evaluated (Anushree Joshi).
+**Cross-refs:** Source: `sephora/ravi/ravi-ml-jd.txt`. Earlier Sephora JD variant in `2026-02-02_resource-planning` (Cisco folder).
+**Suggested home:** `sephora/`
+
+---
+
+### 14. `2026-03-03_ariat_slides` -> **ARIAT (NEW CLIENT)**
+
+**Client:** Ariat — fashion/retail, India GCC scaling (30 -> 200 people in 18 months)
+**Type:** Presentation slides for 90-minute client meeting
+**Purpose:** 5-wave parallel research (20 agents) to build 4 presentation slides. Primary opportunity: managed testing transformation.
+
+**File Tree:**
+```
+2026-03-03_ariat_slides/
+  planning/
+    00_session_setup.md                         (972B)  Session context and rules
+    01_research_plan.md                         (2.9K)  First research wave
+    02_deep_research_plan.md                    (6.9K)  Multi-wave strategy
+  source/
+    meeting1.txt / meeting2.txt                 (var)   Rahul meetings with Ariat context
+    neha-slide.md / team_deck.md                (var)   Existing slide content
+  research/
+    raw/                                        (20 files) 5 waves parallel research
+    topic_1_ai_testing.md                       (700+ lines) 8 AI ideas, 60-70% effort reduction
+    topic_2_enterprise_ai_backoffice.md         (600+ lines) HR/Finance/Legal/Marketing metrics
+    topic_3_ai_culture_skills.md                (500+ lines) Upskilling, attrition, ROI
+    topic_4_general_ai_capabilities.md          (500+ lines) BayOne positioning
+  slides/
+    baseline/                                   (13 files) HTML templates from capabilities_deck
+    prototypes/                                 (40+ files) Card designs, 22 UI components
+    logos/                                      (50+ files) Client/tech logos
+    page_layouts/                               (9 files) Proof point, dark mode, timeline templates
+  handoffs/
+    session_handoff_2026-03-04.md               (15K)   Master handoff for next session
+```
+
+**150+ files.** 5 research waves, 4 consolidated topic docs (2,000+ lines), 70+ proof points.
+**Key metrics:** Testing 60-70% effort reduction, HR 90% time-to-hire reduction, Finance 70% faster AP, GCC attrition 13%->9%.
+**Cross-refs:** Baseline from `2026-02-10_capabilities_deck`. Continues in `2026-03-04_big4_slide1_review`.
+**Suggested home:** New `ariat/` directory
+
+---
+
+### 15. `2026-03-04_big4_slide1_review` -> **ARIAT**
+
+**Client:** Ariat (continuation of slide development)
+**Type:** Big Four quality review of Slide 1
+**Purpose:** Critical review and rewrite of Slide 01 ("AI Strategy and Innovation"). First draft violated requirements by replacing 5 solution areas with 4 new ones. 14 issues catalogued. v2 approved.
+
+**File Tree:**
+```
+2026-03-04_big4_slide1_review/
+  state.json                                    (var)   Session metadata
+  source/
+    00_slide1_planning.md                       (var)   Planning doc for slide content
+    slide_01_ai_strategy_innovation_v1.md       (var)   ** FAILED DRAFT ** — replaced 5 solution areas
+                                                        with 4 new ones (violated explicit requirements)
+  research/
+    00_slide1_requirements.md                   (var)   Requirements analysis and problem statement
+  planning/
+    00_critique.md                              (var)   14 issues: structural violations, Big Four
+                                                        anti-patterns (blog-style headers, rhetorical
+                                                        questions, colloquial language), content quality,
+                                                        document purpose mismatch
+    slide_01_ai_strategy_innovation_v2.md       (var)   ** APPROVED ** — restores 5 solution areas
+                                                        (Developer Productivity, Enterprise Automation,
+                                                        Data & Analytics, Document Intelligence, Applied
+                                                        AI & Operations), enriches with research, applies
+                                                        Big Four style, removes meta-commentary
+    01_version_comparison.md                    (var)   v1 vs v2 analysis confirming all research preserved
+```
+
+**7 files, ~27.3 KB.** 14 issues found in v1, all fixed in v2. 100% research substance preserved.
+**Cross-refs:** Direct continuation of `2026-03-03_ariat_slides`. Uses Big Four quality process from `2025-02-25_big4_edw_framework`.
+**Suggested home:** `ariat/`
+
+---
+
+## Batch 3 Cross-Reference Map
+
+```
+ARIAT cluster (NEW):
+  #14 (ariat_slides) --continues--> #15 (big4_slide1_review)
+  #14 did 5-wave research; #15 reviewed Slide 1 through Big Four quality process
+  Both draw baseline slides from #5 (capabilities_deck)
+
+CISCO cluster (expanded):
+  #11 (ui-conversion-discovery) = SEPARATE Cisco engagement (Guhan/Selva, EPNM->EMS)
+  Distinct from NX-OS CI/CD cluster (#3, #4, #7, #8)
+
+SEPHORA cluster (expanded):
+  #13 (sephora-hiring) = Ravi's ML/Data Engineering JDs + Anushree Joshi candidate eval
+
+TOOLING cluster (expanded):
+  #12 (rfp-questions-skill) = Automated RFP skill built from McGrath lessons (#9)
+```
+
+## Client Attribution Summary (Batches 1-3)
+
+| Client | Folders | Content Type |
+|--------|---------|-------------|
+| **Sephora** | #1, #2, #13 | Meeting prep, Big Four audit, hiring/JDs |
+| **Cisco (NX-OS)** | #3, #4, #7, #8 | Resource planning, recruiter guides, meeting analysis, discovery |
+| **Cisco (EPNM/EMS)** | #11 | UI conversion POC proposal (separate engagement) |
+| **McGrath** | #9 | RFP question development |
+| **Ariat** | #14, #15 | Presentation slides, Big Four review |
+| **BayOne (internal)** | #5 | Capabilities deck |
+| **Tooling (internal)** | #6, #10, #12 | Skill-forge, meeting-analyzer feedback, RFP skill |
+
+---
+
+## Batch 4: Folders 16-20
+
+---
+
+### 16. `2026-03-04_big4_slide_titles` -> **ARIAT**
+
+**Client:** Ariat — GCC presentation (continuation)
+**Type:** Big Four quality review of slide titles
+**Purpose:** Brainstorm and critique title options for the 4 Ariat slides against Big Four standards. Most brainstormed options failed quality check.
+
+**File Tree:**
+```
+2026-03-04_big4_slide_titles/
+  state.json                                    (~200B)  Phase: "critique", topic: Ariat slide titles
+  source/
+    slide_title_options.md                      (~2K)    5-6 title options per slide (4 slides). Includes
+                                                         reference titles from BayOne capabilities deck.
+  planning/
+    critique.md                                 (~3.5K)  Anti-pattern analysis with pass/fail per title.
+                                                         Professional "Tuesday Test". Recommended alternatives.
+                                                         Key finding: most violate Big Four standards.
+  research/
+    source_analysis.md                          (~1.2K)  4 title patterns identified: "The [Concept] [Noun]",
+                                                         "[Noun Phrase]", "[Domain] + [Type]", "Why [Company]".
+                                                         Titles should be 2-4 words, noun phrases, avoid
+                                                         "AI for X", use "Intelligence" over "AI".
+```
+
+**4 files, ~7 KB.** Title options under review.
+**Cross-refs:** Continues `2026-03-03_ariat_slides` (#14) and `2026-03-04_big4_slide1_review` (#15).
+**Suggested home:** `ariat/`
+
+---
+
+### 17. `2026-03-04_tailored-brands-prep` -> **TAILORED BRANDS (NEW CLIENT)**
+
+**Client:** Tailored Brands — Men's Wearhouse / Joseph A. Bank parent. SVP: Siva. CPO: Carl Vasani.
+**Type:** Discovery meeting preparation
+**Purpose:** Comprehensive prep for listening-focused discovery meeting. Multi-wave parallel research synthesizing learnings from Sephora/Cisco/McGrath. Maps org structure, QA gaps, AI opportunities, competitive positioning.
+
+**File Tree:**
+```
+2026-03-04_tailored-brands-prep/
+  goals/
+    00_session_goals.md                         (700B)   Listen & brainstorm philosophy, 3 deliverables planned
+  progress/
+    00_status.md                                (800B)   95% complete, awaiting Colin review
+  source/
+    00_meeting_transcript.md                    (400B)   Reference to internal planning call at /tb/meetings/1.txt
+    IMG_0012.jpeg                               (var)    Handwritten org chart: Siva->Carl, reports: Kalyan (AI),
+                                                         Kieran (UI), Anitha (backend), Vijay (QA Dir)
+  planning/
+    00_game_plan.md                             (6.2K)   Strategic framework: 12 discovery Qs, opportunity tiers,
+                                                         cross-reference table (other client learnings), risks
+  research/
+    00_transcript_decomposition.md              (14.5K)  15-section analysis: org, personnel, BayOne footprint
+                                                         (5-6 placed), $75M tech investment, Commerce Tools,
+                                                         Infosys competitive, Siva/Vijay QA tension
+    01_synthesized_research.md                  (9.2K)   Market (92% retailers up AI budgets), QA is the gap,
+                                                         Kalyan admitted doesn't know AI, Tier 1 opps: QA/test
+                                                         gen + AI guidance + Commerce Tools validation
+  deliverables/
+    discovery_prep_tailored_brands.html         (10.5K)  BayOne-branded HTML v1
+    discovery_prep_tailored_brands_v2.html      (14.4K)  Enhanced v2, client-ready
+```
+
+**9 files, ~57 KB.** 10 key people mapped, 12 discovery questions, 8 specific opportunities across 3 tiers.
+**Key insight:** $75M tech transformation with QA gaps. Kalyan (Dir AI) doesn't know AI. BayOne already has 5-6 people placed. Infosys vulnerable (body shop model).
+**Cross-refs:** Learnings from Sephora, Cisco, McGrath applied. Design template from `2026-02-17_discovery-call-prep`.
+**Suggested home:** `tailored_brands/`
+
+---
+
+### 18. `2026-03-05_big4_meeting4_html` -> **SEPHORA**
+
+**Client:** Sephora — Meeting 4 Technical Deep Dive
+**Type:** Project stub (incomplete)
+**Purpose:** Initialized for converting Meeting 4 documentation to BayOne-branded HTML. Session set up but no content generated.
+
+**File Tree:**
+```
+2026-03-05_big4_meeting4_html/
+  state.json                                    (369B)  Phase: "setup". Converting Meeting 4 docs to HTML.
+                                                        Source: sephora/2025-02-25_andrew-meeting-prep/
+                                                        meetings/04_technical_deep_dive_meeting1/.
+                                                        ** NO CONTENT GENERATED — setup only. **
+```
+
+**1 file, 369 bytes.** Incomplete/abandoned session.
+**Cross-refs:** `2026-03-05_big4_sephora_technical_deep_dive` (#20, same meeting content).
+**Suggested home:** `sephora/` (or delete as empty stub)
+
+---
+
+### 19. `2026-03-05_big4_neha_email` -> **SEPHORA**
+
+**Client:** Sephora — follow-up email after Meeting 4
+**Type:** Email refinement through Big Four quality process
+**Purpose:** Transform Neha's transactional vendor-checklist follow-up email into warm, collaborative relationship-building communication. 8 iterations, v2 passed quality audit.
+
+**File Tree:**
+```
+2026-03-05_big4_neha_email/
+  state.json                                    (274B)  Phase: "complete"
+  source/
+    neha_followup_email_draft.md                (2.4K)  Original draft — tone goals, recipients (Andrew Ho,
+                                                        Gariashi, Maher, Sergei), MCP connector for Cognos
+  planning/
+    critique.md                                 (4.1K)  6 issues: transactional framing, list-heavy, AI-tell
+                                                        phrases, missing warmth. Verdict: NEEDS MAJOR REVISION
+    neha_followup_email_v2.md                   (2.3K)  ** APPROVED ** — warm subject, flowing paragraphs,
+                                                        specific thanks, "you mentioned" framing
+    neha_followup_email_v3.md                   (1.6K)  Shorter alt: "Really enjoyed today's call"
+    neha_followup_email_v4.md                   (1.6K)  Listening-emphasis variant
+    neha_followup_email_v5.md                   (787B)  Most minimal — two core asks only
+    neha_followup_email_v6.md                   (878B)  Slightly more detail than v5
+    neha_followup_email_v7.md                   (1.4K)  Balanced warmth + clarity
+    neha_followup_email_v8.md                   (1.5K)  Technical depth emphasis
+    quality_audit.md                            (2.1K)  v2 passes: 1 medium flag, all anti-patterns pass,
+                                                        tone passes 5 criteria. ** PASS — READY TO SEND **
+  research/
+    source_analysis.md                          (3.8K)  Meeting 4 context: expectation mismatch (Sephora
+                                                        expected demo), artifact ownership mapping, stakeholder
+                                                        communication profiles, tone guidance with quotes
+```
+
+**12 files, ~22.5 KB.** 8 email versions, v2 approved and ready to send.
+**Cross-refs:** Same meeting as #18 and #20. Recipients: Andrew Ho, Grishi, Maher, Sergei, Vlad.
+**Suggested home:** `sephora/`
+
+---
+
+### 20. `2026-03-05_big4_sephora_technical_deep_dive` -> **SEPHORA**
+
+**Client:** Sephora — EDW Modernization Technical Deep Dive framework
+**Type:** Big Four quality review of technical presentation
+**Purpose:** Review and revise technical deep-dive framework for meeting with Andrew Ho, Grishi Chakraborty, and Mahair. Positions BayOne for POC engagement with agent-based automation for Cognos/DataStage/Databricks migration.
+
+**File Tree:**
+```
+2026-03-05_big4_sephora_technical_deep_dive/
+  state.json                                    (~250B)  Phase: "rewrite"
+  source/
+    04_technical_deep_dive_framework.md          (9.2K)  Original framework — 3-year EDW re-engineering,
+                                                         legacy (SQL Server, Cognos, DataStage) -> Databricks.
+                                                         Three challenges: SSAS-to-Databricks, Cognos automation,
+                                                         DataStage migration. Agent orchestration with MCP.
+                                                         Schema mapping: 3-phase deterministic with confidence
+                                                         routing. ** Flagged for AI patterns. **
+  planning/
+    critique.md                                 (4.1K)  8 issue categories: contrastive framing (8x),
+                                                        contractions (2x), em-dashes (6x, max 5), blog
+                                                        headers (5x), colloquial ("piecemeal", "black box"),
+                                                        rhetorical question (1x). Verdict: NEEDS REVISION
+                                                        (85%, style fixes only)
+    04_technical_deep_dive_framework_v2.md      (9.4K)  Revised — all AI patterns remediated. All technical
+                                                        content preserved. Meets Big Four standards.
+  research/
+    source_analysis.md                          (1.8K)  Sources: Meeting 3 transcript. Audience: Grishi
+                                                        (skeptical gatekeeper), Andrew (vision: compress
+                                                        3 years -> 1.5 via agents), Mahair (architect).
+                                                        Tone: confident without overselling.
+```
+
+**5 files, ~24.8 KB.** v2 meets Big Four standards. Andrew's vision: agent swarms to compress timeline 50%.
+**Cross-refs:** Original at `sephora/2025-02-25_andrew-meeting-prep/deliverables/`. Related: #18 (HTML stub), #19 (Neha email). Earlier Sephora: #1, #2.
+**Suggested home:** `sephora/`
+
+---
+
+## Batch 4 Cross-Reference Map
+
+```
+SEPHORA cluster (3 folders, same Meeting 4):
+  #18 (big4_meeting4_html) = stub/abandoned for HTML conversion
+  #19 (big4_neha_email) = follow-up email (8 versions, v2 approved)
+  #20 (big4_sephora_deep_dive) = technical framework (v2 approved)
+  All reference Andrew Ho, Grishi, Mahair meeting
+
+ARIAT cluster (continued):
+  #16 (big4_slide_titles) = title options critique
+  Chain: #14 (research) -> #15 (slide 1) -> #16 (titles)
+
+TAILORED BRANDS (new):
+  #17 (tailored-brands-prep) = discovery meeting prep
+  Cross-references Sephora/Cisco/McGrath learnings applied to new client
+  Design template from #8 (discovery-call-prep)
+```
+
+## Client Attribution Summary (Batches 1-4)
+
+| Client | Folders | Content Type |
+|--------|---------|-------------|
+| **Sephora** | #1, #2, #13, #18, #19, #20 | Meeting prep, Big Four audit, hiring/JDs, email refinement, technical framework |
+| **Cisco (NX-OS)** | #3, #4, #7, #8 | Resource planning, recruiter guides, meeting analysis, discovery |
+| **Cisco (EPNM/EMS)** | #11 | UI conversion POC proposal |
+| **McGrath** | #9 | RFP question development |
+| **Ariat** | #14, #15, #16 | Presentation slides, Big Four review, title critique |
+| **Tailored Brands** | #17 | Discovery meeting prep, org mapping, competitive positioning |
+| **BayOne (internal)** | #5 | Capabilities deck |
+| **Tooling (internal)** | #6, #10, #12 | Skill-forge, meeting-analyzer feedback, RFP skill |
+
+---
+
+## Batch 5: Folders 21-25
+
+---
+
+### 21. `2026-03-10_linkedin_anniversary` -> **BAYONE INTERNAL / PERSONAL**
+
+**Client:** Colin Moore — one-year work anniversary LinkedIn post
+**Type:** Content creation with detailed voice/tone handoff
+**Purpose:** Authentic LinkedIn post celebrating first year at BayOne. 7-document handoff package with strict voice rules after prior sessions had tone mismatches.
+
+**File Tree:**
+```
+2026-03-10_linkedin_anniversary/
+  planning/
+    01_opening_options.md                       (1.1K)  3 draft opening variants (straightforward/warm/concise)
+  source/
+    HANDOFF_README.md                           (2.3K)  Navigation guide, read handoff_05 FIRST
+    handoff_01_background_context.md            (3.4K)  Colin bio, Coherent (toxic, $30M savings), BayOne culture
+    handoff_02_post_structure_and_decisions.md   (4.7K)  13-section arc, tone: reflective/grateful/fired-up
+    handoff_03_reference_materials.md            (5.8K)  7 AI capabilities, TalentAI, ELETS Award, AI Office
+    handoff_04_people_and_shoutouts.md           (2.2K)  Alli (wife), founding team (80% female), #MakeTechPurple
+    handoff_05_voice_tone_and_mistakes.md        (8.2K)  ** CRITICAL ** No fragments, no em dashes, no colons,
+                                                         no "And/But" starters. Voice: warm but direct, dry humor.
+    handoff_06_current_draft_state.md            (2.9K)  Opening has issues, rest NOT DRAFTED
+    handoff_07_neha_reference_post.md            (2.5K)  Neha's post as energy reference (not structure)
+```
+
+**9 files, ~33 KB.** Status: drafting phase, opening needs revision.
+**Suggested home:** `ai_docs/` or `claude/` — personal/internal
+
+---
+
+### 22. `2026-03-16_ai-manager-jd` -> **BAYONE INTERNAL (HIRING)**
+
+**Client:** BayOne — hiring Technical Manager, AI Engineering (India, remote, reports to Colin)
+**Type:** JD + recruiter guide
+**Purpose:** Hybrid hands-on manager for 5-15 person India AI team. "Director's proxy."
+
+**File Tree:**
+```
+2026-03-16_ai-manager-jd/
+  decisions/00_title.md                         (500B)  "Technical Manager, AI Engineering" — rationale
+  progress/00_status.md                         (400B)  All approved, ready for distribution
+  goals/00_requirements.md                      (3.2K)  Colin's brief: hard reqs, leadership profile, anti-patterns
+  deliverables/
+    jd_technical_manager_ai_engineering.md/html  (6.8K/15K)  Candidate JD: 40% leadership, 25% direction,
+                                                              20% hands-on, 15% growth. Req: 3+ yrs AI team lead,
+                                                              Python, Azure, LangGraph, ~8 yrs total.
+    recruiter_guide_technical_manager_ai.md/html (9.1K/20K)  6 hard filters, 5 depth areas (need 2+), 6 positive
+                                                              signals, 8 red flags. Comp: 35-45 LPA (up to 55-60).
+  source/
+    jd_senior_ai_solutions_engineer_original.*   (4.8K/8K)   Format reference
+    transcript2.txt                             (58K)   Meeting transcript (Colin/Rahul/Vinayak/Neeraj/Neha)
+    transcript_analysis.md                      (9.2K)  Key insights, "2 of 5" technical breadth rule
+    recruiting.txt                              (45K)   Earlier recruiting context
+```
+
+**12 files, ~200 KB.** Status: COMPLETE, ready for recruiting execution.
+**Suggested home:** `ai_docs/` — internal hiring
+
+---
+
+### 23. `2026-03-17_opportunity_catalog` -> **BAYONE INTERNAL (PORTFOLIO)**
+
+**Client:** BayOne — cross-client opportunity portfolio for CEO briefing
+**Type:** Portfolio catalog and executive summary
+**Purpose:** Multi-agent discovery (150+ source files reviewed) producing CEO one-pager and 13 client research files covering all active opportunities.
+
+**File Tree:**
+```
+2026-03-17_opportunity_catalog/
+  00_INTERNAL_CATALOG.md                        (12K)   5-client executive catalog
+  CEO_ONE_PAGER.md / .html / _CONDENSED.html    (9K+)   Executive summaries (3 formats)
+  image.png                                     (var)   Visual asset
+  planning/
+    00_execution_plan.md                        (2K)    Methodology, parallel agent plan
+    01_methodology_lessons_learned.md           (9K)    "Read everything" principle, auditability, hierarchy
+  progress/00_phase1_summary.md                 (7K)    21 work streams, 100+ docs reviewed
+  research/
+    01_cisco_findings.md - 13_hpe.md            (13 files) Per-client deep dives with source citations
+  source/                                       (4 files) Base catalog materials
+```
+
+**25 files, ~150 KB.** 13 clients cataloged, 4 active, 21+ work streams, $5M+ first year potential.
+**Key clients:** Cisco ($100K/qtr), Sephora (multi-million), Lam Research, SiTime, Tailored Brands, Zeblok.
+**Suggested home:** Root-level or `ai_docs/` — cross-cutting portfolio view
+
+---
+
+### 24. `2026-03-19_pptx_extractor_skill` -> **TOOLING**
+
+**Client:** BayOne Internal — PPTX extraction skill using Gemini 2.5 Pro vision
+**Type:** Skill development + production extractions
+**Purpose:** Extract PowerPoint slides to faithful markdown via Gemini vision. 3 approaches tested (Option C: full PPTX -> Gemini recommended). Two full production extractions completed.
+
+**File Tree:**
+```
+2026-03-19_pptx_extractor_skill/
+  goals/00_requirements.md                      (4.2K)  Spec: PPTX -> slides -> Gemini -> markdown
+  planning/00_implementation_plan.md            (8.5K)  3 options, CLI interface, rate limiting
+  research/
+    debug_parse.py / test_option_b.py / test_option_c.py  (7.3K)  3 test scripts
+    slide_05_test_output.md                     (18K)   Sample extraction with ASCII layout
+    test_output/ (3 slides)                     (var)   Validation extractions
+  source/
+    BayOne-Overview-Ariat-GCC-*/                (19 slides) Ariat deck fully extracted
+    MGRC Managed Services Proposal/             (32 slides) McGrath deck fully extracted
+    (5 PPTX source files)                       (~21 MB)
+```
+
+**150+ files, ~51 MB total.** 72+ slides extracted at ~95% success rate.
+**Output per slide:** content.md + layout.md (ASCII) + visual_elements.md + slide.png
+**Suggested home:** `tooling/` — skill development
+
+---
+
+### 25. `2026-03-20_big4_lam_problem_restatement` -> **LAM RESEARCH (NEW CLIENT)**
+
+**Client:** Lam Research — IP protection / NER-redaction system
+**Type:** Big Four quality review of problem restatement deliverable
+**Purpose:** Validate client-facing problem restatement HTML against March 12 discovery call transcripts. Mikhail's whiteboard workflow, ML results (20% baseline, 17% fine-tuned), 1,000+ person-hour labeling concern.
+
+**File Tree:**
+```
+2026-03-20_big4_lam_problem_restatement/
+  state.json                                    (539B)  Links to deliverables at cisco_projects/cicd/claude/
+  source/                                       (empty)
+  planning/
+    critique.md                                 (5.9K)  Pattern scanner: 4 flags, all false positives.
+                                                        Compliance: ALL 19 checks PASSED. 3 content issues
+                                                        (2 minor phrasing, 1 borderline). Verdict: NEEDS
+                                                        REVISION (minor, 2 small fixes).
+  research/
+    source_analysis.md                          (1.9K)  All claims verified against transcripts. 9 sections
+                                                        confirmed. 6 user rules enforced, all pass.
+```
+
+**3 files, ~8.3 KB.** Document 95%+ ready, 2 minor phrasing fixes needed.
+**Cross-refs:** Deliverable at `cisco_projects/cicd/claude/2026-03-20_lam-research/`. New client from opportunity catalog.
+**Suggested home:** New `lam_research/`
+
+---
+
+## Batch 5 Cross-Reference Map
+
+```
+BAYONE INTERNAL cluster (3 folders):
+  #21 (linkedin_anniversary) = Colin's 1-year post with strict voice rules
+  #22 (ai-manager-jd) = Hiring Colin's right-hand manager for India team
+  #23 (opportunity_catalog) = Cross-client portfolio for CEO (13 clients cataloged)
+
+TOOLING cluster (expanded):
+  #24 (pptx_extractor_skill) = Gemini vision-based slide extraction
+  Extracted Ariat deck (19 slides) and McGrath deck (32 slides)
+
+LAM RESEARCH (new):
+  #25 (big4_lam_problem_restatement) = QA review of discovery deliverable
+  IP protection / NER-redaction, semiconductor company
+```
+
+## Client Attribution Summary (Batches 1-5)
+
+| Client | Folders | Content Type |
+|--------|---------|-------------|
+| **Sephora** | #1, #2, #13, #18, #19, #20 | Meeting prep, Big Four audit, hiring/JDs, email, technical framework |
+| **Cisco (NX-OS)** | #3, #4, #7, #8 | Resource planning, recruiter guides, meeting analysis, discovery |
+| **Cisco (EPNM/EMS)** | #11 | UI conversion POC proposal |
+| **McGrath** | #9 | RFP question development |
+| **Ariat** | #14, #15, #16 | Presentation slides, Big Four review, title critique |
+| **Tailored Brands** | #17 | Discovery meeting prep |
+| **Lam Research** | #25 | Problem restatement QA review |
+| **BayOne (internal)** | #5, #21, #22, #23 | Capabilities deck, LinkedIn post, hiring, portfolio catalog |
+| **Tooling (internal)** | #6, #10, #12, #24 | Skill-forge, meeting-analyzer, RFP skill, PPTX extractor |
+
+---
+
+## Batch 6: Folders 26-30 (Final)
+
+---
+
+### 26. `2026-03-20_lam-research` -> **LAM RESEARCH**
+
+**Client:** Lam Research — $17B+ semiconductor, IP protection/NER-redaction
+**Type:** Blockchain-style discovery documentation (3 analytical sets)
+**Purpose:** Pre-call prep, discovery call decomposition, and internal debrief for IP protection engagement. Customer-confidential data in knowledge base prevents cross-customer sharing.
+
+**File Tree:**
+```
+2026-03-20_lam-research/
+  org_chart.md                                  Living people map (Brad, Mikhail, Pat, Daniel, Jason)
+  planning/ (2 files)                           Session handoff + skill notes
+  research/ (18+ files in 3 sets)
+    Set 01: Pre-call prep (6 files)             Company profile, question bank, tech reference, people
+    Bridge: 01-02_changes                       Hypothesis validation/invalidation
+    Set 02: Discovery call (8 files)            Use cases, what was tried (all ~20% FP), infrastructure,
+                                                business opportunity, speaker dynamics
+    Set 02a: Internal debrief (4 files)         Candid takes, "AI 101, easy work", action items
+  source/ (3 files)                             Raw transcripts (prep, call, debrief)
+```
+
+**~42 files.** 3 document sets, 12 key people, 2 use cases, 5 prior approaches documented.
+**Key insight:** Lam has no in-house AI expert. Prior ML approaches wrong (20% FP). Colin: "curated dictionaries + fuzzy matching, not ML."
+**Cross-refs:** QA review at #25. Deliverables at `cisco_projects/cicd/claude/2026-03-20_lam-research/deliverables/`.
+**Suggested home:** New `lam_research/`
+
+---
+
+### 27. `2026-03-23_mcgrath_slides` -> **MCGRATH + BAYONE INTERNAL**
+
+**Client:** McGrath RentCorp (slide deck) + BayOne Internal (AI lead qualification framework)
+**Type:** Parallel rebuild of 48-slide RFP proposal + organizational process framework
+**Purpose:** Two concurrent projects: (1) Orchestrator-led HTML slide deck rebuild with triage/autopsy/Ariat crossover. (2) AI Solutions Opportunity Management Framework fixing sales dysfunction.
+
+**File Tree:**
+```
+2026-03-23_mcgrath_slides/
+  2026-03-20_ai-lead-qualification/             ** SEPARATE PROJECT **
+    source/ (5 transcripts, ~93K)               Sales buddy, Anand, Pallavi, Suva
+    research/ (16 files)                        5 incidents, 18 problem statements, 20 solutions
+    planning/
+      03_framework_document.md                  (32K) ** MAIN: 13 sections, 8 principles, 2 appendices **
+  final_deck/ (40+ HTML slides + 20 PNGs)       Complete McGrath proposal in BayOne design system
+  decisions/ (3 files, 45K)                     Colin's feedback, Q&A, V3 integration
+  planning/ (7 files)                           Methodology, slide inventory, master tracker
+  research/ (10 files)                          Bad slide autopsy (22 anti-patterns), Ariat crossover
+  handoffs/ (40+ files)                         Orchestrator handoffs + kickoff prompts + results
+  progress/ (1 file)                            Overall tracker
+```
+
+**150+ files.** 48 slides triaged (30 build / 18 skip), 40+ HTML slides produced, 32K framework document.
+**Cross-refs:** McGrath RFP (#9), Ariat slides (#14, gold standard), PPTX extractor (#24).
+**Suggested home:** Split — slides to `mcgrath/`, framework to `ai_docs/` or `bayone/processes/`
+
+---
+
+### 28. `SESSIONS/` -> **ARCHIVE**
+
+**Type:** Exported Claude Code conversation transcripts
+**Purpose:** Archive of 43 transcript files covering Feb 2 - Mar 9, 2026. Both raw and cleaned versions. Includes sessions marked FAILURE and GIVINGUP.
+
+**43 files.** Cisco 13+, Sephora 10+, McGrath 2, Ariat 2, Zeblok 1, Tooling 6+. 16 cleaned versions.
+**Cross-refs:** Each transcript maps to a session folder in `claude/`.
+**Suggested home:** Keep in `claude/SESSIONS/`
+
+---
+
+### 29. `meeting-analyzer/` -> **SEPHORA**
+
+**Type:** Progressive 4-meeting sales analysis with demo scoping
+**Purpose:** Structured meeting analysis tracking BayOne-Sephora relationship from discovery through technical validation to demo scoping. Contains meeting breakdowns, speaker notes, sentiment analysis, email response drafts, and demo feasibility analysis.
+
+**~46 files, ~450K.** 3 meetings documented (Mani roadmap, Andrew/Grishi deep dive, architect session). Demo Track A (Cognos) not feasible; Track B (ETL) ready. 8 email iterations to Malika.
+**Cross-refs:** Sephora folders #1, #2, #13, #18-20.
+**Suggested home:** `sephora/`
+
+---
+
+### 30. `meetings/` -> **CISCO**
+
+**Type:** Single meeting transcript + analysis
+**Purpose:** Zahra + Colin strategic sales execution call about Cisco pricing ($180K), staffing (1-2 onshore), and Guhan's $7M R&D future opportunity.
+
+**3 files, ~23 KB.** Raw transcript + summary + action items.
+**Cross-refs:** Cisco NX-OS cluster (#3, #4, #7, #8).
+**Suggested home:** `cisco/`
+
+---
+
+## Batch 6 Cross-Reference Map
+
+```
+LAM RESEARCH (complete):
+  #25 (big4_lam_problem_restatement) = QA review of deliverable
+  #26 (lam-research) = full discovery documentation (3 analytical sets)
+
+MCGRATH (complete):
+  #9 (mcgrath_rfp) = RFP question development + skill spec
+  #27 (mcgrath_slides) = 48-slide deck rebuild + AI qualification framework
+
+SEPHORA (complete):
+  #29 (meeting-analyzer) = 4-meeting progressive analysis with demo scoping
+  Deepest engagement: 9 total folders (#1, #2, #13, #18, #19, #20, #25b4, #29)
+
+ARCHIVE:
+  #28 (SESSIONS) = 43 transcripts mapping to session folders
+  #30 (meetings) = Zahra/Colin Cisco pricing call
+```
+
+---
+
+## FINAL: Complete Client Attribution (All 30 Folders)
+
+| Client | Folders | Count | Content Types |
+|--------|---------|-------|---------------|
+| **Sephora** | #1, #2, #13, #18, #19, #20, #29 | **7** | Meeting prep, Big Four audits, hiring/JDs, email, technical framework, demo scoping |
+| **Cisco (NX-OS CI/CD)** | #3, #4, #7, #8, #30 | **5** | Resource planning, recruiter guides, meeting analysis, discovery, pricing |
+| **Cisco (EPNM/EMS)** | #11 | **1** | UI conversion POC proposal |
+| **McGrath** | #9, #27 | **2** | RFP questions, slide deck rebuild |
+| **Ariat** | #14, #15, #16 | **3** | Presentation slides, Big Four reviews, title critique |
+| **Tailored Brands** | #17 | **1** | Discovery meeting prep |
+| **Lam Research** | #25, #26 | **2** | Problem restatement QA, full discovery documentation |
+| **BayOne (internal)** | #5, #21, #22, #23, #27* | **5** | Capabilities deck, LinkedIn post, hiring, portfolio catalog, lead qualification framework |
+| **Tooling (internal)** | #6, #10, #12, #24 | **4** | Skill-forge, meeting-analyzer feedback, RFP skill, PPTX extractor |
+| **Archive** | #28 | **1** | 43 session transcripts |
+
+*\*Folder #27 contains both McGrath slides and BayOne internal framework*
+
+## Overall Statistics
+
+| Metric | Value |
+|--------|-------|
+| **Total folders explored** | 30 |
+| **Total `_explorer_summary.md` files written** | 30 |
+| **Unique clients** | 8 (Sephora, Cisco x2, McGrath, Ariat, Tailored Brands, Lam Research, BayOne) |
+| **Largest folder** | #27 mcgrath_slides (150+ files) and #24 pptx_extractor (150+ files) |
+| **Smallest folder** | #10 meeting-analyzer-hook-redesign (1 file, 2.8 KB) |
+| **Empty/stub folders** | #18 big4_meeting4_html (setup only, no content) |
+| **Client with most folders** | Sephora (7 folders) |
+| **Dominant engagement** | Cisco NX-OS CI/CD (5 folders + related hiring/capabilities) |
+| **New clients discovered** | Ariat, Tailored Brands, Lam Research (not in CLAUDE.md) |
+| **Skills developed** | 4 (skill-forge, RFP questions, PPTX extractor, meeting-analyzer feedback) |
+
+---
+
+## Recommended Reorganization
+
+Based on this exploration, content should flow to these root-level directories:
+
+| Target Directory | Source Folders | Notes |
+|-----------------|----------------|-------|
+| `sephora/` | #1, #2, #13, #18, #19, #20, #29 | Meeting prep chain + demo scoping |
+| `cisco/` | #3, #4, #7, #8, #11, #30 | Two sub-engagements (NX-OS + EPNM/EMS) |
+| `mcgrath/` | #9, #27 (slides portion) | RFP questions + proposal slides |
+| `ariat/` (new) | #14, #15, #16 | Presentation + Big Four reviews |
+| `tailored_brands/` | #17 | Discovery prep |
+| `lam_research/` (new) | #25, #26 | Discovery + QA review |
+| `ai_docs/` | #5, #21, #22, #23 | Capabilities, LinkedIn, hiring, portfolio |
+| `claude/` (keep) | #6, #10, #12, #24, #28 | Tooling + session transcripts |
+| `bayone/` (new) | #27 (framework portion) | AI lead qualification framework |

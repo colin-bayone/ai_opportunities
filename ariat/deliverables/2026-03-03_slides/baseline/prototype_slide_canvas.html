@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide Canvas Prototype - BayOne</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 14px;
+      /* Canvas background - soft neutral gray */
+      background: #e8e6eb;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    /* The slide itself */
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      position: relative;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.06),
+        0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-logo span { color: var(--purple-accent); }
+
+    .header-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+    }
+
+    /* Content */
+    .slide-content {
+      flex: 1;
+      padding: 32px 48px 24px;
+      overflow: hidden;
+    }
+
+    h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 14px;
+      letter-spacing: -0.5px;
+    }
+
+    .lead {
+      font-size: 15px;
+      color: var(--text-light);
+      line-height: 1.7;
+      margin-bottom: 24px;
+      max-width: 680px;
+    }
+
+    /* Chevron Process Flow */
+    .process-flow {
+      display: flex;
+      gap: 0;
+      margin-bottom: 24px;
+    }
+
+    .process-item {
+      flex: 1;
+      position: relative;
+      padding: 14px 20px 14px 28px;
+      clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%, 14px 50%);
+      margin-left: -14px;
+    }
+
+    .process-item:first-child {
+      margin-left: 0;
+      clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%);
+      padding-left: 18px;
+      border-radius: 6px 0 0 6px;
+    }
+
+    .process-item:last-child {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 14px 50%);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .process-item:nth-child(1) {
+      background: linear-gradient(135deg, var(--purple-darkest) 0%, var(--purple-dark) 100%);
+    }
+    .process-item:nth-child(2) {
+      background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple-mid) 100%);
+    }
+    .process-item:nth-child(3) {
+      background: linear-gradient(135deg, var(--purple-mid) 0%, var(--purple-bright) 100%);
+    }
+    .process-item:nth-child(4) {
+      background: linear-gradient(135deg, var(--purple-bright) 0%, var(--purple-accent) 100%);
+    }
+
+    .process-num {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 2px;
+    }
+
+    .process-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 1px;
+    }
+
+    .process-desc {
+      font-size: 10px;
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* Content cards */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.1);
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+
+    .card h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* 70/30 split graphic */
+    .split-graphic {
+      padding: 16px 20px;
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.1);
+      border-radius: 8px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+
+    .split-bar {
+      display: flex;
+      height: 6px;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .split-bar .reusable {
+      width: 70%;
+      background: linear-gradient(90deg, var(--purple-mid), var(--purple-bright));
+    }
+
+    .split-bar .custom {
+      width: 30%;
+      background: var(--purple-glow);
+    }
+
+    .split-labels {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .split-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .split-label .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .split-label .dot.reusable {
+      background: var(--purple-bright);
+    }
+
+    .split-label .dot.custom {
+      background: var(--purple-glow);
+    }
+
+    .split-label span {
+      font-size: 11px;
+      color: var(--text);
+    }
+
+    .split-label strong {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* Footer area */
+    .slide-footer {
+      position: relative;
+      flex-shrink: 0;
+      padding: 0 40px 16px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+      margin-bottom: 10px;
+    }
+
+    .slide-number {
+      position: absolute;
+      bottom: 16px;
+      right: 40px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+
+    /* Print - still works for 8.5x11 */
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .slide {
+        max-width: 100%;
+        aspect-ratio: auto;
+        min-height: 100vh;
+        border-radius: 0;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">Enterprise AI Capabilities</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>Our Approach</h2>
+      <p class="lead">
+        We combine reusable, production-tested architecture with deep customization
+        for your specific needs. The result is faster time to value without
+        sacrificing enterprise-grade quality.
+      </p>
+
+      <div class="process-flow">
+        <div class="process-item">
+          <div class="process-num">01</div>
+          <div class="process-title">Discovery</div>
+          <div class="process-desc">Understand your stack</div>
+        </div>
+        <div class="process-item">
+          <div class="process-num">02</div>
+          <div class="process-title">POC</div>
+          <div class="process-desc">Prove value quickly</div>
+        </div>
+        <div class="process-item">
+          <div class="process-num">03</div>
+          <div class="process-title">Production</div>
+          <div class="process-desc">Scale and harden</div>
+        </div>
+        <div class="process-item">
+          <div class="process-num">04</div>
+          <div class="process-title">Operations</div>
+          <div class="process-desc">Monitor and optimize</div>
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="card">
+          <h3>Build on Your Stack</h3>
+          <p>
+            We work within your infrastructure, not around it. Azure, AWS, on-premise,
+            air-gapped environments. We adapt to your security and compliance requirements.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Internal-First</h3>
+          <p>
+            Every solution we deliver has been deployed internally first. We use what
+            we build. This means proven systems with known operational characteristics.
+          </p>
+        </div>
+      </div>
+
+      <div class="split-graphic">
+        <div class="split-bar">
+          <div class="reusable"></div>
+          <div class="custom"></div>
+        </div>
+        <div class="split-labels">
+          <div class="split-label">
+            <div class="dot reusable"></div>
+            <span><strong>70%</strong> Reusable Architecture</span>
+          </div>
+          <div class="split-label">
+            <div class="dot custom"></div>
+            <span><strong>30%</strong> Custom Integration</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">03</div>
+    </div>
+  </div>
+</body>
+</html>

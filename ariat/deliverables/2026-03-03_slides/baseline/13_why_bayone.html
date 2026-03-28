@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why BayOne - BayOne Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 14px;
+      background: #e8e6eb;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      position: relative;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.06),
+        0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-logo span { color: var(--purple-accent); }
+
+    .header-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+    }
+
+    /* Content */
+    .slide-content {
+      flex: 1;
+      padding: 24px 48px 16px;
+      overflow: hidden;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+    }
+
+    h2 span {
+      color: var(--purple-accent);
+    }
+
+    .lead {
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    /* Differentiator grid - 3x2 */
+    .diff-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .diff-card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.1);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+
+    .diff-card h3 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .diff-card h3 i {
+      font-size: 11px;
+      color: var(--purple-accent);
+    }
+
+    .diff-card p {
+      font-size: 10px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* Different bottom borders */
+    .diff-card:nth-child(1) { border-bottom: 3px solid #5B21B6; }
+    .diff-card:nth-child(2) { border-bottom: 3px solid #6D28D9; }
+    .diff-card:nth-child(3) { border-bottom: 3px solid #7C3AED; }
+    .diff-card:nth-child(4) { border-bottom: 3px solid #8B5CF6; }
+    .diff-card:nth-child(5) { border-bottom: 3px solid #A855F7; }
+    .diff-card:nth-child(6) { border-bottom: 3px solid #C084FC; }
+
+    /* Summary box */
+    .summary-box {
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: #fff;
+      border-radius: 8px;
+      padding: 16px 24px;
+      text-align: center;
+    }
+
+    .summary-box h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .summary-box p {
+      font-size: 12px;
+      color: rgba(255,255,255,0.85);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 16px 40px 16px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .slide {
+        max-width: 100%;
+        aspect-ratio: auto;
+        min-height: 100vh;
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">Enterprise AI Capabilities</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="section-header">
+        <h2>Why Bay<span>One</span></h2>
+      </div>
+
+      <div class="diff-grid">
+        <div class="diff-card">
+          <h3><i class="fa-solid fa-code"></i> Technical Depth</h3>
+          <p>Hands-on AI engineering leadership, not just strategy. We build production systems, not slide decks. Deployed AI at scale across regulated industries.</p>
+        </div>
+
+        <div class="diff-card">
+          <h3><i class="fa-solid fa-industry"></i> Domain Expertise</h3>
+          <p>Deep experience in manufacturing, aerospace, healthcare, and financial services. We understand ITAR, FDA, HIPAA, and SOC 2 from production deployments.</p>
+        </div>
+
+        <div class="diff-card">
+          <h3><i class="fa-solid fa-bolt"></i> Speed to Value</h3>
+          <p>70-80% reusable architecture means faster POCs and lower risk. We have built the hard parts before. Customization focuses on your specific needs.</p>
+        </div>
+
+        <div class="diff-card">
+          <h3><i class="fa-solid fa-server"></i> On-Premise Capable</h3>
+          <p>Full AI capabilities for air-gapped, IP-sensitive, and regulated environments. Local LLM deployment, edge inference, and data sovereignty support.</p>
+        </div>
+
+        <div class="diff-card">
+          <h3><i class="fa-solid fa-sliders"></i> Flexible Delivery</h3>
+          <p>Full onshore, hybrid, or offshore-led models configured to your needs. Get the expertise you need with the economics that work.</p>
+        </div>
+
+        <div class="diff-card">
+          <h3><i class="fa-solid fa-handshake-simple"></i> Client-First</h3>
+          <p>We build on your stack, not ours. No vendor lock-in, no proprietary platforms. You own the code, the models, and the infrastructure.</p>
+        </div>
+      </div>
+
+      <div class="summary-box">
+        <h3>[PLACEHOLDER]</h3>
+        <p>[Content to be determined]</p>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">13</div>
+    </div>
+  </div>
+</body>
+</html>
