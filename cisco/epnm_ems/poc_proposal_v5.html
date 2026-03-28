@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EPNM to EMS UI Conversion - POC Proposal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .cover-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e879f9;
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 56px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .cover-subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 48px;
+      max-width: 600px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 48px;
+      padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .cover-meta-item label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+
+    .cover-meta-item span {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .logo {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span { color: #e879f9; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .section { margin-bottom: 64px; }
+
+    .section-number {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      padding: 6px 14px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%);
+      border-radius: 4px;
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 32px 0 16px;
+    }
+
+    h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 24px 0 12px;
+    }
+
+    p { margin-bottom: 16px; }
+
+    .lead {
+      font-size: 18px;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border-left: 4px solid #a855f7;
+      padding: 24px 28px;
+      margin: 32px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    .highlight-box ol, .highlight-box ul {
+      margin: 12px 0 0 20px;
+      padding: 0;
+    }
+
+    .highlight-box li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      padding: 14px 16px;
+      background: #5b21b6;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+
+    th:last-child { border-right: none; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    ul.criteria-list {
+      margin: 0 0 0 20px;
+      padding: 0;
+    }
+
+    ul.criteria-list li {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin: 24px 0;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      padding: 28px;
+    }
+
+    .card h4 {
+      margin-top: 0;
+      color: var(--purple-mid);
+    }
+
+    .card ul {
+      margin: 0 0 0 20px;
+      padding: 0;
+    }
+
+    .card li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 48px 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 64px;
+    }
+
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .footer-logo span { color: #a855f7; }
+
+    .footer p {
+      font-size: 13px;
+      color: var(--text-light);
+      margin: 0;
+    }
+
+    @media print {
+      @page {
+        size: 8.5in 11in;
+        margin: 0.4in;
+      }
+
+      body { font-size: 9pt; line-height: 1.4; }
+
+      .cover {
+        min-height: 0;
+        height: 10in;
+        padding: 50px;
+        page-break-after: always;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .cover h1 { font-size: 32pt; }
+      .cover-subtitle { font-size: 13pt; }
+
+      .container { padding: 0; max-width: 100%; }
+
+      .section {
+        margin-bottom: 20px;
+        page-break-inside: avoid;
+      }
+
+      h2 { font-size: 14pt; margin-bottom: 10px; page-break-after: avoid; }
+      h3 { font-size: 11pt; margin: 14px 0 8px; page-break-after: avoid; }
+      h4 { font-size: 10pt; margin: 10px 0 6px; page-break-after: avoid; }
+      p { margin-bottom: 6px; }
+      .lead { font-size: 10pt; margin-bottom: 14px; }
+
+      table {
+        font-size: 8pt;
+        margin: 10px 0;
+        page-break-inside: avoid;
+      }
+
+      th, td {
+        padding: 6px 8px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .highlight-box {
+        padding: 12px 16px;
+        margin: 14px 0;
+        page-break-inside: avoid;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .two-col {
+        gap: 16px;
+      }
+
+      .card {
+        padding: 16px;
+        page-break-inside: avoid;
+      }
+
+      .footer {
+        margin-top: 20px;
+        padding: 16px;
+      }
+
+      .section-number {
+        break-after: avoid;
+        page-break-after: avoid;
+      }
+
+      tr {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .workflow-grid {
+        gap: 12px;
+      }
+
+      .workflow-step {
+        padding: 12px 16px;
+      }
+
+      .phase-meta {
+        padding: 10px 14px;
+        margin-bottom: 16px;
+      }
+
+      .deliverable-grid {
+        gap: 10px;
+      }
+
+      .deliverable-card {
+        padding: 10px 14px;
+      }
+    }
+
+    /* Phase metadata display */
+    .phase-meta {
+      display: flex;
+      gap: 48px;
+      padding: 20px 24px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+
+    .phase-meta-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .phase-meta-item label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+
+    .phase-meta-item span {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--primary);
+    }
+
+    /* Workflow steps grid */
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 24px 0;
+    }
+
+    .workflow-step {
+      background: var(--white);
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      padding: 20px 24px;
+      position: relative;
+    }
+
+    .workflow-step-number {
+      position: absolute;
+      top: -12px;
+      left: 20px;
+      width: 24px;
+      height: 24px;
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: #fff;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .workflow-step h5 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 0 0 8px 0;
+    }
+
+    .workflow-step p {
+      font-size: 14px;
+      margin: 0;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* Deliverable cards (no numbers) */
+    .deliverable-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .deliverable-card {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+    }
+
+    .deliverable-card h5 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--purple-mid);
+      margin: 0 0 6px 0;
+    }
+
+    .deliverable-card p {
+      font-size: 13px;
+      margin: 0;
+      color: var(--text);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-label">Proof-of-Concept Proposal</div>
+      <h1>EPNM to EMS UI Conversion</h1>
+      <p class="cover-subtitle">AI-Assisted Conversion of Legacy Screens to the Modern EMS Platform</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <label>Prepared For</label>
+          <span>Cisco Systems</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Date</label>
+          <span>March 2026</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Author</label>
+          <span>BayOne Solutions</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo">Bay<span>One</span> Solutions</div>
+  </div>
+
+  <div class="container">
+
+    <div class="section">
+      <div class="section-number">EXECUTIVE SUMMARY</div>
+      <h2>Overview</h2>
+      <p class="lead">BayOne Solutions proposes a four-week proof-of-concept engagement to demonstrate AI-assisted conversion of EPNM screens to the EMS platform.</p>
+      <p>This engagement will deliver 2-3 fully converted screens, including both frontend UI and supporting backend logic, using a methodology designed to accelerate with each subsequent screen.</p>
+      <p>BayOne is providing this proof-of-concept at no cost to Cisco. The infrastructure developed during this engagement (codebase analysis, custom conversion agents, validated patterns) will serve as the foundation for any subsequent paid engagement. This approach allows Cisco to evaluate BayOne's capabilities against actual codebase requirements before committing to a larger engagement.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>Problem Statement</h2>
+      <p>Cisco seeks to migrate functionality from EPNM to EMS. This migration presents architectural complexity beyond typical UI modernization efforts, requiring extraction of tightly-coupled functionality from a monolithic system and re-implementation within a microservices architecture.</p>
+
+      <h3>Success Criteria</h3>
+      <div class="highlight-box">
+        <p>This proof-of-concept will be considered successful if:</p>
+        <ol>
+          <li>Two to three representative screens are fully converted and functional in the EMS environment</li>
+          <li>Backend logic supporting these screens is implemented or integrated with existing EMS services</li>
+          <li>Automated visual validation confirms behavioral equivalence with EPNM</li>
+          <li>A documented pattern library enables estimation of remaining conversion scope</li>
+          <li>A staffing and velocity model supports planning for full-scale engagement</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>Proposed Approach</h2>
+      <p class="lead">The engagement is structured in two phases: exploration to understand the codebase and select appropriate screens, followed by conversion and validation of the selected screens.</p>
+
+      <h3>Phase 1: Exploration and Onboarding</h3>
+      <div class="phase-meta">
+        <div class="phase-meta-item">
+          <label>Duration</label>
+          <span>Approximately two weeks from code access</span>
+        </div>
+        <div class="phase-meta-item">
+          <label>Deliverable</label>
+          <span>Analysis document with categorized screens and recommended POC candidates</span>
+        </div>
+      </div>
+      <p>Before conversion work begins, BayOne will conduct systematic codebase analysis using AI-assisted exploration to develop a structured understanding of the EPNM architecture.</p>
+
+      <h4>Codebase Analysis</h4>
+      <p>BayOne will use Claude Code for initial exploration, mapping module boundaries, identifying service dependencies, tracing data flows, and cataloging UI patterns. This analysis will produce:</p>
+      <div class="deliverable-grid">
+        <div class="deliverable-card">
+          <h5>Screen Inventory</h5>
+          <p>Categorization by type: data entry forms, dashboards, reports, configuration wizards, real-time monitoring views</p>
+        </div>
+        <div class="deliverable-card">
+          <h5>Dependency Graphs</h5>
+          <p>Mapping which screens share backend services and identifying integration points</p>
+        </div>
+        <div class="deliverable-card">
+          <h5>Complexity Indicators</h5>
+          <p>Distinguishing screens with heavy cross-dependencies from relatively self-contained ones</p>
+        </div>
+        <div class="deliverable-card">
+          <h5>Pattern Identification</h5>
+          <p>Documenting recurring UI structures and their backend correlates</p>
+        </div>
+      </div>
+
+      <h4>Collaborative Screen Selection</h4>
+      <p>Cisco's team possesses context that cannot be derived from code analysis alone: which screens customers prioritize, which have been historically problematic, and which represent typical versus edge-case complexity.</p>
+      <p>BayOne proposes that Cisco SMEs identify candidate screens based on business priority, with BayOne validating technical feasibility based on codebase analysis. This shared ownership of scope decisions protects both parties: Cisco is not bound by assumptions made without business context, and BayOne is not committed to screens that prove to be outliers.</p>
+
+      <h4>Selection Criteria</h4>
+      <p>Ideal POC candidates are screens that:</p>
+      <ul class="criteria-list">
+        <li><strong>Represent</strong> the broader conversion challenge rather than edge cases</li>
+        <li><strong>Are sufficiently self-contained</strong> to convert without extensive system dependencies</li>
+        <li><strong>Do not yet exist in EMS</strong> so this work adds value rather than duplicating effort</li>
+        <li><strong>Are complex enough</strong> to demonstrate meaningful capability</li>
+      </ul>
+      <p>BayOne cannot make informed recommendations until codebase exploration is complete. The exploration phase will surface dependencies, gaps, and complexity factors that are not visible from documentation or discussion alone. Some findings will require Cisco's input and direction before screen selection can be finalized. BayOne will recommend 2-3 screens with supporting rationale; Cisco will review these recommendations, provide guidance on any flagged gaps, and select which screens proceed to Phase 2.</p>
+
+      <h3>Phase 2: Conversion, Testing, and Acceptance</h3>
+      <div class="phase-meta">
+        <div class="phase-meta-item">
+          <label>Duration</label>
+          <span>Approximately two weeks from screen selection</span>
+        </div>
+        <div class="phase-meta-item">
+          <label>Deliverable</label>
+          <span>Working screens in EMS, documented conversion patterns, estimation model</span>
+        </div>
+      </div>
+
+      <p>BayOne will use Cisco-provided Claude Code with purpose-built skills and sub-agents for conversion work. The workflow follows a structured approach: analysis, planning, execution, and validation, with each step producing documented outputs. As conversion proceeds, BayOne builds a pattern library specific to this codebase that accelerates subsequent screen conversions.</p>
+      <p>Visual validation uses Playwright for automated testing, capturing baseline screenshots from EPNM and comparing against converted EMS screens to confirm functional equivalence.</p>
+      <p>Where EPNM functionality does not convert cleanly (missing EMS services, API gaps, UX constraints), BayOne will document these gaps explicitly for Cisco to address during or after the POC.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>Scope and Timeline</h2>
+
+      <h3>POC Scope</h3>
+      <ul class="criteria-list">
+        <li><strong>Screens:</strong> 2-3 representative screens, selected collaboratively following Phase 1 analysis</li>
+        <li><strong>Depth:</strong> End-to-end conversion including backend logic, not limited to UI translation</li>
+        <li><strong>Validation:</strong> Automated visual comparison, functional testing, gap documentation</li>
+        <li><strong>Deliverables:</strong> Working code, documented patterns, estimation model for remaining screens</li>
+      </ul>
+
+      <h3>Timeline</h3>
+      <p><strong>Total Duration:</strong> Four weeks from code access</p>
+      <table>
+        <tr>
+          <th>Week</th>
+          <th>Phase</th>
+          <th>Activities</th>
+        </tr>
+        <tr>
+          <td>1-2</td>
+          <td>Exploration and Onboarding</td>
+          <td>Codebase analysis, screen categorization, candidate selection with Cisco team</td>
+        </tr>
+        <tr>
+          <td>3-4</td>
+          <td>Conversion, Testing, and Acceptance</td>
+          <td>Convert selected screens, develop pattern library, validate and document</td>
+        </tr>
+      </table>
+      <p>The timeline begins upon receipt of repository access. Some Phase 1 activities (initial conversations with Cisco SMEs regarding screen priorities, understanding categorization criteria) can proceed before hardware delivery.</p>
+
+      <h3>Exclusions</h3>
+      <ul class="criteria-list">
+        <li><strong>Additional screens beyond agreed scope.</strong> BayOne will provide an estimation model for extrapolation, but the POC itself is bounded to 2-3 screens.</li>
+        <li><strong>New EMS backend services.</strong> If a screen requires backend functionality that does not exist in EMS, BayOne will document the gap. Building new microservices falls within paid engagement scope.</li>
+        <li><strong>Production deployment.</strong> POC deliverables consist of working code demonstrated in a development or test environment.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-number">04</div>
+      <h2>Investment Model</h2>
+
+      <div class="two-col">
+        <div class="card">
+          <h4>Proof-of-Concept (This Proposal)</h4>
+          <ul>
+            <li><strong>Cost to Cisco:</strong> None</li>
+            <li><strong>Deliverables:</strong> 2-3 fully converted screens, pattern library, gap documentation, estimation model</li>
+            <li><strong>Foundation:</strong> Codebase analysis, conversion agents, and validation infrastructure developed at BayOne's investment</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Paid Engagement (Upon Approval)</h4>
+          <ul>
+            <li><strong>Model:</strong> Outcome-based engagement</li>
+            <li><strong>Scope:</strong> Determined collaboratively based on POC findings and Cisco priorities</li>
+            <li><strong>Foundation:</strong> All POC infrastructure transfers directly</li>
+            <li><strong>Estimation:</strong> Reliable projections available after Phase 1 analysis</li>
+          </ul>
+        </div>
+      </div>
+      <p>The codebase analysis, custom agents, and conversion patterns developed during the POC remain available for any subsequent engagement. A paid engagement would not require repeating this foundational work.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-number">05</div>
+      <h2>Assumptions and Dependencies</h2>
+
+      <h3>Assumptions</h3>
+      <ul class="criteria-list">
+        <li>EPNM and EMS codebases are accessible via standard repository mechanisms</li>
+        <li>Cisco SMEs will be available for periodic consultation during Phase 1 (estimated 2-3 hours total)</li>
+        <li>EMS development environment is available for deployment and validation</li>
+        <li>Selected POC screens have existing backend services in EMS or gaps can be documented and deferred</li>
+      </ul>
+
+      <h3>Dependencies</h3>
+      <ul class="criteria-list">
+        <li>Cisco hardware delivery (laptop in progress)</li>
+        <li>Repository access provisioning</li>
+        <li>Cisco approval of screen selection following Phase 1 analysis</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-number">06</div>
+      <h2>Risk Factors</h2>
+      <table>
+        <tr>
+          <th>Risk</th>
+          <th>Mitigation</th>
+        </tr>
+        <tr>
+          <td>Selected screens have undocumented complexity</td>
+          <td>Phase 1 analysis and collaborative selection reduce this risk; scope adjustments possible with mutual agreement</td>
+        </tr>
+        <tr>
+          <td>Backend services do not exist in EMS</td>
+          <td>Gap documentation is an explicit deliverable; building new services is out of scope for POC</td>
+        </tr>
+        <tr>
+          <td>SME availability constraints</td>
+          <td>Phase 1 can extend if necessary; this does not affect Phase 2 timeline once screens are selected</td>
+        </tr>
+        <tr>
+          <td>Codebase access delays</td>
+          <td>Phase 1 conversations can begin prior to repository access</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">07</div>
+      <h2>Security and Access</h2>
+      <p>Per prior discussions:</p>
+      <ul class="criteria-list">
+        <li>All work will be performed on Cisco hardware (laptop delivery in progress)</li>
+        <li>All AI tooling will use Cisco-licensed instances (Claude via Cisco-approved channels)</li>
+        <li>No code will leave Cisco infrastructure</li>
+        <li>NDA is already executed</li>
+      </ul>
+      <p>BayOne is already onboarded for the CI/CD engagement with Anand's team. The same security posture applies to this engagement.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-number">08</div>
+      <h2>Next Steps</h2>
+      <ul class="criteria-list">
+        <li><strong>Hardware delivery:</strong> Expected on 3/18</li>
+        <li><strong>Initial context:</strong> If Cisco's team can identify candidate screens before code access is available, Phase 1 conversations can begin early</li>
+        <li><strong>Repository access:</strong> Once hardware is ready, BayOne will require access to EPNM and EMS codebases</li>
+        <li><strong>Kickoff:</strong> Brief synchronization to align on priorities and introduce BayOne to relevant SMEs</li>
+      </ul>
+      <p>BayOne will deliver preliminary analysis within the first two weeks of repository access. Screen selection will follow collaboratively, with conversion execution proceeding immediately thereafter.</p>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Confidential - Prepared for Cisco Systems</p>
+    </div>
+  </div>
+</body>
+</html>

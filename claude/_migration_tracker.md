@@ -9,15 +9,15 @@
 |---|---------------|--------|-----------|--------|
 | 1 | `2025-02-25_big4_discovery_guide` | Sephora | `sephora/` | Pending |
 | 2 | `2025-02-25_big4_edw_framework` | Sephora | `sephora/` | Pending |
-| 3 | `2026-02-02_resource-planning` | Cisco | `cisco/` | Pending |
-| 4 | `2026-02-04_recruiter-guides` | Cisco | `cisco/` | Pending |
+| 3 | `2026-02-02_resource-planning` | Cisco | `cisco/cicd/planning/` | **DONE** (2026-03-28) |
+| 4 | `2026-02-04_recruiter-guides` | Cisco | `cisco/cicd/planning/` | **DONE** (2026-03-28) |
 | 5 | `2026-02-10_capabilities_deck` | BayOne | `bayone/positioning/` | Pending |
 | 6 | `2026-02-11_skill-forge-creation` | Tooling | `claude/` (keep) | No migration needed |
-| 7 | `2026-02-17_cisco-meeting-summaries` | Cisco | `cisco/` | Pending |
-| 8 | `2026-02-17_discovery-call-prep` | Cisco | `cisco/` | Pending |
+| 7 | `2026-02-17_cisco-meeting-summaries` | Cisco | `cisco/cicd/meetings/` | **DONE** (2026-03-28) |
+| 8 | `2026-02-17_discovery-call-prep` | Cisco | `cisco/cicd/meetings/` | **DONE** (2026-03-28) |
 | 9 | `2026-02-20_mcgrath_rfp` | McGrath | `mcgrath/` | **DONE** (2026-03-28) |
 | 10 | `2026-02-20_meeting-analyzer-hook-redesign` | Tooling | `claude/` (keep) | No migration needed |
-| 11 | `2026-02-20_ui-conversion-discovery` | Cisco (EPNM) | `cisco/` | Pending |
+| 11 | `2026-02-20_ui-conversion-discovery` | Cisco (EPNM) | `cisco/epnm_ems/` | **DONE** (2026-03-28) |
 | 12 | `2026-02-23_rfp-questions-skill` | Tooling | `claude/` (keep) | No migration needed |
 | 13 | `2026-02-26_sephora-hiring` | Sephora | `sephora/` | Pending |
 | 14 | `2026-03-03_ariat_slides` | Ariat | `ariat/` | **DONE** (2026-03-28) |
@@ -36,13 +36,13 @@
 | 27 | `2026-03-23_mcgrath_slides` | McGrath + BayOne | Split: `mcgrath/` + `bayone/processes/` | **DONE** (2026-03-28) |
 | 28 | `SESSIONS/` | Archive | `claude/` (keep) | No migration needed |
 | 29 | `meeting-analyzer/` | Sephora | `sephora/` | Pending |
-| 30 | `meetings/` | Cisco | `cisco/` | Pending |
+| 30 | `meetings/` | Cisco | `cisco/cicd/meetings/` | **DONE** (2026-03-28) |
 
 ## Summary
 
 | Status | Count |
 |--------|-------|
-| **DONE** | 9 (Ariat 3, Lam Research 2, Tailored Brands 1, McGrath 2, McGrath+BayOne split 1) |
+| **DONE** | 15 (Ariat 3, Lam Research 2, Tailored Brands 1, McGrath 3, Cisco 6) |
 | **No migration needed** (tooling/archive stays in claude/) | 5 |
 | **Pending** | 22 |
 
