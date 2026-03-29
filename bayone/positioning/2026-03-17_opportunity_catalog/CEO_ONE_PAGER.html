@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BayOne Active Work Streams - Executive Summary</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .cover-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e879f9;
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 56px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .cover-subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 48px;
+      max-width: 600px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 48px;
+      padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .cover-meta-item label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+
+    .cover-meta-item span {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .logo {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span { color: #e879f9; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+
+    .client-section {
+      margin-bottom: 56px;
+      page-break-inside: avoid;
+    }
+
+    .client-header {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0;
+      padding: 16px 24px;
+      background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%);
+      border-radius: 8px 8px 0 0;
+      letter-spacing: -0.5px;
+    }
+
+    .client-header + .project-card {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      margin-top: 0;
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin: 40px 0 60px;
+      padding: 32px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .toc-item {
+      text-align: center;
+    }
+
+    .toc-client {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--purple-mid);
+      margin-bottom: 8px;
+    }
+
+    .toc-count {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--purple-accent);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .toc-label {
+      font-size: 12px;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .project-card {
+      background: var(--white);
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(124,58,237,0.06);
+      position: relative;
+    }
+
+    .project-card-client {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--purple-accent);
+      opacity: 0.6;
+    }
+
+    .project-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--purple-mid);
+      margin-bottom: 16px;
+    }
+
+    .project-meta {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      min-width: 140px;
+    }
+
+    .meta-item label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+
+    .meta-item span {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--primary);
+    }
+
+    .project-overview {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .project-section {
+      margin-bottom: 14px;
+    }
+
+    .project-section-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .project-section-content {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .project-section-content ul {
+      margin: 6px 0 0 18px;
+      padding: 0;
+    }
+
+    .project-section-content li {
+      margin-bottom: 4px;
+      line-height: 1.5;
+    }
+
+    .stakeholder-list, .team-list {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    .stakeholder-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 20px;
+      margin: 6px 0 0 18px;
+      padding: 0;
+    }
+
+    .stakeholder-grid li {
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+
+    .overview-list {
+      margin: 6px 0 0 18px;
+      padding: 0;
+      columns: 2;
+      column-gap: 24px;
+    }
+
+    .overview-list li {
+      margin-bottom: 6px;
+      line-height: 1.5;
+      break-inside: avoid;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 48px 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 64px;
+    }
+
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .footer-logo span { color: #a855f7; }
+
+    .footer p {
+      font-size: 13px;
+      color: var(--text-light);
+      margin: 0;
+    }
+
+    @media print {
+      @page {
+        size: 8.5in 11in;
+        margin: 0.4in;
+      }
+
+      body { font-size: 9pt; line-height: 1.4; }
+
+      .cover {
+        min-height: 0;
+        height: 10in;
+        padding: 50px;
+        page-break-after: always;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .cover h1 { font-size: 32pt; }
+      .cover-subtitle { font-size: 13pt; }
+
+      .container { padding: 0 20px; max-width: 100%; }
+
+      .client-section {
+        margin-bottom: 20px;
+      }
+
+      .client-header {
+        font-size: 16pt;
+        margin-bottom: 12px;
+      }
+
+      .project-card {
+        padding: 14px 18px;
+        margin-bottom: 12px;
+      }
+
+      .project-title { font-size: 12pt; margin-bottom: 8px; }
+      .project-meta { gap: 12px; margin-bottom: 10px; padding-bottom: 10px; }
+      .meta-item label { font-size: 8pt; }
+      .meta-item span { font-size: 9pt; }
+      .project-overview { font-size: 9pt; margin-bottom: 10px; }
+      .project-section { margin-bottom: 8px; }
+      .project-section-title { font-size: 8pt; }
+      .project-section-content { font-size: 8pt; line-height: 1.4; }
+      .stakeholder-list, .team-list { font-size: 8pt; }
+
+      .footer {
+        margin-top: 20px;
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-label">Executive Summary</div>
+      <h1>BayOne Active Work Streams</h1>
+      <p class="cover-subtitle">High-level overview of active client engagements and project status</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <label>Date</label>
+          <span>March 17, 2026</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo">Bay<span>One</span> Solutions</div>
+  </div>
+
+  <div class="container">
+
+    <div class="toc-grid">
+      <div class="toc-item">
+        <div class="toc-client">Cisco</div>
+        <div class="toc-count">4</div>
+        <div class="toc-label">Projects</div>
+      </div>
+      <div class="toc-item">
+        <div class="toc-client">Sephora</div>
+        <div class="toc-count">3</div>
+        <div class="toc-label">Projects</div>
+      </div>
+      <div class="toc-item">
+        <div class="toc-client">Lam Research</div>
+        <div class="toc-count">1</div>
+        <div class="toc-label">Project</div>
+      </div>
+      <div class="toc-item">
+        <div class="toc-client">SiTime</div>
+        <div class="toc-count">1</div>
+        <div class="toc-label">Project</div>
+      </div>
+      <div class="toc-item">
+        <div class="toc-client">Tailored Brands</div>
+        <div class="toc-count">2</div>
+        <div class="toc-label">Projects</div>
+      </div>
+    </div>
+
+    <div class="client-section">
+      <h2 class="client-header">CISCO</h2>
+
+      <div class="project-card">
+        <div class="project-card-client">Cisco</div>
+        <div class="project-title">NX-OS CI/CD Pipeline Improvement</div>
+        <div class="project-meta">
+          <div class="meta-item">
+            <label>Type</label>
+            <span>Software Development / AI Integration</span>
+          </div>
+          <div class="meta-item">
+            <label>Budget</label>
+            <span>$100K/quarter</span>
+          </div>
+          <div class="meta-item">
+            <label>SOW Status</label>
+            <span>Signed, renewal end of April 2026</span>
+          </div>
+          <div class="meta-item">
+            <label>Effort</label>
+            <span>High but distributed among team</span>
+          </div>
+          <div class="meta-item">
+            <label>Status</label>
+            <span>On track</span>
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Overview</div>
+          <ul class="overview-list">
+            <li>Multi-phase engagement to improve Cisco's NX-OS CI/CD pipeline with AI-driven tooling</li>
+          </ul>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Phases</div>
+          <div class="project-section-content">
+            <ul>
+              <li><strong>Current:</strong> Discovery + Phase 1 (Developer Box instrumentation for local testing visibility and Branch Health dashboards for failure trends and attribution)</li>
+              <li><strong>Phase 2:</strong> Unified Interface to consolidate data from multiple tools into single chat-based interface</li>
+              <li><strong>Phase 3:</strong> AI-Driven Failure Diagnosis to automate root cause analysis and suggest fixes for pipeline failures</li>
+              <li><strong>Phase 4:</strong> Coverage Tracking to confirm code changes are tested at the condition level before merge</li>
+              <li><strong>Phase 5:</strong> Self-Healing with automated retry and correction for transient failures with governance framework</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Client Stakeholders</div>
+          <ul class="stakeholder-grid">
+            <li>Arun Kumar (VP, Sponsor)</li>
+            <li>Venkat Krishnamurthy (VP)</li>
+            <li>Anand Singh (Director)</li>
+            <li>Srinivas Pitta (Sr. Eng Manager, AI Lead)</li>
+            <li>Divakar Rayapureddy (Eng Manager)</li>
+          </ul>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Team</div>
+          <div class="team-list">
+            <strong>BayOne Lead:</strong> Colin Moore (Director of AI)<br>
+            <strong>Onshore:</strong> Namita Mane (H1 pending, temporary backfill identified), Srikar Madarapu (starts next week)<br>
+            <strong>Offshore:</strong> Saurav Mishra (onboarded), Askari Sayed (onboarded)
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Current Status</div>
+          <div class="project-section-content">
+            Team onboarding in progress. Askari and Saurav have completed onboarding and received Cisco hardware. Srikar starts next week. Namita's H1 status has been challenging for over a month; temporary backfill recommended. Communication with Anand and Srinivas is strong. Most onboarding steps complete on BayOne's side; remaining items pending on Cisco's side with Anand Singh assisting. Discovery phase to begin soon pending final Cisco onboarding activities.
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-card-client">Cisco</div>
+        <div class="project-title">UI Conversion (EPNM to EMS)</div>
+        <div class="project-meta">
+          <div class="meta-item">
+            <label>Type</label>
+            <span>Software Modernization</span>
+          </div>
+          <div class="meta-item">
+            <label>Budget</label>
+            <span>POC (free), paid engagement TBD</span>
+          </div>
+          <div class="meta-item">
+            <label>SOW Status</label>
+            <span>POC stage</span>
+          </div>
+          <div class="meta-item">
+            <label>Effort</label>
+            <span>Medium-low</span>
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Overview</div>
+          <ul class="overview-list">
+            <li>Converting 250+ legacy EPNM UI screens to modern EMS microservices architecture</li>
+            <li>Key customers demand familiar EPNM UI retained (network operators trained 15+ years)</li>
+            <li>Requires extracting tightly-coupled functionality from monolithic system and re-implementing in microservices</li>
+            <li>Highly reusable project with significant scope and strong interest from multiple parties</li>
+          </ul>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Client Stakeholders</div>
+          <ul class="stakeholder-grid">
+            <li>Guhan Raman (Director)</li>
+            <li>Selva Subramanian (Eng Manager, Lead)</li>
+          </ul>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Technical Approach</div>
+          <div class="project-section-content">
+            AI-accelerated code conversion using Claude Code and LangGraph agent swarm. Build knowledge graph of codebase, pattern identification and conversion library (reusable across screens), custom agent development for parsing/converting, Playwright for automated testing. "Flywheel effect" with initial investment in infrastructure (POC: 2-3 screens in 4 weeks), then multiplicative speedup for remaining 250+ screens using established patterns.
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Current Status</div>
+          <div class="project-section-content">
+            Firm opportunity, POC in progress. Waiting on Cisco hardware and code access. NDA signed.
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-card-client">Cisco</div>
+        <div class="project-title">Nexus Dashboard Regression Testing Automation</div>
+        <div class="project-meta">
+          <div class="meta-item">
+            <label>Type</label>
+            <span>Hardware Automation / Regression Testing</span>
+          </div>
+          <div class="meta-item">
+            <label>SOW Status</label>
+            <span>Not started, in discussion</span>
+          </div>
+          <div class="meta-item">
+            <label>Effort</label>
+            <span>Medium to high (larger team required)</span>
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Overview</div>
+          <ul class="overview-list">
+            <li>Regression testing automation for Nexus Dashboard controllers testing Nexus switches</li>
+            <li>30K to 40K test cases running daily with 3 to 4 hour per day manual analysis bottleneck</li>
+            <li>UI automation challenges with Selenium-based testing that breaks when themes change</li>
+            <li>Highly reusable project with alignment across two different Cisco teams in India without duplicating resources</li>
+            <li>Same solution applicable to multiple teams</li>
+          </ul>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Client Stakeholders</div>
+          <div class="project-section-content" style="font-size: 12px; font-style: italic; margin-bottom: 6px;">
+            (In-person meetings; will need last names from Neha and Zahra)
+          </div>
+          <ul class="stakeholder-grid">
+            <li>Rama (Test Manager)</li>
+            <li>Milesh</li>
+            <li>Nilesha</li>
+            <li>Sonawee</li>
+          </ul>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Alignment</div>
+          <div class="project-section-content">
+            Gaurav Kotiyal (Director Client Services, India) and Priya Kalyanasundaram (CTO)
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Technical Approach</div>
+          <div class="project-section-content">
+            Build graph topology of codebase (multi-dimensional, state-aware) showing relationships between files, tests, and dependencies. Updates as code changes for efficient impact analysis. Identifies primary vs. secondary failures hierarchically to avoid noise. Same approach being used for Arun's NX-OS CI/CD team, creating natural alignment and reusability.
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Current Status</div>
+          <div class="project-section-content">
+            Need and interest confirmed. Cisco engineers are extremely forthcoming and proactive, providing content and materials without being asked (strong signal of trust and commitment). Not pressing at the moment; recommendation is to address after current Cisco POCs are delivered as team is at capacity. Real opportunity to pursue once team scales. Highly reusable for other companies and clients.
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-card-client">Cisco</div>
+        <div class="project-title">MDS Code Modernization</div>
+        <div class="project-meta">
+          <div class="meta-item">
+            <label>Type</label>
+            <span>Software Modernization</span>
+          </div>
+          <div class="meta-item">
+            <label>SOW Status</label>
+            <span>Active delivery, SOW approved</span>
+          </div>
+          <div class="meta-item">
+            <label>Effort</label>
+            <span>Medium to high</span>
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Overview</div>
+          <ul class="overview-list">
+            <li>Modernizing MDS Element Manager (device management tool for SAN/Fibre Channel switches) from legacy Java Swing thick client to React frontend with Go backend</li>
+            <li>Related to UI Conversion project; both are element management system modernization efforts but separate SOWs</li>
+            <li>Legacy codebase stuck on Java 1.8 with 1,432 Java files and 242K lines of code</li>
+          </ul>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Client Stakeholders</div>
+          <ul class="stakeholder-grid">
+            <li>Guhan Raman (Director)</li>
+            <li>Selva Subramanian (Eng Manager, Lead)</li>
+          </ul>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">BayOne</div>
+          <div class="project-section-content">
+            <strong>Liaison:</strong> Gaurav Kotiyal (Director Client Services, India)<br>
+            <strong>Should Also Involve:</strong> Priya Kalyanasundaram (CTO)
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Technical Approach</div>
+          <div class="project-section-content">
+            AI-driven code modernization using agentic tooling. Autonomous discovery, purpose-built agents for specific migration tasks, rule-based architecture for reliability, automated validation. Understanding-of-current-state document and approach proposal have been delivered.
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Current Status</div>
+          <div class="project-section-content">
+            Active delivery. Onboarding items including GitHub Enterprise training, VPN access, and DeepSight platform onboarding are in motion. Colin has Bay Area availability week of 3/23 for in-person sessions. Strongest current proof point for BayOne's AI and engineering capabilities.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="client-section">
+      <h2 class="client-header">SEPHORA</h2>
+
+      <div class="project-card">
+        <div class="project-card-client">Sephora</div>
+        <div class="project-title">EDW Modernization Program</div>
+        <div class="project-meta">
+          <div class="meta-item">
+            <label>Type</label>
+            <span>Enterprise Data Warehouse Re-engineering</span>
+          </div>
+          <div class="meta-item">
+            <label>Budget</label>
+            <span>Multi-million dollar potential (TBD)</span>
+          </div>
+          <div class="meta-item">
+            <label>SOW Status</label>
+            <span>POC delivery March 31st</span>
+          </div>
+          <div class="meta-item">
+            <label>Effort (POC)</label>
+            <span>Medium-low</span>
+          </div>
+          <div class="meta-item">
+            <label>Effort (Full)</label>
+            <span>Medium to high</span>
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Overview</div>
+          <ul class="overview-list">
+            <li>Three-year enterprise data warehouse re-engineering program transitioning from SQL Server + IBM Cognos + IBM DataStage to Databricks</li>
+            <li>Re-engineering 6,000+ reports (15-20 years of legacy logic), 8 SSAS cubes, 800+ KPIs, 300 dimensions, 20+ source systems</li>
+            <li>Huge scope opportunity with potential to reduce timeline from 3 years to 1.5 years minimum, possibly 9 months or less with AI acceleration</li>
+            <li>Easy to get deeply embedded with high visibility to CIO</li>
+            <li>Team has significant budget ready</li>
+          </ul>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Domain Tracks</div>
+          <div class="project-section-content">
+            <ul>
+              <li><strong>Current:</strong> Finance (leadership believes nearly complete; actual status around 5% due to slow progress)</li>
+              <li><strong>Future:</strong> Merchandising, Supply Chain, Stores, E-commerce/Omni</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Engagement Models (Three Options)</div>
+          <div class="project-section-content">
+            <ul>
+              <li><strong>Full Handoff:</strong> Complete project accountability on BayOne</li>
+              <li><strong>70/30 Collaboration:</strong> Work with their teams, upskilling while delivering (ideal scenario)</li>
+              <li><strong>Pure Staffing:</strong> No ownership/accountability (least preferable, not currently entertained)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Client Stakeholders</div>
+          <ul class="stakeholder-grid">
+            <li>Vlad Kuznetsov (CIO)</li>
+            <li>Mani Soundararajan (VP, Decision Maker)</li>
+            <li>Andrew Ho (Sr. Director)</li>
+            <li>Gariashi Chakraborty (Director)</li>
+            <li>Maher Burhan (Enterprise Architect)</li>
+            <li>Sergey Shtypuliak (IBM Tools SME)</li>
+            <li>Terti (Semantic Layer Co-lead)</li>
+            <li>Malika Seth (Demo Requirements)</li>
+          </ul>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Team</div>
+          <div class="team-list">
+            <strong>BayOne Lead:</strong> Colin Moore (Director of AI)<br>
+            <strong>Support:</strong> Zahra Syed (Strategic Accounts), Neha Malhotra (Recruiting)
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Technical Approach</div>
+          <div class="project-section-content">
+            Agent-assisted orchestration using hybrid deterministic + AI methodology. Cognos SDK integration for programmatic report extraction, DataStage CLI integration, schema mapping with confidence-based routing, persistent knowledge graph across tracks. Scaling with agents more than people.
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Current Status</div>
+          <div class="project-section-content">
+            POC on track for March 31st delivery. No promises yet on time savings until POC demonstrates full complexity. After POC, will explore formal SOW creation with three engagement model options.
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-card-client">Sephora</div>
+        <div class="project-title">Staffing / Talent Acquisition Engagement</div>
+        <div class="project-meta">
+          <div class="meta-item">
+            <label>Type</label>
+            <span>Staffing / AI Talent Acquisition</span>
+          </div>
+          <div class="meta-item">
+            <label>SOW Status</label>
+            <span>Active placements</span>
+          </div>
+          <div class="meta-item">
+            <label>Effort</label>
+            <span>Medium</span>
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Overview</div>
+          <ul class="overview-list">
+            <li>Building internal AI team for Ravi Pandey at Sephora</li>
+            <li>Pure staffing engagement with focus on upselling quality remote US talent and in-person placements over lower-quality nearshore options</li>
+            <li>Strong relationship with Ravi established</li>
+            <li>High visibility to CIO, representing two-pronged approach with Sephora across multiple projects</li>
+            <li>Building BayOne as household name</li>
+          </ul>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Client Stakeholders</div>
+          <div class="stakeholder-list">
+            Ravi Pandey (Building Internal AI Team)
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Team</div>
+          <div class="team-list">
+            <strong>Business Owner:</strong> Zahra Syed (Strategic Accounts)<br>
+            <strong>Interviews:</strong> Colin Moore (Director of AI, conducting all interviews)<br>
+            <strong>Sourcing Support:</strong> Vinayak's team (Colin assisting)
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Active Placement</div>
+          <div class="project-section-content">
+            Abhinav Gupta (placed at higher pay rate)
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Current Status</div>
+          <div class="project-section-content">
+            Great relationship with Ravi forged through quality and trust. Team acceptance rate improved from under 15% (before Colin training) to 80% first-time acceptance rate with Colin. With Sephora specifically: 100% acceptance rate due to high scrutiny in process. This quality focus has built strong trust with Ravi and his team. Highly effective for both internal hiring and general AI hiring. Dual benefit: same people Ravi needs are same Colin needs for internal team; sourcing for one leads to sourcing for both.
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-card-client">Sephora</div>
+        <div class="project-title">AI-Assisted Development Tooling Initiative</div>
+        <div class="project-meta">
+          <div class="meta-item">
+            <label>Type</label>
+            <span>Engineering Productivity</span>
+          </div>
+          <div class="meta-item">
+            <label>SOW Status</label>
+            <span>In discussion, no SOW</span>
+          </div>
+          <div class="meta-item">
+            <label>Effort</label>
+            <span>TBD</span>
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Overview</div>
+          <ul class="overview-list">
+            <li>Building AI-powered automation for engineering/QA/QE teams, developing Claude Code skills and agents</li>
+            <li>Introducing new AI tools and workflows</li>
+            <li>Well aligned with other initiatives ongoing at Cisco and beyond</li>
+          </ul>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Client Stakeholders</div>
+          <div class="stakeholder-list">
+            Ravi Pandey
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Technical Approach</div>
+          <div class="project-section-content">
+            Claude Code, Cursor, Windsurf, Python, Claude Agent SDK, LangChain, LangGraph for AI-powered automation and skills/agents development.
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Current Status</div>
+          <div class="project-section-content">
+            In discussion. Nothing firm, no SOW. Relationship has evolved from Ravi wanting to keep us at arm's length as a pure staffing partner to being open to technical partnership for solutions.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="client-section">
+      <h2 class="client-header">LAM RESEARCH</h2>
+
+      <div class="project-card">
+        <div class="project-card-client">Lam Research</div>
+        <div class="project-title">Custom NER/Redaction for IP Protection</div>
+        <div class="project-meta">
+          <div class="meta-item">
+            <label>Type</label>
+            <span>Custom AI / NLP / Data Governance</span>
+          </div>
+          <div class="meta-item">
+            <label>SOW Status</label>
+            <span>Discovery completed, follow-up pending</span>
+          </div>
+          <div class="meta-item">
+            <label>Effort</label>
+            <span>TBD pending technical discovery</span>
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Overview</div>
+          <ul class="overview-list">
+            <li>Lam Research suspended all AI/GenAI usage organization-wide due to IP protection concerns</li>
+            <li>Their customers (TSMC, Samsung, Intel, Micron, SK Hynix) are direct competitors, and Lam manages production data from all parties</li>
+            <li>Need custom detection and redaction capabilities to safely re-enable AI tools across the organization</li>
+            <li>Two use cases: self-help knowledge search and ticket escalation system</li>
+            <li>Both requiring high accuracy (under 1% false positive for real-time detection)</li>
+          </ul>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Client Stakeholders</div>
+          <ul class="stakeholder-grid">
+            <li>Bradley Estes (Managing Director)</li>
+            <li>Mikhail Krivenko (Head of Product)</li>
+            <li>Daniel (Technical Lead)</li>
+          </ul>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Technical Approach</div>
+          <div class="project-section-content">
+            Enterprise-grade tooling approach leveraging Microsoft Purview and Azure AI stack. Colin has direct experience building similar detection and redaction systems at Coherent Corp in the semiconductor industry.
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Current Status</div>
+          <div class="project-section-content">
+            Discovery call completed 3/12/2026. Mildly-defined technical problem with abstract success criteria, but easy to formalize. Client driving engagement structure appropriately. Follow-up meeting with technical lead Daniel expected. Note: Internal coordination challenges have been addressed with leadership.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="client-section">
+      <h2 class="client-header">SITIME</h2>
+
+      <div class="project-card">
+        <div class="project-card-client">SiTime</div>
+        <div class="project-title">Salesforce CRM Query Layer</div>
+        <div class="project-meta">
+          <div class="meta-item">
+            <label>Type</label>
+            <span>AI / NLP / Salesforce Integration</span>
+          </div>
+          <div class="meta-item">
+            <label>SOW Status</label>
+            <span>Early stage, evaluating viability</span>
+          </div>
+          <div class="meta-item">
+            <label>Effort</label>
+            <span>TBD pending technical discovery</span>
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Overview</div>
+          <ul class="overview-list">
+            <li>SiTime scaling to $1B revenue and integrating Renesas timing division acquisition</li>
+            <li>Product catalog is extremely parametric (frequency, jitter, phase noise, voltage, package, temp range, etc.)</li>
+            <li>Sales reps need AI layer on Salesforce CRM for natural language product matching to help match customer specs to SKUs</li>
+            <li>Similar system already working on external website for customer-facing product queries</li>
+          </ul>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Client Stakeholders</div>
+          <ul class="stakeholder-grid">
+            <li>Jyothi Gorti (EVP & CDO)</li>
+            <li>Judy Ash (VP, Digital CX Marketing)</li>
+            <li>Piyush Sevalia (EVP Marketing, Introducer)</li>
+          </ul>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Technical Approach</div>
+          <div class="project-section-content">
+            AI layer on top of Salesforce CRM enabling natural language queries. Viability depends on Salesforce data structure and requires technical discovery before scoping. Investigating partnership with Impinger AI (suggested by Priya Kalyanasundaram, CTO) since this is low-value work comparatively speaking to other projects.
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Current Status</div>
+          <div class="project-section-content">
+            Early stage. Meeting held 3/12/2026. Colin evaluating if real AI engagement exists. Only Salesforce query layer is legitimate AI thread; other items discussed (M&A integration, SharePoint intranet, website vendor selection) are not AI work or already decided. Requires no-strings discovery before commitments. Must confirm bandwidth and priority with Surej first.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="client-section">
+      <h2 class="client-header">TAILORED BRANDS</h2>
+
+      <div class="project-card">
+        <div class="project-card-client">Tailored Brands</div>
+        <div class="project-title">AI Adoption in Engineering</div>
+        <div class="project-meta">
+          <div class="meta-item">
+            <label>Type</label>
+            <span>AI Training / Enablement</span>
+          </div>
+          <div class="meta-item">
+            <label>SOW Status</label>
+            <span>Exploratory, no concrete engagement</span>
+          </div>
+          <div class="meta-item">
+            <label>Effort</label>
+            <span>TBD</span>
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Overview</div>
+          <ul class="overview-list">
+            <li>Structured training, best practices, and enablement for development teams to drive AI adoption in engineering workflows</li>
+            <li>Identified by Surej as potential entry point</li>
+            <li>This has not been an articulated need from the client but has strong signals as a way to embed ourselves at Tailored Brands</li>
+            <li>Client is very early in their AI journey</li>
+          </ul>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Client Stakeholders</div>
+          <ul class="stakeholder-grid">
+            <li>Kalyan (Director of AI)</li>
+            <li>Shiva (Engineering Leader)</li>
+          </ul>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Alignment</div>
+          <div class="project-section-content">
+            Part of broader workforce upskilling and training initiative across multiple clients.
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Current Status</div>
+          <div class="project-section-content">
+            Early stage discussions. Monitoring for concrete opportunities as client readiness develops.
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-card-client">Tailored Brands</div>
+        <div class="project-title">Platform Migration with AI-Enabled Development</div>
+        <div class="project-meta">
+          <div class="meta-item">
+            <label>Type</label>
+            <span>Platform Modernization / Code Migration</span>
+          </div>
+          <div class="meta-item">
+            <label>SOW Status</label>
+            <span>Exploratory, no concrete engagement</span>
+          </div>
+          <div class="meta-item">
+            <label>Effort</label>
+            <span>TBD</span>
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Overview</div>
+          <ul class="overview-list">
+            <li>Legacy platform replacement with hundreds of integration wrappers to migrate while maintaining all integration touchpoints</li>
+            <li>Investigating partnership with Impinger AI to support delivery given early stage and lower strategic priority</li>
+          </ul>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Client Stakeholders</div>
+          <ul class="stakeholder-grid">
+            <li>Kalyan (Director of AI)</li>
+            <li>Shiva (Engineering Leader)</li>
+          </ul>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Technical Approach</div>
+          <div class="project-section-content">
+            Agentic approach with autonomous discovery and purpose-built agents. Leveraging reusable demo from Sephora work.
+          </div>
+        </div>
+
+        <div class="project-section">
+          <div class="project-section-title">Current Status</div>
+          <div class="project-section-content">
+            Very early stage. No concrete problem statements from client. Potential partnership with Impinger AI for execution. Monitoring for when client readiness matures.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Confidential</p>
+    </div>
+  </div>
+</body>
+</html>

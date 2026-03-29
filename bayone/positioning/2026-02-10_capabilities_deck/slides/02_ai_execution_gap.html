@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The AI Execution Gap - BayOne Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 14px;
+      background: #e8e6eb;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      position: relative;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.06),
+        0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-logo span { color: var(--purple-accent); }
+
+    .header-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+    }
+
+    /* Content */
+    .slide-content {
+      flex: 1;
+      padding: 32px 48px 24px;
+      overflow: hidden;
+    }
+
+    h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 14px;
+      letter-spacing: -0.5px;
+    }
+
+    .lead {
+      font-size: 15px;
+      color: var(--text-light);
+      line-height: 1.7;
+      margin-bottom: 24px;
+      max-width: 680px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.1);
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+
+    .card h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .highlight-box {
+      background: #fff;
+      border-left: 4px solid var(--purple-accent);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+
+    .highlight-box p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--primary);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .highlight-box .source {
+      display: block;
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--text-light);
+      font-weight: 400;
+    }
+
+    /* Footer */
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 16px 40px 16px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .slide {
+        max-width: 100%;
+        aspect-ratio: auto;
+        min-height: 100vh;
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
+      }
+
+      .slide-header { padding: 16px 40px; }
+      .slide-content { padding: 24px 40px; }
+
+      h2 { font-size: 22pt; }
+      .lead { font-size: 11pt; }
+      .card h3 { font-size: 10pt; }
+      .card p { font-size: 9pt; }
+      .highlight-box p { font-size: 10pt; }
+
+      .slide-footer-bar,
+      .card,
+      .highlight-box {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">Enterprise AI Capabilities</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>The AI Execution Gap</h2>
+      <p class="lead">
+        Every enterprise knows AI is strategic. Few can move from pilot to production
+        at the speed the market demands. The gap between AI ambition and AI execution
+        is where competitive advantage is won or lost.
+      </p>
+
+      <div class="card-grid">
+        <div class="card">
+          <h3>POCs That Stall</h3>
+          <p>
+            Promising proofs of concept never reach production. Teams prove technical
+            feasibility but lack the infrastructure, data pipelines, or organizational
+            buy-in to scale.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Data Chaos</h3>
+          <p>
+            AI initiatives stall at the data layer. Fragmented sources, inconsistent
+            formats, and poor data quality block progress before models are even trained.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Skills Mismatch</h3>
+          <p>
+            Internal teams understand the domain but lack AI/ML engineering depth.
+            External vendors understand AI but not your business or regulatory context.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Integration Complexity</h3>
+          <p>
+            AI systems must fit into existing enterprise stacks, not replace them.
+            Authentication, compliance, governance, and security requirements
+            add layers of complexity.
+          </p>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <p>
+          "Only 12% of enterprises that have deployed AI solutions can
+          effectively execute multi-modal AI capabilities."
+          <span class="source">Gartner, 2025</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">02</div>
+    </div>
+  </div>
+</body>
+</html>

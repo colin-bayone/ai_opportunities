@@ -1,0 +1,4071 @@
+
+ ▐▛███▜▌   Claude Code v2.0.53
+▝▜█████▛▘  Opus 4.5 · Claude Max
+  ▘▘ ▝▝    ~/…/cicd/claude/2026-02-10_capabilities_deck/slides/logos
+══════════════════ Conversation compacted · ctrl+o for history ═════════════════
+
+● I'll continue downloading the full-color logos from Wikipedia Commons for
+  all the clients. Let me get them all.
+
+> Please read our entire chat 750 lines at a time to ensure that you have 
+full context. Also, make sure you are reading'/home/cmoore/programming/cisco
+_projects/cicd/claude/2026-02-10_capabilities_deck/slides/SESSION_RULES.md' 
+'/home/cmoore/programming/cisco_projects/cicd/claude/2026-02-10_capabilities
+_deck/slides/logos/2026-02-10-you-are-acting-as-an-expert-designer-and-const
+ruct_920PM_cleaned.txt' 
+
+● Read(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/sli
+      des/SESSION_RULES.md)
+  ⎿  Read 75 lines
+
+● Read(2026-02-10-you-are-acting-as-an-expert-designer-and-construct_920PM_clean
+      ed.txt)
+  ⎿  Read 923 lines
+
+● I have full context now. I need to continue downloading full-color logos
+  from Wikipedia Commons for all the clients. Let me continue where I left
+  off.
+
+● Bash(cd /home/cmoore/programming/cisco_projects/cicd/claude/2026-02-10_capabil
+      ities_deck/slides/logos && ls -la)
+  ⎿  total 184                                        
+     drwxr-xr-x 2 cmoore cmoore   4096 Feb 10 21:21 .
+     drwxr-xr-x 3 cmoore cmoore   4096 Feb 10 21:19 ..
+     … +5 lines (ctrl+o to expand)
+
+● ServiceNow is done. Let me download the rest of the logos. I'll download
+  them in parallel batches for efficiency.
+
+● Bash(\
+      curl -sL -o salesforce.png "https://upload.wikimedia.org/wikipedia/commons
+      /thumb/f/f9/Salesforce.com_logo.svg/320px-Salesforce.com_logo.svg.png" &&
+      echo "sale…)
+  ⎿  salesforce done
+     snowflake done
+     vmware done
+     atlassian done
+
+● Bash(\
+      curl -sL -o google.png "https://upload.wikimedia.org/wikipedia/commons/thu
+      mb/2/2f/Google_2015_logo.svg/320px-Google_2015_logo.svg.png" && echo
+      "google done" &…)
+  ⎿  google done  
+     opentext done
+     block done
+     jpmorgan done
+
+● Bash(\
+      curl -sL -o wellsfargo.png "https://upload.wikimedia.org/wikipedia/commons
+      /thumb/b/b3/Wells_Fargo_Bank.svg/320px-Wells_Fargo_Bank.svg.png" && echo
+      "wellsfargo…)
+  ⎿  wellsfargo done       
+     schwab done
+     franklintempleton done
+     prudential done
+
+● Bash(\
+      curl -sL -o westernunion.png "https://upload.wikimedia.org/wikipedia/commo
+      ns/thumb/1/10/Western_Union_Logo.svg/320px-Western_Union_Logo.svg.png" &&
+      echo "west…)
+  ⎿  westernunion done    
+     unitedhealthcare done
+     bcbs done
+     gilead done
+
+● Bash(\
+      curl -sL -o questdiagnostics.png
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Quest_Diagnosti
+      cs_logo.svg/320px-Quest_Diagnostics_logo.svg.png" &…)
+  ⎿  questdiagnostics done
+     intuitive done
+     heartflow done
+     appliedmaterials done
+
+● Bash(\
+      curl -sL -o coherent.png "https://upload.wikimedia.org/wikipedia/commons/t
+      humb/2/25/Coherent_Corp_Logo.svg/320px-Coherent_Corp_Logo.svg.png" && echo
+       "coherent…)
+  ⎿  coherent done
+     intel done
+     fortinet done
+     sharp done
+
+● Bash(\
+      curl -sL -o toshiba.png "https://upload.wikimedia.org/wikipedia/commons/th
+      umb/0/01/Toshiba_logo.svg/320px-Toshiba_logo.svg.png" && echo "toshiba
+      done" && \…)
+  ⎿  toshiba done    
+     cisco done
+     att done
+     ringcentral done
+
+● Bash(\
+      curl -sL -o sony.png "https://upload.wikimedia.org/wikipedia/commons/thumb
+      /c/ca/Sony_logo.svg/320px-Sony_logo.svg.png" && echo "sony done" && \…)
+  ⎿  sony done           
+     northropgrumman done
+     caes done
+
+● Now let me check which logos downloaded successfully and which may need
+  alternative sources:
+
+● Bash(ls -la *.png 2>/dev/null | awk '{print $9, $5}' | column -t)
+  ⎿  appliedmaterials.png   1998   
+     atlassian.png          1998
+     att.png                10497
+     … +29 lines (ctrl+o to expand)
+
+● Several logos are very small (1998 bytes) which typically means the
+  Wikipedia Commons URL wasn't valid for that file. Let me check and fix
+  those. I'll re-download the ones that appear too small with alternative
+  URLs:
+
+● Bash(# Check a small file to see what we actually got
+      file atlassian.png && head -c 500 atlassian.png)
+  ⎿  atlassian.png: HTML document, ASCII text, with very long lines (404)
+     <!DOCTYPE html>
+     <html lang="en">
+     … +12 lines (ctrl+o to expand)
+
+● Those small files are Wikimedia error pages. Let me get correct URLs for
+  the failed downloads:
+
+● Bash(# Remove the failed downloads first
+      cd /home/cmoore/programming/cisco_projects/cicd/claude/2026-02-10_capabili
+      ties_deck/slides/logos…)
+  ⎿  Removed failed downloads
+
+● Bash(\
+      curl -sL -o atlassian.png "https://upload.wikimedia.org/wikipedia/en/thumb
+      /d/d5/Atlassian_Logo.svg/320px-Atlassian_Logo.svg.png" && echo "atlassian
+      done" && \…)
+  ⎿  atlassian done
+     block done
+     bcbs done
+     opentext done
+
+● Bash(\
+      curl -sL -o schwab.png
+      "https://upload.wikimedia.org/wikipedia/en/thumb/5/52/Charles_Schwab_Corpo
+      ration_logo.svg/300px-Charles_Schwab_Corporation_logo.svg.png…)
+  ⎿  schwab done           
+     franklintempleton done
+     prudential done
+     westernunion done
+
+● Bash(\
+      curl -sL -o unitedhealthcare.png
+      "https://upload.wikimedia.org/wikipedia/en/thumb/d/dc/UnitedHealthcare_log
+      o.svg/320px-UnitedHealthcare_logo.svg.png" && echo…)
+  ⎿  unitedhealthcare done
+     gilead done
+     questdiagnostics done
+     intuitive done
+
+● Bash(\
+      curl -sL -o appliedmaterials.png
+      "https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/Applied_Materials_lo
+      go.svg/300px-Applied_Materials_logo.svg.png" && ech…)
+  ⎿  appliedmaterials done
+     coherent done
+     sharp done
+     ringcentral done
+
+● Bash(\
+      curl -sL -o northropgrumman.png
+      "https://upload.wikimedia.org/wikipedia/en/thumb/4/42/Northrop_Grumman_log
+      o_black.svg/300px-Northrop_Grumman_logo_black.svg.pn…)
+  ⎿  northropgrumman done
+     caes done
+     heartflow done
+
+● Bash(ls -la *.png 2>/dev/null | awk '{print $9, $5}' | column -t)
+  ⎿  appliedmaterials.png   1998   
+     atlassian.png          1998
+     att.png                10497
+     … +29 lines (ctrl+o to expand)
+
+● Many still failing. The problem is Wikipedia's on-the-fly SVG-to-PNG
+  conversion is finicky. Let me try a different approach - downloading the
+  actual SVG files directly:
+
+● Bash(# Try getting actual SVG files instead
+      cd /home/cmoore/programming/cisco_projects/cicd/claude/2026-02-10_capabili
+      ties_deck/slides/logos…)
+  ⎿  atlassian done
+     block done
+     bcbs done
+
+● Bash(file atlassian.svg block.svg bcbs.svg)
+  ⎿  atlassian.svg: ASCII text, with no line terminators
+     block.svg:     ASCII text, with no line terminators
+     bcbs.svg:      ASCII text, with no line terminators
+
+● Bash(head -c 200 atlassian.svg)
+  ⎿ File not found: /v1/AUTH_mw/wikipedia-en-local-public.d5/d/d5/Atlassian
+    _Logo.svg
+
+
+● Wikipedia is blocking direct SVG downloads. Let me try a different
+  approach - using brand sites or PNG hosting services. Let me check what
+  logos we have that actually work (>2KB):
+
+● Bash(cd /home/cmoore/programming/cisco_projects/cicd/claude/2026-02-10_capabil
+      ities_deck/slides/logos
+      # List good logos vs bad…)
+  ⎿  === WORKING LOGOS (>3KB) ===  
+     att.png
+     cisco.png
+     … +32 lines (ctrl+o to expand)
+
+● I have 12 working logos. Let me try different Wikipedia URLs for the
+  failed ones:
+
+● Bash(cd /home/cmoore/programming/cisco_projects/cicd/claude/2026-02-10_capabil
+      ities_deck/slides/logos…)
+  ⎿ atlassian.png: HTML document, ASCII text, with very long lines (404)   
+    schwab.png: HTML document, ASCII text, with very long lines (404)
+    westernunion.png: HTML document, ASCII text, with very long lines (404)
+
+  ⎿  Interrupted · What should Claude do instead?
+
+> I've gathered all the logos for you. Please take a look at all the valid 
+logos in the folder. Then let's start to think about how we're actually 
+going to show them nicely on the screen. Think big 4. 
+
+● Bash(ls -la *.png *.svg 2>/dev/null | grep -v "^d" | awk '$5 > 1000 {print $9,
+       $5}' | sort)
+  ⎿  albertsons.png 70411          
+     aloyoga.png 210886
+     appliedmaterials.png 27448
+     … +41 lines (ctrl+o to expand)
+
+● Good set of logos now. A few small ones still (bcbs, caes, fortinet,
+  heartflow, opentext) but most are solid.
+
+  For Big 4 style logo presentation, here are some approaches:
+
+  1. Logo Wall / Grid
+  Clean rows of logos, all same height, generous whitespace, no borders or
+  cards. Just logos floating on the slide. McKinsey/BCG style.
+
+  2. Industry Clusters
+  Group logos by industry with a subtle label above each cluster. Logos
+  smaller, tighter grouping. Shows breadth.
+
+  3. Marquee Strip
+  Single horizontal band of logos, evenly spaced. Very minimal. Often used
+  in "Trusted By" sections.
+
+  4. Tiered Display
+  Larger logos for flagship clients (Cisco, Google, Salesforce), smaller
+  logos for the rest. Creates visual hierarchy.
+
+  5. Monochrome Treatment
+  All logos converted to grayscale or single brand color (purple tint).
+  Creates unity but loses brand recognition. More abstract/artistic.
+
+  Given this is for a Cisco VP and we want to show client breadth across
+  industries, I'd lean toward Option 1 (Logo Wall) or Option 2 (Industry 
+  Clusters) — both are clean, professional, and let the logos speak for
+  themselves.
+
+  Which direction interests you?
+
+> I think a logo wall would be nice. Why don't you try a prototype with each
+ of these options so I can pick from them? Please skip the monochrome one 
+because I already told you earlier in the chat, monochrome sucks. I don't 
+want monochrome. It's not artistic, it's autistic. 
+
+● Write(prototype_logo_display.html)
+  ⎿  Wrote 267 lines to prototype_logo_display.html                        
+     <!DOCTYPE html>
+     <html lang="en">
+     <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, 
+     initial-scale=1.0">
+       <title>Logo Display Options</title>
+       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;4
+     00;500;600;700&display=swap" rel="stylesheet">
+       <style>
+         * { margin: 0; padding: 0; box-sizing: border-box; }
+         body {
+     … +257 lines (ctrl+o to expand)
+
+● Done. prototype_logo_display.html has 4 options:
+
+  - A: Logo Wall — Clean grid, all logos same height, generous whitespace,
+  no borders
+  - B: Industry Clusters — Logos grouped by industry with subtle labels
+  above each cluster
+  - C: Marquee Strip — Single horizontal band of key logos, minimal
+  - D: Tiered Display — Big 4 flagship logos on top, smaller logos below
+
+  Open it in your browser to compare.
+
+> Nice, let's see D on the slide slide. However, I don't know why you chose 
+the companies you chose. Remove Charles Schwab because that logo doesn't 
+exist. Add in Coherent. Quest Diagnostics, Albertsons Doordash, eBay REI, 
+Rivian Salesforce, Walmart Starbucks Sephora. BCBS If we are missing any of 
+those, we need to find them. But for right now, don't worry about that. Just
+ show them on the page. If there are two versions, pick one of them. If it 
+doesn't work, I'll let you know so we can swap out the other one. If that 
+one doesn't work, we can go find it online afterwards. 
+
+● Read(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/sli
+      des/11_client_portfolio.html)
+  ⎿  Read 328 lines
+
+● Write(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/sl
+       ides/11_client_portfolio.html)
+  ⎿  Updated ../11_client_portfolio.html with 52 additions and 112 removals
+       123          font-size: 14px;
+       124          color: var(--text-light);
+       125          line-height: 1.6;
+       126 -        margin-bottom: 20px;
+       126 +        margin-bottom: 28px;
+       127          max-width: 720px;
+       128        }
+       129    
+       130 -      /* Industry sections - 3 column layout */
+       131 -      .industries-grid {
+       132 -        display: grid;
+       133 -        grid-template-columns: repeat(3, 1fr);
+       134 -        gap: 16px;
+       130 +      /* Tiered Logo Display */
+       131 +      .logo-display {
+       132 +        text-align: center;
+       133        }
+       134    
+       135 -      .industry-section {
+       136 -        background: #fff;
+       137 -        border: 1px solid rgba(124,58,237,0.1);
+       138 -        border-radius: 8px;
+       139 -        padding: 14px 16px;
+       140 -      }
+       141 -  
+       142 -      .industry-section h3 {
+       143 -        font-size: 11px;
+       144 -        font-weight: 600;
+       145 -        color: var(--primary);
+       146 -        text-transform: uppercase;
+       147 -        letter-spacing: 0.8px;
+       148 -        margin-bottom: 10px;
+       135 +      .tier-1 {
+       136          display: flex;
+       137 +        justify-content: center;
+       138          align-items: center;
+       139 -        gap: 8px;
+       139 +        gap: 50px;
+       140 +        margin-bottom: 32px;
+       141        }
+       142    
+       143 -      .industry-section h3 i {
+       144 -        font-size: 12px;
+       143 +      .tier-1 img {
+       144 +        height: 44px;
+       145 +        width: auto;
+       146 +        object-fit: contain;
+       147        }
+       148    
+       149 -      .client-grid {
+       149 +      .tier-2 {
+       150          display: flex;
+       151          flex-wrap: wrap;
+       152 -        gap: 8px;
+       152 +        justify-content: center;
+       153          align-items: center;
+       154 +        gap: 28px 40px;
+       155        }
+       156    
+       157 -      .client-logo {
+       158 -        height: 24px;
+       157 +      .tier-2 img {
+       158 +        height: 28px;
+       159          width: auto;
+       160 +        object-fit: contain;
+       161        }
+       162    
+       163 -      /* Different colors per industry */
+       164 -      .industry-section:nth-child(1) { border-bottom: 3px 
+           - solid #5B21B6; }
+       165 -      .industry-section:nth-child(1) h3 i { color: #5B21B6; }
+       166 -  
+       167 -      .industry-section:nth-child(2) { border-bottom: 3px 
+           - solid #6D28D9; }
+       168 -      .industry-section:nth-child(2) h3 i { color: #6D28D9; }
+       169 -  
+       170 -      .industry-section:nth-child(3) { border-bottom: 3px 
+           - solid #7C3AED; }
+       171 -      .industry-section:nth-child(3) h3 i { color: #7C3AED; }
+       172 -  
+       173 -      .industry-section:nth-child(4) { border-bottom: 3px 
+           - solid #8B5CF6; }
+       174 -      .industry-section:nth-child(4) h3 i { color: #8B5CF6; }
+       175 -  
+       176 -      .industry-section:nth-child(5) { border-bottom: 3px 
+           - solid #A855F7; }
+       177 -      .industry-section:nth-child(5) h3 i { color: #A855F7; }
+       178 -  
+       179 -      .industry-section:nth-child(6) { border-bottom: 3px 
+           - solid #C084FC; }
+       180 -      .industry-section:nth-child(6) h3 i { color: #C084FC; }
+       181 -  
+       163        /* Footer */
+       164        .slide-footer {
+       165          flex-shrink: 0;
+     ...
+       244    
+       245          <p class="lead">
+       246            We partner with leading organizations across 
+             technology, healthcare,
+       247 -          financial services, manufacturing, 
+           -  and telecommunications.
+       247 +          financial services, manufacturing, retail, 
+           +  and telecommunications.
+       248          </p>
+       249    
+       250 -        <div class="industries-grid">
+       251 -          <div class="industry-section">
+       252 -            <h3><i class="fa-solid fa-microchip"></i> 
+           - Technology & SaaS</h3>
+       253 -            <div class="client-grid">
+       254 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/salesforce.com" 
+           - alt="Salesforce">
+       255 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/servicenow.com" 
+           - alt="ServiceNow">
+       256 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/snowflake.com" 
+           - alt="Snowflake">
+       257 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/vmware.com" alt="VMware">
+       258 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/atlassian.com" 
+           - alt="Atlassian">
+       259 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/google.com" alt="Google">
+       260 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/opentext.com" alt="OpenText">
+       261 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/block.xyz" alt="Block">
+       262 -            </div>
+       250 +        <div class="logo-display">
+       251 +          <!-- Tier 1: Flagship logos -->
+       252 +          <div class="tier-1">
+       253 +            <img src="logos/cisco.png" alt="Cisco">
+       254 +            <img src="logos/google.png" alt="Google">
+       255 +            <img src="logos/salesforce.png" alt="Salesforce">
+       256 +            <img src="logos/intel.png" alt="Intel">
+       257            </div>
+       258    
+       259 -          <div class="industry-section">
+       260 -            <h3><i class="fa-solid fa-landmark"></i> 
+           - Financial Services</h3>
+       261 -            <div class="client-grid">
+       262 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/jpmorganchase.com" alt="JP 
+           - Morgan Chase">
+       263 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/wellsfargo.com" alt="Wells 
+           - Fargo">
+       264 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/schwab.com" alt="Charles 
+           - Schwab">
+       265 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/franklintempleton.com" 
+           - alt="Franklin Templeton">
+       266 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/prudential.com" 
+           - alt="Prudential">
+       267 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/westernunion.com" 
+           - alt="Western Union">
+       268 -            </div>
+       259 +          <!-- Tier 2: All other logos -->
+       260 +          <div class="tier-2">
+       261 +            <img src="logos/servicenow.png" alt="ServiceNow">
+       262 +            <img src="logos/snowflake.png" alt="Snowflake">
+       263 +            <img src="logos/vmware.png" alt="VMware">
+       264 +            <img src="logos/atlassian.png" alt="Atlassian">
+       265 +            <img src="logos/ebay.png" alt="eBay">
+       266 +            <img src="logos/doordash.png" alt="DoorDash">
+       267 +            <img src="logos/jpmorgan.png" alt="JP Morgan">
+       268 +            <img src="logos/wellsfargo.png" alt="Wells 
+           + Fargo">
+       269 +            <img src="logos/prudential.png" alt="Prudential">
+       270 +            <img src="logos/unitedhealthcare.png" 
+           + alt="UnitedHealthcare">
+       271 +            <img src="logos/bcbs.png" alt="Blue Cross Blue 
+           + Shield">
+       272 +            <img src="logos/gilead.png" alt="Gilead">
+       273 +            <img src="logos/questdiagnostics.png" alt="Quest 
+           + Diagnostics">
+       274 +            <img src="logos/coherent.png" alt="Coherent">
+       275 +            <img src="logos/appliedmaterials.png" 
+           + alt="Applied Materials">
+       276 +            <img src="logos/albertsons.png" alt="Albertsons">
+       277 +            <img src="logos/walmart.png" alt="Walmart">
+       278 +            <img src="logos/starbucks.png" alt="Starbucks">
+       279 +            <img src="logos/sephora.png" alt="Sephora">
+       280 +            <img src="logos/rei.png" alt="REI">
+       281 +            <img src="logos/rivian.png" alt="Rivian">
+       282 +            <img src="logos/att.png" alt="AT&T">
+       283 +            <img src="logos/sony.png" alt="Sony">
+       284 +            <img src="logos/northropgrumman.png" 
+           + alt="Northrop Grumman">
+       285            </div>
+       286 -  
+       287 -          <div class="industry-section">
+       288 -            <h3><i class="fa-solid fa-heart-pulse"></i> 
+           - Healthcare & Life Sciences</h3>
+       289 -            <div class="client-grid">
+       290 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/uhc.com" alt="United 
+           - Healthcare">
+       291 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/bcbs.com" alt="Blue Cross 
+           - Blue Shield">
+       292 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/gilead.com" alt="Gilead 
+           - Sciences">
+       293 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/questdiagnostics.com" 
+           - alt="Quest Diagnostics">
+       294 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/intuitive.com" alt="Intuitive
+           -  Surgical">
+       295 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/heartflow.com" 
+           - alt="HeartFlow">
+       296 -            </div>
+       297 -          </div>
+       298 -  
+       299 -          <div class="industry-section">
+       300 -            <h3><i class="fa-solid fa-industry"></i> 
+           - Manufacturing & Industrial</h3>
+       301 -            <div class="client-grid">
+       302 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/appliedmaterials.com" 
+           - alt="Applied Materials">
+       303 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/coherent.com" alt="Coherent">
+       304 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/intel.com" alt="Intel">
+       305 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/fortinet.com" alt="Fortinet">
+       306 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/sharp.com" alt="Sharp">
+       307 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/toshiba.com" alt="Toshiba">
+       308 -            </div>
+       309 -          </div>
+       310 -  
+       311 -          <div class="industry-section">
+       312 -            <h3><i class="fa-solid fa-tower-broadcast"></i> 
+           - Telecom & Media</h3>
+       313 -            <div class="client-grid">
+       314 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/cisco.com" alt="Cisco">
+       315 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/att.com" alt="AT&T">
+       316 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/ringcentral.com" 
+           - alt="RingCentral">
+       317 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/sony.com" alt="Sony">
+       318 -            </div>
+       319 -          </div>
+       320 -  
+       321 -          <div class="industry-section">
+       322 -            <h3><i class="fa-solid fa-jet-fighter"></i> 
+           - Aerospace & Defense</h3>
+       323 -            <div class="client-grid">
+       324 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/northropgrumman.com" 
+           - alt="Northrop Grumman">
+       325 -              <img class="client-logo" 
+           - src="https://logo.clearbit.com/caes.com" alt="CAES">
+       326 -            </div>
+       327 -          </div>
+       286          </div>
+       287        </div>
+       288    
+
+● Done. Slide 11 now uses Option D (Tiered Display) with:
+
+  Tier 1 (large): Cisco, Google, Salesforce, Intel
+
+  Tier 2 (smaller): ServiceNow, Snowflake, VMware, Atlassian, eBay,
+  DoorDash, JP Morgan, Wells Fargo, Prudential, UnitedHealthcare, BCBS,
+  Gilead, Quest Diagnostics, Coherent, Applied Materials, Albertsons,
+  Walmart, Starbucks, Sephora, REI, Rivian, AT&T, Sony, Northrop Grumman
+
+  Take a look and let me know which logos are broken so we can fix them.
+
+> in claude/2026-02-10_capabilities_deck/slides/logos/better-logos, I added 
+some logos that were either missing or are better versions of ones that you 
+have. Please swap out the ones in your folder with these logos. And delete 
+the old versions. Then update the slide accordingly. In addition, I think 
+this slide should have a slightly different layout than the others. I think 
+the header and icon are unnecessary. It should be something that is 
+centered, doesn't need a logo, and should be more of a single nice tagline 
+or something like that. 
+
+● Bash(ls -la /home/cmoore/programming/cisco_projects/cicd/claude/2026-02-10_cap
+      abilities_deck/slides/logos/better-logos/)
+  ⎿  total 232                                       
+     drwxr-xr-x 2 cmoore cmoore  4096 Feb 10 22:17 .
+     drwxr-xr-x 3 cmoore cmoore  4096 Feb 10 22:17 ..
+     … +7 lines (ctrl+o to expand)
+
+● Bash(cd /home/cmoore/programming/cisco_projects/cicd/claude/2026-02-10_capabil
+      ities_deck/slides/logos…)
+  ⎿  Logos swapped
+
+● Read(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/sli
+      des/11_client_portfolio.html)
+  ⎿  Read 268 lines
+
+● Write(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/sl
+       ides/11_client_portfolio.html)
+  ⎿  Updated ../11_client_portfolio.html with 20 additions and 91 removals
+        5      <meta name="viewport" content="width=device-width, 
+            initial-scale=1.0">
+        6      <title>Client Portfolio - BayOne Solutions</title>
+        7      <link href="https://fonts.googleapis.com/css2?family=Inter
+            :wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        8 -    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/
+          - ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        8      <style>
+        9        * { margin: 0; padding: 0; box-sizing: border-box; }
+       10    
+     ...
+       20          --text: #334155;
+       21          --text-light: #64748b;
+       22          --border: #e2e8f0;
+       23 -        --bg-subtle: #f8fafc;
+       23        }
+       24    
+       25        body {
+     ...
+       50          overflow: hidden;
+       51          display: flex;
+       52          flex-direction: column;
+       53 +        justify-content: center;
+       54        }
+       55    
+       56 -      /* Header */
+       57 -      .slide-header {
+       58 -        display: flex;
+       59 -        justify-content: space-between;
+       60 -        align-items: center;
+       61 -        padding: 16px 40px;
+       62 -        border-bottom: 1px solid var(--border);
+       63 -        flex-shrink: 0;
+       64 -      }
+       65 -  
+       66 -      .header-logo {
+       67 -        font-size: 16px;
+       68 -        font-weight: 700;
+       69 -        color: var(--primary);
+       70 -      }
+       71 -  
+       72 -      .header-logo span { color: var(--purple-accent); }
+       73 -  
+       74 -      .header-title {
+       75 -        font-size: 11px;
+       76 -        font-weight: 500;
+       77 -        color: var(--text-light);
+       78 -        letter-spacing: 0.5px;
+       79 -      }
+       80 -  
+       81 -      /* Content */
+       56 +      /* Content - centered layout */
+       57        .slide-content {
+       58 -        flex: 1;
+       59 -        padding: 24px 48px 16px;
+       60 -        overflow: hidden;
+       58 +        padding: 40px 60px;
+       59 +        text-align: center;
+       60        }
+       61    
+       62 -      .section-header {
+       63 -        display: flex;
+       64 -        align-items: center;
+       65 -        gap: 14px;
+       66 -        margin-bottom: 12px;
+       67 -      }
+       68 -  
+       69 -      .section-icon {
+       70 -        width: 44px;
+       71 -        height: 44px;
+       72 -        background: linear-gradient(135deg, #5B21B6, #7C3AED);
+       73 -        color: #fff;
+       74 -        border-radius: 12px;
+       75 -        display: flex;
+       76 -        align-items: center;
+       77 -        justify-content: center;
+       78 -        font-size: 18px;
+       79 -      }
+       80 -  
+       81 -      .section-label {
+       82 -        font-size: 11px;
+       62 +      .tagline {
+       63 +        font-size: 28px;
+       64          font-weight: 600;
+       65 -        color: var(--purple-mid);
+       66 -        letter-spacing: 1.5px;
+       67 -        text-transform: uppercase;
+       68 -        margin-bottom: 2px;
+       69 -      }
+       70 -  
+       71 -      h2 {
+       72 -        font-size: 24px;
+       73 -        font-weight: 700;
+       65          color: var(--primary);
+       66          letter-spacing: -0.5px;
+       67 +        margin-bottom: 40px;
+       68        }
+       69    
+       70 -      .lead {
+       71 -        font-size: 14px;
+       72 -        color: var(--text-light);
+       73 -        line-height: 1.6;
+       74 -        margin-bottom: 28px;
+       75 -        max-width: 720px;
+       70 +      .tagline span {
+       71 +        color: var(--purple-bright);
+       72        }
+       73    
+       74        /* Tiered Logo Display */
+     ...
+       137          justify-content: center;
+       138          align-items: center;
+       139          gap: 50px;
+       140 -        margin-bottom: 32px;
+       140 +        margin-bottom: 36px;
+       141        }
+       142    
+       143        .tier-1 img {
+     ...
+       151          flex-wrap: wrap;
+       152          justify-content: center;
+       153          align-items: center;
+       154 -        gap: 28px 40px;
+       154 +        gap: 24px 36px;
+       155        }
+       156    
+       157        .tier-2 img {
+       158 -        height: 28px;
+       158 +        height: 26px;
+       159          width: auto;
+       160          object-fit: contain;
+       161        }
+       162    
+       163        /* Footer */
+       164        .slide-footer {
+       165 -        flex-shrink: 0;
+       165 +        position: absolute;
+       166 +        bottom: 0;
+       167 +        left: 0;
+       168 +        right: 0;
+       169          padding: 16px 40px 16px;
+       170        }
+       171    
+     ...
+       200    </head>
+       201    <body>
+       202      <div class="slide">
+       203 -      <div class="slide-header">
+       204 -        <div class="header-logo">Bay<span>One</span> 
+           - Solutions</div>
+       205 -        <div class="header-title">Enterprise AI 
+           - Capabilities</div>
+       206 -      </div>
+       207 -  
+       203        <div class="slide-content">
+       204 -        <div class="section-header">
+       205 -          <div class="section-icon"><i class="fa-solid 
+           - fa-building"></i></div>
+       206 -          <div>
+       207 -            <div class="section-label">Our Clients</div>
+       208 -            <h2>Client Portfolio</h2>
+       209 -          </div>
+       210 -        </div>
+       204 +        <div class="tagline">Trusted by <span>industry 
+           + leaders</span> across sectors</div>
+       205    
+       206 -        <p class="lead">
+       207 -          We partner with leading organizations across 
+           - technology, healthcare,
+       208 -          financial services, manufacturing, retail, and 
+           - telecommunications.
+       209 -        </p>
+       210 -  
+       206          <div class="logo-display">
+       207            <!-- Tier 1: Flagship logos -->
+       208            <div class="tier-1">
+     ...
+       240              <img src="logos/wellsfargo.png" alt="Wells 
+             Fargo">
+       241              <img src="logos/prudential.png" alt="Prudential">
+       242              <img src="logos/unitedhealthcare.png" 
+             alt="UnitedHealthcare">
+       243 -            <img src="logos/bcbs.png
+           -  " alt="Blue Cross Blue Shield">
+       243 +            <img src="logos/bcbs.jpg
+           +  " alt="Blue Cross Blue Shield">
+       244              <img src="logos/gilead.png" alt="Gilead">
+       245              <img src="logos/questdiagnostics.png" alt="Quest 
+             Diagnostics">
+       246              <img src="logos/coherent.png" alt="Coherent">
+     ...
+       248              <img src="logos/albertsons.png" alt="Albertsons">
+       249              <img src="logos/walmart.png" alt="Walmart">
+       250              <img src="logos/starbucks.png" alt="Starbucks">
+       251 -            <img src="logos/sephora.png" alt="Sephora">
+       251 +            <img src="logos/sephora.jpg" alt="Sephora">
+       252              <img src="logos/rei.png" alt="REI">
+       253              <img src="logos/rivian.png" alt="Rivian">
+       254              <img src="logos/att.png" alt="AT&T">
+       255              <img src="logos/sony.png" alt="Sony">
+       256 -            <img src="logos/northropgrumman.png
+           -  " alt="Northrop Grumman">
+       256 +            <img src="logos/northropgrumman.svg
+           +  " alt="Northrop Grumman">
+       257            </div>
+       258          </div>
+       259        </div>
+
+● Done. Changes made:
+
+  1. Swapped in better logos — coherent.png, rivian.png, bcbs.jpg, rei.png,
+  sephora.jpg, unitedhealthcare.png, northropgrumman.svg
+  2. New layout — Removed the header bar and icon. Now it's a clean centered
+   design with just:
+    - A tagline: "Trusted by industry leaders across sectors"
+    - Tiered logo display below
+    - Footer gradient bar and slide number
+
+  Take a look and let me know what needs adjusting.
+
+> claude/2026-02-10_capabilities_deck/slides/logos/better-logos two more to 
+swap 
+
+● Bash(ls -la /home/cmoore/programming/cisco_projects/cicd/claude/2026-02-10_cap
+      abilities_deck/slides/logos/better-logos/)
+  ⎿  total 48                                        
+     drwxr-xr-x 2 cmoore cmoore  4096 Feb 10 22:24 .
+     drwxr-xr-x 3 cmoore cmoore  4096 Feb 10 22:21 ..
+     … +3 lines (ctrl+o to expand)
+
+● Bash(cd /home/cmoore/programming/cisco_projects/cicd/claude/2026-02-10_capabil
+      ities_deck/slides/logos…)
+  ⎿  Swapped bcbs and sephora
+
+● Update(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/s
+        lides/11_client_portfolio.html)
+  ⎿  Updated ../11_client_portfolio.html with 1 addition and 1 removal   
+       169              <img src="logos/wellsfargo.png" alt="Wells 
+             Fargo">
+       170              <img src="logos/prudential.png" alt="Prudential">
+       171              <img src="logos/unitedhealthcare.png" 
+             alt="UnitedHealthcare">
+       172 -            <img src="logos/bcbs.jpg
+           -  " alt="Blue Cross Blue Shield">
+       172 +            <img src="logos/bcbs.png
+           +  " alt="Blue Cross Blue Shield">
+       173              <img src="logos/gilead.png" alt="Gilead">
+       174              <img src="logos/questdiagnostics.png" alt="Quest 
+             Diagnostics">
+       175              <img src="logos/coherent.png" alt="Coherent">
+
+● Update(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/s
+        lides/11_client_portfolio.html)
+  ⎿  Updated ../11_client_portfolio.html with 1 addition and 1 removal   
+       177              <img src="logos/albertsons.png" alt="Albertsons">
+       178              <img src="logos/walmart.png" alt="Walmart">
+       179              <img src="logos/starbucks.png" alt="Starbucks">
+       180 -            <img src="logos/sephora.jpg" alt="Sephora">
+       180 +            <img src="logos/sephora.png" alt="Sephora">
+       181              <img src="logos/rei.png" alt="REI">
+       182              <img src="logos/rivian.png" alt="Rivian">
+       183              <img src="logos/att.png" alt="AT&T">
+
+● Done. Swapped in the new BCBS and Sephora logos (both now .png) and
+  updated the slide references.
+
+> Okay, but why did you take away the entire header? You should not have 
+taken away the Topmost header. I just wanted you to take away the title and 
+icon and that text stuff, but the topmost header that all the other pages 
+have should be kept intact. 
+
+● You're right, I removed too much. Let me add the top header bar back.
+
+● Update(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/s
+        lides/11_client_portfolio.html)
+  ⎿  Updated ../11_client_portfolio.html with 5 additions          
+       145    </head>
+       146    <body>
+       147      <div class="slide">
+       148 +      <div class="slide-header">
+       149 +        <div class="header-logo">Bay<span>One</span> 
+           + Solutions</div>
+       150 +        <div class="header-title">Enterprise AI 
+           + Capabilities</div>
+       151 +      </div>
+       152 +  
+       153        <div class="slide-content">
+       154          <div class="tagline">Trusted by <span>industry 
+             leaders</span> across sectors</div>
+       155    
+
+● Update(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/s
+        lides/11_client_portfolio.html)
+  ⎿  Updated ../11_client_portfolio.html with 25 additions         
+       51          justify-content: center;
+       52        }
+       53    
+       54 +      /* Header */
+       55 +      .slide-header {
+       56 +        display: flex;
+       57 +        justify-content: space-between;
+       58 +        align-items: center;
+       59 +        padding: 16px 40px;
+       60 +        border-bottom: 1px solid var(--border);
+       61 +        flex-shrink: 0;
+       62 +      }
+       63 +  
+       64 +      .header-logo {
+       65 +        font-size: 16px;
+       66 +        font-weight: 700;
+       67 +        color: var(--primary);
+       68 +      }
+       69 +  
+       70 +      .header-logo span { color: var(--purple-accent); }
+       71 +  
+       72 +      .header-title {
+       73 +        font-size: 11px;
+       74 +        font-weight: 500;
+       75 +        color: var(--text-light);
+       76 +        letter-spacing: 0.5px;
+       77 +      }
+       78 +  
+       79        /* Content - centered layout */
+       80        .slide-content {
+       81          padding: 40px 60px;
+
+● Done. Added back the top header bar with "BayOne Solutions" and
+  "Enterprise AI Capabilities" — same as the other slides. The section
+  title/icon below it stays removed.
+
+> Something is wrong. The format is different than the other slides. The 
+header looks completely different. It is far too tall and doesn't match the 
+format of the other slides. Please look at the other slides. 
+
+● Read(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/sli
+      des/10_technology_foundation.html)
+  ⎿  Read 376 lines
+
+● Read(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/sli
+      des/11_client_portfolio.html)
+  ⎿  Read 227 lines
+
+● I see the issue. On slide 11, I have justify-content: center on the .slide
+   which is causing the header to be vertically centered instead of at the
+  top. Also the footer is position: absolute which is different. Let me fix
+  this to match slide 10's structure.
+
+● Update(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/s
+        lides/11_client_portfolio.html)
+  ⎿  Updated ../11_client_portfolio.html with 1 removal
+       48          overflow: hidden;
+       49          display: flex;
+       50          flex-direction: column;
+       51 -        justify-content: center;
+       51        }
+       52    
+       53        /* Header */
+
+● Update(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/s
+        lides/11_client_portfolio.html)
+  ⎿  Updated ../11_client_portfolio.html with 4 additions
+       77    
+       78        /* Content - centered layout */
+       79        .slide-content {
+       80 +        flex: 1;
+       81          padding: 40px 60px;
+       82          text-align: center;
+       83 +        display: flex;
+       84 +        flex-direction: column;
+       85 +        justify-content: center;
+       86        }
+       87    
+       88        .tagline {
+
+● Update(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/s
+        lides/11_client_portfolio.html)
+  ⎿  Updated ../11_client_portfolio.html with 1 addition and 4 removals
+       132    
+       133        /* Footer */
+       134        .slide-footer {
+       135 -        position: absolute;
+       136 -        bottom: 0;
+       137 -        left: 0;
+       138 -        right: 0;
+       135 +        flex-shrink: 0;
+       136          padding: 16px 40px 16px;
+       137        }
+       138    
+
+● Fixed. The header is now at the top like the other slides. The content
+  area centers the logos vertically within the available space, and the
+  footer is at the bottom using the same flex structure as slide 10.
+
+> Only thing is the tagline should be more centered. It's a little bit too 
+close to the logo cloud and a little too far away from the header. It should
+ be centered between them. 
+
+● Update(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/s
+        lides/11_client_portfolio.html)
+  ⎿  Updated ../11_client_portfolio.html with 1 removal
+       90          font-weight: 600;
+       91          color: var(--primary);
+       92          letter-spacing: -0.5px;
+       93 -        margin-bottom: 40px;
+       93        }
+       94    
+       95        .tagline span {
+
+● Update(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/s
+        lides/11_client_portfolio.html)
+  ⎿  Updated ../11_client_portfolio.html with 1 addition and 1 removal
+       82          text-align: center;
+       83          display: flex;
+       84          flex-direction: column;
+       85 -        justify-content: center;
+       85 +        justify-content: space-evenly;
+       86        }
+       87    
+       88        .tagline {
+
+● Done. Changed to justify-content: space-evenly so the tagline and logo
+  cloud are evenly distributed in the content area, with equal spacing
+  above, between, and below.
+
+> Still pretty close to the word cloud. Just manually move it up a little 
+bit or add some padding below or something. 
+
+● Update(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/s
+        lides/11_client_portfolio.html)
+  ⎿  Updated ../11_client_portfolio.html with 1 addition
+       90          font-weight: 600;
+       91          color: var(--primary);
+       92          letter-spacing: -0.5px;
+       93 +        margin-bottom: 24px;
+       94        }
+       95    
+       96        .tagline span {
+
+● Done. Added 24px margin below the tagline to push the logo cloud down a
+  bit.
+
+> Great, this is done. Let's move on to slide 12. 
+
+● Read(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/sli
+      des/12_colin_moore_profile.html)
+  ⎿  Read 323 lines
+
+● This slide has a completely different layout - it's a document-style
+  profile page rather than the canvas frame style. Let me apply the canvas
+  frame treatment to match the other slides.
+
+● Write(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/sl
+       ides/12_colin_moore_profile.html)
+  ⎿  Updated ../12_colin_moore_profile.html with 213 additions and 202     
+     removals
+        5      <meta name="viewport" content="width=device-width, 
+            initial-scale=1.0">
+        6      <title>Colin Moore - Director of AI - BayOne 
+            Solutions</title>
+        7      <link href="https://fonts.googleapis.com/css2?family=Inter
+            :wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        8 +    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/
+          + ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        9      <style>
+       10        * { margin: 0; padding: 0; box-sizing: border-box; }
+       11    
+     ...
+        25        body {
+        26          font-family: 'Inter', -apple-system, 
+             BlinkMacSystemFont, sans-serif;
+        27          color: var(--text);
+        28 -        line-height: 1.7;
+        29 -        font-size: 15px;
+        30 -        background: #fff;
+        28 +        line-height: 1.6;
+        29 +        font-size: 14px;
+        30 +        background: #e8e6eb;
+        31 +        min-height: 100vh;
+        32 +        display: flex;
+        33 +        align-items: center;
+        34 +        justify-content: center;
+        35 +        padding: 24px;
+        36        }
+        37    
+        38 -      .container {
+        39 -        max-width: 900px;
+        40 -        margin: 0 auto;
+        41 -        padding: 80px 40px;
+        38 +      .slide {
+        39 +        width: 100%;
+        40 +        max-width: 1100px;
+        41 +        aspect-ratio: 16 / 10;
+        42 +        position: relative;
+        43 +        background: linear-gradient(180deg, #ffffff 0%, 
+           + #fdfcff 60%, #f9f7ff 100%);
+        44 +        border-radius: 12px;
+        45 +        border: 1px solid rgba(0, 0, 0, 0.08);
+        46 +        box-shadow:
+        47 +          0 2px 8px rgba(0, 0, 0, 0.06),
+        48 +          0 8px 24px rgba(0, 0, 0, 0.08);
+        49 +        overflow: hidden;
+        50 +        display: flex;
+        51 +        flex-direction: column;
+        52        }
+        53    
+        54 -      .section-number {
+        55 -        font-size: 12px;
+        56 -        font-weight: 600;
+        57 -        color: var(--purple-accent);
+        58 -        letter-spacing: 2px;
+        59 -        margin-bottom: 12px;
+        60 -        text-transform: uppercase;
+        54 +      /* Header */
+        55 +      .slide-header {
+        56 +        display: flex;
+        57 +        justify-content: space-between;
+        58 +        align-items: center;
+        59 +        padding: 16px 40px;
+        60 +        border-bottom: 1px solid var(--border);
+        61 +        flex-shrink: 0;
+        62        }
+        63    
+        64 -      .profile-header {
+        64 +      .header-logo {
+        65 +        font-size: 16px;
+        66 +        font-weight: 700;
+        67 +        color: var(--primary);
+        68 +      }
+        69 +  
+        70 +      .header-logo span { color: var(--purple-accent); }
+        71 +  
+        72 +      .header-title {
+        73 +        font-size: 11px;
+        74 +        font-weight: 500;
+        75 +        color: var(--text-light);
+        76 +        letter-spacing: 0.5px;
+        77 +      }
+        78 +  
+        79 +      /* Content */
+        80 +      .slide-content {
+        81 +        flex: 1;
+        82 +        padding: 24px 48px 16px;
+        83 +        overflow: hidden;
+        84          display: grid;
+        85 -        grid-template-columns: 100px 1fr;
+        86 -        gap: 28px;
+        87 -        margin-bottom: 32px;
+        88 -        align-items: start;
+        85 +        grid-template-columns: 280px 1fr;
+        86 +        gap: 32px;
+        87        }
+        88    
+        89 +      /* Left column - Profile info */
+        90 +      .profile-column {
+        91 +        display: flex;
+        92 +        flex-direction: column;
+        93 +      }
+        94 +  
+        95        .profile-avatar {
+        96 -        width: 100px;
+        97 -        height: 100px;
+        96 +        width: 80px;
+        97 +        height: 80px;
+        98          background: linear-gradient(135deg, #7c3aed, 
+             #a855f7);
+        99          border-radius: 16px;
+       100          display: flex;
+       101          align-items: center;
+       102          justify-content: center;
+       103 -        font-size: 36px;
+       103 +        font-size: 28px;
+       104          font-weight: 700;
+       105          color: #fff;
+       106 +        margin-bottom: 16px;
+       107        }
+       108    
+       109 -      .profile-title h2 {
+       110 -        font-size: 32px;
+       109 +      .profile-name {
+       110 +        font-size: 22px;
+       111          font-weight: 700;
+       112          color: var(--primary);
+       113 -        margin-bottom: 4px;
+       113          letter-spacing: -0.5px;
+       114 +        margin-bottom: 4px;
+       115        }
+       116    
+       117 -      .profile-title .role {
+       118 -        font-size: 18px;
+       117 +      .profile-role {
+       118 +        font-size: 14px;
+       119          color: var(--purple-mid);
+       120 -        font-weight: 500;
+       120 +        font-weight: 600;
+       121 +        margin-bottom: 2px;
+       122        }
+       123    
+       124 -      .profile-title .company {
+       125 -        font-size: 14px;
+       124 +      .profile-company {
+       125 +        font-size: 12px;
+       126          color: var(--text-light);
+       127 -        margin-top: 4px;
+       127 +        margin-bottom: 16px;
+       128        }
+       129    
+       130        .profile-intro {
+       131 -        font-size: 16px;
+       131 +        font-size: 12px;
+       132          color: var(--text);
+       133 -        line-height: 1.8;
+       134 -        margin-bottom: 32px;
+       133 +        line-height: 1.7;
+       134 +        margin-bottom: 20px;
+       135        }
+       136    
+       137 -      .experience-section h3 {
+       138 -        font-size: 13px;
+       137 +      .background-box {
+       138 +        background: linear-gradient(135deg, 
+           + rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+       139 +        border-left: 3px solid var(--purple-accent);
+       140 +        padding: 14px 16px;
+       141 +        border-radius: 0 8px 8px 0;
+       142 +      }
+       143 +  
+       144 +      .background-box h4 {
+       145 +        font-size: 10px;
+       146          font-weight: 600;
+       147          color: var(--purple-mid);
+       148          text-transform: uppercase;
+       149 -        letter-spacing: 1.5px;
+       150 -        margin-bottom: 16px;
+       149 +        letter-spacing: 1px;
+       150 +        margin-bottom: 8px;
+       151        }
+       152    
+       153 -      .project-list {
+       154 -        display: grid;
+       155 -        gap: 16px;
+       156 -        margin-bottom: 32px;
+       157 -      }
+       158 -  
+       159 -      .project-item {
+       160 -        display: grid;
+       161 -        grid-template-columns: 1fr 1.2fr;
+       162 -        gap: 20px;
+       163 -        padding: 20px;
+       164 -        background: var(--bg-subtle);
+       165 -        border-radius: 10px;
+       166 -        border: 1px solid var(--border);
+       167 -      }
+       168 -  
+       169 -      .project-item h4 {
+       170 -        font-size: 15px;
+       171 -        font-weight: 600;
+       172 -        color: var(--primary);
+       173 -        margin-bottom: 6px;
+       174 -      }
+       175 -  
+       176 -      .project-item p {
+       177 -        font-size: 13px;
+       178 -        color: var(--text-light);
+       179 -        margin: 0;
+       153 +      .background-box p {
+       154 +        font-size: 11px;
+       155 +        color: var(--text);
+       156          line-height: 1.6;
+       157        }
+       158    
+       159 -      .background-section {
+       160 -        background: linear-gradient(135deg, 
+           - rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+       161 -        border-left: 4px solid var(--purple-accent);
+       162 -        padding: 20px 24px;
+       163 -        border-radius: 0 8px 8px 0;
+       164 -        margin-top: 32px;
+       159 +      /* Right column - Projects */
+       160 +      .projects-column {
+       161 +        display: flex;
+       162 +        flex-direction: column;
+       163        }
+       164    
+       165 -      .background-section h3 {
+       166 -        font-size: 13px;
+       165 +      .projects-header {
+       166 +        font-size: 11px;
+       167          font-weight: 600;
+       168          color: var(--purple-mid);
+       169          text-transform: uppercase;
+       170          letter-spacing: 1.5px;
+       171 -        margin-bottom: 12px;
+       171 +        margin-bottom: 14px;
+       172        }
+       173    
+       174 -      .background-section p {
+       175 -        font-size: 14px;
+       176 -        color: var(--text);
+       177 -        margin: 0;
+       178 -        line-height: 1.7;
+       174 +      .projects-grid {
+       175 +        display: grid;
+       176 +        grid-template-columns: 1fr 1fr;
+       177 +        gap: 12px;
+       178        }
+       179    
+       180 -      .footer {
+       181 -        text-align: center;
+       182 -        padding: 48px 40px;
+       183 -        border-top: 1px solid var(--border);
+       184 -        margin-top: 64px;
+       180 +      .project-card {
+       181 +        background: #fff;
+       182 +        border: 1px solid rgba(124,58,237,0.1);
+       183 +        border-radius: 8px;
+       184 +        padding: 14px 16px;
+       185        }
+       186    
+       187 -      .footer-logo {
+       188 -        font-size: 20px;
+       189 -        font-weight: 700;
+       187 +      .project-card h4 {
+       188 +        font-size: 12px;
+       189 +        font-weight: 600;
+       190          color: var(--primary);
+       191 +        margin-bottom: 6px;
+       192 +        display: flex;
+       193 +        align-items: center;
+       194 +        gap: 8px;
+       195        }
+       196    
+       197 -      .footer-logo span { color: var(--purple-accent); }
+       197 +      .project-card h4 i {
+       198 +        font-size: 12px;
+       199 +      }
+       200    
+       201 -      @media print {
+       202 -        @page {
+       203 -          size: 8.5in 11in;
+       204 -          margin: 0.4in;
+       205 -        }
+       201 +      .project-card .desc {
+       202 +        font-size: 11px;
+       203 +        color: var(--text-light);
+       204 +        line-height: 1.5;
+       205 +        margin-bottom: 8px;
+       206 +      }
+       207    
+       208 -        body { font-size: 9pt; line-height: 1.4; }
+       209 -        .container { padding: 0; max-width: 100%; }
+       208 +      .project-card .detail {
+       209 +        font-size: 10px;
+       210 +        color: var(--text);
+       211 +        line-height: 1.5;
+       212 +      }
+       213    
+       214 -        .section-number {
+       215 -          break-after: avoid;
+       216 -          page-break-after: avoid;
+       217 -        }
+       214 +      /* Different colors per card */
+       215 +      .project-card:nth-child(1) { border-bottom: 3px solid 
+           + #5B21B6; }
+       216 +      .project-card:nth-child(1) h4 i { color: #5B21B6; }
+       217    
+       218 -        .profile-header {
+       219 -          grid-template-columns: 70px 1fr;
+       220 -          gap: 20px;
+       221 -          margin-bottom: 20px;
+       222 -          break-inside: avoid;
+       223 -          page-break-inside: avoid;
+       224 -        }
+       218 +      .project-card:nth-child(2) { border-bottom: 3px solid 
+           + #6D28D9; }
+       219 +      .project-card:nth-child(2) h4 i { color: #6D28D9; }
+       220    
+       221 -        .profile-avatar {
+       222 -          width: 70px;
+       223 -          height: 70px;
+       224 -          font-size: 28px;
+       225 -          -webkit-print-color-adjust: exact;
+       226 -          print-color-adjust: exact;
+       227 -        }
+       221 +      .project-card:nth-child(3) { border-bottom: 3px solid 
+           + #7C3AED; }
+       222 +      .project-card:nth-child(3) h4 i { color: #7C3AED; }
+       223    
+       224 -        .profile-title h2 { font-size: 18pt; }
+       225 -        .profile-title .role { font-size: 12pt; }
+       226 -        .profile-title .company { font-size: 9pt; }
+       224 +      .project-card:nth-child(4) { border-bottom: 3px solid 
+           + #8B5CF6; }
+       225 +      .project-card:nth-child(4) h4 i { color: #8B5CF6; }
+       226    
+       227 -        .profile-intro { font-size: 10pt; margin-bottom: 
+           - 20px; }
+       227 +      /* Footer */
+       228 +      .slide-footer {
+       229 +        flex-shrink: 0;
+       230 +        padding: 16px 40px 16px;
+       231 +      }
+       232    
+       233 -        .experience-section h3 { font-size: 9pt; 
+           - margin-bottom: 10px; }
+       233 +      .slide-footer-bar {
+       234 +        height: 3px;
+       235 +        background: linear-gradient(90deg, 
+           + var(--purple-darkest), var(--purple-mid), 
+           + var(--purple-accent), var(--purple-glow));
+       236 +        border-radius: 2px;
+       237 +      }
+       238    
+       239 -        .project-list { gap: 10px; margin-bottom: 20px; }
+       239 +      .slide-number {
+       240 +        text-align: right;
+       241 +        margin-top: 10px;
+       242 +        font-size: 11px;
+       243 +        font-weight: 600;
+       244 +        color: var(--purple-accent);
+       245 +        letter-spacing: 2px;
+       246 +      }
+       247    
+       248 -        .project-item {
+       249 -          padding: 12px;
+       250 -          gap: 12px;
+       251 -          break-inside: avoid;
+       252 -          page-break-inside: avoid;
+       248 +      @media print {
+       249 +        body {
+       250 +          background: white;
+       251 +          padding: 0;
+       252          }
+       253    
+       254 -        .project-item h4 { font-size: 10pt; margin-bottom: 
+           - 4px; }
+       255 -        .project-item p { font-size: 8pt; }
+       256 -  
+       257 -        .background-section {
+       258 -          padding: 14px 18px;
+       259 -          margin-top: 20px;
+       260 -          break-inside: avoid;
+       261 -          page-break-inside: avoid;
+       262 -          -webkit-print-color-adjust: exact;
+       263 -          print-color-adjust: exact;
+       254 +        .slide {
+       255 +          max-width: 100%;
+       256 +          aspect-ratio: auto;
+       257 +          min-height: 100vh;
+       258 +          border-radius: 0;
+       259 +          box-shadow: none;
+       260 +          border: none;
+       261          }
+       262 -  
+       263 -        .background-section h3 { font-size: 9pt; 
+           - margin-bottom: 8px; }
+       264 -        .background-section p { font-size: 9pt; }
+       265 -  
+       266 -        .footer { padding: 24px 0; margin-top: 32px; }
+       262        }
+       263      </style>
+       264    </head>
+       265    <body>
+       266 -    <div class="container">
+       267 -      <div class="section-number">12</div>
+       268 -  
+       269 -      <div class="profile-header">
+       270 -        <div class="profile-avatar">CM</div>
+       271 -        <div class="profile-title">
+       272 -          <h2>Colin Moore</h2>
+       273 -          <div class="role">Director of AI</div>
+       274 -          <div class="company">BayOne Solutions</div>
+       275 -        </div>
+       266 +    <div class="slide">
+       267 +      <div class="slide-header">
+       268 +        <div class="header-logo">Bay<span>One</span> 
+           + Solutions</div>
+       269 +        <div class="header-title">Enterprise AI 
+           + Capabilities</div>
+       270        </div>
+       271    
+       272 -      <p class="profile-intro">
+       273 -        AI/ML engineering leader with deep experience 
+           - building and deploying enterprise-scale
+       274 -        AI systems that operate reliably under 
+           - commercial-grade requirements. Colin leads
+       275 -        technical strategy and manages AI/ML engineering 
+           - teams at BayOne, bringing hands-on
+       276 -        expertise from building systems that serve tens of 
+           - thousands of users across
+       277 -        regulated industries.
+       278 -      </p>
+       272 +      <div class="slide-content">
+       273 +        <div class="profile-column">
+       274 +          <div class="profile-avatar">CM</div>
+       275 +          <div class="profile-name">Colin Moore</div>
+       276 +          <div class="profile-role">Director of AI</div>
+       277 +          <div class="profile-company">BayOne Solutions</div>
+       278    
+       279 -      <div class="experience-section">
+       280 -        <h3>Representative Projects</h3>
+       281 -        <div class="project-list">
+       282 -          <div class="project-item">
+       283 -            <div>
+       284 -              <h4>Enterprise GenAI Platform</h4>
+       285 -              <p>FedRAMP-authorized LLM platform serving 
+           - 40,000+ users across aerospace and manufacturing.</p>
+       286 -            </div>
+       287 -            <div>
+       288 -              <p>Role-based access control via Entra/Azure 
+           - AD, 25+ language support, cost-optimized Kubernetes 
+           - infrastructure.</p>
+       289 -            </div>
+       279 +          <p class="profile-intro">
+       280 +            AI/ML engineering leader with deep experience 
+           + building and deploying enterprise-scale
+       281 +            AI systems that operate reliably under 
+           + commercial-grade requirements. Colin leads
+       282 +            technical strategy and manages AI/ML engineering 
+           + teams at BayOne.
+       283 +          </p>
+       284 +  
+       285 +          <div class="background-box">
+       286 +            <h4>Background</h4>
+       287 +            <p>
+       288 +              Previously Global AI/ML Manager at Coherent 
+           + Corporation, leading a 30+ engineer
+       289 +              AI Center of Excellence with 60+ initiatives 
+           + delivering $30M+ annual impact.
+       290 +              Earlier work in biomedical engineering and 
+           + battery technology, including three
+       291 +              patents and a technology sale to General 
+           + Motors.
+       292 +            </p>
+       293            </div>
+       294 +        </div>
+       295    
+       296 -          <div class="project-item">
+       297 -            <div>
+       298 -              <h4>Context-Aware Code Review</h4>
+       299 -              <p>AI code review tool with VS Code and Visual 
+           - Studio integration.</p>
+       296 +        <div class="projects-column">
+       297 +          <div class="projects-header">Representative 
+           + Projects</div>
+       298 +          <div class="projects-grid">
+       299 +            <div class="project-card">
+       300 +              <h4><i class="fa-solid fa-server"></i> 
+           + Enterprise GenAI Platform</h4>
+       301 +              <p class="desc">FedRAMP-authorized LLM platform
+           +  serving 40,000+ users across aerospace and 
+           + manufacturing.</p>
+       302 +              <p class="detail">Role-based access control via
+           +  Entra/Azure AD, 25+ language support, cost-optimized 
+           + Kubernetes infrastructure.</p>
+       303              </div>
+       304 -            <div>
+       305 -              <p>Ingests organizational patterns and 
+           - standards to reduce false positives and increase developer 
+           - trust.</p>
+       304 +  
+       305 +            <div class="project-card">
+       306 +              <h4><i class="fa-solid fa-code"></i> 
+           + Context-Aware Code Review</h4>
+       307 +              <p class="desc">AI code review tool with VS 
+           + Code and Visual Studio integration.</p>
+       308 +              <p class="detail">Ingests organizational 
+           + patterns and standards to reduce false positives and 
+           + increase developer trust.</p>
+       309              </div>
+       310 -          </div>
+       310    
+       311 -          <div class="project-item">
+       312 -            <div>
+       313 -              <h4>Manufacturing Process Optimization</h4>
+       314 -              <p>Multi-model ML system for high-stakes 
+           - production environments.</p>
+       311 +            <div class="project-card">
+       312 +              <h4><i class="fa-solid fa-industry"></i> 
+           + Manufacturing Optimization</h4>
+       313 +              <p class="desc">Multi-model ML system for 
+           + high-stakes production environments.</p>
+       314 +              <p class="detail">Gradient-boosted models, 
+           + reinforcement learning, digital twin validation. Yield 
+           + increased from 65% to 82%.</p>
+       315              </div>
+       316 -            <div>
+       317 -              <p>Gradient-boosted models, reinforcement 
+           - learning, digital twin validation. Yield increased from 65% 
+           - to 82%.</p>
+       318 -            </div>
+       319 -          </div>
+       316    
+       317 -          <div class="project-item">
+       318 -            <div>
+       319 -              <h4>Global Data Pipeline Architecture</h4>
+       320 -              <p>Enterprise ETL processing data from 70+ 
+           - databases across 9 countries.</p>
+       317 +            <div class="project-card">
+       318 +              <h4><i class="fa-solid fa-database"></i> Global
+           +  Data Pipeline</h4>
+       319 +              <p class="desc">Enterprise ETL processing data 
+           + from 70+ databases across 9 countries.</p>
+       320 +              <p class="detail">Real-time streaming 
+           + dashboards, Oracle Cloud integration, full data 
+           + auditability.</p>
+       321              </div>
+       322 -            <div>
+       323 -              <p>Real-time streaming dashboards, Oracle Cloud
+           -  integration, full data auditability.</p>
+       324 -            </div>
+       322            </div>
+       323          </div>
+       324        </div>
+       325    
+       326 -      <div class="background-section">
+       327 -        <h3>Background</h3>
+       328 -        <p>
+       329 -          Previously Global AI/ML Manager at Coherent 
+           - Corporation, leading a 30+ engineer
+       330 -          AI Center of Excellence with 60+ initiatives 
+           - delivering $30M+ annual impact.
+       331 -          Earlier work in biomedical engineering and battery 
+           - technology, including three
+       332 -          patents and a technology sale to General Motors. 
+           - Technical advisor to legal,
+       333 -          compliance, and cybersecurity teams on AI 
+           - deployment risks.
+       334 -        </p>
+       326 +      <div class="slide-footer">
+       327 +        <div class="slide-footer-bar"></div>
+       328 +        <div class="slide-number">12</div>
+       329        </div>
+       330 -  
+       331 -      <div class="footer">
+       332 -        <div class="footer-logo">Bay<span>One</span> 
+           - Solutions</div>
+       333 -      </div>
+       330      </div>
+       331    </body>
+       332    </html>
+  ⎿  Interrupted · What should Claude do instead?
+
+> This is fine, but I completely hate the layout. It's just weird and 
+doesn't use space well. If I interrupted you, please continue. Also, no logo
+ for me. I'll give a profile picture. You can put a placeholder there for an
+ hour - something with just an empty face avatar or whatever. But think 
+about organizing this more effectively. It's a really nice profile page. If 
+you need to prototype, please go ahead and give some options. 
+
+● Let me create a prototype with different layout options for the profile
+  page.
+
+● Write(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/sl
+       ides/prototype_profile_layouts.html)
+  ⎿  Wrote 695 lines to ../prototype_profile_layouts.html                  
+     <!DOCTYPE html>
+     <html lang="en">
+     <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, 
+     initial-scale=1.0">
+       <title>Profile Layout Options</title>
+       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;4
+     00;500;600;700&display=swap" rel="stylesheet">
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/f
+     ont-awesome/6.5.1/css/all.min.css">
+       <style>
+         * { margin: 0; padding: 0; box-sizing: border-box; }
+     … +685 lines (ctrl+o to expand)
+
+● Done. prototype_profile_layouts.html has 4 options:
+
+  - A: Centered Hero — Photo centered at top, name/role below, stats in a
+  row, project tags as pills
+  - B: Left Photo, Right Content — Large photo on left with name underneath,
+   content flows on right
+  - C: Top Banner + Projects Grid — Compact profile banner at top, 4-column
+  project cards below
+  - D: Magazine Split — Purple left panel with photo/stats, white right
+  panel with bio and project list
+
+  All use a placeholder avatar icon. Take a look and let me know which
+  direction you prefer.
+
+> These are all legitimately way worse than everything else. You make me 
+look like I'm trying to do a KPI card. I'm a person, this is a profile page,
+ and you're missing 99% of all the detail about my profile. Why would you go
+ light on details on a profile page? It should be text-focused. You 
+shouldn't worry about the metrics like that. There's no normal person that 
+puts the total amount of money that they've made on a profile page. That's 
+just insane. 
+
+● You're right, I completely missed the point. A profile page should be
+  about the person - their experience, what they've done, their background.
+  Not a dashboard of vanity metrics.
+
+  Let me look at the original content again and create options that are
+  actually text-focused and professional.
+  ⎿  Interrupted · What should Claude do instead?
+
+> '/home/cmoore/programming/cisco_projects/cicd/ai_docs/colin-moore-profile4
+.md' is the original content source 
+
+● Read(~/programming/cisco_projects/cicd/ai_docs/colin-moore-profile4.md)
+  ⎿  Read 26 lines
+
+● This is much richer content. Let me create proper text-focused profile
+  layouts that actually showcase your experience and projects properly.
+
+● Write(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/sl
+       ides/prototype_profile_layouts.html)
+  ⎿  Updated ../prototype_profile_layouts.html with 299 additions and 345 
+     removals
+       102          letter-spacing: 2px;
+       103        }
+       104    
+       105 -      /* Placeholder avatar */
+       105        .avatar-placeholder {
+       106          background: linear-gradient(135deg, #e2e8f0, 
+             #cbd5e1);
+       107          border-radius: 50%;
+     ...
+       110          align-items: center;
+       111          justify-content: center;
+       112          color: #94a3b8;
+       113 +        flex-shrink: 0;
+       114        }
+       115    
+       116 -      /* ============ OPTION A: Centered Hero ============ */
+       116 +      /* ============ OPTION A: Classic Two-Column
+           +   ============ */
+       117        .content-a {
+       118          flex: 1;
+       119 +        display: grid;
+       120 +        grid-template-columns: 240px 1fr;
+       121 +        gap: 32px;
+       122 +        padding: 28px 44px;
+       123 +        overflow: hidden;
+       124 +      }
+       125 +  
+       126 +      .content-a .left-col {
+       127          display: flex;
+       128          flex-direction: column;
+       129 -        align-items: center;
+       130 -        justify-content: center;
+       131 -        padding: 24px 60px;
+       132 -        text-align: center;
+       129        }
+       130    
+       131        .content-a .avatar-placeholder {
+     ...
+       131        }
+       132    
+       133        .content-a .name {
+       134 -        font-size: 28px;
+       134 +        font-size: 20px;
+       135          font-weight: 700;
+       136          color: var(--primary);
+       137 -        margin-bottom: 4px;
+       137 +        margin-bottom: 2px;
+       138        }
+       139    
+       140        .content-a .role {
+       141 -        font-size: 16px;
+       141 +        font-size: 13px;
+       142          color: var(--purple-mid);
+       143          font-weight: 600;
+       144 -        margin-bottom: 20px;
+       144 +        margin-bottom: 16px;
+       145        }
+       146    
+       147 -      .content-a .intro {
+       148 -        font-size: 14px;
+       147 +      .content-a .bio {
+       148 +        font-size: 11px;
+       149          color: var(--text);
+       150 -        max-width: 700px;
+       151 -        line-height: 1.7;
+       152 -        margin-bottom: 28px;
+       150 +        line-height: 1.65;
+       151 +        margin-bottom: 16px;
+       152        }
+       153    
+       154 -      .content-a .stats-row {
+       155 -        display: flex;
+       156 -        gap: 48px;
+       157 -        margin-bottom: 24px;
+       154 +      .content-a .background {
+       155 +        font-size: 10px;
+       156 +        color: var(--text-light);
+       157 +        line-height: 1.6;
+       158 +        padding-top: 12px;
+       159 +        border-top: 1px solid var(--border);
+       160        }
+       161    
+       162 -      .content-a .stat {
+       163 -        text-align: center;
+       164 -      }
+       165 -  
+       166 -      .content-a .stat-value {
+       167 -        font-size: 28px;
+       168 -        font-weight: 700;
+       169 -        color: var(--purple-bright);
+       170 -      }
+       171 -  
+       172 -      .content-a .stat-label {
+       173 -        font-size: 11px;
+       174 -        color: var(--text-light);
+       162 +      .content-a .right-col h3 {
+       163 +        font-size: 10px;
+       164 +        font-weight: 600;
+       165 +        color: var(--purple-mid);
+       166          text-transform: uppercase;
+       167 -        letter-spacing: 0.5px;
+       167 +        letter-spacing: 1.2px;
+       168 +        margin-bottom: 12px;
+       169        }
+       170    
+       171 -      .content-a .highlights {
+       172 -        display: flex;
+       173 -        gap: 16px;
+       174 -        flex-wrap: wrap;
+       175 -        justify-content: center;
+       171 +      .content-a .project {
+       172 +        margin-bottom: 14px;
+       173        }
+       174    
+       175 -      .content-a .highlight-tag {
+       176 -        background: rgba(124,58,237,0.08);
+       177 -        border: 1px solid rgba(124,58,237,0.15);
+       178 -        padding: 8px 16px;
+       179 -        border-radius: 20px;
+       175 +      .content-a .project h4 {
+       176          font-size: 12px;
+       177 -        color: var(--purple-mid);
+       178 -        font-weight: 500;
+       177 +        font-weight: 600;
+       178 +        color: var(--primary);
+       179 +        margin-bottom: 4px;
+       180        }
+       181    
+       182 -      /* ============ OPTION B: Left Photo, Right Content 
+           - ============ */
+       182 +      .content-a .project p {
+       183 +        font-size: 10px;
+       184 +        color: var(--text);
+       185 +        line-height: 1.55;
+       186 +      }
+       187 +  
+       188 +      /* ============ OPTION B: Narrow Sidebar, Wide Content 
+           + ============ */
+       189        .content-b {
+       190          flex: 1;
+       191          display: grid;
+       192 -        grid-template-columns: 200px 1fr;
+       193 -        gap: 40px;
+       194 -        padding: 32px 48px;
+       195 -        align-items: center;
+       192 +        grid-template-columns: 160px 1fr;
+       193 +        gap: 28px;
+       194 +        padding: 24px 40px;
+       195 +        overflow: hidden;
+       196        }
+       197    
+       198 -      .content-b .photo-side {
+       199 -        text-align: center;
+       198 +      .content-b .sidebar {
+       199 +        border-right: 1px solid var(--border);
+       200 +        padding-right: 24px;
+       201        }
+       202    
+       203        .content-b .avatar-placeholder {
+       204 -        width: 160px;
+       205 -        height: 160px;
+       206 -        font-size: 60px;
+       207 -        margin: 0 auto 16px;
+       204 +        width: 80px;
+       205 +        height: 80px;
+       206 +        font-size: 32px;
+       207 +        margin-bottom: 12px;
+       208        }
+       209    
+       210 -      .content-b .name-under {
+       211 -        font-size: 18px;
+       210 +      .content-b .name {
+       211 +        font-size: 16px;
+       212          font-weight: 700;
+       213          color: var(--primary);
+       214 +        margin-bottom: 2px;
+       215        }
+       216    
+       217 -      .content-b .role-under {
+       218 -        font-size: 13px;
+       217 +      .content-b .role {
+       218 +        font-size: 11px;
+       219          color: var(--purple-mid);
+       220 -        font-weight: 500;
+       221 -      }
+       222 -  
+       223 -      .content-b .info-side h2 {
+       224 -        font-size: 13px;
+       220          font-weight: 600;
+       221 -        color: var(--purple-mid);
+       222 -        text-transform: uppercase;
+       223 -        letter-spacing: 1.5px;
+       221          margin-bottom: 12px;
+       222        }
+       223    
+       224 -      .content-b .intro {
+       225 -        font-size: 14px;
+       224 +      .content-b .sidebar-note {
+       225 +        font-size: 9px;
+       226 +        color: var(--text-light);
+       227 +        line-height: 1.5;
+       228 +        font-style: italic;
+       229 +      }
+       230 +  
+       231 +      .content-b .main-content .bio {
+       232 +        font-size: 12px;
+       233          color: var(--text);
+       234          line-height: 1.7;
+       235 -        margin-bottom: 20px;
+       235 +        margin-bottom: 16px;
+       236        }
+       237    
+       238 -      .content-b .project-pills {
+       239 -        display: flex;
+       240 -        flex-wrap: wrap;
+       241 -        gap: 10px;
+       242 -        margin-bottom: 20px;
+       238 +      .content-b .main-content h3 {
+       239 +        font-size: 10px;
+       240 +        font-weight: 600;
+       241 +        color: var(--purple-mid);
+       242 +        text-transform: uppercase;
+       243 +        letter-spacing: 1.2px;
+       244 +        margin-bottom: 10px;
+       245        }
+       246    
+       247 -      .content-b .pill {
+       248 -        background: #fff;
+       249 -        border: 1px solid rgba(124,58,237,0.12);
+       250 -        padding: 10px 14px;
+       251 -        border-radius: 8px;
+       252 -        font-size: 12px;
+       253 -        border-left: 3px solid var(--purple-accent);
+       247 +      .content-b .projects-grid {
+       248 +        display: grid;
+       249 +        grid-template-columns: 1fr 1fr;
+       250 +        gap: 12px;
+       251        }
+       252    
+       253 -      .content-b .pill strong {
+       254 -        color: var(--primary);
+       255 -        display: block;
+       256 -        margin-bottom: 2px;
+       253 +      .content-b .project {
+       254 +        padding: 10px 12px;
+       255 +        background: var(--bg-subtle);
+       256 +        border-radius: 6px;
+       257 +        border-left: 2px solid var(--purple-accent);
+       258        }
+       259    
+       260 -      .content-b .pill span {
+       261 -        color: var(--text-light);
+       260 +      .content-b .project h4 {
+       261          font-size: 11px;
+       262 +        font-weight: 600;
+       263 +        color: var(--primary);
+       264 +        margin-bottom: 4px;
+       265        }
+       266    
+       267 -      .content-b .background-note {
+       268 -        font-size: 12px;
+       267 +      .content-b .project p {
+       268 +        font-size: 9px;
+       269 +        color: var(--text);
+       270 +        line-height: 1.5;
+       271 +      }
+       272 +  
+       273 +      .content-b .background-bar {
+       274 +        margin-top: 14px;
+       275 +        font-size: 10px;
+       276          color: var(--text-light);
+       277 -        border-top: 1px solid var(--border);
+       278 -        padding-top: 16px;
+       277          line-height: 1.6;
+       278 +        padding-top: 12px;
+       279 +        border-top: 1px solid var(--border);
+       280        }
+       281    
+       282 -      /* ============ OPTION C: Top Banner with Projects 
+           -  Grid ============ */
+       282 +      /* ============ OPTION C: Full Width, Flowing Text 
+           +  ============ */
+       283        .content-c {
+       284          flex: 1;
+       285 +        padding: 24px 48px;
+       286 +        overflow: hidden;
+       287          display: flex;
+       288          flex-direction: column;
+       289 -        padding: 24px 48px;
+       289        }
+       290    
+       291 -      .content-c .profile-banner {
+       291 +      .content-c .profile-header {
+       292          display: flex;
+       293          align-items: center;
+       294          gap: 20px;
+       295 -        margin-bottom: 20px;
+       296 -        padding-bottom: 20px;
+       295 +        margin-bottom: 18px;
+       296 +        padding-bottom: 16px;
+       297          border-bottom: 1px solid var(--border);
+       298        }
+       299    
+       300        .content-c .avatar-placeholder {
+       301 -        width: 70px;
+       302 -        height: 70px;
+       301 +        width: 72px;
+       302 +        height: 72px;
+       303          font-size: 28px;
+       304 -        flex-shrink: 0;
+       304        }
+       305    
+       306 -      .content-c .banner-info {
+       307 -        flex: 1;
+       308 -      }
+       309 -  
+       310 -      .content-c .banner-info .name {
+       306 +      .content-c .header-text .name {
+       307          font-size: 22px;
+       308          font-weight: 700;
+       309          color: var(--primary);
+       310        }
+       311    
+       312 -      .content-c .banner-info .role {
+       313 -        font-size: 14px;
+       312 +      .content-c .header-text .role {
+       313 +        font-size: 13px;
+       314          color: var(--purple-mid);
+       315          font-weight: 500;
+       316        }
+       317    
+       318 -      .content-c .banner-intro {
+       319 -        font-size: 13px;
+       318 +      .content-c .bio {
+       319 +        font-size: 12px;
+       320          color: var(--text);
+       321 -        line-height: 1.6;
+       322 -        max-width: 500px;
+       321 +        line-height: 1.7;
+       322 +        margin-bottom: 16px;
+       323 +        column-count: 2;
+       324 +        column-gap: 32px;
+       325        }
+       326    
+       327 -      .content-c .projects-section h3 {
+       328 -        font-size: 11px;
+       327 +      .content-c h3 {
+       328 +        font-size: 10px;
+       329          font-weight: 600;
+       330          color: var(--purple-mid);
+       331          text-transform: uppercase;
+       332 -        letter-spacing: 1.5px;
+       333 -        margin-bottom: 14px;
+       332 +        letter-spacing: 1.2px;
+       333 +        margin-bottom: 10px;
+       334        }
+       335    
+       336 -      .content-c .projects-grid {
+       337 -        display: grid;
+       338 -        grid-template-columns: repeat(4, 1fr);
+       339 -        gap: 14px;
+       340 -        margin-bottom: 16px;
+       336 +      .content-c .projects-flow {
+       337 +        column-count: 2;
+       338 +        column-gap: 24px;
+       339        }
+       340    
+       341 -      .content-c .project-card {
+       342 -        background: #fff;
+       343 -        border: 1px solid rgba(124,58,237,0.1);
+       344 -        border-radius: 8px;
+       345 -        padding: 14px;
+       341 +      .content-c .project {
+       342 +        break-inside: avoid;
+       343 +        margin-bottom: 12px;
+       344        }
+       345    
+       346 -      .content-c .project-card h4 {
+       347 -        font-size: 12px;
+       346 +      .content-c .project h4 {
+       347 +        font-size: 11px;
+       348          font-weight: 600;
+       349          color: var(--primary);
+       350 -        margin-bottom: 6px;
+       351 -        display: flex;
+       352 -        align-items: center;
+       353 -        gap: 6px;
+       350 +        margin-bottom: 3px;
+       351        }
+       352    
+       353 -      .content-c .project-card p {
+       354 -        font-size: 11px;
+       355 -        color: var(--text-light);
+       356 -        line-height: 1.5;
+       357 -      }
+       358 -  
+       359 -      .content-c .project-card:nth-child(1) { border-bottom: 
+           - 3px solid #5B21B6; }
+       360 -      .content-c .project-card:nth-child(1) h4 i { color: 
+           - #5B21B6; }
+       361 -      .content-c .project-card:nth-child(2) { border-bottom: 
+           - 3px solid #6D28D9; }
+       362 -      .content-c .project-card:nth-child(2) h4 i { color: 
+           - #6D28D9; }
+       363 -      .content-c .project-card:nth-child(3) { border-bottom: 
+           - 3px solid #7C3AED; }
+       364 -      .content-c .project-card:nth-child(3) h4 i { color: 
+           - #7C3AED; }
+       365 -      .content-c .project-card:nth-child(4) { border-bottom: 
+           - 3px solid #8B5CF6; }
+       366 -      .content-c .project-card:nth-child(4) h4 i { color: 
+           - #8B5CF6; }
+       367 -  
+       368 -      .content-c .background-bar {
+       369 -        background: linear-gradient(135deg, 
+           - rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+       370 -        border-left: 3px solid var(--purple-accent);
+       371 -        padding: 12px 16px;
+       372 -        border-radius: 0 8px 8px 0;
+       373 -        font-size: 12px;
+       353 +      .content-c .project p {
+       354 +        font-size: 10px;
+       355          color: var(--text);
+       356 -        line-height: 1.6;
+       356 +        line-height: 1.55;
+       357        }
+       358    
+       359 -      /* ============ OPTION D: Magazine
+           -   Style ============ */
+       359 +      /* ============ OPTION D: Document
+           +   Style ============ */
+       360        .content-d {
+       361          flex: 1;
+       362 -        display: grid;
+       363 -        grid-template-columns: 1fr 1fr;
+       364 -        gap: 0;
+       362 +        padding: 28px 56px;
+       363 +        overflow: hidden;
+       364        }
+       365    
+       366 -      .content-d .left-panel {
+       367 -        background: linear-gradient(135deg, 
+           - var(--purple-dark), var(--purple-bright));
+       368 -        padding: 40px;
+       366 +      .content-d .top-row {
+       367          display: flex;
+       368 -        flex-direction: column;
+       369 -        justify-content: center;
+       370 -        align-items: center;
+       371 -        text-align: center;
+       372 -        color: #fff;
+       373 -      }
+       374 -  
+       375 -      .content-d .left-panel .avatar-placeholder {
+       376 -        width: 120px;
+       377 -        height: 120px;
+       378 -        font-size: 48px;
+       379 -        background: rgba(255,255,255,0.2);
+       380 -        color: rgba(255,255,255,0.6);
+       368 +        align-items: flex-start;
+       369 +        gap: 24px;
+       370          margin-bottom: 20px;
+       371        }
+       372    
+       373 -      .content-d .left-panel .name {
+       374 -        font-size: 26px;
+       375 -        font-weight: 700;
+       376 -        margin-bottom: 4px;
+       373 +      .content-d .avatar-placeholder {
+       374 +        width: 88px;
+       375 +        height: 88px;
+       376 +        font-size: 36px;
+       377        }
+       378    
+       379 -      .content-d .left-panel .role {
+       380 -        font-size: 15px;
+       381 -        opacity: 0.9;
+       382 -        margin-bottom: 20px;
+       379 +      .content-d .intro-block {
+       380 +        flex: 1;
+       381        }
+       382    
+       383 -      .content-d .left-panel .stats {
+       384 -        display: flex;
+       385 -        gap: 30px;
+       386 -      }
+       387 -  
+       388 -      .content-d .left-panel .stat-value {
+       383 +      .content-d .name {
+       384          font-size: 24px;
+       385          font-weight: 700;
+       386 +        color: var(--primary);
+       387 +        margin-bottom: 2px;
+       388        }
+       389    
+       390 -      .content-d .left-panel .stat-label {
+       391 -        font-size: 10px;
+       392 -        opacity: 0.8;
+       393 -        text-transform: uppercase;
+       394 -        letter-spacing: 0.5px;
+       390 +      .content-d .role {
+       391 +        font-size: 14px;
+       392 +        color: var(--purple-mid);
+       393 +        font-weight: 600;
+       394 +        margin-bottom: 12px;
+       395        }
+       396    
+       397 -      .content-d .right-panel {
+       398 -        padding: 32px;
+       399 -        display: flex;
+       400 -        flex-direction: column;
+       401 -        justify-content: center;
+       397 +      .content-d .bio {
+       398 +        font-size: 12px;
+       399 +        color: var(--text);
+       400 +        line-height: 1.7;
+       401        }
+       402    
+       403 -      .content-d .right-panel h3 {
+       404 -        font-size: 11px;
+       403 +      .content-d h3 {
+       404 +        font-size: 10px;
+       405          font-weight: 600;
+       406          color: var(--purple-mid);
+       407          text-transform: uppercase;
+       408 -        letter-spacing: 1.5px;
+       408 +        letter-spacing: 1.2px;
+       409          margin-bottom: 12px;
+       410 +        padding-bottom: 6px;
+       411 +        border-bottom: 1px solid var(--border);
+       412        }
+       413    
+       414 -      .content-d .right-panel .intro {
+       415 -        font-size: 13px;
+       416 -        color: var(--text);
+       417 -        line-height: 1.7;
+       418 -        margin-bottom: 20px;
+       414 +      .content-d .projects-list {
+       415 +        display: grid;
+       416 +        grid-template-columns: 1fr 1fr;
+       417 +        gap: 10px 20px;
+       418        }
+       419    
+       420 -      .content-d .project-list {
+       421 -        display: flex;
+       422 -        flex-direction: column;
+       423 -        gap: 12px;
+       420 +      .content-d .project h4 {
+       421 +        font-size: 11px;
+       422 +        font-weight: 600;
+       423 +        color: var(--primary);
+       424 +        margin-bottom: 3px;
+       425        }
+       426    
+       427 -      .content-d .project-row {
+       428 -        display: flex;
+       429 -        align-items: flex-start;
+       430 -        gap: 12px;
+       431 -        padding: 12px;
+       432 -        background: var(--bg-subtle);
+       433 -        border-radius: 8px;
+       427 +      .content-d .project p {
+       428 +        font-size: 10px;
+       429 +        color: var(--text);
+       430 +        line-height: 1.5;
+       431        }
+       432    
+       433 -      .content-d .project-row i {
+       434 -        color: var(--purple-accent);
+       435 -        margin-top: 2px;
+       433 +      .content-d .background-section {
+       434 +        margin-top: 14px;
+       435 +        padding-top: 12px;
+       436 +        border-top: 1px solid var(--border);
+       437        }
+       438    
+       439 -      .content-d .project-row strong {
+       440 -        font-size: 12px;
+       441 -        color: var(--primary);
+       442 -        display: block;
+       443 -        margin-bottom: 2px;
+       439 +      .content-d .background-section h3 {
+       440 +        border-bottom: none;
+       441 +        padding-bottom: 0;
+       442 +        margin-bottom: 6px;
+       443        }
+       444    
+       445 -      .content-d .project-row span {
+       446 -        font-size: 11px;
+       445 +      .content-d .background-section p {
+       446 +        font-size: 10px;
+       447          color: var(--text-light);
+       448 +        line-height: 1.6;
+       449        }
+       450      </style>
+       451    </head>
+       452    <body>
+       453      <h1>Profile Layout Options</h1>
+       454    
+       455 -    <!-- OPTION A: Centered Hero -->
+       456 -    <div class="option-label">Option A: Centered Hero</div>
+       455 +    <!-- OPTION A: Classic Two-Column -->
+       456 +    <div class="option-label">Option A: Classic Two-Column
+           +  </div>
+       457      <div class="slide">
+       458        <div class="slide-header">
+       459          <div class="header-logo">Bay<span>One</span> 
+             Solutions</div>
+       460          <div class="header-title">Enterprise AI 
+             Capabilities</div>
+       461        </div>
+       462        <div class="content-a">
+       463 -        <div class="avatar-placeholder"><i class="fa-solid 
+           - fa-user"></i></div>
+       464 -        <div class="name">Colin Moore</div>
+       465 -        <div class="role">Director of AI</div>
+       466 -        <p class="intro">
+       467 -          AI/ML engineering leader with deep experience 
+           - building and deploying enterprise-scale AI systems.
+       468 -          Previously Global AI/ML Manager at Coherent 
+           - Corporation, leading a 30+ engineer AI Center of Excellence.
+       469 -        </p>
+       470 -        <div class="stats-row">
+       471 -          <div class="stat">
+       472 -            <div class="stat-value">40K+</div>
+       473 -            <div class="stat-label">Platform Users</div>
+       463 +        <div class="left-col">
+       464 +          <div class="avatar-placeholder"><i class="fa-solid 
+           + fa-user"></i></div>
+       465 +          <div class="name">Colin Moore</div>
+       466 +          <div class="role">Director of AI</div>
+       467 +          <p class="bio">
+       468 +            AI/ML engineering leader with deep experience 
+           + building and deploying enterprise-scale AI systems that 
+           + operate reliably under commercial-grade requirements. Leads 
+           + technical strategy and manages AI/ML engineering teams at 
+           + BayOne Solutions.
+       469 +          </p>
+       470 +          <p class="bio">
+       471 +            Previously Global AI/ML Manager at Coherent 
+           + Corporation, where he established and led the company's AI 
+           + Center of Excellence, managing a global team of 30+ AI 
+           + engineers across US, EU, and APAC.
+       472 +          </p>
+       473 +          <p class="background">
+       474 +            Early career in biomedical engineering 
+           + (photoacoustic flowmetry for melanoma detection) and battery
+           +  R&D (lithium-sulfur cathode materials). Three patents, 
+           + technology sale to GM. Technical advisor on AI deployment 
+           + risks.
+       475 +          </p>
+       476 +        </div>
+       477 +        <div class="right-col">
+       478 +          <h3>Representative Projects</h3>
+       479 +          <div class="project">
+       480 +            <h4>Context-Aware Code Review System</h4>
+       481 +            <p>AI code review tool that ingests 
+           + organizational coding standards, architectural patterns, and
+           +  examples to build context. Integrates into VS Code and 
+           + Visual Studio, dramatically reducing false positives and 
+           + increasing engineer trust.</p>
+       482            </div>
+       483 -          <div class="stat">
+       484 -            <div class="stat-value">$30M+</div>
+       485 -            <div class="stat-label">Annual Impact</div>
+       483 +          <div class="project">
+       484 +            <h4>Enterprise GenAI Platform</h4>
+       485 +            <p>FedRAMP-authorized Azure-hosted LLM platform 
+           + serving 40,000+ users across Aerospace & Defense and 
+           + manufacturing. Role-based access via Entra/Azure AD, 25+ 
+           + languages, cost-optimized Kubernetes.</p>
+       486            </div>
+       487 -          <div class="stat">
+       488 -            <div class="stat-value">60+</div>
+       489 -            <div class="stat-label">AI Initiatives</div>
+       487 +          <div class="project">
+       488 +            <h4>High-Stakes Process Optimization</h4>
+       489 +            <p>Multi-model ML system for advanced materials 
+           + manufacturing where each run cost $3M. Gradient-boosted 
+           + prediction, temporal CNNs for early warning, PPO 
+           + reinforcement learning trained in digital twins. Yield: 65% 
+           + → 82%.</p>
+       490            </div>
+       491 -          <div class="stat">
+       492 -            <div class="stat-value">3</div>
+       493 -            <div class="stat-label">Patents</div>
+       491 +          <div class="project">
+       492 +            <h4>Global Data Pipeline Architecture</h4>
+       493 +            <p>Enterprise ETL processing ~10TB daily from 70+
+           +  on-premises databases across 9 countries plus Oracle Cloud.
+           +  Real-time streaming dashboards with full data 
+           + auditability.</p>
+       494            </div>
+       495          </div>
+       496 -        <div class="highlights">
+       497 -          <div class="highlight-tag">FedRAMP GenAI</div>
+       498 -          <div class="highlight-tag">Manufacturing ML</div>
+       499 -          <div class="highlight-tag">Code Review AI</div>
+       500 -          <div class="highlight-tag">Global Data 
+           - Pipelines</div>
+       501 -        </div>
+       496        </div>
+       497        <div class="slide-footer">
+       498          <div class="slide-footer-bar"></div>
+     ...
+       543        </div>
+       544      </div>
+       545    
+       546 -    <!-- OPTION B: Left Photo, Right Content -->
+       547 -    <div class="option-label">Option B: Left Photo, Right
+           -   Content</div>
+       546 +    <!-- OPTION B: Narrow Sidebar -->
+       547 +    <div class="option-label">Option B: Narrow Sidebar, Wide
+           +   Content</div>
+       548      <div class="slide">
+       549        <div class="slide-header">
+       550          <div class="header-logo">Bay<span>One</span> 
+             Solutions</div>
+       551          <div class="header-title">Enterprise AI 
+             Capabilities</div>
+       552        </div>
+       553        <div class="content-b">
+       554 -        <div class="photo-side">
+       554 +        <div class="sidebar">
+       555            <div class="avatar-placeholder"><i class="fa-solid 
+             fa-user"></i></div>
+       556 -          <div class="name-under">Colin Moore</div>
+       557 -          <div class="role-under">Director of AI</div>
+       556 +          <div class="name">Colin Moore</div>
+       557 +          <div class="role">Director of AI</div>
+       558 +          <p class="sidebar-note">Hands-on technical 
+           + leadership on AI architecture and implementation for this 
+           + engagement.</p>
+       559          </div>
+       560 -        <div class="info-side">
+       561 -          <h2>About</h2>
+       562 -          <p class="intro">
+       563 -            AI/ML engineering leader with deep experience 
+           - building and deploying enterprise-scale AI systems
+       564 -            that operate reliably under commercial-grade 
+           - requirements. Leads technical strategy and manages
+       565 -            AI/ML engineering teams at BayOne.
+       560 +        <div class="main-content">
+       561 +          <p class="bio">
+       562 +            AI/ML engineering leader with deep experience 
+           + building and deploying enterprise-scale AI systems. 
+           + Previously Global AI/ML Manager at Coherent Corporation, 
+           + establishing their AI Center of Excellence with a 30+ 
+           + engineer global team across US, EU, and APAC, building a 
+           + portfolio of 60+ AI initiatives.
+       563            </p>
+       564 -          <div class="project-pills">
+       565 -            <div class="pill"><strong>Enterprise 
+           - GenAI</strong><span>40K+ users, FedRAMP</span></div>
+       566 -            <div class="pill"><strong>Code Review 
+           - AI</strong><span>VS Code integration</span></div>
+       567 -            <div class="pill"><strong>Manufacturing 
+           - ML</strong><span>65% → 82% yield</span></div>
+       568 -            <div class="pill"><strong>Global 
+           - ETL</strong><span>70+ databases, 9 countries</span></div>
+       564 +          <h3>Representative Projects</h3>
+       565 +          <div class="projects-grid">
+       566 +            <div class="project">
+       567 +              <h4>Context-Aware Code Review</h4>
+       568 +              <p>AI code review ingesting org standards and 
+           + patterns. VS Code/Visual Studio integration. Dramatically 
+           + reduced false positives.</p>
+       569 +            </div>
+       570 +            <div class="project">
+       571 +              <h4>Enterprise GenAI Platform</h4>
+       572 +              <p>FedRAMP-authorized LLM platform, 40K+ users 
+           + across A&D and manufacturing. Role-based access, 25+ 
+           + languages.</p>
+       573 +            </div>
+       574 +            <div class="project">
+       575 +              <h4>High-Stakes Process Optimization</h4>
+       576 +              <p>Multi-model ML for $3M production runs. 
+           + Digital twin validation, SHAP explainability. Yield improved
+           +  65% → 82%.</p>
+       577 +            </div>
+       578 +            <div class="project">
+       579 +              <h4>Global Data Pipeline</h4>
+       580 +              <p>~10TB daily ETL from 70+ databases across 9 
+           + countries. Real-time streaming dashboards, full 
+           + auditability.</p>
+       581 +            </div>
+       582            </div>
+       583 -          <p class="background-note">
+       584 -            Previously Global AI/ML Manager at Coherent 
+           - Corporation (30+ engineers, $30M+ impact).
+       585 -            Three patents, technology sale to General Motors.
+       583 +          <p class="background-bar">
+       584 +            <strong>Background:</strong> Biomedical 
+           + engineering (photoacoustic melanoma detection), battery R&D 
+           + (lithium-sulfur cathodes). Three patents, technology sale to
+           +  GM. Technical advisor on AI deployment risks to legal, 
+           + compliance, and cybersecurity teams.
+       585            </p>
+       586          </div>
+       587        </div>
+     ...
+       581        </div>
+       582      </div>
+       583    
+       584 -    <!-- OPTION C: Top Banner with Projects Grid -->
+       585 -    <div class="option-label">Option C: Top Banner + 
+           -  Projects Grid</div>
+       584 +    <!-- OPTION C: Full Width Flowing -->
+       585 +    <div class="option-label">Option C: Full Width, Flowing 
+           +  Text</div>
+       586      <div class="slide">
+       587        <div class="slide-header">
+       588          <div class="header-logo">Bay<span>One</span> 
+             Solutions</div>
+       589          <div class="header-title">Enterprise AI 
+             Capabilities</div>
+       590        </div>
+       591        <div class="content-c">
+       592 -        <div class="profile-banner">
+       592 +        <div class="profile-header">
+       593            <div class="avatar-placeholder"><i class="fa-solid 
+             fa-user"></i></div>
+       594 -          <div class="banner-info">
+       594 +          <div class="header-text">
+       595              <div class="name">Colin Moore</div>
+       596              <div class="role">Director of AI, BayOne 
+             Solutions</div>
+       597            </div>
+       598 -          <p class="banner-intro">
+       599 -            AI/ML engineering leader building 
+           - enterprise-scale AI systems. Previously led 30+ engineer AI 
+           - CoE at Coherent with $30M+ annual impact.
+       600 -          </p>
+       598          </div>
+       599 -        <div class="projects-section">
+       600 -          <h3>Representative Projects</h3>
+       601 -          <div class="projects-grid">
+       602 -            <div class="project-card">
+       603 -              <h4><i class="fa-solid fa-server"></i> GenAI 
+           - Platform</h4>
+       604 -              <p>FedRAMP LLM platform, 40K+ users, 25+ 
+           - languages</p>
+       605 -            </div>
+       606 -            <div class="project-card">
+       607 -              <h4><i class="fa-solid fa-code"></i> Code 
+           - Review AI</h4>
+       608 -              <p>VS Code integration, org-aware patterns</p>
+       609 -            </div>
+       610 -            <div class="project-card">
+       611 -              <h4><i class="fa-solid fa-industry"></i> 
+           - Manufacturing ML</h4>
+       612 -              <p>Digital twin, yield 65% → 82%</p>
+       613 -            </div>
+       614 -            <div class="project-card">
+       615 -              <h4><i class="fa-solid fa-database"></i> Global
+           -  Data Pipeline</h4>
+       616 -              <p>70+ databases, 9 countries, real-time</p>
+       617 -            </div>
+       599 +        <p class="bio">
+       600 +          AI/ML engineering leader with deep experience 
+           + building and deploying enterprise-scale AI systems that 
+           + operate reliably under commercial-grade requirements. 
+           + Previously Global AI/ML Manager at Coherent Corporation, 
+           + where he established and led the company's AI Center of 
+           + Excellence—managing a global team of 30+ AI engineers and 
+           + data scientists distributed across US, EU, and APAC, 
+           + building a portfolio of 60+ AI initiatives. Early career in 
+           + biomedical engineering (photoacoustic flowmetry for melanoma
+           +  detection) and battery R&D (lithium-sulfur cathode 
+           + materials resulting in three patents and a technology sale 
+           + to GM). Technical advisor on AI deployment risks.
+       601 +        </p>
+       602 +        <h3>Representative Projects</h3>
+       603 +        <div class="projects-flow">
+       604 +          <div class="project">
+       605 +            <h4>Context-Aware Code Review System</h4>
+       606 +            <p>AI code review tool that ingests 
+           + organizational coding standards, architectural patterns, and
+           +  examples. VS Code and Visual Studio integration, 
+           + dramatically reducing false positives.</p>
+       607            </div>
+       608 +          <div class="project">
+       609 +            <h4>Enterprise GenAI Platform</h4>
+       610 +            <p>FedRAMP-authorized Azure-hosted LLM platform 
+           + serving 40,000+ users across A&D and manufacturing. 
+           + Role-based access, 25+ languages, cost-optimized 
+           + Kubernetes.</p>
+       611 +          </div>
+       612 +          <div class="project">
+       613 +            <h4>High-Stakes Process Optimization</h4>
+       614 +            <p>Multi-model ML for advanced materials 
+           + manufacturing ($3M per run). Gradient-boosted prediction, 
+           + temporal CNNs, PPO RL trained in digital twins. Yield: 65% →
+           +  82%.</p>
+       615 +          </div>
+       616 +          <div class="project">
+       617 +            <h4>Global Data Pipeline Architecture</h4>
+       618 +            <p>Enterprise ETL processing ~10TB daily from 70+
+           +  databases across 9 countries. Real-time streaming 
+           + dashboards with full auditability.</p>
+       619 +          </div>
+       620          </div>
+       621 -        <div class="background-bar">
+       622 -          <strong>Background:</strong> Biomedical 
+           - engineering, battery technology, 3 patents, technology sale 
+           - to GM. Advisor on AI deployment risks.
+       623 -        </div>
+       621        </div>
+       622        <div class="slide-footer">
+       623          <div class="slide-footer-bar"></div>
+     ...
+       630        </div>
+       631      </div>
+       632    
+       633 -    <!-- OPTION D: Magazine Style -->
+       634 -    <div class="option-label">Option D: Magazine Split</div>
+       633 +    <!-- OPTION D: Document Style -->
+       634 +    <div class="option-label">Option D: Document Style</div>
+       635      <div class="slide">
+       636        <div class="slide-header">
+       637          <div class="header-logo">Bay<span>One</span> 
+             Solutions</div>
+       638          <div class="header-title">Enterprise AI 
+             Capabilities</div>
+       639        </div>
+       640        <div class="content-d">
+       641 -        <div class="left-panel">
+       641 +        <div class="top-row">
+       642            <div class="avatar-placeholder"><i class="fa-solid 
+             fa-user"></i></div>
+       643 -          <div class="name">Colin Moore</div>
+       644 -          <div class="role">Director of AI</div>
+       645 -          <div class="stats">
+       646 -            <div class="stat">
+       647 -              <div class="stat-value">40K+</div>
+       648 -              <div class="stat-label">Users</div>
+       649 -            </div>
+       650 -            <div class="stat">
+       651 -              <div class="stat-value">$30M+</div>
+       652 -              <div class="stat-label">Impact</div>
+       653 -            </div>
+       654 -            <div class="stat">
+       655 -              <div class="stat-value">3</div>
+       656 -              <div class="stat-label">Patents</div>
+       657 -            </div>
+       643 +          <div class="intro-block">
+       644 +            <div class="name">Colin Moore</div>
+       645 +            <div class="role">Director of AI</div>
+       646 +            <p class="bio">
+       647 +              AI/ML engineering leader with deep experience 
+           + building and deploying enterprise-scale AI systems that 
+           + operate reliably under commercial-grade requirements. 
+           + Previously Global AI/ML Manager at Coherent Corporation, 
+           + where he established and led the company's AI Center of 
+           + Excellence—managing a global team of 30+ AI engineers across
+           +  US, EU, and APAC, building a portfolio of 60+ AI 
+           + initiatives.
+       648 +            </p>
+       649            </div>
+       650          </div>
+       651 -        <div class="right-panel">
+       652 -          <h3>About</h3>
+       653 -          <p class="intro">
+       654 -            AI/ML engineering leader with deep experience 
+           - building enterprise-scale AI systems.
+       655 -            Previously Global AI/ML Manager at Coherent 
+           - Corporation, leading 30+ engineers.
+       656 -          </p>
+       657 -          <h3>Key Projects</h3>
+       658 -          <div class="project-list">
+       659 -            <div class="project-row">
+       660 -              <i class="fa-solid fa-server"></i>
+       661 -              <div><strong>Enterprise GenAI 
+           - Platform</strong><span>FedRAMP-authorized, 40K+ 
+           - users</span></div>
+       662 -            </div>
+       663 -            <div class="project-row">
+       664 -              <i class="fa-solid fa-code"></i>
+       665 -              <div><strong>Context-Aware Code 
+           - Review</strong><span>VS Code + Visual Studio 
+           - integration</span></div>
+       666 -            </div>
+       667 -            <div class="project-row">
+       668 -              <i class="fa-solid fa-industry"></i>
+       669 -              <div><strong>Manufacturing 
+           - Optimization</strong><span>Yield increased 65% → 
+           - 82%</span></div>
+       670 -            </div>
+       671 -            <div class="project-row">
+       672 -              <i class="fa-solid fa-database"></i>
+       673 -              <div><strong>Global Data 
+           - Pipeline</strong><span>70+ databases across 9 
+           - countries</span></div>
+       674 -            </div>
+       651 +        <h3>Representative Projects</h3>
+       652 +        <div class="projects-list">
+       653 +          <div class="project">
+       654 +            <h4>Context-Aware Code Review</h4>
+       655 +            <p>AI code review ingesting org standards and 
+           + architectural patterns. VS Code/Visual Studio integration, 
+           + dramatically reducing false positives and increasing 
+           + engineer trust.</p>
+       656            </div>
+       657 +          <div class="project">
+       658 +            <h4>Enterprise GenAI Platform</h4>
+       659 +            <p>FedRAMP-authorized LLM platform, 40K+ users 
+           + across A&D and manufacturing. Role-based access via 
+           + Entra/Azure AD, 25+ languages, cost-optimized K8s.</p>
+       660 +          </div>
+       661 +          <div class="project">
+       662 +            <h4>High-Stakes Process Optimization</h4>
+       663 +            <p>Multi-model ML for $3M production runs. 
+           + Gradient-boosted models, temporal CNNs, PPO RL trained in 
+           + digital twins. Yield improved 65% → 82%.</p>
+       664 +          </div>
+       665 +          <div class="project">
+       666 +            <h4>Global Data Pipeline</h4>
+       667 +            <p>~10TB daily ETL from 70+ databases across 9 
+           + countries plus Oracle Cloud. Real-time streaming dashboards,
+           +  full data auditability.</p>
+       668 +          </div>
+       669          </div>
+       670 +        <div class="background-section">
+       671 +          <h3>Background</h3>
+       672 +          <p>Biomedical engineering (photoacoustic flowmetry 
+           + for melanoma detection), battery R&D (lithium-sulfur cathode
+           +  materials—three patents, technology sale to GM). Technical 
+           + advisor on AI deployment risks to legal, compliance, and 
+           + cybersecurity teams.</p>
+       673 +        </div>
+       674        </div>
+       675        <div class="slide-footer">
+       676          <div class="slide-footer-bar"></div>
+
+● Done. prototype_profile_layouts.html now has 4 text-focused options:
+
+  - A: Classic Two-Column — Photo/name/bio on left, projects stacked on
+  right with full descriptions
+  - B: Narrow Sidebar — Small sidebar with photo/name, wide content area
+  with bio, 2x2 project grid, and background footer
+  - C: Full Width Flowing — Header banner with photo, bio in two columns,
+  projects flow in two columns
+  - D: Document Style — Photo next to intro block at top, projects in
+  2-column grid below, background section at bottom
+
+  All have the actual content from your profile - the bio, Coherent
+  experience, project descriptions, and background. Take a look.
+
+> Honestly, these all completely suck. Let's skip this one and move on to 
+the next slide. Just a waste of time here. 
+
+● Fair enough. Moving on to slide 13.
+
+● Read(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/sli
+      des/13_cisco_engagement.html)
+  ⎿  Read 321 lines
+
+● Write(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/sl
+       ides/13_cisco_engagement.html)
+  ⎿  Updated ../13_cisco_engagement.html with 211 additions and 178 removal
+
+        5      <meta name="viewport" content="width=device-width, 
+            initial-scale=1.0">
+        6      <title>Cisco CI/CD Engagement - BayOne Solutions</title>
+        7      <link href="https://fonts.googleapis.com/css2?family=Inter
+            :wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        8 +    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/
+          + ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        9      <style>
+       10        * { margin: 0; padding: 0; box-sizing: border-box; }
+       11    
+     ...
+        25        body {
+        26          font-family: 'Inter', -apple-system, 
+             BlinkMacSystemFont, sans-serif;
+        27          color: var(--text);
+        28 -        line-height: 1.7;
+        29 -        font-size: 15px;
+        30 -        background: #fff;
+        28 +        line-height: 1.6;
+        29 +        font-size: 14px;
+        30 +        background: #e8e6eb;
+        31 +        min-height: 100vh;
+        32 +        display: flex;
+        33 +        align-items: center;
+        34 +        justify-content: center;
+        35 +        padding: 24px;
+        36        }
+        37    
+        38 -      .container {
+        39 -        max-width: 900px;
+        40 -        margin: 0 auto;
+        41 -        padding: 80px 40px;
+        38 +      .slide {
+        39 +        width: 100%;
+        40 +        max-width: 1100px;
+        41 +        aspect-ratio: 16 / 10;
+        42 +        position: relative;
+        43 +        background: linear-gradient(180deg, #ffffff 0%, 
+           + #fdfcff 60%, #f9f7ff 100%);
+        44 +        border-radius: 12px;
+        45 +        border: 1px solid rgba(0, 0, 0, 0.08);
+        46 +        box-shadow:
+        47 +          0 2px 8px rgba(0, 0, 0, 0.06),
+        48 +          0 8px 24px rgba(0, 0, 0, 0.08);
+        49 +        overflow: hidden;
+        50 +        display: flex;
+        51 +        flex-direction: column;
+        52        }
+        53    
+        54 -      .section-number {
+        55 -        font-size: 12px;
+        56 -        font-weight: 600;
+        57 -        color: var(--purple-accent);
+        58 -        letter-spacing: 2px;
+        54 +      /* Header */
+        55 +      .slide-header {
+        56 +        display: flex;
+        57 +        justify-content: space-between;
+        58 +        align-items: center;
+        59 +        padding: 16px 40px;
+        60 +        border-bottom: 1px solid var(--border);
+        61 +        flex-shrink: 0;
+        62 +      }
+        63 +  
+        64 +      .header-logo {
+        65 +        font-size: 16px;
+        66 +        font-weight: 700;
+        67 +        color: var(--primary);
+        68 +      }
+        69 +  
+        70 +      .header-logo span { color: var(--purple-accent); }
+        71 +  
+        72 +      .header-title {
+        73 +        font-size: 11px;
+        74 +        font-weight: 500;
+        75 +        color: var(--text-light);
+        76 +        letter-spacing: 0.5px;
+        77 +      }
+        78 +  
+        79 +      /* Content */
+        80 +      .slide-content {
+        81 +        flex: 1;
+        82 +        padding: 24px 48px 16px;
+        83 +        overflow: hidden;
+        84 +      }
+        85 +  
+        86 +      .section-header {
+        87 +        display: flex;
+        88 +        align-items: center;
+        89 +        gap: 14px;
+        90          margin-bottom: 12px;
+        91 +      }
+        92 +  
+        93 +      .section-icon {
+        94 +        width: 44px;
+        95 +        height: 44px;
+        96 +        background: linear-gradient(135deg, #5B21B6, 
+           + #7C3AED);
+        97 +        color: #fff;
+        98 +        border-radius: 12px;
+        99 +        display: flex;
+       100 +        align-items: center;
+       101 +        justify-content: center;
+       102 +        font-size: 18px;
+       103 +      }
+       104 +  
+       105 +      .section-label {
+       106 +        font-size: 11px;
+       107 +        font-weight: 600;
+       108 +        color: var(--purple-mid);
+       109 +        letter-spacing: 1.5px;
+       110          text-transform: uppercase;
+       111 +        margin-bottom: 2px;
+       112        }
+       113    
+       114        h2 {
+       115 -        font-size: 32px;
+       115 +        font-size: 24px;
+       116          font-weight: 700;
+       117          color: var(--primary);
+       118 -        margin-bottom: 24px;
+       118          letter-spacing: -0.5px;
+       119        }
+       120    
+       121        .lead {
+       122 -        font-size: 18px;
+       122 +        font-size: 13px;
+       123          color: var(--text-light);
+       124 -        line-height: 1.8;
+       125 -        margin-bottom: 40px;
+       124 +        line-height: 1.6;
+       125 +        margin-bottom: 20px;
+       126 +        max-width: 800px;
+       127        }
+       128    
+       129 -      .engagement-grid {
+       129 +      /* Two column layout */
+       130 +      .content-grid {
+       131          display: grid;
+       132          grid-template-columns: 1fr 1fr;
+       133 -        gap: 24px;
+       134 -        margin: 40px 0;
+       133 +        gap: 20px;
+       134 +        margin-bottom: 18px;
+       135        }
+       136    
+       137 -      .engagement-card {
+       137 +      .card {
+       138          background: #fff;
+       139 -        border: 1px solid rgba(124,58,237,0.12);
+       140 -        border-radius: 12px;
+       141 -        padding: 24px;
+       139 +        border: 1px solid rgba(124,58,237,0.1);
+       140 +        border-radius: 8px;
+       141 +        padding: 16px 18px;
+       142        }
+       143    
+       144 -      .engagement-card h3 {
+       145 -        font-size: 16px;
+       144 +      .card h3 {
+       145 +        font-size: 13px;
+       146          font-weight: 600;
+       147          color: var(--primary);
+       148 -        margin-bottom: 12px;
+       148 +        margin-bottom: 8px;
+       149 +        display: flex;
+       150 +        align-items: center;
+       151 +        gap: 8px;
+       152        }
+       153    
+       154 -      .engagement-card p {
+       155 -        font-size: 14px;
+       154 +      .card h3 i {
+       155 +        font-size: 12px;
+       156 +      }
+       157 +  
+       158 +      .card p {
+       159 +        font-size: 12px;
+       160          color: var(--text);
+       161 -        line-height: 1.7;
+       162 -        margin: 0;
+       161 +        line-height: 1.6;
+       162        }
+       163    
+       164 -      .focus-areas {
+       164 +      /* Card colors */
+       165 +      .card:nth-child(1) { border-bottom: 3px solid #5B21B6; 
+           + }
+       166 +      .card:nth-child(1) h3 i { color: #5B21B6; }
+       167 +  
+       168 +      .card:nth-child(2) { border-bottom: 3px solid #6D28D9; 
+           + }
+       169 +      .card:nth-child(2) h3 i { color: #6D28D9; }
+       170 +  
+       171 +      /* Focus areas */
+       172 +      .focus-section {
+       173          background: linear-gradient(135deg, 
+             rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+       174 -        border-radius: 12px;
+       175 -        padding: 28px;
+       176 -        margin: 40px 0;
+       174 +        border-radius: 8px;
+       175 +        padding: 16px 20px;
+       176 +        margin-bottom: 16px;
+       177        }
+       178    
+       179 -      .focus-areas h3 {
+       180 -        font-size: 14px;
+       179 +      .focus-section h3 {
+       180 +        font-size: 11px;
+       181          font-weight: 600;
+       182          color: var(--purple-mid);
+       183          text-transform: uppercase;
+       184          letter-spacing: 1.5px;
+       185 -        margin-bottom: 20px;
+       185 +        margin-bottom: 14px;
+       186        }
+       187    
+       188 -      .focus-list {
+       188 +      .focus-grid {
+       189          display: grid;
+       190          grid-template-columns: 1fr 1fr;
+       191 -        gap: 16px;
+       191 +        gap: 14px;
+       192        }
+       193    
+       194        .focus-item {
+     ...
+       116          gap: 12px;
+       117        }
+       118    
+       119 -      .focus-item .number {
+       119 +      .focus-letter {
+       120          width: 28px;
+       121          height: 28px;
+       122          background: var(--purple-mid);
+     ...
+       125          display: flex;
+       126          align-items: center;
+       127          justify-content: center;
+       128 -        font-size: 13px;
+       129 -        font-weight: 600;
+       128 +        font-size: 12px;
+       129 +        font-weight: 700;
+       130          flex-shrink: 0;
+       131        }
+       132    
+       133 -      .focus-item .content h4 {
+       134 -        font-size: 15px;
+       133 +      .focus-item h4 {
+       134 +        font-size: 12px;
+       135          font-weight: 600;
+       136          color: var(--primary);
+       137 -        margin-bottom: 4px;
+       137 +        margin-bottom: 2px;
+       138        }
+       139    
+       140 -      .focus-item .content p {
+       141 -        font-size: 13px;
+       140 +      .focus-item p {
+       141 +        font-size: 11px;
+       142          color: var(--text-light);
+       143 -        margin: 0;
+       143 +        line-height: 1.5;
+       144        }
+       145    
+       146 -      .capabilities-used {
+       147 -        margin: 40px 0;
+       148 -      }
+       149 -  
+       150 -      .capabilities-used h3 {
+       151 -        font-size: 14px;
+       152 -        font-weight: 600;
+       153 -        color: var(--purple-mid);
+       154 -        text-transform: uppercase;
+       155 -        letter-spacing: 1.5px;
+       156 -        margin-bottom: 16px;
+       157 -      }
+       158 -  
+       159 -      .capability-tags {
+       146 +      /* Capabilities */
+       147 +      .capabilities-row {
+       148          display: flex;
+       149          flex-wrap: wrap;
+       150 -        gap: 10px;
+       150 +        gap: 8px;
+       151        }
+       152    
+       153        .capability-tag {
+       154          background: var(--bg-subtle);
+       155          border: 1px solid var(--border);
+       156 -        padding: 8px 14px;
+       156 +        padding: 6px 12px;
+       157          border-radius: 6px;
+       158 -        font-size: 13px;
+       158 +        font-size: 11px;
+       159          font-weight: 500;
+       160          color: var(--primary);
+       161        }
+       162    
+       163 -      .footer {
+       164 -        text-align: center;
+       165 -        padding: 48px 40px;
+       166 -        border-top: 1px solid var(--border);
+       167 -        margin-top: 64px;
+       163 +      /* Footer */
+       164 +      .slide-footer {
+       165 +        flex-shrink: 0;
+       166 +        padding: 16px 40px 16px;
+       167        }
+       168    
+       169 -      .footer-logo {
+       170 -        font-size: 20px;
+       171 -        font-weight: 700;
+       172 -        color: var(--primary);
+       169 +      .slide-footer-bar {
+       170 +        height: 3px;
+       171 +        background: linear-gradient(90deg, 
+           + var(--purple-darkest), var(--purple-mid), 
+           + var(--purple-accent), var(--purple-glow));
+       172 +        border-radius: 2px;
+       173        }
+       174    
+       175 -      .footer-logo span { color: var(--purple-accent); }
+       175 +      .slide-number {
+       176 +        text-align: right;
+       177 +        margin-top: 10px;
+       178 +        font-size: 11px;
+       179 +        font-weight: 600;
+       180 +        color: var(--purple-accent);
+       181 +        letter-spacing: 2px;
+       182 +      }
+       183    
+       184        @media print {
+       185 -        @page {
+       186 -          size: 8.5in 11in;
+       187 -          margin: 0.4in;
+       185 +        body {
+       186 +          background: white;
+       187 +          padding: 0;
+       188          }
+       189    
+       190 -        body { font-size: 9pt; line-height: 1.4; }
+       191 -        .container { padding: 0; max-width: 100%; }
+       192 -  
+       193 -        .section-number {
+       194 -          break-after: avoid;
+       195 -          page-break-after: avoid;
+       190 +        .slide {
+       191 +          max-width: 100%;
+       192 +          aspect-ratio: auto;
+       193 +          min-height: 100vh;
+       194 +          border-radius: 0;
+       195 +          box-shadow: none;
+       196 +          border: none;
+       197          }
+       198 -  
+       199 -        h2 {
+       200 -          font-size: 18pt;
+       201 -          margin-bottom: 12px;
+       202 -          break-after: avoid;
+       203 -          page-break-after: avoid;
+       204 -        }
+       205 -  
+       206 -        .lead { font-size: 11pt; margin-bottom: 20px; }
+       207 -  
+       208 -        .engagement-grid { gap: 16px; margin: 20px 0; }
+       209 -  
+       210 -        .engagement-card {
+       211 -          padding: 16px;
+       212 -          break-inside: avoid;
+       213 -          page-break-inside: avoid;
+       214 -        }
+       215 -  
+       216 -        .engagement-card h3 { font-size: 11pt; margin-bottom:
+           -  8px; }
+       217 -        .engagement-card p { font-size: 9pt; }
+       218 -  
+       219 -        .focus-areas {
+       220 -          padding: 20px;
+       221 -          margin: 20px 0;
+       222 -          break-inside: avoid;
+       223 -          page-break-inside: avoid;
+       224 -          -webkit-print-color-adjust: exact;
+       225 -          print-color-adjust: exact;
+       226 -        }
+       227 -  
+       228 -        .focus-areas h3 { font-size: 9pt; margin-bottom: 
+           - 12px; }
+       229 -        .focus-list { gap: 12px; }
+       230 -  
+       231 -        .focus-item .number {
+       232 -          width: 22px;
+       233 -          height: 22px;
+       234 -          font-size: 10px;
+       235 -          -webkit-print-color-adjust: exact;
+       236 -          print-color-adjust: exact;
+       237 -        }
+       238 -  
+       239 -        .focus-item .content h4 { font-size: 10pt; }
+       240 -        .focus-item .content p { font-size: 8pt; }
+       241 -  
+       242 -        .capabilities-used { margin: 20px 0; }
+       243 -        .capabilities-used h3 { font-size: 9pt; 
+           - margin-bottom: 10px; }
+       244 -        .capability-tags { gap: 6px; }
+       245 -        .capability-tag { padding: 5px 10px; font-size: 8pt; 
+           - }
+       246 -  
+       247 -        .footer { padding: 24px 0; margin-top: 32px; }
+       198        }
+       199      </style>
+       200    </head>
+       201    <body>
+       202 -    <div class="container">
+       203 -      <div class="section-number">13 - Active 
+           - Engagement</div>
+       204 -      <h2>Cisco CI/CD Pipeline Intelligence</h2>
+       205 -      <p class="lead">
+       206 -        BayOne is actively engaged with Cisco to improve 
+           - their NX-OS development
+       207 -        pipeline through AI-powered tooling, visibility, and 
+           - intelligent automation.
+       208 -      </p>
+       202 +    <div class="slide">
+       203 +      <div class="slide-header">
+       204 +        <div class="header-logo">Bay<span>One</span> 
+           + Solutions</div>
+       205 +        <div class="header-title">Enterprise AI 
+           + Capabilities</div>
+       206 +      </div>
+       207    
+       208 -      <div class="engagement-grid">
+       209 -        <div class="engagement-card">
+       210 -          <h3>The Challenge</h3>
+       211 -          <p>
+       212 -            Engineers across a multi-stage CI/CD pipeline 
+           - lack unified, intelligent
+       213 -            visibility into work status. Failures require 
+           - manual investigation,
+       214 -            and there is no AI-driven interface for pipeline 
+           - health.
+       215 -          </p>
+       208 +      <div class="slide-content">
+       209 +        <div class="section-header">
+       210 +          <div class="section-icon"><i class="fa-solid 
+           + fa-code-branch"></i></div>
+       211 +          <div>
+       212 +            <div class="section-label">Active 
+           + Engagement</div>
+       213 +            <h2>Cisco CI/CD Pipeline Intelligence</h2>
+       214 +          </div>
+       215          </div>
+       216 -        <div class="engagement-card">
+       217 -          <h3>Our Approach</h3>
+       218 -          <p>
+       219 -            Build on existing infrastructure (Jenkins, 
+           - Airflow, pyATS) to add
+       220 -            AI-powered telemetry, failure diagnosis, and 
+           - proactive health monitoring
+       221 -            without disrupting current workflows.
+       222 -          </p>
+       216 +  
+       217 +        <p class="lead">
+       218 +          BayOne is actively engaged with Cisco to improve 
+           + their NX-OS development pipeline through AI-powered tooling,
+           +  visibility, and intelligent automation.
+       219 +        </p>
+       220 +  
+       221 +        <div class="content-grid">
+       222 +          <div class="card">
+       223 +            <h3><i class="fa-solid 
+           + fa-triangle-exclamation"></i> The Challenge</h3>
+       224 +            <p>
+       225 +              Engineers across a multi-stage CI/CD pipeline 
+           + lack unified, intelligent visibility into work status. 
+           + Failures require manual investigation, and there is no 
+           + AI-driven interface for pipeline health.
+       226 +            </p>
+       227 +          </div>
+       228 +          <div class="card">
+       229 +            <h3><i class="fa-solid fa-lightbulb"></i> Our 
+           + Approach</h3>
+       230 +            <p>
+       231 +              Build on existing infrastructure (Jenkins, 
+           + Airflow, pyATS) to add AI-powered telemetry, failure 
+           + diagnosis, and proactive health monitoring without 
+           + disrupting current workflows.
+       232 +            </p>
+       233 +          </div>
+       234          </div>
+       235 -      </div>
+       235    
+       236 -      <div class="focus-areas">
+       237 -        <h3>Current Focus Areas</h3>
+       238 -        <div class="focus-list">
+       239 -          <div class="focus-item">
+       240 -            <div class="number">A</div>
+       241 -            <div class="content">
+       242 -              <h4>Developer Box Intelligence</h4>
+       243 -              
+           -  <p>Telemetry, coverage tracking, AI-assisted debugging at 
+           -  local dev</p>
+       236 +        <div class="focus-section">
+       237 +          <h3>Current Focus Areas</h3>
+       238 +          <div class="focus-grid">
+       239 +            <div class="focus-item">
+       240 +              <div class="focus-letter">A</div>
+       241 +              <div>
+       242 +                <h4>Developer Box Intelligence</h4>
+       243 +                
+           +  <p>Telemetry, coverage tracking, AI-assisted debugging at 
+           +  local dev</p>
+       244 +              </div>
+       245              </div>
+       246 -          </div>
+       247 -          <div class="focus-item">
+       248 -            <div class="number">F</div>
+       249 -            <div class="content">
+       250 -              <h4>Branch Health Monitoring</h4>
+       251 -              <p>Dashboards, failure attribution, automated 
+           - follow-up workflows</p>
+       246 +            <div class="focus-item">
+       247 +              <div class="focus-letter">F</div>
+       248 +              <div>
+       249 +                <h4>Branch Health Monitoring</h4>
+       250 +                <p>Dashboards, failure attribution, automated
+           +  follow-up workflows</p>
+       251 +              </div>
+       252              </div>
+       253            </div>
+       254          </div>
+       255 -      </div>
+       255    
+       256 -      <div class="capabilities-used">
+       257 -        <h3>BayOne Capabilities Applied</h3>
+       258 -        <div class="capability-tags">
+       256 +        <div class="capabilities-row">
+       257            <div class="capability-tag">Agentic DevOps</div>
+       258            <div class="capability-tag">CI/CD Integration</div>
+       259            <div class="capability-tag">Data Pipeline 
+             Engineering</div>
+     ...
+       312          </div>
+       313        </div>
+       314    
+       315 -      <div class="footer">
+       316 -        <div class="footer-logo">Bay<span>One</
+           -  span> Solutions</div>
+       315 +      <div class="slide-footer">
+       316 +        <div class="slide-footer-bar"></div>
+       317 +        <div class="slide-number">13</div>
+       318        </div>
+       319      </div>
+       320    </body>
+
+● Done. Slide 13 now has:
+  - Canvas frame with header/footer
+  - Section icon (code-branch) with "Active Engagement" label
+  - Lead paragraph
+  - Two cards (Challenge / Approach) with differentiated colors
+  - Focus areas section with A and F letter badges
+  - Capability tags at bottom
+
+  What do you think?
+
+> Move on to the next slide. I don't like this one at all. But it doesn't 
+matter, just move on to the next one. 
+
+● Read(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/sli
+      des/14_engagement_model.html)
+  ⎿  Read 332 lines
+
+● Write(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/sl
+       ides/14_engagement_model.html)
+  ⎿  Updated ../14_engagement_model.html with 221 additions and 199 removal
+
+        5      <meta name="viewport" content="width=device-width, 
+            initial-scale=1.0">
+        6      <title>Engagement Model - BayOne Solutions</title>
+        7      <link href="https://fonts.googleapis.com/css2?family=Inter
+            :wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        8 +    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/
+          + ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        9      <style>
+       10        * { margin: 0; padding: 0; box-sizing: border-box; }
+       11    
+     ...
+        25        body {
+        26          font-family: 'Inter', -apple-system, 
+             BlinkMacSystemFont, sans-serif;
+        27          color: var(--text);
+        28 -        line-height: 1.7;
+        29 -        font-size: 15px;
+        30 -        background: #fff;
+        28 +        line-height: 1.6;
+        29 +        font-size: 14px;
+        30 +        background: #e8e6eb;
+        31 +        min-height: 100vh;
+        32 +        display: flex;
+        33 +        align-items: center;
+        34 +        justify-content: center;
+        35 +        padding: 24px;
+        36        }
+        37    
+        38 -      .container {
+        39 -        max-width: 900px;
+        40 -        margin: 0 auto;
+        41 -        padding: 80px 40px;
+        38 +      .slide {
+        39 +        width: 100%;
+        40 +        max-width: 1100px;
+        41 +        aspect-ratio: 16 / 10;
+        42 +        position: relative;
+        43 +        background: linear-gradient(180deg, #ffffff 0%, 
+           + #fdfcff 60%, #f9f7ff 100%);
+        44 +        border-radius: 12px;
+        45 +        border: 1px solid rgba(0, 0, 0, 0.08);
+        46 +        box-shadow:
+        47 +          0 2px 8px rgba(0, 0, 0, 0.06),
+        48 +          0 8px 24px rgba(0, 0, 0, 0.08);
+        49 +        overflow: hidden;
+        50 +        display: flex;
+        51 +        flex-direction: column;
+        52        }
+        53    
+        54 -      .section-number {
+        55 -        font-size: 12px;
+        56 -        font-weight: 600;
+        57 -        color: var(--purple-accent);
+        58 -        letter-spacing: 2px;
+        54 +      /* Header */
+        55 +      .slide-header {
+        56 +        display: flex;
+        57 +        justify-content: space-between;
+        58 +        align-items: center;
+        59 +        padding: 16px 40px;
+        60 +        border-bottom: 1px solid var(--border);
+        61 +        flex-shrink: 0;
+        62 +      }
+        63 +  
+        64 +      .header-logo {
+        65 +        font-size: 16px;
+        66 +        font-weight: 700;
+        67 +        color: var(--primary);
+        68 +      }
+        69 +  
+        70 +      .header-logo span { color: var(--purple-accent); }
+        71 +  
+        72 +      .header-title {
+        73 +        font-size: 11px;
+        74 +        font-weight: 500;
+        75 +        color: var(--text-light);
+        76 +        letter-spacing: 0.5px;
+        77 +      }
+        78 +  
+        79 +      /* Content */
+        80 +      .slide-content {
+        81 +        flex: 1;
+        82 +        padding: 24px 48px 16px;
+        83 +        overflow: hidden;
+        84 +      }
+        85 +  
+        86 +      .section-header {
+        87 +        display: flex;
+        88 +        align-items: center;
+        89 +        gap: 14px;
+        90          margin-bottom: 12px;
+        91 +      }
+        92 +  
+        93 +      .section-icon {
+        94 +        width: 44px;
+        95 +        height: 44px;
+        96 +        background: linear-gradient(135deg, #5B21B6, 
+           + #7C3AED);
+        97 +        color: #fff;
+        98 +        border-radius: 12px;
+        99 +        display: flex;
+       100 +        align-items: center;
+       101 +        justify-content: center;
+       102 +        font-size: 18px;
+       103 +      }
+       104 +  
+       105 +      .section-label {
+       106 +        font-size: 11px;
+       107 +        font-weight: 600;
+       108 +        color: var(--purple-mid);
+       109 +        letter-spacing: 1.5px;
+       110          text-transform: uppercase;
+       111 +        margin-bottom: 2px;
+       112        }
+       113    
+       114        h2 {
+       115 -        font-size: 32px;
+       115 +        font-size: 24px;
+       116          font-weight: 700;
+       117          color: var(--primary);
+       118 -        margin-bottom: 24px;
+       118          letter-spacing: -0.5px;
+       119        }
+       120    
+       121        .lead {
+       122 -        font-size: 18px;
+       122 +        font-size: 13px;
+       123          color: var(--text-light);
+       124 -        line-height: 1.8;
+       125 -        margin-bottom: 48px;
+       124 +        line-height: 1.6;
+       125 +        margin-bottom: 18px;
+       126 +        max-width: 800px;
+       127        }
+       128    
+       129 +      /* Phase cards - 3 column */
+       130        .phase-grid {
+       131          display: grid;
+       132          grid-template-columns: repeat(3, 1fr);
+       133 -        gap: 24px;
+       134 -        margin: 40px 0;
+       133 +        gap: 16px;
+       134 +        margin-bottom: 18px;
+       135        }
+       136    
+       137        .phase-card {
+       138          background: #fff;
+       139 -        border: 1px solid rgba(124,58,237,0.15);
+       140 -        border-radius: 12px;
+       141 -        padding: 28px;
+       142 -        position: relative;
+       139 +        border: 1px solid rgba(124,58,237,0.1);
+       140 +        border-radius: 8px;
+       141 +        padding: 16px;
+       142        }
+       143    
+       144 -      .phase-card::before {
+       145 -        content: '';
+       146 -        position: absolute;
+       147 -        top: 0;
+       148 -        left: 0;
+       149 -        right: 0;
+       150 -        height: 4px;
+       151 -        background: linear-gradient(90deg, var(--purple-mid),
+           -  var(--purple-accent));
+       152 -        border-radius: 12px 12px 0 0;
+       144 +      .phase-card h3 {
+       145 +        font-size: 13px;
+       146 +        font-weight: 600;
+       147 +        color: var(--primary);
+       148 +        margin-bottom: 8px;
+       149 +        display: flex;
+       150 +        align-items: center;
+       151 +        gap: 10px;
+       152        }
+       153    
+       154        .phase-number {
+       155 -        width: 40px;
+       156 -        height: 40px;
+       155 +        width: 26px;
+       156 +        height: 26px;
+       157          background: linear-gradient(135deg, #7c3aed, 
+             #a855f7);
+       158          color: #fff;
+       159 -        border-radius: 10px;
+       159 +        border-radius: 8px;
+       160          display: flex;
+       161          align-items: center;
+       162          justify-content: center;
+       163 -        font-size: 18px;
+       163 +        font-size: 12px;
+       164          font-weight: 700;
+       165 -        margin-bottom: 16px;
+       165 +        flex-shrink: 0;
+       166        }
+       167    
+       168 -      .phase-card h3 {
+       169 -        font-size: 18px;
+       170 -        font-weight: 600;
+       171 -        color: var(--primary);
+       172 -        margin-bottom: 12px;
+       173 -      }
+       174 -  
+       168        .phase-card p {
+       169 -        font-size: 14px;
+       169 +        font-size: 11px;
+       170          color: var(--text);
+       171 -        line-height: 1.7;
+       172 -        margin: 0;
+       171 +        line-height: 1.55;
+       172        }
+       173    
+       174 -      .models-section {
+       175 -        margin: 48px 0;
+       176 -      }
+       174 +      /* Different colors per phase */
+       175 +      .phase-card:nth-child(1) { border-bottom: 3px solid 
+           + #5B21B6; }
+       176 +      .phase-card:nth-child(2) { border-bottom: 3px solid 
+           + #7C3AED; }
+       177 +      .phase-card:nth-child(3) { border-bottom: 3px solid 
+           + #A855F7; }
+       178    
+       179 +      /* Commercial models - 3 column */
+       180        .models-section h3 {
+       181 -        font-size: 14px;
+       181 +        font-size: 11px;
+       182          font-weight: 600;
+       183          color: var(--purple-mid);
+       184          text-transform: uppercase;
+       185          letter-spacing: 1.5px;
+       186 -        margin-bottom: 20px;
+       186 +        margin-bottom: 12px;
+       187        }
+       188    
+       189        .model-grid {
+       190          display: grid;
+       191          grid-template-columns: repeat(3, 1fr);
+       192 -        gap: 20px;
+       192 +        gap: 14px;
+       193 +        margin-bottom: 16px;
+       194        }
+       195    
+       196        .model-item {
+       197          background: var(--bg-subtle);
+       198          border: 1px solid var(--border);
+       199 -        border-radius: 10px;
+       200 -        padding: 20px;
+       199 +        border-radius: 8px;
+       200 +        padding: 14px 16px;
+       201        }
+       202    
+       203        .model-item h4 {
+       204 -        font-size: 15px;
+       204 +        font-size: 12px;
+       205          font-weight: 600;
+       206          color: var(--primary);
+       207 -        margin-bottom: 8px;
+       207 +        margin-bottom: 4px;
+       208 +        display: flex;
+       209 +        align-items: center;
+       210 +        gap: 8px;
+       211        }
+       212    
+       213 +      .model-item h4 i {
+       214 +        font-size: 11px;
+       215 +        color: var(--purple-accent);
+       216 +      }
+       217 +  
+       218        .model-item p {
+       219 -        font-size: 13px;
+       219 +        font-size: 11px;
+       220          color: var(--text-light);
+       221 -        margin: 0;
+       222 -        line-height: 1.6;
+       221 +        line-height: 1.5;
+       222        }
+       223    
+       224 +      /* Staffing note */
+       225        .staffing-note {
+       226          background: linear-gradient(135deg, 
+             rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+       227 -        border-left: 4px solid var(--purple-accent);
+       228 -        padding: 20px 24px;
+       229 -        margin: 40px 0;
+       227 +        border-left: 3px solid var(--purple-accent);
+       228 +        padding: 12px 16px;
+       229          border-radius: 0 8px 8px 0;
+       230        }
+       231    
+       232        .staffing-note p {
+       233 -        font-size: 15px;
+       233 +        font-size: 12px;
+       234 +        color: var(--text);
+       235 +        line-height: 1.6;
+       236 +      }
+       237 +  
+       238 +      .staffing-note strong {
+       239          color: var(--primary);
+       240 -        margin: 0;
+       240        }
+       241    
+       242 -      .footer {
+       243 -        text-align: center;
+       244 -        padding: 48px 40px;
+       245 -        border-top: 1px solid var(--border);
+       246 -        margin-top: 64px;
+       242 +      /* Footer */
+       243 +      .slide-footer {
+       244 +        flex-shrink: 0;
+       245 +        padding: 16px 40px 16px;
+       246        }
+       247    
+       248 -      .footer-logo {
+       249 -        font-size: 20px;
+       250 -        font-weight: 700;
+       251 -        color: var(--primary);
+       248 +      .slide-footer-bar {
+       249 +        height: 3px;
+       250 +        background: linear-gradient(90deg, 
+           + var(--purple-darkest), var(--purple-mid), 
+           + var(--purple-accent), var(--purple-glow));
+       251 +        border-radius: 2px;
+       252        }
+       253    
+       254 -      .footer-logo span { color: var(--purple-accent); }
+       254 +      .slide-number {
+       255 +        text-align: right;
+       256 +        margin-top: 10px;
+       257 +        font-size: 11px;
+       258 +        font-weight: 600;
+       259 +        color: var(--purple-accent);
+       260 +        letter-spacing: 2px;
+       261 +      }
+       262    
+       263        @media print {
+       264 -        @page {
+       265 -          size: 8.5in 11in;
+       266 -          margin: 0.4in;
+       264 +        body {
+       265 +          background: white;
+       266 +          padding: 0;
+       267          }
+       268    
+       269 -        body { font-size: 9pt; line-height: 1.4; }
+       270 -        .container { padding: 0; max-width: 100%; }
+       271 -  
+       272 -        .section-number {
+       273 -          break-after: avoid;
+       274 -          page-break-after: avoid;
+       269 +        .slide {
+       270 +          max-width: 100%;
+       271 +          aspect-ratio: auto;
+       272 +          min-height: 100vh;
+       273 +          border-radius: 0;
+       274 +          box-shadow: none;
+       275 +          border: none;
+       276          }
+       277 -  
+       278 -        h2 {
+       279 -          font-size: 18pt;
+       280 -          margin-bottom: 12px;
+       281 -          break-after: avoid;
+       282 -          page-break-after: avoid;
+       283 -        }
+       284 -  
+       285 -        .lead { font-size: 11pt; margin-bottom: 24px; }
+       286 -  
+       287 -        .phase-grid { gap: 16px; margin: 20px 0; }
+       288 -  
+       289 -        .phase-card {
+       290 -          padding: 18px;
+       291 -          break-inside: avoid;
+       292 -          page-break-inside: avoid;
+       293 -        }
+       294 -  
+       295 -        .phase-card::before {
+       296 -          -webkit-print-color-adjust: exact;
+       297 -          print-color-adjust: exact;
+       298 -        }
+       299 -  
+       300 -        .phase-number {
+       301 -          width: 32px;
+       302 -          height: 32px;
+       303 -          font-size: 14px;
+       304 -          margin-bottom: 12px;
+       305 -          -webkit-print-color-adjust: exact;
+       306 -          print-color-adjust: exact;
+       307 -        }
+       308 -  
+       309 -        .phase-card h3 { font-size: 11pt; margin-bottom: 8px;
+           -  }
+       310 -        .phase-card p { font-size: 9pt; }
+       311 -  
+       312 -        .models-section { margin: 24px 0; }
+       313 -        .models-section h3 { font-size: 9pt; margin-bottom: 
+           - 12px; }
+       314 -        .model-grid { gap: 12px; }
+       315 -  
+       316 -        .model-item {
+       317 -          padding: 14px;
+       318 -          break-inside: avoid;
+       319 -          page-break-inside: avoid;
+       320 -        }
+       321 -  
+       322 -        .model-item h4 { font-size: 10pt; margin-bottom: 6px;
+           -  }
+       323 -        .model-item p { font-size: 8pt; }
+       324 -  
+       325 -        .staffing-note {
+       326 -          padding: 14px 18px;
+       327 -          margin: 20px 0;
+       328 -          break-inside: avoid;
+       329 -          page-break-inside: avoid;
+       330 -          -webkit-print-color-adjust: exact;
+       331 -          print-color-adjust: exact;
+       332 -        }
+       333 -  
+       334 -        .staffing-note p { font-size: 9pt; }
+       335 -  
+       336 -        .footer { padding: 24px 0; margin-top: 32px; }
+       277        }
+       278      </style>
+       279    </head>
+       280    <body>
+       281 -    <div class="container">
+       282 -      <div class="section-number">14</div>
+       283 -      <h2>Engagement Model</h2>
+       284 -      <p class="lead">
+       285 -        We meet you where you are. Whether you need a focused
+           -  discovery sprint,
+       286 -        a proof of concept, or full production deployment, we
+           -  structure engagements
+       287 -        to deliver value at each phase.
+       288 -      </p>
+       281 +    <div class="slide">
+       282 +      <div class="slide-header">
+       283 +        <div class="header-logo">Bay<span>One</span> 
+           + Solutions</div>
+       284 +        <div class="header-title">Enterprise AI 
+           + Capabilities</div>
+       285 +      </div>
+       286    
+       287 -      <div class="phase-grid">
+       288 -        <div class="phase-card">
+       289 -          <div class="phase-number">1</div>
+       290 -          <h3>Discovery</h3>
+       291 -          <p>
+       292 -            Understand your stack, identify quick wins, and 
+           - map the path to value.
+       293 -            We assess your data, infrastructure, and team 
+           - capabilities to design
+       294 -            a realistic roadmap.
+       295 -          </p>
+       287 +      <div class="slide-content">
+       288 +        <div class="section-header">
+       289 +          <div class="section-icon"><i class="fa-solid 
+           + fa-handshake"></i></div>
+       290 +          <div>
+       291 +            <div class="section-label">How We Work</div>
+       292 +            <h2>Engagement Model</h2>
+       293 +          </div>
+       294          </div>
+       295 -        <div class="phase-card">
+       296 -          <div class="phase-number">2</div>
+       297 -          <h3>Proof of Concept</h3>
+       298 -          <p>
+       299 -            Build a working solution that proves value with 
+           - real data. POCs are
+       300 -            designed to answer specific questions and de-risk
+           -  production investment.
+       301 -          </p>
+       302 -        </div>
+       303 -        <div class="phase-card">
+       304 -          <div class="phase-number">3</div>
+       305 -          <h3>Production</h3>
+       306 -          <p>
+       307 -            Scale, harden, and integrate. Production 
+           - deployments include monitoring,
+       308 -            security review, user training, and documentation
+           -  for handoff.
+       309 -          </p>
+       310 -        </div>
+       311 -      </div>
+       295    
+       296 -      <div class="models-section">
+       297 -        <h3>Commercial Models</h3>
+       298 -        <div class="model-grid">
+       299 -          <div class="model-item">
+       300 -            <h4>Time & Materials</h4>
+       301 -            <p>Flexible engagement for discovery and 
+           - exploratory work. Pay for time, adjust scope as needed.</p>
+       296 +        <p class="lead">
+       297 +          We meet you where you are. Whether you need a 
+           + focused discovery sprint, a proof of concept, or full 
+           + production deployment, we structure engagements to deliver 
+           + value at each phase.
+       298 +        </p>
+       299 +  
+       300 +        <div class="phase-grid">
+       301 +          <div class="phase-card">
+       302 +            <h3><div class="phase-number">1</div> 
+           + Discovery</h3>
+       303 +            <p>
+       304 +              Understand your stack, identify quick wins, and
+           +  map the path to value. We assess your data, infrastructure,
+           +  and team capabilities to design a realistic roadmap.
+       305 +            </p>
+       306            </div>
+       307 -          <div class="model-item">
+       308 -            <h4>Fixed Price</h4>
+       309 -            <p>Milestone-based delivery for well-defined 
+           - scopes. Clear deliverables, predictable budget.</p>
+       307 +          <div class="phase-card">
+       308 +            <h3><div class="phase-number">2</div> Proof of 
+           + Concept</h3>
+       309 +            <p>
+       310 +              Build a working solution that proves value with
+           +  real data. POCs are designed to answer specific questions 
+           + and de-risk production investment.
+       311 +            </p>
+       312            </div>
+       313 -          <div class="model-item">
+       314 -            <h4>Managed Service</h4>
+       315 -            <p>Ongoing operations and optimization. We run 
+           - and improve the system over time.</p>
+       313 +          <div class="phase-card">
+       314 +            <h3><div class="phase-number">3</div> 
+           + Production</h3>
+       315 +            <p>
+       316 +              Scale, harden, and integrate. Production 
+           + deployments include monitoring, security review, user 
+           + training, and documentation for handoff.
+       317 +            </p>
+       318            </div>
+       319          </div>
+       320 -      </div>
+       320    
+       321 -      <div class="staffing-note">
+       322 -        <p>
+       323 -          <strong>Staffing model:</strong> Senior onshore 
+           - leadership paired with
+       324 -          scalable offshore delivery. Flexible pods covering 
+           - AI, Data Engineering,
+       325 -          Full-Stack, and UI/UX as your needs evolve.
+       326 -        </p>
+       321 +        <div class="models-section">
+       322 +          <h3>Commercial Models</h3>
+       323 +          <div class="model-grid">
+       324 +            <div class="model-item">
+       325 +              <h4><i class="fa-solid fa-clock"></i> Time & 
+           + Materials</h4>
+       326 +              <p>Flexible engagement for discovery and 
+           + exploratory work. Pay for time, adjust scope as needed.</p>
+       327 +            </div>
+       328 +            <div class="model-item">
+       329 +              <h4><i class="fa-solid fa-bullseye"></i> Fixed 
+           + Price</h4>
+       330 +              <p>Milestone-based delivery for well-defined 
+           + scopes. Clear deliverables, predictable budget.</p>
+       331 +            </div>
+       332 +            <div class="model-item">
+       333 +              <h4><i class="fa-solid fa-gears"></i> Managed 
+           + Service</h4>
+       334 +              <p>Ongoing operations and optimization. We run 
+           + and improve the system over time.</p>
+       335 +            </div>
+       336 +          </div>
+       337 +        </div>
+       338 +  
+       339 +        <div class="staffing-note">
+       340 +          <p>
+       341 +            <strong>Staffing model:</strong> Senior onshore 
+           + leadership paired with scalable offshore delivery. Flexible 
+           + pods covering AI, Data Engineering, Full-Stack, and UI/UX as
+           +  your needs evolve.
+       342 +          </p>
+       343 +        </div>
+       344        </div>
+       345    
+       346 -      <div class="footer">
+       347 -        <div class="footer-logo">Bay<span>One</
+           -  span> Solutions</div>
+       346 +      <div class="slide-footer">
+       347 +        <div class="slide-footer-bar"></div>
+       348 +        <div class="slide-number">14</div>
+       349        </div>
+       350      </div>
+       351    </body>
+
+● Done. Slide 14 has:
+  - Canvas frame with header/footer
+  - Section icon (handshake) with "How We Work" label
+  - 3 phase cards (Discovery, POC, Production) with numbered badges and
+  differentiated bottom borders
+  - 3 commercial model cards with icons
+  - Staffing note callout at bottom
+
+  What do you think?
+
+> I don't like the handshake logo at all. Staffing model: Senior onshore 
+leadership paired with scalable offshore delivery. Flexible pods covering 
+AI, Data Engineering, Full-Stack, and UI/UX as your needs evolve Should not 
+be formatted that way. Let's prototype on how to reformat that one and be 
+more effective. The content is great, just the delivery is bad. 
+
+● Update(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/s
+        lides/14_engagement_model.html)
+  ⎿  Updated ../14_engagement_model.html with 1 addition and 1 removal
+       287    
+       288        <div class="slide-content">
+       289          <div class="section-header">
+       290 -          <div class="section-icon"><i class="fa-solid fa-
+           -  handshake"></i></div>
+       290 +          <div class="section-icon"><i class="fa-solid fa-
+           +  arrows-spin"></i></div>
+       291            <div>
+       292              <div class="section-label">How We Work</div>
+       293              <h2>Engagement Model</h2>
+
+● Write(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/sl
+       ides/prototype_staffing_layouts.html)
+  ⎿  Wrote 527 lines to ../prototype_staffing_layouts.html                 
+     <!DOCTYPE html>
+     <html lang="en">
+     <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, 
+     initial-scale=1.0">
+       <title>Staffing Section Options</title>
+       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;4
+     00;500;600;700&display=swap" rel="stylesheet">
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/f
+     ont-awesome/6.5.1/css/all.min.css">
+       <style>
+         * { margin: 0; padding: 0; box-sizing: border-box; }
+     … +517 lines (ctrl+o to expand)
+
+● Done. Changed the icon to arrows-spin (a cycle/process icon).
+
+  Created prototype_staffing_layouts.html with 6 options for the staffing
+  section:
+
+  - A: Two Columns — Leadership on left, Delivery Pods on right with tags
+  - B: Icon Row — Leadership block + pod icons in a row
+  - C: Compact Inline — Label | description | pills all in one line
+  - D: Visual Diagram — Onshore box → arrow → Offshore pods box
+  - E: Simple Two-Line — Text with emphasis, pods listed with dots
+  - F: Horizontal Cards — 5 cards (leadership highlighted, 4 pod types)
+
+  Take a look.
+
+> I think option A, but the problem is that this doesn't really capture our 
+true delivery model. We offer things based upon what the client needs. We 
+can do full onshore with no issue. Delivering accessible local talent that 
+can be on-site, remote, or hybrid. We can do a hybrid onshore/offshore which
+ is sometimes a nice balance between top-tier talent, accessibility, and 
+cost. Primarily offshore with onshore leads or even entirely offshore as a 
+best cost model or way to bridge time zones or provide 24-hour coverage. 
+This is highly flexible. We don't want to be too wordy or redundant. How can
+ we integrate this slide to really say this without confusing everyone? 
+
+● Good point. The current framing is too rigid. Let me create a prototype
+  that shows the flexibility without being wordy.
+
+● Write(~/programming/cisco_projects/cicd/claude/2026-02-10_capabilities_deck/sl
+       ides/prototype_staffing_v2.html)
+  ⎿  Wrote 401 lines to ../prototype_staffing_v2.html                      
+     <!DOCTYPE html>
+     <html lang="en">
+     <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, 
+     initial-scale=1.0">
+       <title>Staffing Model Options v2</title>
+       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;4
+     00;500;600;700&display=swap" rel="stylesheet">
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/f
+     ont-awesome/6.5.1/css/all.min.css">
+       <style>
+         * { margin: 0; padding: 0; box-sizing: border-box; }
+     … +391 lines (ctrl+o to expand)
+  ⎿  Interrupted · What should Claude do instead?
+
+
+
