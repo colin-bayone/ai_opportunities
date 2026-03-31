@@ -20,6 +20,8 @@ from pathlib import Path
 
 
 # Map of generation types to required references
+# At least ONE reference from each list must be read (OR logic within a type,
+# so reading the 2026-03-28 update satisfies the requirement alongside the originals)
 REFERENCE_REQUIREMENTS = {
     "skill": [
         "2026-02-11_skill_structure.md",
@@ -32,6 +34,11 @@ REFERENCE_REQUIREMENTS = {
         "2026-02-11_hooks_system.md",
     ],
 }
+
+# The 2026-03-28 update covers ALL categories — reading it satisfies any requirement
+UNIVERSAL_REFERENCES = [
+    "2026-03-28_new_features_update.md",
+]
 
 # NOTE: Detection is now based on Write/Edit tool calls to specific paths,
 # not text mentions. See detect_generation_type() for implementation.
@@ -188,6 +195,10 @@ def main():
 
     # Check what references were read
     read_files = check_transcript_for_reads(transcript_path)
+
+    # If a universal reference was read, all requirements are satisfied
+    if any(ref in read_files for ref in UNIVERSAL_REFERENCES):
+        sys.exit(0)
 
     # Check for missing required references
     missing = []

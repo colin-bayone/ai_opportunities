@@ -14,11 +14,43 @@ Create skills, agents, and hooks following 2026 best practices.
 
 ---
 
+## MANDATORY: Pre-Flight Checks (Run EVERY Time)
+
+**Before doing ANYTHING else, run these two checks. They are non-negotiable.**
+
+### Check 1: Agent Write Permissions
+
+```bash
+python3 .claude/skills/skill-forge/scripts/check_agent_write_permissions.py
+```
+
+If status is "missing", **STOP and tell the user**. They need to add this to `.claude/settings.local.json` under `permissions.allow`:
+```
+Write($CLAUDE_PROJECT_DIR/.claude/skills/skill-forge/**)
+```
+
+This permission is required for the self-update agent to write research files. Without it, skill-forge cannot keep itself current.
+
+### Check 2: Staleness Check
+
+```bash
+python3 .claude/skills/skill-forge/scripts/check_staleness.py
+```
+
+If stale (>30 days since last update), **show the user the report** and offer:
+> "Skill-forge references are {X} days old. Would you like me to run the skill-forge-updater agent to refresh them before we proceed?"
+
+If the user says yes, invoke the `skill-forge-updater` agent and wait for it to complete before proceeding with the skill creation workflow.
+
+If the user says no or it's not stale, proceed normally.
+
+---
+
 ## MANDATORY: Follow This Workflow Exactly
 
 **DO NOT skip steps. DO NOT jump to generating files. DO NOT assume what the user wants.**
 
-When skill-forge is invoked:
+When skill-forge is invoked (after pre-flight checks pass):
 
 1. **FIRST** - Ask the onboarding question (Step 0) and WAIT for the user's answer
 2. **SECOND** - Read the required reference files based on what they want to build
@@ -330,6 +362,8 @@ Support refinement:
 - `scripts/estimate_tokens.py` - Estimate tokens (char/4)
 - `scripts/validate.py` - Validate skill structure
 - `scripts/scaffold.py` - Generate skill/agent/hook scaffolds
+- `scripts/check_staleness.py` - Check if skill-forge references are stale (>30 days)
+- `scripts/check_agent_write_permissions.py` - Verify agents can write to references/
 
 ## Kickoff Prompts
 
@@ -344,14 +378,20 @@ Example prompts for different user situations. Read these to understand how user
 
 Detailed patterns from 2026-02-11 research. **All references are at `.claude/skills/skill-forge/references/`**
 
-**Index:**
-- `.claude/skills/skill-forge/references/2026-02-11_new_features.md` - Summary of Dec 2025 - Feb 2026 features
+**Latest (2026-03-28 update):**
+- `.claude/skills/skill-forge/references/2026-03-28_new_features_update.md` - All changes Jan–Mar 2026: 26+ hook events, HTTP hooks, new frontmatter fields, 250 char description cap, worktree isolation, auto mode, /batch, plugin system, 1M context
 
-**Best Practices (Phase 2 research):**
+**Original Research (2026-02-11):**
+- `.claude/skills/skill-forge/references/2026-02-11_new_features.md` - Summary of Dec 2025 - Feb 2026 features
 - `.claude/skills/skill-forge/references/2026-02-11_skill_structure.md` - SKILL.md format, frontmatter, triggering, 8 implementation patterns
-- `.claude/skills/skill-forge/references/2026-02-11_agents_subagents.md` - Task tool, Agent Teams, 6 coordination patterns, model selection
-- `.claude/skills/skill-forge/references/2026-02-11_hooks_system.md` - 14 hook events, 3 types, 8 enforcement patterns
+- `.claude/skills/skill-forge/references/2026-02-11_agents_subagents.md` - Agent tool, Agent Teams, 6 coordination patterns, model selection
+- `.claude/skills/skill-forge/references/2026-02-11_hooks_system.md` - Hook events, 3 types, 8 enforcement patterns (see 2026-03-28 update for current count)
 - `.claude/skills/skill-forge/references/2026-02-11_scripts_context.md` - Progressive disclosure, degrees of freedom, token management
+
+**Self-Update System:**
+- `.claude/skills/skill-forge/VERSION.md` - Version tracking, update history, known gaps
+- `.claude/agents/skill-forge-updater.md` - Self-update agent with parallel research capabilities
+- `.claude/hooks/skill-forge-preflight.py` - Enforces pre-flight checks via Stop hook
 
 **Local Patterns (Phase 3 research):**
 - `.claude/skills/skill-forge/references/2026-02-11_django_forge_patterns.md` - 14-agent swarm, blackboard pattern, wave execution
@@ -370,7 +410,7 @@ All fields are optional, but `description` is strongly recommended.
 ```yaml
 # Identity & Triggering
 name: skill-name                 # 1-64 chars, lowercase + hyphens. Becomes /slash-command name
-description: |                   # RECOMMENDED: Claude uses this to auto-trigger
+description: |                   # RECOMMENDED: Claude uses this to auto-trigger. MAX 250 CHARS.
   What this skill does.
   WHEN to use: [triggers]
   WHEN NOT to use: [exclusions]
@@ -384,9 +424,15 @@ argument-hint: [file] [options]  # Autocomplete hint showing expected arguments
 context: fork                    # fork = runs skill in isolated subagent context
 agent: Explore                   # Subagent type when context: fork (Explore, Plan, general-purpose)
 model: sonnet                    # Model override: sonnet, opus, haiku, inherit
+effort: medium                   # Model effort level: low, medium, high (v2.1.80)
 
 # Tool Access
 allowed-tools: Read, Grep, Bash(git:*)  # Pre-approved tools, supports wildcards
+
+# Path-Based Activation (v2.1.84)
+paths:                           # YAML list of glob patterns — skill activates for matching files
+  - "src/components/**/*.tsx"
+  - "*.css"
 
 # Lifecycle Hooks (skill-scoped)
 hooks:                           # Hook automation scoped to this skill
@@ -395,6 +441,8 @@ hooks:                           # Hook automation scoped to this skill
       type: command
       command: "./validate.sh"
 ```
+
+**CRITICAL: Description cap is 250 characters** (reduced from 1024 in v2.1.86). Front-load the most important trigger condition.
 
 **NOT SUPPORTED (will cause validation errors):**
 - `license`, `version`, `compatibility`, `metadata`, `mode`
@@ -421,6 +469,7 @@ description: |                   # Determines when Claude delegates to this agen
 
 # Model Selection (help user choose)
 model: sonnet                    # See model guidance below
+effort: medium                   # Model effort: low, medium, high (v2.1.80)
 
 # Tool Access
 tools: Read, Grep, Glob, Edit    # Allowlist; inherits all if omitted
@@ -429,6 +478,8 @@ disallowedTools: Task            # Denylist; removes from inherited/specified se
 # Execution Control
 permissionMode: default          # See permission modes below
 maxTurns: 20                     # Maximum agentic turns before stopping
+isolation: worktree              # Run in isolated git worktree (v2.1.50)
+initialPrompt: "Start analyzing" # Auto-submit first turn (v2.1.83)
 
 # Context Enhancement
 skills:                          # Skills preloaded into agent context
@@ -436,14 +487,14 @@ skills:                          # Skills preloaded into agent context
   - another-skill
 memory: project                  # Persistent memory: user, project, or local
 
-# Hooks (agent-specific)
+# Hooks (agent-specific — NOT available in plugin agents for security)
 hooks:
   PreToolUse:
     - matcher: "Edit"
       type: command
       command: "./validate.sh"
 
-# MCP Integration
+# MCP Integration (NOT available in plugin agents for security)
 mcpServers:                      # MCP servers available to this agent
   - my-mcp-server
 ```
@@ -464,8 +515,8 @@ mcpServers:                      # MCP servers available to this agent
 | `default` | Standard permission prompts | Normal operation |
 | `plan` | Read-only, no modifications | Research/exploration agents |
 | `acceptEdits` | Auto-accept file changes | Trusted implementation workers |
+| `auto` | AI classifier approves/blocks (research preview) | Teams wanting smart auto-approval |
 | `dontAsk` | Auto-deny permission requests | Restricted agents (allowed tools still work) |
-| `delegate` | Coordination mode | Team leads spawning other agents |
 | `bypassPermissions` | Skip all checks | Use cautiously, testing only |
 
 **Memory Scopes** (if user needs persistence):
@@ -489,10 +540,11 @@ When user wants hooks, create at `.claude/hooks/` or in settings.json:
         "matcher": "Bash",              # Regex pattern for tool name
         "hooks": [
           {
-            "type": "command",          # command, prompt, or agent
+            "type": "command",          # command, prompt, agent, or http
             "command": ".claude/hooks/validate.sh",
             "timeout": 60000,           # ms, default 600000 (10 min)
-            "async": false              # true = non-blocking background
+            "async": false,             # true = non-blocking background
+            "if": "Bash(git *)"         # Conditional filter (v2.1.85)
           }
         ]
       }
@@ -501,18 +553,33 @@ When user wants hooks, create at `.claude/hooks/` or in settings.json:
 }
 ```
 
-**Hook Events** (14 available):
+**Hook Types** (4 available):
+- `command` — Shell script, receives JSON via stdin, exit codes control behavior
+- `prompt` — Single-turn LLM evaluation, returns `{"ok": true/false, "reason": "..."}`
+- `agent` — Multi-turn subagent with tool access (Read, Grep, Glob), 60s timeout
+- `http` — POST event data as JSON to HTTP endpoint (v2.1.63)
+
+**Hook Events** (26+ available — see `2026-03-28_new_features_update.md` for full list):
 
 | Event | Blocking | Use For |
 |-------|----------|---------|
 | `PreToolUse` | Yes | Security checks, input modification, auto-approval |
 | `PostToolUse` | No | Auto-formatting, logging, quality checks |
 | `Stop` | Yes | Task completion verification |
+| `StopFailure` | No | Handle API errors at turn end |
 | `SessionStart` | No | Context injection, environment setup |
+| `SessionEnd` | No | Cleanup, final logging |
 | `UserPromptSubmit` | Yes | Prompt validation |
 | `SubagentStart/Stop` | No/Yes | Subagent tracking, output validation |
+| `TaskCreated` | Yes | Block/validate task creation |
 | `TaskCompleted` | Yes | Completion criteria enforcement |
 | `TeammateIdle` | Yes | Multi-agent workflow control |
+| `WorktreeCreate/Remove` | Yes | Worktree lifecycle |
+| `PreCompact/PostCompact` | No | Context preservation |
+| `InstructionsLoaded` | No | Detect CLAUDE.md loading |
+| `ConfigChange` | No | React to settings changes mid-session |
+| `CwdChanged/FileChanged` | No | Working directory and file watchers |
+| `Elicitation/ElicitationResult` | Yes/No | MCP server user input |
 
 **Exit Codes** (for command hooks):
 - `0` = Allow, continue

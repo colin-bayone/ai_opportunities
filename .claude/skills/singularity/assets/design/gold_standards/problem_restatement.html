@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Balancing IP Protection with Productivity at Scale</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .cover-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e879f9;
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .cover-subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 48px;
+      max-width: 600px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 48px;
+      padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .cover-meta-item label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+
+    .cover-meta-item span {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .logo {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span { color: #e879f9; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .section { margin-bottom: 64px; }
+
+    .section-number {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      padding: 6px 14px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%);
+      border-radius: 4px;
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 32px 0 16px;
+    }
+
+    h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 24px 0 12px;
+    }
+
+    p { margin-bottom: 16px; }
+
+    .lead {
+      font-size: 18px;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border-left: 4px solid #a855f7;
+      padding: 24px 28px;
+      margin: 32px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    .highlight-box ol, .highlight-box ul {
+      margin: 12px 0 0 20px;
+      padding: 0;
+    }
+
+    .highlight-box li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      padding: 14px 16px;
+      background: #5b21b6;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+
+    th:last-child { border-right: none; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    ul.content-list {
+      margin: 0 0 0 20px;
+      padding: 0;
+    }
+
+    ul.content-list li {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin: 24px 0;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      padding: 28px;
+    }
+
+    .card h4 {
+      margin-top: 0;
+      color: var(--purple-mid);
+    }
+
+    .card ul {
+      margin: 0 0 0 20px;
+      padding: 0;
+    }
+
+    .card li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .card p {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .card p:last-child { margin-bottom: 0; }
+
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      margin: 24px 0;
+    }
+
+    .workflow-step {
+      background: var(--white);
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      padding: 20px 24px;
+      position: relative;
+    }
+
+    .workflow-step-number {
+      position: absolute;
+      top: -12px;
+      left: 20px;
+      width: 24px;
+      height: 24px;
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: #fff;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .workflow-step h5 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 0 0 8px 0;
+    }
+
+    .workflow-step p {
+      font-size: 14px;
+      margin: 0;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 48px 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 64px;
+    }
+
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .footer-logo span { color: #a855f7; }
+
+    .footer p {
+      font-size: 13px;
+      color: var(--text-light);
+      margin: 0;
+    }
+
+    @media print {
+      @page {
+        size: 8.5in 11in;
+        margin: 0.4in;
+      }
+
+      body { font-size: 9pt; line-height: 1.4; }
+
+      .cover {
+        min-height: 0;
+        height: 10in;
+        padding: 50px;
+        page-break-after: always;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .cover h1 { font-size: 32pt; }
+      .cover-subtitle { font-size: 13pt; }
+      .cover-meta { padding-top: 32px; gap: 32px; }
+      .logo { position: relative; bottom: auto; right: auto; margin-top: 32px; }
+
+      .container { padding: 0; max-width: 100%; }
+
+      .section {
+        margin-bottom: 20px;
+        page-break-inside: avoid;
+      }
+
+      h2 { font-size: 14pt; margin-bottom: 10px; page-break-after: avoid; }
+      h3 { font-size: 11pt; margin: 14px 0 8px; page-break-after: avoid; }
+      h4 { font-size: 10pt; margin: 10px 0 6px; page-break-after: avoid; }
+      p { margin-bottom: 6px; }
+      .lead { font-size: 10pt; margin-bottom: 14px; }
+
+      table {
+        font-size: 8pt;
+        margin: 10px 0;
+        page-break-inside: avoid;
+      }
+
+      th, td {
+        padding: 6px 8px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .highlight-box {
+        padding: 12px 16px;
+        margin: 14px 0;
+        page-break-inside: avoid;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .two-col { gap: 16px; }
+
+      .card {
+        padding: 16px;
+        page-break-inside: avoid;
+      }
+
+      .workflow-grid { gap: 12px; }
+      .workflow-step { padding: 12px 16px; }
+
+      .section-number {
+        break-after: avoid;
+        page-break-after: avoid;
+      }
+
+      tr {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .footer {
+        margin-top: 20px;
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-label">Secure Knowledge Enablement</div>
+      <h1>Balancing IP Protection with Productivity at Scale</h1>
+      <p class="cover-subtitle">Understanding the challenge of enabling cross-customer knowledge sharing while protecting intellectual property</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <label>Prepared For</label>
+          <span>Lam Research</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Prepared By</label>
+          <span>BayOne Solutions</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Date</label>
+          <span>March 2026</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo">Bay<span>One</span></div>
+  </div>
+
+  <div class="container">
+
+    <div class="section">
+      <div class="section-number">PURPOSE</div>
+      <h2>Document Intent</h2>
+      <p class="lead">This document reflects BayOne's understanding of the problem as presented during the discovery session on March 12, 2026. The intent is to demonstrate a clear and accurate understanding of the challenge before any approaches or solutions are discussed.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>The Business Context</h2>
+      <p>Lam Research occupies a unique position in the semiconductor industry. As a provider of wafer fabrication equipment, Lam has direct visibility into the production environments of customers who are direct competitors with each other. TSMC, Samsung, Intel, Micron, and SK Hynix all rely on Lam's equipment and services, and in the course of that work, Lam employees interact with proprietary data belonging to each of these customers.</p>
+      <p>A leak of one customer's data to another would be catastrophic, both for the business relationship and potentially from a regulatory and antitrust standpoint. Protecting customer intellectual property is therefore existential to Lam's business model.</p>
+
+      <div class="highlight-box">
+        <p><strong>Core tension:</strong> Lam must simultaneously serve competing customers while maintaining absolute data isolation between them. The challenge is to enable knowledge sharing for non-proprietary technical content without compromising customer-identifiable information.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>The Troubleshooting Workflow</h2>
+      <p class="lead">The problem is anchored in a three-stage troubleshooting workflow that Lam's field and support teams follow.</p>
+
+      <div class="workflow-grid">
+        <div class="workflow-step">
+          <div class="workflow-step-number">1</div>
+          <h5>Self-Help</h5>
+          <p>The user searches knowledge bases, documentation, and AI tools to find an answer independently.</p>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-step-number">2</div>
+          <h5>Ask for Help</h5>
+          <p>The user reaches out to a community of experts or peers for guidance.</p>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-step-number">3</div>
+          <h5>Escalate</h5>
+          <p>A structured troubleshooting process involving more experts, deeper analysis, and formal coordination.</p>
+        </div>
+      </div>
+
+      <p>The goal is to maximize resolution at the self-help tier and minimize the volume of issues that reach escalation. Escalation is costly, time-consuming, and affects customer trust. The more problems that can be resolved through self-help, the lower the operational cost and the faster the resolution time.</p>
+
+      <div class="highlight-box">
+        <p><strong>The feedback loop:</strong> Once a problem is solved through escalation, the solution should flow back into the self-help knowledge base so that the next person with the same problem finds the answer without escalating. This feedback loop is currently blocked, and unblocking it is at the core of what Lam is trying to achieve.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>The Over-Restriction Problem</h2>
+      <p class="lead">Today, Lam's default approach to protecting customer IP is blanket restriction. When there is uncertainty about whether a document or piece of data contains customer-identifiable information, the policy is to assume it does and restrict access.</p>
+
+      <p>This approach is understandable and defensible from a risk standpoint. However, it creates significant downstream problems.</p>
+
+      <table>
+        <tr>
+          <th>Problem</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td><strong>Knowledge silos</strong></td>
+          <td>A field engineer working on a problem for one customer cannot access a solution that was documented in the context of another customer, even when the solution itself is entirely generic and non-proprietary. The answer exists within the organization but is inaccessible due to customer segmentation.</td>
+        </tr>
+        <tr>
+          <td><strong>Fragmented search</strong></td>
+          <td>Over-restriction has driven the creation of multiple segmented search systems. There are currently six or more separate search tools, each covering a different knowledge pool with different access rules. This fragmentation compounds the problem rather than solving it.</td>
+        </tr>
+        <tr>
+          <td><strong>Blocked AI training</strong></td>
+          <td>Restricted data cannot be used to train AI models for the general population. Because the organization cannot confirm whether a given data source is free of customer-identifiable content, that data source is excluded from model training entirely.</td>
+        </tr>
+        <tr>
+          <td><strong>Blocked feedback loop</strong></td>
+          <td>Solutions generated during escalation often contain unstructured text, meeting transcripts, and attachments that may include customer names, fab identifiers, or other sensitive information. Until that content can be reliably cleaned, it cannot safely enter the general knowledge base.</td>
+        </tr>
+      </table>
+
+      <div class="highlight-box">
+        <p><strong>The result:</strong> Lam is knowingly limiting productivity and knowledge-sharing capability in order to protect customer IP. The trade-off is acknowledged internally, and the goal of this initiative is to move from blanket restriction to targeted, intelligent protection.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">04</div>
+      <h2>Use Case 1: Self-Help Search Enablement</h2>
+
+      <h3>The Problem</h3>
+      <p>When users search for solutions across Lam's knowledge bases, relevant results may be locked behind customer-specific access restrictions. A solution that originated in one customer's context may be entirely applicable to a different customer's problem, but the customer segmentation prevents the user from seeing it.</p>
+
+      <h3>The Goal</h3>
+      <p>Process stored content (documents, procedures, historical solutions) to remove or mask customer-identifiable information so that the underlying technical knowledge can be surfaced to a broader audience. The aspiration is to take content that is currently restricted and make it searchable across customer boundaries by stripping the information that makes it customer-specific.</p>
+
+      <h3>Key Characteristics</h3>
+      <ul class="content-list">
+        <li>The data involved is primarily unstructured: documents, procedures, meeting transcripts, and problem descriptions.</li>
+        <li>Some metadata exists in certain systems to identify customers, but coverage is not 100%.</li>
+        <li>There is no single data lake. Multiple databases and search systems exist, each with different segmentation and access rules.</li>
+        <li>The approach for this use case is accuracy-focused rather than speed-focused. Processing can take longer (up to an hour for batch operations) because it happens on stored data, not in real time.</li>
+        <li>Over-redaction is acceptable as a starting point. If the system strips more than strictly necessary, that is still an improvement over blanket restriction.</li>
+      </ul>
+
+      <div class="highlight-box">
+        <p><strong>Success benchmark:</strong> If the system over-redacts less than the organization currently restricts, that already constitutes success.</p>
+      </div>
+
+      <h3>Sensitive Information in This Context</h3>
+      <table>
+        <tr>
+          <th>Category</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td><strong>Customer names</strong></td>
+          <td>Direct mentions in text</td>
+        </tr>
+        <tr>
+          <td><strong>Fab identifiers</strong></td>
+          <td>Numerous spelling variations (Fab 11, F11, Micro 11, FAP 11, FAP-11, and others)</td>
+        </tr>
+        <tr>
+          <td><strong>File names</strong></td>
+          <td>Files that contain customer identifiers in their names</td>
+        </tr>
+        <tr>
+          <td><strong>Site-specific details</strong></td>
+          <td>Information traceable to a particular customer location</td>
+        </tr>
+        <tr>
+          <td><strong>Proprietary process data</strong></td>
+          <td>Customer-proprietary process information embedded within troubleshooting documents</td>
+        </tr>
+      </table>
+
+      <p>The initial target scope is narrow: customer name and file name. If detection and redaction cannot be made reliable for these two fields, there is no basis for expanding to harder cases.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-number">05</div>
+      <h2>Use Case 2: Escalation Entry Point Protection</h2>
+
+      <h3>The Problem</h3>
+      <p>When users create tickets, describe problems, or interact with experts during escalation, the way they communicate can itself expose customer IP. A field engineer typing a problem statement from a mobile device might inadvertently include customer-identifiable information in an unstructured text field.</p>
+      <p>Policy violations are common. When the team began examining actual ticket data, a policy violation was found within the first seven tickets reviewed. This is not a theoretical risk. It is a pervasive, everyday occurrence driven by convenience rather than malice.</p>
+
+      <h3>The Goal</h3>
+      <p>Detect potential policy violations at the point of data entry and notify the user in real time. The intent is awareness and deterrence, not enforcement. The system should alert the user that their input may contain customer-confidential information and give them the opportunity to correct it, while leaving the final decision with the user.</p>
+
+      <h3>Key Characteristics</h3>
+      <ul class="content-list">
+        <li>This must operate in real time, within standard UI response times of two to five seconds.</li>
+        <li>The system notifies rather than blocks. Because no detection system will be 100% accurate, hard blocking at entry would create unacceptable friction and false rejections.</li>
+        <li>Detection only, no redaction at this stage. The system identifies and flags but does not modify content.</li>
+      </ul>
+
+      <div class="highlight-box">
+        <p><strong>False positive sensitivity is critical.</strong> If every fifth notification is a false alarm, users will stop trusting the system and ignore all notifications. Auditors who receive constant false positive alerts will similarly lose confidence and disable notifications. The target false positive rate is well below 1%.</p>
+      </div>
+
+      <h3>Two Sub-Approaches</h3>
+      <div class="two-col">
+        <div class="card">
+          <h4>Real-Time Detection at Entry</h4>
+          <p>Fast, lightweight, focused on minimizing false positives. Catches the obvious violations (customer names, fab identifiers in plain text) and notifies immediately. Speed is the priority.</p>
+        </div>
+        <div class="card">
+          <h4>Batch Processing After Entry</h4>
+          <p>Once data has entered the system (problem statements, answers, transcripts, attachments), a heavier analysis runs to detect and handle customer-identifiable information before that data flows into the general knowledge base. Accuracy is the priority, and over-redaction is acceptable. If content cannot be reliably redacted (for example, IP embedded in an image), the fallback is to keep the document restricted.</p>
+        </div>
+      </div>
+
+      <h3>The Connection Between Use Cases</h3>
+      <p>Batch processing in Use Case 2 feeds Use Case 1. Once escalation data is cleaned through the heavier detection and redaction process, that cleaned data can enter the self-help knowledge base. This is the feedback loop: escalation solutions, once stripped of customer-identifiable information, become searchable for the general population, driving more problem resolution at the self-help tier and reducing future escalation volume.</p>
+      <p>The two use cases should be treated as separate tracks for MVP and development purposes, but they are connected through this feedback loop and should inform each other.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-number">06</div>
+      <h2>What Has Been Tried</h2>
+      <p class="lead">Lam has made multiple attempts to solve the detection and redaction challenge. Each attempt has been paused or abandoned for specific, articulable reasons.</p>
+
+      <h3>Machine Learning Models</h3>
+      <p>Three models were trained using an MLOps pipeline deployed on Azure Cloud.</p>
+      <table>
+        <tr>
+          <th>Model</th>
+          <th>Type</th>
+          <th>Result</th>
+        </tr>
+        <tr>
+          <td><strong>Transformers-based model</strong></td>
+          <td>Deep learning, fine-tuned on Lam data</td>
+          <td>~20% false positive rate per ticket</td>
+        </tr>
+        <tr>
+          <td><strong>SpaCy</strong></td>
+          <td>NLP library, likely NER-based</td>
+          <td>~20% false positive rate per ticket</td>
+        </tr>
+        <tr>
+          <td><strong>Azure AI model</strong></td>
+          <td>Cloud-based ML service</td>
+          <td>~20% false positive rate per ticket</td>
+        </tr>
+      </table>
+      <p>These models were trained with Lam's own data on top of globally pre-trained foundations. Fine-tuning improved the false positive rate marginally, to approximately 17%. At a target of well below 1%, this gap is an order of magnitude, and the effort was paused.</p>
+
+      <div class="highlight-box">
+        <p><strong>For reference:</strong> A 20% false positive rate is consistent with general-purpose language model baselines, suggesting that the fine-tuning approach did not produce meaningful gains over default model performance.</p>
+      </div>
+
+      <h3>Rule-Based Models</h3>
+      <p>Rule-based approaches were explored but abandoned early. The core challenge is the spelling variation problem: a single entity like "Fab 11" can appear as Fab11, F11, Micro 11, FAP 11, FAP-11, and other variations. Enumerating all permutations is theoretically possible but creates an unsustainable maintenance burden, as new variations appear continuously with new employees, sites, and shorthand.</p>
+
+      <h3>Labeling Exercise</h3>
+      <p>A labeling exercise to create structured training data was evaluated and estimated at over 1,000 person-hours for the initial pass, with continuous maintenance required thereafter. This was paused (not abandoned) due to cost, with the reasoning that the investment could not be justified without first proving the concept works at a smaller scale. If the use case proves valuable enough, the labeling effort may become justifiable.</p>
+
+      <h3>Generative AI</h3>
+      <p>Generative AI approaches have not been attempted. The decision was deliberate: the team preferred deterministic, binary output (redact or do not redact) over the probabilistic, unstructured output that language models typically produce. There is awareness that prompt engineering can produce more structured output from language models, but concerns remain about reliability and guardrails.</p>
+
+      <h3>Current State</h3>
+      <p>The current operational mode remains blanket over-restriction. Every prior attempt to replace it with something more targeted has failed to meet the accuracy bar. The organization is open to any and all approaches, including AI, non-AI, or hybrid methods, with a preference for understanding trade-offs before committing to a direction.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-number">07</div>
+      <h2>The Infrastructure Landscape</h2>
+      <p class="lead">The technology environment is highly heterogeneous, with a mix of on-premises systems, cloud-based systems, systems in the process of migrating to cloud, internally hosted AI tools, and cloud-based bot services.</p>
+
+      <p>The organization aspires to move cloud-first and has expressed interest in a microservice architecture long-term, though this is aspirational rather than committed.</p>
+
+      <table>
+        <tr>
+          <th>Dimension</th>
+          <th>Current State</th>
+        </tr>
+        <tr>
+          <td><strong>Data architecture</strong></td>
+          <td>No unified data lake. Data is fragmented across many systems with different segmentation and access models.</td>
+        </tr>
+        <tr>
+          <td><strong>Search systems</strong></td>
+          <td>Six or more search tools covering different knowledge pools.</td>
+        </tr>
+        <tr>
+          <td><strong>Data entry paths</strong></td>
+          <td>User-entered problem statements, expert responses, uploaded documents, Microsoft Teams meeting transcripts automatically attached to escalation tickets, and images/OCR content.</td>
+        </tr>
+        <tr>
+          <td><strong>Identity and access</strong></td>
+          <td>An active program of approximately two years, not yet fully mature. Users are identified by work center and role. Employee types include full employees, contractors, licensed service providers, trade-restricted individuals, and embargo-country employees.</td>
+        </tr>
+        <tr>
+          <td><strong>Access Security Manager</strong></td>
+          <td>Governs access to certain sensitive areas (such as the escalation flow) but is not enterprise-wide and does not control individual entry fields within tickets.</td>
+        </tr>
+        <tr>
+          <td><strong>Customer segmentation</strong></td>
+          <td>Enforced at the customer level in the ticketing system. Employees assigned to one customer see only that customer's tickets. Cross-visibility is blocked.</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">08</div>
+      <h2>The Desired Outcome</h2>
+      <p class="lead">Lam Research is looking for a path from blanket over-restriction to targeted, intelligent IP protection.</p>
+
+      <ul class="content-list">
+        <li>Enables cross-customer knowledge sharing for non-proprietary technical solutions</li>
+        <li>Detects and flags customer-identifiable information at the point of data entry with a false positive rate well below 1%</li>
+        <li>Processes stored content to remove customer-identifiable information so it can be surfaced more broadly</li>
+        <li>Unblocks the escalation-to-self-help feedback loop, driving down costly escalations over time</li>
+        <li>Starts small, proves incrementally, and scales based on demonstrated results</li>
+        <li>Is technology-agnostic, with a willingness to evaluate any approach based on trade-offs and outcomes</li>
+        <li>Does not require a revolutionary overhaul. Evolutionary, incremental progress is expected and preferred.</li>
+      </ul>
+
+      <div class="highlight-box">
+        <p><strong>Initial proof of concept scope:</strong> Demonstrate reliable detection and handling of customer names and file names. If these two fields cannot be solved reliably, there is no foundation for tackling the harder cases. If they can, the path to broader capability becomes clear.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">09</div>
+      <h2>Summary</h2>
+      <p>Lam Research has a well-defined problem with clear business impact. The over-restriction of customer-identifiable information is blocking knowledge sharing, limiting AI model training, fragmenting search across multiple systems, and preventing the feedback loop that would drive down escalation costs.</p>
+      <p>Multiple technical approaches have been tried and have not met the required accuracy thresholds. The organization is open to new approaches and is looking for a partner that demonstrates deep understanding of the problem before proposing solutions.</p>
+      <p>BayOne believes this document reflects that understanding. We welcome feedback, corrections, and refinements to ensure we are fully aligned before discussing approaches.</p>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Confidential - Prepared for Lam Research</p>
+    </div>
+  </div>
+</body>
+</html>
