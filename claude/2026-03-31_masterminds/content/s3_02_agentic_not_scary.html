@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 12: Why Agentic AI Is Not Scary</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-darkest: #0c1929;
+      --blue-dark: #15293e;
+      --blue-mid: #1e3a5f;
+      --blue-bright: #2563eb;
+      --blue-accent: #3b82f6;
+      --steel-light: #64748b;
+      --steel-glow: #94a3b8;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e6e8eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--blue-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 22px 40px 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+      flex-shrink: 0;
+    }
+
+    .lead {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 14px;
+      line-height: 1.5;
+      flex-shrink: 0;
+    }
+
+    /* Three analogy cards */
+    .analogies {
+      display: flex;
+      gap: 14px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .analogy-card {
+      flex: 1;
+      background: #fff;
+      border: 1px solid rgba(37,99,235,0.10);
+      border-radius: 12px;
+      padding: 18px 18px;
+      box-shadow: 0 1px 6px rgba(37,99,235,0.04);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .analogy-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .analogy-card:nth-child(1)::before { background: linear-gradient(90deg, #0c1929, #1e3a5f); }
+    .analogy-card:nth-child(2)::before { background: linear-gradient(90deg, #1e3a5f, #2563eb); }
+    .analogy-card:nth-child(3)::before { background: linear-gradient(90deg, #2563eb, #3b82f6); }
+
+    .analogy-card .a-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      color: #fff;
+      flex-shrink: 0;
+      margin-bottom: 10px;
+    }
+
+    .analogy-card:nth-child(1) .a-icon { background: linear-gradient(135deg, #0c1929, #1e3a5f); }
+    .analogy-card:nth-child(2) .a-icon { background: linear-gradient(135deg, #1e3a5f, #2563eb); }
+    .analogy-card:nth-child(3) .a-icon { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+
+    .analogy-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .analogy-card .a-role {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--blue-accent);
+      margin-bottom: 10px;
+    }
+
+    .analogy-card .a-desc {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .analogy-card .a-bottom {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* Takeaway */
+    .takeaway {
+      margin-top: 14px;
+      padding: 12px 18px;
+      background: linear-gradient(135deg, var(--blue-darkest), var(--blue-mid));
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .takeaway p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.55;
+    }
+
+    .takeaway strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 10px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-darkest), var(--blue-mid), var(--blue-accent), var(--steel-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 2px;
+    }
+    .slide-nav { position: fixed; bottom: 18px; left: 18px; display: flex; gap: 6px; z-index: 100; }
+    .slide-nav a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: rgba(12,25,41,0.75); color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: background 0.2s, color 0.2s; border: 1px solid rgba(255,255,255,0.1); }
+    .slide-nav a:hover { background: rgba(37,99,235,0.9); color: #fff; }
+    .slide-nav a.disabled { opacity: 0.25; pointer-events: none; }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Master<span>minds</span></div>
+      <div class="header-title">April 2026</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>Why Agentic AI Is Not Scary</h2>
+      <p class="lead">Agentic AI operates within boundaries you define. You already work with people who function this way every day.</p>
+
+      <div class="analogies">
+        <div class="analogy-card">
+          <div class="a-icon"><i class="fa-solid fa-gavel"></i></div>
+          <h3>The Paralegal</h3>
+          <div class="a-role">For legal professionals</div>
+          <p class="a-desc">A paralegal researches, organizes, drafts, and prepares. They do not make legal decisions. The attorney reviews everything, decides on strategy, and signs off. Agentic AI fills the same role. It does the legwork so the professional can focus on judgment.</p>
+          <div class="a-bottom">The attorney still decides.</div>
+        </div>
+
+        <div class="analogy-card">
+          <div class="a-icon"><i class="fa-solid fa-chart-pie"></i></div>
+          <h3>The Associate Advisor</h3>
+          <div class="a-role">For financial professionals</div>
+          <p class="a-desc">A junior advisor pulls data, prepares reports, runs scenarios, and presents options. They do not set strategy for a client's portfolio. The senior advisor makes the call. Agentic AI handles the preparation so the advisor can focus on the relationship.</p>
+          <div class="a-bottom">The advisor still calls the shots.</div>
+        </div>
+
+        <div class="analogy-card">
+          <div class="a-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3>The Claims Coordinator</h3>
+          <div class="a-role">For insurance professionals</div>
+          <p class="a-desc">When a claim comes in, someone gathers policy details, contacts the carrier, arranges the tow truck, and sets up the rental car. That is coordination, not decision-making. Agentic AI handles the logistics so the broker can focus on the client.</p>
+          <div class="a-bottom">The broker still owns the relationship.</div>
+        </div>
+      </div>
+
+      <div class="takeaway">
+        <p><strong>In every case, the professional retains authority.</strong> Agentic AI handles the execution of well-defined steps so you can focus on the parts that require human expertise, judgment, and trust.</p>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">12</div>
+    </div>
+  </div>
+
+  <div class="slide-nav">
+    <a href="s3_01_agentic_what.html"><i class="fa-solid fa-chevron-left"></i></a>
+    <a href="s3_03_agentic_today.html"><i class="fa-solid fa-chevron-right"></i></a>
+    <a href="s0_00_toc.html" style="margin-left: 6px;"><i class="fa-solid fa-house"></i></a>
+  </div>
+
+</body>
+</html>

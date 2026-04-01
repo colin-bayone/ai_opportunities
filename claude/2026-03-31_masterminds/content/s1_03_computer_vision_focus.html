@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 03: Computer Vision</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-darkest: #0c1929;
+      --blue-dark: #15293e;
+      --blue-mid: #1e3a5f;
+      --blue-bright: #2563eb;
+      --blue-accent: #3b82f6;
+      --steel-light: #64748b;
+      --steel-glow: #94a3b8;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e6e8eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--blue-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Dark definition bar */
+    .definition-bar {
+      background: linear-gradient(135deg, var(--blue-darkest) 0%, var(--blue-mid) 100%);
+      padding: 14px 40px;
+      flex-shrink: 0;
+    }
+
+    .definition-bar .db-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 5px;
+    }
+
+    .definition-bar h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .definition-bar p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.6;
+      max-width: 800px;
+    }
+
+    .definition-bar strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* Main area */
+    .main-area {
+      flex: 1;
+      min-height: 0;
+      padding: 14px 40px 10px;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(180deg, #fcfdff 0%, #f7f9fc 100%);
+    }
+
+    /* Middle row: two images + two cards */
+    .middle-row {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      gap: 14px;
+      overflow: hidden;
+    }
+
+    .img-block {
+      border-radius: 10px;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+
+    .img-block img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .img-col {
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .img-col .img-block {
+      flex: 1;
+      min-height: 0;
+    }
+
+    .mid-cards {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .mid-card {
+      background: #fff;
+      border: 1px solid rgba(37,99,235,0.10);
+      border-radius: 10px;
+      padding: 10px 14px;
+      box-shadow: 0 1px 6px rgba(37,99,235,0.04);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .mid-card .mc-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: #fff;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .mid-card:nth-child(1) .mc-icon { background: linear-gradient(135deg, #1e3a5f, #2563eb); }
+    .mid-card:nth-child(2) .mc-icon { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+    .mid-card:nth-child(3) .mc-icon { background: linear-gradient(135deg, #3b82f6, #4f93f7); }
+    .mid-card:nth-child(4) .mc-icon { background: linear-gradient(135deg, #4f93f7, #64748b); }
+    .mid-card:nth-child(5) .mc-icon { background: linear-gradient(135deg, #64748b, #94a3b8); }
+
+    .mid-card h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+
+    .mid-card p {
+      font-size: 11.5px;
+      color: var(--text-light);
+      line-height: 1.45;
+    }
+
+    /* Ultra strip */
+    .ultra-strip {
+      margin-top: 12px;
+      height: 80px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #1a1a2e;
+      flex-shrink: 0;
+    }
+
+    .ultra-strip img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Bottom bar */
+    .bottom-bar {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 10px;
+      flex-shrink: 0;
+    }
+
+    .distinction {
+      display: flex;
+      gap: 8px;
+    }
+
+    .distinction-item {
+      text-align: center;
+      padding: 6px 14px;
+      border-radius: 6px;
+    }
+
+    .distinction-item.active {
+      background: linear-gradient(135deg, var(--blue-darkest), var(--blue-dark));
+    }
+
+    .distinction-item.inactive {
+      background: #f1f5f9;
+    }
+
+    .distinction-item .d-label {
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 1px;
+    }
+
+    .distinction-item.active .d-label { color: rgba(255,255,255,0.6); }
+    .distinction-item.inactive .d-label { color: var(--steel-light); }
+
+    .distinction-item .d-value {
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .distinction-item.active .d-value { color: #fff; }
+    .distinction-item.inactive .d-value { color: #94a3b8; }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 10px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-darkest), var(--blue-mid), var(--blue-accent), var(--steel-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 2px;
+    }
+    .slide-nav { position: fixed; bottom: 18px; left: 18px; display: flex; gap: 6px; z-index: 100; }
+    .slide-nav a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: rgba(12,25,41,0.75); color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: background 0.2s, color 0.2s; border: 1px solid rgba(255,255,255,0.1); }
+    .slide-nav a:hover { background: rgba(37,99,235,0.9); color: #fff; }
+    .slide-nav a.disabled { opacity: 0.25; pointer-events: none; }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Master<span>minds</span></div>
+      <div class="header-title">April 2026</div>
+    </div>
+
+    <div class="slide-content">
+      <!-- Dark definition bar -->
+      <div class="definition-bar">
+        <div class="db-label">The Visual Branch</div>
+        <h2>Computer Vision</h2>
+        <p>Computer vision is a type of artificial intelligence that enables machines to interpret and make decisions based on visual information. Images, video feeds, satellite footage, medical scans, and live camera input are all processed by systems trained to recognize objects, patterns, anomalies, and spatial context within what they see.</p>
+      </div>
+
+      <!-- Main area -->
+      <div class="main-area">
+        <!-- Middle: images + cards -->
+        <div class="middle-row">
+          <!-- Images stacked vertically -->
+          <div class="img-col">
+            <div class="img-block" style="flex: 3;">
+              <img src="resources/s1_03_track.png" alt="Pose estimation on runners">
+            </div>
+            <div class="img-block" style="flex: 2;">
+              <img src="resources/s1_03_segmentation.png" alt="Street scene segmentation">
+            </div>
+          </div>
+
+          <!-- Example cards -->
+          <div class="mid-cards">
+            <div class="mid-card">
+              <div class="mc-icon"><i class="fa-solid fa-basket-shopping"></i></div>
+              <div>
+                <h4>Amazon Go Stores</h4>
+                <p>Walk in, grab what you want, and leave. Ceiling cameras track every item you pick up and charge your account without scanning.</p>
+              </div>
+            </div>
+            <div class="mid-card">
+              <div class="mc-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+              <div>
+                <h4>Google Lens Visual Search</h4>
+                <p>Point your phone camera at a plant, building, or product and get information about it instantly.</p>
+              </div>
+            </div>
+            <div class="mid-card">
+              <div class="mc-icon"><i class="fa-solid fa-football"></i></div>
+              <div>
+                <h4>Sports Broadcast Analysis</h4>
+                <p>Systems track player movement, speed, and formations in real time during live broadcasts for the stats overlays you see on screen.</p>
+              </div>
+            </div>
+            <div class="mid-card">
+              <div class="mc-icon"><i class="fa-solid fa-seedling"></i></div>
+              <div>
+                <h4>Agricultural Drone Monitoring</h4>
+                <p>Drones fly over fields to detect crop disease, irrigation problems, and yield estimates across thousands of acres.</p>
+              </div>
+            </div>
+            <div class="mid-card">
+              <div class="mc-icon"><i class="fa-solid fa-barcode"></i></div>
+              <div>
+                <h4>Walmart and Target Shelf Monitoring</h4>
+                <p>Cameras and robots scan store aisles to detect out-of-stock items, misplaced products, and pricing errors in real time.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Distinction bar -->
+        <div class="bottom-bar">
+          <div class="distinction">
+            <div class="distinction-item inactive">
+              <div class="d-label">Machine Learning</div>
+              <div class="d-value">Numbers and Tabular Data</div>
+            </div>
+            <div class="distinction-item active">
+              <div class="d-label">Computer Vision</div>
+              <div class="d-value">Images and Video</div>
+            </div>
+            <div class="distinction-item inactive">
+              <div class="d-label">Generative AI</div>
+              <div class="d-value">Text and Content</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">03</div>
+    </div>
+  </div>
+
+  <div class="slide-nav">
+    <a href="s1_02_machine_learning_focus.html"><i class="fa-solid fa-chevron-left"></i></a>
+    <a href="s1_04_generative_ai_focus.html"><i class="fa-solid fa-chevron-right"></i></a>
+    <a href="s0_00_toc.html" style="margin-left: 6px;"><i class="fa-solid fa-house"></i></a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 15: The Cost of Waiting vs. Doing It Wrong</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-darkest: #0c1929;
+      --blue-dark: #15293e;
+      --blue-mid: #1e3a5f;
+      --blue-bright: #2563eb;
+      --blue-accent: #3b82f6;
+      --steel-light: #64748b;
+      --steel-glow: #94a3b8;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e6e8eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--blue-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 22px 40px 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+      flex-shrink: 0;
+    }
+
+    .lead {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 14px;
+      line-height: 1.5;
+      flex-shrink: 0;
+    }
+
+    /* Two columns */
+    .columns {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      gap: 16px;
+    }
+
+    .column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .col-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+    }
+
+    .col-waiting .col-label {
+      color: var(--steel-light);
+      border-bottom: 2px solid var(--steel-glow);
+    }
+
+    .col-wrong .col-label {
+      color: #dc2626;
+      border-bottom: 2px solid #fca5a5;
+    }
+
+    .col-items {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .col-item {
+      flex: 1;
+      background: #fff;
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      overflow: hidden;
+    }
+
+    .col-waiting .col-item {
+      border: 1px solid rgba(100, 116, 139, 0.15);
+      box-shadow: 0 1px 6px rgba(100, 116, 139, 0.05);
+    }
+
+    .col-wrong .col-item {
+      border: 1px solid rgba(220, 38, 38, 0.1);
+      box-shadow: 0 1px 6px rgba(220, 38, 38, 0.04);
+    }
+
+    .col-item .ci-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #fff;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .col-waiting .col-item:nth-child(1) .ci-icon { background: linear-gradient(135deg, #475569, #64748b); }
+    .col-waiting .col-item:nth-child(2) .ci-icon { background: linear-gradient(135deg, #64748b, #94a3b8); }
+    .col-waiting .col-item:nth-child(3) .ci-icon { background: linear-gradient(135deg, #94a3b8, #cbd5e1); }
+
+    .col-wrong .col-item:nth-child(1) .ci-icon { background: linear-gradient(135deg, #991b1b, #dc2626); }
+    .col-wrong .col-item:nth-child(2) .ci-icon { background: linear-gradient(135deg, #dc2626, #ef4444); }
+    .col-wrong .col-item:nth-child(3) .ci-icon { background: linear-gradient(135deg, #ef4444, #f87171); }
+
+    .col-item h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 3px;
+    }
+
+    .col-item p {
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    /* Takeaway */
+    .takeaway {
+      margin-top: 12px;
+      padding: 12px 18px;
+      background: linear-gradient(135deg, var(--blue-darkest), var(--blue-mid));
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .takeaway p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.55;
+    }
+
+    .takeaway strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 10px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-darkest), var(--blue-mid), var(--blue-accent), var(--steel-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 2px;
+    }
+    .slide-nav { position: fixed; bottom: 18px; left: 18px; display: flex; gap: 6px; z-index: 100; }
+    .slide-nav a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: rgba(12,25,41,0.75); color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: background 0.2s, color 0.2s; border: 1px solid rgba(255,255,255,0.1); }
+    .slide-nav a:hover { background: rgba(37,99,235,0.9); color: #fff; }
+    .slide-nav a.disabled { opacity: 0.25; pointer-events: none; }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Master<span>minds</span></div>
+      <div class="header-title">April 2026</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>The Cost of Waiting vs. Doing It Wrong</h2>
+      <p class="lead">For a group that advises clients on risk every day, this is how to think about the AI adoption decision honestly</p>
+
+      <div class="columns">
+        <div class="column col-waiting">
+          <div class="col-label">The cost of waiting</div>
+          <div class="col-items">
+            <div class="col-item">
+              <div class="ci-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+              <div>
+                <h4>Efficiency advantages compound</h4>
+                <p>Competitors who adopt first gain small advantages that stack up over time. A 20-minute daily time savings adds up to over 80 hours a year per person.</p>
+              </div>
+            </div>
+            <div class="col-item">
+              <div class="ci-icon"><i class="fa-solid fa-users"></i></div>
+              <div>
+                <h4>Client expectations are shifting</h4>
+                <p>People are beginning to expect faster turnaround, more personalized communication, and proactive insights from their professional advisors.</p>
+              </div>
+            </div>
+            <div class="col-item">
+              <div class="ci-icon"><i class="fa-solid fa-stairs"></i></div>
+              <div>
+                <h4>The learning curve exists either way</h4>
+                <p>Whether you start now or start in two years, you will have to learn how to use these tools. Starting now means the curve is gentler and the stakes are lower.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column col-wrong">
+          <div class="col-label">The cost of doing it wrong</div>
+          <div class="col-items">
+            <div class="col-item">
+              <div class="ci-icon"><i class="fa-solid fa-shield-halved"></i></div>
+              <div>
+                <h4>PII exposure from the wrong tool</h4>
+                <p>Using a consumer AI tool with client information can create data privacy risks that no amount of productivity improvement is worth.</p>
+              </div>
+            </div>
+            <div class="col-item">
+              <div class="ci-icon"><i class="fa-solid fa-handshake-slash"></i></div>
+              <div>
+                <h4>Bad output damages client trust</h4>
+                <p>Sending something to a client that AI generated incorrectly and you did not catch undermines the relationship you spent years building.</p>
+              </div>
+            </div>
+            <div class="col-item">
+              <div class="ci-icon"><i class="fa-solid fa-money-bill-wave"></i></div>
+              <div>
+                <h4>Wasted investment on poor-fit tools</h4>
+                <p>Buying software that does not actually match your workflow wastes money and creates frustration that makes the team resistant to trying again later.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="takeaway">
+        <p><strong>Neither extreme is the answer.</strong> The smart move is deliberate, informed experimentation. Start small, verify the output, and expand from what actually works in your specific practice.</p>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">15</div>
+    </div>
+  </div>
+
+  <div class="slide-nav">
+    <a href="s4_01_replacement_question.html"><i class="fa-solid fa-chevron-left"></i></a>
+    <a href="s5_01_compliance_pii.html"><i class="fa-solid fa-chevron-right"></i></a>
+    <a href="s0_00_toc.html" style="margin-left: 6px;"><i class="fa-solid fa-house"></i></a>
+  </div>
+</body>
+</html>

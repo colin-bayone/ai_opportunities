@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 09: What Works and What Does Not</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-darkest: #0c1929;
+      --blue-dark: #15293e;
+      --blue-mid: #1e3a5f;
+      --blue-bright: #2563eb;
+      --blue-accent: #3b82f6;
+      --steel-light: #64748b;
+      --steel-glow: #94a3b8;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e6e8eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--blue-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 20px 40px 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+      flex-shrink: 0;
+    }
+
+    .lead {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 14px;
+      line-height: 1.5;
+      flex-shrink: 0;
+    }
+
+    /* Two columns */
+    .columns {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      gap: 16px;
+    }
+
+    .column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .col-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+    }
+
+    .col-works .col-label {
+      color: #059669;
+      border-bottom: 2px solid #059669;
+    }
+
+    .col-rough .col-label {
+      color: var(--steel-light);
+      border-bottom: 2px solid var(--steel-glow);
+    }
+
+    .col-items {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .col-item {
+      flex: 1;
+      background: #fff;
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      overflow: hidden;
+    }
+
+    .col-works .col-item {
+      border: 1px solid rgba(5, 150, 105, 0.12);
+      box-shadow: 0 1px 6px rgba(5, 150, 105, 0.05);
+    }
+
+    .col-rough .col-item {
+      border: 1px solid rgba(100, 116, 139, 0.15);
+      box-shadow: 0 1px 6px rgba(100, 116, 139, 0.05);
+    }
+
+    .col-item .ci-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #fff;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .col-works .col-item:nth-child(1) .ci-icon { background: linear-gradient(135deg, #047857, #059669); }
+    .col-works .col-item:nth-child(2) .ci-icon { background: linear-gradient(135deg, #059669, #10b981); }
+    .col-works .col-item:nth-child(3) .ci-icon { background: linear-gradient(135deg, #10b981, #34d399); }
+    .col-works .col-item:nth-child(4) .ci-icon { background: linear-gradient(135deg, #34d399, #6ee7b7); }
+    .col-works .col-item:nth-child(5) .ci-icon { background: linear-gradient(135deg, #6ee7b7, #a7f3d0); }
+
+    .col-rough .col-item:nth-child(1) .ci-icon { background: linear-gradient(135deg, #475569, #64748b); }
+    .col-rough .col-item:nth-child(2) .ci-icon { background: linear-gradient(135deg, #64748b, #94a3b8); }
+    .col-rough .col-item:nth-child(3) .ci-icon { background: linear-gradient(135deg, #94a3b8, #cbd5e1); }
+    .col-rough .col-item:nth-child(4) .ci-icon { background: linear-gradient(135deg, #cbd5e1, #e2e8f0); }
+
+    .col-item h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+
+    .col-item p {
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.45;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 10px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-darkest), var(--blue-mid), var(--blue-accent), var(--steel-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 2px;
+    }
+    .slide-nav { position: fixed; bottom: 18px; left: 18px; display: flex; gap: 6px; z-index: 100; }
+    .slide-nav a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: rgba(12,25,41,0.75); color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: background 0.2s, color 0.2s; border: 1px solid rgba(255,255,255,0.1); }
+    .slide-nav a:hover { background: rgba(37,99,235,0.9); color: #fff; }
+    .slide-nav a.disabled { opacity: 0.25; pointer-events: none; }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Master<span>minds</span></div>
+      <div class="header-title">April 2026</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>What Works and What Does Not (Yet)</h2>
+      <p class="lead">An honest assessment of where AI is reliable today and where it still needs a human in the loop</p>
+
+      <div class="columns">
+        <!-- Works well -->
+        <div class="column col-works">
+          <div class="col-label">Reliable Today</div>
+          <div class="col-items">
+            <div class="col-item">
+              <div class="ci-icon"><i class="fa-solid fa-file-lines"></i></div>
+              <div>
+                <h4>Summarizing content you provide</h4>
+                <p>Give it a document and ask for a breakdown. This is where AI performs best because you control the input.</p>
+              </div>
+            </div>
+            <div class="col-item">
+              <div class="ci-icon"><i class="fa-solid fa-pen-nib"></i></div>
+              <div>
+                <h4>Drafting from structured inputs</h4>
+                <p>Bullet points into polished emails, rough notes into client-ready letters, templates filled with specific details.</p>
+              </div>
+            </div>
+            <div class="col-item">
+              <div class="ci-icon"><i class="fa-solid fa-arrows-rotate"></i></div>
+              <div>
+                <h4>Reorganizing and reformatting</h4>
+                <p>Taking existing content and restructuring it for a different audience, format, or purpose.</p>
+              </div>
+            </div>
+            <div class="col-item">
+              <div class="ci-icon"><i class="fa-solid fa-comments"></i></div>
+              <div>
+                <h4>Brainstorming and ideation</h4>
+                <p>Generating options, exploring angles, and producing first drafts that you refine with your expertise.</p>
+              </div>
+            </div>
+            <div class="col-item">
+              <div class="ci-icon"><i class="fa-solid fa-spell-check"></i></div>
+              <div>
+                <h4>First-pass review and proofreading</h4>
+                <p>Catching inconsistencies, flagging potential issues, and cleaning up drafts before final human review.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Still rough -->
+        <div class="column col-rough">
+          <div class="col-label">Still Rough</div>
+          <div class="col-items">
+            <div class="col-item">
+              <div class="ci-icon"><i class="fa-solid fa-gavel"></i></div>
+              <div>
+                <h4>Domain-specific accuracy</h4>
+                <p>Insurance policy language, tax code nuance, legal citation, and regulatory specifics still produce errors that require expert verification.</p>
+              </div>
+            </div>
+            <div class="col-item">
+              <div class="ci-icon"><i class="fa-solid fa-calculator"></i></div>
+              <div>
+                <h4>Math and numerical reasoning</h4>
+                <p>Language models work with words, not numbers. Financial calculations, actuarial math, and tax computations need dedicated tools.</p>
+              </div>
+            </div>
+            <div class="col-item">
+              <div class="ci-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+              <div>
+                <h4>Empathy, judgment, and trust</h4>
+                <p>Guiding a family through an estate administration, advising on a difficult claim, counseling a client through a financial decision. AI cannot do this.</p>
+              </div>
+            </div>
+            <div class="col-item">
+              <div class="ci-icon"><i class="fa-solid fa-globe"></i></div>
+              <div>
+                <h4>Open-ended research without guardrails</h4>
+                <p>Asking AI to research a topic with no constraints or source documents produces confident-sounding output that may or may not be accurate.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">09</div>
+    </div>
+  </div>
+
+  <div class="slide-nav">
+    <a href="s2_02_seventy_thirty.html"><i class="fa-solid fa-chevron-left"></i></a>
+    <a href="s2_04_ai_audit.html"><i class="fa-solid fa-chevron-right"></i></a>
+    <a href="s0_00_toc.html" style="margin-left: 6px;"><i class="fa-solid fa-house"></i></a>
+  </div>
+</body>
+</html>

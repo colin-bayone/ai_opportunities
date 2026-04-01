@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 17: The Vendor Pitch Filter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-darkest: #0c1929;
+      --blue-dark: #15293e;
+      --blue-mid: #1e3a5f;
+      --blue-bright: #2563eb;
+      --blue-accent: #3b82f6;
+      --steel-light: #64748b;
+      --steel-glow: #94a3b8;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e6e8eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--blue-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+    }
+
+    /* Left panel */
+    .left-panel {
+      width: 45%;
+      padding: 22px 26px;
+      background: linear-gradient(180deg, #fcfdff 0%, #f7f9fc 100%);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .left-panel .subtitle {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+    }
+
+    .left-panel h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .left-lead {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.65;
+      margin-bottom: 14px;
+    }
+
+    .image-placeholder {
+      flex: 1;
+      min-height: 0;
+      background: linear-gradient(135deg, #f1f5f9 0%, #e8edf3 100%);
+      border: 2px dashed rgba(37,99,235,0.15);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-placeholder i {
+      font-size: 28px;
+      color: rgba(37,99,235,0.25);
+    }
+
+    .connection-strip {
+      margin-top: 12px;
+      padding: 11px 14px;
+      background: linear-gradient(135deg, var(--blue-darkest), var(--blue-mid));
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .connection-strip p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.55;
+    }
+
+    .connection-strip strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* Right panel */
+    .right-panel {
+      width: 55%;
+      padding: 22px 30px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .right-panel .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+    }
+
+    .questions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .question {
+      flex: 1;
+      background: #fff;
+      border: 1px solid rgba(37,99,235,0.10);
+      border-radius: 12px;
+      padding: 16px 18px;
+      box-shadow: 0 1px 6px rgba(37,99,235,0.04);
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .question::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 3px;
+    }
+
+    .question:nth-child(1)::before { background: linear-gradient(180deg, #0c1929, #1e3a5f); }
+    .question:nth-child(2)::before { background: linear-gradient(180deg, #1e3a5f, #2563eb); }
+    .question:nth-child(3)::before { background: linear-gradient(180deg, #2563eb, #64748b); }
+
+    .question .q-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .question:nth-child(1) .q-num { background: linear-gradient(135deg, #0c1929, #1e3a5f); }
+    .question:nth-child(2) .q-num { background: linear-gradient(135deg, #1e3a5f, #2563eb); }
+    .question:nth-child(3) .q-num { background: linear-gradient(135deg, #2563eb, #64748b); }
+
+    .question h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .question p {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.55;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 10px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-darkest), var(--blue-mid), var(--blue-accent), var(--steel-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 2px;
+    }
+    .slide-nav { position: fixed; bottom: 18px; left: 18px; display: flex; gap: 6px; z-index: 100; }
+    .slide-nav a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: rgba(12,25,41,0.75); color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: background 0.2s, color 0.2s; border: 1px solid rgba(255,255,255,0.1); }
+    .slide-nav a:hover { background: rgba(37,99,235,0.9); color: #fff; }
+    .slide-nav a.disabled { opacity: 0.25; pointer-events: none; }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Master<span>minds</span></div>
+      <div class="header-title">April 2026</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="left-panel">
+        <div class="subtitle">Due diligence for AI</div>
+        <h2>The Vendor Pitch Filter</h2>
+
+        <p class="left-lead">
+          Everyone in this room is going to get pitched an AI solution at some point. Probably already has. These three questions are the same kind of due diligence you already apply to any vendor or partner, just adapted for AI.
+        </p>
+
+        <div style="display: flex; gap: 8px; flex: 1; min-height: 0;">
+          <div style="flex: 1; border-radius: 10px; overflow: hidden; background: #fff;">
+            <img src="resources/s5_02_fake_ai.png" alt="Scooby Doo meme" style="width: 100%; height: 100%; object-fit: contain;">
+          </div>
+          <div style="flex: 1; border-radius: 10px; overflow: hidden; background: #fff;">
+            <img src="resources/s5_02_powered_by_ai.png" alt="Flex tape powered by AI meme" style="width: 100%; height: 100%; object-fit: contain;">
+          </div>
+        </div>
+
+        <div class="connection-strip">
+          <p><strong>These are not technical questions.</strong> They are the same scrutiny you would apply to any vendor asking for access to your clients, your data, or your workflow. If the vendor cannot answer them clearly, that tells you everything you need to know.</p>
+        </div>
+      </div>
+
+      <div class="right-panel">
+        <div class="section-label">Three questions to ask any AI vendor</div>
+
+        <div class="questions">
+          <div class="question">
+            <div class="q-num">1</div>
+            <div>
+              <h4>What data does it need access to?</h4>
+              <p>If the answer is vague or "everything," that is a red flag. A well-designed AI tool should be specific about what information it requires, why it needs it, and what it does with data it does not need.</p>
+            </div>
+          </div>
+          <div class="question">
+            <div class="q-num">2</div>
+            <div>
+              <h4>Where is that data stored and who can see it?</h4>
+              <p>Cloud or on-premise. Domestic or international servers. Whether your data is used to train the model. Who at the vendor has access. These are questions with specific answers, and any vendor worth working with will have them ready.</p>
+            </div>
+          </div>
+          <div class="question">
+            <div class="q-num">3</div>
+            <div>
+              <h4>What happens when it is wrong?</h4>
+              <p>Every AI system will produce errors. The question is whether the system is designed for a human to catch mistakes before they reach a client. If the vendor talks only about accuracy and never about error handling, be cautious.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">17</div>
+    </div>
+  </div>
+
+  <div class="slide-nav">
+    <a href="s5_01_compliance_pii.html"><i class="fa-solid fa-chevron-left"></i></a>
+    <a href="s5_03_myth_busting.html"><i class="fa-solid fa-chevron-right"></i></a>
+    <a href="s0_00_toc.html" style="margin-left: 6px;"><i class="fa-solid fa-house"></i></a>
+  </div>
+</body>
+</html>
