@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discovery Discussion Guide - Sephora EDW Modernization</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+      --teal-accent: #14b8a6;
+      --teal-dark: #0d9488;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #334155;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(20,184,166,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .cover-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #14b8a6;
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .cover-subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 48px;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 48px;
+      padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .cover-meta-item label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+
+    .cover-meta-item span {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .logo {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .logo span { color: #14b8a6; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .section { margin-bottom: 64px; }
+
+    .section-number {
+      font-size: 12px;
+      font-weight: 600;
+      color: #a855f7;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #0f172a;
+      margin: 32px 0 16px;
+    }
+
+    p { margin-bottom: 16px; }
+
+    .lead {
+      font-size: 18px;
+      color: #64748b;
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border-left: 4px solid #a855f7;
+      padding: 24px 28px;
+      margin: 32px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    .question-box {
+      background: linear-gradient(135deg, rgba(20,184,166,0.05) 0%, rgba(20,184,166,0.1) 100%);
+      border-left: 4px solid #14b8a6;
+      padding: 24px 28px;
+      margin: 32px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .question-box p:last-child { margin-bottom: 0; }
+
+    .question-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #0d9488;
+      margin-bottom: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      padding: 14px 16px;
+      background: #5b21b6;
+      color: #fff;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+
+    th:last-child { border-right: none; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: #f8fafc; }
+
+    .card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      padding: 28px;
+      margin: 24px 0;
+      box-shadow: 0 1px 3px rgba(124,58,237,0.06);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: #fff;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .card-subtitle {
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    .idea-card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      padding: 28px;
+      margin: 24px 0;
+    }
+
+    .idea-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #a855f7;
+      margin-bottom: 8px;
+    }
+
+    .idea-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 12px;
+    }
+
+    .idea-value {
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 16px;
+      padding-left: 16px;
+      border-left: 2px solid #e2e8f0;
+    }
+
+    .purpose-box {
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+
+    .purpose-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+
+    .purpose-text {
+      font-size: 15px;
+      color: #64748b;
+      margin: 0;
+    }
+
+    .discussion-item {
+      padding: 16px 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .discussion-item:last-child {
+      border-bottom: none;
+    }
+
+    .discussion-number {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      background: #f1f5f9;
+      color: #64748b;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 28px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-right: 12px;
+    }
+
+    .discussion-text {
+      display: inline;
+      font-size: 15px;
+      color: #334155;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 48px 40px;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 64px;
+    }
+
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 12px;
+    }
+
+    .footer-logo span { color: #a855f7; }
+
+    .footer p {
+      font-size: 13px;
+      color: #64748b;
+      margin: 0;
+    }
+
+    .footer-note {
+      font-style: italic;
+      margin-top: 8px;
+    }
+
+    @media print {
+      @page {
+        size: 8.5in 11in;
+        margin: 0.4in;
+      }
+
+      body { font-size: 9pt; line-height: 1.4; }
+
+      .cover {
+        min-height: 0;
+        height: 10in;
+        padding: 50px;
+        page-break-after: always;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .cover h1 { font-size: 32pt; }
+      .cover-subtitle { font-size: 13pt; }
+
+      .container { padding: 0; max-width: 100%; }
+
+      .section { margin-bottom: 20px; }
+
+      h2 { font-size: 18pt; margin-bottom: 12px; }
+      h3 { font-size: 12pt; margin: 16px 0 8px; }
+      p { margin-bottom: 8px; }
+      .lead { font-size: 11pt; margin-bottom: 16px; }
+
+      table { font-size: 8pt; margin: 12px 0; }
+      th, td { padding: 8px 10px; }
+
+      th, .cover, .highlight-box, .question-box, .card, .idea-card {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .section-number { break-after: avoid; page-break-after: avoid; }
+      h1, h2, h3, h4, h5, h6 { break-after: avoid; page-break-after: avoid; break-inside: avoid; page-break-inside: avoid; }
+      table { break-inside: avoid; page-break-inside: avoid; }
+      tr { break-inside: avoid; page-break-inside: avoid; }
+      .card, .idea-card, .highlight-box, .question-box { break-inside: avoid; page-break-inside: avoid; }
+      p { orphans: 3; widows: 3; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-label">Discovery Working Session</div>
+      <h1>EDW Modernization Partnership</h1>
+      <p class="cover-subtitle">A collaborative discussion to understand your perspective on the modernization initiative and shape a proposal that fits your reality</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <label>With</label>
+          <span>Andrew Ho & Grishi Chakraborty</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Date</label>
+          <span>February 25, 2026</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Type</label>
+          <span>Working Session</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo">Bay<span>One</span> Solutions</div>
+  </div>
+
+  <div class="container">
+
+    <div class="purpose-box">
+      <div class="purpose-title">Meeting Purpose</div>
+      <p class="purpose-text">This is a collaborative working session to deepen our understanding of Sephora's EDW modernization initiative. Mani shared the strategic vision; we're here to learn from Andrew and Grishi's technical and execution perspective. Our goal: listen, learn, and gather input to shape a proposal that genuinely fits your needs.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>What We Understand So Far</h2>
+      <p class="lead">Based on our conversation with Mani, here's our current understanding. We'd welcome your corrections, additions, and perspective.</p>
+
+      <h3>The Initiative</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Aspect</th>
+            <th>Our Understanding</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Project</strong></td>
+            <td>EDW Modernization — a 3-year program</td>
+          </tr>
+          <tr>
+            <td><strong>Approach</strong></td>
+            <td>Re-engineering, not migration (critical distinction)</td>
+          </tr>
+          <tr>
+            <td><strong>Source</strong></td>
+            <td>SQL Server + IBM Cognos + DataStage</td>
+          </tr>
+          <tr>
+            <td><strong>Target</strong></td>
+            <td>Databricks (data layer); Cognos retained for now</td>
+          </tr>
+          <tr>
+            <td><strong>Philosophy</strong></td>
+            <td>Progress over perfection; don't let semantic layer slow momentum</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>The Scale</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>What We've Heard</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Reports</td>
+            <td>Thousands (6,000 referenced)</td>
+          </tr>
+          <tr>
+            <td>SSAS Cubes</td>
+            <td>8</td>
+          </tr>
+          <tr>
+            <td>KPIs</td>
+            <td>800+</td>
+          </tr>
+          <tr>
+            <td>Source Systems</td>
+            <td>20+</td>
+          </tr>
+          <tr>
+            <td>Timeline</td>
+            <td>3 years, with hope to accelerate to 2027</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>The Approach</h3>
+      <p><strong>Track-Based Execution:</strong> Finance first (nearly complete), with Merchandising and Supply Chain as potential next tracks. Patterns established from Finance to apply forward.</p>
+      <p><strong>Governance Structure:</strong> Core table includes Databricks, Microsoft, Data Platform, and BI SMEs. Andrew and Terti leading semantic layer direction; Grishi's team executing day-to-day modernization.</p>
+
+      <div class="question-box">
+        <div class="question-label">For Discussion</div>
+        <p><strong>What would you add, correct, or emphasize differently?</strong></p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>What We'd Like to Learn</h2>
+      <p class="lead">We're preparing a proposal for Mani with three engagement options. Your input will shape what we recommend.</p>
+
+      <h3>About the Work</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Why It Matters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>What's been the biggest challenge in the Finance track?</td>
+            <td>Learn from your experience</td>
+          </tr>
+          <tr>
+            <td>Where do you see the biggest opportunities for acceleration?</td>
+            <td>Focus our proposal appropriately</td>
+          </tr>
+          <tr>
+            <td>What would a successful pilot look like to you?</td>
+            <td>Define success criteria</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>About the Tools</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Why It Matters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>What's working well with current AI tooling (Lutra, Flow, etc.)?</td>
+            <td>Build on what works</td>
+          </tr>
+          <tr>
+            <td>Where are the gaps that current tools don't address?</td>
+            <td>Find where we can add value</td>
+          </tr>
+          <tr>
+            <td>What AI approaches have you tried that disappointed?</td>
+            <td>Avoid repeating mistakes</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>About the Partnership</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Why It Matters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>How do you see external partners fitting into the governance structure?</td>
+            <td>Understand our potential role</td>
+          </tr>
+          <tr>
+            <td>What would make an external partnership valuable vs. overhead?</td>
+            <td>Ensure we add, not subtract value</td>
+          </tr>
+          <tr>
+            <td>What's Databricks specifically proposing for AI acceleration?</td>
+            <td>Understand the landscape</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>Ideas We're Exploring</h2>
+      <p class="lead">Based on what Mani shared, we've been thinking about areas where AI might help. These are early ideas — we'd value your reaction.</p>
+
+      <div class="idea-card">
+        <div class="idea-label">Idea</div>
+        <div class="idea-title">Pattern Detection & Clustering</div>
+        <p>Rather than treating each report as unique, identify common structures across the portfolio. Reports sharing similar schemas or query patterns could be grouped and re-engineered together.</p>
+        <div class="idea-value"><strong>Potential Value:</strong> Enable batch re-engineering instead of report-by-report</div>
+        <div class="question-box" style="margin-bottom: 0;">
+          <div class="question-label">Your Perspective</div>
+          <p>Does this align with how you're approaching the work? What would make this more or less useful?</p>
+        </div>
+      </div>
+
+      <div class="idea-card">
+        <div class="idea-label">Idea</div>
+        <div class="idea-title">Codebase & Logic Extraction</div>
+        <p>Use AI to scan legacy Cognos/SQL code and surface buried business logic, dependencies, and potential risks before they become blockers.</p>
+        <div class="idea-value"><strong>Potential Value:</strong> Reduce "surprises" during re-engineering; accelerate SME review</div>
+        <div class="question-box" style="margin-bottom: 0;">
+          <div class="question-label">Your Perspective</div>
+          <p>Where is buried logic the biggest pain point? How are you currently handling this?</p>
+        </div>
+      </div>
+
+      <div class="idea-card">
+        <div class="idea-label">Idea</div>
+        <div class="idea-title">Validation Acceleration</div>
+        <p>Use deterministic + AI hybrid approaches to validate source-to-target mappings, flagging only anomalies for human review rather than reviewing everything manually.</p>
+        <div class="idea-value"><strong>Potential Value:</strong> Focus SME time on exceptions, not routine verification</div>
+        <div class="question-box" style="margin-bottom: 0;">
+          <div class="question-label">Your Perspective</div>
+          <p>What's the current validation burden? Where does it create bottlenecks?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">04</div>
+      <h2>What We'd Find Helpful</h2>
+      <p class="lead">To make our proposal as concrete and useful as possible, we'd benefit from:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Request</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Sample reports</strong> (if possible)</td>
+            <td>Understand complexity distribution</td>
+          </tr>
+          <tr>
+            <td><strong>Your perspective on pilot scope</strong></td>
+            <td>Right-size the engagement</td>
+          </tr>
+          <tr>
+            <td><strong>Budget range guidance</strong></td>
+            <td>Ensure proposal is realistic</td>
+          </tr>
+          <tr>
+            <td><strong>Timeline context</strong></td>
+            <td>When does next track start?</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="highlight-box">
+        <p>We're not asking you to commit to anything — just help us understand so we can bring something useful back to Mani.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">05</div>
+      <h2>Our Relevant Experience</h2>
+      <p class="lead">For context on why we're here:</p>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">CM</div>
+          <div>
+            <div class="card-title">Colin Moore, Director of AI</div>
+            <div class="card-subtitle">BayOne Solutions</div>
+          </div>
+        </div>
+        <p>Previously led BI and AI at a 40,000-employee company. Undertook similar EDW modernization (to Snowflake). Direct experience with SSAS/SSRS, Cognos-like environments. Understands that "re-engineering" is fundamentally different from "migration."</p>
+      </div>
+
+      <h3>BayOne's Position</h3>
+      <p><strong>Not a platform vendor</strong> — we're tool-agnostic. We can work alongside Databricks and existing tools, not replace them.</p>
+      <p><strong>Focused on methodology</strong> — acceleration strategy rather than selling software. This independence allows us to evaluate options objectively.</p>
+      <p><strong>Long-term relationship</strong> — with Sephora through staffing engagement. We understand your organization.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-number">06</div>
+      <h2>Discussion Guide</h2>
+      <p class="lead">Suggested flow for our conversation today:</p>
+
+      <h3>Core Questions</h3>
+      <div class="discussion-item">
+        <span class="discussion-number">1</span>
+        <span class="discussion-text">"What's been the biggest challenge so far in the Finance track?"</span>
+      </div>
+      <div class="discussion-item">
+        <span class="discussion-number">2</span>
+        <span class="discussion-text">"Where do you see the biggest opportunities for AI to actually help?"</span>
+      </div>
+      <div class="discussion-item">
+        <span class="discussion-number">3</span>
+        <span class="discussion-text">"What tools are working? What gaps remain?"</span>
+      </div>
+      <div class="discussion-item">
+        <span class="discussion-number">4</span>
+        <span class="discussion-text">"What would success look like for a pilot engagement?"</span>
+      </div>
+      <div class="discussion-item">
+        <span class="discussion-number">5</span>
+        <span class="discussion-text">"How should we think about integrating with your governance structure?"</span>
+      </div>
+
+      <h3>If Time Permits</h3>
+      <div class="discussion-item">
+        <span class="discussion-number">6</span>
+        <span class="discussion-text">"Can we get sample reports to make our proposal more concrete?"</span>
+      </div>
+      <div class="discussion-item">
+        <span class="discussion-number">7</span>
+        <span class="discussion-text">"What budget range should we be thinking about?"</span>
+      </div>
+      <div class="discussion-item">
+        <span class="discussion-number">8</span>
+        <span class="discussion-text">"What should we definitely avoid proposing?"</span>
+      </div>
+
+      <div class="highlight-box">
+        <p><strong>Closing question:</strong> "This has been really valuable. We want to make sure the proposal we bring back to Mani actually fits your reality, not just the strategic vision. What else should we know?"</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">07</div>
+      <h2>Next Steps</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Owner</th>
+            <th>Timeline</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Incorporate your feedback into proposal</td>
+            <td>BayOne</td>
+            <td>This week</td>
+          </tr>
+          <tr>
+            <td>Send case studies as promised to Mani</td>
+            <td>BayOne</td>
+            <td>Tomorrow</td>
+          </tr>
+          <tr>
+            <td>Proposal review with Mani</td>
+            <td>All</td>
+            <td>Week after next</td>
+          </tr>
+          <tr>
+            <td>Sample reports (if agreed)</td>
+            <td>Sephora</td>
+            <td>As available</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Confidential — Prepared for Sephora</p>
+      <p class="footer-note">This is a collaborative working document, not a formal proposal.<br>The formal proposal will follow based on this discussion.</p>
+    </div>
+  </div>
+</body>
+</html>

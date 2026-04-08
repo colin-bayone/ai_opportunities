@@ -1,67 +1,55 @@
-# Lam Research — AI Opportunities
+# Lam Research — Engagement Index
+
+*BayOne Solutions*
+*Last updated: 2026-04-08*
+
+---
+
+## Active Project
+
+### [IP Protection](ip_protection/)
+- **Status:** Proposal phase — proposal due by April 10, decision expected ~April 17
+- **Structure:** Full Singularity (8 document sets, 47 research files, 8 deliverables, 11 presentation slides)
+- **Application:** Escalation Solver (homegrown escalation management platform)
+- **Problem:** Customer-confidential data in knowledge base prevents cross-customer sharing. Customers are competitors (semiconductor fabs).
+- **Key contacts:** Bradley Estes (Managing Director, decision-maker), Mikhail Krivenko (Head of Product, technical driver), Daniel Harrison (Director of Engineering, GFSO)
+- **BayOne team:** Colin Moore (technical lead), Anuj Sehgal (relationship), Pratik Sharda / Amit Grover (technical support)
+- **Start here:** `ip_protection/research/00_methodology_2026-04-06.md`, then summaries in order
 
 **Company:** Lam Research ($17B+ revenue, ~17,000 employees, wafer fabrication equipment)
-**Opportunity:** IP Protection — detecting/redacting customer-confidential information in unstructured data to enable cross-customer knowledge sharing
-**Primary Contact:** Bradley Estes (Managing Director, Knowledge & Advanced Services)
-**BayOne Sales:** Anuj Sehgal (VP of Sales)
-**Status:** Discovery complete (March 12, 2026), problem restatement delivered, follow-up pending
 
-## Directory Structure
+---
 
-```
-lam_research/
-  org_chart.md                                  Living people map (updated per meeting)
-  context/
-    2026-03-12_source_transcripts/              3 raw transcripts:
-      lam_call_prep (1).txt                       Pre-call prep document
-      lam_meeting_3122026.txt                     Discovery call transcript
-      anuj_and_colin_after_call1.txt              Post-call debrief (candid, unfiltered)
-  project/
-    2026-03-12_research/                        Blockchain-style research (append-only, numbered)
-      00_methodology_2026-03-20.md                Documentation methodology
-      01-02_changes_2026-03-12.md                 Bridge: hypothesis validation/invalidation
-      set_01_call_prep/                           5 files: company profile, question bank, tech ref, people, summary
-      set_02_discovery_call/                      8 files: people, topic map, use cases, infrastructure, dynamics, etc.
-      set_02a_debrief/                            4 files: candid takes, internal assessment, action items, summary
-      set_03_discussion/                          7 files: technical approach (3 rounds), strategy, open needs, clarifications
-    2026-03-20_quality_review/                  Big Four QA of problem restatement deliverable
-      critique.md                                 19/19 compliance checks passed, 2 minor phrasing fixes
-      source_analysis.md                          All claims verified against transcripts
-  planning/
-    2026-03-20_session/                         Session handoff + skill notes
-  deliverables/
-    2026-03-12_discovery_call/                  Client-facing outputs
-      problem_restatement.md / .html              Core deliverable: 9-section problem understanding
-      preliminary_approach.md / .html             Technical approach options
-      information_request.md / .html              Specific asks for Lam team
-      followup_email_draft.md                     Email draft for next steps
-      README.md                                   Deliverable context/navigation
-```
+## Quick Context
 
-## Source Session Folders (in `claude/`, marked _MIGRATED)
+- **Two use cases:** (1) Batch redaction for self-help search, (2) Real-time detection for escalation entry point
+- **Prior attempts:** 18 months of work, Transformers/SpaCy/Azure AI, 21% false positive (reduced to 17%), no golden set created
+- **BayOne approach:** Layered funnel (deterministic -> ML/NLP -> Gen AI), ground truth first, linear not parallel
+- **POC scope:** Five free-text fields, two entity types (customer name, fab ID) on Escalation Solver
+- **Key advantage:** Lam has no in-house AI expertise. Colin built similar systems at Coherent (semiconductor/defense ITAR).
 
-| Session | Content Migrated To | Status |
-|---------|-------------------|--------|
-| `claude/2026-03-20_lam-research` | All content (context, research, planning, deliverables) | Migrated 2026-03-28 |
-| `claude/2026-03-20_big4_lam_problem_restatement` | project/2026-03-20_quality_review/ | Migrated 2026-03-28 |
+---
 
-## Problem Context
+## Archive
 
-- **The Problem:** Customer-confidential data in knowledge base prevents cross-customer sharing. Customers are competitors (semiconductor fabs).
-- **Prior Attempts:** Transformers, SpaCy, Azure AI (all ~20% false positive), fine-tuned to 17%. 1,000+ hour labeling exercise paused.
-- **Colin's Assessment:** Prior approaches fundamentally wrong. Needs curated dictionaries + fuzzy matching, not ML.
-- **Two Use Cases:** (1) Batch redaction for self-help search, (2) Real-time detection for escalation entry point
-- **Phase Strategy:** Phase 1 MVP on 2 fields (customer name, file name) -> Phase 2 expansion -> Phase 3 scale
-- **Competitors:** Deloitte, Capgemini, Accenture
-- **Key Advantage:** Lam has no in-house AI expert. Colin built similar systems at Coherent (semiconductor/defense ITAR).
+Pre-Singularity content preserved in [`archive/`](archive/). This includes:
 
-## Key People
+| Folder | Contents |
+|--------|----------|
+| `context/` | 3 original source transcripts (March 12). Duplicated in ip_protection/source/ and ip_protection/archive/. |
+| `project/` | 29 files of pre-Singularity research (sets 01-03) and Big Four quality review. Superseded by ip_protection/research/. |
+| `planning_legacy/` | Session handoff from March 20 and skill notes. Copied to ip_protection/planning/ before archiving. |
+| `deliverables_legacy/` | March 12 deliverables (problem restatement, preliminary approach, information request, email draft). Copied to ip_protection/deliverables/ with dated filenames before archiving. |
+| `org_chart.md` | Older version. ip_protection/org_chart.md is authoritative. |
 
-| Person | Role | Notes |
-|--------|------|-------|
-| Bradley Estes | Managing Director, Knowledge & Advanced Services | Decision maker, room controller |
-| Mikhail Krivenko | Head of Product | Problem presenter, precise but honest about limits |
-| Daniel | Technical Lead | Key for follow-up technical discussion |
-| Pat/Pratik | Supporting | "Awesome" per Colin |
-| Jason Callahan | CISO | Security context |
-| Anuj Sehgal | BayOne VP of Sales | Deal driver, "start small, embed, scale" strategy |
+---
+
+## Reorganization Log
+
+**2026-04-08:** Consolidated using Singularity Reorganization Guide.
+- Validated ip_protection/ Singularity structure (all research checks pass)
+- Moved March 12 deliverables into ip_protection/deliverables/ with dated filenames
+- Moved internal meeting summary from deliverables/ to planning/ (not client-facing)
+- Copied session handoff and skill notes into ip_protection/planning/
+- Wrote fresh session handoff reflecting April 6 state
+- Archived all top-level legacy content

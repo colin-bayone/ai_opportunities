@@ -1,130 +1,55 @@
-# Sephora EDW Modernization - Documentation Index
+# Sephora — Engagement Index
 
-*BayOne Solutions Engagement*
-*Last updated: February 12, 2026*
-
----
-
-## Quick Links
-
-### Core Understanding
-- [Project Overview](project/00_project_overview.md) - What the project is, migration path, current state
-- [Key Terms & Glossary](project/01_glossary.md) - SSAS, Cognos, DataStage, Databricks, etc.
-- [Scope and Scale](project/03_scope_and_scale.md) - Quantified scope: 6,000 reports, 8 cubes, 800+ KPIs
-
-### Problem Analysis
-- [Pain Points & Opportunities](project/02_pain_points.md) - SSAS blocker, ETL conversion, embedded SQL, data mapping
-
-### People
-- [Stakeholder Directory](stakeholders/00_people_directory.md) - Who's who at Sephora and BayOne
-
-### Strategy & Planning
-- [BayOne Positioning](planning/00_bayone_positioning.md) - How we position ourselves, two-track model
-- [Open Questions](planning/01_open_questions.md) - Gaps to fill, questions to answer
-
-### Timeline
-- [Engagement History](project/04_engagement_timeline.md) - Chronological record of interactions
-
-### Source Materials
-- [context/email1.txt](context/email1.txt) - Full email thread Dec 2025 - Feb 2026
-- [context/email2.txt](context/email2.txt) - Zahra's internal planning email
+*BayOne Solutions*
+*Last updated: 2026-04-08*
 
 ---
 
-## Folder Structure
+## Active Projects
 
-```
-sephora/
-├── 00_index.md              ← You are here
-├── context/                 ← Source documents (emails, transcripts)
-│   ├── email1.txt
-│   └── email2.txt
-├── project/                 ← Current state documents
-│   ├── 00_project_overview.md
-│   ├── 01_glossary.md
-│   ├── 02_pain_points.md
-│   ├── 03_scope_and_scale.md
-│   └── 04_engagement_timeline.md
-├── planning/                ← Strategy and approach
-│   ├── 00_bayone_positioning.md
-│   └── 01_open_questions.md
-├── stakeholders/            ← People and relationships
-│   └── 00_people_directory.md
-└── research/                ← Investigation materials (empty for now)
-```
+### [EDW Modernization](edw_modernization/)
+- **Status:** Active engagement, post-demo phase
+- **Structure:** Full Singularity (7 document sets, 58 research files, 5 deliverables)
+- **Key contacts:** Mani Soundararajan (VP), Andrew Ho, Grishi Chakraborty, Maher, Saurav
+- **Summary:** AI-assisted EDW modernization — migrating ~6,000 reports, 8 SSAS cubes, 800+ KPIs from legacy SQL Server/Cognos/DataStage to Databricks. BayOne demonstrated a working demo on April 2, 2026.
+- **Start here:** `edw_modernization/research/00_methodology_2026-04-02.md`, then summaries in order
 
----
+### [QA/QE Playwright](qa_qe_playwright/)
+- **Status:** Discovery complete, opportunity identified
+- **Structure:** Full Singularity (1 document set, 9 research files, 1 deliverable)
+- **Key contact:** Vaibhav (QE organization)
+- **Summary:** QA/QE automation using generative AI and Playwright. Sephora transitioning from Selenium, has AI mandate since August 2025, moving to Agentic Micro Pod model.
+- **Start here:** `qa_qe_playwright/research/00_methodology_2026-03-30.md`, then summary
 
-## Key Numbers at a Glance
-
-| Metric | Value |
-|--------|-------|
-| Reports to migrate | ~6,000 (15-20 years legacy) |
-| SSAS Cubes | 8 |
-| KPIs | 800+ |
-| Dimensions | 300 |
-| Source systems | 20+ |
-| EDW age | ~20 years |
-| Timeline | 2026-2028 (possibly 2027 with AI acceleration) |
-| Rate strategy | $105-115/hr ($120+ on-site only) |
+### [Staffing — Ravi](ravi/)
+- **Status:** Job descriptions created for 4 roles
+- **Structure:** Custom (not Singularity — staffing engagement, not solutions)
+- **Key contact:** Ravi Pandey
+- **Summary:** JD creation for ML Platform Engineer, ML Engineer, AI Engineer, Data Engineer. Includes recruiter guides and search terms.
 
 ---
 
-## Key People at a Glance
+## Archive
 
-**Sephora (Mani's Org):**
-- **Vlad** - CIO (executive sponsor)
-- **Mani Soundararajan** - VP (key decision-maker, wants proposal-led conversations)
-- **Ram** - Acquisition & Retention (reports to Mani, actively hiring)
-- **Andrew Ho** - Sr. Director, Influencer/Media/Marketing AI (reports to Mani, actively hiring)
-- **Rizwan Khan** - CRM & Marketing Personalization (reports to Mani, hiring late Q1)
-- **Grishi Chakraborty** - Director, Data Eng/BI (reports to Andrew, actively hiring)
-- **Ravi** - Engineer (Colin lunch today)
+All pre-Singularity content is preserved in [`archive/`](archive/). This includes:
 
-**Domain Leaders (Decentralization):**
-- **David/Natalia** - Stores (Model 1)
-- **Rajesh** - E-commerce/Omni (Model 2)
-
-**BayOne:**
-- **Colin Moore** - Director of AI (technical lead)
-- **Zahra Syed** - Director, Strategic Accounts (sales lead, had key roadmap conversation)
-- **Neha Malhotra** - Head of Recruiting (staffing track)
+| Folder | Contents |
+|--------|----------|
+| `2025-02-25_andrew-meeting-prep/` | 124 files of pre-Singularity meeting analysis. Superseded by edw_modernization/research/. Unique stakeholder dossiers and relationship analysis copied to edw_modernization/planning/stakeholder_intelligence/ before archiving. |
+| `context/` | Raw source materials (transcripts, emails, ETL use case reference files). Unique files copied to edw_modernization/source/ before archiving. Duplicates verified by hash. |
+| `project/` | Legacy project overview, glossary, pain points, scope, timeline (5 files). Superseded by edw_modernization/research/. |
+| `planning_legacy/` | Legacy positioning and open questions (2 files). Superseded by edw_modernization/planning/. |
+| `stakeholders/` | Legacy people directory (1 file). Superseded by edw_modernization/org_chart.md. |
+| `deliverables_legacy/` | Early AI acceleration proposal (1 file). Superseded by edw_modernization/deliverables/. |
 
 ---
 
-## Current Status
+## Reorganization Log
 
-**Phase:** Discovery & Positioning (Nearing Completion) → Proposal Development (Starting)
-
-**Today (Feb 12, 2026):**
-- Colin meeting with Mani (VP) - **proposal-led conversation expected**
-- Colin lunch with Ravi (Engineer)
-
-**Key Strategic Insight:**
-> *"If someone comes with groundwork done and a proposal — that would be very productive."* - Mani
-
-**They want:** Proposal-led, not discovery. They are **not locked into Databricks** AI tools yet.
-
-**Next Steps:**
-1. ~~Clarify staffing vs. solutions~~ **DONE** - both active
-2. ~~Identify decision authority~~ **DONE** - Mani is key
-3. Prepare 1-page POV: AI-Assisted EDW Modernization Framework
-4. Get sample reports from Grishi
-5. Define pilot scope (Finance - Business Planning suggested)
-
----
-
-## Open Questions (Priority)
-
-**Answered:**
-- Do they want AI help? → **YES, explicitly**
-- Proposal or discovery? → **Proposal-led**
-- Locked into Databricks? → **NO, still experimenting**
-
-**Remaining:**
-1. What AI POCs have they already done?
-2. What is Databricks proposing?
-3. Budget authority for solutions engagement?
-4. Sample reports across complexity levels?
-
-See [Open Questions](planning/01_open_questions.md) for full list.
+**2026-04-08:** Full reorganization using Singularity Reorganization Guide.
+- Validated edw_modernization (10/12 PASS, fixed: formatted 17 source transcripts)
+- Validated qa_qe_playwright (8/12 PASS, fixed: added session handoff)
+- Copied unique content from andrew-meeting-prep to edw_modernization (stakeholder intelligence, pre-demo deliverables, action tracking)
+- Copied 4 unique source files from context/ to edw_modernization/source/
+- Archived all superseded content
+- Left ravi/ as standalone staffing engagement
