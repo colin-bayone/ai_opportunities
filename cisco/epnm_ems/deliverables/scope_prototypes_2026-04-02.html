@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; color: #334155; font-size: 12px; background: #fff; padding: 40px; }
+
+    .prototype { max-width: 700px; margin: 0 auto 60px; }
+    .prototype-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #a855f7; margin-bottom: 12px; }
+
+    .section-header {
+      font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: #5b21b6;
+      margin-bottom: 6px; padding-bottom: 3px; border-bottom: 1px solid #e2e8f0;
+    }
+
+    /* ===== PROTOTYPE A: Definition list style ===== */
+    .scope-dl {
+      display: grid; grid-template-columns: 120px 1fr;
+      font-size: 11.5px; line-height: 1.5;
+    }
+    .scope-dl dt {
+      font-weight: 600; color: #0f172a; padding: 4px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .scope-dl dd {
+      padding: 4px 0 4px 12px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .scope-dl dt:last-of-type, .scope-dl dd:last-of-type { border-bottom: none; }
+
+    /* ===== PROTOTYPE B: Inline comma-separated ===== */
+    .scope-inline { font-size: 11.5px; line-height: 1.7; }
+    .scope-inline .tag {
+      font-weight: 600; color: #0f172a;
+    }
+
+    /* ===== PROTOTYPE C: Compact pills ===== */
+    .scope-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .scope-pill {
+      font-size: 11px; padding: 4px 10px;
+      border: 1px solid #e2e8f0; border-radius: 4px;
+      background: #f8fafc;
+    }
+    .scope-pill strong { color: #0f172a; }
+    .scope-pill span { color: #64748b; }
+
+    /* ===== PROTOTYPE D: Two-column compact grid ===== */
+    .scope-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0; font-size: 11.5px;
+    }
+    .scope-grid-item {
+      padding: 5px 10px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .scope-grid-item:nth-child(odd) { border-right: 1px solid #f1f5f9; }
+    .scope-grid-item strong { color: #0f172a; display: block; font-size: 11px; }
+    .scope-grid-item span { color: #64748b; font-size: 10.5px; }
+
+    /* ===== PROTOTYPE E: Single paragraph ===== */
+    .scope-para {
+      font-size: 11.5px; line-height: 1.6; color: #334155;
+      border-left: 3px solid #5b21b6; padding-left: 12px;
+    }
+    .scope-para strong { color: #0f172a; }
+  </style>
+</head>
+<body>
+
+  <!-- A: Definition list -->
+  <div class="prototype">
+    <div class="prototype-label">Prototype A: Definition List</div>
+    <div class="section-header">Engagement Scope</div>
+    <dl class="scope-dl">
+      <dt>Conversion</dt>
+      <dd>250+ screens, end-to-end: frontend UI, backend logic extraction, and EMS service integration</dd>
+      <dt>Architecture</dt>
+      <dd>EPNM (monolithic, Java/Dojo) to EMS (microservices, Java/Angular)</dd>
+      <dt>Code Generation</dt>
+      <dd>100% AI-generated code, with purpose-built agents coordinating codebase analysis, pattern identification, code generation, and validation in parallel</dd>
+      <dt>Quality Engineering</dt>
+      <dd>Continuous, in-the-loop generative AI-driven QE, including automated visual validation, integration testing, and functional equivalence verification</dd>
+      <dt>Post-Delivery</dt>
+      <dd>One month of dedicated support following final delivery for issue resolution and stabilization</dd>
+    </dl>
+  </div>
+
+  <!-- B: Inline -->
+  <div class="prototype">
+    <div class="prototype-label">Prototype B: Inline Paragraph</div>
+    <div class="section-header">Engagement Scope</div>
+    <p class="scope-inline">
+      <span class="tag">Conversion:</span> 250+ screens, end-to-end (frontend UI, backend logic, EMS service integration).
+      <span class="tag">Architecture:</span> EPNM (monolithic, Java/Dojo) to EMS (microservices, Java/Angular).
+      <span class="tag">Code Generation:</span> 100% AI-generated code with purpose-built agents for codebase analysis, pattern identification, and validation.
+      <span class="tag">Quality Engineering:</span> Continuous generative AI-driven QE with automated visual validation and integration testing.
+      <span class="tag">Post-Delivery:</span> One month of dedicated support for issue resolution and stabilization.
+    </p>
+  </div>
+
+  <!-- C: Pills -->
+  <div class="prototype">
+    <div class="prototype-label">Prototype C: Compact Pills</div>
+    <div class="section-header">Engagement Scope</div>
+    <div class="scope-pills">
+      <div class="scope-pill"><strong>Conversion</strong> <span>250+ screens, end-to-end</span></div>
+      <div class="scope-pill"><strong>Architecture</strong> <span>EPNM to EMS (monolith to microservices)</span></div>
+      <div class="scope-pill"><strong>Code</strong> <span>100% AI-generated</span></div>
+      <div class="scope-pill"><strong>QE</strong> <span>Continuous, generative AI-driven</span></div>
+      <div class="scope-pill"><strong>Post-Delivery</strong> <span>1 month support</span></div>
+    </div>
+  </div>
+
+  <!-- D: Two-column grid -->
+  <div class="prototype">
+    <div class="prototype-label">Prototype D: Two-Column Grid</div>
+    <div class="section-header">Engagement Scope</div>
+    <div class="scope-grid">
+      <div class="scope-grid-item">
+        <strong>Conversion</strong>
+        <span>250+ screens, end-to-end (UI + backend + EMS integration)</span>
+      </div>
+      <div class="scope-grid-item">
+        <strong>Architecture</strong>
+        <span>EPNM (Java/Dojo) to EMS (Java/Angular)</span>
+      </div>
+      <div class="scope-grid-item">
+        <strong>Code Generation</strong>
+        <span>100% AI-generated with purpose-built agents</span>
+      </div>
+      <div class="scope-grid-item">
+        <strong>Quality Engineering</strong>
+        <span>Continuous generative AI-driven QE and validation</span>
+      </div>
+      <div class="scope-grid-item" style="grid-column: 1 / -1;">
+        <strong>Post-Delivery</strong>
+        <span>One month of dedicated support for issue resolution and stabilization</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- E: Single paragraph with left border -->
+  <div class="prototype">
+    <div class="prototype-label">Prototype E: Bordered Paragraph</div>
+    <div class="section-header">Engagement Scope</div>
+    <p class="scope-para">
+      Full-stack conversion of <strong>250+ EPNM screens</strong> to the EMS platform (monolithic Java/Dojo to microservices Java/Angular), including frontend UI, backend logic extraction, and EMS service integration. All conversion code is <strong>100% AI-generated</strong> with purpose-built agents coordinating codebase analysis, pattern identification, and validation in parallel. <strong>Continuous generative AI-driven quality engineering</strong> is integrated throughout, including automated visual validation, integration testing, and functional equivalence verification. Includes <strong>one month of post-delivery support</strong> for issue resolution and stabilization.
+    </p>
+  </div>
+
+</body>
+</html>

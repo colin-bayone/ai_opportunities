@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; color: #334155; font-size: 12px; background: #fff; padding: 40px; }
+
+    .prototype { max-width: 700px; margin: 0 auto 50px; }
+    .prototype-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #a855f7; margin-bottom: 10px; }
+
+    .section-header {
+      font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: #5b21b6;
+      margin-bottom: 4px; padding-bottom: 2px; border-bottom: 1px solid #e2e8f0;
+    }
+
+    /* ===== A: Horizontal flow with circles ===== */
+    .ms-flow { display: flex; justify-content: space-between; margin-top: 8px; }
+    .ms-flow-item { display: flex; flex-direction: column; align-items: center; flex: 1; position: relative; }
+    .ms-flow-item:not(:last-child)::after {
+      content: ''; position: absolute; top: 14px; left: 55%; right: -45%;
+      height: 2px; background: #e2e8f0;
+    }
+    .ms-flow-circle {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: linear-gradient(135deg, #5b21b6, #a855f7);
+      color: #fff; font-size: 10px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; z-index: 1;
+    }
+    .ms-flow-pct { font-size: 11px; font-weight: 700; color: #0f172a; margin-top: 4px; }
+    .ms-flow-desc { font-size: 9px; color: #64748b; text-align: center; margin-top: 2px; max-width: 110px; line-height: 1.3; }
+
+    /* ===== B: Horizontal bar segments ===== */
+    .ms-bar { display: flex; border-radius: 4px; overflow: hidden; margin-top: 8px; height: 28px; }
+    .ms-bar-seg { display: flex; align-items: center; justify-content: center; color: #fff; font-size: 10px; font-weight: 600; }
+    .ms-bar-seg:nth-child(1) { background: #2e1065; flex: 15; }
+    .ms-bar-seg:nth-child(2) { background: #4c1d95; flex: 25; }
+    .ms-bar-seg:nth-child(3) { background: #5b21b6; flex: 25; }
+    .ms-bar-seg:nth-child(4) { background: #7c3aed; flex: 25; }
+    .ms-bar-seg:nth-child(5) { background: #a855f7; flex: 10; }
+    .ms-bar-labels { display: flex; margin-top: 4px; font-size: 9px; color: #64748b; }
+    .ms-bar-label { line-height: 1.3; }
+    .ms-bar-label:nth-child(1) { flex: 15; }
+    .ms-bar-label:nth-child(2) { flex: 25; }
+    .ms-bar-label:nth-child(3) { flex: 25; }
+    .ms-bar-label:nth-child(4) { flex: 25; }
+    .ms-bar-label:nth-child(5) { flex: 10; }
+
+    /* ===== C: Compact definition list ===== */
+    .ms-def { display: grid; grid-template-columns: 45px 1fr; font-size: 11px; margin-top: 6px; }
+    .ms-def-pct { font-weight: 700; color: #5b21b6; padding: 3px 0; border-bottom: 1px solid #f1f5f9; }
+    .ms-def-desc { padding: 3px 0 3px 8px; border-bottom: 1px solid #f1f5f9; }
+    .ms-def-pct:last-of-type, .ms-def-desc:last-of-type { border-bottom: none; }
+
+    /* ===== D: Numbered steps with left accent ===== */
+    .ms-steps { margin-top: 6px; }
+    .ms-step {
+      display: flex; align-items: baseline; gap: 8px;
+      padding: 3px 0 3px 8px; border-left: 2px solid #5b21b6;
+      font-size: 11px; margin-bottom: 2px;
+    }
+    .ms-step-pct { font-weight: 700; color: #5b21b6; flex: 0 0 35px; }
+    .ms-step-desc { color: #334155; }
+
+    /* ===== E: Inline single line ===== */
+    .ms-inline { font-size: 11px; margin-top: 6px; line-height: 1.6; }
+    .ms-inline-item { display: inline; }
+    .ms-inline-pct { font-weight: 700; color: #5b21b6; }
+    .ms-inline-sep { color: #d4d4d8; margin: 0 4px; }
+
+    /* ===== F: Pills row ===== */
+    .ms-pills { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+    .ms-pill {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 5px 8px; border: 1px solid #e2e8f0; border-radius: 4px;
+      flex: 1; min-width: 100px;
+    }
+    .ms-pill-pct { font-size: 13px; font-weight: 700; color: #5b21b6; }
+    .ms-pill-desc { font-size: 9px; color: #64748b; text-align: center; margin-top: 2px; line-height: 1.3; }
+  </style>
+</head>
+<body>
+
+  <!-- A: Horizontal flow -->
+  <div class="prototype">
+    <div class="prototype-label">Prototype A: Horizontal Flow</div>
+    <div class="section-header">Milestone Payments</div>
+    <div class="ms-flow">
+      <div class="ms-flow-item">
+        <div class="ms-flow-circle">1</div>
+        <div class="ms-flow-pct">15%</div>
+        <div class="ms-flow-desc">Kickoff and codebase analysis complete</div>
+      </div>
+      <div class="ms-flow-item">
+        <div class="ms-flow-circle">2</div>
+        <div class="ms-flow-pct">25%</div>
+        <div class="ms-flow-desc">First batch converted and accepted</div>
+      </div>
+      <div class="ms-flow-item">
+        <div class="ms-flow-circle">3</div>
+        <div class="ms-flow-pct">25%</div>
+        <div class="ms-flow-desc">Second batch delivered and accepted</div>
+      </div>
+      <div class="ms-flow-item">
+        <div class="ms-flow-circle">4</div>
+        <div class="ms-flow-pct">25%</div>
+        <div class="ms-flow-desc">Final batch delivered and accepted</div>
+      </div>
+      <div class="ms-flow-item">
+        <div class="ms-flow-circle">5</div>
+        <div class="ms-flow-pct">10%</div>
+        <div class="ms-flow-desc">Integration testing and formal acceptance</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- B: Horizontal bar -->
+  <div class="prototype">
+    <div class="prototype-label">Prototype B: Progress Bar</div>
+    <div class="section-header">Milestone Payments</div>
+    <div class="ms-bar">
+      <div class="ms-bar-seg">15%</div>
+      <div class="ms-bar-seg">25%</div>
+      <div class="ms-bar-seg">25%</div>
+      <div class="ms-bar-seg">25%</div>
+      <div class="ms-bar-seg">10%</div>
+    </div>
+    <div class="ms-bar-labels">
+      <div class="ms-bar-label">Kickoff + analysis</div>
+      <div class="ms-bar-label">First batch accepted</div>
+      <div class="ms-bar-label">Second batch accepted</div>
+      <div class="ms-bar-label">Final batch accepted</div>
+      <div class="ms-bar-label">Final acceptance</div>
+    </div>
+  </div>
+
+  <!-- C: Compact definition list -->
+  <div class="prototype">
+    <div class="prototype-label">Prototype C: Definition List</div>
+    <div class="section-header">Milestone Payments</div>
+    <div class="ms-def">
+      <div class="ms-def-pct">15%</div>
+      <div class="ms-def-desc">Kickoff and codebase analysis complete, screen prioritization finalized</div>
+      <div class="ms-def-pct">25%</div>
+      <div class="ms-def-desc">First batch of screens converted, tested, and accepted</div>
+      <div class="ms-def-pct">25%</div>
+      <div class="ms-def-desc">Second batch of screens delivered and accepted</div>
+      <div class="ms-def-pct">25%</div>
+      <div class="ms-def-desc">Final batch of screens delivered and accepted</div>
+      <div class="ms-def-pct">10%</div>
+      <div class="ms-def-desc">Integration testing, final validation, and formal acceptance</div>
+    </div>
+  </div>
+
+  <!-- D: Left-accent steps -->
+  <div class="prototype">
+    <div class="prototype-label">Prototype D: Left-Accent Steps</div>
+    <div class="section-header">Milestone Payments</div>
+    <div class="ms-steps">
+      <div class="ms-step"><span class="ms-step-pct">15%</span><span class="ms-step-desc">Kickoff and codebase analysis complete, screen prioritization finalized</span></div>
+      <div class="ms-step"><span class="ms-step-pct">25%</span><span class="ms-step-desc">First batch of screens converted, tested, and accepted</span></div>
+      <div class="ms-step"><span class="ms-step-pct">25%</span><span class="ms-step-desc">Second batch of screens delivered and accepted</span></div>
+      <div class="ms-step"><span class="ms-step-pct">25%</span><span class="ms-step-desc">Final batch of screens delivered and accepted</span></div>
+      <div class="ms-step"><span class="ms-step-pct">10%</span><span class="ms-step-desc">Integration testing, final validation, and formal acceptance</span></div>
+    </div>
+  </div>
+
+  <!-- E: Inline single line -->
+  <div class="prototype">
+    <div class="prototype-label">Prototype E: Inline</div>
+    <div class="section-header">Milestone Payments</div>
+    <p class="ms-inline">
+      <span class="ms-inline-pct">15%</span> Kickoff + analysis<span class="ms-inline-sep">|</span>
+      <span class="ms-inline-pct">25%</span> First batch<span class="ms-inline-sep">|</span>
+      <span class="ms-inline-pct">25%</span> Second batch<span class="ms-inline-sep">|</span>
+      <span class="ms-inline-pct">25%</span> Final batch<span class="ms-inline-sep">|</span>
+      <span class="ms-inline-pct">10%</span> Final acceptance
+    </p>
+  </div>
+
+  <!-- F: Pills -->
+  <div class="prototype">
+    <div class="prototype-label">Prototype F: Pills</div>
+    <div class="section-header">Milestone Payments</div>
+    <div class="ms-pills">
+      <div class="ms-pill"><div class="ms-pill-pct">15%</div><div class="ms-pill-desc">Kickoff and codebase analysis</div></div>
+      <div class="ms-pill"><div class="ms-pill-pct">25%</div><div class="ms-pill-desc">First batch accepted</div></div>
+      <div class="ms-pill"><div class="ms-pill-pct">25%</div><div class="ms-pill-desc">Second batch accepted</div></div>
+      <div class="ms-pill"><div class="ms-pill-pct">25%</div><div class="ms-pill-desc">Final batch accepted</div></div>
+      <div class="ms-pill"><div class="ms-pill-pct">10%</div><div class="ms-pill-desc">Final acceptance</div></div>
+    </div>
+  </div>
+
+</body>
+</html>

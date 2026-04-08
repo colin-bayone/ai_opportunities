@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CI/CD Team Briefing - April 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #334155;
+  line-height: 1.7;
+  font-size: 15px;
+  background: #ffffff;
+}
+
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px;
+  background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  page-break-after: always;
+}
+
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 80%;
+  height: 200%;
+  background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+  transform: rotate(-12deg);
+}
+
+.cover::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 60%;
+  height: 80%;
+  background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+.cover-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #e879f9;
+  margin-bottom: 24px;
+}
+
+.cover h1 {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+}
+
+.cover-subtitle {
+  font-size: 20px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 48px;
+  max-width: 600px;
+}
+
+.cover-meta {
+  display: flex;
+  gap: 48px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.cover-meta-item label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 8px;
+}
+
+.cover-meta-item span {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.logo {
+  position: absolute;
+  bottom: 80px;
+  right: 80px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  z-index: 1;
+}
+
+.logo span { color: #e879f9; }
+
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 64px 40px;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 24px;
+  letter-spacing: -0.5px;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 32px 0 16px;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 24px 0 12px;
+}
+
+p { margin-bottom: 16px; }
+
+.lead {
+  font-size: 18px;
+  color: #64748b;
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.section-number {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #a855f7;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  padding: 6px 14px;
+  background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%);
+  border-radius: 4px;
+}
+
+.highlight-box {
+  background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+  border-left: 4px solid #a855f7;
+  padding: 24px 28px;
+  margin: 32px 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.highlight-box p:last-child { margin-bottom: 0; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 14px;
+}
+
+th {
+  text-align: left;
+  padding: 14px 16px;
+  background: #5b21b6;
+  color: #fff;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-right: 1px solid rgba(255,255,255,0.15);
+}
+
+th:last-child { border-right: none; }
+th:first-child { border-radius: 8px 0 0 0; }
+th:last-child { border-radius: 0 8px 0 0; }
+
+td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: top;
+}
+
+tr:last-child td { border-bottom: none; }
+tr:nth-child(even) { background: #f8fafc; }
+
+.task-item {
+  margin-bottom: 28px;
+  padding-left: 0;
+}
+
+.task-item h4 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: #4c1d95;
+}
+
+.task-number {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: white;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 600;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.contact-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+
+.contact-card h4 {
+  margin: 0 0 8px 0;
+  color: #4c1d95;
+}
+
+.contact-card p { margin-bottom: 8px; font-size: 14px; }
+.contact-card p:last-child { margin-bottom: 0; }
+
+.constraint-box {
+  background: #fef3c7;
+  border-left: 4px solid #f59e0b;
+  padding: 20px 24px;
+  margin: 20px 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.constraint-box p:last-child { margin-bottom: 0; }
+
+ol.mcp-steps {
+  counter-reset: mcp-counter;
+  list-style: none;
+  padding-left: 0;
+}
+
+ol.mcp-steps li {
+  counter-increment: mcp-counter;
+  padding: 8px 0 8px 36px;
+  position: relative;
+  margin-bottom: 4px;
+}
+
+ol.mcp-steps li::before {
+  content: counter(mcp-counter);
+  position: absolute;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  background: #5b21b6;
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.section-divider {
+  border: none;
+  border-top: 2px solid #e2e8f0;
+  margin: 48px 0;
+}
+
+.footer {
+  text-align: center;
+  padding: 48px 40px;
+  color: #64748b;
+  font-size: 13px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.footer .logo-footer {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.footer .logo-footer span { color: #a855f7; }
+
+@media print {
+  .cover { height: 10in; page-break-after: always; }
+  .content { padding: 40px 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-content">
+    <div class="cover-label">Internal Team Briefing</div>
+    <h1>CI/CD Track Update</h1>
+    <div class="cover-subtitle">Action items and context from the April 2-3 CI/CD Track Sync Up with Srinivas's extended team</div>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <label>Prepared By</label>
+        <span>Colin Moore</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Date</label>
+        <span>April 6, 2026</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Distribution</label>
+        <span>Internal Team Only</span>
+      </div>
+    </div>
+  </div>
+  <div class="logo">Bay<span>One</span></div>
+</div>
+
+<div class="content">
+
+  <div class="section-number">01 NEW CISCO CONTACTS</div>
+  <h2>Who You Will Be Working With</h2>
+  <p class="lead">The following people were introduced during the April 2-3 CI/CD Track Sync Up. They are part of Srinivas's extended team and will be regular counterparts throughout this engagement. Familiarize yourself with their roles before reading the rest of this document, as the upcoming work items reference them by name.</p>
+
+  <div class="contact-card">
+    <h4>Srinivas Pitta</h4>
+    <p><strong>Role:</strong> Director of Engineering, AI Lead</p>
+    <p><strong>Email:</strong> spitta@cisco.com</p>
+    <p>Technical visionary for the engagement. Owns the DeepSight Atlas platform and defines the direction for all AI work across the Cloud Networking Group. He organized the April 2-3 sync and is the person who assigned the first tasks. All architectural and design decisions ultimately go through him.</p>
+  </div>
+
+  <div class="contact-card">
+    <h4>Anand Singh</h4>
+    <p><strong>Role:</strong> Senior Director, Cloud Networking Group</p>
+    <p><strong>Email:</strong> anandksi@cisco.com</p>
+    <p>Executive sponsor for the engagement. Holds the budget and monitors progress. Srinivas reports to Anand. He was invited to the April 2-3 sync but did not actively participate, which is consistent with his role as an oversight figure rather than a hands-on technical lead.</p>
+  </div>
+
+  <div class="contact-card">
+    <h4>Anupma Sehgal</h4>
+    <p><strong>Role:</strong> Lead Engineer, DevEx Organization</p>
+    <p><strong>Email:</strong> asehgal@cisco.com</p>
+    <p>Co-owns the CI pipeline with Divakar's team. Controls CAT-related databases (likely Cassandra). Represents a separate Cisco organization from Srinivas. She has reservations about exposing database access directly, and cross-org negotiation is required to get what we need.</p>
+  </div>
+
+  <div class="contact-card">
+    <h4>Divakar Rayapureddy</h4>
+    <p><strong>Role:</strong> Engineering Lead, Build Infrastructure</p>
+    <p><strong>Email:</strong> divvenka@cisco.com</p>
+    <p>Primary contact for infrastructure access and provisioning. Handles GitHub Enterprise access, ADS Linux machine provisioning, VPN setup, and Jenkins access. Co-owns the CI pipeline with Anupma's DevEx team. He was invited to the April 2-3 sync but did not actively participate.</p>
+  </div>
+
+  <div class="contact-card">
+    <h4>Justin Joseph</h4>
+    <p><strong>Role:</strong> Engineer, Build Infrastructure (Srinivas's team)</p>
+    <p><strong>Email:</strong> justijos@cisco.com</p>
+    <p>Owns MySQL databases for official builds, NFS for logs (3-5 day retention policy), and an existing basic MCP that can query the latest QA-turning rate, most recent build, and sanity results. Has already built AI-based fix suggestion tools. He is the primary technical counterpart for build log work.</p>
+  </div>
+
+  <div class="contact-card">
+    <h4>Naga</h4>
+    <p><strong>Role:</strong> Engineer (Srinivas's team)</p>
+    <p>Has existing WebEx automation plugins for chat content scraping and recording transcription. May have committed code already. Colin will connect the team with Naga to coordinate on the first task.</p>
+  </div>
+
+  <div class="contact-card">
+    <h4>Mazar and Tim</h4>
+    <p><strong>Role:</strong> Call Graph and CLAM/LAM System</p>
+    <p>Relevant for impact analysis work: which function changed, what is the blast radius. Justin will coordinate with them. Not immediate counterparts but will become relevant as the call graph work progresses.</p>
+  </div>
+
+  <hr class="section-divider">
+
+  <div class="section-number">02 IMMEDIATE PRIORITY</div>
+  <h2>GitHub MFA Access Blocker</h2>
+  <p class="lead">This is the single highest priority item. GitHub Enterprise access is currently blocked for our team, and nearly everything else depends on it being resolved.</p>
+
+  <div class="highlight-box">
+    <p>When connecting to GitHub Enterprise through the VPN and attempting Duo multi-factor authentication, the system enters an infinite loop. It prompts to add a new authentication device, but only presents the physical security key option (FIDO). The expected options for Touch ID and push notifications do not appear, which makes it impossible to complete the login flow.</p>
+    <p>Other Cisco team members such as Divakar and Justin do not experience this issue, which suggests it is specific to our accounts or our provisioning configuration rather than a systemic problem.</p>
+    <p><strong>Action required:</strong> Raise an IT support case with Cisco and call the support number directly to escalate. This needs to be resolved before we can access any repositories, review code, or begin working with the DeepSight platform codebase.</p>
+  </div>
+
+  <hr class="section-divider">
+
+  <div class="section-number">03 UPCOMING WORK</div>
+  <h2>First Tasks Overview</h2>
+  <p class="lead">The following work items were discussed during the April 2-3 sync with Srinivas's team. This section provides a high-level overview of what is coming. We will cover each of these in detail, including specific assignments and expectations, during our next team meeting.</p>
+
+  <div class="task-item">
+    <h4><span class="task-number">1</span> WebEx Space Scraper</h4>
+    <p>Our first deliverable is a plugin that downloads the content of the NXOCI workflow WebEx space, which is where Cisco engineers have been posting their CI/CD pipeline questions and issues for the past six to eight months. Once we have that content, we will use AI to summarize the issues, categorize them, and rank them by priority and severity. This analysis becomes our starting point for understanding what Cisco engineers struggle with on a daily basis, and it will directly inform which problems we tackle first.</p>
+    <p>Naga, an engineer on Srinivas's team, may already have working code for a WebEx content scraper and a recording transcription tool. Colin will connect the team with Naga so we can evaluate what exists before building anything from scratch. There is also a public WebEx API that Cisco has published, which Srinivas indicated should take minimal effort to integrate with.</p>
+    <p>Srinivas was clear that this plugin must be built as a reusable component, not a one-off script. It will be used across other WebEx spaces and other DeepSight applications beyond CI/CD. The orchestration should run on Cisco's existing Airflow instance rather than a standalone deployment, so that we avoid creating parallel infrastructure that would need to be maintained separately.</p>
+  </div>
+
+  <div class="task-item">
+    <h4><span class="task-number">2</span> Meeting Recording Transcriber</h4>
+    <p>The second plugin follows the same pattern as the scraper. Given a WebEx meeting recording, this tool will download the recording, extract the transcript, produce a summary, and pull out action items. The output should be driven by a configurable prompt so that different teams can tailor the summarization to their own needs without modifying the underlying code.</p>
+    <p>As with the scraper, this must be designed for reuse across multiple contexts. The same reusability and Airflow orchestration requirements apply.</p>
+  </div>
+
+  <div class="task-item">
+    <h4><span class="task-number">3</span> Build Log Analysis with Justin Joseph</h4>
+    <p>The team will meet with Justin Joseph for one to two working sessions to develop a thorough understanding of the build log structure at Cisco. There are two distinct build types that we need to understand: official builds, which run nightly and accumulate commits from over 1,000 engineers into a single build, and user builds, which are triggered by an individual engineer submitting a single pull request. Both produce logs in the same format but at very different scales.</p>
+    <p>During these sessions, we need to understand the log format, the typical log size for each build type, the common failure categories, and what tools Justin's team has already built. Justin already has some AI-based fix suggestion tooling in place, but there is currently no capability to determine which specific commit caused a build failure. That gap is one of the problems we will be solving.</p>
+    <p>Srinivas was explicit that this understanding must come before any design work on failure analysis. The team should treat these sessions as a prerequisite, not something to rush through in order to start building sooner.</p>
+  </div>
+
+  <hr class="section-divider">
+
+  <div class="section-number">04 DESIGN CONSTRAINTS</div>
+  <h2>Rules for All Work</h2>
+  <p class="lead">These constraints apply to everything we build on this engagement. They come directly from Srinivas and are non-negotiable.</p>
+
+  <div class="constraint-box">
+    <h4>Build for Reuse</h4>
+    <p>Everything we build will be used beyond CI/CD. Srinivas was explicit about this: do not assume anything is single-purpose. Plugins, MCPs, Airflow pipelines, and any other components must be designed so they can be consumed by other teams and other DeepSight applications without modification.</p>
+  </div>
+
+  <div class="constraint-box">
+    <h4>Inference Cost Discipline</h4>
+    <p>Cisco's inference costs have already increased by 4X, and Srinivas will reject any approach that throws large logs or raw data at a language model without proper preprocessing and engineering. Solutions must be designed to minimize token consumption through structured extraction, filtering, and targeted prompting. This is not a nice-to-have; it is a screening criterion for the work we deliver.</p>
+  </div>
+
+  <div class="constraint-box">
+    <h4>Understand Before Designing</h4>
+    <p>The team must spend time with Justin and the build infrastructure before proposing any architecture. Srinivas wants everyone to understand the artifacts, the log structure, and the failure modes firsthand. No design work should begin until that understanding is solid and verified through direct observation.</p>
+  </div>
+
+  <hr class="section-divider">
+
+  <div class="section-number">05 TEAM LOGISTICS</div>
+  <h2>Meeting Cadence and Expectations</h2>
+
+  <div class="highlight-box">
+    <p><strong>Twice-weekly recurring meetings</strong> with Srinivas's extended team are now established. All team members should be available for these meetings and should come prepared to report on progress and raise any blockers.</p>
+    <p><strong>Srinivas has requested profiles and resumes</strong> for the two on-site team members. Colin will handle sending these directly.</p>
+    <p><strong>If CI/CD work is blocked</strong> on access or dependencies, Srinivas will assign other DeepSight work to the team. The expectation is clear: no one should be idle at any point. If one track is waiting on something, there is always another track to contribute to.</p>
+  </div>
+
+  <hr class="section-divider">
+
+  <div class="section-number">06 CONTEXT</div>
+  <h2>MCP as the Integration Pattern</h2>
+  <p class="lead">All data sources feeding the CI/CD application on DeepSight need to be exposed through MCPs (Model Context Protocol). This is how our work plugs into the platform.</p>
+
+  <p>The workflow Srinivas defined:</p>
+
+  <ol class="mcp-steps">
+    <li>Inventory existing data sources and databases</li>
+    <li>Check if MCPs already exist for each source</li>
+    <li>If yes, evaluate the tool calls they support</li>
+    <li>If no, create MCPs</li>
+    <li>Map tool calls to user needs</li>
+    <li>Design all tool calls to serve both self-serve (user asks a question) and agentic (system takes action) modes</li>
+  </ol>
+
+  <hr class="section-divider">
+
+  <div class="section-number">07 CONTEXT</div>
+  <h2>Expanded Database Landscape</h2>
+  <p class="lead">In addition to what was previously known (MySQL, MongoDB), the following data sources were identified.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Database</th>
+        <th>Contents</th>
+        <th>Owner</th>
+        <th>Access Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Cassandra</strong></td>
+        <td>CAT/DevEx data</td>
+        <td>Anupma's team</td>
+        <td>APIs exist but DB not directly exposed. Cross-org negotiation required.</td>
+      </tr>
+      <tr>
+        <td><strong>NFS</strong></td>
+        <td>Build logs (official and user builds)</td>
+        <td>Justin's team</td>
+        <td>Retained only 3-5 days. Must be processed in near-real-time or copied out before expiry.</td>
+      </tr>
+      <tr>
+        <td><strong>MySQL (Justin)</strong></td>
+        <td>Official build data: triggered status, pass/fail, artifacts. Sanity results.</td>
+        <td>Justin's team</td>
+        <td>Accessible. Existing basic MCP available.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr class="section-divider">
+
+  <div class="section-number">08 CONTEXT</div>
+  <h2>Call Graph and Impact Analysis</h2>
+
+  <p>The CLAM/LAM system can generate call graphs at compile time, showing function-level caller/callee relationships. Two approaches:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Approach</th>
+        <th>Description</th>
+        <th>Use Case</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Baseline</strong></td>
+        <td>Generated from nightly builds, stored as a lookup database</td>
+        <td>Known code: "if this function changes, what is the impact?"</td>
+      </tr>
+      <tr>
+        <td><strong>Dynamic</strong></td>
+        <td>Generated on the fly for new or modified files not yet in the baseline</td>
+        <td>New additions that the nightly build has not picked up</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>This is distinct from CRFT, which runs on the physical switch and tracks runtime function coverage. The call graph is static analysis at compile time. Both are independent data sources.</p>
+
+  <hr class="section-divider">
+
+  <div class="section-number">09 CONTEXT</div>
+  <h2>CI Pipeline Co-Ownership</h2>
+
+  <p>The CI/CD pipeline is co-owned by two Cisco organizations: Divakar's data center team and Anupma's DevEx team. Services that need to be automated span both organizations.</p>
+
+  <p>This means some access requests go through Divakar, some through Anupma, and coordination between the two is required. Srinivas can direct Divakar's team but must negotiate with Anupma's. This organizational boundary explains why some access items take longer than expected.</p>
+
+</div>
+
+<div class="footer">
+  <div class="logo-footer">Bay<span>One</span> Solutions</div>
+  <p>Internal Distribution Only</p>
+</div>
+
+</body>
+</html>

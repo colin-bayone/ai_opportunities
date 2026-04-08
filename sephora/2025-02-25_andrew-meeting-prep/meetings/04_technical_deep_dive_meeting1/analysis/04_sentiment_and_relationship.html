@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sentiment & Relationship Notes - Sephora Technical Deep Dive</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --primary: #0f172a; --accent: #a855f7; --purple-dark: #5b21b6; --text: #334155; --text-light: #64748b; --border: #e2e8f0; --bg-subtle: #f8fafc; --white: #ffffff; --green: #059669; --amber: #d97706; --red: #dc2626; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); line-height: 1.7; font-size: 15px; background: var(--white); }
+    .cover { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 80px; background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%); color: var(--white); position: relative; overflow: hidden; }
+    .cover::before { content: ''; position: absolute; top: -50%; right: -20%; width: 80%; height: 200%; background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%); transform: rotate(-12deg); }
+    .cover::after { content: ''; position: absolute; bottom: -30%; left: -10%; width: 60%; height: 80%; background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%); border-radius: 50%; }
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+    .cover-label { font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #e879f9; margin-bottom: 24px; }
+    .cover h1 { font-size: 48px; font-weight: 700; line-height: 1.1; margin-bottom: 24px; letter-spacing: -1px; }
+    .cover-subtitle { font-size: 20px; font-weight: 300; color: rgba(255,255,255,0.8); margin-bottom: 48px; max-width: 600px; }
+    .cover-meta { display: flex; gap: 48px; padding-top: 48px; border-top: 1px solid rgba(255,255,255,0.15); }
+    .cover-meta-item label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+    .cover-meta-item span { font-size: 15px; font-weight: 500; }
+    .logo { position: absolute; bottom: 80px; right: 80px; font-size: 24px; font-weight: 700; color: var(--white); }
+    .logo span { color: #e879f9; }
+    .container { max-width: 900px; margin: 0 auto; padding: 80px 40px; }
+    .section { margin-bottom: 44px; }
+    .section-number { display: inline-block; font-size: 13px; font-weight: 700; color: var(--purple-dark); letter-spacing: 2px; margin-bottom: 12px; padding: 6px 14px; background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%); border-radius: 4px; }
+    h2 { font-size: 28px; font-weight: 700; color: var(--primary); margin-bottom: 20px; letter-spacing: -0.5px; }
+    h3 { font-size: 18px; font-weight: 600; color: var(--primary); margin: 28px 0 14px; }
+    p { margin-bottom: 16px; }
+    .lead { font-size: 17px; color: var(--text-light); line-height: 1.8; margin-bottom: 28px; }
+    .quote-block { background: var(--bg-subtle); border-left: 3px solid var(--accent); padding: 12px 16px; margin: 10px 0; border-radius: 0 8px 8px 0; font-style: italic; }
+    .interpretation { font-size: 14px; color: var(--text-light); margin-top: 8px; font-style: normal; padding-left: 12px; border-left: 2px solid var(--border); }
+    .trajectory { background: var(--bg-subtle); border-radius: 8px; padding: 16px 20px; margin: 16px 0; font-family: monospace; font-size: 14px; color: var(--purple-dark); text-align: center; letter-spacing: 1px; }
+    .signal-list { background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%); border-radius: 8px; padding: 16px 16px 16px 36px; margin: 16px 0; }
+    .signal-list li { margin-bottom: 8px; }
+    .signal-list li:last-child { margin-bottom: 0; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+    th { text-align: left; padding: 10px 14px; background: #5b21b6; color: var(--white); font-weight: 600; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; border-right: 1px solid rgba(255,255,255,0.15); }
+    th:last-child { border-right: none; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+    td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: var(--bg-subtle); }
+    .score-box { display: inline-flex; align-items: center; gap: 12px; background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%); border-radius: 8px; padding: 16px 24px; margin: 16px 0; }
+    .score-number { font-size: 36px; font-weight: 700; color: var(--purple-dark); }
+    .score-label { font-size: 14px; color: var(--text-light); }
+    .risk-low { color: var(--green); font-weight: 600; }
+    .footer { text-align: center; padding: 48px 40px; border-top: 1px solid var(--border); margin-top: 64px; }
+    .footer-logo { font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+    .footer-logo span { color: #a855f7; }
+    .footer p { font-size: 13px; color: var(--text-light); margin: 0; }
+    @media print {
+      @page { size: 8.5in 11in; margin: 0.5in; }
+      body { font-size: 9pt; line-height: 1.4; }
+      .cover { min-height: 0; padding: 50px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .cover h1 { font-size: 32pt; }
+      .container { padding: 20px 0; max-width: 100%; }
+      .section { margin-bottom: 16px; }
+      h2 { font-size: 14pt; }
+      .quote-block { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-label">SENTIMENT & RELATIONSHIP NOTES</div>
+      <h1>Sephora Technical Deep Dive</h1>
+      <p class="cover-subtitle">Tone, enthusiasm, and relationship-building moments from the technical deep dive</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <label>Meeting</label>
+          <span>Meeting 4</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Date</label>
+          <span>March 2026</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Classification</label>
+          <span>Internal</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo">Bay<span>One</span> Solutions</div>
+  </div>
+
+  <div class="container">
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>Overall Tone</h2>
+      <p class="lead">Meeting started tense due to expectation mismatch, recovered to collaborative and productive.</p>
+      <p><strong>Duration:</strong> Full meeting completed with clear next steps despite the rocky start</p>
+      <div class="trajectory">Start &rarr; Tense &rarr; Recovery &rarr; Engaged &rarr; Constructive &rarr; Positive End</div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>Andrew Ho</h2>
+      <p class="lead">Sr. Director, Data & Analytics, Sephora</p>
+
+      <h3>Protective and Supportive</h3>
+      <p>Andrew stepped in immediately when the expectation mismatch surfaced, reframing the meeting constructively and introducing his technical experts.</p>
+      <div class="quote-block">
+        <p>"Today is really an opportunity for you to come back and ask our expertise here questions. We have an enterprise architect. We have Sergey, who actually really is our SME on all our IBM tools."</p>
+      </div>
+      <p class="interpretation">Andrew is actively protecting BayOne's position and enabling their success. He's an internal champion.</p>
+
+      <h3>Transparency About Process</h3>
+      <p>Andrew provided an exceptionally detailed walkthrough of the manual workflow, sharing internal process details openly.</p>
+      <div class="quote-block">
+        <p>"Now I'm gonna throw the ball back to you. Now that you know the flow, my expectation is... is there any way throughout this step that we can create agents?"</p>
+      </div>
+      <p class="interpretation">High trust signal. Andrew is sharing the "how" so BayOne can genuinely help, not just playing vendor games.</p>
+
+      <h3>Vision Alignment</h3>
+      <p>Andrew's articulation of the agent swarm vision closely matches what BayOne has been proposing.</p>
+      <div class="quote-block">
+        <p>"I'm not expecting one agent do it... it's like a lot of smaller agents... and then you have that one orchestrator to just orchestrating this whole entire all the smaller agents."</p>
+      </div>
+      <p class="interpretation">Strong alignment on approach. Andrew has bought into the vision and is advocating for it internally.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>Gariashi Chakrabarty</h2>
+      <p class="lead">Director, Data Engineering, Sephora</p>
+
+      <h3>Direct About Disappointment</h3>
+      <p>Gariashi surfaced the expectation mismatch directly rather than letting it simmer. Notably, she was the only Sephora participant who expected a demo — Andrew, Maher, and Sergey were aligned with the technical discussion format.</p>
+      <div class="quote-block">
+        <p>"I think we were excited to see the demo today."</p>
+      </div>
+      <p class="interpretation">Gariashi is direct and honest. This is healthier than passive disappointment. She wants to see proof but isn't hostile about it. The fact that she was the only one out of the loop suggests an internal communication gap on Sephora's side, not a BayOne failure.</p>
+
+      <h3>Pragmatic Acceptance</h3>
+      <p>After the pivot, Gariashi engaged constructively and agreed to next steps.</p>
+      <div class="quote-block">
+        <p>"Yeah, that sounds good."</p>
+      </div>
+      <p class="interpretation">Gariashi adapted to the revised meeting purpose. Needs demo to gain confidence but isn't blocking progress.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-number">04</div>
+      <h2>Maher Burhan</h2>
+      <p class="lead">Enterprise Architect, Sephora</p>
+
+      <h3>Practical Problem-Solver</h3>
+      <p>Maher Burhan's first instinct was to find workarounds, not create obstacles.</p>
+      <div class="quote-block">
+        <p>"The agent can do the work, the migration work, without having access, without validating whether it's working or not."</p>
+      </div>
+      <p class="interpretation">Maher Burhan is a pragmatist. He understands organizational constraints and works around them rather than using them as excuses.</p>
+
+      <h3>Honest About Constraints</h3>
+      <p>Maher Burhan openly shared past failures and security blocks.</p>
+      <div class="quote-block">
+        <p>"We tried to run our own agent on the independent record, we get blocked by security."</p>
+      </div>
+      <p class="interpretation">Trust signal. Sharing failures shows transparency and sets realistic expectations.</p>
+
+      <h3>Need for Proof</h3>
+      <div class="quote-block">
+        <p>"We need to see a demo, really. To see if this will work or not. Because we didn't have success."</p>
+      </div>
+      <p class="interpretation">Healthy skepticism from experience. Maher Burhan will be convinced by results, not promises.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-number">05</div>
+      <h2>Sergey Shtypuliak</h2>
+      <p class="lead">SME - IBM Tools - Consultant, Sephora</p>
+
+      <h3>Grounded Skepticism</h3>
+      <p>Sergey's comment about difficulty came from deep experience with these tools.</p>
+      <div class="quote-block">
+        <p>"It's easy said than done. I worked with Collins, I wrote code for the BI server, and that's a complicated word."</p>
+      </div>
+      <p class="interpretation">Not hostile, just realistic. Sergey has seen promises before and wants to see execution. The demo will need to impress him specifically.</p>
+
+      <h3>Constructive Engagement</h3>
+      <p>Despite skepticism, Sergey provided extremely specific and useful requirements for the agent output.</p>
+      <div class="quote-block">
+        <p>"Main question right now, how to teach these agents to understand that, okay, we need to create three YAML files with some configuration inside."</p>
+      </div>
+      <p class="interpretation">Sergey wants this to work. He's giving the roadmap for success, not creating obstacles.</p>
+
+      <h3>Vision of Ideal State</h3>
+      <div class="quote-block">
+        <p>"If we can ask him... hey man, we have 10 jobs, please convert them, generate YAML files, commit them to repo. After that, some developer can quickly review that it's good and that's it. So this is like ideal world."</p>
+      </div>
+      <p class="interpretation">Sergey can envision the future state and is excited by it. He just needs to see it work.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-number">06</div>
+      <h2>Relationship Indicators</h2>
+
+      <h3>Trust Signals</h3>
+      <ul class="signal-list">
+        <li>Andrew shared complete internal workflow process</li>
+        <li>Maher Burhan openly discussed security blocks and past failures</li>
+        <li>Sergey Shtypuliak provided detailed requirements for agent output format</li>
+        <li>Team agreed to provide actual report artifacts, not mock data</li>
+        <li>Multiple stakeholders engaged substantively</li>
+      </ul>
+
+      <h3>Interest Signals</h3>
+      <ul class="signal-list">
+        <li>Gariashi's disappointment indicated genuine anticipation</li>
+        <li>Andrew's detailed questions showed deep engagement</li>
+        <li>Sergey Shtypuliak's specific YAML requirements showed forward thinking</li>
+        <li>Maher Burhan proposed creative workarounds (genuine problem-solving)</li>
+      </ul>
+
+      <h3>Investment Signals</h3>
+      <ul class="signal-list">
+        <li>Andrew positioned his experts as resources for BayOne</li>
+        <li>Team willing to coordinate with Vlad (CIO) to get materials</li>
+        <li>Internal discussion planned on additional demo needs</li>
+        <li>Optional DataStage scope offered proactively</li>
+      </ul>
+
+      <h3>Cultural Fit Signals</h3>
+      <ul class="signal-list">
+        <li>Both sides adapted gracefully to the expectation mismatch</li>
+        <li>Technical depth was welcomed, not superficial</li>
+        <li>Practical workarounds valued over theoretical perfection</li>
+        <li>Direct communication style on both sides</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-number">07</div>
+      <h2>Comparison to Previous Meeting</h2>
+      <table>
+        <tr>
+          <th>Aspect</th>
+          <th>Meeting 3</th>
+          <th>Meeting 4</th>
+        </tr>
+        <tr>
+          <td><strong>Tone</strong></td>
+          <td>Discovery, exploratory</td>
+          <td>Technical deep dive, practical</td>
+        </tr>
+        <tr>
+          <td><strong>Data Shared</strong></td>
+          <td>Pain points and vision</td>
+          <td>Complete workflow details</td>
+        </tr>
+        <tr>
+          <td><strong>Commitment Level</strong></td>
+          <td>Interest expressed</td>
+          <td>Materials promised</td>
+        </tr>
+        <tr>
+          <td><strong>Enthusiasm</strong></td>
+          <td>High but abstract</td>
+          <td>High and specific</td>
+        </tr>
+        <tr>
+          <td><strong>New Stakeholders</strong></td>
+          <td>None</td>
+          <td>Maher Burhan (architect), Sergey Shtypuliak (SME)</td>
+        </tr>
+        <tr>
+          <td><strong>Risk Level</strong></td>
+          <td>Medium</td>
+          <td>Low (clear path forward)</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">SUMMARY</div>
+      <h2>Relationship Health Assessment</h2>
+      <p class="lead">The meeting started rocky with an expectation mismatch but recovered well due to Andrew's intervention and both sides' willingness to adapt.</p>
+
+      <div class="score-box">
+        <div class="score-number">8/10</div>
+        <div class="score-label">Relationship Health Score<br><small>(minus 2 for expectation mismatch — only Gariashi was out of the loop)</small></div>
+      </div>
+
+      <h3>Key Takeaways</h3>
+      <ul class="signal-list">
+        <li><strong>Andrew</strong> is clearly an internal champion who will advocate for BayOne</li>
+        <li><strong>Maher Burhan</strong> is a practical problem-solver who will help navigate organizational constraints</li>
+        <li><strong>Sergey Shtypuliak</strong> is a healthy skeptic who will be convinced by results, not promises</li>
+        <li><strong>Gariashi</strong> needs to see the demo to gain confidence but isn't blocking progress</li>
+        <li><strong>Trust level</strong> increased despite the rough start, evidenced by agreement to share real artifacts</li>
+      </ul>
+
+      <p><strong>Risk for Next Meeting:</strong> <span class="risk-low">Low</span>, assuming demo is delivered as committed</p>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Internal Meeting Notes</p>
+    </div>
+  </div>
+</body>
+</html>

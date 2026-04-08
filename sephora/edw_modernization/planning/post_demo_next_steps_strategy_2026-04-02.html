@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post-Demo Next Steps Strategy - Sephora EDW</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+      --green: #16a34a;
+      --green-bg: #f0fdf4;
+      --green-border: #bbf7d0;
+      --amber: #d97706;
+      --amber-bg: #fffbeb;
+      --amber-border: #fde68a;
+      --red: #dc2626;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    .cover {
+      min-height: 45vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: #fff;
+    }
+
+    .cover-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--purple-glow);
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+
+    .cover .subtitle {
+      font-size: 19px;
+      font-weight: 300;
+      opacity: 0.85;
+      line-height: 1.5;
+      max-width: 650px;
+    }
+
+    .cover-meta {
+      margin-top: 36px;
+      font-size: 13px;
+      opacity: 0.7;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 40px;
+    }
+
+    .section {
+      margin-bottom: 56px;
+    }
+
+    .section-number {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 28px 0 12px;
+    }
+
+    p { margin-bottom: 14px; }
+
+    .lead {
+      font-size: 17px;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.04) 0%, rgba(168,85,247,0.08) 100%);
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 24px;
+    }
+
+    .highlight-box .box-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .highlight-box p, .highlight-box li {
+      font-size: 14px;
+    }
+
+    .highlight-box ul {
+      margin: 8px 0 0 18px;
+    }
+
+    .highlight-box li { margin-bottom: 6px; }
+
+    .script-box {
+      background: var(--primary);
+      color: #e2e8f0;
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin: 24px 0;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .script-box .script-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--purple-accent);
+      margin-bottom: 16px;
+    }
+
+    .script-box p {
+      color: #e2e8f0;
+      margin-bottom: 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+
+    th {
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple-bright));
+      color: var(--white);
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    .week-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 16px;
+    }
+
+    .week-card .week-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .week-card .week-title {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 16px;
+    }
+
+    .week-card .week-hours {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--white);
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .week-card ul {
+      margin: 0 0 0 18px;
+      font-size: 14px;
+    }
+
+    .week-card li { margin-bottom: 6px; }
+
+    .deliverable-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .deliverable-item:last-child { border-bottom: none; }
+
+    .deliverable-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .deliverable-text .del-title {
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 15px;
+      margin-bottom: 2px;
+    }
+
+    .deliverable-text .del-desc {
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    .option-card {
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    .option-card .opt-title {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .option-a { background: var(--bg-subtle); border: 1px solid var(--border); }
+    .option-b { background: var(--green-bg); border: 1px solid var(--green-border); }
+    .option-c { background: linear-gradient(135deg, rgba(124,58,237,0.04) 0%, rgba(168,85,247,0.08) 100%); border: 1px solid rgba(124,58,237,0.15); }
+
+    .minimum-outcome {
+      background: var(--green-bg);
+      border: 1px solid var(--green-border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin: 24px 0;
+    }
+
+    .minimum-outcome .mo-title {
+      font-weight: 700;
+      color: var(--green);
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .minimum-outcome ul {
+      margin: 8px 0 0 18px;
+      font-size: 14px;
+    }
+
+    .minimum-outcome li { margin-bottom: 6px; }
+
+    .ref-table {
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    .ref-table td { padding: 8px 12px; font-size: 13px; }
+    .ref-table th { font-size: 11px; padding: 8px 12px; }
+
+    @media print {
+      .cover { min-height: auto; padding: 40px; }
+      .container { padding: 20px; }
+      body { font-size: 12px; }
+      .week-card, .highlight-box, .script-box { break-inside: avoid; }
+      th, .cover, .deliverable-icon, .week-hours {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-label">Internal Strategy Document</div>
+  <h1>Post-Demo<br>Next Steps Strategy</h1>
+  <p class="subtitle">How to handle the timeline and scope questions, frame the exploration SOW, and get BayOne's foot in the door at Sephora.</p>
+  <div class="cover-meta">April 2, 2026 | Sephora EDW Modernization | BayOne Solutions</div>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: CORE ASK -->
+  <div class="section">
+    <div class="section-number">01</div>
+    <h2>The Core Ask</h2>
+    <p class="lead">The goal is not to close a massive engagement today. The goal is to get a small, defined SOW started that gives BayOne access to Sephora's systems. Once inside, we scope the full engagement with real data instead of assumptions.</p>
+    <p>Even a small start with limited scope before expanding is the best outcome. The demo proves the approach. The exploration phase proves it works across their environment. The full engagement delivers at scale.</p>
+  </div>
+
+  <!-- SECTION 2: TIMELINE COMPRESSION -->
+  <div class="section">
+    <div class="section-number">02</div>
+    <h2>Gap Response: Timeline Compression</h2>
+    <p class="lead">When Andrew asks "how fast can this go?"</p>
+
+    <div class="highlight-box">
+      <div class="box-title">The Optimistic Reality</div>
+      <p>This is real. We built this in two weeks. It works on their actual data at 97%+ first pass. We can run as many agents or flows concurrently as we want. Once we have a good picture of the full complexity landscape, we can identify exactly where patterns repeat, where the flywheel kicks in, and where parallel execution compresses timelines.</p>
+      <p>If everything across their environment is similar to what we just demonstrated, we could be off to the races and have this done very quickly.</p>
+    </div>
+
+    <h3>What We Need to Unlock That</h3>
+    <p><strong>1. Access to the systems for exploration.</strong> A mapping exercise to understand the full complexity distribution across all reports and data flows. We need read access to Cognos, DataStage, SQL Server EDW, and Databricks.</p>
+    <p><strong>2. Time with their technical SMEs</strong> (approximately one week of meetings) to help us understand locations and structures, followed by one week of autonomous mapping.</p>
+
+    <h3>Why This Is the Responsible Approach</h3>
+    <p>Here is the most responsible estimate we can give right now: provided that all information shared with us is correct, we can make this much more accurate once we see the full picture. We can properly assess the flywheel effect and the timeline pull-in.</p>
+    <p>Without the exploration, any estimate is a flat calculation: total number of reports and data flows multiplied by the time it took to do this one. That works, but it is riddled with assumptions and does not account for the acceleration that agents provide through pattern reuse and parallel execution.</p>
+    <p>The flywheel only comes into effect when we have multiple completed pipelines as knowns and a good picture of the overall distribution, both in terms of types and complexities. Quantifying that acceleration properly requires seeing the full landscape.</p>
+
+    <div class="script-box">
+      <div class="script-label">How to Frame It</div>
+      <p>"Here is the most responsible estimate we can give you today. We are confident in the approach and the technology. To give you a number we can stand behind, we need to see the full picture. Two weeks of focused exploration, and we will give you a data-driven proposal with real acceleration numbers, not flat assumptions."</p>
+    </div>
+  </div>
+
+  <!-- SECTION 3: TABLE DATA MIGRATION -->
+  <div class="section">
+    <div class="section-number">03</div>
+    <h2>Gap Response: Table Data Migration</h2>
+    <p class="lead">When Andrew asks about SQL Server to Databricks data migration.</p>
+    <p>This is covered by the same access request. We cannot demonstrate or scope table data migration without read access to the source SQL Server systems and the target Databricks environment. The pipeline we showed today converts ETL logic (the transformation layer). The data migration layer is complementary and uses the same agent architecture, but requires seeing the actual source tables and their Databricks targets.</p>
+
+    <div class="script-box">
+      <div class="script-label">How to Frame It</div>
+      <p>"Table data migration is absolutely within scope. It is the other half of what we showed you today. But we need to see your source tables and your Databricks environment to build that pipeline. That is part of the exploration phase we are proposing."</p>
+    </div>
+  </div>
+
+  <!-- SECTION 4: FULL ENGAGEMENT SCOPE -->
+  <div class="section">
+    <div class="section-number">04</div>
+    <h2>Defining the Full Engagement Scope</h2>
+    <p class="lead">The scope has evolved through the engagement. The full picture has two halves.</p>
+
+    <table>
+      <tr>
+        <th>Phase</th>
+        <th>What Sephora Asked For</th>
+        <th style="width: 140px">Status</th>
+      </tr>
+      <tr>
+        <td>Andrew/Grishi Meeting</td>
+        <td>Agentic orchestration for report migration</td>
+        <td style="color: var(--green); font-weight: 600;">Demonstrated</td>
+      </tr>
+      <tr>
+        <td>Technical Deep Dive</td>
+        <td>Cognos MCP integration + ETL/DataStage conversion</td>
+        <td style="color: var(--amber); font-weight: 600;">ETL done, MCP deferred</td>
+      </tr>
+      <tr>
+        <td>Andrew's Expansion</td>
+        <td>Table data migration (SQL Server to Databricks)</td>
+        <td style="color: var(--red); font-weight: 600;">Requires access</td>
+      </tr>
+      <tr>
+        <td>Malika's Email</td>
+        <td>End-to-end workflow with orchestration across tools</td>
+        <td style="color: var(--green); font-weight: 600;">Demonstrated</td>
+      </tr>
+      <tr>
+        <td>Track Selection</td>
+        <td>Track B (ETL) for demo, Track A (Cognos MCP) for future</td>
+        <td style="color: var(--green); font-weight: 600;">Track B demonstrated</td>
+      </tr>
+    </table>
+
+    <div class="highlight-box">
+      <div class="box-title">The Two Halves</div>
+      <p><strong>1. ETL pipeline conversion</strong> (demonstrated): DataStage jobs to Spark SQL + YAML configs for AggregationApplication framework.</p>
+      <p><strong>2. Cognos MCP integration</strong> (the other half): MCP connectivity for automated report extraction, SQL conversion, re-pointing to Databricks.</p>
+      <p>We showed one half today. The other half requires environment access. This is the natural bridge to a paid engagement.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 5: EXPLORATION SOW -->
+  <div class="section">
+    <div class="section-number">05</div>
+    <h2>Proposed SOW: Exploration Phase</h2>
+    <p class="lead">A small, focused SOW to get inside and scope the full engagement. Two weeks. 30 hours. Four deliverables.</p>
+
+    <h3>What BayOne Needs from Sephora</h3>
+    <ul style="margin: 0 0 20px 18px; font-size: 14px;">
+      <li>Sephora accounts for Colin Moore and one additional team member (read-only, within what is necessary)</li>
+      <li>Cognos access (if MCP integration is to be explored, which is their own Track A ask)</li>
+      <li>Read access to relevant data platforms as directed by their technical team</li>
+      <li>Technical SME availability for Week 1 (Sergey, Malika, Grishi, or designees)</li>
+    </ul>
+
+    <h3>Timeline</h3>
+
+    <div class="week-card">
+      <div class="week-header">
+        <div class="week-title">Week 1: Discovery Meetings</div>
+        <div class="week-hours">~8 hours</div>
+      </div>
+      <ul>
+        <li>Contingent on their team's availability. We need Sephora to identify the right people and confirm schedules.</li>
+        <li>Approximately 8 hours of meetings spread across the week with relevant SMEs.</li>
+        <li>Understand the full landscape: reports, DataStage jobs, data flows, and where everything lives.</li>
+        <li>Validate Cognos MCP connectivity against their specific Cognos version and environment.</li>
+        <li>Not full-time work on our side. Paced by their availability.</li>
+      </ul>
+    </div>
+
+    <div class="week-card">
+      <div class="week-header">
+        <div class="week-title">Week 2: Autonomous Mapping and Analysis</div>
+        <div class="week-hours">~20 hours + 2 hr buffer</div>
+      </div>
+      <ul>
+        <li>BayOne builds the knowledge graph and dependency map of all reports autonomously.</li>
+        <li>Classify every pipeline by type and complexity.</li>
+        <li>This is the heads-down work that produces the deliverable.</li>
+        <li>2 hours of buffer for follow-up questions or edge cases discovered during mapping.</li>
+      </ul>
+    </div>
+
+    <h3>What BayOne Delivers</h3>
+
+    <div class="deliverable-item">
+      <div class="deliverable-icon"><i class="fa-solid fa-map"></i></div>
+      <div class="deliverable-text">
+        <div class="del-title">Complexity Mapping and State Analysis</div>
+        <div class="del-desc">Full inventory of report types, DataStage job types, and data flows with complexity classification and distribution analysis.</div>
+      </div>
+    </div>
+
+    <div class="deliverable-item">
+      <div class="deliverable-icon"><i class="fa-solid fa-plug"></i></div>
+      <div class="deliverable-text">
+        <div class="del-title">Cognos MCP Validation</div>
+        <div class="del-desc">Confirm the MCP connector works against their specific Cognos version. Closes the loop on Track A.</div>
+      </div>
+    </div>
+
+    <div class="deliverable-item">
+      <div class="deliverable-icon"><i class="fa-solid fa-database"></i></div>
+      <div class="deliverable-text">
+        <div class="del-title">Table Migration Assessment</div>
+        <div class="del-desc">Identify what is needed for SQL Server to Databricks data migration and what agents can automate.</div>
+      </div>
+    </div>
+
+    <div class="deliverable-item">
+      <div class="deliverable-icon"><i class="fa-solid fa-file-lines"></i></div>
+      <div class="deliverable-text">
+        <div class="del-title">Data-Driven Engagement Proposal</div>
+        <div class="del-desc">Scope, timeline with acceleration estimates, and pricing for the full modernization, grounded in actual system complexity.</div>
+      </div>
+    </div>
+
+    <h3>Cost Structure: ~30 Hours</h3>
+    <table>
+      <tr>
+        <th>Phase</th>
+        <th>Hours</th>
+        <th>Who</th>
+      </tr>
+      <tr>
+        <td>Week 1: Discovery meetings</td>
+        <td>~8 hours</td>
+        <td>Colin + one team member with Sephora SMEs</td>
+      </tr>
+      <tr>
+        <td>Week 2: Autonomous mapping</td>
+        <td>~20 hours</td>
+        <td>Primarily the second team member, Colin at ~10% for oversight and MCP validation</td>
+      </tr>
+      <tr>
+        <td>Buffer</td>
+        <td>~2 hours</td>
+        <td>Follow-ups, edge cases</td>
+      </tr>
+      <tr style="font-weight: 600;">
+        <td>Total</td>
+        <td>~30 hours</td>
+        <td></td>
+      </tr>
+    </table>
+    <p style="font-size: 13px; color: var(--text-light);">Total driven by: (1) how quickly Sephora makes SMEs available in Week 1, and (2) the volume and accessibility of systems in Week 2.</p>
+  </div>
+
+  <!-- SECTION 6: PRICING OPTIONS -->
+  <div class="section">
+    <div class="section-number">06</div>
+    <h2>Pricing Options</h2>
+    <p class="lead">The deliverable is exploration and state analysis. The value is in what it enables, not a standalone output. Three ways to frame it.</p>
+
+    <div class="option-card option-a">
+      <div class="opt-title">Option A: Standalone Exploration SOW</div>
+      <p>Small, defined, approximately 30 hours at cost-plus rates. Delivers complexity mapping and engagement proposal. Clean, but may feel like paying for a proposal.</p>
+    </div>
+
+    <div class="option-card option-b">
+      <div class="opt-title">Option B: Phase 0 of a Larger SOW</div>
+      <p>Embed the exploration as the first two weeks of a broader engagement. Cost absorbed into the full engagement price. Feels more natural, but requires Sephora to commit to broader scope upfront.</p>
+    </div>
+
+    <div class="option-card option-c">
+      <div class="opt-title">Option C: Hybrid with Credit</div>
+      <p>Exploration SOW at a reduced rate, with the cost credited toward the full engagement if they proceed. Removes the "paying for a proposal" objection while protecting BayOne's time.</p>
+    </div>
+
+    <p style="font-size: 14px; color: var(--text-light); margin-top: 16px;">The right choice depends on how the demo lands and Mani's appetite for the budget conversation.</p>
+  </div>
+
+  <!-- SECTION 7: MINIMUM OUTCOME -->
+  <div class="section">
+    <div class="section-number">07</div>
+    <h2>Ideal Minimum Outcome</h2>
+
+    <div class="minimum-outcome">
+      <div class="mo-title"><i class="fa-solid fa-bullseye"></i> &nbsp;Even if the SOW takes time to formalize, get Colin access to Sephora's environments.</div>
+      <ul>
+        <li>Colin can begin the complexity mapping immediately</li>
+        <li>Colin can validate MCP connectivity against their Cognos</li>
+        <li>Colin can knowledge-share with the team for the broader engagement</li>
+        <li>BayOne has a foot in the door with real system access</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 8: WHAT TO SAY -->
+  <div class="section">
+    <div class="section-number">08</div>
+    <h2>How to Bring This Up</h2>
+    <p class="lead">Do NOT pitch this during the demo. Let the demo land first. After, when they ask "what is the next step?"</p>
+
+    <div class="script-box">
+      <div class="script-label">Conversational Script</div>
+      <p>"We are really confident in what this can do. You just saw it process your actual data end to end. The question now is how do we get the best picture of what the full engagement looks like.</p>
+      <p>Here is what I would recommend. We do a focused two-week exploration. Week one, we sit with your technical team and they walk us through the full landscape of reports, DataStage jobs, and data flows. Week two, we take that and build the full complexity map autonomously. At the end of those two weeks, we give you a data-driven proposal with real acceleration numbers, not flat assumptions.</p>
+      <p>For that, we would need read-only access to your systems. Myself and one other team member. Mani mentioned when we met in person that there are existing BayOne resources at Sephora who could help facilitate that, and he was supportive of it.</p>
+      <p>The other thing this exploration gives us is the Cognos MCP validation that Malika asked about. We could not demonstrate that without your environment, but with access, we can prove it works against your specific Cognos version. That closes the loop on Track A.</p>
+      <p>If we can get that access started, even just for me to begin with, I can do the initial mapping and knowledge-share with our team from there."</p>
+    </div>
+
+    <p style="font-size: 14px; color: var(--text-light);">Keep it conversational. Do not hand them a document during the demo. Do not frame it as "paying for a proposal." Frame it as "the responsible next step to give you the most accurate engagement plan."</p>
+  </div>
+
+  <!-- SECTION 9: REFERENCE -->
+  <div class="section">
+    <div class="section-number">09</div>
+    <h2>Reference: Key Facts from the Research Library</h2>
+
+    <table class="ref-table">
+      <tr>
+        <th>Source</th>
+        <th>Fact</th>
+      </tr>
+      <tr><td>Mani (Set 01)</td><td>3-year program, trying to compress to 2027 or early 2028</td></tr>
+      <tr><td>Mani (Set 02)</td><td>Wants three engagement options with flexibility</td></tr>
+      <tr><td>Andrew (Set 03)</td><td>Redirecting manual contractor spend into upfront agent development</td></tr>
+      <tr><td>Grishi (Set 03)</td><td>6,000+ reports, 8 SSAS cubes, 800+ KPIs, 300 dimensions, 20 source systems</td></tr>
+      <tr><td>Sergey (Set 04)</td><td>Thousands of jobs already in the AggregationApplication framework</td></tr>
+      <tr><td>Saurav intel (Set 05)</td><td>All other vendors dismissed. Budget lock-in end of April.</td></tr>
+      <tr><td>Mani in person (Set 06)</td><td>Vendor selection must happen by end of month. Supportive of BayOne getting access via existing resources.</td></tr>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

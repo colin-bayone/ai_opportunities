@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sephora EDW Demo Meeting: Overview and Takeaways</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+      --green: #16a34a;
+      --green-bg: #f0fdf4;
+      --green-border: #bbf7d0;
+      --amber: #d97706;
+      --amber-bg: #fffbeb;
+      --amber-border: #fde68a;
+      --red: #dc2626;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%; width: 80%; height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -30%; left: -10%; width: 60%; height: 80%;
+      background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+    .cover-label {
+      font-size: 12px; font-weight: 600; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--purple-glow); margin-bottom: 24px;
+    }
+    .cover h1 { font-size: 48px; font-weight: 700; line-height: 1.1; letter-spacing: -1px; margin-bottom: 20px; }
+    .cover .subtitle { font-size: 20px; font-weight: 300; opacity: 0.85; line-height: 1.5; max-width: 600px; }
+    .cover-footer {
+      position: absolute; bottom: 40px; left: 80px; right: 80px;
+      display: flex; justify-content: space-between; font-size: 13px; opacity: 0.6; z-index: 1;
+    }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 64px 40px; }
+    .section { margin-bottom: 56px; }
+    .section-number { font-size: 12px; font-weight: 600; color: var(--purple-accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+    h2 { font-size: 30px; font-weight: 700; color: var(--primary); margin-bottom: 22px; letter-spacing: -0.5px; }
+    h3 { font-size: 18px; font-weight: 600; color: var(--primary); margin: 28px 0 12px; }
+    p { margin-bottom: 14px; }
+    .lead { font-size: 17px; color: var(--text-light); line-height: 1.8; margin-bottom: 28px; }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border: 1px solid rgba(124,58,237,0.15); border-radius: 12px;
+      padding: 24px 28px; margin: 20px 0;
+    }
+    .highlight-box .box-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--purple-accent); margin-bottom: 10px;
+    }
+    .highlight-box p { font-size: 14px; margin-bottom: 8px; }
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 24px 0; }
+    .stat-card {
+      text-align: center; padding: 20px 16px;
+      background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 12px;
+    }
+    .stat-card .stat-num { font-size: 28px; font-weight: 700; color: var(--purple-bright); }
+    .stat-card .stat-label { font-size: 12px; color: var(--text-light); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .person-card {
+      background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 12px;
+      padding: 18px 22px; margin-bottom: 12px;
+      display: flex; align-items: flex-start; gap: 16px;
+    }
+    .person-icon {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: #fff; border-radius: 50%; display: flex;
+      align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;
+    }
+    .person-info { flex: 1; }
+    .person-info .p-name { font-weight: 700; color: var(--primary); font-size: 15px; }
+    .person-info .p-role { font-size: 12px; color: var(--purple-accent); font-weight: 500; margin-bottom: 6px; }
+    .person-info .p-detail { font-size: 13px; color: var(--text); line-height: 1.6; }
+    .person-info .p-utterances { font-size: 11px; color: var(--text-light); margin-top: 4px; }
+
+    .takeaway-card {
+      border-left: 4px solid var(--purple-bright); background: var(--bg-subtle);
+      padding: 18px 22px; margin-bottom: 14px; border-radius: 0 10px 10px 0;
+    }
+    .takeaway-card .tk-num { font-size: 11px; font-weight: 700; color: var(--purple-accent); letter-spacing: 1px; margin-bottom: 4px; }
+    .takeaway-card .tk-title { font-weight: 700; color: var(--primary); font-size: 15px; margin-bottom: 6px; }
+    .takeaway-card .tk-detail { font-size: 14px; color: var(--text); line-height: 1.6; }
+
+    .req-card {
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: 16px 20px; margin-bottom: 10px;
+      display: flex; align-items: flex-start; gap: 12px;
+    }
+    .req-badge {
+      font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 20px;
+      white-space: nowrap; flex-shrink: 0; margin-top: 2px;
+    }
+    .req-badge.blocked { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
+    .req-badge.ready { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+    .req-text .req-title { font-weight: 600; color: var(--primary); font-size: 14px; margin-bottom: 2px; }
+    .req-text .req-who { font-size: 12px; color: var(--text-light); }
+    .req-text .req-detail { font-size: 13px; color: var(--text); margin-top: 4px; }
+
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+    th {
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple-bright));
+      color: var(--white); padding: 12px 16px; text-align: left;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;
+    }
+    td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    .action-list { list-style: none; padding: 0; margin: 16px 0; }
+    .action-list li {
+      padding: 12px 16px 12px 46px; margin-bottom: 8px;
+      background: var(--bg-subtle); border: 1px solid var(--border);
+      border-radius: 8px; font-size: 14px; position: relative;
+    }
+    .action-list li::before {
+      content: "\f0a4"; font-family: "Font Awesome 6 Free"; font-weight: 900;
+      position: absolute; left: 16px; top: 13px; color: var(--purple-accent);
+    }
+
+    .quote-box {
+      background: var(--primary); color: #e2e8f0; border-radius: 10px;
+      padding: 18px 22px; margin: 16px 0; font-size: 15px; line-height: 1.7;
+    }
+    .quote-box .quote-attr { font-size: 12px; color: var(--purple-accent); margin-top: 8px; }
+
+    .cta-box {
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: #fff; border-radius: 16px; padding: 36px 40px; margin: 28px 0;
+      position: relative; overflow: hidden;
+    }
+    .cta-box::before {
+      content: ''; position: absolute; top: -40%; right: -15%; width: 60%; height: 180%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.2) 0%, transparent 60%);
+      transform: rotate(-12deg);
+    }
+    .cta-box .cta-content { position: relative; z-index: 1; }
+    .cta-box .cta-title { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+    .cta-box p { font-size: 15px; opacity: 0.9; line-height: 1.7; margin-bottom: 0; }
+
+    @media print {
+      .cover { min-height: auto; padding: 40px; page-break-after: always; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+      .section { page-break-inside: avoid; }
+      th, .cover, .person-icon, .req-badge, .cta-box {
+        -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-content">
+    <div class="cover-label">Internal Team Briefing</div>
+    <h1>Sephora EDW Demo<br>Meeting Overview</h1>
+    <p class="subtitle">Summary, attendee analysis, key takeaways, new requirements, and recommended next steps from the April 2 demonstration.</p>
+  </div>
+  <div class="cover-footer">
+    <span>BayOne Solutions | AI Practice</span>
+    <span>April 2, 2026</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 01: MEETING OVERVIEW -->
+  <div class="section">
+    <div class="section-number">01</div>
+    <h2>Meeting Overview</h2>
+    <p class="lead">The culminating demo of the Sephora EDW Modernization engagement. Colin presented a live run of the multi-agent ETL conversion pipeline to the Sephora technical evaluation team.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-num">54</div>
+        <div class="stat-label">Minutes Total</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">13.5</div>
+        <div class="stat-label">Min Pipeline Run</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">29</div>
+        <div class="stat-label">Technical Questions</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">7</div>
+        <div class="stat-label">New Requirements</div>
+      </div>
+    </div>
+
+    <p>The pipeline ran end-to-end on Sephora's actual DataStage XML, stored procedures, DDLs, views, and Databricks schemas. It produced Spark SQL, pipeline YAML, deployment YAML, and HQL output conforming to Sephora's existing AggregationApplication framework. The remaining ~40 minutes were intensive Q&A covering validation methodology, Azure architecture, security, deployment options, scaling, portability, and next steps.</p>
+
+    <div class="highlight-box">
+      <div class="box-label">Bottom Line</div>
+      <p><strong>The demo landed.</strong> Andrew Ho said "very, very nice" and announced the team will discuss and determine next steps. This is the first meeting in the engagement that ended without a new gate. No request for another demo, additional proof, or more information. The next action is on Sephora's side.</p>
+    </div>
+  </div>
+
+  <!-- 02: ATTENDEES -->
+  <div class="section">
+    <div class="section-number">02</div>
+    <h2>Attendees and Dynamics</h2>
+    <p class="lead">Six Sephora-side participants, three BayOne. Colin dominated with 74.5% of utterances as the presenter. Maher Burhan was the most active questioner.</p>
+
+    <h3>Sephora</h3>
+
+    <div class="person-card">
+      <div class="person-icon"><i class="fa-solid fa-user-tie"></i></div>
+      <div class="person-info">
+        <div class="p-name">Andrew Ho</div>
+        <div class="p-role">Director, Enterprise Reporting</div>
+        <div class="p-detail">Strategic decision-maker. Asked about parallel scaling across business areas and the critical "what would be step one?" question. His closing: "Very, very nice. We're gonna go back and discuss this further and figure out next steps."</div>
+        <div class="p-utterances">23 utterances (7.3%)</div>
+      </div>
+    </div>
+
+    <div class="person-card">
+      <div class="person-icon"><i class="fa-solid fa-shield-halved"></i></div>
+      <div class="person-info">
+        <div class="p-name">Maher Burhan</div>
+        <div class="p-role">Enterprise Architect, Sephora Data Platform (Xebia consultant)</div>
+        <div class="p-detail">Technical assessor. Asked about validation methodology, Azure isolation, deployment options (AKS vs Container Apps), database requirements, auto-fix, auto-resolve, and migration detection. Satisfied with all answers. Framed the tool as temporary: "This is the transition period. We use it to migrate. When we migrate, we don't need it anymore."</div>
+        <div class="p-utterances">100 utterances (9.0%)</div>
+      </div>
+    </div>
+
+    <div class="person-card">
+      <div class="person-icon"><i class="fa-solid fa-gears"></i></div>
+      <div class="person-info">
+        <div class="p-name">Grishi (Gariashi Chakrabarty)</div>
+        <div class="p-role">Director, Data Engineering, BI and Analytics</div>
+        <div class="p-detail">Execution owner. Asked about schema validation (which schema?), schema mismatch handling when target does not match legacy, and data reconciliation. Her questions indicate implementation thinking, not evaluation. She is past "does this work?" and into "how do we use this?"</div>
+        <div class="p-utterances">11 utterances (2.2%)</div>
+      </div>
+    </div>
+
+    <div class="person-card">
+      <div class="person-icon"><i class="fa-solid fa-compass-drafting"></i></div>
+      <div class="person-info">
+        <div class="p-name">Malika Seth</div>
+        <div class="p-role">Enterprise Architect</div>
+        <div class="p-detail">Asked about the pattern mapper automation, which parser receives the schema files, and whether the LLM would read actual data (sample records) for column mapping. Detail-oriented, mapping her own workflow to the pipeline.</div>
+        <div class="p-utterances">9 utterances (2.9%)</div>
+      </div>
+    </div>
+
+    <div class="person-card">
+      <div class="person-icon"><i class="fa-solid fa-user-plus"></i></div>
+      <div class="person-info">
+        <div class="p-name">Vishal Sharma (NEW)</div>
+        <div class="p-role">Consultant (Databricks/data engineering specialist)</div>
+        <div class="p-detail">First time attendee. Not in any prior meetings. Asked about FastAPI's role, whether ADF can replace it, XML parsing comprehensiveness, platform portability, and data reconciliation. His key concern: "We want to make sure we can run something fully in our environment without your system as well." Focused on self-sufficiency and avoiding vendor lock-in.</div>
+        <div class="p-utterances">18 utterances (3.2%)</div>
+      </div>
+    </div>
+
+    <h3>BayOne</h3>
+
+    <div class="person-card">
+      <div class="person-icon"><i class="fa-solid fa-microphone"></i></div>
+      <div class="person-info">
+        <div class="p-name">Colin Moore</div>
+        <div class="p-role">Director of AI, Presenter</div>
+        <div class="p-detail">Ran the live demo, fielded all 29 technical questions, showed the architecture diagram, walked through LangSmith, and delivered the two-week exploration SOW pitch when Andrew asked about next steps.</div>
+        <div class="p-utterances">237 utterances (74.5%)</div>
+      </div>
+    </div>
+
+    <div class="person-card">
+      <div class="person-icon"><i class="fa-solid fa-handshake"></i></div>
+      <div class="person-info">
+        <div class="p-name">Neha Malhotra and Zahra Syed</div>
+        <div class="p-role">VP Growth / Director Strategic Accounts</div>
+        <div class="p-detail">Offered follow-up time the next day, suggested including Mani in that session.</div>
+        <div class="p-utterances">4 utterances combined</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03: KEY TAKEAWAYS -->
+  <div class="section">
+    <div class="section-number">03</div>
+    <h2>Key Takeaways</h2>
+
+    <div class="takeaway-card">
+      <div class="tk-num">TAKEAWAY 01</div>
+      <div class="tk-title">The demo worked and impressed</div>
+      <div class="tk-detail">The pipeline processed Sephora's actual data end-to-end in 13.5 minutes with no crashes or major issues. Andrew's closing was unambiguously positive. This is the first meeting in the engagement that ended without any new gate requested. No additional demos, no extra proof points, no "come back with more information." The evaluation phase is complete.</div>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="tk-num">TAKEAWAY 02</div>
+      <div class="tk-title">Maher Burhan (the technical assessor) was satisfied</div>
+      <div class="tk-detail">Maher asked 100 utterances worth of technical questions spanning validation, architecture, security, deployment, and error handling. Every question was answered. The Azure isolation confirmation killed the security objection in one exchange. His closing framing of the tool as "the transition period" is healthy and honest. He is not opposed. He is pragmatic.</div>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="tk-num">TAKEAWAY 03</div>
+      <div class="tk-title">The exploration SOW pitch landed</div>
+      <div class="tk-detail">Andrew asked "what would be step one?" and Colin delivered the two-week proposal exactly as planned: Week 1 guided discovery with SMEs, Week 2 autonomous complexity mapping, deliverable is a data-driven engagement proposal. Andrew responded with "Got it. OK." and moved to wrap-up. No pushback, no counter-proposal. He had actually started describing the exploration concept himself before Colin even pitched it.</div>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="tk-num">TAKEAWAY 04</div>
+      <div class="tk-title">Five of seven new requirements need system access</div>
+      <div class="tk-detail">Data reconciliation, migration detection, schema mismatch handling, live data reading for mapping, and Cognos MCP all require access to Sephora's production systems. This means the exploration SOW is not just strategically desirable, it is operationally necessary. These capabilities cannot be delivered without access. Access implies a contract.</div>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="tk-num">TAKEAWAY 05</div>
+      <div class="tk-title">Portability and self-sufficiency is a real concern</div>
+      <div class="tk-detail">Vishal Sharma explicitly asked about running the system without BayOne. Maher reinforced the "transition period" framing. This needs to be addressed clearly in the engagement proposal: the system is temporary, agents are customizable, Sephora keeps everything, and BayOne's goal is to make itself unnecessary for the migration tooling once the program is complete.</div>
+    </div>
+  </div>
+
+  <!-- 04: KEY QUESTIONS AND ANSWERS -->
+  <div class="section">
+    <div class="section-number">04</div>
+    <h2>Key Questions Asked</h2>
+    <p class="lead">29 technical questions were asked during the demo. Here are the most significant exchanges by topic.</p>
+
+    <h3>Validation and Quality</h3>
+    <div class="quote-box">
+      "When you say validation, what are you validating against?"
+      <div class="quote-attr">Maher Burhan, [00:04:19]</div>
+    </div>
+    <p>Colin explained the two-tier validation: deterministic checks first (syntax, table presence, column matching via sqlglot), then LLM-based business logic verification. Deterministic gates must pass before LLM checks run. This saves tokens and ensures reliability.</p>
+
+    <div class="quote-box">
+      "So which schema is it like the target schema or which schema validation is it doing?"
+      <div class="quote-attr">Grishi, [00:06:17]</div>
+    </div>
+    <p>Colin explained the orchestrator classifies all files and routes them to the correct parser. The Databricks schemas Sephora provided go to the DDL parser. The mapping between legacy and Databricks happens at the pattern mapper stage automatically.</p>
+
+    <h3>Security and Architecture</h3>
+    <div class="quote-box">
+      "When you make calls to these models, do you go out of the our network to the public model or you have your private?"
+      <div class="quote-attr">Maher Burhan, [00:20:17]</div>
+    </div>
+    <p>Colin showed the architecture diagram and confirmed: "There are no calls to anything at this current moment in time that ever go outside of your Azure instance. Every single thing that we built here is entirely based on Azure exclusively." Maher responded: "So basically when you're finished with this, you're gonna tell us deploy it to your VNet, put it in your subnet and we'll be able to run it. It's not reaching out to anything." Colin confirmed.</p>
+
+    <h3>Scaling and Parallelism</h3>
+    <div class="quote-box">
+      "It can be deployed to run in multiple in parallel in multiple business subject area in parallel. Am I correct? I just want to make sure that this is not like you still have to have a person feeding couple report at a time."
+      <div class="quote-attr">Andrew Ho, [00:50:13]</div>
+    </div>
+    <p>Colin confirmed: the only constraint is compute. FastAPI is lean, the heavy lifting happens in Azure AI Foundry. Adding Celery workers (~$20/month) or Redis (~$30/month) enables full parallel execution. He described the "orchestrator of orchestrators" pattern for running all business areas simultaneously.</p>
+
+    <h3>Portability</h3>
+    <div class="quote-box">
+      "We want to make sure that we can run something fully in our environment without your system as well. So that you know, we're sure that in case we want to move ahead, we want to change it in the future."
+      <div class="quote-attr">Vishal Sharma, [00:35:03]</div>
+    </div>
+    <p>Colin confirmed agents are fully customizable, the system is temporary for the migration, and Sephora keeps everything. Maher reinforced: "This is the transition period. We use it to migrate. When we migrate, we don't need it anymore."</p>
+
+    <h3>Next Steps</h3>
+    <div class="quote-box">
+      "In reality, if I was like day one, how are you gonna go about it?"
+      <div class="quote-attr">Andrew Ho, [00:45:55]</div>
+    </div>
+    <p>Colin proposed the two-week exploration SOW: guided discovery Week 1 (~8 hours of meetings with SMEs), autonomous complexity mapping Week 2, deliverable is a data-driven engagement proposal with real acceleration numbers. Andrew had already begun describing this approach himself before Colin pitched it, which signals alignment.</p>
+  </div>
+
+  <!-- 05: NEW REQUIREMENTS -->
+  <div class="section">
+    <div class="section-number">05</div>
+    <h2>New Requirements Surfaced</h2>
+    <p class="lead">Seven new capabilities were requested during the Q&A that were not part of the original Track B demo scope. Five are blocked by the same thing: no access to Sephora's production systems.</p>
+
+    <div class="req-card">
+      <div class="req-badge blocked">Needs Access</div>
+      <div class="req-text">
+        <div class="req-title">Data Reconciliation (EDW vs Databricks)</div>
+        <div class="req-who">Raised by: Vishal Sharma, clarified by Grishi</div>
+        <div class="req-detail">Validate that the output on Databricks matches the legacy EDW source after migration. Colin confirmed this is already built, waiting to be wired in once access is available.</div>
+      </div>
+    </div>
+
+    <div class="req-card">
+      <div class="req-badge blocked">Needs Access</div>
+      <div class="req-text">
+        <div class="req-title">Migration Detection (what already exists in Databricks?)</div>
+        <div class="req-who">Raised by: Maher Burhan, confirmed by Andrew</div>
+        <div class="req-detail">Can the agent scan Databricks and determine which tables have already been migrated? Colin described the knowledge graph exploration approach. This is essentially the exploration SOW itself.</div>
+      </div>
+    </div>
+
+    <div class="req-card">
+      <div class="req-badge blocked">Needs Access</div>
+      <div class="req-text">
+        <div class="req-title">Schema Mismatch Handling</div>
+        <div class="req-who">Raised by: Grishi</div>
+        <div class="req-detail">Target Databricks schema will not match legacy EDW schema 1:1. Colin explained two paths: auto-resolve if non-breaking, flag for human if breaking. Can expand the pipeline with new agents for data migration.</div>
+      </div>
+    </div>
+
+    <div class="req-card">
+      <div class="req-badge blocked">Needs Access</div>
+      <div class="req-text">
+        <div class="req-title">Live Data Sampling for Column Mapping</div>
+        <div class="req-who">Raised by: Malika Seth</div>
+        <div class="req-detail">Would the LLM read actual data (e.g., 10 records) to validate column mapping? Colin recommended two paths: pre-cache during exploration (recommended), or give LLM read-only tools for live queries as fallback.</div>
+      </div>
+    </div>
+
+    <div class="req-card">
+      <div class="req-badge blocked">Needs Access</div>
+      <div class="req-text">
+        <div class="req-title">Cognos MCP Connectivity</div>
+        <div class="req-who">Ongoing from prior meetings</div>
+        <div class="req-detail">Live integration with Cognos for automated report extraction. Java SDK exists. Requires Cognos environment access. Natural first deliverable of the production engagement.</div>
+      </div>
+    </div>
+
+    <div class="req-card">
+      <div class="req-badge ready">Can Address Now</div>
+      <div class="req-text">
+        <div class="req-title">Source-to-Target Mapping (Manual Feed)</div>
+        <div class="req-who">Raised by: Maher Burhan</div>
+        <div class="req-detail">Can Sephora provide the source-to-target mapping if they already have it? Colin confirmed yes. This is a configuration option, not a new capability.</div>
+      </div>
+    </div>
+
+    <div class="req-card">
+      <div class="req-badge ready">Can Address Now</div>
+      <div class="req-text">
+        <div class="req-title">ADF as Alternative Orchestration</div>
+        <div class="req-who">Raised by: Vishal Sharma</div>
+        <div class="req-detail">Can Azure Data Factory replace FastAPI for orchestration? Colin confirmed it is adaptable. This is a platform preference, not a new capability.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06: NEXT STEPS -->
+  <div class="section">
+    <div class="section-number">06</div>
+    <h2>Recommended Next Steps</h2>
+
+    <ul class="action-list">
+      <li><strong>Send the demo package document and architecture diagram</strong> to Andrew, Grishi, Maher, Malika, and Vishal as a follow-up to the meeting</li>
+      <li><strong>Follow up on the session Zahra offered</strong> for the next day, and ensure Mani is included. The commercial conversation needs to start with Mani in the room.</li>
+      <li><strong>Prepare the formal exploration SOW document</strong> for when Sephora is ready to discuss. Two weeks, ~30 hours, four deliverables (complexity mapping, Cognos MCP validation, table migration assessment, data-driven engagement proposal).</li>
+      <li><strong>Update the engagement proposal</strong> to address the 7 new requirements, especially the portability and self-sufficiency concern raised by Vishal</li>
+      <li><strong>Research Vishal Sharma</strong> to understand his exact role and influence on the decision. He was not in any prior meetings and raised the most cautious questions.</li>
+    </ul>
+
+    <div class="cta-box">
+      <div class="cta-content">
+        <div class="cta-title">The ball is in Sephora's court.</div>
+        <p>Andrew said the team will discuss and determine next steps. All other vendors have been dismissed. Budget lock-in is end of April. Five of seven new requirements need system access, which means a contract. The exploration SOW is the natural bridge. BayOne's position is the strongest it has ever been in this engagement.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

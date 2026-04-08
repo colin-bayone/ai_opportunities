@@ -1,0 +1,1086 @@
+[00:00:06] Ho, Andrew: Cool.
+
+[00:00:08] Colin Moore: Is it?
+I see the recording symbol.
+It didn't kick me off.
+So OK, all right, all right.
+So some boxes are bigger than others and they finish faster.
+For instance, DDL is a much smaller file.
+The DDS files are much larger.
+
+[00:00:09] Ho, Andrew: Yeah, we're good.
+We're good.
+We're good.
+
+[00:00:23] Colin Moore: But after they're done running, we're able to see everything that goes in and I'll show you the observability that we have even in real time for this with Langchain and Langsmith.
+This is all based on Langchain and Langgraph.
+So for each of these boxes, they've now processed a file, the DS.
+Like I said, the DS files are.
+The largest so that it takes a little bit longer than the others, but they are done in parallel, so this goes nicely.
+After this comes the mapping step.
+So mapping means that we have to take the source and map it over to the target and this map step is a deterministic gate once again.
+So this is using deterministic first and language model version second.
+That is an important part to the overall strategy.
+That's what makes this work at scale, because effectively this is taking away steps that could either get messed up, misinterpreted, or otherwise take a long time and increase our token cost.
+So if there's things we can do deterministically with a high confidence, we always do that as the first step before.
+Before we move on to the next, but there's a constant checking and feedback loop that is built in here.
+The part that's tough to show on this screen, uh, is the actual feedback loop itself.
+So let me, uh, take you to that while you're waiting.
+And this ugly chart on the far right hand side is effectively what the real loop looks like.
+So each one of these we are currently at this orange step, the pattern mapper step.
+There is a feedback loop here that says when we're actually going and generating the new SQL code.
+That is compatible with your data bricks.
+We want to make sure that that code is correct.
+So this green gate, the validator gate, is actually going and checking to see what was generated here is actually up to the mark.
+Does it work?
+Does it compile?
+Does it pass both those deterministic gates as well as the language model basic business logic check?
+Compared to what the old was.
+If this doesn't pass, then go and try again and constantly refine on the SQL generation and conversion mapping.
+Do this and essentially churn here until you get to an answer that you're happy with.
+And at this point, certain issues get flagged.
+You'll see this happen real time in this part of the demo, but basically the things that get flagged here are going to be the human approval points that we need to have.
+And that is also an important part that we can show once these steps all finish.
+The human approval gates are kind of building out the knowledge base.
+That's the flywheel that makes this faster and faster every time and get better over time.
+So I think whenever we sent our message over to you, that was what just last week about this time.
+And at that point we were at 97% accuracy, which we, you know, kind of said, OK, that's actually not too bad for a first pass.
+But even just in a couple of days, just the small test that we've been running, we've already been have been able to get to an even higher level of accuracy.
+So we're right around perfect.
+Right now, given the files that we have, that of course will drift a little bit once we get in some new files.
+But the point is that the flywheel effect that's passively improving the system does work 2%.
+It doesn't sound like much, but there's not much room to get better when you're already that.
+That close to perfect and we'll see here on the screen whenever this finishes what the human review gates look like.
+But this is again just the we'll call it the ugly version.
+So the team put this together in about 5 days for the UI side.
+The important side is the back end, what actually does the work.
+But even from a UI side, if nothing, if something doesn't look perfect to you, don't worry, this is not meant to be a polished finished product for you, just something to give some visibility into this as we do the demo so.
+
+[00:04:19] Burhan,
+Maher - Consultant: When you say validation and that ugly diagram that you show, I didn't say it's ugly, you said it's ugly.
+So when you say validation, what are you validating against?
+
+[00:04:22] Colin Moore: Mhm.
+Um.
+Yes.
+Great question.
+So two different things.
+The 1st is a deterministic validation and deterministic validation is nothing more than saying is this valid syntax and that's easy.
+Second deterministic validation is and I actually have this on the sheet so we can pass this along to you too.
+The second validation that happens is specifically is this business logic preserved?
+And the deterministic version of that is were all the tables mentioned in A still there in B?
+Does all of the things still contain each other here?
+
+[00:05:04] Burhan, Maher - Consultant: OK then.
+
+[00:05:09] Colin Moore: Those are the deterministic gates, and those are based upon the each one of the steps.
+So they have different checks that happen as part of validation.
+Those must be perfect in order for the step to proceed, so those will churn on themselves.
+Deterministic is going to fail if nothing changes, that's true.
+The language model is the second step to go and backwards validate, say here are the known patterns that we have.
+We had to prepare some kind of gold standards for this based upon the files that were provided for us, but each one that is actually approved by a human at the very end that we know is good is helping to build that language model style validation.
+So deterministic is always gonna be the same check for all files of that state, but the language model style checks for validation.
+Those are ones that are taking into account the business logic and once we have the cognitive side of things in loop, that validation would also have to include checking this on the actual report.
+Values are there, make sure the report compiles, everything is good and everything is showing exactly as it was before whenever it was connected to SQL Server.
+
+[00:06:17] Chakrabarty, Gariashi: So in your well ugly diagram you had something that it was doing schema validation, right?
+So which schema is it like the target schema or which schema validation is it doing?
+
+[00:06:21] Burhan, Maher - Consultant: Thank.
+
+[00:06:30] Colin Moore: Great question.
+So that is what the orchestrator first step is doing is it's essentially saying here's all the files provided to me and then from those files I need to pick out for them because I have no I'm not doing something naive where it's, you know, guess based upon the founding.
+What is contained within that file, which the schema mapping within that file.
+But it's essentially saying it's this first orchestrator step.
+Look at all the files that have been provided and assign them an identity.
+Map them to what they're actually containing and what they do.
+Now we have that settled.
+The next step is to take them and say here's the schema on the Databrook side that we have as the target, and here's the schema on the Cognitive side that's coming from SQL Server.
+That's yeah.
+
+[00:07:16] Chakrabarty, Gariashi: So we feed right?
+So the human will have to feed the.
+So we will feed the schema from Databricks side or is it like the same orchestrator or the agent can read from both sides and.
+
+[00:07:23] Colin Moore: Mm.
+Mm.
+
+[00:07:32] Chakrabarty, Gariashi: Compare.
+
+[00:07:34] Colin Moore: That's, that's right.
+And so that's that's one of the two things that would be addressed if once we can have some access to the Sephora resources.
+So for instance, human for this step as it is right now for what we have available to us would have to provide the schema.
+But the moment we have access to Cognos, we can pull that out.
+And the same with Databricks, we can pull that down from either of them without a human needing to be in the loop.
+So long as we have the logic to say that this is where it goes.
+But that would be part of whenever we have the what we were talking about the last time for exploring and doing a mapping of that and having kind of a knowledge.
+Knowledge graph of what relates to what?
+You know, what's the equivalency between these two?
+Um, right now it has to be human because we don't have access to Databricks or to Cognos, but once we have MCPS connected for those, we can get this in.
+
+[00:08:19] Burhan, Maher - Consultant: But I thought.
+I thought the validation will validate the input against the output.
+So you know that you analyze and you figure out what component inside.
+Let's say they did a stage job and then you share it in output and now you need to validate to make sure.
+
+[00:08:28] Colin Moore: Mhm.
+
+[00:08:41] Burhan, Maher - Consultant: That you haven't missed anything from the other state is that that's not money.
+That's not something we have to provide.
+It's you, right?
+OK, yeah, yeah.
+
+[00:08:48] Colin Moore: Right, absolutely not.
+Yes, yes.
+When it once this finishes, you'll see that in in action because there's even an extra thing that we tried to add on to this to even further reduce that.
+
+[00:08:54] Burhan, Maher - Consultant: OK.
+OK.
+
+[00:09:02] Colin Moore: Yes.
+
+[00:09:03] Burhan, Maher - Consultant: Yep.
+
+[00:09:06] Seth, Malika: So Colin, over the e-mail thread, I think we gave you the target schema for the Databricks tables.
+I think 4 tables we had sent schema, right?
+So you're saying you fed it to the orchestrator stage 1?
+
+[00:09:13] Colin Moore: Mm-hmm.
+Yes.
+Mhm, yes, mhm.
+
+[00:09:20] Seth, Malika: Right.
+And then it goes to these parallel parsers.
+So where does that TXT file go to?
+Like which parser does it go to over here?
+
+[00:09:29] Colin Moore: Mhm.
+Yes, so So what happens in the orchestrator?
+So assigning those files and identity 'cause I think there are something like 15 files, so.
+That's the the step that'll help for the automation later.
+Whatever file is correct for that step, because we know what the objective is for this step.
+We're essentially categorizing those and saying, OK, this is the DS file that we need to feed in.
+This was the SQL that we were able to extract out of.
+One of the other files, like an HDL file that was coming in.
+So this is done at the language model step.
+That's how we're able to figure out, you know, for instance, let's say you could upload a PowerPoint or a Word doc in there and it would just get ignored because the the orchestrator step is trying to get the identity of those files and what.
+It's actually trying to do what what SEPL needed for the outcome here.
+So for instance, this part, the actual routing of those files to the right node happens based upon the language model's understanding of what is contained in those files.
+
+[00:10:33] Seth, Malika: So those schemas, the the schema definitions,
+does it go to the DDL parser or like?
+
+[00:10:38] Colin Moore: Mhm.
+Yes, yes.
+So and I think I have the complete breakdown of this here too, so you can see exactly.
+
+[00:10:45] Seth, Malika: The.
+
+[00:10:53] Colin Moore: What's happening?
+And hopefully this can get a little bit bigger, but if not, I'll figure out how I can zoom this a little bit more.
+So the yes orchestrator loads files and classifies them.
+If it has the files that it needs, that's what gate one does.
+So first of all, can we even do this?
+Do we have all the required information to do?
+If that is yes, then we go through and that's only when this next step happens.
+So it does require.
+Require all the files to be present in order for it to continue.
+That's the only way it could could work in that way.
+But there's always this retry mechanism.
+So if there's nothing there, or if we haven't found a file, well, we're going to hopefully assume that it's just something that got missed in this classification step.
+This can go up to two times right now, and that could be any number to check that over the files once more before it concludes either yes, I can't continue, I just didn't make the right assumptions to start, or no, we don't have what's needed.
+We need to report back to the human and say we we don't have all the files here.
+Yes.
+
+[00:12:09] Seth, Malika: And so the pattern mapper.
+Oh, sorry, go ahead.
+OK, so the the pattern mapper, Colin, is that where the EDW tables get mapped to the Databricks tables?
+
+[00:12:09] Burhan, Maher - Consultant: I was on mute, sorry.
+Go ahead.
+No, go ahead, Madika.
+Go ahead.
+
+[00:12:24] Colin Moore: Yes, yes, exactly, exactly.
+
+[00:12:26] Seth, Malika: So that that automatically happens because we just shared the schema of data, like we did not do the mapping manually.
+Is that happening like automatically here in the mapper, right?
+OK.
+
+[00:12:36] Colin Moore: Yes, yes.
+And let me show you this too.
+So this is so back to this page with my ugly diagram.
+This will be available in case anyone wants to see.
+But basically for here what I've done is I've taken all of our agents.
+And I've put them over here so you can see exactly what they're doing and how they're doing it.
+So for instance, if we wanted to go and see how the pattern mapper is actually working, we have a way for you to do this and see exactly what you know, kind of the guidance and directions are for them.
+
+[00:13:08] Burhan, Maher - Consultant: Oh.
+After.
+
+[00:13:12] Colin Moore: And in addition to this, we have Langsmith enabled too.
+So for Langsmith, let me show you this.
+This is not in the app, this is just a thing that comes with us as well.
+So whenever we go to.
+Langsmith.
+Langsmith is like the.
+You can say it's the observer back end for Langrah, which we have.
+We are able to see the waterfall map of exactly what is happening here.
+So that's why if it seems like I'm not showing as much, it's because I have so much that I could show here in the output that it would be almost overwhelming.
+
+[00:13:47] Burhan, Maher - Consultant: Yeah.
+
+[00:13:50] Colin Moore: But for instance,
+if I go and I click on one of these, every single step has a full log of exactly what was happened and exactly how it worked.
+So for instance, this one here were the source artifacts from data stage that came.
+And then it'll also give us the output of what was actually generated by that specific step.
+So we can we can expose any of this on the front end, of course.
+But the question was for us for the demo, we didn't want to overwhelm with all these different fields, but this is the behind the scenes, yeah.
+
+[00:14:24] Burhan,
+Maher - Consultant: So so that's where you that's where you go and validate manually if you need to like this tool is going to be available part of the OR or or this won't be available to us.
+
+[00:14:39] Colin Moore: Both both will be available.
+So this would be let's call it the the nerdy version of if you wanted to dig deep.
+But for normal users this is how it would look.
+So this is the screen after that mapping after that workflow finishes.
+
+[00:14:42] Burhan, Maher - Consultant: OK.
+Hmm.
+Yeah.
+OK.
+
+[00:14:57] Colin Moore: Anything that has this is the human input step right here.
+So we've now completed that full workflow.
+It took 13 minutes, 30 seconds.
+
+[00:15:03] Burhan, Maher - Consultant: Mm.
+
+[00:15:10] Colin Moore: And there were two things that needed attention here.
+
+[00:15:35] Burhan, Maher - Consultant: Mm.
+
+[00:15:35] Colin Moore: For this,
+this is where a human can at least see what AI is calling out as an issue.
+Now does a human have to fix this?
+No, this is just to get some observability into it.
+
+[00:15:46] Burhan, Maher - Consultant: OK.
+
+[00:15:47] Colin Moore: So let me show you then how we actually go and resolve.
+But this this is there for anything that we flagged as either a mapping problem or a business logic problem.
+So either of those we will get flagged here.
+Advisory ones are really more for little things that probably a human being would miss too, for instance.
+You know the equivalency between null versus the null string cast their preference.
+
+[00:16:13] Burhan, Maher - Consultant: So you you're catching, you're catching errors here from the existing job that we have.
+Oh, OK, nice.
+
+[00:16:20] Colin Moore: Yes, yes, exactly.
+So that's that's what we're trying to do because it's like like we said in the first meeting, it's less about just a lift and shift migration.
+It's more about reengineering if needed, as much as needed.
+So, but we kept it within the human's power to make that call.
+You know we aren't going to change business logic without a human being.
+
+[00:16:36] Burhan, Maher - Consultant: Yeah.
+
+[00:16:40] Colin Moore: In the loop, unless you've told me to change that logic over and over and over again.
+
+[00:16:44] Burhan,
+Maher - Consultant: So is there a way OK we know that the column did not they didn't include in group by right this this this problem here which means that this statement gonna fail anyway when when you run it in data breaks.
+So does that do you have an option to continue the migration even though you know?
+
+[00:16:54] Colin Moore: Mhm.
+Mhm.
+
+[00:17:04] Burhan, Maher - Consultant: We're gonna fail or that will basically terminate that job.
+Like instead of that job failure will not move, move on with it.
+
+[00:17:06] Colin Moore: Yeah.
+Yeah, glad you asked.
+So we have this button down here, AI review.
+Now again, give give me some slack here on the way that this will show because not too much time for us, but I think you'll like the premise of this.
+
+[00:17:19] Burhan, Maher - Consultant: OK.
+Oh, no, no, that's fine.
+That's all good, yeah.
+
+[00:17:28] Colin Moore: So we'll give this a minute to run.
+Essentially what this is doing is this is grabbing in and essentially this is giving you like a mini cloud code.
+Literally it's it's giving you a cloud code right in the browser interface.
+What's happening here is we've put together some skills that accompany this.
+
+[00:17:38] Burhan, Maher - Consultant: Why?
+
+[00:17:47] Colin Moore: So for these little things that you want to map, land graph is there as a possibility, but also this for in terms of skills.
+You'll see whenever this is finished, we'll have some options to, you know, take some action here.
+
+[00:18:02] Burhan, Maher - Consultant: OK, you can correct it here if you want to, right?
+OK.
+
+[00:18:03] Colin Moore: Yes, yes.
+And every single decision that goes here is saved.
+So that goes into the memory of the project, which means that if we need to, you know, do this again in the future, we now have a bias one way or another.
+You know, for instance, some of these things that were called out as errors.
+We're actually going and confirming that the business logic here is actually incorrect.
+
+[00:18:28] Burhan, Maher - Consultant: Yeah, I know.
+OK, that's you.
+
+[00:18:30] Colin Moore: You know, just just like Cloud code would do.
+So we still get that specificity that Cloud code has and we can still see this and you'll see once this gets to the very end,
+it's going to give us an option to resolve these and we'll be able to say if we want to resolve or if we would just want to proceed without the resolution in place.
+
+[00:18:49] Burhan,
+Maher - Consultant: And do you have the option to stay resolve it for me?
+
+[00:18:54] Colin Moore: Yes, yes.
+
+[00:18:55] Burhan, Maher - Consultant: OK, cool.
+I like that.
+
+[00:18:57] Colin Moore: Yes.
+See this?
+Uh, this guy is just.
+Running validation.
+So the good thing is, is this is actually like a live code window for you, so everything is connected together.
+Let me see if this is going to finish.
+Again, it's probably just a rendering thing on my side if it doesn't, but let me see if I have one pulled up for you already, yeah.
+
+[00:19:13] Burhan, Maher - Consultant: Yeah, yeah.
+
+[00:19:27] Colin Moore: I'll see you.
+This one should finish anyway, but I think it's because it started to run over.
+But uh, for.
+
+[00:19:29] Burhan, Maher - Consultant: Oh, I know.
+I started the button to fix.
+OK, yeah, nice, yeah.
+
+[00:19:34] Colin Moore: Yep.
+And and So what what we'll do, I mean of course you know given some more time what we would do for you is this would instead of just being a pop up window and those are nice, but we would give you this as more of a dashboard view.
+So maybe you want more granularity as to what you want to fix or maybe you want to see a preview of what that fix would specifically be.
+We'll be giving that to you as well.
+
+[00:20:00] Burhan, Maher - Consultant: Yeah.
+
+[00:20:01] Colin Moore: So that way you can interact with it, make your edits, make your changes however you'd like, and then you can choose to auto fix as a result of that.
+But it's it literally gives you the same power that cloud code does, because technically it's a mini fork of it right in the application, which is meant to, you know, make life easy.
+So as even for the steps that are human, we try to make them as little little expense to you in terms of your time as possible.
+
+[00:20:17] Burhan, Maher - Consultant: Yeah, yeah.
+Yeah.
+When you when you make calls to these models, whatever model you're using in the background, do you go out of the our network to the public model or you have your private?
+
+[00:20:41] Colin Moore: Mhm, mhm.
+I'm glad you asked.
+
+[00:20:50] Burhan, Maher - Consultant: Are you hosted now outside?
+
+[00:20:52] Colin Moore: Someone told me that I wouldn't need this diagram today, but I'm glad I have it.
+So let me show you this.
+So this is the essentially the high level application model diagram.
+There are no calls to anything at this current moment in time that ever go outside of your Azure instance.
+And in fact, every single thing that we built here is entirely based on Azure exclusively.
+Even for us, you know, even Postgres, that's the back end for Landgraph in this case, even Postgres right now is running in Azure.
+So we did that intentionally to make sure that everything is perfectly transferable.
+So if you would want to get off to a running start here.
+
+[00:21:12] Burhan, Maher - Consultant: OK.
+OK.
+
+[00:21:30] Colin Moore: Let me Scroll down a little bit further.
+Every single thing here is already exclusively based in Azure, so there's nothing here that you would need to have any external connections to.
+Even for us for the POC, we still kept it all production ready, ready to go.
+
+[00:21:52] Burhan, Maher - Consultant: OK, that's good.
+So basically when you're finished with this, you're gonna tell us here, deploy it to your Vnet, put it in your subnet and we'll be able to run it.
+It's not reaching out to anything.
+
+[00:22:05] Colin Moore: That's right.
+That's right.
+Completely isolated from the outside.
+
+[00:22:06] Burhan, Maher - Consultant: OK.
+Cool.
+Thank you.
+
+[00:22:12] Colin Moore: Of course.
+And so the same, the same here, even for the diagram, I will share this 'cause this, I'm sure if there's anyone in IT that wants to know, we we've definitely had this conversation before.
+But generally speaking, that's the a good motivator for us.
+We have less hectic conversations with IT.
+
+[00:22:22] Burhan, Maher - Consultant: Yeah.
+
+[00:22:30] Colin Moore: Whenever we use the right platforms from the start, so that's the motivation for us.
+
+[00:22:34] Burhan, Maher - Consultant: Yeah, mm.
+Oh.
+
+[00:22:38] Colin Moore: OK.
+Now let me go back over here now that everything is done.
+And so there is a real bug that was found here.
+And we can make the call.
+There's full details of this up above.
+Right now it's saying I would either fix this or I would continue one of the two.
+
+[00:23:02] Burhan, Maher - Consultant: Oh, good.
+Yeah.
+
+[00:23:03] Colin Moore: So it still leaves you that power in your hands.
+If you want to say, you know, hey, proceed anyway, I don't agree.
+I'm going to go ahead and click auto fix here and I'll actually go and apply the fixes over and it'll tell us what happened.
+So there's surgical edits to the existing files.
+So we keep a full breakdown of all the files that were changed.
+It's almost like there's a mini git inside this so that anything that is done can be undone and vice versa.
+So this will go through and it'll actually go and edit those same files to make the fix and apply.
+
+[00:23:37] Burhan, Maher - Consultant: So do you have do you have a a a mode where you run the said auto fix everything?
+I don't want to review it.
+
+[00:23:37] Colin Moore: And then it'll go through and check once again.
+Yes, yes.
+So that's just a toggle for us, yeah.
+
+[00:23:48] Burhan, Maher - Consultant: OK.
+OK.
+Thank you.
+
+[00:23:51] Colin Moore: Yes.
+And so you'll see, let me go back to this screen for just a moment.
+What you'll see is that on steps, let me go back to the we'll pull up an old run.
+So on the the last step of my ugly chart, you see this last step says valid, and that's the last one that's green.
+
+[00:24:11] Burhan, Maher - Consultant: Oh.
+
+[00:24:12] Colin Moore: This one says APPR.
+That's for approve.
+For us, the only real difference between this screen and the other screen is if you want to turn auto approve on, you can do that or you can set a threshold for the confidence.
+So for instance on on this one where it said, you know, hey, there's an actual issue here that we should address.
+The approved field over here lets you set your confidence indicator.
+Is this something that we've auto resolved in the past?
+If it is, great, go and auto do this.
+If it's not, maybe that's something still where we want the human in the loop to validate, but you can be in full control of that.
+We don't make those decisions for you.
+
+[00:24:49] Burhan, Maher - Consultant: It's nice to have the option.
+
+[00:24:55] Colin Moore: So let me go back over here.
+So we we kept all the syntax highlighting here for anything that was perfect right out of the gate and perfect means what it can mean at this current stage.
+So just just to be clear there, if we get Cognos MCP set up, if we get the Databricks connector set up, we can actually go and truly you know.
+Not just validate in terms of logic and business logic and syntax and everything like that, but we can check on the report itself so we can really give you a fully autonomous view and even do it as a, you know, stage and temp version of it too,
+so we don't mess with any of the existing reports that might not have any problems.
+
+[00:25:26] Burhan, Maher - Consultant: Oh.
+
+[00:25:43] Colin Moore: Now at the end of this, right now the end deliverable for it,
+because we don't have that connector back to Cognos, is just to download everything as a zip file.
+
+[00:25:50] Burhan, Maher - Consultant: Yeah.
+
+[00:25:55] Colin Moore: It'll zip up all the files for you.
+You can also of course preview them from the screen to see what the output files would be.
+Um.
+The good thing is, is whenever we zip them up, they are structured, so they should be able to be dropped in, unzipped and dropped right into the product structure as is.
+So we we kept the file names the same, so it should map right back to the source.
+Like that you can always preview, you can always see them, you can always individually download whatever you'd like.
+And you can always of course choose to rerun this as well.
+So.
+And that that same is true over here.
+It's just the same same preview screen, but at the end of it you have as much as possible the human out of the loop, but only human in the loop where it matters.
+You know the difference here is that some things are needs attention are essentially like your it's not.
+Not quite an error because we would have caught that, but it's more of a warning, something that demands your attention.
+Advisory things are pretty much strictly just preference because, you know, knowing what your kind of organizational standards are, how you want things to be done, if it's a scaler file.
+How do you want that to be written?
+These are more things that could not error or break, but they're just preference for style points that you might like.
+So can for the most part be totally ignored as they don't have any impact on the actual business logic or.
+You know other other deliverable.
+
+[00:27:26] Burhan, Maher - Consultant: Yeah.
+So you have the diagram, the diagram that you show regarding the Azure deployment environment.
+Can you go back?
+Yeah.
+So these are the component that you will have.
+So you can deploy this as a container either to.
+
+[00:27:34] Colin Moore: Mm-hmm.
+Yes.
+
+[00:27:45] Burhan, Maher - Consultant: Container service or AKS and you need Azure database or do you need the database post SQL database or?
+
+[00:27:48] Colin Moore: Mhm.
+
+[00:27:57] Burhan, Maher - Consultant: Do you need it?
+So so all the components you have here.
+Basically this is what you need to deploy this application, right?
+
+[00:27:59] Colin Moore: That.
+Mhm.
+Right.
+And I I think let me share a couple of things so you'll you'll understand this.
+So I'll go technical for just a moment.
+Fast API as a container app, absolutely needed.
+We have these all set up as Docker compose images for you that can already be deployed if you wanted it like even for us.
+
+[00:28:07] Burhan, Maher - Consultant: Yeah.
+Yeah.
+Mm-hmm.
+
+[00:28:24] Colin Moore: It's a deploy script, LCICD automation built into these for us.
+Fast API is here, the dashboard AKA the actual UI itself.
+If you want a UI and you don't want to use it natively in VS code, then dashboard can be here as just a separate other container just as a a viewpoint.
+
+[00:28:27] Burhan, Maher - Consultant: Yeah,
+I am.
+
+[00:28:43] Colin Moore: The other two containers, if you wanted them, or excuse me, would be just a fast API worker container.
+So if you wanted to do this at a scale and we were throttling for any reason, we do have a worker container with Celery that you could bring into this.
+It does increase cost, but it also increases your concurrency.
+
+[00:28:43] Burhan, Maher - Consultant: OK.
+Um.
+
+[00:29:03] Colin Moore: Without overloading the server and with Azure it's scale up, scale down.
+So we can do it with AKS.
+We can do it with Azure Container apps natively and just use their own scaling with KDA scaling.
+Both will work fine for this.
+And then for the database, do we need it?
+Not really.
+
+[00:29:17] Burhan, Maher - Consultant: Yeah.
+OK.
+
+[00:29:22] Colin Moore: We can have it, or you can use SQLite, or you can use a different database that you might already have, uh, deployed on Azure that you'd want to put this on.
+It doesn't have to be an additional cost.
+
+[00:29:32] Burhan, Maher - Consultant: So so can you use SQLite container inside?
+OK, so all right, nice.
+
+[00:29:35] Colin Moore: Yes, yes, yes, yes, yeah.
+Now of course the the downside to SQLite is that it's a single threaded database, so it doesn't have quite as much concurrency as the others do, but we even have ways around that.
+We we could do parquet files and then a SQLite at the end and that way you know the application doesn't get bogged down.
+Yeah.
+
+[00:29:58] Burhan, Maher - Consultant: OK.
+
+[00:30:01] Colin Moore: Now, very last two points on this to make.
+Langsmith is optional.
+That's only for people that really want to dig their teeth into, you know, what's specifically going on in the language model side.
+Every single prompt, every single call to a language model, every single bit of output.
+That comes from these.
+You can see with Langsmith that is completely free open source for you.
+That's something that would just come by default and can come through your single sign on as well.
+This can be turned off or turned on.
+It's a simple environment variable to turn it off or on.
+This would be of any service.
+Technically Langsmith is hosted externally, but it authenticates through SSO, so you still have that enterprise protection there.
+Or you can just turn it off and or you could host it yourself in a different container if you wanted.
+It's just an observability tool, though it's not anything critical for a function.
+Think of like Grafana similar to that, but for language models.
+
+[00:30:53] Burhan, Maher - Consultant: OK.
+OK.
+Yeah.
+OK.
+
+[00:31:01] Sharma, Vishal - Consultant: So this fast API, what exactly are handled here?
+Like is it like parsing?
+It's handling AI calls?
+It's handling like orchestration?
+Like why can't we use ADF right?
+
+[00:31:16] Burhan, Maher - Consultant: That's the that's the engine, I believe.
+That's the this is this is Vython, right?
+The Ison library.
+
+[00:31:21] Colin Moore: Mm-hmm.
+
+[00:31:23] Burhan, Maher - Consultant: Yeah, it is in Python.
+OK, it's a Python package.
+That's the BI.
+
+[00:31:29] Sharma, Vishal - Consultant: OK, but we did also handle orchestration too, because that's what it will do, correct?
+
+[00:31:29] Colin Moore: Yes.
+Yes, that's right.
+That's right.
+And for the AI model hosting and access, those are all coming from Azure AI Foundry.
+But the orchestrator, the thing that's making the calls, parsing, running those deterministic steps, that is all this fast API server and fast API is just what we picked.
+For our stack, we can adapt to pretty much anything in case there's a preference.
+
+[00:31:57] Sharma, Vishal - Consultant: So for orchestration, if you want to use ADF for example, we can do that, correct?
+
+[00:32:02] Colin Moore: Yeah, yeah.
+We would just have to know what what you want and we can build around that, no problem.
+
+[00:32:07] Sharma, Vishal - Consultant: OK, and this is mainly like when you convert data like like data stage components right to for example terabricks.
+Here you're mainly doing XML parsing.
+That's what I understood.
+Is it correct understanding of?
+
+[00:32:18] Colin Moore: Mhm.
+Yeah.
+
+[00:32:23] Sharma, Vishal - Consultant: Note.
+
+[00:32:24] Colin Moore: XML parsing is one part of it, but it's actually every one of those file types that is needed for this conversion does get processed.
+So for instance, if I go back to this flow, XML files are there, but there's also parsing for the data stage file themselves, DDL files, the SQL that gets extracted from some of the files too.
+So if it's an important enough file that it's standalone like the XML is, yes, it gets parsed.
+I think the XML files are by far and large the largest files in this Max.
+
+[00:32:52] Sharma, Vishal - Consultant: Yeah, but the external parsing is able to cover most of the components like for example sequences, you know like all the jobs and data stages, containers.
+Is it able to handle like because external parsing might miss some lot of stuff right while converting the code?
+
+[00:33:02] Colin Moore: Mm-hmm.
+
+[00:33:12] Sharma, Vishal - Consultant: To the bricks.
+
+[00:33:13] Colin Moore: Right, absolutely.
+And that that is precisely why we did this step for the deterministic gates that happened first to make sure whatever's generated.
+I don't even have a language model ever check a language model's output, you know, bad idea.
+So what we do instead is check to see was everything that should be present here present in the output of.
+What the language model gave, if not immediate fail, go back and at least check on it.
+And that's kind of the certainty that we have.
+And there's always this retry loop that happens at the end of every single interaction so that we can go and check our work to make sure that nothing was missed.
+
+[00:33:33] Sharma, Vishal - Consultant: Yeah.
+OK.
+
+[00:33:49] Colin Moore: So that, and that's all visible in Langsmith.
+So you can see that it is going back and trying to look at this.
+But combining that system of doing things in a deterministic way plus the, let's say, dynamic nature of the language models, that's what gives you that very high throughput.
+That's also what makes it take a little bit longer too.
+
+[00:33:54] Burhan, Maher - Consultant: OK.
+
+[00:34:09] Colin Moore: But what you lose in time, you're gaining back in confidence that it's correct.
+
+[00:34:14] Sharma,
+Vishal - Consultant: And you use YAML like plus that kind of SEL capability right here, right?
+So like what if you see suppose in future we decide to stop using that platform like like what what what will be our options in that case?
+
+[00:34:32] Colin Moore: Yeah, good question.
+So it depends upon if we know about it in advance, we can make those as agents.
+Every one of these, even for the output sake, is nothing more than really an agent with some specific instructions, some specific known good examples.
+So if we'd want to move away from, you know, thing A and move it on to thing B, all we'd really need to know is, you know specifically what you want to do or what options you'd want to have, and we can just preemptively build those.
+And at the end of the day, we can also build you something that can build them for you.
+You know, that's that's always.
+
+[00:35:03] Sharma, Vishal - Consultant: Yeah, because because we want to make sure that you know we can run something fully in our environment like without your system as well.
+So that you know, we're sure that in case we want to move ad, we want to change it in the future.
+So that should that capability should be supported.
+That's all.
+
+[00:35:18] Colin Moore: Yes, yes, yes.
+And actually what you'll have no matter what, because I'll put it this way, you know, agents, especially anything like this where there is some kind of a, you know, prompt, you could look at this and say I could do it way better, you know, and all I will do is I'll give you the.
+Effectively the default versions of them.
+Anything like these are fully customizable.
+If you want to add on new ones, we have.
+We didn't add it included in this POC, but typically we have a configuration screen so that you can go and create your own if you'd want.
+Now can I be accountable for how well those perform?
+Of course not, but at least the possibility will be there.
+So if you want to add in custom agents, different steps, have different types of outputs, or even just tweak little things in here, you can always do that and there will always be a, you know, go back to defaults version, yeah.
+
+[00:36:02] Burhan,
+Maher - Consultant: Yeah, I mean, yeah, this, this is the, this is the a transition period.
+Basically we use it to migrate.
+When we migrate, we don't need it anymore.
+We are in the our platform, yeah.
+
+[00:36:13] Colin Moore: Yes, exactly.
+Exactly.
+If if we do a good job, then this means that this is temporary for you, right?
+
+[00:36:17] Burhan, Maher - Consultant: Mm.
+Yeah, yeah, exactly.
+That's that's the plan, basically migrate.
+And when we migrate, we're running in the data break.
+Yeah, that's the goal.
+
+[00:36:31] Colin Moore: Yes.
+
+[00:36:33] Sharma, Vishal - Consultant: Great, great.
+And last question about is there any way you guys support data reconciliation?
+Like I know you there's a validation step in in one of your diagram, but if want to do reconciliation then is there anything?
+
+[00:36:43] Colin Moore: Mhm.
+
+[00:36:49] Sharma,
+Vishal - Consultant: Like that supported as a.
+
+[00:36:51] Colin Moore: Yes, yeah.
+
+[00:36:51] Chakrabarty, Gariashi: Reconciliation between, uh, two platforms, Vishal, right?
+Yeah, yeah.
+
+[00:36:55] Sharma, Vishal - Consultant: Correct, correct, correct.
+Like for example, yeah, go ahead.
+
+[00:36:58] Colin Moore: So.
+
+[00:37:00] Chakrabarty, Gariashi: EDW whatever we have output versus what DP output DP.
+Yeah, in DP.
+
+[00:37:03] Colin Moore: Mhm.
+
+[00:37:03] Sharma, Vishal - Consultant: Yes.
+Versus the what we get right, correct.
+
+[00:37:09] Colin Moore: I see, I see.
+I would say, yeah.
+And there's no reason why we can't.
+The only reason why that's not explicitly in here now is because we would have to have access to the systems to test it, make sure that's working properly.
+But there's no reason why we shouldn't.
+And actually that's that's one of the things in the the the form that I gave that I'll give at the end of this meeting.
+You'll see I I called that out because that's only not here because we didn't have the access to the the systems.
+But if we had that, that just is an extra gate at the end.
+It's already built actually, so it's just waiting to get wired in if we have some access to those systems.
+So for reconciliation, no, no problem.
+If it was between two systems, we just need to.
+If we didn't have an idea of how to do that, and I'll just give an idea for this.
+What we'd probably want to do is spend a couple minutes with someone that's actually doing that manually, see what their workflow's like, and then we can capture that into a new agent and and build it in here for you.
+
+[00:37:46] Sharma, Vishal - Consultant: OK, good.
+OK.
+Thank you.
+
+[00:38:08] Colin Moore: Yes.
+
+[00:38:08] Chakrabarty, Gariashi: Well, I want to talk a little bit about the modernization piece in this floor, right?
+So we we have these two systems and these we have this modern DP and we have this EDWO legacy system, right?
+
+[00:38:13] Colin Moore: Mhm.
+
+[00:38:26] Chakrabarty,
+Gariashi: And in this modern system we already have some data available.
+
+[00:38:31] Colin Moore: Mhm.
+
+[00:38:32] Chakrabarty, Gariashi: Right.
+So it's already there.
+So it's not a direct lift and shift.
+So while we're doing in your pipeline flow, we wouldn't be migrating all of it, right?
+And the schema will not be same.
+My target schema won't be same what my legacy schema is, right?
+
+[00:38:33] Colin Moore: Mm.
+OK.
+Mhm.
+
+[00:38:52] Chakrabarty, Gariashi: How would you tackle that piece and at which stage in this flow you would tackle that?
+
+[00:38:57] Colin Moore: Great question.
+So what happens here is that there because essentially what what is happening here is one of two situations, one where it can reasonably be resolved, where it's just a case where there's not an exact match.
+But if you looked you could say, OK, maybe not everything is here, maybe you know not all fields have been migrated or something like that.
+Like this, but will that actually break the report?
+That's one part of it.
+The other part is to say if it's not resolvable, if it would break the report, what to do now?
+And the answer for that second one is that's where you flagged at the human.
+We can't continue because there's something that's a critical mismatch.
+That can't be resolved.
+If you know me by now, my answer back to that is, well, great, well, looks like we're going to expand on this pipeline a little bit and add in some agents in some part of the workflow that can go and say specifically what we need to move over.
+If it would be breaking for the report and specifically how you do that, maybe they even can go and you know take on some of those data stage jobs for you in situation one though, where it could be reasonably resolved.
+That's where it'll go back to that first part about confidence.
+So if it's something where we are confident, we've done this type of a mapping before.
+Then go and do it automatically.
+But if it's something that's the very first time, just to make sure it's actually correct, that would still be a human step.
+And again, we don't force any of that on you.
+So if you want it to be automatic from the start, that's fine.
+If you want it to be all human in the loop from the start, that's also fine.
+They're just toggles for us.
+
+[00:40:28] Chakrabarty, Gariashi: OK.
+
+[00:40:30] Seth, Malika: But it in order for it to be automatic, it would have to read the data off of the tables, right?
+It would it would have to like actually query that live data and then do the mapping because just by the names of the columns in the in the table it it you know that may not be a.
+Exact match with the EDW legacy tables.
+So with it, will the LLM actually go and read the data?
+So will that data be fed to the LLM in that case?
+
+[00:40:53] Colin Moore: Yes.
+So, uh, we can do it two ways, yeah.
+
+[00:41:04] Seth, Malika: Like sample records, I meant yeah like like maybe it takes like 10 records from the EDW table,
+10 records from the Databricks table and then it does the mapping based on you know what are the values, what are the patterns in the values.
+
+[00:41:17] Burhan, Maher - Consultant: Mhm.
+
+[00:41:18] Colin Moore: Yes, yes, absolutely.
+So there's two things that'll go here and maybe let me talk about them as like there's path number one and the both of these paths would be done.
+But path number one to say is what's our starting state, what's the initial because to do them, you know, real time is both a little bit of risk, but also.
+A little bit of latency.
+So if we can do that exploration step first, even though that of course will be stale at some point.
+If we can do that first, at least to preload everything in good to go.
+At that point all I need to know is if the data types and the columns changed.
+Other than that I can get my 10 rows as a deterministic step during exploration.
+And save that and after that I don't need to live query and try to pull data all the time.
+I could just look for changes to the database itself so that can be easier to prevent it from needing to query a production database while it's running.
+Option two on the other hand of course is give the language model access to read only tools.
+
+[00:42:16] Burhan, Maher - Consultant: It.
+
+[00:42:17] Colin Moore: That can do very specific things within your database.
+So this is the anti Twitter stories that say Touch GPT deleted my production database.
+For us it would be it has specific access to one specific tool within Landgraph which allows it to go and retrieve me of the top 10 records because absolutely you can't do it even based upon column names.
+Even just column names plus column types, you still need to see some of that data to make sure you know column names, column types are great, but what if everything's null?
+So that's one where we can definitely do that.
+We would just have to have the system with access to it if we want it to be real time.
+I would recommend both.
+You know one to observe and look for changes.
+The second one, if that fails, you know now you can go on live query if and as needed, but not as the first line 'cause they we could skip that a little bit by just caching that.
+
+[00:43:09] Burhan, Maher - Consultant: So there is two more things that we want to ask for.
+One of them is to do the remapping by either we feeding you the mapping from the source to the target so things change in data break side.
+
+[00:43:12] Colin Moore: Mm.
+Mhm.
+Mhm.
+
+[00:43:27] Burhan, Maher - Consultant: And here is the mapping between the two.
+The second one, which Andrew asked before, do you have a way of figuring out what's already exist on the target?
+So we can give you the our EDW.
+So here's the schema and the old EDW.
+
+[00:43:33] Colin Moore: Mhm.
+Mm.
+OK.
+
+[00:43:47] Burhan, Maher - Consultant: I want you to go to Data Break, look in this catalog and find.
+Can you find to see if these tables or this data set been already migrated?
+
+[00:44:00] Colin Moore: umm Yes.
+
+[00:44:01] Burhan, Maher - Consultant: So, OK, so so so you're saying that you guys can do such a thing?
+
+[00:44:03] Colin Moore: Mhm.
+Yes, yes.
+And and that one I I have a lot of fun with that because it's it's almost like you're in a mini video game almost like right and and like you're exploring the map and the map's all dark and you've got a flashlight.
+Well, the way that I'm.
+
+[00:44:16] Burhan, Maher - Consultant: Yeah, yeah, yeah.
+What's the success rate in figuring out what's already migrated in in your experience?
+
+[00:44:27] Colin Moore: Hmm.
+So first of all, do essentially a state map.
+Even if it changes, even if there's active work going on, it still is helpful to do that.
+So say on this day I'm going to do exploration of this entire, you know, on Prem SQL Server.
+And if that sounds daunting, we've done this before.
+We've had to do this for.
+
+[00:44:34] Burhan, Maher - Consultant: OK.
+OK.
+
+[00:44:47] Colin Moore: You know, the first time it was 72 different unique production SQL Server instances all running Oracle.
+All kinds of craziness to collect, but build that knowledge graph over here.
+Same thing on Databricks or Snowflake or whatever else you want to do.
+
+[00:44:48] Burhan, Maher - Consultant: Yeah.
+Yeah.
+
+[00:45:03] Colin Moore: And then as a third step, see where the alignment is at that moment in time, Yeah.
+
+[00:45:07] Burhan, Maher - Consultant: OK.
+Yeah, I got you what you're saying.
+Yeah.
+OK.
+Yeah.
+
+[00:45:10] Ho, Andrew: I I I was, I was gonna ask exactly the that question.
+Well in in in other words like I was gonna ask you like are you if we if we gonna let's say great you know what they want we like you guys we want to you know have you guys help us in this.
+
+[00:45:13] Colin Moore: Uh.
+
+[00:45:29] Ho, Andrew: This project then what will be really the step one right?
+Cuz you you talked about this whole you know past one hour talk about you showcase you know this is a prototype you know we're able to help you guys to convert a job from you know a table and job from data stage and then SQL Server to data breaks and a pipeline and then.
+
+[00:45:43] Colin Moore: Mm-hmm.
+Mhm.
+
+[00:45:55] Ho, Andrew: Like in in reality like if I was like day one, how are you gonna go about it?
+It sounds like you will probably looks like a run a profiler on our on our SQL server on our data stage and then and also the the cardinals and and then kind of start building up those kind of the.
+The bad thing and stuff like that, right?
+
+[00:46:14] Colin Moore: Sir, I think I preempted you.
+
+[00:46:19] Ho, Andrew: Yeah.
+
+[00:46:20] Colin Moore: Ha.
+
+[00:46:20] Ho, Andrew: Got it.
+OK.
+
+[00:46:22] Colin Moore: I I I tried my best.
+I I always listen.
+So my exactly that I I'd say you know maybe you know what I would propose for this cause at the end of the day we'll have to do a scoping for you right?
+Cause we'll have to say yes we can do this, yes we can help, but here's how long it would take.
+Here's so much the effort would be and eventually.
+
+[00:46:35] Ho, Andrew: Yeah.
+
+[00:46:41] Colin Moore: You know that that ultimate decision of not just can we do this, but is this going to work for everyone?
+So what I was going to propose is, you know, kind of a two week, you know, SOW that can go on and at the end of that the objective would be to have both of these things done.
+
+[00:46:46] Ho, Andrew: Mhm.
+
+[00:46:58] Colin Moore: One, you know, understand the full landscape of everything.
+So we did, you know, this one part, but absolutely right.
+There's still more to this and we wanna help you as much as we can, as much as you want us to help.
+We'll we'll take whatever we can get here, but at the same time.
+You know, wherever it's the most value added for you, a guided discovery to understand exactly what we can do and map out not just the databases, but our approach.
+This one, I said 8 hours.
+I don't really mean 8 hours.
+It's more however many people involved, you know, how much time they have.
+I always say a week for that because not everyone's available all the time.
+After that, once we have some access, we would build that comprehensive graph for you, classify all the pipelines, identify how we can accelerate this because we'll be able to have a pretty high level overview of patterns and what is.
+You know the outlier here, and at that point we'll have a good idea of the scope.
+You know, how much time will this take us?
+You know, what can we accelerate that we're very confident in?
+What are we a little bit risky about?
+That way we'll get a good idea of specifically what the full scope would look like, and at that point we can break it up into smaller.
+SOWS or we can do one giant thing, whatever is the most agreeable.
+I know when we were talking to Mani, he he wanted to talk about a couple of different models.
+Um, so we can talk about that as well.
+
+[00:48:19] Ho, Andrew: OK, coming back, sorry, go back to that that technical part of the question.
+So what you showed us, right, if and I'm I'm trying to think of it as a in the in the more grand schema we have of of course.
+
+[00:48:26] Colin Moore: Mhm.
+
+[00:48:39] Ho, Andrew: Lots of tables, lots of ETL jobs, lots of reports, right?
+So the the process that the the flow that you've shown today, I'm assuming that it it's it's not just like a one or two report at a time or one or two tables at a time like you know it's it can scale.
+
+[00:48:43] Colin Moore: Mhm.
+Mhm.
+It's yes.
+
+[00:48:59] Ho, Andrew: And run in parallel with multiple tables, multiple reports or and or if I want to for example if we want in in our cart load side right we are it it all separated by folder by subject business area, finance folder,
+we have merchandising folder, we have you know.com.
+
+[00:49:15] Colin Moore: Mhm.
+
+[00:49:18] Ho, Andrew: And of course in the back end, the EDW database, the SQL Server and also the data stage server.
+We don't separate it logically by business.
+It's all like one in a database.
+The SQL Server is 1 schema for the entire EDW and then in the data stage it's like bunch of job all the job in.
+
+[00:49:31] Colin Moore: Um.
+
+[00:49:38] Ho, Andrew: In in like maybe one or two a couple folders and but they are not really break it down by uh business area per SE right.
+So so how do I and I'm assuming that your flow and and your processes it it's gonna allow us to if I want to tackle.
+
+[00:49:40] Colin Moore: M.
+Mhm.
+
+[00:49:54] Ho, Andrew: Maybe the first thing is, OK, run a pilot, just pick one business area and then you convert that, you know, make that happen, right?
+Then once we've proven that this is really it works, it it it, you know, it save us, you know, I don't know whatever percentage of the time.
+And then now we're like, OK, I want to run it full scale.
+
+[00:50:01] Colin Moore: Mm.
+
+[00:50:13] Ho, Andrew: And it can be deployed to a run it in multiple in parallel in multiple business subject area in parallel.
+Am I am I correct?
+I just want to make sure that this is not like you know you still have to have a person you know feeding couple report at a time and run through the whole process and then do all that validation.
+
+[00:50:14] Colin Moore: Mm.
+Mm-hmm.
+Yes.
+
+[00:50:32] Ho, Andrew: It's not that, right?
+That's definitely right.
+OK.
+
+[00:50:32] Colin Moore: Yeah.
+Right, absolutely.
+So let me, I'll explain the kind of levers you have to pull on.
+The first thing is, yes, the exclusive thing that we are constrained by in terms of parallelism is the compute.
+So basically that is determined exclusively by.
+
+[00:50:46] Ho, Andrew: Mm-hmm.
+
+[00:50:51] Colin Moore: Effectively what you want for this fast API.
+That's why I brought up workers because fast API.
+This is already pretty lean because really the only heavy lifting is not even happening here, it's actually happening in Foundry.
+So those language model calls.
+
+[00:51:06] Burhan, Maher - Consultant: Yeah.
+
+[00:51:07] Colin Moore: Realistically, in fast API, we're running some very quick Python scripts.
+There's no throttling that I can see with something that's a reasonably equipped container app instance.
+So this is something that you're probably not gonna get bottlenecked by, but if you did, all you'd do is set up Celery, set up workers that would increase your cost marginal.
+We're talking when I say cost, we're talking probably an extra $20.00 a month to run the service for the duration that it's online.
+So $20 Max is the ceiling and then you could, you know, it's just a matter of how much you want to scale.
+
+[00:51:37] Burhan, Maher - Consultant: Yeah.
+So that's why.
+
+[00:51:42] Colin Moore: Yeah.
+
+[00:51:42] Burhan, Maher - Consultant: That's why you were mentioning that the database, if we have a, you know the scalable database, then it'll be much better than having container running inside the Azure Container apps, right?
+OK, yeah.
+
+[00:51:55] Colin Moore: Both in terms of performance and persistence.
+So if you and the other one that would come in if you really wanted to take the training wheels off of this is throw Redis into the mix.
+Redis again does add on some cost.
+It's about $30 a month when you deploy an Azure at this.
+What would you need for this?
+
+[00:51:59] Burhan, Maher - Consultant: Oh, yeah.
+
+[00:52:15] Colin Moore: This tier, but at that point you have, if you wanted to say once we have some confidence, if you wanted to say do everything today, there's not really a reason why we couldn't do that.
+It's just a matter of this first step.
+A really easy way to think is to say.
+Imagine there's one more layer above this that is the orchestrator of the orchestrators.
+And imagine this just takes this, copies and pastes it up above and says do all these in parallel with each other this and then at the human end of it you would just see your dashboard view at the end.
+
+[00:52:38] Burhan,
+Maher - Consultant: Mhm.
+
+[00:52:49] Colin Moore: Which would be a collective of all these things across reports.
+So yeah, so scaling, no problem.
+This is built to be concurrent as much as the compute has appetite for.
+We'll say that.
+
+[00:53:03] Ho, Andrew: Cool.
+Great.
+I know.
+I think some of us need to hop off.
+We're not a meeting right now, but this is great.
+Thank you.
+We appreciate it.
+You know, it's good to see it's actually running.
+
+[00:53:17] Burhan, Maher - Consultant: Yeah.
+
+[00:53:21] Ho, Andrew: Yeah, very, very nice.
+Thank you very much for for for your time, Colin.
+Well, yeah.
+So Girishi, Mahay and I and you know we're and Vishal, we we're gonna, you know go back and we'll we'll discuss this further and then we'll we'll let's figure out what's the next steps.
+
+[00:53:27] Colin Moore: Yes.
+OK, awesome.
+And I'll I'll send you over the the documents too.
+So hopefully you enjoyed today.
+
+[00:53:41] Chakrabarty, Gariashi: Thank you all.
+
+[00:53:47] Neha Malhotra: Thank you.
+Hi, Andrew and Grishi.
+If you guys want to set up some time tomorrow, if you have any questions, you know that come up and include them in that session, we have time tomorrow as well.
+
+[00:53:47] Burhan, Maher - Consultant: Thank you.
+Thank you, Paul.
+
+[00:53:48] Ho, Andrew: Oh, all right.
+Thank you.
+Yes.
+
+[00:53:48] Zahra Syed: And then real quick, Andrew and Grishi, if you guys want to set up some time tomorrow, if you have any questions, you know that come up and include money in that session, we have time tomorrow as well.
+Let us know.
+
+[00:54:00] Ho, Andrew: OK, we'll we'll let you know.
+Cool.
+Thank you.
+Bye.
+
+[00:54:03] Zahra Syed: Thanks.
+I.

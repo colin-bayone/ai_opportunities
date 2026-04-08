@@ -1,0 +1,686 @@
+Hey, Zara.
+Oh, you're there.
+Hi, I'm here.
+And Andrew reached me out.
+Hi, Colin.
+Hello, hello.
+Hey, Andrew.
+How are you feeling?
+Hello.
+Hi, I'm doing good.
+Hi, Andrew.
+Hey, good.
+Hey.
+Party's back.
+Hi, everyone.
+I'm here.
+Hi, Shaka.
+Hello.
+Hello, hello.
+It's good morning, everyone.
+Hello.
+Good morning.
+Morning, everyone.
+Go ahead, Neha.
+You can take the lead.
+Quick introduction.
+Hi, everyone.
+This is Neha.
+I am a VP of Growth and Customer Success.
+We have Colin Moore, head of AI.
+Thank you for coming on.
+We can get into the deep dive session.
+We have Gaurishi and Andrew as well.
+If you want to just go ahead and introduce yourself real quick, that'd be great.
+And then we can just dive into it.
+So let's do this.
+Oh, no.
+We know each other, right?
+Absolutely.
+All of us, I guess.
+Yes, yes.
+I think Monica is on our team for that.
+Sorry.
+So, Colm, why don't you go ahead and do the recap of last discussion, and then you can take the lead.
+Sure, sure, sure.
+So last time, I think we had a really great talk, and it was all about understanding what's going on right now for the EDW ship that's happening.
+Where we talked about last time was a couple of the pain points that we found as well as kind of where we could come in and start to help out.
+So a couple of those things just at a high level.
+One is on the integrations with the old Cognos reports.
+So if we did want to lift and shift those, how do we actually integrate with the old reports?
+I've got some good news to share there.
+We did some homework for you.
+Another pain point was on how to do this dynamic mapping.
+So right now, I think there's a lot of minimal effort going on, sometimes with AI tools and the loop, and that is the one more person joining.
+A place for AI mapping can come in to help accelerate some of the pace of this, especially given the sheer scale of the reports.
+So we talked about that the last time.
+Also, some more to share with you there today.
+And another pain point that I think we had found was, how do we actually go and do this in a controlled way?
+So what does this look like if it's an ejectic system, if it's something that's happening at scale?
+Each of the efforts kind of has their own part to play in the overall picture of this three-year effort.
+But where can AI come in, and how do we make sure that everything stays kind of aligned as it goes?
+So where we left off the last time was we were talking about what we could do for you for a demo.
+And I think that's what today's session is really about.
+So we can understand from a more technical perspective some of the specific things in the tool stack.
+So we can come back to you and do a demo that will really hopefully blow you away.
+We can do just about anything for that demo.
+I've got a couple of suggestions that I'll come to later on.
+But I think for now, what I'm really hoping to get from today is kind of a breakdown of where we're at today with things, maybe how AI has been used so far and what kind of challenges or success has been had there,
+and then also to know where the ping points are here so we can align our demo with that because we can do something very big that's more relevant for deep data mapping or we can do something more targeted like integrating with the older ports.
+The only challenge, which I also have some good news to share on this, the only challenge is that For demos, it requires, if we want to do the updated mapping side, it requires data to be set up.
+I'll get to that a little bit later, but at a high level, we could, if we wanted to, spin up our own Databricks instance.
+I actually have some friends that work there,
+so I was able to get a couple things set up on our end for demo purposes. but also if we wanted to keep it on a different scope in case that's not the primary pain point here we could go a different direction altogether talk about integrating with Cognos how we can actually touch on those things and actually integrate with the tools when it comes to agentic AI all of which is definitely possible so from my aspect it's just a matter of knowing what's most valuable to you and aligning ourselves to that so hopefully that that recaps it enough So maybe that's probably the place to start,
+would be maybe to take it from your side and see from the technical perspective what's been tried so far and where the team's at, where maybe the struggles are with the current effort.
+I think we were excited to see the demo today.
+The struggles of the team is... and Meher and Sergey, right?
+Jump in if you want to add anything.
+We want to automate and make things easier using AI agent in this whole journey of data ingestion, aggregation, and reports built, right?
+As you already know, I guess at this point a lot about the project that we have ADW and DP where we are trying to migrate all the data from ADW to DP.
+And we want to automate and use AI agents in this migration.
+So yeah, would love to see some demos where maybe you have already used something.
+Yes, so I think that's probably where our disconnect is today.
+I think for the demo perspective, we won't. be able to do that until we get some more information.
+Because for us, everyone's environment's different.
+So if we want to do a demo, we can do it in a couple of different areas.
+But to say we would do a demo right now, we wouldn't have enough information to go off to do that.
+I think we do have a good understanding of what a couple of the issues are.
+And that's what we were talking about the last time.
+There's one that's the SSAS to Databricks transition.
+Another is re-engineering the Cognis reports, which is back burner for right now.
+And then the actual pipeline migration doing that dynamic map.
+So for us to do the mapping to best make that valuable to you, because I can show you a mapping that it might be totally irrelevant based upon what you guys are actually seeing.
+Because if we do it, for instance, on Snowflake and just a mocked up instance of Salesforce plus a couple of other systems.
+We don't know how close that is to actually what you guys have internally.
+So that's what I wanted to get to today so we can make the demo for you.
+Can we talk a little bit about the SAS 2 data grades?
+Can you describe the capability and what's the percentage of competition if we migrate using the tool?
+So, from the perspective of how we can migrate with the agenda, so Databricks is great, modern platform, a lot of already existing integrations, so there's much less work that we have to do.
+It depends upon how we want to run that migration, so it really depends upon your appetite for the agenda side of things, how much you want a human to be in the loop for this.
+That's good information for us so we can get the demo ready for you because there's some organizations that want to be totally hands-off and check it at the end.
+There's others that are more cautious that want to do this kind of as we go with the agentic workflow.
+At a high level, in general, what we do is we're able to first integrate with those reports.
+We build out our knowledge graph of all the different reports, all the different data that you have already today between reports themselves and also the data that you have itself, which I believe right now is on-prem SQL Server.
+Do that mapping to the reports and look at what is in Databricks too.
+So I think that's where I mean we could go a lot of different directions because I could show you how we migrate data from on-prem to Databricks with AI.
+I could show you how we do report mapping to reach parity with AI.
+We could talk about connectors and the specific capabilities, building custom MCP servers, for instance, to integrate in with Databricks.
+But it's really just a big problem.
+And what we want to know is what specific slice of that pie would you be most interested in for the demo?
+I feel in our last conversation, right, in our last meeting, I think we wanted to see some kind of demo for us to get some confidence that, you know, You'll have tackled those kind of things right that will give us the confidence that yeah,
+it's possible and that's where we were coming from and That was my understanding like we wanted to see something No, absolutely, and I apologize if you know there was a little over.
+Oh Yeah, I thought we left off that discussion discussion and intending to have a technical discussion with your architect so that when we do to the devil whatever What information we need to make sure that the demo is going to be, you know, relevant to you.
+That was the intent to gather anything else or any questions or concerns that your architects had.
+And I apologize for that disconnect, but that's what we thought the intent was going to be.
+As it stands today, Colin, you know, we definitely want to be mindful of your time and we'll give that time back.
+Since we're all on the call, if there's anything that any questions that any of you have or Colin, anything else that we might need for them to get that demo ready, I think we can give everyone's time back.
+And my apologies, Grisha. do a little bit more of that technical deep dive.
+It's easy to rotate it for a long time to if you have any more, any more further technical questions.
+That's why I really like my hair and super hair so that they can answer your question and the whole idea of all is once you have all of your question answered or whatever the... things that you may want to figure it out before you go back and maybe create some sort of a prototype or a demo.
+Again, you know, I don't think we necessarily need to have, you know, support data, you know, to actually do the tools to demo, but it's really about demoing the capability, right?
+Whether you guys can or whether it's even possible. to create all those different smaller agents and have a kind of an orchestrator agent to orchestrate all the smaller agents to do all the specific tasks. throughout this modernization journey, right?
+And particularly, let's say, we want to focus on report, behind the scenes of report migration, which is really updating the SQL and then also the part of where the data and table migrate from EDW SQL Server to Databricks, right?
+So those are the different track that we talked about last time.
+And then, What I would like to see is if you come back with some sort of a demo or even walk us through, yes, this can be done.
+This is how it will be done.
+And also focus on, like I mentioned, what I really worry about is that I'm sure that anyone can really create a lot of different AI agents right now out there.
+I mean, the capability is there.
+What I'm a little bit concerned is the version, the software version that we use here, the IBM Cardinals, the data stage, the SQL Server, whether those version has the endpoint open up for the kind of AI agent to be able to tap in and then do all those kind of automation, right?
+Those are the things that I posted there and out there last session.
+And I think this today is really an opportunity for you to come back and ask our expertise here to question.
+Like I said, we have an enterprise architect.
+We have Sergey, who actually really like our SMB on all our IBM, you know, caught those tools, the data-stage tools.
+I mean, he knows because he's been really the background behind seeing the developer for us throughout the last 10, 15 years.
+So that's kind of what I'm expecting with today's session.
+And I agree that it's not really, I don't expect it to see a demo today.
+I mean, I remember that was not the...
+Sorry, no, it's okay, it's okay.
+We talked a lot last time, so that's all perfectly fine.
+Yeah, go ahead.
+Feel free to get more in-depth technical questions that you would like to get answered before you go off and start preparing that demo.
+That would be awesome.
+I'll say, once all of you know me a little bit better, you'll know that if it would be demo day and if I didn't have it, I'd start typing furiously on this meeting and somehow pull something out of a hat to show you today.
+I can promise you that.
+Okay, let me let me start with the first part and then I can get on it some questions that I have for everyone But Andrew, thank you.
+Thank you for that because I was like, oh no, I messed up today.
+Otherwise Okay, so the first thing is I did some homework on this so on Cognos and on DataSage both Very good news for you beautiful perfect all-inclusive APIs or SDKs for both of them These are old enough that they weren't APIs yet.
+They were just pure SDKs.
+They're available in both Java and .NET.
+That goes all the way back to even the earliest versions of Cognos.
+So as long as you're using a version that's after 2003, we're in good shape.
+So that is definitely there.
+We can definitely link into any of the Cognos reports for any past or current versions of IBM Cognos.
+So that is totally possible.
+Just as a quick note, the way that we do this, we build what's called an MCP server.
+These don't typically already exist.
+So these are things that we build from scratch as part of what we do.
+This is not uncommon for us at all.
+We have to do this very often when it comes to legacy platforms. and essentially gives us a way to interact with that SDK programmatically with agents.
+So we define here's what some action should be taken as, here's all the different controls, constraints, and parameters that you can interact with with Cognos, and that basically gives you a mini-agent with the capability to take some action into Cognos.
+So that is at the report level that even goes up to some things with it's of interest when you're migrating.
+If you have things like with RBAC that you want to keep consistent between those two, depending upon how you have it set up right now, there's basically complete access to everything within Cognos with no restrictions that I could find.
+So that was very positive, well-documented, very established.
+So you're building a custom NCB server to talk to Cognos SDK.
+And what does that, in this scenario, what's the outcome of this activity?
+So two things.
+Number one, whenever we have to do the report mapping so that we don't have to manually feed that in, that gives us the report mapping.
+So any of the data sets that are part of that report, any of the data, any of the other calculations or otherwise that might be a part of that report, rather than trying to access it through a human or even for the sake of verification, we can pull it out programmatically.
+So programmatic access is first and foremost.
+The second is to make sure that we actually have good parity between the two.
+So if there's some nuance to it, we're able to more deeply explore that, rather than something that might just be a screenshot or some human notes that we're given.
+So it gives us a much deeper way to interact with that report in order to understand how we might want to shift it.
+Now, how we would actually use that information is kind of one of my questions today. what do humans do today that would want to make it genetic?
+Because now I know the agent can be given the tools to do the work, but the task that I'm effectively assigning to that agent is what I want to get figured out today, so it can give you a nice demo for it.
+So, long story short, if it involves cognos, we'll be able to interact with it, either pull information out, put information in, or otherwise take over. and then we can move it whichever we want.
+If that's to a mapping exercise or if that's to generate a new report, both are possible.
+It just depends upon what the priority is.
+So I think, so I'm assuming you're going to be asking a question of what kind of AI agent that we're thinking, creating, in terms of dealing with the confidence, right?
+In a sort of general question.
+So I'm going to try to answer the question.
+Anyone, please feel free to correct me, right?
+So at least from my understanding of my expectation is that right now, today, we have already started the modernization journey.
+We have worked in the finance, the subject area.
+So in IBM Cardinals, we create folders for each of the but I, the subject area, my business subject area.
+So for example, finance, we have a, we have a photo of finance, group of finance report, whatever, right?
+That, that folder.
+And in that folder, it has all those, um, partners report listed there for finance use.
+And so, um, what the team had done is they, when they, um, so I, I mentioned last time, I, our, I, I go at least for Facebook with this modernization is we're not, moving away from Cognos.
+We want to continue using Cognos as a user-friendly reporting tool, but behind the scene today is pointing to SQL Server, the EDW SQL Server, as a data source.
+In the future, we want to point it to Databricks.
+Now, in order to do that, obviously, step one is we need to make sure the tables and the data that the report is pointing to in the SQL Server, it needs to exist in Databricks.
+So that's a step one that we need to make sure that somehow, well, I'm going to use the menu step first, right?
+Someone needs to go in and and understand, look at the report and then figure it out.
+Oh, these are the table that is actually referencing.
+Then I need to go to SQL Server and then look at those tables and understand, okay, now I know I need to migrate this table over to Databricks.
+What do I need to do?
+Is a table or the data or the existed Databricks maybe? in a different format, or it's not in an aggregator level, then that means I need to do the aggregation.
+So that whole mapping thing that Garishia had mentioned in last meeting, it's kind of deck for deck, right?
+So then once you know, okay, tables is already in Databricks, now I'm coming back to look at the report.
+In the card notes report today, we have two options.
+Either you have the report, point to the IBM framework model, which is really the kind of the quote unquote metadata, right?
+That actually behind and seen that whole model, it's pointing to all those different tables with all the different join in the SQL server.
+So when the report execute, if those report point to the framework model, when you execute the report, the report actually does the whole SQL for that report is actually basically the generated dynamically based on that framework model, how it was modeled, how all the table joined happened, right?
+So, for those reports who are purely just pointing to the framework model, then what we need to do, all we need to do is to make sure that framework model now is actually pointing to the data breaks, right?
+That data model.
+And make sure that to ensure that if there's any changes to that framework model or not, because there may be a little bit of a table changes in Databricks versus the SQL Server, right?
+So that's, again, I'm just walking through it manually what we need to do so that you know, you can think of what agent can need to be created, right?
+So that one thing is, in this case, we need to look at a framework model and make sure that the entire framework model now is pointing to Databricks and they all continue to create the SQL that service all those different metrics and dimensions that are referenced in the framework model, right?
+So if that's done, then your report, whichever all the report that points to the framework model, will just automatically work.
+Nothing needs to be done on the reporting side.
+Now, we also have another second half set of the report that... actually doesn't just point to the framework model.
+By default, when you create a report, you have to point to your framework model.
+Fine, we point it.
+But we actually don't leverage the framework model to generate the SQL.
+In reality, in every query within the report, we actually write a free-hand SQL.
+In those cases, then we now have to manually open the SQL, take the SQL out, and then basically change it to Databricks simple, basically, right?
+Because you cannot take the existed SQL and just run against the Databricks, it will not work like this, right?
+So once then you convert it to the Databricks SQL, then of course you test it, make sure that data come back correctly, da da da, then you take that SQL, step it back to the report, and then the report will be done in terms of changes.
+So that's the whole...
+Man you flow today that that every single step of the way that has to you know, someone has to do that now Now I'm gonna throw the ball back to you now.
+Okay now that you know the the flow my expectation is but not expectation my ask is Is there any way throughout this step that we can create agents?
+Again the agent doesn't it's not I'm not expecting one agent do it and I think I actually wanted an agent just every it's like a lot of smaller agent agent do a small little thing you have a lot of this small little agent right and then they just do their own responsibility do the whole thing and then you have that one orchestrator to just orchestrating this whole entire all the smaller engine Makes sense makes sense makes sense Am I missing anything from a support side?
+Sorry, am I anyone you know want to pitch in if I'm missing anything on this book anything?
+Yeah, no, I think you've covered everything from start to end and these are all the steps we do like there I mean we can break it out into like five six steps like same as what Andrew said from the start And maybe we can have those five six agents,
+you know ages to take care of each of those steps but Overall, it's essentially like what I've recovered.
+Only thing is like we don't, you know, we can, right now we're doing all of this manually, like exporting the XML from the cocknose and then, you know, extracting all the joints, the source tables, everything.
+We are using Claude right now to help us do all of that extraction.
+But getting that XML, that is still manual effort, we have to log into Cognos, go to report studio, download the XML.
+And then mapping also, again, we are using Claude in some cases where it can help to the code translation from the SQL Server code to the Databricks-oriented code.
+That's where we're trying to use AI, but we haven't really come up with any agent yet that can do this process end to end.
+Because this is pretty standard that we have to do for all the Cognos reports.
+Good.
+Well, I can speak to both of you.
+So I think first of all, so thank you for going through that.
+That's great for me.
+And that does separate into the two areas, right?
+So one is actually some conversion along the way with SQL.
+And it's absolutely right, because especially when you're dealing with SQL Server on-prem, there's things that just don't even exist, like an identity column.
+It's not even a data type that exists.
+So even from a reporting perspective, there's certain things like that that need to be adapted, and that can be done in the look too.
+So let me go through on this part, because I pulled this together at a high level for you to give you an idea of what this looks like.
+And this is why I was really coming in.
+I can do anything, but I want to make sure it's the most valuable valuable for you.
+So, agents plus MCP is the way to go here, for sure.
+MCP is essentially a connector to all these tools.
+To prevent that human step from needing to, you'll always find a very good indication that you need to MCP in the mix is if you find a human being copying and pasting or taking screenshots of something and passing it out to a language model.
+It's a very good indication that there's something that should be there with MCP that might not be there yet.
+So MCP just gives us a way to connect into applications like we would have to build for Cognos.
+So we're able to strip out the SQL for it.
+Or if we want to build another agent that might be the database agent, let's say, that knows the database structure, knows what to go looking for, what to query so that it's actually aware.
+And agents can be stateful as well.
+I think that's what you'll find as I scroll down through this.
+Agents can be stateful as well.
+And what I mean by that is they can learn over time.
+And are they really learning?
+Learning, a lot of people think that means we're retraining models.
+We're certainly not doing that.
+It's that we're building up the business context that the agents are working within in a kind of a blockchain format.
+So the way I like to say that is it's almost like a perfectly behaved, you know, school kid.
+Like they, you know, you tell them not to do something once.
+They know not to do that ever again.
+You tell them, hey, this was the right mapping and it's a reinforcement model. to help with them.
+But it's all through well-managed context, which is possible if you have a framework.
+It's not super possible to do that if it's just cloud.
+So even with cloud skills, cloud agents within cloud code, it's still too big of a problem for cloud to do by itself.
+That's where frameworks come in and are a lot more powerful because they're still using cloud behind the scenes.
+It's just that they're doing it in a more orchestrated way with a lot more moving parts to keep things on track.
+So, even for instance, for this one, I brought up a couple of specific agents that we could make, which by themselves don't do anything.
+But if you combine them with MCP and you combine them with an orchestrator, now you have something powerful.
+So, for instance, something to extract report metadata or something to go and parse SQL and figure out what the equivalent would be in Databricks.
+And maybe this isn't even one agent, maybe it's two.
+Maybe there's one that's a Databricks agent, one that's SQL Server and one that takes both of their inputs and then figures out what the the rehashing of the sequel might be in order to keep that report working.
+If there's a transformation, how do we validate that?
+The point for this isn't to have human in the loop at all times.
+Like I said earlier, some people love that, some people hate that.
+But for this, you can choose what the level of interaction is that you want to have with the system.
+And whenever you want to go and deploy things, too, there's a really nice way that we can define a workflow around that.
+So imagine you have a Cognos report that's currently pointing to your SQL servers.
+You want to point it to Databricks.
+Well, let's keep that existing Cognos report in place as is.
+Let's not touch it.
+But let's build a copy of it, a clone of it, that is not connected up to Databricks.
+That way we're not messing with anything that's working today, but we're able to still connect into it and show that data work. even an agent that can go and take screenshots of the reports or do like point wise validation on certain key values within a report.
+It's a really good way to build some confidence as the agent goes on and also again eliminate the human interaction step.
+The general way that this goes for agents, agents do all of the boring stuff.
+As humans, we do things like edge case decisions, we look at the business logic, we give the final approval, and if there's anything that goes wrong, which there always is with any kind of agent workflow, there's almost nothing that'll work perfect out of the box.
+There's always that one weird edge case that we didn't handle.
+Humans need to see those, flag them up so that either a new agent can be brought in or some agent can be refined.
+Agents are very simple to build at the end of the day, to be honest with you.
+But getting them combined with MCP so they have the right tools at their disposal whenever they need to actually go and take some action, that is where the power comes in from this.
+Whenever we even talk about that first half, so before we talk about the SQL conversion side, this is where mapping comes in.
+So I wrote this out a little bit more directly because I think this came up the last time too.
+And I just want to show the approach here because this is how we do it.
+And this would happen both in Databricks as well as in SQL.
+And this is for speed, efficiency, but also just correctness.
+What can happen if you have a language model dynamically look up, like let's say we talked to Cloud and we say, go find me this table in Databricks that is equivalent to this table.
+That can work once.
+But if you try it over and over and over again, especially if things don't have clear naming conventions, or there might be some versioning, or there might be just some nuance to it, what you'll find is that it doesn't work reliably every time.
+So this is something we've definitely found through much pain in the past.
+It sounds AI can do everything, this one not so much.
+So what we do first is the structural discovery.
+This happens on both sides of the house, both in Databricks as well as in SQL.
+And this is actually no AI involved whatsoever.
+This is just essentially a recursive crawler script that goes out and can map the actual tables, databases, colonies, relationships. data types that are on the tables that you have on-prem as well as in Databricks.
+It saves us a lot of effort to do this later on because if a table doesn't exist in Databricks, I don't need to go try to find it.
+I can say deterministically, no, it doesn't exist before I ever get AI involved.
+So that way we don't end up kind of...
+I call it a telephone game here, where you have an agent going and looking for something saying, hmm, I can't find that table because it doesn't exist.
+But instead of saying, oh, I'm out of luck, it doesn't exist, instead of making something up at that time, it knows to exit and come back and flag it to a human to say, we can't do this one because that table's not Databricks yet.
+It's also possible that I can hand off to another agent to do the migration up to Databricks.
+But that's where these things go.
+They're really fun for us.
+Phase two is the actual role-based map.
+Again, no AI here.
+This is just making sure that there's matching.
+And it doesn't have to be a one-to-one map, because that still doesn't necessarily mean that the data is the same.
+It happens very often in business intelligence reports, for sure, where there's a lot of similarly named things, or maybe custom named things within a report.
+But they might be a different data source altogether.
+We are looking for things that we have confirmation on that they are 100% accurate.
+When we capture the things that we're wrong about, we capture the things that we're right about.
+That all kind of becomes the context as these agents go forward.
+So now phase three is where the AI system mapping comes into place.
+So we're looking at the column names, making sure that there's compatibility between the data types.
+This is essentially the pre-work that's needed before we do that shift over to Databricks from SQL Server.
+This is saying now we have the information from the first two phases, and now with phase three, we're filling in the gaps, if any exist.
+From a routing perspective, this is a cool pattern that's been the only one that works consistently, I would say, and it is a human in the loop reinforcement learning type of process.
+So what this means is how do you know that confidence is high?
+What does that really mean?
+That's where AI...
+I think especially with language models suffers quite a bit because it can say I'm 100% confident in something.
+A lot of the times we call that a hallucination.
+I disagree with that determination because it's usually that either we haven't given enough context or the ground truth is wrong.
+But confidence is one where it can't be coming from a language model.
+A language model doesn't even have a concept of confidence.
+What it means for us though is...
+Whenever a human goes and reinforces a decision made by AI, that is confidence.
+So if you say yes, you are correct or no, you are wrong, that is what determines confidence.
+And even when it's wrong, now it knows what's wrong about it, so confidence still increases.
+So what's happening is that this gets better over time.
+It starts slow.
+It starts with a lot more human interaction to go and say, am I doing this right?
+Am I doing this right?
+But as soon as that gets OK'd a couple of times, confidence gets high enough that it goes and says, OK, if the situation is the same, if everything is the same here, should I do this myself?
+And those are things that we can adjust in the process.
+Like I said, everyone's got their own preference.
+We can adjust to whatever the team likes.
+But generally speaking, in simple terms, if I've said, yes, you can do this five times in a row, And time number six, you don't need to ask me to do it.
+You can just go and do it as long as you're tracking and keep remaining traceable with the actions taken.
+So it's a good way to build some momentum with the agents while also making sure they don't go to work for 20 hours and then come back and it's complete junk that you can use.
+So it kind of self-corrects in the system by taking in the human feedback.
+So it's fun for humans because we get to sit back and just say, looks good or looks terrible and here's why.
+But that's how the feedback mechanism goes.
+There is a Knowledge Graph component to this.
+And this is, I think, what makes the biggest difference compared to something like just using Cloud natively.
+Because you're remembering the state of the system.
+So if a new table gets added into Databricks, now we're aware of that change occurring.
+And we can now say, look, now these other avenues for the reports are available to us. or if there was some mistake made, or some rabbit hole that we went down and we went into this kind of infinity loop of agents talking to agents and never really reaching an answer.
+Knowledge Graph helps to keep everything grounded as we go, especially when these things are more than just a one-shot, which certainly we are in the back of the boat over here.
+If it's more than just a one-shot attempt, Knowledge Graph is definitely needed to keep things aligned and on track and to say here's... what the current status of the system is, both on the Databricks side as well as in Cogran's and SQL world.
+There are always guardrails.
+These are the basic ones that we can have, but we can always add in more.
+It really depends upon what's the most important to you.
+Sometimes guardrails are actually just checking static numbers, almost like what a human would do to say that this work is actually done.
+How do I know that this conversion is actually a bit successful?
+Other things could just be, are we following conventions? basic things with guardrails to make sure that we didn't randomly take a different approach.
+Guardrails are important here because since agents are working autonomously, you don't want them to just work and work and work completely in their own direction.
+So kind of this way of guidance is very important to these being successful.
+If things fail, what happens?
+Well, it depends.
+Again, on the, you know, whatever the appetite is.
+On one hand, you can tell agents to go and resolve themselves.
+And that's something where you can have a decider agent in the loop to say, here's what you do when something goes bad.
+On the other hand, you could always have a human in the loop and continue to build that flywheel.
+It really depends upon how, first of all, I guess, the appetite of the team to be involved in that way.
+But it also depends upon how complicated or not the reports are.
+So if reports are all over the place and done completely differently, and there's a million of them with a million different formats.
+Yes, it's going to need to be more human in the loop because there will be so many edge cases.
+But in other cases where it's more simple and you have, you know, 80% of reports follow the same conventions, which usually is true if they were developed by the same team, well then we can go and do this a lot quicker because there's less patterns for us to uncover along the way.
+MCP is just, like I said, the way that we get into the different tools.
+With Databricks itself, whether that's SQL Server, whether it's Cognos, MCP just becomes the connector into those things.
+From an infrastructure perspective, I think that's one thing that we did touch on last time.
+This is where it gets tough from a demo perspective, because I can show it working on our side of the house.
+I can't show how it'll work on yours without getting it set up for you.
+So we can do that for the sake of a demo, but that's one thing that I wanted to ask about today to understand what we wanted to do.
+So like I said, last time I met, we'll meet you where you live.
+So if you are on Azure and you want us to use all Azure services and any of the AI subscriptions that you have, it's definitely better to go that way, especially from a cost perspective.
+But at the same time, for a demo, we can bring our own and show you with that.
+So just a couple of things here.
+But hopefully that explains what we're trying to do with these agents and why.
+I think I do have a couple of questions that would be helpful.
+But I think before that, let me pause and see if anyone has any questions for me so far.
+I don't have any questions.
+That's clear.
+I mean, that's kind of what in mind what I was expecting.
+All the different agents needed.
+So, I don't know, anyone in the floor side?
+Like, Maha, Sergey?
+Do you guys have any questions?
+No, I understand.
+We thought of all these attempts.
+We will...
+We need to see a demo, really.
+To see if this video will work or not.
+Because we didn't have success.
+That's not real.
+But in general, what Colin kind of walked through the strategy, right?
+Is it in line with what we're thinking as well?
+Yes, yes.
+Okay, perfect, that's great.
+It's easy said than do.
+I worked with Collins, I wrote code for the BI server, and that's a complicated word.
+Yeah.
+Yeah, that's true.
+Okay, so I guess, Colin, you said you have a question.
+Yes, yes, yes.
+Probably just a couple of these, I'll keep them higher level, but it's really just to understand.
+So the first is on the Databricks side.
+So how deep is that right now?
+Is everything been migrated or what's like the percentage of that migration?
+How is that done so far?
+On what side?
+The actual data warehouse?
+Yes.
+Yeah, it is happening, but not everything.
+So, and the...
+It's a little bit different.
+It will look different than the model and the old legacy, it's because of...
+Okay, so,
+how are you looking for some sort of a... percentage of if it's a hundred percent EW here and then you're asking how what's the percentage that we have migrated from EW to take a break so really right now is that that's important that's right that's right sorry Karish you speak on me it's very less Colin probably you know a few tables I would say Out of,
+we have around 1,000 tables sitting on EDW.
+So we have tackled very less percentage-wise.
+I mean, we are considering, we don't want to talk about percentages, and we have some internal percentage based on how many reports are deprecated and all that, but that doesn't amount to actual migration work that we have done.
+So it's good to know because the reason I was asking and this is why I didn't want to go full force with a demo because if I show you the demo and I show you all this working but Databricks is not fully done yet, then the agents won't have anything to do.
+So that's the catch point too.
+Oh, if you question is if the Databricks environment is up and running, it's very mature.
+We have a lot of other tables. on it we have catalogs and it is very mature we have critical reports you know p1 applications running on it so it is a very developed environment right it is what edw we have very few reports out of that edw tables we have migrated i see because we just started the project this january i see yeah our daily practice is very bit mature already like the it's really our data platform for several years already.
+And then that's why we decided that it's time to move out of this EDW legacy database and fully utilize Databricks, because it's very mature already.
+So if you're out, yeah, so I'm sorry, I misunderstood your question.
+I thought you were asking, what's the percentage moving from EDW to Databricks?
+And I didn't realize you're asking how... how mature our data breaks are.
+It's mature, it's ready to go.
+And I just want to make sure I understood one thing as well.
+This agent that we are looking to create, my assumption is not only handling the card notes migration track, We're also looking for agents to help even the table data migration from SQL Server to Databricks.
+Are you aligned with that?
+Yes.
+Okay, good.
+I just want to make sure that we cover both sides of the house, not just one side.
+That's why I asked, because I was like, okay, so if it wasn't the truth...
+I would say let's spend a lot more energy early on in the front and the latter side of the house to help with that.
+Because then this is the first part of it which we're actually using agents to go and you know reconnect the reports and it's going to be way more useful to you.
+If all the data is over here and is ready to go then this agent pool over here has way more work to it can do.
+But if it's not available, then that would be an issue.
+But it sounds like it's mature in that aspect, but still, that's still a part where we can help, where agents are helping to shift this up to Databricks.
+So maybe the next one would be, so Databricks is there, a couple of the reports, the major reports that have migrated, makes sense, that's how that goes. for the other reports.
+Are there any that are a big priority to you that are on like the to-do list?
+Is there any kind of like forced ranking of which reports we want to get to in some time or is it just, you know, let's take these on as we go.
+So just a matter of- No, we do.
+We have a whole project plan where, you know, we are tackling finance, dot-com, vendor seller, these kind of tracks where those are our priority first being finance reports.
+And so the second and last question that I'll have, or the second part of that and last question that I'll have is, so like I said last time, we can set up some data on our site.
+I won't lie to you, it is some work for us if we're setting up a Cognos report and we're setting up some spoof dummy data here and also setting up a Databricks environment.
+We can't do that.
+I'd be happy to do that so that you guys have confidence in us.
+It's important to us that you do, so I want to make sure that that's there.
+At the same time, if you want us to do it on real data, we can definitely do that.
+That's an easier start for us, because we don't have to do that 40% of the work, which is just setting up the problem.
+But if you want, we can go that direction, too, when we talk about it down.
+So for instance, if there was a report that you felt was a good example, or a couple of reports, and You know, we could go through whatever loop we need to get access to things, even if it's a more limited access, then we could show you this working on your own system.
+Now, if you're hesitant about that, I completely understand.
+It's just that there's, like I said, 40% of our effort for the demo would be just to set up an equivalent environment to give you a reasonable POC.
+So it's up to you what you want there.
+I won't force anything, but we're happy to go either way.
+And you don't have to give an answer right now either.
+If you want to think on it, that's okay.
+So Mahir Subsarghi, what are your recommendations?
+We will probably have to go through the whole security thing at Sephora if we want an external agent to run on our environment.
+Yeah, probably, yes.
+Maybe let's talk about it.
+We tried to run our own incident on the independent record. we get blocked by security.
+But this activity actually, we did cause migration of different pieces, including data space.
+We didn't have to have access to the system.
+We did the migration, and we have the definition of the job, the data space, or the report definition.
+And when we pointed basically to data break, And if we have that restriction for it, all the required tables, view, whatever, it should work.
+Because I'm saying the agent can do the work, the migration work, without having access, without validating whether it's working or not.
+Right?
+Yeah.
+Yes.
+Yes.
+As long as we know things like the table definitions and things that are in Databricks, we wouldn't necessarily need to access that.
+Of course, like you said, we would have to skip the validation. loop that would go on, but we could definitely do that.
+So if there's, for instance, some existing reports that would be okay, that might be a good starting point for us so that we can make it directly relevant to you.
+You can see it working on things you're familiar with.
+We saved some of our time, too, so it's more of a better investment, I think, if we can.
+Yeah, I mean, I can see it in your face as you have it in your presentation.
+We can have a One thing to give you a report, and you do the conversion without a validation.
+And the first step, maybe, left the chip.
+Assume that it has the same structure, data model, and data breaks.
+And the second step is to be remapping.
+Here's the oldest URL. and his own structure, and now we want to move it to the new structure.
+Don't ask another agent to do the mapping, figure that out.
+But what do you think, Rishi and Andrew, if we have the first one, try this approach by lift and shift and abort, and we'll, after you finish your work, we'll take it and point it to data breaks, giving that I've had the structure acquired entity.
+And if it worked, then we prove that we valid it.
+We don't have to have that.
+So are you seeing my hair?
+Pick a Cognos report that doesn't need any kind of query restructuring.
+Just lift and shift 0.2.
+Databricks, is that?
+And what will the agent do?
+Well, that's become current. the Cognos report to work with Databricks.
+That's the first step.
+The second step, we do the e-monitor.
+There's a Cognos report that says Framework Manager Model.
+So when you're saying, I'm trying to envision this, when you're saying convert the Cognos report to make it run on Databricks, if you're doing a lift and shift and just pointing it, What is the agent doing?
+Just pointing, like taking the endpoints or something? is that we can do that like the conversion with using the agent without having access to the system.
+That needs to be done.
+Agreed.
+Yes.
+Second question.
+No, no, agreed.
+Yeah, without as my hair was suggesting, right?
+Less work, faster work, right?
+Whatever is easy for both the parties, right?
+Without getting the agent into the environment, I think bypassing.
+That that will be ideal for us So how would we do this like how do we get them Well, you get the cognos report definition that's all we need to share,
+okay You don't need to connect to the content store or you know that because those are different functionality that probably going to be have to migrate to somehow but this is all cognos proprietary stuff that can happen in the world that are you thinking migrating the whole cognos content store or another?
+Did it separate?
+Wait hold on, I think I'm only coughing as you see, sorry my hand you're asking Are we going to have a content store for content to end in this?
+Yeah, I mean, how much required?
+No, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no,
+no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no,
+The only thing that we will make is the actual data source that are currently sitting in the SQL server for the EDW database.
+All those tables of data will need to then remap and move over to Databricks.
+Yeah, I'm just trying to understand the scope.
+We don't touch on the scope.
+No, we don't.
+It can't talk in content store, which we don't need to do that.
+Yeah, we're not moving the content store, but you definitely have to touch in the content store, because you need to update all those people's map and stuff like that in the content store, right?
+Okay, so sorry.
+Now, what's our decision in terms of doing, I guess, showing us the demo proof of concept or whatnot?
+So it sounds like if we can get one of the Cognos reports, what we will be able to do is we can take that, build the MCP for it, make sure that we can A, connect to it, B, dissect it, and be able to get into it.
+I know, as you said, the SDK, they're not pretty, but we have ways to do this, and we use AI ourselves to help them build these.
+That's one.
+And then to remap it up to Databricks is part two.
+The caveat there is yes, agree, I think it's a much better idea to have it disconnected.
+The only thing is that unless that structure is pretty much identical in Databricks, without knowing what the new structure will be, the table names, things like that, that's where it'll be a little bit dicey.
+So it's not like we could do that without knowing anything about what's going on in Databricks.
+But that could also be some basic info that you could share.
+Because at the end of the day, it doesn't really matter that much.
+It would just be a matter of saying, here's the input mapping, here's the desired output mapping.
+If that's something that's synthetic to start with, or if that's the real Databricks that comes from the, what I said, the deterministic discovery that goes on first, it doesn't really make a difference to the agent.
+It just wants to know, I'm lifting from A, I'm shifting to B.
+So whatever that mapping is, we can definitely do.
+So here, we need that piece, right?
+That connection piece with Databricks like us.
+The agent just gives us something.
+Are you saying we take that and we run it and see?
+Because it did.
+We get all the information that we need.
+But, you know, as a log schema is pointing to.
+And we have the connection to get the breaks.
+That's the agent will do that, have to figure out the connection to the breaks on Cognos.
+And all of what we do, we feed it the actual information about the catalog and schema.
+Assuming that we pay the table that the SQL run you on time, then it should not.
+So I think next steps, you just need the query of the Cognos report.
+Yes, that's right.
+Okay, so Malika, I think we need to work with Vlad to get that.
+We can pick one report from finance.
+Are you looking for the XML or just the SQL query?
+Does that sound like something that would be valuable from a demo perspective to you?
+That's my only question.
+Just to make sure that's the, you know, we can show you a big pain point and we can show you how it works with the agents.
+At the end of it, that's a much quicker scenario for us.
+That's way better.
+I mean, I'm kind of breathing a sigh of relief.
+We don't have to set up a, you know, independent Databricks instance for a demo.
+But at the same time, you know, I'm happy to adapt to that.
+I just want to make sure you're getting what you want out of this.
+For sure.
+My hair, I would...
+Well,
+I mean this is one see how this will work So and if you want to extend the demo one of the data stage out and see how Did that work on the address because we did that? with is the Lake bridge But it was almost like 85% need to do something we can on the deliberate side,
+convert it to vice part.
+So that's another one.
+None of we have, we probably can have a simple data stage job that we can share.
+Sir, you had a question.
+Basically not a question, but just a remark.
+Basically, Our goal is to migrate data state jobs to existing framework.
+So on Databricks, we develop frameworks, color-based, where you don't need to do, let's say, Python development or something.
+So you just need to do configuration.
+And we have, let's say, thousands of jobs running in production today, support team aware how to support them and so on.
+So basically, no need to create, let's say,
+new framework. by using some Python or something yeah so everything is there we just need to configure you know and ideally this agent should create all needed configurations yeah so let's say hey we have SQL query or stored procedure that is like doing ABCDF yeah let's convert this stored procedure to SQL logic we can say like this spark SQL logic or to Scala but ideally to SQL,
+to simplify things.
+Because, you know, stored procedure is basically SQL, so you can just more easily convert it to SQL.
+Then, yeah, and it will fit into existing, you know, support model, because again, we have production support team who is like supporting thousands of jobs.
+And if we will introduce new framework, you know, it's additional cost for them, they should, you know, learn it. supported, and so on.
+But there we have defined logging procedures, file lowers, and so on.
+This is also a problem with lake bridge.
+So we're just converting some, be honest, spaghetti code.
+When you have Databricks notebook with hundreds of Windows inside inside this notebook and how to maintain it I don't I I don't know if it will be nightmare, you know to debug it and so on this Such a problem.
+So yeah, the best scenario is to convert to existing framework Does he have knowledge It's not the complex color that we are migrating.
+Again, no need to write Scala code there at all.
+So if you talk about aggregation or ingestion, there are no need to do Scala code.
+So again, main question right now, how to teach these agents to understand that, okay, we need to create three YAML files with some configuration inside.
+Let's say 20, 50 different parameters like source table name, connection details and so on.
+So you don't need to write code itself, just to create config file.
+It's even simpler than write code.
+But just we need to see how agent can do it.
+Let's say if we can ask him in the brackets.
+Ask him, hey man, we have 10 jobs, please convert them, generate YAML files, commit them to packet.
+After that, some developer can quickly review that it's good and that's it.
+So this is like ideal world.
+Maybe two quick things that I can hopefully add on.
+One of them is, there is a concept, we call it as a playbook.
+So if there's like a well-defined task that humans already have known and documented, that is a good set of instructions for the agent.
+And this is kind of the iterative refinement that happens whenever we first create an agent to make sure it's actually doing what it's supposed to be doing, and it's robust enough that it can not just work once, but work broadly in that area.
+That's one side, but that doesn't always exist, where it's a well-defined process that's written down and recorded.
+Another, even though it's going to sound a little bit silly, is actually very, very easy and kind of pain free for everyone.
+It's been very effective.
+All that we do is we get on a call, we hit the record button on the call to enable the transcript, and essentially someone walked through the exact process calling out those details.
+That's it.
+And then I have one of our team on just asking some questions along the way.
+It's usually something that's like 30 minutes to 45 minutes, depending on how complicated it is.
+At the end of that, that transcript itself becomes distilled as the first input to the agent.
+So it's a nice way, even if documentation doesn't exist, usually I find that we're better as humans at showing what we're doing, rather than we are sitting down and writing it, because sometimes we miss out on details, or it's a little bit painful to do that.
+So either of those is able to happen, and what happens at the outset is what we call the playbook, these repeatable, well-known, well-defined tasks.
+So if you do want to generate 4uML files, any time that I give you this, it's not really business jargon, but let's say business jargon of, you know, do this to a report, if you want those things to be created every time,
+that's essentially us making an association between this set of actions corresponds to this kind of a request.
+So, both of you.
+Yeah, we did one of those, too.
+We pointed to the framework that Sergey talked me about, and did an aspect to introduce a new ingestion pipeline, source data front, and Oracle database.
+And it did, you know.
+It's a cloud that's not new stuff yet.
+So I think, I guess, for our next steps and everything, is that what we want to do?
+I appreciate it.
+Is that the plan then?
+We'll get a report with the full report for all the XML included, and then we'll try to lift and shift it to some definition that's given to us from Databricks.
+So that's probably the first step.
+And why don't we admire internally, maybe?
+As a team, we want to regroup and see what else would be helpful for us.
+And then we can get back to you.
+That's a good start for us.
+Awesome.
+And then one very last question on my side would be, so just because I heard it, I just want to ask the question.
+So if the security team, you said they blocked an MCP server that you tried to create for this one?
+So is that something that also you might have some trouble with or something that we can help with?
+I'll say it like this.
+We do this all the time, so we're used to talking to IT and security teams to kind of tell them, no, we're not crazy.
+No, we're not going to hurt anything.
+We know how to talk to them about this to kind of unblock things.
+But just bringing that up, because the worst thing I'll tell you from experience is you develop this amazing solution, then you go and IT just says no.
+Yeah.
+Is that something that...
+That's what happened.
+Yeah.
+This is okay.
+They are the right thing.
+They feel better, like, you know, and see this a lot, proxy, actually.
+Which is fine with us.
+We just give it the tools that we have.
+Whenever I left my last job, someone gave me a t-shirt that said Shadow IT across the back.
+So, that would be good.
+So I know the pain there, but we're happy to help you, even if it's just being very clear about the security implications of it or even what we do to protect that information when we use agents.
+Sometimes it's really easy.
+I think as soon as people understand like, hey, we're doing this with your own tools within your own environment, literally no information goes beyond that.
+That takes care of about 80% of the...
+I would say knee-jerk reaction to say something's dangerous in the IT space.
+And the remaining 20%, we can say, any guardrails you want, we can put in the system.
+Yeah.
+All right.
+Awesome.
+Dr.
+Girish, as next steps, just waiting on those reports from you, and then we set up a time for that first level demo. to showcase capabilities.
+And if there is anything else that you want to add on or you'd like us to showcase in terms of a POC, just let us know and then we can set up a time accordingly.
+Yeah, that sounds good.
+Great.
+Any questions, Andrew or Grisha or Colin, for the team here?
+No, we're good.
+Good.
+Thank you for your time, everyone.
+Thank you, team.
+Thank you.
+Appreciate it.
+Thank you all.
+Thank you.
+Bye bye.
+Thank you.
+Whoo!

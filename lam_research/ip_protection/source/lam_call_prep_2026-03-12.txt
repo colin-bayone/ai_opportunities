@@ -1,0 +1,257 @@
+LAM RESEARCH DISCOVERY CALL - PREP DOCUMENT
+============================================
+
+CALL FORMAT
+-----------
+
+Per Bradley Estes' email:
+1. Lam presents their problem statement
+2. Q&A session
+3. BayOne goes away and comes back with a response/approach
+
+This is discovery. Let them present. Your job is to listen, ask smart questions that draw out information, and demonstrate you understand their world without making assumptions.
+
+
+WHAT WE KNOW GOING IN
+---------------------
+
+From the transcript and emails:
+- They're on Azure stack: AI Foundry + Microsoft Sentinel
+- Current guardrails are "failing" to their expectations
+- They've pulled back ALL AI/GenAI usage due to IP concerns
+- Goal: Get error rate below 20% before production deployment
+
+Your working hypothesis (do not present as fact - validate through questions):
+- "Failing guardrails" likely means Purview DLP, not Sentinel (Sentinel is SIEM, not content detection)
+- Microsoft's OOTB Sensitive Information Types don't cover semiconductor IP (customer names, process parameters, yield data)
+- Custom SIT configuration is non-trivial and likely not fully implemented
+- Shadow AI may be a bigger factor than they're admitting
+
+
+ABOUT LAM RESEARCH
+------------------
+
+Business Context:
+- $17B+ revenue, ~17,000 employees
+- HQ: Fremont, CA
+- Core products: Wafer fabrication equipment (etch, deposition, clean)
+- Key customers: TSMC, Samsung, Intel, Micron, SK Hynix
+- Critical to AI chip manufacturing
+
+Why IP Protection is Existential:
+Their customers are direct competitors. Lam sees production data from TSMC, Samsung, Intel, and Micron simultaneously. If Customer A's yield data leaked to Customer B, that's catastrophic - both for the business relationship and potentially for regulatory/antitrust reasons.
+
+From their CISO Jason Callahan (public quote):
+"We are operating from the zero-trust point of view. But we all share intellectual property. Fundamentally, we as security people don't trust encryption."
+
+This tells you: They're sophisticated. They've already tried things. They understand the tension between enabling productivity and protecting IP.
+
+
+KEY CONTACTS
+------------
+
+Bradley Estes
+- Title: Managing Director, Knowledge & Advanced Services
+- Background: Progressed from Product Support Manager to Senior Director of Knowledge Management
+- Focus: Knowledge governance, information governance, product support
+- Why he's involved: Knowledge Management = how information flows through the org
+
+Mikhail Krivenko
+- Likely to present the technical problem statement
+
+
+YOUR EXPERIENCE POINTS
+----------------------
+
+Lead with governance and detection, not process optimization:
+
+1. DETECTION & REDACTION SYSTEMS
+   - Built data classification layers, early-alert mechanisms, automated intervention
+   - Detection systems for restricted technical data, drawings, controlled information
+   - Intercepted exfiltration attempt (China-related) before regulatory consequences
+
+2. GOVERNANCE FRAMEWORKS
+   - Primary advisor to Legal, Compliance, Cybersecurity on AI governance
+   - Deployed GenAI to 40,000+ users while navigating ITAR, CMMC, DFARS, NIST 800-171
+   - Defense primes (Raytheon, Northrop Grumman) - similarly sensitive environments
+
+3. SHADOW AI EXPERIENCE
+   - Built bidirectional IP protection for China operations
+   - Understands the fix isn't blocking - it's enabling the right tools with proper controls
+   - Governance + usability, not governance vs. usability
+
+
+DISCOVERY QUESTIONS
+-------------------
+
+UNDERSTANDING THE FAILURE
+(Start here - don't assume you know what "failing" means)
+
+"Can you walk through a specific example where the guardrails didn't catch something you expected them to?"
+
+"When you say 'failing,' are you seeing false negatives (sensitive content getting through), false positives (blocking legitimate use), or both?"
+
+"How are you testing the guardrails? Manual red teaming, automated adversarial testing, production monitoring?"
+
+"What does the 20% error rate specifically measure? How was that threshold determined?"
+
+"Are the failures happening at the prompt level (what users type), the response level (what AI returns), or file uploads, or all of the above?"
+
+
+UNDERSTANDING THE TOOL STACK
+(Validate assumptions - don't state what you think you know)
+
+"Which specific tools are you seeing failures in? AI Foundry? Copilot? Something else?"
+
+"How are you doing content detection today? Is this Purview DLP, Azure AI Content Safety, or something else?"
+
+"What custom Sensitive Information Types have you configured, if any?"
+
+"Are you detecting based on patterns (regex, keywords) or semantics (understanding context)?"
+
+
+UNDERSTANDING THEIR IP TAXONOMY
+(Critical - OOTB patterns don't cover semiconductor IP)
+
+"What categories of content are you most concerned about? Customer names, production volumes, process parameters, technical drawings - all equally weighted, or is there a priority order?"
+
+"Can you give me examples of what 'sensitive' looks like in your context? A sentence that should be blocked, a document type that shouldn't be uploaded?"
+
+"Are customer names always sensitive, or only in certain contexts? For example, 'TSMC' in a public earnings discussion vs. 'TSMC yield rate for Q4'?"
+
+
+UNDERSTANDING SHADOW AI
+(Industry data shows this is likely a bigger factor than admitted)
+
+"What visibility do you have into AI usage outside the approved tools?"
+
+"Do you know if employees are using personal ChatGPT accounts, personal Claude accounts, or other consumer AI tools?"
+
+"What about browser extensions, meeting recording tools like Otter.ai, or AI features embedded in other SaaS tools?"
+
+"Is there concern about developers using GitHub Copilot or building on top of unapproved AI APIs?"
+
+
+UNDERSTANDING GOVERNANCE STRUCTURE
+(Determines who needs to buy in and what's realistic)
+
+"Who owns AI governance at Lam? Is there a formal AI CoE or governance committee?"
+
+"Who are the stakeholders for this initiative? Legal, IT, CISO, business units?"
+
+"What does the approval process look like for new AI tools or use cases?"
+
+"Is there a formal taxonomy or classification system for sensitive data?"
+
+
+UNDERSTANDING WHAT'S BEEN TRIED
+(Don't duplicate work or propose something they've already ruled out)
+
+"What have you already configured in Purview, AI Foundry, or elsewhere?"
+
+"What worked? What didn't work?"
+
+"Were there specific solutions you evaluated and decided not to pursue? Why not?"
+
+
+UNDERSTANDING THE VECTOR
+(Different leakage vectors require different solutions)
+
+"Are you primarily concerned about:"
+- "Data going INTO AI tools via prompts or uploads?"
+- "AI surfacing sensitive data from connected knowledge bases in responses?"
+- "Data leaving the organization through AI-generated outputs?"
+
+"Is email exfiltration part of this scope, or is this specifically about AI tools?"
+
+
+UNDERSTANDING TIMELINE & SUCCESS
+(Determines engagement scope)
+
+"What's the timeline pressure? Is this blocking a specific initiative?"
+
+"What would success look like in 6 months? In 12 months?"
+
+"Is the goal to re-enable AI usage org-wide, or for specific teams first?"
+
+"What's the best format for our response - written proposal, another call, presentation?"
+
+
+CLOSING QUESTIONS
+-----------------
+
+"What else should we understand before we come back with an approach?"
+
+"Who else should we be talking to?"
+
+"What would you need to see from us to feel confident moving forward?"
+
+
+LISTEN FOR
+----------
+
+Indicators this is a configuration/governance gap (consulting opportunity):
+- Confusion about which tool does what (Sentinel vs. Purview vs. Content Safety)
+- No custom Sensitive Information Types configured
+- No formal AI governance structure
+- Shadow AI usage acknowledged but unquantified
+- "We're not sure what Microsoft's tools can actually do"
+
+Indicators this is a genuine custom build requirement:
+- Custom SITs already configured and tuned, still insufficient
+- Detection needs are semantic/contextual, not pattern-based
+- Real-time intervention required, not just logging/alerting
+- Specific failure modes that can't be addressed with configuration
+
+
+CONTEXT: MICROSOFT STACK (For Your Reference)
+----------------------------------------------
+
+Sentinel: SIEM/SOAR platform. Aggregates alerts, triggers playbooks. NOT a content detection tool.
+
+Purview DLP: The actual guardrail layer. Detects sensitive content based on Sensitive Information Types (SITs), sensitivity labels. Can block Copilot from processing labeled content. Prompt-based SIT detection is in preview, GA expected late March 2026.
+
+Azure AI Content Safety / Prompt Shields: Real-time detection of prompt injection, jailbreak attempts, harmful content. Model-layer protection.
+
+Defender for Cloud Apps: CASB functionality. Visibility into shadow AI/SaaS usage.
+
+Key insight: If Lam is relying on Sentinel as their primary guardrail, that's an architecture misunderstanding. Sentinel alerts on events - it doesn't block content.
+
+
+CONTEXT: SHADOW AI (For Your Reference)
+---------------------------------------
+
+- 98% of organizations report unsanctioned AI use
+- 68% of employees use free-tier AI tools via personal accounts
+- 77% of AI users copy/paste data into chatbot queries
+- 1 in 5 organizations experienced a breach due to shadow AI
+- Shadow AI breaches cost $670K more than standard breaches
+- Samsung incident (2023): Engineers leaked semiconductor source code via ChatGPT - directly analogous to Lam's fear
+
+Key insight: The "ban all AI" approach Lam has taken likely drives shadow AI underground rather than eliminating it. One healthcare system that provided approved AI alternatives saw 89% reduction in unauthorized use.
+
+
+CONTEXT: AI GOVERNANCE MATURITY (For Your Reference)
+----------------------------------------------------
+
+Most organizations are at Stage 1-2:
+- Stage 1: Ad-hoc experiments, shadow AI, no inventory
+- Stage 2: Pockets of success, inconsistent practices
+- Stage 3: Systematic CoE, governance framework, standards
+- Stage 4: Integrated across organization
+- Stage 5: Optimized with continuous monitoring
+
+Lam pulling back ALL AI usage suggests reactive Stage 1-2 maturity. BayOne's opportunity is to help them build Stage 3 systematic governance while solving the immediate technical problem.
+
+
+CONTEXT: GUARDRAIL TESTING (For Your Reference)
+-----------------------------------------------
+
+Key metric: Attack Success Rate (ASR) - percentage of successful attacks over total attempts
+
+"20% error rate" likely means:
+- False negatives: 20% of sensitive content getting through (most dangerous)
+- Or false positives: 20% of legitimate content blocked (productivity impact)
+- Or combined rate - need to clarify
+
+Red teaming tools exist (Microsoft PyRIT, Nvidia Garak, F5 AI Red Team) but many enterprises don't use them systematically. Testing methodology matters as much as the guardrails themselves.

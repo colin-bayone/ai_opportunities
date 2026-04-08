@@ -1,0 +1,1605 @@
+Transcript
+April 2, 2026, 2:05PM
+
+Colin Moore   0:45
+Hey Sir, I'm sorry about that.
+
+Saurav Kumar Mishra   0:50
+Please. Yeah. Hi. Good morning.
+
+Colin Moore   0:54
+Good evening, good evening.
+OK, so good day today. I'm excited. So the demo is even late for me, so it's it's good for. I'm glad for both of us that I get to help with it because I'm like they they ended up picking. I think it's gonna be like.
+
+Saurav Kumar Mishra   0:57
+Huh.
+
+Colin Moore   1:14
+What, like 6:00 for me? So not not too bad, but.
+
+Saurav Kumar Mishra   1:19
+Mhm.
+Yeah, not too good. Yeah, I think it's kind of end of the day for you as well, get it so.
+
+Colin Moore   1:24
+But.
+Yeah, most days. Good day organ end like that.
+But let me see, I'm gonna.
+'Cause, uh, I just realized, so I I'm gonna.
+Oh, go amateur hour on this right now because I just did a pull to get the latest code and then it's showing me because remember whenever I had said that the some of the files were getting ignored?
+
+Saurav Kumar Mishra   1:57
+Uh-huh. Yep, Yep, Yep. The target files. Uh, let me just fix that.
+
+Colin Moore   1:59
+Hotmail.
+Oh, no, no, no. Don't. Don't worry. Don't worry. I can just stash them for a moment.
+
+Saurav Kumar Mishra   2:05
+Yeah.
+
+Colin Moore   2:41
+See.
+OK, and then I just have to do poetry install. OK.
+'Cause what I wanna do is I wanna. That's probably a good first step. Let's get it running on mine. Uh.
+
+Saurav Kumar Mishra   3:23
+Yep, Yep. And just to make sure that it runs when it's required.
+
+Colin Moore   3:30
+Yes.
+Alright, so I have this.
+That is fixed. I have the latest. I have all the files populated on the side. I don't think anything changed the ENV file, but.
+
+Saurav Kumar Mishra   4:05
+Mhm.
+Yep, nothing changed in J&B.
+
+Colin Moore   4:07
+Then this is just a docker.
+
+Saurav Kumar Mishra   4:11
+Uh, PG up. Yeah, Docker Composer.
+
+Colin Moore   4:12
+Back in composer.
+
+Saurav Kumar Mishra   4:19
+I I don't even like stop my PG containers anytime. Like I I don't remember like ever stopping them apart from when they crashed like.
+
+Colin Moore   4:26
+No, yeah, me either.
+See.
+That's why. That's why I like Postgres, because it's lightweight and you don't even have to think about it.
+
+Saurav Kumar Mishra   4:52
+Yep.
+
+Colin Moore   4:57
+I don't know. We'll see about what Ascari was saying for Cisco, but generally speaking, I have. I get a rash whenever we talk about brand new things, but we'll see.
+
+Saurav Kumar Mishra   5:08
+Yeah, yeah. So I checked that data based out like TIDB. So it provides like some what you call good handling in terms of when we are dealing with a large amount of distributed data across like different regions.
+So it's something that it is like what you call port of TTIDB, but I don't think like in our cases we will be needing that kind of like setup for DB because I think most of the data which we will be getting.
+I hope they are already storing them and from our end it's just like creating a data pipeline or create fetching those from the sources in which it is already present and then organizing it properly rather than like what you will create new.
+
+Colin Moore   5:58
+Mhm.
+
+Saurav Kumar Mishra   6:05
+Distributed data system to add or source all of those data into those distributed systems. It's like a lot of overhead for no reason.
+
+Colin Moore   6:16
+Right, right. Absolutely. And I mean, frankly, like a you.
+If we've done math and we have, you know, numbers that we can show that something like that's necessary, it's necessary. But if we don't have math and we're just guessing, you know, that's that's where engineering is not there.
+
+Saurav Kumar Mishra   6:32
+Yeah.
+
+Colin Moore   6:38
+You know, like that's you have to have the numbers. If you don't have the numbers to support, then that's just guessing. And you know that's the classic case. I'm not, I'm not saying for what Eskry suggested, but the classic case in IT is whenever people way over provision things because they're just not sure.
+
+Saurav Kumar Mishra   6:40
+3.
+Yeah.
+
+Colin Moore   6:56
+Um, and you know then project ends up never starting because they're they for their 10 users that will use this, they won't have Kubernetes.
+
+Saurav Kumar Mishra   6:57
+Yep. Yeah.
+
+Colin Moore   7:06
+You know, and you know, they're gone way too much.
+
+Saurav Kumar Mishra   7:08
+Even for like yeah even for like even if like suppose they have around 1000 devs working daily at that scale also like PG easily scales and we don't need a like distributor system for just like 1000 devs even if support they are doing.
+100 PRS a day. That's a lot, but still just assume so thousand deaths with 100 PR. That's still only 100,000 per day, right?
+
+Colin Moore   7:40
+And I mean the the the real thing is that it's it's not even it's not even that bad because what when Postgres is overloaded, unless you haven't set something up on your side, really the only consequence is just connection pooling, which means like you just have a queue that starts.
+And as long as you don't have a traffic jam, because traffic's not really that constant sometimes, but as long as you don't have like a steady state system that you can't break out of that's in a traffic jam, it'll still be fine because.
+
+Saurav Kumar Mishra   7:58
+Yep, Yep.
+Mm-hmm. Yes.
+
+Colin Moore   8:14
+That'll just queue things up. I mean, people don't need like real time responses for when they're getting.
+When their PRS are coming back, you know it's that's where I was like, you know, until we can show that and the catch Tony do with it is the only way you can show it is once people are using the system, a problem has to exist first.
+
+Saurav Kumar Mishra   8:23
+3.
+Yep.
+
+Colin Moore   8:38
+But.
+OK, so for this, what which one should I use to run? Is this streamlined at this point or the?
+
+Saurav Kumar Mishra   8:44
+Yeah, first one. No, yes. Dashboard, yes.
+
+Colin Moore   8:47
+This one.
+
+Saurav Kumar Mishra   8:51
+Streamlit one also I made some changes on that, but it's not visually that appealing. Like this one is like full bit. If you want to try slim streamlit one, you can try that one out as well. This one is is better.
+
+Colin Moore   9:04
+Mhm. Oh.
+Let me I'm gonna take this down to this cause otherwise it'll look strange. There we go. Start off new run.
+
+Saurav Kumar Mishra   9:08
+Right.
+Mhm.
+
+Colin Moore   9:19
+So drag and drop the source files so.
+
+Saurav Kumar Mishra   9:19
+And yeah.
+Load demo files. There is down. Yep. So this step is totally like this is hard coded. I've changed the like files as well. Previously we only have like 5 files but these are like the nine files which will be needed. So starting out with like the.
+
+Colin Moore   9:23
+Uh.
+Mhm.
+
+Saurav Kumar Mishra   9:41
+Which they have given us. So these are all the files that they have. It has like all the table definitions, the Scala app, the XML and the schema, everything. OK, so it's just for like what you got place builder at this point.
+
+Colin Moore   10:05
+Mhm.
+Mm-hmm. OK.
+
+Saurav Kumar Mishra   10:13
+We can just start the pipeline so that drag and drop is not working. If you try to click it, it's just like a placeholder for now. But yeah, if they do need that option, they can have it like, yeah, not a big thing.
+
+Colin Moore   10:20
+OK.
+Yeah, for for demo, we're good. We're we're more than good. Nice.
+
+Saurav Kumar Mishra   10:30
+Yeah.
+I even thought of like even if I added that bar over there, correct. So yeah, So what will happen? OK, I ran out of thought because I was thinking about this screen now. So yeah, also I made like some changes as you told me that add something which.
+
+Colin Moore   10:37
+Mhm.
+Mhm.
+
+Saurav Kumar Mishra   10:52
+It shows that the what do you call the process itself is running. So if you see on like the execution log at the like bottom side we have that extracting SQL currently then parsing like the cloud style that the agent itself is processing something.
+Other than like the messages, so currently parsing XML and it is showing a timer, so Yep.
+
+Colin Moore   11:18
+Mhm.
+Very nice.
+And so for gate one, so just what are the gates doing for these? I know what they're doing, but that's my demo mode for you, yeah?
+
+Saurav Kumar Mishra   11:31
+Yeah, yeah, yeah, sure. So let's start with Orchestrator before even the gates. So what the gates do basically is checking if everything has been loaded properly, if there were any kind of hallucinations.
+If we are missing any kind of tables, so these are like all kind of gate, not like in particular order. We will go through them like once we pass through them. So starting with orchestrator, it's main work is to load the source OK.
+
+Colin Moore   12:00
+Mhm.
+
+Saurav Kumar Mishra   12:06
+Here here like suppose in our like real use case the MCP connection and everything that is related to source, everything will be in orchestrator. OK so it loads the source file and then select which pipeline to like start. So currently we only have.
+
+Colin Moore   12:17
+Mhm.
+
+Saurav Kumar Mishra   12:26
+One like SQL to spark conversion but we can have like multiple files here correct? So based on the like the what exactly is the file name and what exactly is in the file, it can decide like which pipeline to run and which like target files to select.
+
+Colin Moore   12:34
+It.
+
+Saurav Kumar Mishra   12:46
+Based on the source. OK so it can fetch all the files and then decide which files it needs for which workflow and then it will start. Then go to gate. Sorry G1G1 will check if all the like artifact store is loaded or not like all the target examples are present.
+
+Colin Moore   12:47
+Mhm.
+
+Saurav Kumar Mishra   13:06
+All like the source files are present. We have the XML, Scala like everything else is present or not. Did we check like a correct pipeline? OK, so we can have like a different type of pipeline names in a what do you call list type order introduction and we can.
+Check exactly if it matches the pipeline or not. OK then we have one more that is run ID. The run ID is basically generated in orchestrator when it is starting so that we can keep track of this whole like pipeline for this time. OK for each run so the previous.
+
+Colin Moore   13:30
+Mhm.
+Mm-hmm.
+
+Saurav Kumar Mishra   13:45
+Like the first dashboard which you saw which has all the run listed. So the run ID helps in that. OK, so that is our G1. It checks everything that if any one of those is failing then it can vertical come back to orchestrator and get those details back.
+
+Colin Moore   13:51
+Mm-hmm.
+
+Saurav Kumar Mishra   14:03
+OK, so after G1 we have all like the initial starting context. All the files are loaded, our pipeline is selected. Then we are going for parsing stage. We are going for like 3 stage parsing here. One post DS is your data stage parsing.
+
+Colin Moore   14:03
+Mhm.
+
+Saurav Kumar Mishra   14:23
+Which will pull out like the table names, the views, what kind of joins are there and those kind of things like what exactly data stages are present in your XML. OK then we have SQL. SQL is going to check for your business logics.
+
+Colin Moore   14:37
+Mhm.
+
+Saurav Kumar Mishra   14:42
+Your what do you call it? One second. Let me pull out that sheet. It has everything like.
+
+Colin Moore   14:48
+Mhm.
+
+Saurav Kumar Mishra   15:17
+Yep, so the vertical data stage parser checks all the like job stages, the transformations, the source target connection, and the data flow. OK, we have inside the data stage parser 2 stages.
+
+Colin Moore   15:28
+Mhm.
+
+Saurav Kumar Mishra   15:34
+Both of those run parallelly. One is deterministic so that if we can fetch out like the what you call different job stages or transformations directly from the sorry XML, those will be your what you call deterministic ones.
+And then this included with like the original context which we had like the XML file, we are sending that whole to the LLM OK to do like check if the deterministic one is present and or not and what exactly we are missing. So it will give us like everything.
+
+Colin Moore   16:02
+Mhm.
+
+Saurav Kumar Mishra   16:12
+In terms of job stages, transformation, source, target connections and the data flow for our XML. Then the second one, the second one is your SQL interpreter. It basically checks your stored procedures.
+OK, so it will look for table joints, your CTS, temp tables. What exactly is the business logic? Any aggregations, aggregation patterns? OK, so these kind of things here also we have like what do you call a combination of deterministic plus LLM.
+
+Colin Moore   16:29
+Mhm.
+
+Saurav Kumar Mishra   16:48
+We are using SQL glot here, so we are passing parsing the whole text file of the stored procedure via SQL glot. If it can catch something then it's OK if it is not catching anything and that is also totally fine because we are going to pass this with the like deterministic extraction.
+To the LLM so it can get all the details here and then we also have like DDL parser. OK, the DDL parser will check your what you call the DDL files and view files.
+
+Colin Moore   17:11
+Mm-hmm.
+
+Saurav Kumar Mishra   17:23
+OK, these are like the vertical source documents and it will. From those it will take out the table name, column name, data type, like the typecast things and the constraints and precisions. What exactly is like decimal point precision and those things.
+
+Colin Moore   17:41
+Mm-hmm.
+
+Saurav Kumar Mishra   17:43
+OK so this is also similarly SQL GLOT plus LLM synthesis both. So as these all three has like different source so we can fire and doing like different things.
+
+Colin Moore   17:48
+Mhm.
+
+Saurav Kumar Mishra   17:57
+All three are like parsing, but they are parsing for different things. That's why we are able to fire these off in like parallel here. OK, yeah. And in gate two similarly it will check like if like the table names are matching with the source column. So it's not like.
+
+Colin Moore   18:04
+I see.
+
+Saurav Kumar Mishra   18:17
+Currently not what you call very mature matching system. It's just taking whatever the LLM is sending it in terms of like table name, column name, table joints and etc data stages transformation. It takes that and inside like the source file it does does like a search.
+Can it find that exact word like the column name or the table name or the transformation name exactly or not? OK here also the one thing which we are unable to like what you got flag out is if there is anything wrong with the business logic itself for.
+
+Colin Moore   18:44
+Mhm.
+
+Saurav Kumar Mishra   18:56
+SQL because that we cannot get like deterministically and check via simple search that it was correct or not. Other than that like the rest of the things, job stages, table, joins, columns, etcetera, everything is passed from your G2 so it's it checks if.
+
+Colin Moore   19:04
+Mhm.
+
+Saurav Kumar Mishra   19:16
+Anything has been hallucinated or not or like if it is missing or not. OK, so that is part of your parser stage. Then we have our mapping stage. In the mapping stage what is does is like.
+
+Colin Moore   19:22
+Mhm.
+8.
+
+Saurav Kumar Mishra   19:32
+It will take all three parser output so we know like all of the stages required, tables, columns, like all the details are present with us. We have our target files. These were also shared by what do you call?
+The Sephora team. So in target files we have Scala and YAML references. OK, so it's kind of like your end end artifacts which were previously generated by them, so it is not.
+
+Colin Moore   20:12
+Mm-hmm.
+Mm-hmm.
+
+Saurav Kumar Mishra   20:23
+Yep. And uh, here we have.
+We are doing this with one opus call because it is like what do you call a big process and mapping itself like take some time here this stage take takes time the spar.
+Uh, Sparks day. It takes time like a SQL generation and the data stage stage a parser that takes like a small amount of time.
+
+Colin Moore   20:56
+Mhm.
+
+Saurav Kumar Mishra   20:57
+On your end also like it's running kind of slow.
+
+Colin Moore   21:03
+That's uh, we'll see too, 'cause it uh, we can try one thing, um as well, 'cause I think I have access to the fast mode.
+
+Saurav Kumar Mishra   21:11
+Mhm.
+
+Colin Moore   21:12
+Clock and that could be.
+
+Saurav Kumar Mishra   21:14
+Yep, Yep.
+
+Colin Moore   21:16
+A simple thing to try to. Let's try.
+
+Saurav Kumar Mishra   21:23
+So on the like high level you can see like the pattern mapper is creating a translation dictionary for us from SQL to Spark. OK that exact that's exactly what it's doing using your target examples and whatever.
+
+Colin Moore   21:34
+Mhm.
+
+Saurav Kumar Mishra   21:42
+Column names and other things we have present. OK then we are going to SQL spark generation here. Also like on G3 it will check one second. Let me just see what is G3.
+
+Colin Moore   21:46
+Mhm.
+
+Saurav Kumar Mishra   22:09
+Oh, I can open my tanksmith also.
+
+Colin Moore   22:17
+You see 'cause you're using all Opus right now, correct?
+
+Saurav Kumar Mishra   22:22
+No, not all like for SQL generation we are using Opus for like second stage for what do you call pattern mapping we are using SQL sorry Opus. So like the heavy task in which we need like more thinking type and a lot.
+
+Colin Moore   22:35
+OK.
+
+Saurav Kumar Mishra   22:41
+Profiles to look at because with Opus, you were getting like 1,000,000 contacts, though we do not need that much, but still it is good to have like, yeah.
+
+Colin Moore   22:49
+Mhm.
+OK.
+Because actually the.
+
+Saurav Kumar Mishra   22:54
+Inside like yeah, inside SQL like Spark generation agent, we are also doing it in like you can say three-step process, not even two. So first we are looking at the mapping OK and the business logic as well as the extracted fields in our parser.
+
+Colin Moore   23:05
+Mhm.
+
+Saurav Kumar Mishra   23:14
+Then first we are planning out OK based on the business logic of the transformations that how many stages are needed and we are also generating a dependency graph based on those like suppose there are 20 stages, stage 123789.
+
+Colin Moore   23:27
+Mhm.
+
+Saurav Kumar Mishra   23:33
+These are kind of like independent stages. It loads a single table and as a alias or join which does not share any like what do you call any initial conditions with any other table. So these are like independent stages OK.
+So it is planning out for these things. It will plan out, then create a dependency graph for independent and dependent stages. OK, and then it will go for generation. Then it will first fire off like in parallel for all those independent stages. So suppose they're in.
+
+Colin Moore   23:59
+Mhm.
+
+Saurav Kumar Mishra   24:11
+Total 22 transformations we have like suppose seven or five or seven like independent stages. So we have put in like Max concurrency of four, so four at a time it will like generate all the independent stages first.
+Once it has all the independent stages and the plan, then it will move for like the generation of the dependent stages. OK, so it's kind of like three-step process for SQL generation. Once we are done with that, we are coming here for G4 which it which it is currently doing.
+
+Colin Moore   24:38
+Mhm.
+
+Saurav Kumar Mishra   24:48
+So it is checking for if the SQL is truncated or not, if the logic looks sound, if we have all the stages present or not, like suppose in our mapping and in our plan we figured out that there was supposed.
+
+Colin Moore   24:48
+Mhm.
+
+Saurav Kumar Mishra   25:07
+26 stages and here in when we checked on G4 it was only like suppose 21 present or 23 present. So are all the stages present or not? If not we can go back to spark. So these are kind of like a couple of deterministic checks.
+Plus we have currently I've added like Ng4 one more like LLM check also so it checks for your business logic as well as like how closely it is following the Scala schema.
+OK, because what was happening, it comes down through the whole process and suppose it is missing something important in the SQL generation process. OK and as we cannot like deterministically check it every time.
+
+Colin Moore   25:44
+Mhm.
+Mhm.
+
+Saurav Kumar Mishra   25:59
+So I was letting it pass through so it will go through the next, generate the config and the deployment YML and everything else HQL and then we are going to review and again it will go to retry. So it were running those 3-4 nodes.
+Like every time and burning those tokens which could be saved just so just when we can add this directly to our vertical the gate node to check if like the business logic is sound or not. So it will retry over there. We have put in like threshold of 75.
+
+Colin Moore   26:20
+Mhm.
+Mhm.
+
+Saurav Kumar Mishra   26:37
+10% of like accuracy for just business logic, not for column consistency, not for source tables and it is that everything else is aside just based on business logic because that is one thing that we were failing to get out like consistently from this system.
+OK, so Yep and.
+
+Colin Moore   26:58
+Mhm.
+
+Saurav Kumar Mishra   27:03
+Yeah, after it has checked like the business logic is found, then it will move on to like our next stage which is our what do you call config generation. In config generation we are filing off 3 parallel agent.
+
+Colin Moore   27:07
+Mm-hmm.
+
+Saurav Kumar Mishra   27:19
+One is going to generate your pipeline YML, one is going to generate your deployment YML configuration and the last one is going to generate your create dot HQL OK or HQL dot DTL.
+
+Colin Moore   27:23
+Mhm.
+Mhm.
+
+Saurav Kumar Mishra   27:35
+Whatever you want to call it and Yep, those three are firing off in parallel for the what you call config generation phase and it has like your the previously generated SQL as like the context so it can generate the UML and HQL based.
+On that SQL which we have previously generated. So after that stage is passed, it will similarly check for like the deterministic things. We can check on deployment if like all the column names are present or not, if all the configs are being passed correctly or not and Yep.
+
+Colin Moore   28:14
+Mhm.
+
+Saurav Kumar Mishra   28:15
+That's it. Then we are in our validation phase. It just does like some basic validations. I think LLM one I've shifted everything to the gate, so here we only have like the deterministic ones.
+To see you can open any of these. These are dropdowns, the boxes you see here correct. If the score is like 100% we will close the box. If it if we are having any issues here it will like keep it open and flag that issue exactly.
+
+Colin Moore   28:34
+Mm-hmm.
+Mm-hmm.
+
+Saurav Kumar Mishra   28:49
+OK.
+Yep I have added that highlight dot JS here. So as you can see it is highlighting there also in here on the preview side. Also if you see like the where we can see Yep you can try for like a different SQL would be better. Yeah it has better highlight.
+
+Colin Moore   28:54
+8.
+Mhm.
+
+Saurav Kumar Mishra   29:10
+Waiting. So yeah.
+
+Colin Moore   29:11
+Mm-hmm. Nice. Nice.
+
+Saurav Kumar Mishra   29:16
+Yeah, I have also like kind of added that also if you see we have like now AI review button in there. So yeah.
+
+Colin Moore   29:24
+Hmm.
+
+Saurav Kumar Mishra   29:27
+So this will like send all of these details to AI to ask it to kind of like audit it. OK, so this is kind of like auditing the validation also because it might be possible that something it hallucinated and something just.
+It missed so it will do a like re review. This is mainly important in terms of when there are many issues. In this run we did not get many issues because I have been solving it like a lot. So that's why we got this much of score on first try. So yeah.
+
+Colin Moore   29:48
+Mhm.
+Mhm.
+
+Saurav Kumar Mishra   30:06
+It will just go through everything, check if anything was like false positive reported here or anything which it does not. It did not flag. So yeah, currently it did give one, but it is still saying like recommended review.
+
+Colin Moore   30:20
+Mm.
+Mhm.
+Mhm.
+
+Saurav Kumar Mishra   30:43
+We still have like somewhere and if you read these, these are kind of like very descriptive. So whoever is dealing with these databases, they can like what you call make these out like in one try. We also have like a little bit of highlighting going on like.
+
+Colin Moore   30:59
+Hmm.
+
+Saurav Kumar Mishra   31:02
+What exactly he wants to like look at and at the end we have like 2-3 options available. So one is like your auto fix which is like it will based on these like whatever it has figured out like we have two bugs and one advisory it will try to.
+
+Colin Moore   31:13
+Mhm.
+
+Saurav Kumar Mishra   31:22
+Fix that here itself and if we go and reject and retry it will go to our directly to our SQL generator and it will run like 2-3 steps whatever were present in there 2-3 nodes like SQL generation then the gate.
+
+Colin Moore   31:37
+Mhm.
+
+Saurav Kumar Mishra   31:41
+Then the config, then the config gate, then the validation and then we will come back to review. So we have two ways to do this. I was just what you call kind of messing around with this. I found like the auto fix one, what you call more intuitive.
+Because we have already done like most of the work and then it comes down to like this final stage, correct. So we have like very small bugs found out. So in terms of like.
+
+Colin Moore   32:05
+Mhm.
+
+Saurav Kumar Mishra   32:14
+In total 25 or 26 transformations, it might be possible that there is one table name wrong or one where condition wrong or one null handling wrong or maybe might what do you call?
+Integration or mixture of couple of these issues. So these are kind of like small issues in total 26 transformation. So that's why I added this auto fix feature. So it is you can think it as like a cloud code for this OK.
+
+Colin Moore   32:41
+Mhm.
+Mhm.
+
+Saurav Kumar Mishra   32:48
+So when we did a review, correct? So we already have our SQL file generated, correct? So it will treat that SQL file, your XML, Scala have everything as a everything else as a file.
+
+Colin Moore   32:51
+Mm.
+Mhm.
+
+Saurav Kumar Mishra   33:06
+OK, it has tools to read those files and it has tool to edit those files. So you can think think this like you are using cloud code, you gave it everything in a file and you ask it then after the generation that go ahead and review this validation.
+
+Colin Moore   33:17
+Mhm.
+
+Saurav Kumar Mishra   33:25
+As well as this generation. Then after it came up with the audit result, you set it set to it. Yeah, go ahead and fix it. Then it opens the SQL, go to that line number and fix those exact things. So kind of like surgical edits rather than like full generation.
+
+Colin Moore   33:39
+OK.
+Mhm.
+
+Saurav Kumar Mishra   33:43
+So retry, reject and retry would be your full generation. It will generate everything and this auto fix is like surgical edits in that so it is able to perform that. After we have done the auto fix it will again run the validation itself and we will roll back to like the previous review.
+
+Colin Moore   33:53
+Mhm.
+
+Saurav Kumar Mishra   34:03
+Screen with new details. If we want to like follow through that cycle again, you can go ahead and do that or you can approve it after we have approved it, whatever the wrong patterns we have flagged.
+Correct. Whatever were the false positive or suppose we made a new what you call a rule that null handling should be done in this way or the where clause or the when case should be added in this way or we have to treat a particular type of like join or view in a.
+A particular way after we have approved it, it adds that like as a what you call JSON object to a knowledge base so that in the next generation when SQL is doing the generation, it knows that yeah, previously this kind of thing has already been approved.
+So I should follow this pattern for this. Either we can do it on first try or we can like flag it out and after we have uploaded 345 times in the runs it can like automatically like pass this out.
+
+Colin Moore   35:13
+Mhm.
+
+Saurav Kumar Mishra   35:13
+So we will be able to. So this will be kind of like a system which will be able to learn based on the runs it is going through. So yeah.
+
+Colin Moore   35:23
+Very nice, very nice. So for this, what would you, what would you have me do? Do you want to try out a fix? Do you want to try a proof? Yeah.
+
+Saurav Kumar Mishra   35:32
+Yeah, yeah, sure. Let's try auto fix.
+
+Colin Moore   35:37
+No, this is cool. This is a good idea.
+
+Saurav Kumar Mishra   35:41
+Earlier I fixed it like like two different agent. One is doing the review, then the other agent is taking that review and the whole other context and then what you call making the edits.
+So I was like this is wasting time and this looks cumbersome like kind of does not make sense that they are doing kind of same thing when I can ask Claude in the same window to after it has done everything to just go ahead and do those changes.
+
+Colin Moore   36:10
+Right, right.
+
+Saurav Kumar Mishra   36:11
+Like after it has come up with plan. So I thought that is very much doable and it should be able to do it because we already have like the chat thread on the back end here also for like the retries. Also we have it in a chat fashion so it keeps in mind like the.
+So you can think of each of these nodes as like suppose individual chat threads. So it keeps in mind the previous context as well as previous generation which is dead whenever we are retrying or this whole like the rejection request the whole AI message.
+As well as the last part, like the verdict, why it was rejected or why we mark something as false positive. Every all of this is being fed to the vertical chat again, so you can think it off like you are running a vertical normal chat and it gave you an output.
+And you provided it with some like updates that this is incorrect, this is incorrect, this is incorrect, this can be better, this can be better. And then it makes the changes again. So yeah.
+
+Colin Moore   37:13
+Mhm.
+
+Saurav Kumar Mishra   37:20
+Sure.
+
+Colin Moore   37:21
+And so.
+With actually what I'm thinking is this is this makes perfect sense because with the fixing that's that's the clear delineation between what is, you know, addressed like when we say 100%, we're talking about pretty much everything except for the logic bugs.
+Uh, like the business logic bugs within the SQL code itself. Like they they're they compile, their syntax is good, everything is right. Then this is the time when we're actually looking at the business logic there to see if there's it's logically sensible.
+
+Saurav Kumar Mishra   37:42
+Yeah.
+Yep.
+Yep, is it logically sensible? Are we running into any race conditions? Anything kind of like it missed which can like create production grade issues and Yep, those kind of things. So and here also like for this we can add like suppose the rules files as well.
+
+Colin Moore   38:04
+Right.
+
+Saurav Kumar Mishra   38:13
+Future if they need it. Best way still as I message you will be skills like just create skills for all of these agents and let them have it right? Yep.
+
+Colin Moore   38:18
+Right, right. Bye.
+So.
+
+Saurav Kumar Mishra   38:29
+So it again did. So OK, I think there is some issue here. Yep, it is not printing in the text. So you see the badge or the label of this advisory and Click to view. There should be like text in here.
+
+Colin Moore   38:33
+Mhm.
+Mhm.
+
+Saurav Kumar Mishra   38:46
+OK, so it is not exactly showing that text. I think this is rendering issue because that is available. That's why it what you call even generated that I will fix it. No worries. Yeah, yeah.
+
+Colin Moore   38:49
+Mhm.
+Mhm.
+Okay, yeah, no, no problem, not a problem.
+No, it looks good and I think probably the the two questions. One is just from a demo standpoint. So when I click fix, fix the code, should I keep that window open?
+
+Saurav Kumar Mishra   39:11
+Mhm.
+
+Colin Moore   39:14
+And until it finishes.
+
+Saurav Kumar Mishra   39:15
+Yeah, maybe. Yeah, it's OK to like keep it open. Even if you close it, we will come down back to this window only. There's nothing to look at here, right? I think once you click that auto fix, now you can come upstairs and.
+
+Colin Moore   39:25
+OK.
+
+Saurav Kumar Mishra   39:34
+Maybe read the review like what exactly review it gave by it rejected. So when like one minute or a couple of minutes when in the time it is doing the auto fix you can get like a high over a high level overview of how good a job it is doing.
+
+Colin Moore   39:36
+Mhm.
+
+Saurav Kumar Mishra   39:53
+For like the AI reviews because I've seen like it has flagged out like many issues for like the SQL generation. So yeah.
+
+Colin Moore   39:55
+Mhm.
+And then so after this so I'll go and click approve.
+
+Saurav Kumar Mishra   40:04
+Exactly.
+Yep, Yep.
+
+Colin Moore   40:09
+So after I'm I'm satisfied with everything, I look at it, check it all out, I'll click approve.
+
+Saurav Kumar Mishra   40:12
+Yep.
+Yep.
+And we get all of these. You can click on like download button. I think all of these should be downloadable, right? Yeah.
+
+Colin Moore   40:19
+Improved.
+Mhm.
+I think I don't know of it.
+
+Saurav Kumar Mishra   40:33
+OK, zip is not downloaded. Can you try like uh single ones?
+
+Colin Moore   40:39
+Yeah, mm-hmm. Does work. Mm-hmm.
+Yeah, it's, it's, yeah.
+
+Saurav Kumar Mishra   40:49
+Like individual ones, I thought these are working, so I just thought that, yeah, maybe drip is also working.
+
+Colin Moore   40:55
+So for for this duration, is this is this right or is this 'cause I'm wondering if this also includes that human step too?
+
+Saurav Kumar Mishra   41:01
+This is like including including the retries as well as like the time it took from what you call at the end of human approval as well. So suppose it was sitting there 1020 minutes just for like human approval so it will count that time as well so.
+
+Colin Moore   41:21
+Mhm.
+
+Saurav Kumar Mishra   41:21
+So you can see say like kind of it is it should have closed like earlier. But yeah this time it's like very long even I don't take like this this long.
+
+Colin Moore   41:28
+Mhm.
+No, but.
+But that's OK, 'cause the The thing is that's that's what I was confirming because it's, uh, really just because we were talking.
+
+Saurav Kumar Mishra   41:41
+Yep, Yep, Yep.
+
+Colin Moore   41:41
+You know.
+So, yeah.
+But no, this is good.
+
+Saurav Kumar Mishra   41:48
+Can you run this guy one more time? Oh.
+
+Colin Moore   41:51
+Yeah.
+
+Saurav Kumar Mishra   41:52
+If it is like again taking that long, it should not.
+
+Colin Moore   41:57
+So I think it's missing the the the last run.
+
+Saurav Kumar Mishra   42:00
+Where is.
+Can you like hard refresh it? Everything is like odd. Is there like kind of some issue with the PG container?
+
+Colin Moore   42:05
+Control shift diary.
+Uh, Yep, right here.
+
+Saurav Kumar Mishra   42:18
+Yeah.
+
+Colin Moore   42:19
+Probably migration.
+Um.
+I'll at least give you the error message.
+If you want, I can just fix it right now too. I already have Cloud pulled up.
+
+Saurav Kumar Mishra   42:40
+No worries. I think this pipeline in my system it is present, but maybe I did not set up like a command which can set this up like a pipeline runs table on your end like.
+
+Colin Moore   42:55
+I see. I see. OK.
+
+Saurav Kumar Mishra   42:56
+Oh, that might be a problem. Yep.
+
+Colin Moore   43:00
+Well, at least I mean, in any case, it still didn't crash, you know, so that's good.
+
+Saurav Kumar Mishra   43:05
+Yeah, I think that run was completed and yeah.
+
+Colin Moore   43:08
+Yes.
+And for these, these are good. I like that. You can see Drew tries all this stuff. Good. Love demo.
+Start.
+
+Saurav Kumar Mishra   43:21
+Yeah, if you want to like we talk about the files as well, maybe you can do it. So first is your XML file which is kind of big. That is I think around 30 lines or something for the whole XML.
+Then we have the tables, these dot TXT of USP update as well as populate stock inventory pre period. So these are like all the tables for this pipeline. We do not need all of these files, OK.
+
+Colin Moore   43:52
+Mhm.
+
+Saurav Kumar Mishra   43:53
+So that is one thing that I want to make here what you call clear. We do not need all of these files. These files you see stock continuity, all SQ SKU as well as like USP populate stock continuity. These files we do not need but we can.
+We can pass these to the LLM just because we have orchestrator which will figure it out and like in what you call in real life cases. Also it will receive in this kind of way only I assume after it is fetching everything from the source.
+
+Colin Moore   44:26
+Mhm.
+Right.
+
+Saurav Kumar Mishra   44:31
+So we just to show that it is able to like vertical figure out between all of those files like which exact date needs. So yeah.
+
+Colin Moore   44:31
+Right.
+Mhm.
+
+Saurav Kumar Mishra   44:40
+We have all the files present here, yeah.
+
+Colin Moore   44:43
+Very nice, very nice. And for them I'm definitely gonna flag out for the Cognos MCP. We know we can do that. I checked and there's actually a Java, a Java MCP hook that you can use for for accessing it, but.
+
+Saurav Kumar Mishra   44:50
+Mhm.
+
+Colin Moore   45:00
+So I don't have any worries about the MCP, but I'm going to try to tell them, you know, hey, not for a free PFC. And the good thing for us is the moment we have access to their internal systems, we've already got a contract. So you know, like the moment they give us actual access to Cognos, because they're going to want to see that.
+
+Saurav Kumar Mishra   45:06
+OK.
+
+Colin Moore   45:20
+We've already got a deal in our hands. You know, I'm not going to do that for free for development for, you know, a very old platform like that.
+
+Saurav Kumar Mishra   45:23
+Yep.
+Yeah.
+
+Colin Moore   45:29
+Yeah, OK, start pipeline.
+
+Saurav Kumar Mishra   45:30
+Yeah.
+Yep.
+So on this on that vertical screen the maybe only clickable thing is load demo and after that start pipeline Yep.
+
+Colin Moore   45:44
+Mhm.
+
+Saurav Kumar Mishra   45:49
+And uh, this thing that uh, what do you call uh the claude style? Uh.
+
+Colin Moore   45:56
+Mhm.
+
+Saurav Kumar Mishra   45:56
+Mm-hmm. I don't even know what they call it. You see that parsing XML structure 4 second, five second, yeah.
+
+Colin Moore   46:00
+Mhm.
+Uh, yes. Yeah, I really like that. That's nice.
+
+Saurav Kumar Mishra   46:07
+Yep, so that gets updated whenever like one agent like is finished at its stage. So orchestrator will run as well as till that whole thing is running. So this timer so we can like figure out like how.
+
+Colin Moore   46:21
+Mhm.
+
+Saurav Kumar Mishra   46:25
+Long that particular agent has been running, yeah.
+Mhm.
+So whenever you see it going away, the those are mostly at times like we have received the response and we are waiting for like the gates to finish or something. So yeah.
+
+Colin Moore   47:03
+Mhm.
+I see.
+That's what I was wondering. And actually you have a a decent limit on the the amount of requests, but that's why I was looking for Foundry. You have 75K quota for both Claude and for Opus and for Sana.
+
+Saurav Kumar Mishra   47:23
+Yeah, yeah, I can like try to increase it. Currently we have like concurrency as four. So yeah, but like previously when I was trying it, I I was hitting like a lot of times.
+
+Colin Moore   47:24
+Which should be enough.
+Mhm.
+
+Saurav Kumar Mishra   47:38
+What do you call 529 errors like so that's why I kept it as like 4 because even if we want to divide it for like 7-8 or 10 files. So instead of like what do you call it, it can pass that.
+
+Colin Moore   47:42
+Yeah, yeah.
+
+Saurav Kumar Mishra   47:58
+7-8 files in two tries instead of giving for like 3 and going for like 3 tries so.
+
+Colin Moore   48:04
+Mhm.
+
+Saurav Kumar Mishra   48:06
+And yeah, if it totally works out, I can try this with what you call 8 or 9 concurrency as it. If that runs fine like maybe for demo and we can have it like for 8:00 or 9:00 so that just so that all over parallel process fire like properly.
+
+Colin Moore   48:13
+Mhm.
+
+Saurav Kumar Mishra   48:22
+Cool.
+This is also proper like uh this throw. This shows that it is throttling. It is not throttling sorry.
+
+Colin Moore   48:33
+And actually, that's what I'm gonna try to do right now. I'm gonna just try to increase the quota.
+
+Saurav Kumar Mishra   48:39
+Yeah.
+OK.
+
+Colin Moore   48:42
+Oh.
+
+Saurav Kumar Mishra   48:46
+I think.
+So as you saw the as like the new mapping agent run ran, we have like the a new spinner here for like the mapping. So yeah.
+
+Colin Moore   49:00
+Mhm.
+
+Saurav Kumar Mishra   49:05
+And yeah, we have like 3-4 things in here like yeah, I don't know if you have if you saw like the I don't know if they released it or it got leaked. But yeah, they leak cloud codes like whole code base.
+
+Colin Moore   49:22
+Yes, yes, I saw that. That was the.
+
+Saurav Kumar Mishra   49:23
+Yeah.
+In my opinion they did it intentionally because there is no way a source file happens to be get placed with like the what do you call latest things they are planning on like a new release or the new push so.
+
+Colin Moore   49:42
+Right, right. I mean, I I'll, I'll tell you right now, there's there's something that's really funny that people keep saying, and it's so funny to see the anthropic fight with Open AI. It's so funny, like genuinely, like very funny for me. So what the secret is here is that.
+Open AI just got done buying out all these different companies for the stuff to do. Basically what Cloud code does, and then Cloud code lets them buy them, waste all their money and then says, Yep, we're gonna give it to the world anyway.
+
+Saurav Kumar Mishra   50:11
+Mhm.
+Yeah, right. It is 3:00 PM, right? Yeah.
+
+Colin Moore   50:17
+Yep.
+That's the the funny part.
+Yeah.
+Good PR too.
+
+Saurav Kumar Mishra   50:25
+Yeah.
+
+Colin Moore   50:27
+OK, all right, so this this is here.
+Map is going on and requesting quota right now. I don't think we'll get it in the same time, but.
+
+Saurav Kumar Mishra   50:42
+Mhm.
+
+Colin Moore   50:43
+We'll see about the rest.
+Mhm.
+
+Saurav Kumar Mishra   51:04
+Maybe add a button which can like move through the stages and while you are talking just click through the stages and it will load all the data as it has already processed once and cached once and the real process may be running in the background just because it is taking time if you are not able to obviously solve the time issue.
+Cool. Cool.
+
+Colin Moore   51:25
+Right.
+Well, I yeah, 'cause I think that's not a bad idea at all. Um.
+Even for the cache run, because that it could still take like a reasonable amount of time per per block. But I think what's happening right now is you're just getting throttled. I because I I think that's all that's happening right now.
+
+Saurav Kumar Mishra   51:42
+Mm-hmm.
+Yep, Yep. Most likely, yeah.
+
+Colin Moore   51:49
+See this.
+So I just requested quota for one.
+
+Saurav Kumar Mishra   51:59
+Because we are like firing parallel in parallel like crazy. Let me show you land drop. No, let me share my screen.
+
+Colin Moore   52:10
+Yeah, that's another thing I need to get our Langsmith pulled up to.
+
+Saurav Kumar Mishra   52:14
+Yeah, Langsmith. Yep. OK, so.
+This looks like a good one.
+So this is basically like the starting point. So if they are firing in, these are like the API calls. These are your nodes. OK, so this is like it did a like a single API call here, then it did tool calls here, then another API call.
+Here and we had it is like just after this is completed we are starting these data stage data, sorry DDL parser as well as SQL interpreter. So if you see here these are all starting at like the same line. So these are like 4 files.
+Firing in parallel with these stages firing in parallel, so 3 stages. So it's like 7-8 request going in parallel everything this year. OK, similarly when we go through pattern mapper, we just have like a single Opus as I told you.
+In SQL generation also first it plans then generate like the first independent independent stages, then it generates all like the dependent stages. So this whole like runtime is like this much. Then it comes to like the SQL gate, the deterministic ones.
+
+Colin Moore   53:43
+Mhm.
+
+Saurav Kumar Mishra   53:47
+What you call they can easily we can what you call finish them, but most of that time is taking for like the LLM gateway which we have added in here for like the SQL gate. Then we have configuration as I told you like 3 for like the three different YAM deployment.
+
+Colin Moore   54:01
+Mhm.
+
+Saurav Kumar Mishra   54:07
+The normal YML configuration as well as the HPL. So we are firing these three in parallel again, then checking for like the configuration and similarly we are checking like the LLM part of the configuration here. Yep.
+
+Colin Moore   54:12
+Mhm.
+Mhm.
+
+Saurav Kumar Mishra   54:23
+You see here we are passing though whatever happened in our deterministic check in this like gate we are passing that as well as here is like this generated XML your deployed HTM XML as well as like.
+Generated spark for like cross type references and then we are asking it to like uh filter out. OK give us uh responses for these.
+
+Colin Moore   54:48
+Mhm.
+
+Saurav Kumar Mishra   54:56
+You'll see. So if you want to here inside Langsmith, if you want to see suppose a node input output, we can check here directly on these blue ones so it will show you exactly. This is our Langraph's initial state.
+What it uh started out with in let's do this OK.
+We have pattern mapping the source artifacts. These got loaded in our like orchestrator loaded the source artifact, the 11 source artifacts, the schemas, everything which got loaded in for this table. What exactly are the columns?
+And like the type and all of those things. OK as I have clicked on this SQL spark generator. So you see this spark generator is currently null, but we have this SQL interpreted.
+Which we started here in like this stage, the scale interpreter stage. So this is what it interpreted. So in here also we have like these business rules which it has extracted for each of these vertical files.
+So we have these files tempo everything is is empty. Then it just gives us for this what do you call spark generation. This is the current state and this is like our spark output.
+
+Colin Moore   56:10
+Mhm.
+Mhm.
+
+Saurav Kumar Mishra   56:26
+Make the whole transformation.
+
+Colin Moore   56:28
+Mhm.
+
+Saurav Kumar Mishra   56:29
+So if you want to see like uh what you call uh.
+Agent level or LLM level task, what exactly happened, what went in, what went out or how how we are doing it parallely. So everything we can check inside this waterfall model. Yep.
+
+Colin Moore   56:49
+Mhm.
+And so one one question for you. So on this I got I see one error and then I see one more thing. So I haven't connected in with the same project ID that you have.
+
+Saurav Kumar Mishra   57:02
+Yep, Yep.
+Uh huh.
+
+Colin Moore   57:06
+It's showing me the last run from 17 minutes ago. Is it only showing them after they finish?
+
+Saurav Kumar Mishra   57:13
+Yep, so it is not like real time, but maybe couple of minute, not 15 minutes. Like it should be like a couple of minutes should be OK.
+
+Colin Moore   57:15
+OK.
+Mhm.
+OK.
+OK. Yeah.
+
+Saurav Kumar Mishra   57:24
+It does not like what you call update in real time, real time like the execution log itself is like the best place to see exactly what's happening. But within like a minute or a couple of minute we will see that on like the Langsmith page.
+
+Colin Moore   57:34
+Mhm.
+I see, I see. OK, so that's good. And then this one. So the only reason why I'm calling this one out, because I don't think this is going to be the problem thing, but this is the longest step. This is also the one with the error. I don't know what this error specifically is about.
+Um, but.
+
+Saurav Kumar Mishra   57:59
+OK, this is not like the longest step. So this is like our whole graph. OK And after we have like finished this graph, everything has been saved. But what do you call? There was a async task.
+
+Colin Moore   58:13
+Mhm.
+
+Saurav Kumar Mishra   58:19
+So that's generator. It's generator got what you call exited out. I will like yeah I will check this one over rather than in runs. You can check this in threads. See threads after run. Yeah up up.
+
+Colin Moore   58:24
+Mhm.
+OK.
+Mhm.
+
+Saurav Kumar Mishra   58:35
+OK.
+Here we will see like all of it has packet as well. So yeah.
+
+Colin Moore   58:43
+I see. I see.
+
+Saurav Kumar Mishra   58:45
+This is your whole one run and here you can change this. Just like it told uh you see uh on the top it says trace and turn here.
+
+Colin Moore   58:55
+I see. Yep. Mhm.
+There we go.
+
+Saurav Kumar Mishra   59:02
+Here also we should have a option of like waterfall. So it will show you like the same thing it was showing me. Yeah, waterfall.
+
+Colin Moore   59:07
+Mhm.
+Yeah, mhm.
+
+Saurav Kumar Mishra   59:16
+It's up like there we have the what do you call filters if you see at the top, yeah so we can add filters if we want to next to it. Also we it's currently not in like it is normal view.
+
+Colin Moore   59:22
+Mhm.
+
+Saurav Kumar Mishra   59:35
+And this one is like your waterfall you. So the orchestrator itself will show you how much time it is taking plus like if you see everything. So it's kind of like waterfall what it is. If you Scroll down you can see through it like everything.
+
+Colin Moore   59:36
+Mhm.
+Mhm.
+Mm-hmm.
+Mhm.
+See you.
+
+Saurav Kumar Mishra   1:00:12
+So this and like attribute it's OK. We don't usually don't want it. Main things are input outputs. If we want individual like what you call LLM level outputs, you can click on these chat and tropics.
+
+Colin Moore   1:00:15
+Mm-hmm.
+Mhm.
+Mhm.
+
+Saurav Kumar Mishra   1:00:30
+OK and if we want stage level output we can click on those blue pattern mapper or SQL generator. What are coming in blue? Those are like node level and the orange one is like LLM level.
+
+Colin Moore   1:00:31
+Mhm.
+Mhm.
+I see. I see. OK.
+That sounds cool.
+Mm-hmm.
+Mhm.
+
+Saurav Kumar Mishra   1:01:09
+That one output one of the fields of Lang Langraph is output of this part. Yep. So you see current pattern mapper completed and it is filling in this pattern mapping feed. Yep.
+
+Colin Moore   1:01:15
+Mhm.
+Is.
+This is pretty cool. It's been a long time, so.
+
+Saurav Kumar Mishra   1:01:32
+Yep, similarly like it's really good these. If you click on these what you call deterministic gates also you can see like it's not just about the LLM ones, you can see like the deterministic gates output as well.
+
+Colin Moore   1:01:33
+They've made this so much better.
+
+Saurav Kumar Mishra   1:01:49
+If you want to what you call see why exactly like the LLM made that kind of call here or we have step validation error like output we have like total 8 checks if you open those now.
+
+Colin Moore   1:01:56
+Mhm.
+Mm-hmm. So like for instance, like this gate mapper.
+
+Saurav Kumar Mishra   1:02:05
+Uh, it will open.
+Yep, Yep, it works. Then output.
+And you open the step validation, Yep.
+So this is actually what happened. So four out of five are passed. One is about character mapping. Is it empty or not? Source table are all source present or not even if like it is for calling out for the source.
+It should not be like any hallucinated source. OK, so it's basically checking mention of source tables. Similarly source reference. So here I think it is missing this then mapping. Is it like present or not? Is it what you call hallucinating or not? So similar kind of thing.
+
+Colin Moore   1:02:39
+Mhm.
+
+Saurav Kumar Mishra   1:02:55
+Here also like column mapping, type mapping, source reference. So these kind of things we are checking in like single gates if you want to go down to like simple yeah what exactly feeds we are tracking.
+Similarly for all the gates, we will have these results.
+
+Colin Moore   1:03:14
+I see. Mm-hmm.
+And for instance, if I go here to get SQL, same thing, step validation you can see.
+
+Saurav Kumar Mishra   1:03:20
+Uh, hey.
+And here also we have a step validations are deterministic checks OK and in this one we also have gate LLM check if you see on top now a current state where we are starting out.
+
+Colin Moore   1:03:33
+Mhm.
+Mhm.
+
+Saurav Kumar Mishra   1:03:42
+We have these zero and one, correct? Yeah, these are your LLMJ checks. So this is checking your business logic. OK, it made 17 findings. So we have these good like nested objects and like all the what do you call all the outputs are pretty structured. You can see I put in a lot of.
+
+Colin Moore   1:03:45
+Mhm.
+T.
+Mhm.
+Mhm.
+Hmm.
+Yes, yes, absolutely.
+
+Saurav Kumar Mishra   1:04:05
+We be because I was thinking this like what will be a good example to like even if we want to replicate any other like agentic demo. So this exactly shows what kind of structured output we want so that the.
+
+Colin Moore   1:04:05
+This is great.
+Mhm.
+
+Saurav Kumar Mishra   1:04:25
+The cycle itself continues, so.
+
+Colin Moore   1:04:26
+Mhm.
+No, this is great. Really great.
+Wow.
+I'm, I'm. I mean, you did put a lot in into this and I'm glad you did because this is no one. I'll put it this way. No one will have any question that cannot be answered from this. You know, that's a great thing.
+
+Saurav Kumar Mishra   1:04:42
+Yeah, currently like we don't even have this much space to show everything on the front end and I did not want to make like the demo itself like too info intensive you can say.
+
+Colin Moore   1:04:58
+Right, right.
+
+Saurav Kumar Mishra   1:04:59
+Because we have a lot of thing which we have not surfaced on like the front end you'll see on like the Langsmith, we have all of these fields. Whatever you see in this output or input, those are in Langraph states, so those are already present. You can consider them as like a.
+Jason object which we are building throughout this whole land graph and whenever we have one field of that Jason object present, it goes in and fills in that part of the object and we can fetch like any detail we want or surface any of these details we want in any stages.
+
+Colin Moore   1:05:30
+Mhm.
+
+Saurav Kumar Mishra   1:05:37
+Yep.
+
+Colin Moore   1:05:38
+Mhm.
+
+Saurav Kumar Mishra   1:05:42
+That's I am. I was even like, do we even need a UI? Because Lang Langschmid does a better job in my opinion.
+
+Colin Moore   1:05:48
+Well, well, honestly, I mean that's, I'll put it this way. I think I'm glad that we have this because this is, this is going in the, you know, demo portfolio. So whenever we want to show people a nice agentic workflow with land graph.
+Like actually working, we have something great now and long time for them. Do they want to see a UI? We will find that out today because I think, I'll put it this way, I think for non-technical people, Yep. But I think for technical people they're going to say this is really nice but also.
+
+Saurav Kumar Mishra   1:06:16
+Yeah.
+
+Colin Moore   1:06:24
+So if I have Langsmith that does the same for me, maybe with less effort for you. So this is nice to have and you know, makes it look nicer and makes it more digestible. But maybe they'll say it's always good to just know that we have this and we don't need to go too crazy on here, so we don't duplicate what's already on here.
+
+Saurav Kumar Mishra   1:06:31
+OK.
+Yeah, yeah, totally makes sense. And we even have like a what do you call API available on back end for like Langsmith. So if you want to access any of those details or just create like a dashboard just based on those details, we can like directly hook their.
+Yeah.
+
+Colin Moore   1:07:05
+Right, right.
+So I guess, I mean, I'll put it this way. Is there anything I I feel good right now. I mean, is there anything that we're missing that we haven't covered in this?
+
+Saurav Kumar Mishra   1:07:18
+Um, let me think. Um.
+I don't think so. I think we have covered like everything.
+All the stages done, so it's files done, target files done and.
+I've not set this up using this. This is currently we are using Langsmith just for what you call.
+
+Colin Moore   1:07:35
+Yeah.
+Oh, right, right, right. Yeah.
+
+Saurav Kumar Mishra   1:07:44
+Tracing. Yeah, on the back end we did use like Langsmith. I was thinking of using it's like Playground or Studio to develop it, but then I was like what if they are asking like money to get this out?
+
+Colin Moore   1:07:45
+Yeah, that's what I I figured.
+
+Saurav Kumar Mishra   1:08:02
+Yeah, yeah.
+
+Colin Moore   1:08:03
+Right, right, right.
+Yeah, we can do this and I can say 'cause I know the error rate thing. Boom, look done. Call it a day.
+done. Um, no.
+
+Saurav Kumar Mishra   1:08:16
+Yeah, one issue which I found was like not even an issue, just something to look out for because I had run this around like 40-50 times, correct?
+So main thing is like the as we are just running this one use case, correct? So the project name itself is always the same inventing, sorry, inventory, periodic, whatever. OK, so yeah that maybe we can have.
+
+Colin Moore   1:08:45
+Mhm.
+
+Saurav Kumar Mishra   1:08:50
+Like a couple of hard coded things in there in your database which will populate so that it for just show that yeah we have run, we can have different type of reports in here.
+
+Colin Moore   1:09:03
+Right, right. Yeah, good idea. Good idea.
+
+Saurav Kumar Mishra   1:09:08
+Yeah, working when will only be like the new run or the ones you have run for orchestrator, but just to show on the front end.
+
+Colin Moore   1:09:09
+Oh.
+Right. Yeah, it's not bad. That's not bad. So let me let me do this. OK, because.
+So if if there's any last things that you want to change, I don't know. I know there were a few things that you said you wanted to finish up. If if there, if you still want to do that, completely fine. I'm gonna I already have a copy of this on my local. I'm gonna keep it running until I can show the other version running so.
+
+Saurav Kumar Mishra   1:09:42
+Mhm.
+
+Colin Moore   1:09:50
+So don't worry about if anything gets messed up 'cause I'll always have the backup.
+
+Saurav Kumar Mishra   1:09:55
+Stop the shop.
+
+Colin Moore   1:09:56
+That you know this is good. I put in the two quota requests both for Opus and for Sonnet.
+
+Saurav Kumar Mishra   1:10:01
+Mhm.
+
+Colin Moore   1:10:02
+For basically a 4X5X improvement on the token overhead.
+
+Saurav Kumar Mishra   1:10:07
+OK. Yeah.
+
+Colin Moore   1:10:09
+So we'll see if that happens. I don't know, but you know, fingers crossed. If it does, if it doesn't, I mean, who's to say that's even the.
+You know, that's even a thing, so we'll we'll look out for this.
+
+Saurav Kumar Mishra   1:10:21
+Yeah.
+
+Colin Moore   1:10:24
+Uh.
+
+Saurav Kumar Mishra   1:10:24
+Sure.
+
+Colin Moore   1:10:25
+Let me do this. I'm gonna.
+Go through my notes here. I'm gonna try try some things out. You do not have to be late because it's gonna be late your time, but I'll ping you if there's anything at all that comes up in in terms of, you know, trying out the demo. I have the silly leadership meeting here from what?
+
+Saurav Kumar Mishra   1:10:40
+Mhm.
+
+Colin Moore   1:10:48
+In about 45 minutes I have it for an hour, but honestly I'm going to either have my camera off and be testing during that going through notes or something else. So if if I have any remaining things, I'll ask them before it's too late your time.
+
+Saurav Kumar Mishra   1:10:57
+Mhm.
+
+Colin Moore   1:11:05
+But I also am not expecting a response. Don't think I'm asking you to get on a call at 1:00 AM. Not gonna happen. But yeah, I'll go through everything on my side for this. The only thing I would ask is if.
+there is anything that you do want to change at all, just, you know, have some time to do it. Let me know whenever you're ready. We can go.
+
+Saurav Kumar Mishra   1:11:26
+Yeah, so Yep, not change, but something I would like to point it out as this is like not based on any framework for the front end, correct. So we have very.
+Stick with glue kind of thing for the front end part for on the DAG portion correct the whole animation which we show. So if there is if yeah disclaimer kind of if you ever try on the demo.
+
+Colin Moore   1:11:46
+Mhm.
+
+Saurav Kumar Mishra   1:12:02
+To click on that we clicked on auto fix correct. There was another button beside it reject and retry. OK if you click on that one it will bring you to the DAG screen. However as we are not able to control like which DAGs are lit so.
+
+Colin Moore   1:12:07
+Mhm.
+I see. Mm-hmm.
+
+Saurav Kumar Mishra   1:12:22
+Are unable to show like the retry over there correctly, but on the execution log it will run properly. Everything is running properly. It's not like the retry is broken, but like the tag light up get messed up whenever we are retrying on that.
+
+Colin Moore   1:12:25
+I see.
+Mhm.
+
+Saurav Kumar Mishra   1:12:38
+Uh, using that button to yeah, something to look out for, yeah.
+
+Colin Moore   1:12:42
+Good to know, good to know. No, that's good. I think for for demo's sake, I'm gonna stick with the the fix because that's a cool thing. I mean that's that's a really nice thing to see and even just to show them, hey, it's like cloud code except you don't have to, you know, you get to be in the kind of the control center for for all the different runs. You don't have to, you know.
+Have individual cloud sessions like this, so that's super cool.
+
+Saurav Kumar Mishra   1:13:05
+Yeah, yeah. And even if we want now. So as you if you look at those reviews, so those those are kind of like pointers as well as like what exactly changes we can do for them. So if we really go into.
+The depths of it we can also create kind of like a editor there itself. So you open the preview and you can like fix code directly in line or if you want to do a edit kind of thing like manually write something or just copy, paste or move around.
+Numbers you can directly do edit and then approve those requests after the after the review. So if we want we can have that thing also at the end. These are just like add-ons. If they want we can have anything so.
+
+Colin Moore   1:13:49
+Mhm.
+I see.
+Mhm.
+Right, right.
+Yeah. And then I think the only other one that I can think of is that if there's anything that I should run on my side for the database, you know, like I think what was it? It was the pipeline stages.
+
+Saurav Kumar Mishra   1:14:18
+Yeah, I am adding that like so it was basically missing like a check if the DB like the table was not present. So I'm just adding if it is not present, just create it. Yeah, that's that.
+
+Colin Moore   1:14:20
+OK.
+OK, yeah.
+Perfect.
+And good. OK, Sir, so let's do this. So we can end for right now. I'm going to get my notes, my thoughts in order. I'm. I've been taking notes while you've been talking. That's why I've been quiet.
+
+Saurav Kumar Mishra   1:14:44
+Mhm.
+
+Colin Moore   1:14:49
+I'll make sure that I have all my information that I can talk like I know something about this.
+
+Saurav Kumar Mishra   1:14:54
+Mhm.
+
+Colin Moore   1:14:56
+And then while I'm doing that, if you are able to do that, just the database load thing in the background 'cause that'll make my pipeline stages show up. So that'll be good for demo's sake of in case they wanna see the second thing like see two runs.
+Um.
+
+Saurav Kumar Mishra   1:15:13
+Yeah, yeah, sure, sure.
+
+Colin Moore   1:15:14
+Interrupt.
+And then if if anything happens, if anything changes, I will ping you. But as far as I'm concerned, you know, do not feel like you're on the hook for anything beyond normal hours. So if you happen to see it, great. If you don't, that's OK. But you know, right now it's everything looks amazing. So thank you. I mean, it's really.
+Really good work. I'm I think the only thing I'm sad about is that you don't get to do the demo, but at least you get to have some reasonable sleep.
+
+Saurav Kumar Mishra   1:15:44
+No worries. I will check like if maybe I'm available, so maybe I will join in the call. Yeah, I if I am like awake at that time, I may not be able to not in a state to give the demo, but.
+
+Colin Moore   1:15:44
+But.
+Yeah, I mean.
+
+Saurav Kumar Mishra   1:16:04
+Yeah, maybe I can just join in if they have any kind of like doubts or you want to ask any question. So yeah, maybe I can be available, but yeah, I cannot say for sure.
+
+Colin Moore   1:16:07
+Yeah, well, let me.
+
+Saurav Kumar Mishra   1:16:22
+Uh, don't quote me on the matter.
+
+Colin Moore   1:16:25
+If if you, I'll put it this way, sorry, if you are there, I expect you to not be on some of the meetings on Friday.
+Is that, you know, you gotta get some rest at some point.
+
+Saurav Kumar Mishra   1:16:38
+Yeah.
+
+Colin Moore   1:16:40
+So hopefully, let me see. Hopefully you got I I forwarded you the invite again. I know it's it's literally going to start at 3:30 AM your time. So don't don't just don't stretch yourself then. I mean you already did a ton of work for this so.
+
+Saurav Kumar Mishra   1:16:41
+OK.
+Ha.
+
+Colin Moore   1:16:57
+You know, take take the time you need.
+
+Saurav Kumar Mishra   1:16:57
+Yeah, yeah. So this is what I was talking about. So if you see we have different run IDs, these are like different. So we can see if we want to check this run, what exactly happened. See so many errors. These are not even errors. So most of these are like our.
+Call false positive. That's that's the only reason like I have to add this like AI review in here so.
+
+Colin Moore   1:17:23
+I see. I see.
+
+Saurav Kumar Mishra   1:17:27
+And yeah, as you see inventory period, daily inventory because this is the same report we are running right? Yeah. And it already has like date time. So I did not add like date time in a year. So this can be like something kind of off putting.
+
+Colin Moore   1:17:35
+Right.
+Mhm.
+
+Saurav Kumar Mishra   1:17:44
+But if you have not run it these many times, so I was just saying like suppose inventory daily, inventory weekly, all SQS or something else like just add some runs on the database end like yeah.
+
+Colin Moore   1:17:58
+Right.
+
+Saurav Kumar Mishra   1:18:00
+These are also working if you want to show if you have those in your end. Yeah, this is something that is broken, but I don't know if that will happen in what you call the demo or not. So this basically what was happening.
+
+Colin Moore   1:18:06
+Mhm.
+
+Saurav Kumar Mishra   1:18:19
+So whenever we are doing like more than one or two retry, so it's basically 15 step till like the human approval is done. But if after that we are what you call reject and retrying so it run 3-4 more steps then again reject retrying so it goes over like 15.
+Here we are 22201921, yeah, so.
+
+Colin Moore   1:18:39
+Mhm.
+I see. I see. No. Makes sense. Makes sense. That's easy. That's a small thing.
+
+Saurav Kumar Mishra   1:18:49
+Yeah, yeah.
+Cool. I don't think anything else I'm missing or missing here. Yeah, we are currently not clickable, but if you want to like pitch to them so we can see like that, you can also decide like, yeah, we can have.
+
+Colin Moore   1:18:52
+OK.
+
+Saurav Kumar Mishra   1:19:11
+Drop down for like different target platforms here change retries. We can have like different models here also Yep then demo files and even like if they want to once we have the.
+
+Colin Moore   1:19:21
+Mhm.
+
+Saurav Kumar Mishra   1:19:28
+MCPS and all present. Where did that work? Oh cool, I it's good I caught it. So if you see like the configuration then top screen somewhere.
+
+Colin Moore   1:19:37
+Mhm.
+Mhm.
+
+Saurav Kumar Mishra   1:19:42
+I started again.
+
+Colin Moore   1:19:43
+Yes, I think probably if you if you zoom out on your screen, I think that was, I think that was it. I think it was just view constrained by viewport height. That's what I 'cause I saw it on mine, yes.
+
+Saurav Kumar Mishra   1:19:52
+Uh, uh, yeah.
+
+Colin Moore   1:19:55
+Yeah.
+
+Saurav Kumar Mishra   1:19:55
+It's here. OK, what was I was saying? Yeah, we can have like different things here and even if we want we can also have suppose a connector column in here and like different source listed so.
+Like MCP connectors, it can directly pick up those also if they want obviously. And then yeah, I don't think we are missing anything else.
+
+Colin Moore   1:20:14
+Mhm.
+Right, right.
+
+Saurav Kumar Mishra   1:20:28
+Yeah, these are just for show. Yeah, these look good, but do not do anything. If you want to collapse this, we do have this button to collapse and we have this progress bar. Yeah, OK.
+
+Colin Moore   1:20:34
+Mhm.
+Mhm.
+Mhm.
+
+Saurav Kumar Mishra   1:20:43
+Which shows like the progress for the whole thing. And yeah this is also collapsible but we do not have like icon so it goes blank. Maybe no need to collapse this at those time and after we have done the run. So suppose you are checking on previous runs.
+
+Colin Moore   1:20:57
+Mhm.
+
+Saurav Kumar Mishra   1:21:03
+So I've made these like now clickable. So if you want to see like any previous run which you have run which you have like attempted so you can even go to like the main page and then select any one of these.
+And uh, go through any of these after it has completed.
+
+Colin Moore   1:21:21
+Mhm.
+Mm-hmm.
+Okay.
+
+Saurav Kumar Mishra   1:21:27
+I've also tried to add these also, but it bet best not to open these by clicking the stages. It it do has like data in it, but I thought it is not that much necessary like.
+
+Colin Moore   1:21:36
+Mhm.
+
+Saurav Kumar Mishra   1:21:44
+To surface everything, but if they really need it, as you saw in like the Langsmith, we do have each stages input, output and everything present. If we want to surface those inside this tag, we can do it, but it was just getting too much hassle to manage all the.
+
+Colin Moore   1:21:45
+Mhm.
+
+Saurav Kumar Mishra   1:22:04
+JavaScript on like in without any frameworks, so that's why I left it out, yeah.
+
+Colin Moore   1:22:07
+Mhm.
+Makes sense. Makes sense. And I mean for again, for a demo, we're we're all good. I think it even for a demo, it looks really, really good and that's the the trick. So it looks like we used a framework, frankly, but you know that's a good thing. That's a compliment to to you, so.
+
+Saurav Kumar Mishra   1:22:22
+Mhm, mhm.
+Thanks. Thanks.
+
+Colin Moore   1:22:28
+You kind of build your own mini mini temporary framework for for this, which is awesome.
+
+Saurav Kumar Mishra   1:22:37
+It's just there are like better, better front end developer. It's not like that so.
+
+Colin Moore   1:22:38
+Oh.
+OK, it's uh, yeah, but do it in, uh, less than a week. Yeah, we'll see about that.
+All right, let me let me run on to the next one with Yogesh. But like I said, I'm going to get my all my thoughts in order here. I'm going to get my kind of talking script going and I will ping in case of anything just on your end if there's once you finish things, if you want to, I think still.
+
+Saurav Kumar Mishra   1:22:50
+Oh.
+
+Colin Moore   1:23:10
+Even if you don't, we're still not in bad shape at all. If you want to make the last final things, just let me know when to pull and I will do that. Or if there's anything I should run on my side either, I can do that too.
+
+Saurav Kumar Mishra   1:23:13
+Mhm.
+Yep.
+Yep Yep sure. I will make sure to ping this like database creation when I'm handling. Do we want new tables in the database pre add in? Should I add those as well like in the commands that it prefills like the project name and couple of run IDs and?
+Best bus, just for sure sure.
+
+Colin Moore   1:23:45
+Yeah, yeah, you could do that. And I would just keep it. I wouldn't do too many, like maybe like 3 or 4, something like that. Um.
+
+Saurav Kumar Mishra   1:23:52
+Yeah, sure, sure. One for like a couple of pass, one in pending and one failed. Something like this, correct? Yeah.
+
+Colin Moore   1:23:54
+Yeah.
+Right, right.
+
+Saurav Kumar Mishra   1:24:02
+Yeah.
+
+Colin Moore   1:24:04
+All right.
+
+Saurav Kumar Mishra   1:24:04
+Sure.
+
+Colin Moore   1:24:07
+Well, good. Well, thank you again. This is awesome. So I'm I'm excited to show them. They're probably so excited to see. So I will record the meeting too. So no matter what, you'll be able to see how it goes. And you know, if I if I do it proper justice, so.
+
+Saurav Kumar Mishra   1:24:21
+You will do it justice, I know.
+
+Colin Moore   1:24:24
+I'll make sure I do. I will make sure I do.
+Well, good. Well, take care. Try to get some rest eventually. You know, again, only you don't not have to feel like you need to join. If you want to, you can be, but otherwise I will record it for you and no matter what, rain or shine, I'll be OK. So.
+
+Saurav Kumar Mishra   1:24:45
+Yeah, sure.
+
+Colin Moore   1:24:46
+Don't worry.
+Uh.
+
+Saurav Kumar Mishra   1:24:50
+You need anything? Just ping me. I'm available at least in the next 2 1/2 hours, right? Yeah, OK.
+
+Colin Moore stopped transcription

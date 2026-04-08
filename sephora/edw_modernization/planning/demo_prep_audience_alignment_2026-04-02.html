@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo Prep: Audience Alignment - Sephora EDW</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+      --green: #16a34a;
+      --amber: #d97706;
+      --red: #dc2626;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    .cover {
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: #fff;
+      position: relative;
+    }
+
+    .cover-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--purple-glow);
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 44px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+
+    .cover .subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      opacity: 0.85;
+      line-height: 1.5;
+      max-width: 600px;
+    }
+
+    .cover-meta {
+      margin-top: 40px;
+      font-size: 13px;
+      opacity: 0.7;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 40px;
+    }
+
+    .section {
+      margin-bottom: 48px;
+    }
+
+    .section-number {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 28px 0 12px;
+    }
+
+    p { margin-bottom: 14px; }
+
+    .lead {
+      font-size: 17px;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
+    .person-card {
+      background: linear-gradient(135deg, rgba(124,58,237,0.04) 0%, rgba(168,85,247,0.08) 100%);
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+    }
+
+    .person-card .name {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .person-card .title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--purple-accent);
+      margin-bottom: 12px;
+    }
+
+    .person-card .quote {
+      background: var(--white);
+      border-left: 3px solid var(--purple-accent);
+      padding: 12px 16px;
+      margin: 12px 0;
+      font-style: italic;
+      color: var(--text);
+      font-size: 14px;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .person-card ul {
+      margin: 8px 0 0 18px;
+      font-size: 14px;
+    }
+
+    .person-card li { margin-bottom: 6px; }
+
+    .want-list, .donot-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .want-list li, .donot-list li {
+      padding: 12px 16px 12px 44px;
+      margin-bottom: 8px;
+      border-radius: 8px;
+      font-size: 14px;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .want-list li {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+    }
+
+    .want-list li::before {
+      content: "\f00c";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      left: 16px;
+      color: var(--green);
+    }
+
+    .donot-list li {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+    }
+
+    .donot-list li::before {
+      content: "\f00d";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      left: 16px;
+      color: var(--red);
+    }
+
+    .phase-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .phase-card .phase-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .phase-card .phase-title {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 16px;
+    }
+
+    .phase-card .phase-time {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--white);
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .phase-card .maps-to {
+      font-size: 12px;
+      color: var(--purple-accent);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .phase-card p {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+
+    th {
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple-bright));
+      color: var(--white);
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    .avoid-card {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 8px;
+      padding: 12px 16px 12px 44px;
+      margin-bottom: 8px;
+      font-size: 14px;
+      position: relative;
+    }
+
+    .avoid-card::before {
+      content: "\f071";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      left: 16px;
+      color: var(--amber);
+    }
+
+    @media print {
+      .cover { min-height: auto; padding: 40px; }
+      .container { padding: 20px; }
+      body { font-size: 12px; }
+      .phase-card, .person-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-label">Internal Prep Document</div>
+  <h1>Demo Prep:<br>Audience Alignment</h1>
+  <p class="subtitle">Sephora EDW Modernization Demo. What Andrew and Grishi want to see, what to show, and how to frame every moment.</p>
+  <div class="cover-meta">April 2, 2026 | Demo at 6:00 PM ET | BayOne Solutions</div>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: WHO IS IN THE ROOM -->
+  <div class="section">
+    <div class="section-number">01</div>
+    <h2>Who Is in the Room</h2>
+    <p class="lead">Two people. One thinks strategically, one thinks operationally. The demo must satisfy both.</p>
+
+    <div class="person-card">
+      <div class="name">Andrew Ho</div>
+      <div class="title">Director, Enterprise Reporting &middot; Reports to Mani</div>
+      <ul>
+        <li><strong>What he cares about:</strong> Strategic feasibility. Can this compress a 3-year program to 1-1.5 years? Is the agentic approach real or just vendor talk?</li>
+        <li><strong>His vision:</strong> He independently articulated multi-agent orchestration before BayOne pitched it. Multiple small specialized agents, one master orchestrator, parallel execution.</li>
+        <li><strong>His concern:</strong> Expanded scope beyond just reports. Wants agents for BOTH report migration AND table data migration.</li>
+        <li><strong>What impresses him:</strong> Honesty about limitations. Proof over promises. Scalability arguments.</li>
+      </ul>
+      <div class="quote">"I just want to make sure the wild thinking is not wild, it's real, it can be done."</div>
+    </div>
+
+    <div class="person-card">
+      <div class="name">Grishi (Gariashi Chakrabarty)</div>
+      <div class="title">Director, Data Engineering, BI and Analytics &middot; Reports to Andrew</div>
+      <ul>
+        <li><strong>What she cares about:</strong> Execution reality. Her team does this work every day. They use Claude and get 30% efficiency. She needs to see dramatically more.</li>
+        <li><strong>Her pain:</strong> Manual workflow: navigate Cognos, open report, extract SQL, run through AI, get output, snap it back. Each step is human-limited.</li>
+        <li><strong>What impresses her:</strong> Working code, not slides. Specificity. Technical depth.</li>
+      </ul>
+      <div class="quote">"I just want to see that you guys have done something like this, that you've created agents capable of doing these kind of things."</div>
+    </div>
+  </div>
+
+    <div class="person-card">
+      <div class="name">Maher Burhan</div>
+      <div class="title">Enterprise Architect, Sephora Data Platform &middot; Employed by Xebia</div>
+      <ul>
+        <li><strong>What he cares about:</strong> Technical soundness. He has deep Cognos expertise (8 years at IBM), Databricks Unity Catalog experience, and works for a company that builds agentic migration tools. He knows what good looks like in this space.</li>
+        <li><strong>His role on this call:</strong> Trusted technical assessor for Andrew and Grishi. Added by them because they need an expert voice they trust to evaluate the demo.</li>
+        <li><strong>Engagement history:</strong> He was on the Set 04 technical deep dive call and suggested the disconnected demo approach. He is not new. He has seen Colin's architecture slides already.</li>
+        <li><strong>What impresses him:</strong> Technical precision. Honest limitations. Architecture that holds up under scrutiny. Do not oversimplify for him.</li>
+      </ul>
+      <div class="quote">See the full Maher assessment document for detailed risk analysis and predicted questions.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: WHAT THEY WANT -->
+  <div class="section">
+    <div class="section-number">02</div>
+    <h2>What They Want to See</h2>
+    <p class="lead">From Malika's scope email (written on behalf of the technical team) and direct statements from Andrew and Grishi across three meetings.</p>
+
+    <ul class="want-list">
+      <li><strong>Agent-driven orchestration across multiple tools</strong> (not one agent doing one thing)</li>
+      <li><strong>End-to-end workflow automation</strong> (extraction, interpretation, and downstream execution coordinated by agents)</li>
+      <li><strong>Task sequencing and dependency handling</strong> (how the pipeline manages what runs when)</li>
+      <li><strong>Parsing of their actual DataStage XML, stored procedures, and views</strong></li>
+      <li><strong>Output that fits their existing framework</strong> (Spark SQL + YAML configs for AggregationApplication, not notebooks)</li>
+      <li><strong>That the system learns from approved patterns</strong> (knowledge base)</li>
+      <li><strong>That it scales independent of people</strong> ("100 reports is the same as 1,000")</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 3: WHAT THEY DON'T WANT -->
+  <div class="section">
+    <div class="section-number">03</div>
+    <h2>What They Do Not Want</h2>
+
+    <ul class="donot-list">
+      <li><strong>Just code translation.</strong> "Code translation alone would not be the primary area we are looking to evaluate." They already do this with Claude.</li>
+      <li><strong>A product pitch.</strong> "No one has a package... Who can help us create this?" They want a custom solution.</li>
+      <li><strong>Spaghetti notebook code.</strong> Sergey: "Hundreds of windows inside a notebook. Nightmare to debug." Output must be clean YAML configs.</li>
+      <li><strong>Theory without proof.</strong> Both demanded a demo before committing. No more presentations.</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 4: DEMO FLOW -->
+  <div class="section">
+    <div class="section-number">04</div>
+    <h2>Demo Flow</h2>
+    <p class="lead">Seven phases. Each maps to something Andrew or Grishi specifically asked for. Open with the dashboard, not slides.</p>
+
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-title">Opening</div>
+        <div class="phase-time">2 min</div>
+      </div>
+      <div class="maps-to">Maps to: Credibility, "built for you"</div>
+      <p>Do NOT open with slides. Open with the dashboard. One sentence: "Everything you see was built specifically around your DataStage jobs, stored procedures, and source schemas over the last two weeks." Then start the pipeline.</p>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-title">Phase 1: Load Their Actual Files</div>
+        <div class="phase-time">2 min</div>
+      </div>
+      <div class="maps-to">Maps to: "Can it handle our specific data?"</div>
+      <p>Click "Load Demo Files" (their 9 actual files preloaded). Point out: these are Sephora's files. DataStage XML, stored procedures, DDLs, views, Databricks schemas, target framework examples. Click "Start Pipeline."</p>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-title">Phase 2: Watch the Execution Log</div>
+        <div class="phase-time">3-5 min</div>
+      </div>
+      <div class="maps-to">Maps to: "End-to-end workflow automation" and "task sequencing"</div>
+      <p>Live spinners show each agent step. Call out parallel parsers: "Three agents working simultaneously. DataStage parser analyzing XML, SQL interpreter extracting business rules, DDL parser mapping column types." When gates pass: "Deterministic checks, zero LLM cost, verifying tables exist in your source files."</p>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-title">Phase 3: Walk Through Gate Results</div>
+        <div class="phase-time">2-3 min</div>
+      </div>
+      <div class="maps-to">Maps to: "How does it handle quality?"</div>
+      <p>Open gate dropdowns. Show pass/fail checks: column mapping, source table grounding, SQL syntax. "LLM checks only run after deterministic checks pass, which saves tokens." This is for Grishi. She will want specifics.</p>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-title">Phase 4: Review Step</div>
+        <div class="phase-time">3-5 min</div>
+      </div>
+      <div class="maps-to">Maps to: "Human-in-the-loop" and "confidence score"</div>
+      <p>"97% confidence means the remaining items are not errors. They are small conversion items flagged for human review." Show the issues: warnings and infos, never errors. Click "AI Review" to show the audit. Explain: "An engineer would look at these and say 'I see this all the time.' That is the human-in-the-loop value."</p>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-title">Phase 5: Auto-Fix</div>
+        <div class="phase-time">2-3 min</div>
+      </div>
+      <div class="maps-to">Maps to: "Can the system self-correct?"</div>
+      <p>Click Auto-Fix (NOT reject-and-retry). "This is like Claude Code for your pipeline. It treats generated SQL as files and makes surgical edits based on review findings." This eliminates the manual iteration Grishi described.</p>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-title">Phase 6: Approve and Download</div>
+        <div class="phase-time">2 min</div>
+      </div>
+      <div class="maps-to">Maps to: "Does the output fit our framework?"</div>
+      <p>Click Approve. Download individual files. Show: Spark SQL (syntax highlighted), Pipeline YAML, Deployment YAML, Create.HQL. "These are the three config files Sergey described. They plug directly into your existing framework."</p>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-title">Phase 7: LangSmith (if asked)</div>
+        <div class="phase-time">Optional</div>
+      </div>
+      <div class="maps-to">Maps to: Technical deep-dive for Andrew/Grishi</div>
+      <p>If anyone asks "how does it work under the hood?" open LangSmith. Waterfall view shows every API call, every node, parallel execution visually. "No question you have cannot be answered from this."</p>
+    </div>
+  </div>
+
+  <!-- SECTION 5: TALKING POINTS -->
+  <div class="section">
+    <div class="section-number">05</div>
+    <h2>Talking Points by Concern</h2>
+
+    <table>
+      <tr>
+        <th style="width: 30%">Their Concern</th>
+        <th>What to Say</th>
+      </tr>
+      <tr>
+        <td><strong>"Is this real?"</strong> (Andrew)</td>
+        <td>The pipeline just processed your actual DataStage XML, stored procedures, and schemas. The output plugs into your existing framework.</td>
+      </tr>
+      <tr>
+        <td><strong>"Does it beat Claude alone?"</strong> (Grishi, 30% baseline)</td>
+        <td>Your team uses Claude for one step: SQL conversion. This automates the entire workflow. The efficiency gain compounds across all steps, and the deterministic gates ensure consistency that manual Claude interactions cannot.</td>
+      </tr>
+      <tr>
+        <td><strong>"What about old software versions?"</strong></td>
+        <td>Cognos and DataStage both have Java/.NET SDKs going back to 2003. For this demo we used exported files. In production, MCP connectivity replaces the manual export.</td>
+      </tr>
+      <tr>
+        <td><strong>"Does it fit our framework?"</strong> (Sergey)</td>
+        <td>Pipeline YAML, deployment YAML, and HQL. No Scala code, no notebooks. These work with your existing AggregationApplication framework.</td>
+      </tr>
+      <tr>
+        <td><strong>"Can it scale?"</strong> (Andrew)</td>
+        <td>Once agents and patterns are in place, 100 reports is the same work as 1,000. The knowledge base learns from each approved run.</td>
+      </tr>
+      <tr>
+        <td><strong>"What about Cognos MCP?"</strong></td>
+        <td>The MCP connector is the natural next step. A Java hook exists. Once we have access to your environment, the pipeline runs fully end-to-end.</td>
+      </tr>
+      <tr>
+        <td><strong>"What is the next step?"</strong></td>
+        <td>We can deploy on Azure with secure credentials so your team can try the workflow. Time-bound access, your data already loaded. Or we schedule a deeper session.</td>
+      </tr>
+      <tr>
+        <td><strong>"How does the agent architecture work technically?"</strong> (Maher)</td>
+        <td>LangGraph StateGraph with 15 nodes and 5 deterministic gates. Parsers use sqlglot for AST-based extraction before involving the LLM. Source grounding checks verify every generated name exists in the original artifacts. Retry loops pass specific error context back to the producing agent. LangSmith has the full execution trace.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- SECTION 6: THINGS TO AVOID -->
+  <div class="section">
+    <div class="section-number">06</div>
+    <h2>Things to Avoid</h2>
+
+    <div class="avoid-card">Do NOT click "Reject and Retry" (DAG animation breaks, use Auto-Fix instead)</div>
+    <div class="avoid-card">Do NOT interact with configuration dropdowns (non-functional placeholders)</div>
+    <div class="avoid-card">Do NOT mention cost per run or token counts (they will multiply by 6,000 reports)</div>
+    <div class="avoid-card">Do NOT say "migration" (Mani corrected this: "re-engineering, not migration")</div>
+    <div class="avoid-card">Do NOT oversell MCP (requires environment access, which means a contract)</div>
+    <div class="avoid-card">Do NOT dwell on the UI if they want technical depth (pivot to LangSmith)</div>
+    <div class="avoid-card">Do NOT use the word "product" (this is a custom solution built for them, not an off-the-shelf tool)</div>
+    <div class="avoid-card">Do NOT oversimplify the architecture (Maher has deep technical expertise and will notice handwaving)</div>
+  </div>
+
+  <!-- SECTION 7: GAP SUMMARY -->
+  <div class="section">
+    <div class="section-number">07</div>
+    <h2>Gap Summary</h2>
+    <p class="lead">15 items evaluated. 7 fully covered, 3 partial, 5 gaps. No deal-breakers. See full gap analysis for talking points on each.</p>
+
+    <table>
+      <tr>
+        <th>Capability</th>
+        <th style="width: 100px">Status</th>
+        <th style="width: 80px">Risk</th>
+      </tr>
+      <tr><td>Agent orchestration across tools</td><td style="color: var(--green); font-weight: 600;">COVERED</td><td>-</td></tr>
+      <tr><td>End-to-end workflow automation</td><td style="color: var(--green); font-weight: 600;">COVERED</td><td>-</td></tr>
+      <tr><td>Task sequencing and dependency</td><td style="color: var(--green); font-weight: 600;">COVERED</td><td>-</td></tr>
+      <tr><td>Parse DataStage XML</td><td style="color: var(--green); font-weight: 600;">COVERED</td><td>-</td></tr>
+      <tr><td>Interpret stored procedures/views</td><td style="color: var(--green); font-weight: 600;">COVERED</td><td>-</td></tr>
+      <tr><td>Map patterns to Spark</td><td style="color: var(--green); font-weight: 600;">COVERED</td><td>-</td></tr>
+      <tr><td>Generate YAML + SQL + HQL output</td><td style="color: var(--green); font-weight: 600;">COVERED</td><td>-</td></tr>
+      <tr><td>MCP server for Cognos</td><td style="color: var(--red); font-weight: 600;">GAP</td><td>LOW</td></tr>
+      <tr><td>Automated Cognos extraction</td><td style="color: var(--red); font-weight: 600;">GAP</td><td>LOW</td></tr>
+      <tr><td>Timeline compression evidence</td><td style="color: var(--amber); font-weight: 600;">PARTIAL</td><td>MEDIUM</td></tr>
+      <tr><td>Comparison to current Claude usage</td><td style="color: var(--amber); font-weight: 600;">PARTIAL</td><td>LOW</td></tr>
+      <tr><td>Running on Sephora infrastructure</td><td style="color: var(--red); font-weight: 600;">GAP</td><td>LOW</td></tr>
+      <tr><td>Table data migration</td><td style="color: var(--red); font-weight: 600;">GAP</td><td>MEDIUM</td></tr>
+      <tr><td>Knowledge base learning</td><td style="color: var(--amber); font-weight: 600;">PARTIAL</td><td>LOW</td></tr>
+      <tr><td>Multiple pipeline generalization</td><td style="color: var(--red); font-weight: 600;">GAP</td><td>LOW</td></tr>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

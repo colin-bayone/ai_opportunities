@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EDW Modernization: Demonstration Summary and Proposed Next Steps</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+      --green: #16a34a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    /* ── Cover ── */
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .cover-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--purple-glow);
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+
+    .cover .subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      opacity: 0.85;
+      line-height: 1.5;
+      max-width: 600px;
+    }
+
+    .cover-footer {
+      position: absolute;
+      bottom: 40px;
+      left: 80px;
+      right: 80px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      opacity: 0.6;
+      z-index: 1;
+    }
+
+    /* ── Container ── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 64px 40px;
+    }
+
+    .section {
+      margin-bottom: 64px;
+    }
+
+    .section-number {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 32px 0 16px;
+    }
+
+    p { margin-bottom: 16px; }
+
+    .lead {
+      font-size: 18px;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    /* ── Highlight box ── */
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin: 24px 0;
+    }
+
+    .highlight-box .box-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--purple-accent);
+      margin-bottom: 12px;
+    }
+
+    .highlight-box p {
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    /* ── Capability grid ── */
+    .cap-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .cap-card {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+    }
+
+    .cap-card .cap-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: #fff;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      margin-bottom: 14px;
+    }
+
+    .cap-card .cap-title {
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .cap-card .cap-desc {
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* ── Timeline ── */
+    .timeline-row {
+      display: flex;
+      gap: 20px;
+      margin: 24px 0;
+    }
+
+    .timeline-card {
+      flex: 1;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      position: relative;
+    }
+
+    .timeline-card .tl-badge {
+      position: absolute;
+      top: -12px;
+      left: 24px;
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+    }
+
+    .timeline-card .tl-title {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 17px;
+      margin-bottom: 6px;
+      margin-top: 8px;
+    }
+
+    .timeline-card .tl-hours {
+      font-size: 13px;
+      color: var(--purple-accent);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .timeline-card ul {
+      margin: 0 0 0 16px;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .timeline-card li { margin-bottom: 6px; }
+
+    /* ── Deliverables ── */
+    .del-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .del-item:last-child { border-bottom: none; }
+
+    .del-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .del-title {
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .del-desc {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* ── Access requirements ── */
+    .req-list {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+
+    .req-list li {
+      padding: 14px 18px 14px 50px;
+      margin-bottom: 10px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 15px;
+      position: relative;
+    }
+
+    .req-list li::before {
+      content: "\f058";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      left: 18px;
+      top: 15px;
+      color: var(--purple-accent);
+      font-size: 16px;
+    }
+
+    /* ── Next step CTA ── */
+    .cta-box {
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: #fff;
+      border-radius: 16px;
+      padding: 40px 44px;
+      margin: 32px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -15%;
+      width: 60%;
+      height: 180%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.2) 0%, transparent 60%);
+      transform: rotate(-12deg);
+    }
+
+    .cta-box .cta-content { position: relative; z-index: 1; }
+
+    .cta-box .cta-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .cta-box p {
+      font-size: 16px;
+      opacity: 0.9;
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+
+    /* ── Print ── */
+    @media print {
+      .cover { min-height: auto; padding: 40px; page-break-after: always; }
+      .container { padding: 20px; }
+      body { font-size: 11pt; }
+      .timeline-row { flex-direction: column; }
+      .cap-grid { grid-template-columns: 1fr; }
+      .section { page-break-inside: avoid; }
+      th, .cover, .del-icon, .cap-icon, .tl-badge, .cta-box {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ COVER ═══════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-content">
+    <div class="cover-label">Sephora EDW Modernization</div>
+    <h1>Demonstration Summary<br>and Proposed Next Steps</h1>
+    <p class="subtitle">Agent-driven ETL pipeline conversion for the enterprise data warehouse re-engineering program.</p>
+  </div>
+  <div class="cover-footer">
+    <span>BayOne Solutions | AI Practice</span>
+    <span>April 2, 2026</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ═══════ SECTION 1: WHAT WAS DEMONSTRATED ═══════ -->
+  <div class="section">
+    <div class="section-number">01</div>
+    <h2>What Was Demonstrated</h2>
+    <p class="lead">A multi-agent pipeline built specifically around Sephora's DataStage jobs, stored procedures, source schemas, and target framework over the past two weeks.</p>
+
+    <div class="cap-grid">
+      <div class="cap-card">
+        <div class="cap-icon"><i class="fa-solid fa-diagram-project"></i></div>
+        <div class="cap-title">Agent Orchestration</div>
+        <div class="cap-desc">Multiple specialized agents coordinating across parsing, interpretation, mapping, generation, and validation stages with deterministic quality gates between each step.</div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon"><i class="fa-solid fa-code"></i></div>
+        <div class="cap-title">DataStage ETL Conversion</div>
+        <div class="cap-desc">DataStage XML, SQL Server stored procedures, DDLs, and views parsed and converted to Databricks-compatible Spark SQL and YAML configuration files.</div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="cap-title">Deterministic Quality Gates</div>
+        <div class="cap-desc">Every agent output is validated by deterministic checks (zero LLM cost) before proceeding. Source table grounding, syntax validation, column mapping, and business logic verification.</div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon"><i class="fa-solid fa-file-code"></i></div>
+        <div class="cap-title">Framework-Compatible Output</div>
+        <div class="cap-desc">Generated output follows the existing AggregationApplication framework format: pipeline YAML, deployment YAML, and HQL table definitions. No new frameworks introduced.</div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon"><i class="fa-solid fa-user-check"></i></div>
+        <div class="cap-title">Human-in-the-Loop Review</div>
+        <div class="cap-desc">AI-powered review identifies conversion items for human validation. Auto-fix applies surgical corrections. The system learns from approved patterns for future runs.</div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon"><i class="fa-solid fa-bolt"></i></div>
+        <div class="cap-title">Parallel Execution</div>
+        <div class="cap-desc">Independent pipeline stages run concurrently. Three parsers execute in parallel. SQL generation plans a dependency graph and generates independent stages simultaneously.</div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="box-label">Key Result</div>
+      <p>The pipeline processed Sephora's actual source materials end to end and produced output that conforms to the existing production framework. The approach is proven. The remaining question is how to apply it across the full environment.</p>
+    </div>
+  </div>
+
+  <!-- ═══════ SECTION 2: PROPOSED NEXT STEPS ═══════ -->
+  <div class="section">
+    <div class="section-number">02</div>
+    <h2>Proposed Next Steps</h2>
+    <p class="lead">A focused two-week exploration to map the full complexity of the EDW environment and produce a data-driven engagement proposal.</p>
+
+    <p>The demonstration validated the approach on one pipeline. To provide an accurate engagement plan with real acceleration estimates, BayOne needs to understand the full distribution of report types, DataStage jobs, and data flows across the environment. This exploration also enables the Cognos MCP validation that was identified as a priority during the technical deep dive.</p>
+
+    <div class="timeline-row">
+      <div class="timeline-card">
+        <div class="tl-badge">Week 1</div>
+        <div class="tl-title">Guided Discovery</div>
+        <div class="tl-hours">Approximately 8 hours of meetings</div>
+        <ul>
+          <li>Technical SMEs walk BayOne through the full landscape of reports, DataStage jobs, and data flows</li>
+          <li>Understand the locations and structures across all tracks (finance, supply chain, merchandising, stores, e-commerce)</li>
+          <li>Validate Cognos MCP connectivity against the specific Cognos version and environment</li>
+          <li>Paced by Sephora's team availability</li>
+        </ul>
+      </div>
+      <div class="timeline-card">
+        <div class="tl-badge">Week 2</div>
+        <div class="tl-title">Autonomous Mapping</div>
+        <div class="tl-hours">Approximately 20 hours of analysis</div>
+        <ul>
+          <li>Build a comprehensive knowledge graph and dependency map of all reports</li>
+          <li>Classify every pipeline by type and complexity</li>
+          <li>Identify acceleration opportunities: where patterns repeat and where parallel execution compresses timelines</li>
+          <li>Produce the deliverables</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ SECTION 3: WHAT WE NEED ═══════ -->
+  <div class="section">
+    <div class="section-number">03</div>
+    <h2>What We Need from Sephora</h2>
+
+    <ul class="req-list">
+      <li><strong>Sephora accounts for two BayOne team members</strong> with read-only access within the confines of what is necessary for integration and exploration</li>
+      <li><strong>Cognos environment access</strong> to validate the MCP connector against the specific version in use, addressing the integration layer identified during the technical deep dive</li>
+      <li><strong>Read access to relevant data platforms</strong> (DataStage, SQL Server EDW, Databricks) as directed by Sephora's technical team, sufficient for complexity mapping and table migration assessment</li>
+      <li><strong>Technical SME availability for Week 1</strong> to walk through the locations, structures, and priorities across the environment</li>
+    </ul>
+  </div>
+
+  <!-- ═══════ SECTION 4: WHAT WE DELIVER ═══════ -->
+  <div class="section">
+    <div class="section-number">04</div>
+    <h2>What BayOne Delivers</h2>
+
+    <div class="del-item">
+      <div class="del-icon"><i class="fa-solid fa-map"></i></div>
+      <div>
+        <div class="del-title">Complexity Mapping and State Analysis</div>
+        <div class="del-desc">Full inventory of report types, DataStage job types, and data flows with complexity classification and distribution analysis. This is the foundation for accurate timeline and pricing estimates.</div>
+      </div>
+    </div>
+
+    <div class="del-item">
+      <div class="del-icon"><i class="fa-solid fa-plug"></i></div>
+      <div>
+        <div class="del-title">Cognos MCP Validation</div>
+        <div class="del-desc">Confirmation that the MCP connector works against Sephora's specific Cognos version and environment. This closes the loop on the integration layer identified as a priority during the technical deep dive and addresses the Track A scope.</div>
+      </div>
+    </div>
+
+    <div class="del-item">
+      <div class="del-icon"><i class="fa-solid fa-database"></i></div>
+      <div>
+        <div class="del-title">Table Migration Assessment</div>
+        <div class="del-desc">Assessment of what is needed for SQL Server to Databricks table data migration and identification of what the agent pipeline can automate. This addresses the data migration scope alongside the ETL pipeline conversion demonstrated today.</div>
+      </div>
+    </div>
+
+    <div class="del-item">
+      <div class="del-icon"><i class="fa-solid fa-file-lines"></i></div>
+      <div>
+        <div class="del-title">Data-Driven Engagement Proposal</div>
+        <div class="del-desc">Scope, timeline with acceleration estimates, and pricing for the full modernization effort, grounded in actual system complexity rather than flat assumptions. Includes identification of the flywheel opportunities where agents accelerate through pattern reuse and parallel execution.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ SECTION 5: WHY THIS APPROACH ═══════ -->
+  <div class="section">
+    <div class="section-number">05</div>
+    <h2>Why This Approach</h2>
+    <p class="lead">The most responsible path to an accurate engagement plan.</p>
+
+    <p>Without the exploration, any engagement estimate is a flat calculation: the total number of reports and data flows multiplied by the time required for one conversion. That approach does not account for the acceleration that agents provide through pattern reuse, knowledge base learning, and parallel execution.</p>
+
+    <p>The agent-driven flywheel only takes effect when there is a clear picture of the overall complexity distribution, both in terms of pipeline types and their relative complexity. Some pipelines will closely resemble the one demonstrated today and can move through the system with minimal human intervention. Others will present unique patterns that require additional configuration.</p>
+
+    <p>This exploration produces the data needed to distinguish between those categories and provide acceleration estimates grounded in the actual environment rather than assumptions. It also seeds the knowledge base with the real complexity distribution, so the agent flywheel begins accelerating from the first day of the full engagement rather than learning from scratch.</p>
+
+    <div class="highlight-box">
+      <div class="box-label">Additional Benefit</div>
+      <p>The exploration also validates the Cognos MCP integration, which was identified as a priority during the technical deep dive but could not be demonstrated without access to the Cognos environment. With access, BayOne can confirm the connector works and scope the full end-to-end automation that includes automated report extraction, conversion, and deployment.</p>
+    </div>
+  </div>
+
+  <!-- ═══════ SECTION 6: GETTING STARTED ═══════ -->
+  <div class="section">
+    <div class="section-number">06</div>
+    <h2>Getting Started</h2>
+
+    <div class="cta-box">
+      <div class="cta-content">
+        <div class="cta-title">The fastest path forward is access.</div>
+        <p>BayOne can begin the complexity mapping as soon as read-only access is provisioned. The two-week exploration produces the deliverables needed for a properly scoped engagement, and the Cognos MCP validation can happen in parallel during Week 1. In the interim, BayOne can also deploy the demonstrated pipeline on Azure with secure, time-bound credentials so the Sephora team can interact with the workflow directly.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

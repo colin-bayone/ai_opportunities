@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; color: #334155; font-size: 12px; background: #fff; padding: 40px; }
+
+    .prototype { max-width: 700px; margin: 0 auto 60px; }
+    .prototype-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #a855f7; margin-bottom: 12px; }
+
+    .section-header {
+      font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: #5b21b6;
+      margin-bottom: 6px; padding-bottom: 3px; border-bottom: 1px solid #e2e8f0;
+    }
+
+    /* ===== F: Stacked cards, no border, divider lines ===== */
+    .scope-stack { font-size: 11.5px; }
+    .scope-stack-item {
+      display: flex; gap: 10px; padding: 4px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .scope-stack-item:last-child { border-bottom: none; }
+    .scope-stack-label {
+      flex: 0 0 130px; font-weight: 600; color: #0f172a; font-size: 11px;
+    }
+    .scope-stack-value { flex: 1; line-height: 1.45; }
+
+    /* ===== G: Left-accent blocks ===== */
+    .scope-accents { display: flex; flex-direction: column; gap: 4px; }
+    .scope-accent-item {
+      padding: 4px 0 4px 10px;
+      border-left: 2px solid #5b21b6;
+      font-size: 11.5px; line-height: 1.45;
+    }
+    .scope-accent-item strong { color: #0f172a; font-size: 11px; margin-right: 4px; }
+
+    /* ===== H: Tight two-row table, more columns ===== */
+    .scope-wide { width: 100%; border-collapse: collapse; font-size: 11px; border: 1px solid #d4d4d8; }
+    .scope-wide th {
+      padding: 4px 8px; background: #5b21b6; color: #fff;
+      font-weight: 600; font-size: 9px; letter-spacing: 0.5px; text-transform: uppercase;
+      text-align: center;
+    }
+    .scope-wide td {
+      padding: 4px 8px; text-align: center; border-right: 1px solid #e2e8f0;
+      line-height: 1.35; vertical-align: top;
+    }
+    .scope-wide td:last-child { border-right: none; }
+    .scope-wide td strong { display: block; color: #0f172a; font-size: 11px; margin-bottom: 1px; }
+    .scope-wide td span { color: #64748b; font-size: 10px; }
+
+    /* ===== I: Icon-style compact grid ===== */
+    .scope-icon-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+    .scope-icon-item {
+      padding: 6px 8px; border: 1px solid #e2e8f0; border-radius: 4px;
+      font-size: 11px; line-height: 1.4;
+    }
+    .scope-icon-item .scope-icon-label {
+      font-weight: 600; color: #5b21b6; font-size: 10px;
+      text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px;
+    }
+    .scope-icon-item .scope-icon-text { color: #334155; }
+
+    /* ===== J: Minimal indented list ===== */
+    .scope-minimal { font-size: 11.5px; line-height: 1.5; }
+    .scope-minimal-item { padding: 3px 0 3px 12px; border-left: 2px solid #e2e8f0; margin-bottom: 3px; }
+    .scope-minimal-item strong { color: #0f172a; }
+    .scope-minimal-item .detail { color: #334155; }
+
+    /* ===== K: Condensed table, single-line rows ===== */
+    .scope-condensed { width: 100%; border-collapse: collapse; font-size: 11px; border: 1px solid #d4d4d8; }
+    .scope-condensed th {
+      padding: 3px 8px; background: #5b21b6; color: #fff;
+      font-weight: 600; font-size: 9.5px; letter-spacing: 0.3px; text-transform: uppercase; text-align: left;
+    }
+    .scope-condensed td { padding: 3px 8px; border-bottom: 1px solid #f1f5f9; }
+    .scope-condensed td:first-child { font-weight: 600; color: #0f172a; width: 110px; }
+    .scope-condensed tr:last-child td { border-bottom: none; }
+    .scope-condensed tr:nth-child(even) { background: #fafafa; }
+  </style>
+</head>
+<body>
+
+  <!-- F: Stacked rows, no table -->
+  <div class="prototype">
+    <div class="prototype-label">Prototype F: Stacked Rows (No Table)</div>
+    <div class="section-header">Engagement Scope</div>
+    <div class="scope-stack">
+      <div class="scope-stack-item">
+        <div class="scope-stack-label">Conversion</div>
+        <div class="scope-stack-value">250+ screens, end-to-end: frontend UI, backend logic extraction, and EMS service integration</div>
+      </div>
+      <div class="scope-stack-item">
+        <div class="scope-stack-label">Architecture</div>
+        <div class="scope-stack-value">EPNM (monolithic, Java/Dojo) to EMS (microservices, Java/Angular)</div>
+      </div>
+      <div class="scope-stack-item">
+        <div class="scope-stack-label">Code Generation</div>
+        <div class="scope-stack-value">100% AI-generated code, with purpose-built agents coordinating codebase analysis, pattern identification, code generation, and validation in parallel</div>
+      </div>
+      <div class="scope-stack-item">
+        <div class="scope-stack-label">Quality Engineering</div>
+        <div class="scope-stack-value">Continuous, in-the-loop generative AI-driven QE, including automated visual validation, integration testing, and functional equivalence verification</div>
+      </div>
+      <div class="scope-stack-item">
+        <div class="scope-stack-label">Post-Delivery</div>
+        <div class="scope-stack-value">One month of dedicated support following final delivery for issue resolution and stabilization</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- G: Left-accent blocks -->
+  <div class="prototype">
+    <div class="prototype-label">Prototype G: Left-Accent Blocks</div>
+    <div class="section-header">Engagement Scope</div>
+    <div class="scope-accents">
+      <div class="scope-accent-item"><strong>Conversion</strong> 250+ screens, end-to-end: frontend UI, backend logic extraction, and EMS service integration</div>
+      <div class="scope-accent-item"><strong>Architecture</strong> EPNM (monolithic, Java/Dojo) to EMS (microservices, Java/Angular)</div>
+      <div class="scope-accent-item"><strong>Code Generation</strong> 100% AI-generated code, with purpose-built agents coordinating codebase analysis, pattern identification, code generation, and validation in parallel</div>
+      <div class="scope-accent-item"><strong>Quality Engineering</strong> Continuous, in-the-loop generative AI-driven QE, including automated visual validation, integration testing, and functional equivalence verification</div>
+      <div class="scope-accent-item"><strong>Post-Delivery</strong> One month of dedicated support following final delivery for issue resolution and stabilization</div>
+    </div>
+  </div>
+
+  <!-- H: Wide table, more columns -->
+  <div class="prototype">
+    <div class="prototype-label">Prototype H: Wide Multi-Column Table</div>
+    <div class="section-header">Engagement Scope</div>
+    <table class="scope-wide">
+      <tr>
+        <th>Conversion</th>
+        <th>Architecture</th>
+        <th>Code Generation</th>
+        <th>Quality Engineering</th>
+        <th>Post-Delivery</th>
+      </tr>
+      <tr>
+        <td><strong>250+ screens</strong><span>End-to-end: UI, backend, EMS integration</span></td>
+        <td><strong>EPNM to EMS</strong><span>Monolith (Java/Dojo) to microservices (Java/Angular)</span></td>
+        <td><strong>100% AI-generated</strong><span>Purpose-built agents for analysis, generation, validation</span></td>
+        <td><strong>Continuous AI-driven QE</strong><span>Visual validation, integration testing, equivalence verification</span></td>
+        <td><strong>1 month</strong><span>Dedicated support for issue resolution and stabilization</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- I: 3-column grid cards -->
+  <div class="prototype">
+    <div class="prototype-label">Prototype I: Three-Column Grid</div>
+    <div class="section-header">Engagement Scope</div>
+    <div class="scope-icon-grid">
+      <div class="scope-icon-item">
+        <div class="scope-icon-label">Conversion</div>
+        <div class="scope-icon-text">250+ screens, end-to-end: frontend UI, backend logic, EMS service integration</div>
+      </div>
+      <div class="scope-icon-item">
+        <div class="scope-icon-label">Architecture</div>
+        <div class="scope-icon-text">EPNM (monolithic, Java/Dojo) to EMS (microservices, Java/Angular)</div>
+      </div>
+      <div class="scope-icon-item">
+        <div class="scope-icon-label">Code Generation</div>
+        <div class="scope-icon-text">100% AI-generated code with purpose-built agents for analysis, generation, and validation</div>
+      </div>
+      <div class="scope-icon-item">
+        <div class="scope-icon-label">Quality Engineering</div>
+        <div class="scope-icon-text">Continuous generative AI-driven QE, visual validation, integration testing</div>
+      </div>
+      <div class="scope-icon-item">
+        <div class="scope-icon-label">Post-Delivery</div>
+        <div class="scope-icon-text">One month dedicated support for issue resolution and stabilization</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- J: Minimal indented list -->
+  <div class="prototype">
+    <div class="prototype-label">Prototype J: Indented List</div>
+    <div class="section-header">Engagement Scope</div>
+    <div class="scope-minimal">
+      <div class="scope-minimal-item"><strong>Conversion</strong> <span class="detail">250+ screens, end-to-end: frontend UI, backend logic extraction, and EMS service integration</span></div>
+      <div class="scope-minimal-item"><strong>Architecture</strong> <span class="detail">EPNM (monolithic, Java/Dojo) to EMS (microservices, Java/Angular)</span></div>
+      <div class="scope-minimal-item"><strong>Code Generation</strong> <span class="detail">100% AI-generated code, with purpose-built agents coordinating codebase analysis, pattern identification, code generation, and validation in parallel</span></div>
+      <div class="scope-minimal-item"><strong>Quality Engineering</strong> <span class="detail">Continuous, in-the-loop generative AI-driven QE, including automated visual validation, integration testing, and functional equivalence verification</span></div>
+      <div class="scope-minimal-item"><strong>Post-Delivery</strong> <span class="detail">One month of dedicated support following final delivery for issue resolution and stabilization</span></div>
+    </div>
+  </div>
+
+  <!-- K: Condensed table, tighter than original -->
+  <div class="prototype">
+    <div class="prototype-label">Prototype K: Condensed Table (Tighter Than Current)</div>
+    <div class="section-header">Engagement Scope</div>
+    <table class="scope-condensed">
+      <tr>
+        <th>Area</th>
+        <th>Detail</th>
+      </tr>
+      <tr>
+        <td>Conversion</td>
+        <td>250+ screens, end-to-end: frontend UI, backend logic extraction, and EMS service integration</td>
+      </tr>
+      <tr>
+        <td>Architecture</td>
+        <td>EPNM (monolithic, Java/Dojo) to EMS (microservices, Java/Angular)</td>
+      </tr>
+      <tr>
+        <td>Code Generation</td>
+        <td>100% AI-generated code, with purpose-built agents coordinating codebase analysis, pattern identification, code generation, and validation in parallel</td>
+      </tr>
+      <tr>
+        <td>Quality Engineering</td>
+        <td>Continuous, in-the-loop generative AI-driven QE, including automated visual validation, integration testing, and functional equivalence verification</td>
+      </tr>
+      <tr>
+        <td>Post-Delivery</td>
+        <td>One month of dedicated support following final delivery for issue resolution and stabilization</td>
+      </tr>
+    </table>
+  </div>
+
+</body>
+</html>

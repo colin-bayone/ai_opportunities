@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speaker Notes - Sephora Technical Deep Dive</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --primary: #0f172a; --accent: #a855f7; --purple-dark: #5b21b6; --text: #334155; --text-light: #64748b; --border: #e2e8f0; --bg-subtle: #f8fafc; --white: #ffffff; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); line-height: 1.7; font-size: 15px; background: var(--white); }
+    .cover { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 80px; background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%); color: var(--white); position: relative; overflow: hidden; }
+    .cover::before { content: ''; position: absolute; top: -50%; right: -20%; width: 80%; height: 200%; background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%); transform: rotate(-12deg); }
+    .cover::after { content: ''; position: absolute; bottom: -30%; left: -10%; width: 60%; height: 80%; background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%); border-radius: 50%; }
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+    .cover-label { font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #e879f9; margin-bottom: 24px; }
+    .cover h1 { font-size: 48px; font-weight: 700; line-height: 1.1; margin-bottom: 24px; letter-spacing: -1px; }
+    .cover-subtitle { font-size: 20px; font-weight: 300; color: rgba(255,255,255,0.8); margin-bottom: 48px; max-width: 600px; }
+    .cover-meta { display: flex; gap: 48px; padding-top: 48px; border-top: 1px solid rgba(255,255,255,0.15); }
+    .cover-meta-item label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+    .cover-meta-item span { font-size: 15px; font-weight: 500; }
+    .logo { position: absolute; bottom: 80px; right: 80px; font-size: 24px; font-weight: 700; color: var(--white); }
+    .logo span { color: #e879f9; }
+    .container { max-width: 900px; margin: 0 auto; padding: 80px 40px; }
+    .section { margin-bottom: 44px; }
+    .section-number { display: inline-block; font-size: 13px; font-weight: 700; color: var(--purple-dark); letter-spacing: 2px; margin-bottom: 12px; padding: 6px 14px; background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%); border-radius: 4px; }
+    h2 { font-size: 28px; font-weight: 700; color: var(--primary); margin-bottom: 20px; letter-spacing: -0.5px; }
+    h3 { font-size: 18px; font-weight: 600; color: var(--primary); margin: 28px 0 14px; }
+    p { margin-bottom: 16px; }
+    .lead { font-size: 17px; color: var(--text-light); line-height: 1.8; margin-bottom: 28px; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+    th { text-align: left; padding: 10px 14px; background: #5b21b6; color: var(--white); font-weight: 600; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; border-right: 1px solid rgba(255,255,255,0.15); }
+    th:last-child { border-right: none; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+    td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: var(--bg-subtle); }
+    .quote-block { background: var(--bg-subtle); border-left: 3px solid var(--accent); padding: 12px 16px; margin: 10px 0; border-radius: 0 8px 8px 0; font-style: italic; }
+    .commitment-list { background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%); border-radius: 8px; padding: 16px 16px 16px 36px; margin: 16px 0; }
+    .commitment-list li { margin-bottom: 8px; }
+    .commitment-list li:last-child { margin-bottom: 0; }
+    .footer { text-align: center; padding: 48px 40px; border-top: 1px solid var(--border); margin-top: 64px; }
+    .footer-logo { font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+    .footer-logo span { color: #a855f7; }
+    .footer p { font-size: 13px; color: var(--text-light); margin: 0; }
+    @media print {
+      @page { size: 8.5in 11in; margin: 0.5in; }
+      body { font-size: 9pt; line-height: 1.4; }
+      .cover { min-height: 0; height: 10in; padding: 50px; page-break-after: always; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .cover h1 { font-size: 32pt; }
+      .container { padding: 0; max-width: 100%; }
+      .section { margin-bottom: 24px; page-break-inside: avoid; }
+      h2 { font-size: 14pt; page-break-after: avoid; }
+      .quote-block { page-break-inside: avoid; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-label">SPEAKER NOTES</div>
+      <h1>Sephora Technical Deep Dive</h1>
+      <p class="cover-subtitle">Quick reference for who said what and their areas of ownership</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <label>Meeting</label>
+          <span>Meeting 4</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Date</label>
+          <span>March 2026</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Classification</label>
+          <span>Internal</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo">Bay<span>One</span> Solutions</div>
+  </div>
+
+  <div class="container">
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>Colin Moore</h2>
+      <p class="lead">Director of AI, BayOne — Present for full meeting, primary presenter</p>
+
+      <h3>On Cognos/DataStage Integration</h3>
+      <div class="quote-block">
+        <p>"On Cognos and on DataStage both - very good news for you. Beautiful, perfect, all-inclusive APIs or SDKs for both of them. These are old enough that they weren't APIs yet. They were just pure SDKs."</p>
+      </div>
+
+      <h3>On MCP Servers</h3>
+      <div class="quote-block">
+        <p>"The way that we do this, we build what's called an MCP server. These don't typically already exist. So these are things that we build from scratch as part of what we do. This is not uncommon for us at all."</p>
+      </div>
+      <div class="quote-block">
+        <p>"A very good indication that you need MCP in the mix is if you find a human being copying and pasting or taking screenshots of something and passing it out to a language model."</p>
+      </div>
+
+      <h3>On Confidence-Based Routing</h3>
+      <div class="quote-block">
+        <p>"Whenever a human goes and reinforces a decision made by AI, that is confidence. So if you say yes, you are correct or no, you are wrong, that is what determines confidence."</p>
+      </div>
+      <div class="quote-block">
+        <p>"If I've said, yes, you can do this five times in a row, and time number six, you don't need to ask me to do it."</p>
+      </div>
+
+      <h3>Key Commitments</h3>
+      <ul class="commitment-list">
+        <li>Build demo using provided Cognos report XML and Databricks schema</li>
+        <li>Build MCP server for Cognos integration</li>
+        <li>Help with IT/security conversations if needed</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>Andrew Ho</h2>
+      <p class="lead">Sr. Director, Data & Analytics, Sephora — Present for full meeting, key contributor</p>
+
+      <h3>On Meeting Recovery</h3>
+      <div class="quote-block">
+        <p>"Again, you know, I don't think we necessarily need to have support data to actually demo, but it's really about demoing the capability, right?"</p>
+      </div>
+      <div class="quote-block">
+        <p>"Today is really an opportunity for you to come back and ask our expertise here questions. We have an enterprise architect. We have Sergey, who actually really is our SME on all our IBM tools."</p>
+      </div>
+
+      <h3>On Agent Vision</h3>
+      <div class="quote-block">
+        <p>"Is there any way throughout this step that we can create agents? I'm not expecting one agent do it... it's like a lot of smaller agents, agents do a small little thing, and then you have that one orchestrator to just orchestrating this whole entire all the smaller agents."</p>
+      </div>
+
+      <h3>Key Commitments</h3>
+      <ul class="commitment-list">
+        <li>Confirmed agents should cover both Cognos and data migration tracks</li>
+        <li>Will regroup internally on additional demo needs</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>Gariashi Chakrabarty</h2>
+      <p class="lead">Director, Data Engineering, Sephora — Present for full meeting</p>
+
+      <h3>On Current AI Usage</h3>
+      <div class="quote-block">
+        <p>"Right now we're doing all of this manually, like exporting the XML from the Cognos and then extracting all the joints, the source tables, everything. We are using Claude right now to help us do all of that extraction."</p>
+      </div>
+      <div class="quote-block">
+        <p>"We haven't really come up with any agent yet that can do this process end to end."</p>
+      </div>
+
+      <h3>Key Commitments</h3>
+      <ul class="commitment-list">
+        <li>Provide Cognos report XML from Finance folder (coordinating with Vlad)</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-number">04</div>
+      <h2>Maher Burhan</h2>
+      <p class="lead">Enterprise Architect, Sephora — Present for full meeting, first time in engagement</p>
+
+      <h3>On MCP Server Clarification</h3>
+      <div class="quote-block">
+        <p>"So you're building a custom MCP server to talk to Cognos SDK. And what does that, in this scenario, what's the outcome of this activity?"</p>
+      </div>
+
+      <h3>On Practical Workaround</h3>
+      <div class="quote-block">
+        <p>"The agent can do the work, the migration work, without having access, without validating whether it's working or not."</p>
+      </div>
+
+      <h3>Key Commitments</h3>
+      <ul class="commitment-list">
+        <li>Provide Databricks schema/catalog information</li>
+        <li>Consider providing simple DataStage job sample</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-number">05</div>
+      <h2>Sergey Shtypuliak</h2>
+      <p class="lead">SME - IBM Tools - Consultant, Sephora — Present for full meeting, first time in engagement</p>
+
+      <h3>On DataStage Framework</h3>
+      <div class="quote-block">
+        <p>"On Databricks, we developed frameworks, color-based, where you don't need to do Python development or something. So you just need to do configuration. And we have thousands of jobs running in production today."</p>
+      </div>
+      <div class="quote-block">
+        <p>"Main question right now, how to teach these agents to understand that we need to create three YAML files with some configuration inside. So you don't need to write code itself, just to create config file."</p>
+      </div>
+
+      <h3>On Healthy Skepticism</h3>
+      <div class="quote-block">
+        <p>"It's easy said than done. I worked with Collins, I wrote code for the BI server, and that's a complicated word."</p>
+      </div>
+
+      <h3>Key Commitments</h3>
+      <ul class="commitment-list">
+        <li>Defined success criteria: YAML config output, not code</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-number">REFERENCE</div>
+      <h2>Transcription Corrections</h2>
+      <table>
+        <tr>
+          <th>Transcript Shows</th>
+          <th>Actually Means</th>
+        </tr>
+        <tr>
+          <td>"Shaka"</td>
+          <td>Zahra Syed</td>
+        </tr>
+        <tr>
+          <td>"my hair", "Mahir", "Malika"</td>
+          <td>Maher Burhan</td>
+        </tr>
+        <tr>
+          <td>"Sir"</td>
+          <td>Sergey Shtypuliak</td>
+        </tr>
+        <tr>
+          <td>"Gaurishi", "Garishia", "Karish"</td>
+          <td>Gariashi</td>
+        </tr>
+        <tr>
+          <td>"Cardinals", "Card notes", "coughing"</td>
+          <td>Cognos</td>
+        </tr>
+        <tr>
+          <td>"Lake bridge"</td>
+          <td>Lakehouse</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">SUMMARY</div>
+      <h2>Quick Reference</h2>
+      <table>
+        <tr>
+          <th>Speaker</th>
+          <th>Main Topics</th>
+          <th>Key Takeaway</th>
+        </tr>
+        <tr>
+          <td><strong>Colin</strong></td>
+          <td>MCP, schema mapping, confidence routing</td>
+          <td>Technical approach validated, research completed</td>
+        </tr>
+        <tr>
+          <td><strong>Andrew</strong></td>
+          <td>Workflow walkthrough, agent vision</td>
+          <td>Internal champion, rescued meeting</td>
+        </tr>
+        <tr>
+          <td><strong>Gariashi</strong></td>
+          <td>Current state, expectations</td>
+          <td>Demo needed to gain confidence</td>
+        </tr>
+        <tr>
+          <td><strong>Maher Burhan</strong></td>
+          <td>Security, practical workarounds</td>
+          <td>Pragmatic problem-solver</td>
+        </tr>
+        <tr>
+          <td><strong>Sergey Shtypuliak</strong></td>
+          <td>DataStage framework, YAML requirements</td>
+          <td>Defined success criteria for agent output</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Internal Meeting Notes</p>
+    </div>
+  </div>
+</body>
+</html>

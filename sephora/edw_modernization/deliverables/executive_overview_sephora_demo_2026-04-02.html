@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sephora EDW: Executive Overview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+      --green: #16a34a;
+      --green-bg: #f0fdf4;
+      --green-border: #bbf7d0;
+      --amber: #d97706;
+      --amber-bg: #fffbeb;
+      --amber-border: #fde68a;
+      --red: #dc2626;
+      --red-bg: #fef2f2;
+      --red-border: #fecaca;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text); line-height: 1.7; font-size: 15px; background: var(--white);
+    }
+
+    .cover {
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+      padding: 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: #fff; position: relative; overflow: hidden;
+    }
+    .cover::before {
+      content: ''; position: absolute; top: -50%; right: -20%; width: 80%; height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+    .cover::after {
+      content: ''; position: absolute; bottom: -30%; left: -10%; width: 60%; height: 80%;
+      background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%); border-radius: 50%;
+    }
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+    .cover-label {
+      font-size: 12px; font-weight: 600; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--purple-glow); margin-bottom: 24px;
+    }
+    .cover h1 { font-size: 48px; font-weight: 700; line-height: 1.1; letter-spacing: -1px; margin-bottom: 20px; }
+    .cover .subtitle { font-size: 20px; font-weight: 300; opacity: 0.85; line-height: 1.5; max-width: 620px; }
+    .cover-footer {
+      position: absolute; bottom: 40px; left: 80px; right: 80px;
+      display: flex; justify-content: space-between; font-size: 13px; opacity: 0.6; z-index: 1;
+    }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 64px 40px; }
+    .section { margin-bottom: 56px; }
+    .section-number { font-size: 12px; font-weight: 600; color: var(--purple-accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+    h2 { font-size: 30px; font-weight: 700; color: var(--primary); margin-bottom: 22px; letter-spacing: -0.5px; }
+    h3 { font-size: 18px; font-weight: 600; color: var(--primary); margin: 28px 0 12px; }
+    p { margin-bottom: 14px; }
+    .lead { font-size: 17px; color: var(--text-light); line-height: 1.8; margin-bottom: 28px; }
+
+    /* TLDR box */
+    .tldr-box {
+      background: var(--green-bg); border: 2px solid var(--green-border); border-radius: 14px;
+      padding: 28px 32px; margin: 24px 0;
+    }
+    .tldr-box .tldr-label {
+      font-size: 12px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--green); margin-bottom: 10px;
+    }
+    .tldr-box p { font-size: 16px; color: var(--primary); font-weight: 500; line-height: 1.7; margin-bottom: 8px; }
+    .tldr-box p:last-child { margin-bottom: 0; }
+
+    /* Signal cards */
+    .signal-card {
+      border-radius: 12px; padding: 18px 22px; margin-bottom: 12px;
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+    .signal-card.positive { background: var(--green-bg); border: 1px solid var(--green-border); }
+    .signal-card.caution { background: var(--amber-bg); border: 1px solid var(--amber-border); }
+    .signal-card.risk { background: var(--red-bg); border: 1px solid var(--red-border); }
+
+    .signal-icon {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex-shrink: 0; margin-top: 2px;
+    }
+    .signal-card.positive .signal-icon { background: var(--green); color: white; }
+    .signal-card.caution .signal-icon { background: var(--amber); color: white; }
+    .signal-card.risk .signal-icon { background: var(--red); color: white; }
+
+    .signal-text .sig-title { font-weight: 700; color: var(--primary); font-size: 15px; margin-bottom: 4px; }
+    .signal-text .sig-detail { font-size: 13px; color: var(--text); line-height: 1.6; }
+
+    /* Highlight box */
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border: 1px solid rgba(124,58,237,0.15); border-radius: 12px;
+      padding: 24px 28px; margin: 20px 0;
+    }
+    .highlight-box .box-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--purple-accent); margin-bottom: 10px;
+    }
+    .highlight-box p { font-size: 14px; margin-bottom: 8px; }
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    /* Interest meter */
+    .meter-row { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .meter-name { width: 160px; font-weight: 600; font-size: 14px; color: var(--primary); flex-shrink: 0; }
+    .meter-bar-bg {
+      flex: 1; height: 24px; background: var(--border); border-radius: 12px; overflow: hidden; position: relative;
+    }
+    .meter-bar {
+      height: 100%; border-radius: 12px;
+      background: linear-gradient(90deg, #7c3aed, #a855f7);
+    }
+    .meter-label {
+      font-size: 12px; font-weight: 600; color: var(--text-light); width: 40px; text-align: right; flex-shrink: 0;
+    }
+
+    /* Quote box */
+    .quote-box {
+      background: var(--primary); color: #e2e8f0; border-radius: 10px;
+      padding: 18px 22px; margin: 14px 0; font-size: 15px; line-height: 1.7;
+    }
+    .quote-box .quote-attr { font-size: 12px; color: var(--purple-accent); margin-top: 8px; }
+
+    /* Differentiator cards */
+    .diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+    .diff-card {
+      background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 12px;
+      padding: 20px 24px;
+    }
+    .diff-card .diff-icon {
+      width: 36px; height: 36px; background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: #fff; border-radius: 8px; display: flex; align-items: center;
+      justify-content: center; font-size: 14px; margin-bottom: 12px;
+    }
+    .diff-card .diff-title { font-weight: 700; color: var(--primary); font-size: 15px; margin-bottom: 6px; }
+    .diff-card .diff-detail { font-size: 13px; color: var(--text-light); line-height: 1.6; }
+
+    /* Action items */
+    .action-list { list-style: none; padding: 0; margin: 16px 0; }
+    .action-list li {
+      padding: 14px 18px 14px 48px; margin-bottom: 8px;
+      background: var(--bg-subtle); border: 1px solid var(--border);
+      border-radius: 8px; font-size: 14px; position: relative;
+    }
+    .action-list li::before {
+      content: "\f0a4"; font-family: "Font Awesome 6 Free"; font-weight: 900;
+      position: absolute; left: 18px; top: 15px; color: var(--purple-accent);
+    }
+
+    /* CTA */
+    .cta-box {
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: #fff; border-radius: 16px; padding: 36px 40px; margin: 28px 0;
+      position: relative; overflow: hidden;
+    }
+    .cta-box::before {
+      content: ''; position: absolute; top: -40%; right: -15%; width: 60%; height: 180%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.2) 0%, transparent 60%);
+      transform: rotate(-12deg);
+    }
+    .cta-box .cta-content { position: relative; z-index: 1; }
+    .cta-box .cta-title { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+    .cta-box p { font-size: 15px; opacity: 0.9; line-height: 1.7; margin-bottom: 0; }
+
+    @media print {
+      .cover { min-height: auto; padding: 40px; page-break-after: always; }
+      .diff-grid { grid-template-columns: 1fr; }
+      .section { page-break-inside: avoid; }
+      th, .cover, .signal-icon, .diff-icon, .meter-bar, .cta-box {
+        -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-content">
+    <div class="cover-label">Executive Overview</div>
+    <h1>Sephora EDW<br>Modernization Demo</h1>
+    <p class="subtitle">Relationship signals, interest levels, competitive position, differentiators, and recommended next steps.</p>
+  </div>
+  <div class="cover-footer">
+    <span>BayOne Solutions | AI Practice</span>
+    <span>April 2, 2026 | Confidential</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 01: TLDR -->
+  <div class="section">
+    <div class="section-number">01</div>
+    <h2>Summary</h2>
+
+    <div class="tldr-box">
+      <div class="tldr-label">The Short Version</div>
+      <p>The demo went extremely well. The pipeline ran live on Sephora's actual data. Andrew Ho (the decision-maker) said "very, very nice" and announced his team will discuss next steps internally. This is the first meeting in two months of engagement that ended without Sephora asking for anything more. All other vendors were dismissed weeks ago. Budget must be locked by end of April. The deal is ours to close.</p>
+    </div>
+  </div>
+
+  <!-- 02: RELATIONSHIP SIGNALS -->
+  <div class="section">
+    <div class="section-number">02</div>
+    <h2>Relationship Signals</h2>
+    <p class="lead">What the meeting told us about where Sephora's head is at.</p>
+
+    <h3>Interest Level by Person</h3>
+
+    <div class="meter-row">
+      <div class="meter-name">Andrew Ho</div>
+      <div class="meter-bar-bg"><div class="meter-bar" style="width: 90%"></div></div>
+      <div class="meter-label">90%</div>
+    </div>
+    <div class="meter-row">
+      <div class="meter-name">Grishi</div>
+      <div class="meter-bar-bg"><div class="meter-bar" style="width: 85%"></div></div>
+      <div class="meter-label">85%</div>
+    </div>
+    <div class="meter-row">
+      <div class="meter-name">Maher Burhan</div>
+      <div class="meter-bar-bg"><div class="meter-bar" style="width: 80%"></div></div>
+      <div class="meter-label">80%</div>
+    </div>
+    <div class="meter-row">
+      <div class="meter-name">Malika Seth</div>
+      <div class="meter-bar-bg"><div class="meter-bar" style="width: 85%"></div></div>
+      <div class="meter-label">85%</div>
+    </div>
+    <div class="meter-row">
+      <div class="meter-name">Vishal Sharma</div>
+      <div class="meter-bar-bg"><div class="meter-bar" style="width: 65%"></div></div>
+      <div class="meter-label">65%</div>
+    </div>
+
+    <p style="font-size: 13px; color: var(--text-light); margin-top: 8px;">Interest levels estimated from question tone, engagement depth, and closing behavior. Vishal is lower because he is new to the conversation and his questions focused on caution (portability, lock-in) rather than enthusiasm.</p>
+  </div>
+
+  <!-- 03: WHAT'S GOOD -->
+  <div class="section">
+    <div class="section-number">03</div>
+    <h2>Positive Signals</h2>
+
+    <div class="signal-card positive">
+      <div class="signal-icon"><i class="fa-solid fa-check"></i></div>
+      <div class="signal-text">
+        <div class="sig-title">No new gates requested</div>
+        <div class="sig-detail">Every prior meeting ended with "show us more" or "we need a demo" or "we need a deep dive." This one ended with "we will discuss internally." The evaluation phase is complete. They are moving to a decision.</div>
+      </div>
+    </div>
+
+    <div class="signal-card positive">
+      <div class="signal-icon"><i class="fa-solid fa-check"></i></div>
+      <div class="signal-text">
+        <div class="sig-title">Andrew asked "what is step one?" not "can you do this?"</div>
+        <div class="sig-detail">The decision-maker shifted from evaluating capability to planning execution. He was already describing the exploration approach before Colin pitched it. He is mentally past the "should we?" question and into "how do we start?"</div>
+      </div>
+    </div>
+
+    <div class="signal-card positive">
+      <div class="signal-icon"><i class="fa-solid fa-check"></i></div>
+      <div class="signal-text">
+        <div class="sig-title">Security objection resolved in one exchange</div>
+        <div class="sig-detail">Maher asked about network isolation. Colin showed everything runs within Azure. Maher said "deploy it to your VNet, we'll be able to run it." That conversation lasted 90 seconds. IT security is not going to be a blocker.</div>
+      </div>
+    </div>
+
+    <div class="signal-card positive">
+      <div class="signal-icon"><i class="fa-solid fa-check"></i></div>
+      <div class="signal-text">
+        <div class="sig-title">Grishi's questions are about implementation, not evaluation</div>
+        <div class="sig-detail">She asked about schema mismatch handling, data reconciliation, and whether the agent reads Databricks directly. These are "how do we use this in our environment" questions. She has moved past "does this work."</div>
+      </div>
+    </div>
+
+    <div class="signal-card positive">
+      <div class="signal-icon"><i class="fa-solid fa-check"></i></div>
+      <div class="signal-text">
+        <div class="sig-title">Maher validated the approach as an expert in the space</div>
+        <div class="sig-detail">Maher works for Xebia, a Databricks Elite Partner that builds agentic migration tools. He has deep Cognos expertise (8 years at IBM). He asked 100 questions and was satisfied with every answer. His endorsement carries more weight than anyone else in the room.</div>
+      </div>
+    </div>
+
+    <div class="signal-card positive">
+      <div class="signal-icon"><i class="fa-solid fa-check"></i></div>
+      <div class="signal-text">
+        <div class="sig-title">All other vendors were dismissed weeks ago</div>
+        <div class="sig-detail">Learned during the in-person visit with Mani (March 2026). Sephora told all other vendors no. BayOne is the sole remaining candidate. Budget must be locked by end of April.</div>
+      </div>
+    </div>
+
+    <div class="signal-card positive">
+      <div class="signal-icon"><i class="fa-solid fa-check"></i></div>
+      <div class="signal-text">
+        <div class="sig-title">Follow-up offered for the next day</div>
+        <div class="sig-detail">Zahra and Neha offered to meet the next day and suggested including Mani. Andrew responded with "we'll let you know." This keeps momentum and opens the door for the commercial conversation.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04: WHAT'S CAUTIONARY -->
+  <div class="section">
+    <div class="section-number">04</div>
+    <h2>Watch Items</h2>
+
+    <div class="signal-card caution">
+      <div class="signal-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+      <div class="signal-text">
+        <div class="sig-title">Vishal Sharma is new and cautious</div>
+        <div class="sig-detail">First-time attendee, not in any prior meetings. His questions focused on portability, vendor lock-in, and whether Sephora can run the system independently. This is not opposition, it is healthy diligence. But his influence on the decision is unknown and his concerns need to be addressed in the proposal.</div>
+      </div>
+    </div>
+
+    <div class="signal-card caution">
+      <div class="signal-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+      <div class="signal-text">
+        <div class="sig-title">Seven new requirements surfaced during Q&A</div>
+        <div class="sig-detail">Data reconciliation, migration detection, schema mismatch handling, live data sampling, Cognos MCP, ADF orchestration, and portability. Five of these need system access (which means a contract). Two are configuration preferences. None are deal-breakers, but all need to be addressed in the engagement proposal to show we heard them.</div>
+      </div>
+    </div>
+
+    <div class="signal-card caution">
+      <div class="signal-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+      <div class="signal-text">
+        <div class="sig-title">The "transition period" framing cuts both ways</div>
+        <div class="sig-detail">Maher framed the tool as temporary: "We use it to migrate. When we migrate, we don't need it anymore." This is healthy and honest, and Colin agreed. But it means Sephora sees this as a time-bound engagement, not a long-term product relationship. Pricing and scope should reflect that reality.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05: WHAT THE CLIENT CARED ABOUT -->
+  <div class="section">
+    <div class="section-number">05</div>
+    <h2>What the Client Cared About</h2>
+    <p class="lead">Based on where they spent their questions and what generated the most engagement.</p>
+
+    <div class="highlight-box">
+      <div class="box-label">Their Top Priorities (by question volume)</div>
+      <p><strong>1. Security and Azure isolation.</strong> Maher's first major question. The moment Colin confirmed everything stays within Azure, the entire security conversation ended. This was clearly a pre-condition for them.</p>
+      <p><strong>2. Validation methodology.</strong> Both Maher and Grishi wanted to understand how the system catches errors. The deterministic-first, LLM-second approach resonated. Maher specifically asked about the retry loop and auto-fix.</p>
+      <p><strong>3. Scalability across business areas.</strong> Andrew wanted confirmation that this can run in parallel across all subject areas, not one report at a time. Colin's "orchestrator of orchestrators" concept landed.</p>
+      <p><strong>4. Output compatibility with their existing framework.</strong> The pipeline produces YAML configs for the AggregationApplication framework, not notebooks or new code. This was established in prior meetings and confirmed in the demo.</p>
+      <p><strong>5. Portability and self-sufficiency.</strong> Vishal's primary concern. Can Sephora run this without BayOne? Can they modify agents? What happens when the migration is done?</p>
+    </div>
+
+    <h3>What They Did NOT Ask About</h3>
+    <p>Notably absent from the conversation: cost modeling, pricing, accuracy measurement methodology, Cognos report-level testing, rollback strategy, timeline estimates, and model selection details. This suggests the demo was purely a technical validation gate, with the commercial conversation happening on a separate track with Mani.</p>
+  </div>
+
+  <!-- 06: OUR DIFFERENTIATORS -->
+  <div class="section">
+    <div class="section-number">06</div>
+    <h2>Our Differentiators</h2>
+    <p class="lead">What sets BayOne apart in this engagement, as demonstrated in the meeting.</p>
+
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="diff-icon"><i class="fa-solid fa-bullseye"></i></div>
+        <div class="diff-title">Custom Solution, Not a Product</div>
+        <div class="diff-detail">Everything was built specifically around Sephora's DataStage XML, stored procedures, schemas, and target framework in two weeks. A generic migration tool would produce notebooks or raw SQL that does not fit their existing support model.</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="diff-title">Deterministic-First Validation</div>
+        <div class="diff-detail">Every gate runs Python and sqlglot checks at zero LLM cost before the language model is involved. This is the architecture that Maher validated. Generic tools do not have this rigor.</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon"><i class="fa-solid fa-file-code"></i></div>
+        <div class="diff-title">Framework-Compatible Output</div>
+        <div class="diff-detail">The pipeline produces YAML configs for the existing AggregationApplication framework. Not spaghetti code notebooks. Sergey (their IBM tools SME) was emphatic about this requirement, and BayOne delivered.</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon"><i class="fa-solid fa-brain"></i></div>
+        <div class="diff-title">Knowledge Base Learning</div>
+        <div class="diff-detail">Approved patterns are saved and improve future runs. The system gets smarter with every migration. Generic tools start fresh every time.</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon"><i class="fa-solid fa-cloud"></i></div>
+        <div class="diff-title">100% Azure, Zero External Calls</div>
+        <div class="diff-detail">Everything runs within Azure AI Foundry, Container Apps, and Blob Storage. No data leaves their network. Deployable to their VNet as-is. IT security objection eliminated.</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon"><i class="fa-solid fa-user-check"></i></div>
+        <div class="diff-title">Human-in-the-Loop with Auto-Fix</div>
+        <div class="diff-detail">AI-powered review with surgical code corrections. Not a black box. The confidence score and issue classification (warnings, not errors) give the team transparency and control at every step.</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+        <div class="diff-title">Colin's Prior Experience</div>
+        <div class="diff-detail">Colin led the same type of EDW modernization at Coherent Corp (40K employees, $1.6B revenue, SSAS/SSRS to Snowflake). He has done this before. He is not learning on the job.</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon"><i class="fa-solid fa-handshake"></i></div>
+        <div class="diff-title">No Vendor Lock-In</div>
+        <div class="diff-detail">The system is temporary for the migration. Agents are customizable. Sephora keeps everything. BayOne's goal is to make itself unnecessary for the migration tooling once the program is complete. Maher (their own architect) confirmed this framing.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07: COMPETITIVE POSITION -->
+  <div class="section">
+    <div class="section-number">07</div>
+    <h2>Competitive Position</h2>
+
+    <div class="signal-card positive">
+      <div class="signal-icon"><i class="fa-solid fa-trophy"></i></div>
+      <div class="signal-text">
+        <div class="sig-title">BayOne is the sole remaining vendor</div>
+        <div class="sig-detail">Sephora dismissed all other vendors as of March 2026 (confirmed by Mani in person at Sephora HQ). There is no competitive bid process. The budget must be locked by end of April 2026. This is a confirmation exercise, not a competition.</div>
+      </div>
+    </div>
+
+    <p>The closest competitive presence is Maher Burhan's employer, Xebia, which is a Databricks Elite Partner with their own agentic migration product. However, Maher is embedded at Sephora as a consultant (not selling Xebia's services), and he validated BayOne's approach throughout the demo. If Xebia were a competing vendor, they would have been in the running already and would not have been dismissed with the others.</p>
+  </div>
+
+  <!-- 08: NEXT STEPS -->
+  <div class="section">
+    <div class="section-number">08</div>
+    <h2>Recommended Next Steps</h2>
+
+    <ul class="action-list">
+      <li><strong>Send the demo package and architecture documents</strong> to the full Sephora team as a follow-up while the meeting is fresh</li>
+      <li><strong>Schedule the follow-up session Zahra offered</strong> and ensure Mani is included. The commercial conversation needs Mani in the room.</li>
+      <li><strong>Prepare the formal exploration SOW</strong> for when Sephora is ready. Two weeks, approximately 30 hours, four deliverables (complexity mapping, Cognos MCP validation, table migration assessment, data-driven engagement proposal). Colin already pitched this to Andrew and received no pushback.</li>
+      <li><strong>Address the seven new requirements</strong> in the engagement proposal, especially portability and self-sufficiency (Vishal's concern) and data reconciliation (the most-discussed new requirement)</li>
+      <li><strong>Research Vishal Sharma</strong> to understand his exact role and influence. He was not in any prior meetings and raised the most cautious questions. Knowing whether he is a decision-influencer or a technical evaluator changes how we address his concerns.</li>
+    </ul>
+
+    <div class="cta-box">
+      <div class="cta-content">
+        <div class="cta-title">The deal is ours to close.</div>
+        <p>No competitors. Budget deadline approaching. Technical evaluation complete. Decision-maker asking "how do we start?" not "should we do this?" Five of seven new requirements need system access, which means a contract. The exploration SOW is the natural bridge from demo to engagement. BayOne's position is the strongest it has ever been.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

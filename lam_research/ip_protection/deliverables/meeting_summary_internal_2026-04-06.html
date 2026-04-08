@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meeting Summary - Lam Research Discovery (Internal)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    .doc-header {
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: var(--white);
+      padding: 48px 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .doc-header-content h1 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    .doc-header-content p {
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .doc-header-meta {
+      text-align: right;
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .doc-header-meta strong { color: var(--white); font-weight: 500; }
+
+    .internal-banner {
+      background: #dc2626;
+      color: var(--white);
+      text-align: center;
+      padding: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .logo { font-size: 20px; font-weight: 700; color: var(--white); letter-spacing: -0.5px; }
+    .logo span { color: #e879f9; }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 60px 40px; }
+    .section { margin-bottom: 56px; }
+
+    .section-number {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      padding: 6px 14px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%);
+      border-radius: 4px;
+    }
+
+    h2 { font-size: 28px; font-weight: 700; color: var(--primary); margin-bottom: 20px; letter-spacing: -0.5px; }
+    h3 { font-size: 20px; font-weight: 600; color: var(--primary); margin: 28px 0 14px; }
+    h4 { font-size: 16px; font-weight: 600; color: var(--primary); margin: 20px 0 10px; }
+    p { margin-bottom: 14px; }
+    .lead { font-size: 17px; color: var(--text-light); line-height: 1.8; margin-bottom: 24px; }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border-left: 4px solid #a855f7;
+      padding: 20px 24px;
+      margin: 24px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .highlight-box p:last-child { margin-bottom: 0; }
+    .highlight-box ul { margin: 10px 0 0 20px; padding: 0; }
+    .highlight-box li { margin-bottom: 6px; line-height: 1.6; }
+
+    .warning-box {
+      background: rgba(220, 38, 38, 0.05);
+      border-left: 4px solid #dc2626;
+      padding: 20px 24px;
+      margin: 24px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .warning-box p:last-child { margin-bottom: 0; }
+
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+    th {
+      text-align: left; padding: 12px 16px; background: #5b21b6; color: var(--white);
+      font-weight: 600; font-size: 12px; letter-spacing: 0.5px; text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+    th:last-child { border-right: none; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+    td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    ul.content-list { margin: 0 0 16px 20px; padding: 0; }
+    ul.content-list li { margin-bottom: 8px; line-height: 1.6; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 20px 0; }
+    .card {
+      background: var(--white); border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px; padding: 24px;
+    }
+    .card h4 { margin-top: 0; color: var(--purple-mid); }
+    .card ul { margin: 0 0 0 20px; padding: 0; }
+    .card li { margin-bottom: 6px; line-height: 1.5; font-size: 14px; }
+    .card p { font-size: 14px; line-height: 1.6; }
+    .card p:last-child { margin-bottom: 0; }
+
+    .footer {
+      text-align: center; padding: 40px; border-top: 1px solid var(--border); margin-top: 48px;
+    }
+    .footer-logo { font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 10px; }
+    .footer-logo span { color: #a855f7; }
+    .footer p { font-size: 13px; color: var(--text-light); margin: 0; }
+
+    @media print {
+      @page { size: 8.5in 11in; margin: 0.4in; }
+      body { font-size: 9pt; line-height: 1.4; }
+      .doc-header { padding: 32px 40px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .doc-header h1 { font-size: 22pt; }
+      .internal-banner { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .container { padding: 0; max-width: 100%; }
+      .section { margin-bottom: 20px; }
+      h2 { font-size: 14pt; margin-bottom: 10px; }
+      h3 { font-size: 11pt; margin: 12px 0 6px; }
+      p { margin-bottom: 5px; }
+      .lead { font-size: 10pt; margin-bottom: 12px; }
+      table { font-size: 8pt; margin: 8px 0; }
+      th, td { padding: 5px 8px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .highlight-box, .warning-box { padding: 10px 14px; margin: 10px 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .two-col { gap: 12px; }
+      .card { padding: 14px; }
+      .footer { margin-top: 16px; padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="internal-banner">Internal Only - Do Not Distribute to Lam Research</div>
+
+  <div class="doc-header">
+    <div class="doc-header-content">
+      <h1>Meeting Summary</h1>
+      <p>Lam Research Follow-Up Discovery, April 6, 2026</p>
+    </div>
+    <div class="doc-header-meta">
+      <div class="logo">Bay<span>One</span></div>
+      <p style="margin-top: 8px;"><strong>Internal</strong><br>V1 Draft</p>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- SECTION 1: MEETING OVERVIEW -->
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>Meeting Overview</h2>
+
+      <table>
+        <tr>
+          <th>Detail</th>
+          <th>Information</th>
+        </tr>
+        <tr>
+          <td><strong>Date</strong></td>
+          <td>April 6, 2026, approximately 90 minutes (hard stop at 2:30 PM)</td>
+        </tr>
+        <tr>
+          <td><strong>Lam Attendees</strong></td>
+          <td>Bradley Estes (Managing Director), Mikhail Krivenko (Head of Product), Daniel Harrison (Director of Engineering)</td>
+        </tr>
+        <tr>
+          <td><strong>BayOne Attendees</strong></td>
+          <td>Colin Moore (remote), Pratik Sharda, Anuj Sehgal, Amit Grover (all in person)</td>
+        </tr>
+        <tr>
+          <td><strong>Purpose</strong></td>
+          <td>Follow-up discovery session. First meeting with Daniel Harrison (engineering lead). Technical deep dive on prior work, application identification, and POC scoping.</td>
+        </tr>
+      </table>
+
+      <div class="highlight-box">
+        <p><strong>Key outcomes:</strong></p>
+        <ul>
+          <li>The POC target application was identified: <strong>Escalation Solver</strong></li>
+          <li>The prior technical work was fully decomposed and understood</li>
+          <li>BayOne's layered architecture approach was presented and well received</li>
+          <li>POC confirmed on the same application and data as the prior effort</li>
+          <li>Proposal due by Friday, April 10</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 2: THE APPLICATION -->
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>The Application: Escalation Solver</h2>
+
+      <p>Escalation Solver is a homegrown escalation management platform. Field engineers and support staff create work orders; when issues cannot be resolved within eight hours, they are required to open an escalation ticket. The application supports troubleshooting workflows, closure reports, engineering design changes, procedure changes, and tech articles.</p>
+
+      <h3>Scope for the POC</h3>
+      <table>
+        <tr>
+          <th>Parameter</th>
+          <th>Detail</th>
+        </tr>
+        <tr>
+          <td><strong>Fields</strong></td>
+          <td>Five free-text fields selected from the application, each 4,000 to 5,000 characters</td>
+        </tr>
+        <tr>
+          <td><strong>Elements to detect</strong></td>
+          <td>Two: customer name and fab identifier</td>
+        </tr>
+        <tr>
+          <td><strong>Data type</strong></td>
+          <td>Pure text. Document redaction is a future capability, not in scope for POC.</td>
+        </tr>
+        <tr>
+          <td><strong>Existing policy</strong></td>
+          <td>A definitive policy already exists in the application prohibiting entry of customer confidential information. Violations are pervasive despite the policy.</td>
+        </tr>
+        <tr>
+          <td><strong>Why this application</strong></td>
+          <td>Easiest data access, most variation for proving the use case, and the application where the prior effort was tested. Both detection and redaction can be proven on this data set.</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- SECTION 3: PRIOR WORK -->
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>Prior Technical Work</h2>
+
+      <p class="lead">Mikhail (not Daniel) drove the entire prior work discussion. He was the technical driver of the effort, which was approximately 18 months old.</p>
+
+      <h3>What Was Built</h3>
+      <ul class="content-list">
+        <li>A <strong>standalone redaction service</strong> designed as an API that any application could call, not integrated into Escalation Solver directly. This is architecturally significant: they already built for reusability.</li>
+        <li>Started with <strong>Presidio models from Microsoft</strong>. Evaluated 12 models, narrowed to 5, then to 3.</li>
+        <li>Final three: <strong>Hugging Face Flair</strong> (transformer), <strong>SpaCy</strong> (NLP), and <strong>Azure AI</strong> (cloud LLM).</li>
+        <li>A <strong>reconciliation algorithm</strong> ran all three models in parallel and reconciled results.</li>
+        <li>Initially deployed on <strong>on-prem Kubernetes</strong>. Azure AI was the only cloud component.</li>
+      </ul>
+
+      <h3>Results</h3>
+      <table>
+        <tr>
+          <th>Metric</th>
+          <th>Result</th>
+        </tr>
+        <tr>
+          <td><strong>False positive rate (initial)</strong></td>
+          <td>21% (corrected from the 20% figure in earlier meetings)</td>
+        </tr>
+        <tr>
+          <td><strong>False positive rate (after reconciliation)</strong></td>
+          <td>17%</td>
+        </tr>
+        <tr>
+          <td><strong>Detection accuracy</strong></td>
+          <td>Approximately 90%</td>
+        </tr>
+        <tr>
+          <td><strong>MVP target</strong></td>
+          <td>Less than 5% false positives</td>
+        </tr>
+        <tr>
+          <td><strong>Ultimate target</strong></td>
+          <td>Less than 1% false positives</td>
+        </tr>
+      </table>
+
+      <h3>Why It Did Not Succeed</h3>
+      <p>The fundamental limitation was the <strong>absence of ground truth</strong>. No golden set was created. The team was told they needed a full labeling exercise (estimated at 1,000+ hours) to create one, and that was cost-prohibitive. Instead, they used three reference lists: a customer name list, a fab/location list, and an acronym exclusion list (~3,000 acronyms).</p>
+      <p>The data they had was suitable for a rule-based approach but did not provide enough signal for meaningful model training or fine-tuning. The parallel reconciliation approach (running all three models and voting) was identified as a modified mixture-of-experts architecture that does not work well when the models are not equally capable or equally suited to the task.</p>
+
+      <div class="highlight-box">
+        <p><strong>Existing asset:</strong> A thumbs up / thumbs down UI already exists with approximately 1,000 labeled examples. This is a starting point for ground truth that can be expanded.</p>
+      </div>
+    </div>
+
+    <!-- SECTION 4: TECHNICAL ANALYSIS -->
+    <div class="section">
+      <div class="section-number">04</div>
+      <h2>Technical Analysis</h2>
+
+      <h3>Why the Prior Approach Failed</h3>
+      <p>The prior effort's fundamental limitation was not model selection. It was the complete absence of ground truth. The team had no golden set, no labeled training data, and no structured evaluation methodology. They worked with three reference lists (customer names, fab identifiers, and an acronym exclusion list of approximately 3,000 entries), which are configuration inputs for a deterministic system, not training data for machine learning models.</p>
+      <p>The models themselves (Hugging Face Flair, SpaCy, Azure AI) were selected through a bake-off of pre-trained models evaluated on out-of-the-box performance against a problem none of them were designed for. Presidio, the starting framework, is built for standard PII detection (social security numbers, credit cards, phone numbers). Lam's problem is custom domain-specific text classification for entities that exist only within their operational context. Applying generic PII tools to a domain-specific problem is a category error regardless of how many models are evaluated.</p>
+      <p>The parallel reconciliation approach (running all three models and comparing outputs) produced a marginal 4 percentage point improvement (21% to 17%) for the complexity of orchestrating three models. The models made correlated errors because they share the same limitation: none had any concept of what Lam's sensitive entities actually are. The 18-month timeline with no meaningful advancement reflects the gap in internal AI expertise, not problem difficulty.</p>
+
+      <div class="highlight-box">
+        <p><strong>Key takeaway:</strong> The prior effort was purely exploratory. Models were given raw input and evaluated on unguided output. No ground truth was established, no structured evaluation protocol existed, and the team was searching for a model that already understood their problem rather than building the detection capability themselves.</p>
+      </div>
+
+      <h3>The Ground Truth Problem</h3>
+      <p>The team was told that creating a golden set required a full labeling exercise estimated at over 1,000 person-hours. This estimate was accepted without challenge and became the justification for abandoning the ground truth pathway entirely. The estimate has no analytical basis. The team never scoped the actual data set, never determined what a statistically meaningful sample would look like, and never considered tiered or automated approaches to labeling.</p>
+      <p>The three-tier labeling framework presented in the meeting reframed this constraint:</p>
+      <table>
+        <tr>
+          <th>Tier</th>
+          <th>What It Contains</th>
+          <th>Effort Level</th>
+        </tr>
+        <tr>
+          <td><strong>Tier 1</strong></td>
+          <td>Flagged entity on its own. Binary: sensitive or not. No document context.</td>
+          <td>Lowest. The existing thumbs up/down data (~1,000 examples) is Tier 1.</td>
+        </tr>
+        <tr>
+          <td><strong>Tier 2</strong></td>
+          <td>Flagged entity plus the document or text field it appeared in. Context without human explanation.</td>
+          <td>Moderate. Can be accelerated with auto-labeling using existing reference lists as seed data.</td>
+        </tr>
+        <tr>
+          <td><strong>Tier 3</strong></td>
+          <td>Flagged entity, plus document, plus human reasoning for why it is or is not sensitive.</td>
+          <td>Highest. This is what the 1,000-hour estimate assumed for the entire data set.</td>
+        </tr>
+      </table>
+      <p>The correct approach is to start at Tier 2 and subset to Tier 3 for the hardest cases. Mikhail's immediate self-assessment ("We'd be definitely Tier 1 first") showed he understood both the current position and the incremental path forward. Exploratory Data Analysis on the existing data will determine sample sufficiency before any labeling commitment is made.</p>
+
+      <h3>Layered Architecture</h3>
+      <p>The proposed approach uses a sequential funnel rather than the parallel model the prior effort employed:</p>
+      <div class="two-col">
+        <div class="card">
+          <h4>Deterministic Layer</h4>
+          <p>Known patterns handled through enterprise tooling (Microsoft Purview custom Sensitive Information Types). Customer names, fab identifiers, and their variations matched deterministically. Zero false positives on exact matches. Resolves the majority of cases at minimal compute cost.</p>
+        </div>
+        <div class="card">
+          <h4>AI Classification Layer</h4>
+          <p>ML/NLP for pattern-adjacent cases, Gen AI for contextual ambiguity. Only processes what the deterministic layer cannot resolve. Each layer handles a smaller, harder subset. Cost and complexity scale with actual difficulty rather than total volume.</p>
+        </div>
+      </div>
+      <p>This contrasts with the prior approach of running three models in parallel and voting on results. The linear funnel is more accurate (each layer is optimized for its problem class), more cost-effective (expensive compute is only invoked when cheaper methods fail), and more debuggable (errors trace to a specific layer rather than an opaque reconciliation).</p>
+      <p>Mikhail recognized the distinction immediately: "So we just basically accidentally picked literally every single thing, one of each." This was a significant credibility milestone. He arrived at the conclusion independently after seeing the structured approach, rather than being told the prior work was wrong.</p>
+
+      <h3>Deployment Environment</h3>
+      <p>Azure is confirmed for the POC. The prior effort's Azure environment is still partially running (Azure AI infrastructure, data retrieval jobs disabled but intact), which can accelerate setup. Three deployment modes were clarified during the meeting:</p>
+      <table>
+        <tr>
+          <th>Mode</th>
+          <th>Description</th>
+          <th>Status</th>
+        </tr>
+        <tr>
+          <td><strong>Cloud (Azure)</strong></td>
+          <td>Azure AI Foundry for model hosting, Purview for deterministic detection, enterprise compliance integration</td>
+          <td>Confirmed for POC. Existing environment available.</td>
+        </tr>
+        <tr>
+          <td><strong>On-prem (data center)</strong></td>
+          <td>Models hosted on internal servers</td>
+          <td>Not recommended. Operational burden without corresponding benefit. Compliance risk.</td>
+        </tr>
+        <tr>
+          <td><strong>Disconnected (air-gapped fab)</strong></td>
+          <td>Edge deployment at customer sites for local data cleansing</td>
+          <td>Future state. Not in scope for POC. Requires a business requirement from Brad that has not been stated.</td>
+        </tr>
+      </table>
+      <p>The on-prem Kubernetes deployment used in the prior effort created an infrastructure and maintenance burden that is unsustainable for a team without dedicated AI operations expertise. Azure AI Foundry eliminates this overhead and places the infrastructure within the enterprise compliance perimeter from the start, which also addresses the looming concern of non-compliance as the project moves from experiment to production.</p>
+      <p>Microsoft Purview as the deterministic layer serves a dual purpose: it is the right technical tool for known-pattern detection, and it bridges the organizational gap between Brad's team (CSBG) and the IT/engineering function (GIS) by placing detection capability within enterprise compliance tooling that IT already manages.</p>
+
+      <h3>Detection vs. Redaction</h3>
+      <p>Mikhail continues to frame detection and redaction as separate use cases with different technical requirements. From a technical standpoint, this is a false separation. Detection is a prerequisite step within redaction. The pipeline detects the sensitive entity, then takes an action: notify the user (detection), mask the text (redaction), block the upload, or quarantine for review. The detection engine is identical regardless of the downstream action.</p>
+      <p>Additionally, if the ingestion pipeline detects and prevents sensitive content from entering the knowledge base, the need for batch redaction of stored content approaches zero. Redaction becomes a bounded, one-time historical cleanup rather than an ongoing operational mode.</p>
+      <p>This distinction should be addressed in a separate focused conversation with Mikhail. For the POC, the team is focused on detection only, which avoids the issue for now.</p>
+    </div>
+
+    <!-- SECTION 5: STAKEHOLDER ASSESSMENT -->
+    <div class="section">
+      <div class="section-number">05</div>
+      <h2>Stakeholder Assessment</h2>
+
+      <div class="warning-box">
+        <p><strong>Internal only.</strong> Candid assessments of each participant's technical understanding and engagement. Do not share externally.</p>
+      </div>
+
+      <table>
+        <tr>
+          <th>Person</th>
+          <th>Role</th>
+          <th>Assessment</th>
+        </tr>
+        <tr>
+          <td><strong>Mikhail Krivenko</strong></td>
+          <td>Head of Product</td>
+          <td>Turning point in this meeting. Recognized the prior approaches were fundamentally wrong ("we just basically accidentally picked literally every single thing, one of each"). Engaged substantively on labeling. The person on the Lam side who will understand and champion the approach. Credibility gained.</td>
+        </tr>
+        <tr>
+          <td><strong>Brad Estes</strong></td>
+          <td>Managing Director</td>
+          <td>Less dominant than the first meeting. Let the technical discussion flow. Showed surprisingly good intuition ("layers of an onion" was his phrase). Asked for more technical depth on labeling than expected. Scope-managed Daniel's tangents effectively.</td>
+        </tr>
+        <tr>
+          <td><strong>Daniel Harrison</strong></td>
+          <td>Director of Engineering</td>
+          <td>The least useful participant. Self-described as information gathering. Fixated on edge AI and disconnected environments throughout, which were not relevant to the POC scope. Appeared to not understand the distinction between model architecture and deployment topology. Software engineering leader, not an AI/ML resource. Communication should be calibrated accordingly.</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- SECTION 6: NEXT STEPS -->
+    <div class="section">
+      <div class="section-number">06</div>
+      <h2>Next Steps</h2>
+
+      <table>
+        <tr>
+          <th>Action</th>
+          <th>Owner</th>
+          <th>Timeline</th>
+        </tr>
+        <tr>
+          <td>Deliver POC proposal to Lam</td>
+          <td>Colin</td>
+          <td>Friday, April 10</td>
+        </tr>
+        <tr>
+          <td>Brad reviews proposal, thumbs up/down</td>
+          <td>Brad</td>
+          <td>Following week (by approximately April 17)</td>
+        </tr>
+        <tr>
+          <td>SOW and legal execution</td>
+          <td>Both teams</td>
+          <td>Approximately 1 week after approval</td>
+        </tr>
+        <tr>
+          <td>Data access for POC</td>
+          <td>Mikhail / Orion</td>
+          <td>After SOW execution. Orion dependency (critical COS project) is the primary risk.</td>
+        </tr>
+        <tr>
+          <td>POC execution</td>
+          <td>Colin</td>
+          <td>Approximately 2 weeks from data access</td>
+        </tr>
+        <tr>
+          <td>Redact customer names from all BayOne documents</td>
+          <td>Colin</td>
+          <td>Immediate (Brad's request)</td>
+        </tr>
+        <tr>
+          <td>Full-scope estimate</td>
+          <td>Colin</td>
+          <td>Produced as a byproduct of the POC</td>
+        </tr>
+      </table>
+
+      <div class="highlight-box">
+        <p><strong>Existing infrastructure:</strong> The Azure environment from Lam's prior effort is still partially running. Data retrieval jobs exist (hourly, currently disabled but intact). This can accelerate POC setup significantly.</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Internal Only - Lam Research IP Protection Engagement</p>
+    </div>
+  </div>
+</body>
+</html>

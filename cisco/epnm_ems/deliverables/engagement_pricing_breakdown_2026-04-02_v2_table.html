@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EPNM to EMS Conversion - Pricing Breakdown</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    @page { size: 8.5in 11in; margin: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #334155; line-height: 1.5; font-size: 12px; background: #fff;
+    }
+
+    .page {
+      width: 8.5in; min-height: 11in; margin: 0 auto;
+      padding: 0.4in 0.65in 0.4in; position: relative;
+    }
+
+    .page-break { page-break-before: always; }
+
+    /* Letterhead */
+    .header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding-bottom: 8px; border-bottom: 2px solid #5b21b6; margin-bottom: 20px;
+    }
+    .header-left { display: flex; flex-direction: column; }
+    .logo { font-size: 22px; font-weight: 700; color: #0f172a; letter-spacing: -0.5px; }
+    .logo span { color: #a855f7; }
+    .header-office { font-size: 10px; color: #5b21b6; font-weight: 500; margin-top: 1px; letter-spacing: 0.3px; }
+    .header-right { text-align: right; font-size: 11px; color: #64748b; line-height: 1.6; }
+    .header-right strong { color: #0f172a; font-weight: 600; }
+
+    /* Light header for page 2 */
+    .header-light {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-bottom: 6px; border-bottom: 1px solid #e2e8f0; margin-bottom: 16px;
+    }
+    .header-light .logo { font-size: 14px; }
+    .header-light .page-indicator { font-size: 10px; color: #94a3b8; }
+
+    /* Title */
+    .doc-title { margin-bottom: 10px; }
+    .doc-title h1 { font-size: 24px; font-weight: 700; color: #0f172a; letter-spacing: -0.4px; line-height: 1.2; }
+    .doc-title .subtitle { font-size: 16px; font-weight: 400; color: #64748b; }
+
+    /* Sections */
+    .section { margin-bottom: 22px; }
+    .section-header {
+      font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: #5b21b6;
+      margin-bottom: 6px; padding-bottom: 3px; border-bottom: 1px solid #e2e8f0;
+    }
+
+    p { margin-bottom: 8px; font-size: 11.5px; }
+
+    /* BOM Table */
+    .bom {
+      width: 100%; border-collapse: separate; border-spacing: 0;
+      font-size: 11px; border: 1px solid #d4d4d8; border-radius: 6px; overflow: hidden;
+    }
+
+    .bom th {
+      text-align: left; padding: 5px 10px; background: #5b21b6; color: #fff;
+      font-weight: 600; font-size: 9.5px; letter-spacing: 0.3px; text-transform: uppercase;
+    }
+
+    .bom th:last-child { text-align: right; width: 120px; }
+
+    .bom td { padding: 3px 10px; border-bottom: 1px solid #f1f5f9; border-right: 1px solid #e2e8f0; vertical-align: top; }
+    .bom td:last-child { border-right: none; }
+
+    .bom tr:last-child td { border-bottom: none; }
+
+    /* Phase header rows */
+    .bom .phase-row td {
+      font-weight: 700; color: #fff; font-size: 11px;
+      background: #5b21b6; padding: 5px 10px;
+      border-bottom: 1px solid #4c1d95;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .bom .phase-row td:last-child { text-align: right; border-right: none; }
+
+    /* Sub-line items */
+    .bom .sub-item td { color: #334155; font-size: 10px; padding-top: 2px; padding-bottom: 2px; }
+    .bom .sub-item td:first-child { padding-left: 24px; }
+    .bom .sub-item td:last-child { text-align: right; color: #94a3b8; }
+
+    /* Description rows */
+    .bom .desc-row td {
+      font-size: 10.5px; color: #64748b; font-style: italic;
+      padding: 2px 10px 6px 10px; border-bottom: 1px solid #e2e8f0;
+    }
+
+    /* Total row */
+    .bom .total-row td {
+      font-weight: 700; color: #0f172a; font-size: 12px;
+      border-top: 2px solid #d4d4d8; padding: 7px 10px;
+      background: #f5f3ff;
+    }
+
+    .bom .total-row td:last-child { text-align: right; }
+
+    /* Notes */
+    .note-box {
+      font-size: 10.5px; color: #334155; line-height: 1.45;
+      padding: 8px 10px; background: #f8fafc;
+      border: 1px solid #e2e8f0; border-radius: 6px; margin-top: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      position: absolute; bottom: 0.35in; left: 0.65in; right: 0.65in;
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 6px; border-top: 1px solid #e2e8f0; font-size: 10px; color: #94a3b8;
+    }
+    .footer-logo { font-size: 12px; font-weight: 700; color: #64748b; }
+    .footer-logo span { color: #a855f7; }
+
+    @media print {
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page { padding: 0.35in 0.6in 0.35in; }
+      .footer { bottom: 0.3in; left: 0.6in; right: 0.6in; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== PAGE 1 ==================== -->
+  <div class="page">
+
+    <!-- Letterhead -->
+    <div class="header">
+      <div class="header-left">
+        <div class="logo">Bay<span>One</span> Solutions</div>
+        <div class="header-office">Office of AI Strategy and Innovation</div>
+      </div>
+      <div class="header-right">
+        <strong>Prepared for Cisco Systems</strong><br>
+        April 2026 - Confidential
+      </div>
+    </div>
+
+    <!-- Title -->
+    <div class="doc-title">
+      <h1>EPNM to EMS Conversion</h1>
+      <div class="subtitle">Pricing Breakdown</div>
+    </div>
+
+    <!-- BOM Table -->
+    <div class="section">
+      <table class="bom">
+        <!-- Phase 1 -->
+        <tr class="phase-row">
+          <td>Discovery and Codebase Analysis</td>
+          <td>$50,000 (10%)</td>
+        </tr>
+        <tr class="sub-item">
+          <td>EPNM architecture mapping: module boundaries, service dependencies, data flow tracing</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Screen inventory with complexity classification (data entry, dashboards, reports, configuration, monitoring)</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>EMS integration point identification and gap analysis</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Conversion pattern identification and documentation for reuse</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Collaborative screen prioritization with Cisco SMEs</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Inventory of screens already ported to EMS vs. remaining in EPNM only</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Estimation model: conversion velocity data and per-screen effort calibration</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Architecture review document with findings, risk assessment, and recommendations</td>
+          <td>Included</td>
+        </tr>
+
+        <!-- Phase 2 -->
+        <tr class="phase-row">
+          <td>AI Tooling and Agent Development</td>
+          <td>$100,000 (20%)</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Purpose-built conversion agents tuned to EPNM and EMS architecture patterns</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Dojo-to-Angular semantic translation engine (widget structures, data binding, component model)</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Backend extraction patterns for monolith-to-microservices service boundary adaptation</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Automated visual validation pipeline (Playwright-based, side-by-side comparison)</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Persistent conversion pattern library that grows with each screen converted</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Test coverage gap analysis with new test generation where needed</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Codebase knowledge base: architecture, dependencies, edge cases, institutional patterns</td>
+          <td>Included</td>
+        </tr>
+
+        <!-- Phase 3 -->
+        <tr class="phase-row">
+          <td>Screen Conversion and Integration</td>
+          <td>$275,000 (55%)</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Frontend UI conversion: Dojo/JS to Angular with semantic translation of intent</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Backend logic extraction and adaptation for EMS microservices boundaries</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>EMS service integration with gap documentation where services do not yet exist</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Data flow preservation: complete path verified for functional equivalence per screen</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Reactive state management: Dojo data stores mapped to Angular RxJS observables</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Targeted backend adaptation (service adaptation, not new service development)</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Gap documentation for EPNM functionality requiring new EMS services</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Pattern capture: each conversion enriches the library for subsequent screens</td>
+          <td>Included</td>
+        </tr>
+
+        <!-- Phase 4 -->
+        <tr class="phase-row">
+          <td>Quality Engineering and Validation</td>
+          <td>$75,000 (15%)</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Generative AI-driven QE embedded in every conversion cycle</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Human-in-the-loop review: architectural oversight and quality verification at every stage</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Automated visual validation: EPNM vs. EMS side-by-side comparison per screen</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Automated regression testing across all converted screens</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Integration testing with EMS environment for end-to-end verification</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Domain-specific validation for element management: network inventory, topology, automation lifecycle</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Continuous gap analysis throughout development</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Final acceptance validation and stakeholder review support</td>
+          <td>Included</td>
+        </tr>
+        <tr class="sub-item">
+          <td>Defect resolution throughout the engagement</td>
+          <td>Included</td>
+        </tr>
+
+        <!-- Total -->
+        <tr class="total-row">
+          <td>Total (Not-to-Exceed)</td>
+          <td>$500,000</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Footer page 1 -->
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <div>Confidential - Prepared for Cisco Systems</div>
+    </div>
+
+  </div>
+
+  <!-- ==================== PAGE 2 ==================== -->
+  <div class="page page-break">
+
+    <!-- Light header -->
+    <div class="header-light">
+      <div class="logo">Bay<span>One</span> Solutions</div>
+      <div class="page-indicator">EPNM to EMS Conversion - Pricing Breakdown</div>
+    </div>
+
+    <!-- Pricing Basis -->
+    <div class="section">
+      <div class="section-header">Pricing Basis</div>
+      <p>This engagement is priced at $500,000 based on our current understanding of the EPNM and EMS architectures as discussed with your team. Scope is based on approximately 240 to 260 screens as identified through collaborative prioritization with the Cisco team. The final screen inventory will be confirmed during discovery, and BayOne will accommodate reasonable variance from this estimate within the engagement. Significant changes to the screen count or complexity beyond what is identified during discovery would be addressed through the change request process.</p>
+      <p>During the discovery phase, we will gain firsthand understanding of codebase structure and screen complexity. If that analysis reveals opportunities to streamline delivery, we will share those findings proactively. Any formal adjustments would follow the change request process outlined in our engagement pricing proposal.</p>
+    </div>
+
+    <!-- Reference -->
+    <div class="section">
+      <div class="section-header">Reference</div>
+      <p style="font-size: 11px; color: #64748b;">This document supplements the EPNM to EMS Conversion Engagement Pricing proposal dated March 2026. Scope assumptions, delivery options, milestone payments, and terms are detailed in that document.</p>
+    </div>
+
+    <!-- Footer page 2 -->
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <div>Confidential - Prepared for Cisco Systems</div>
+    </div>
+
+  </div>
+
+</body>
+</html>

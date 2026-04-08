@@ -1,0 +1,650 @@
+Hi, Neha.
+Nice to meet you.
+Hi, Colin.
+Hello, hello.
+How are you?
+Hi, Neha.
+Hi, Colin.
+Good afternoon.
+Very good afternoon.
+Actually, it's not afternoon for you.
+No, no, it's morning for us.
+Lucky.
+Lucky.
+I think I don't know if Neha is speaking.
+We can't hear her.
+Yes.
+Hi.
+Hey, guys.
+Hello.
+We can do it.
+Bye.
+How are you, guys?
+I'm good.
+Surviving we did so many interviews today, but it's it's a good thing.
+I think Unfortunately, I'm not getting a ton of winners, but it's for the right reasons.
+Let's say so Hey Andrew Andrew Hey You guys can hear me right?
+Yeah Does that mean having a laptop issue?
+I'd love to if she's true.
+I'm on my phone Let me I'm hey, so I give you a second.
+I want to think or she sees she's able to join One second.
+Oh Wait, she said she doesn't have the invite.
+Oh,
+maybe I I forgot to send it to her hold on one second well you did send it to her i thought i did is that oh you sent it to her yeah yeah you did let me let me forward it to her again uh in one second you know what i'm just going to copy the the link okay she has joined okay awesome there she is no she did yeah hello i'm sorry about that I'm not sure what's going on.
+I'm not sure what's going on because your email was in the invite, but somehow it didn't get to you.
+It's not.
+Yeah.
+Okay.
+All right.
+So yeah, thanks for, for meeting up with us.
+You guys, I know we've been talking about Colin forever, so he's here.
+He's real.
+Um, we had a conversation with, with money, um, just a couple of weeks ago and I'll let Colin take lead in terms of, you know, what we're trying to do and what we understand so far.
+So Colin, I'll let you take the lead.
+Yes, awesome.
+Well, it's nice to meet everyone.
+So my name is Colin Moore.
+So I am real, I promise.
+But at the same time, you probably haven't met me before.
+So I'm director of AI for Bay One.
+And we did talk with Mani.
+We got a lot of great information and insight from him.
+I think today I'll share what we know from our understanding there.
+We didn't go too much in depth when we talked to Mani, but we did share some of the ideas with him.
+So at least for me, my understanding of this is this is a very large scale multi-year data re-engineering project.
+So for an enterprise data warehouse.
+So from what I understand, the team is doing more.
+It's not a lift and shift.
+It's more total re-engineering from the ground up.
+You're rebuilding data pipelines and reporting assets for this new modern architecture instead of just moving existing code to a platform.
+The environment, I believe, is mostly around SQL Server databases.
+You have IBM Cognos as your reporting backend and IBM Data Stage for most of the ETL in the current state, as my understanding.
+Target is not to do anything to this Cognos report, but to get all this data into Databricks.
+And then Cognos frontend is retained throughout that transition to minimize the change management disruption.
+For scale, there's a big scale to this, of course.
+If it's a three-year project, of course, it has some scale.
+Cogniz reports, Mani had said there's about 6,000-plus reports, eight SSAS cubes, 800-plus KPIs, 300 dimensions, 20 source systems, a whole lot on your plate, for sure.
+But he did mention that there is a lot of great progress going on.
+The finance track is at least nearing completion.
+There's many tracks that he had mentioned, but he said the finance one is nearing completion, and it's kind of the proving ground to establish patterns on and establish the tool.
+Not completion, just a quick correction.
+Okay.
+It'll go throughout, you know, end of this year, but we are making progress.
+Okay.
+All right.
+Well, then with that, I had asked him, you know, a couple of things, like what's the paint points?
+And I can share a little bit of mine.
+I can give you some ideas.
+One that he mentioned on that I definitely wanted to talk about today was the Semitic Lair.
+He said that's kind of, it's not not a priority, but it's not something that he would be willing to block other things on if it didn't resolve in time, let's say.
+Is that still correct from our perspective?
+Sorry, could you say the question again?
+Yes, so he had mentioned that throughout this effort there is a desire for a common semantic layer to be formed?
+Yes.
+By domains.
+By domains, right.
+So is that work ongoing as well?
+Yeah, that is the ideal state, right, that we are looking for so that the semantic layer stays common between all these different reporting tools. speed, cognos speed, cubes that will be migrated to, you know, thought spot or whichever tool is efficient, right?
+So that we can use these common semantic error, feed all these tools.
+We want to stay tool agnostic so that whichever tool we use, we just point it to the same data set.
+And the KPIs that they are showing is We don't have questions on, oh, this is something different.
+That's something different.
+It's the same KPI.
+It's coming from different tables, and it's updating at different times.
+Awesome.
+Well, maybe let me segue a little bit.
+Now, I'll tell you a little bit about my background on this one, because this is where, hopefully, I can help the most.
+But at the same time, I know my title's AI.
+But before this, my prior role at the prior company was coherent.
+There's a large, I think about $16 billion revenue company, 40,000 employees about that size.
+I was the same role for them, but also BI was attached to us.
+So the way that we kind of explained it to people, because it made no sense to just about anyone, myself included. was that we both need data, we both need the same source, we both have the same problem.
+Garbage in, garbage out.
+So for an AI system, if I don't have access to the right data, I have a big problem with the reliability.
+For the BI teams as well, they've got an even bigger problem because they're the dashboards that the business relies on.
+We did a similar migration to this.
+So ours was a little bit different.
+We weren't moving to Databricks, we were moving to Snowflake.
+We had a lot more entrenched on-prem SQL Server instances that were a big problem.
+And we were working across a couple of different geographies, which made it a whole lot of fun.
+So there is a lot of local element to that as well from a change management perspective.
+I understand the business kind of doesn't care to a certain degree.
+They're like, what we have is already working.
+Whatever you guys want to do up in the sky is your own business.
+And we just want things to keep moving.
+We don't want to have to worry about moving and changing and having to do all these extra things on top of our life.
+We were, and ended up being successful in that.
+And being tool agnostic is really important.
+That was what it was important to us too, for the three reasons.
+One was for the reporting tools, people have their preferences.
+So we were all Tableau and Power BI.
+A lot of the business users love Power BI because they could be self-serve.
+With Tableau, it was nice for people that were a little bit more technical, more data science-oriented.
+But we also had people wanting to hook up manufacturing dashboards to this, which was a totally different paradigm from either of those two.
+What we ended up doing as well for making things agnostic for the semantic layer, that's kind of the glue that holds everything together.
+So that's a really good thing to prioritize.
+It's a very tough thing to do retroactively.
+Because once the reports are out there, now you have to again, kind of do the exact same extent of effort to kind of bring them all into one place.
+So semantic layer for us was really important for AI as the third that I would make.
+AI needs to speak the same language as the reports because those phone calls you get whenever the company chatbot came back with different reporting numbers than the actual report on the screen is a big problem.
+So having that harmonization between the two is good.
+I don't know how much of priority that is for you guys right now, but at the same time, Two birds, one stone, if it can get down.
+So, for me, I just kind of want to know from both of you, because I don't know too much in my events about other of you, what your take is, if there's ping points.
+I can, of course, cover the AI angle of it or even the architecture angle, any which way we want.
+But I'd really just love to hear from both of you on any problems or any ping points that exist right now.
+Our biggest ping point now, would be moving SSAS cubes through data breaks with minimal change management.
+So we have these aggregated tables in form of cubes, but we have an Excel pivot table that's feeding data. from those SSAS cubes, and business just drags and drops those KPIs, so they love the Excel view, right?
+Now SAS doesn't have a connector to DP where we can retain that, so we want to run some POCs so that the change is minimal.
+How we are currently approaching the problem is we move all the data, all the aggregated layer onto data breaks. and we make it accessible through ThoughtSpot.
+We give the KPIs and they just access it.
+But then they have to change from Excel to ThoughtSpot, which is two different UIs, two totally different look and feel.
+So that is our biggest point, right?
+Secondly, I would say we want to use AI.
+You know in each we are using Claude Lake bridge and we are experimenting with all these tools and we are using but at this point we are not finding something like we want to ideally have an agent that would Integrate with let's say cognose all these reports and it would re-engineer the metadata queries and it can automatically point to our semantic layer that's sitting on Databricks,
+right?
+Similarly, we have data stage tool, which is the ETL tool that grabs data from different sources and dumps it into our SQL data warehouse.
+So we would want an agent to go integrate with data stage, read all that and re-engineer code automatically on data breaks.
+Now we are picking all the, we are going to each job and getting it, getting an XML, feeding it and checking, getting the re-engineered code and then feeding onto data breaks, right?
+So those are the two things is a challenge.
+I don't know Andrew, if you have in your mind anything.
+I think from what you said, she and her team have defined the approach how we want to execute this program.
+Again, as you are already being told, it is going to be a multi-year journey, right?
+We don't want to...
+I would say without AI...
+When we estimate this project or this program, we know it's such a big program that we cannot just boil the whole ocean in one shot.
+Now, then the Rishi team has started to look into how do we use AI help to speed up this process.
+And they were able to, there are a couple of areas that we were able to just have AI to, for example, AI can help us to convert some of the SQL data embedded in all the continents with Fortune Day. that are SQL service specific SQL to automatically transform into Databricks aware kind of SQL, right?
+So that's great.
+That's cut us quite a bit of a time.
+But the efficiency gain that the issues and the team had figured out was about 30%, okay?
+Now, as you kind of imagine, we still have... a lot of manual intervention that needs to happen throughout that process.
+You still have to manually go to Cognos, and then open the report, then take the SQL out, and then run through the AI, spit out the new SQL, then you have to manually snap it back to the Cognos.
+This entire process, what we're thinking is, hey, knowing that this whole AI is so mature right now, I mean, it's evolving every single day anyway.
+And people are creating agents left and right and help their day-to-day process, day-to-day job.
+So can we, and I was just thinking why, right?
+Can we, you know, is there a way we can create multiple agents, small little agents that can do all this little step by step for us? and they have a big orchestration kind of agent that orchestrates this entire flow, right?
+So then, rather than spending money on manual, you know, at the end of the day, we still need to spend the money, you know, in a contractor to do the manual work.
+Rather than spending that money there, I take the money and resources and spend it upfront to create all these agents so that it will then, once it's all done, then it can parallel run and do all the thing by itself.
+Of course, at the end, you still need QE to validate your data.
+I get that, right?
+But if we can do that, then all of a sudden, you can parallel track a lot of this migration.
+And so then this program can potentially shrink from, I don't know, three years, all the way to maybe a year or a year and a half, or something like that, right?
+So that's a whole concept, or at least the idea that we are talking money about.
+And now we are, again, I'm just going to be very transparent, right?
+We have been talking this exact same conversation with a lot of different vendor right now.
+Because I know for a fact, right now outside there's no, no one has a pre, a package that we can just say, Hey, I will get,
+I want to buy your package or I want to pay something to get your package in so I can just run through this migration. without any human involved or even a little human involved.
+So now I'm just kind of poking a hole and saying, who out there can help us to create this potential package with multiple agents and with a master agent orchestrating the whole thing?
+So that's kind of where we are.
+This is super helpful.
+And actually, I'll share my screen.
+I'll show you something.
+To be fair, I did this before we started our meeting, so at the same time, some will be on target, other things will not.
+Let's take a look.
+Now, on a couple of these, I completely agree.
+I think I'm always the skeptic.
+I think probably that's what I can give you.
+Instead of being the AI guy that says we can do anything at any time, I'm certainly not that person.
+I think probably from a commercial solution standpoint, closest solution, which still would involve manual effort and still would be probably prohibitively expensive, to be honest, as Palantir.
+If you've ever gotten a demo from them, they'll come and say, you know, we can do these migrations.
+You don't even have to change anything.
+You can keep everything exactly where it is.
+And we'll be able to pipeline data.
+We'll do the ETL for you.
+We'll do the reports for you.
+We'll do everything.
+The problem is that's also going to come with six zeros attached to the price tag.
+And there is still always that manual effort that's involved.
+Someone actually has to do it, right?
+So even if the agents come in, even aside from the QAQE validation, there's still this very human aspect of it to make sure that those reports are actually needed.
+So on the other hand, from agent's perspective, it's exactly the right thing to thought to it.
+It's an agent swarm, right?
+So it's an orchestrated cluster of agents that you have if you've spun off for a specific task.
+Agents in general work better if they're more specific.
+So if you try to have, you know, a small subset of agents that, this is my reports agent.
+No, no, no.
+Here's the reports validator agent.
+Here's the one that checks the past state and the present state, just as two small examples.
+The more specific you go with agents without going overly specific, the better off you are.
+And also it grows a little bit more organically too.
+There's good frameworks for it, but everything is so custom. that is usually a one-size-fits-most for a lot of the commercial solutions that are out there.
+I'll be honest with you, if I had a commercial solution, I could recommend I would tell you right now and skip our involvement, because it's going to be better for both of us.
+But it doesn't exist.
+From what I myself am aware of, it doesn't exist, especially because there's so much, even though like SSA, SSAS, SSRS, From Microsoft perspective, those are such standard, I'd say the common core reporting tools.
+It's tough because they're also old.
+And so there's this kind of shift where there's a lot of legacy stuff left over at a lot of companies, but there's also a lot of new that's there.
+So you have very rich things being built in Databricks and Snowflake and things like that.
+But then you still have this kind of elephant in the room of how do we actually get there?
+How do we get all this information into that?
+I put together a couple of ideas for where AI can help you, and that's for sure.
+Just ideas, this isn't all-encompassing.
+Of course, we can talk agents to it, because that's definitely the best approach.
+These are some quick time savers, I think, that we could do.
+And I can also talk about, like we were saying, the POC for the connectors to SSAS.
+So one is looking at report similarity.
+So we can definitely look at this in the Cognos reports.
+We can definitely assess, just like you're probably doing today, the difference is that this system would learn.
+So instead of doing that as kind of a one-off, this always feeds into a central knowledge graph.
+So that anything we learn in one report, any connections it has, any mapping that it has, that's preserved going forward.
+So that helps you kind of build this flywheel so things get better over time.
+Because typically when you do the one-off, I'm sure the team's probably found this.
+Even with the help of things like Claude to do the conversion, you'll find that it's kind of like hot and cold sometimes.
+Sometimes it works really, really well.
+Other times it completely doesn't work.
+And the manual effort to go and copy code here, paste it into this, check the report, go back and do that iteration, it's faster for sure than doing it all manually, but it's still a process.
+And to do that at scale is tough.
+It's essentially human limited because it's so manual.
+Same goes for business logic extraction.
+Different things across different reports mean different things.
+So unifying that, harmonizing that, that's probably the biggest challenge that I can see for semantic layers in general.
+Of course, the reports in general, but semantic layer in general, even a chart of accounts. coherent, I'll tell you, we had different people that are all VP levels disagreeing on what the segments of the company are called, and there's only three of them.
+So the highest business division of the company people still couldn't agree on. even from harmonizing between reports, AI can help with that.
+We can extract out the logic in a bigger shot than doing one report at a time and build that into the same knowledge graph as the others.
+Dependency mapping, similar thing.
+Schema mapping validation to help to automate that process.
+It's not that you're having AI go out and do these things independently.
+That's not the case that I'm presenting here.
+It's instead to say that AI And in these agent teams, agent swarms work best if you model them after real life things.
+So how does this work in real life?
+Imagine if AI wasn't a part of the picture.
+What would the team look like?
+That's how you can think of designing those agent swarms.
+So each role that a person plays or each primary function becomes part of the swarm.
+So even from a schema mapping validation perspective, that's still something that a human being has to go and do if this was a manual process prior to all of this happening. a couple of more things that we can do with AI in the mix.
+KPI lineage tracing.
+I'm sorry, I'm a little interested in the schema mapping validation.
+Sure.
+Where it maps, like, how does it automate?
+Like, what is the process?
+How does it do it?
+Yes, so this is the fun one because we have a couple of different types of mapping.
+We have the bad kind of mapping, which is the, they're all kind of bad, but together they're good.
+Let me explain this for a moment.
+Bad kind of mapping number one would be to just say, this field name is this field name, or these two look similar.
+Doesn't really work because we know that especially the more reports you get, the less that holds true.
+But at least there's that kind of, let's say, pattern level matching, where you're saying this maps to this because they're definitely pulling from the same table. they just have different names and it's kind of just giving you a straight mapping at the end.
+Then you have the semantic matching, mapping, where you would want to say...
+Oh, sorry to interrupt.
+We have done this mapping using Claude.
+The only thing that we're figuring out is that there is a manual intervention, right?
+We have to feed it the schema and then whatever we are looking for, right?
+Like we have two systems.
+We have EDW and we have DP where we have to come up with these mappings for table and everything is not one-to-one mapping, right?
+Three tables in EDW could be one table in DP.
+So, but we are having manual intervention in doing so and it's not 100% accurate.
+So I'm interested in knowing like when you say automate source to target column mapping, What are the steps?
+What is the AI into doing?
+And where will our intervention be needed?
+Is it just like a switch and it's done?
+I wish.
+So I'll walk through this.
+Now I understand.
+So the first step in this, and this is kind of the trajectory that we follow, we actually stay away from AI until we have to.
+The reason for that is the higher up in the food chain AI gets implemented in, the more kind of telephone effect happens.
+So if you can wait to use AI until a little bit later in the process, it works better.
+So step one always for this is to build this mapping and hierarchy out.
+We kind of do a big exploration.
+That exploration is not done with AI.
+That exploration is literally tell me all the tables, tell me all the different schemas, tell me all of anything that you want us to factor into this.
+And let's go and map out those structures first, and let's preserve those.
+That's almost the same as if you were to just do an exploring sequel, and you were to just say, what is all the whole view of it?
+Usually people get worried when we say that, because they'll say, boil the ocean.
+It's not boiling the ocean, it's just a recursive, almost like we're crawling through a folder, just in a much more complex way of the sequel.
+We can do that for SQL, we can do that for reports.
+But this essentially, without AI in the loop, gives us kind of the flat picture of where the playing field is at.
+That's always step one.
+That way we have something reliable to go and trace back on.
+Step two is then to now try to do the initial mapping.
+The initial mapping, that's why I started to break it up into the AI and non-AI phases.
+We try to do that first without AI in the mix.
+We try to see what fields are common, which share a similar kind of route through this.
+So if it's one report here, but that same report is the source for three more reports over here, we can say with higher confidence that those fields are interrelated.
+The AI mapping though is what comes in because the first one did probably 30% of the work.
+It's not super useful by itself, but it is enough to give you certainty on things that you're actually 100% certain on.
+It's a good launch and off point, so that doesn't ever get confused later.
+For the AI mapping, that's where you have to kind of play a big world, small world on it.
+Big world means I need to consider everything at once.
+If I do things in a vacuum, then I don't have the needed context to really understand what I'm talking about.
+And that's certainly true for AI agents.
+They can do a task, but are they doing the task with respect to the entire system or just with respect to that single report or file or circumstance?
+The small word part of it is that, unfortunately, AI is not that advanced that you can just throw the whole thing at it and say, figure it out.
+So there is a procedure or process that's needed.
+That's where the orchestration between agents becomes the most important, and actually tracking and tracing the progress between them.
+What ends up happening is there is an agent that is the orchestrator.
+He's not the only one though.
+So there's an orchestrator agent there, but there's also a judge.
+And the judge and the orchestrator have to be in sync.
+The judge, I call him like the grumpy old man agent, kind of yells at everyone, stay on track, follow this workflow, do not deviate.
+If it deviates, it rejects immediately and lives back.
+This is good.
+We can't do that quite with humans, but we can't do that with AI.
+Token cost for these actually isn't too bad.
+It's just token cost is directly proportional to speed when you're talking about agents forms.
+So if you want it to happen faster, more tokens are being consumed, it'll take a little bit longer if that's a worry.
+The reality for it is that if you're using something like Cloud Code and you have, for instance, the Macs license, it's very tough to exhaust that.
+If you're paying by API, it gets expensive.
+But if you're using an account like that, It's a lot more reasonable to do and we can take advantage of that for the swarms.
+What ends up happening though is that everything, just like I said, we model what human interaction would be.
+So if you told a human being to go and do this mapping, what would be the next human in the process?
+Who would check them?
+That becomes another agent in the flow to actually go and validate that.
+This and doing this, helps you to take the humans out of the loop for that early part.
+There still have to be there at the end, but they do get a little bit out of there for the early part.
+In addition, we can have reports generated during this to keep humans aware of what's going on instead of it just being a black box.
+You flick a switch on and you don't know really anything until it's all done.
+On the actual tool integration part of it, that's a fun one.
+That actually becomes more of an MCP problem than an agent problem, because you want to get all these different tools connected.
+Agents can definitely do that.
+But agents combined with MCP to actually interact with those utilities and tools is much better because it's more reliable.
+So you can make sure that an agent is testing something the exact same way each and every time instead of just telling it, go figure this out.
+So having structure to it is kind of the secret sauce, I would say.
+Having that planning there.
+But don't rely on just the orchestrating agent to do the planning.
+As humans, we can sit down and come up with a much more logical plan and plan it out almost like we were doing it.
+And even with us, just be as detailed as possible with the gates, agents are pretty easy to make at the end of the day.
+But in order to orchestrate them, you also need the framework behind it.
+So even for us, that would be line graph.
+We do something custom with line graph, something that scales.
+That's much better than just trying to do it in Cloud Code.
+Cloud Code can get you pretty far, but it was 6,000 odd reports.
+That's pretty tough to do and tough to do consistently.
+And what usually ends up happening is even within local teams, even within my own team.
+The more people get familiar with these tools, the better they get with them, and their workflow kind of fundamentally changes over time.
+So they might get faster, they might start using Cloth skills, for instance, that's probably something that can help speed things up.
+But it still kind of evolves over time, and that kind of causes a little bit of drift because the whole workflow is changing as you go.
+So there's ways to do it.
+The biggest thing though is orchestration, but understanding the whole picture, even though it seems too broad and too much at once, that's the best first step to make sure that everything gets touched appropriately.
+So without that, it's very tough to do without kind of being very microscope zoomed in on each record.
+So that's there for the schema mapping validation.
+And then the last one for, I don't have it on here, but for the connectors.
+Connectors, that's a different type of POC, but also something we can do.
+The challenge there is definitely going to be the Excel interface.
+So if it's going to still need to keep that native Excel drag and drop, we can do that.
+It would just be a matter of if it doesn't have a direct connector, we'd actually have to build one of those into Excel, which is possible.
+It's a little bit heavier, but it is doable if that needed to be done.
+I understand businesses do not like to change the way that they build their reports, and everyone loves Excel for... some reason that's unknown to me.
+But at the same time, the challenge there is mostly around making sure that you're voting something that will last.
+For most of these tools, they're mature enough that you can do that safely.
+But it would just be a matter of knowing what kind of functionality is needed.
+If it's everything, that's fine too.
+But if there's specific things that you want to do with Excel with SSAS to keep that same drag and drop pivot table like interface and convert it then into something that attaches to the new semantic layer, that's definitely doable.
+You just have to have a specific Excel plugin to do it or have an Excel-like interface.
+That's probably not what you want to go for, but it is possible in Excel.
+It would just be designing a custom plugin for Excel that can come in now.
+So another use case for those we've done is for Hyperion.
+So Hyperion works the same way.
+Hyperion's got a very complex data structure.
+So with Hyperion we had the same challenge here.
+We had to build a custom connector in Excel.
+There was an existing, but unfortunately that doesn't play nicely with the other BI tools.
+So it is definitely doable.
+I'd say for SSAS it's a little bit easier than it was for what we had to see with Hyperion, but certainly doable as a POC if that's something that's of interest.
+All right, this is good.
+I do have a question.
+Let's say we want you guys to develop some agents for us to automate the whole process, right?
+Would you guys develop like the agents in our ecosystem, like using data breaks, cloud, or is it something like a new tool you guys bring in or we have to work through, you know, how does that look like?
+Yes, good question.
+Good question.
+So even though I sound like a crazy person, my first instinct is always just build it.
+If it's a custom situation, we need to build it.
+But also, my language, I like to say, I'll meet you at your home.
+So we don't want to force you into using another tool.
+You're already getting another tool.
+So I add more to that.
+The other thing is that, for better or for worse, it's hopefully a temporary effort.
+You know, once that three year period is done, you want to be done with it.
+You don't want to have this debt that you have an additional tool in the stack that's adding technical debt to everyone on the team.
+Just one more baby to babysit.
+So for us, it would be built on your infrastructure if that is desired.
+If you tell us, though, you want us to build it off on ours and bring it to you, we can do that as well.
+But first preference is to build it on yours.
+We can follow kind of all the organizational rules, I can say.
+So, for instance, for other clients that we work with, we use everything that's approved from their IT department or even working on their hardware.
+We have laptops that are issued and physically have their image on it, even just for the development itself.
+The deployment, as long as there is infrastructure and we can at least work with that and there's openness to that, then we can definitely just do it exactly... on what you already have.
+That way we're not bringing an extra tool.
+We're not creating more headache for you.
+There's nothing further to maintain and it's familiar for the team.
+So it doesn't create more work later on.
+Yeah, and it will, I'm assuming, you can use more account infrastructure.
+Because as you run through those agents, like you mentioned, it's going to use tokens.
+And we have enterprise account or whatnot, right, with cloud and with all those stuff, even Google Vertex AI.
+So that makes sense.
+It has to be using our own kind of platform in our stuff to execute.
+The good news is even with that, if there is an openness, for instance, I don't know what stack you guys are on, but if you're on Azure, for instance, you have Azure AI Foundry.
+So then you even have another level of sophistication there because everything with Azure AI Foundry is just as secure as when you use Outlook as one example.
+So using Azure AI Foundry models are way cheaper as well than their commercial API counterparts.
+So you can do a lot of cost optimization just by using infrastructure.
+It's kind of a hidden bonus that a lot of people kind of miss on.
+If you go directly like let's say the cloud API, super expensive.
+I would never use that as a standalone API. opening eyes API much better than Claude in terms of performance versus cost but You're still at the mercy of that API and especially any of agent swarms.
+You're going to hit a limit very quickly Versus whenever you deploy it on Azure you have absolute control and this same paradigm is true for Azure afraid of us for GCP It's just whatever flavor they want.
+So for instance vertex for Google, you know AWS is bedrock but you can do any of these on any of those platforms.
+It's definitely better to keep it on the enterprise infrastructure if you can.
+It makes everyone happy.
+What's the next step, I guess?
+So, it sounds like, you know, you, whatever you, the things you present, it's really aligned with what we're thinking, right?
+A lot of stuff that we're thinking, well, what needs to happen.
+As I mentioned before, we had talked to Kawada vendors before.
+So right now, we're still in the initial stage of talking.
+Now, although from a program perspective, Garishi's team had started the journey already.
+We're not, you know, right now, just kind of standing still and waiting for all the agents being created.
+They have started all the migration.
+There's a lot of, even though, you know, many work is happening, that's fine.
+We'll continue executing this program, but at the same time, we do want to, like I said, we do want to look at creating more AI agents to help us and continue to speed up this process.
+So yeah, so that that's I'm just wondering what's the next step it is that something that You know you need you need more information in terms of Technical information Should we have a you know technical deep dive?
+And so then then it will give you guys more information to come back with some sort of a proposal How is that gonna work?
+Yeah, I would say definitely if if No, I'm not going to force us to you guys.
+I know, like you said, you're talking to multiple people.
+What we can do is we can kind of grow with your appetite.
+I think there's going to be some confidence building that we're going to need to do with you first that's given to me.
+I understand that.
+Doing the technical deep dive is definitely going to help. because we can be more specific and probably even like the ideas I showed to you today, maybe some of them landed, maybe some of them didn't.
+But that's me just knowing from that one conversation with Moni.
+So the more information we have, the more I can kind of tailor that to exactly what you want.
+So if we're already mostly aligned, that's great.
+That's a good indicator for me.
+We could start out small because I think with a project this big, there's enough room at the table.
+So even if you want to continue exploring other vendors, that's fine. and we could do a small-scope thing for you to start with.
+And if you like that, we continue.
+If you don't, it's less of an investment for you.
+I think the technical deep dive is definitely going to help, because then I can be realistic.
+Instead of telling you, hey, we can do this in two months, I'd be lying if I said that right now, because no one knows until they know.
+So I think that would be a great next step to do.
+I know what Mani had asked us for was kind of a three-tier proposal.
+He said, one, where you're pretty much doing this ourselves.
+We give you a big chunk of work, we give you requirements, you deliver on it, and that's that.
+Type two, which to me is the best type, and I think the healthiest type, even from an org standpoint, is kind of a partner.
+Where we're doing a lot of the work, we're taking care of that AI load, but we're also at the same time kind of working alongside your team to help them understand what we're doing.
+So we're not doing this in a vacuum, there's not secret sauce to this.
+It's you're kind of getting people that are now upskilled as a result.
+And what we get back as the engagement is things go smoother because we have now people that are really doing this for a day job that we can ask for some guidance here.
+It's not meant to be something that takes up 50% of people's time, but it's just in general, it's not in isolation from us.
+In type three would be pure staffing, where we just hand you off people that we know can do the work.
+That one is my least favorite because I can't control that.
+After it happens, can give you the best people, but it's almost like the Olympics a little bit.
+Who saw USA winning that?
+I didn't.
+So sometimes the right team with the right leader can result in amazing outcome.
+But I've also seen things totally fall on their face if you have an amazing team, but maybe the direction isn't perfectly clear.
+So those were the three tiers that Manny had asked for.
+That's what I would like to propose for.
+And we can keep the scope reasonable at first.
+If you want to go full throttle with it, we can do that.
+The great thing about these is they scale independent of people.
+So once we have the agents going, that's one of the strongest parts about them.
+We still need people to do the work.
+But the more and more we scale the agents, the less and less we need.
+So the work to take on 100 tables or 100 different reports is about the same as if we were to do 1,000.
+Because once we have that initial structure in place, this scales naturally.
+So that would be my very long answer to a very short question.
+I would say if we can do a technical deep dive, that's going to be absolutely ideal for us so we can be as honest as we can with the proposal.
+Even today, the ping points that you shared, that was really helpful for us.
+So anything more like that that we could have too is really great.
+We can include that in the proposal as well in case those are also of interest.
+And that also includes like the connectors because even though they're two kind of separate boxes, It's up to you.
+If you've got an appetite for it, we can certainly step in and show you what we've got.
+So, yeah.
+For me, I loved what you presented today, right?
+But it would really help me if we could see some kind of a demo or, like, agents that you guys have created or, you know, that has done this kind of job, be ingestion automated this stuff, right?
+That will help us and give us the confidence that, oh, these guys have already done something like that, to see it actually working.
+That is something I would love to see.
+So I'll give you three options for this one.
+Because this is tough.
+This is where, even for some of the graphic designers, I'll go off on a tangent here.
+I feel bad for them, because they're kind of in the same boat that I am.
+I'm a graphic designer, but I can't show you what I worked on because it belongs to someone else.
+So we're still in that boat here.
+But I can give you our number one case studies.
+Number two, we can do a POC.
+So if we can have some representative sampling of something, we can just do it live for you on your own data as a POC.
+And that can actually feed into, if there's a scope of work or anything like an SOW, that can be a part of it.
+So you're not duplicating effort.
+There's nothing lost there.
+And if you don't like it at the end, Well, you got something for free out of it.
+The third is we could show you with a representative sample from what we understand.
+So we could demo this on our own data, probably just some data that we put together, just to show you how it would work.
+That's the safest option, but there is kind of no value add.
+So there's like whatever time we sink into that doesn't directly contribute to the time that we would have to take to do it for real.
+So it can be a plus or minus depending upon how sensitive the data is, what your preference is for it.
+But those are the three I can give.
+The tough thing is I can't exactly go to one of the customers and say, hey, let me, you know, open the lid on what we built for you.
+I think we want to make sure that this concept of, you know, all those little multiple little agents and have an orchestrator kind of, you know, orchestrating the entire flow, is it possible?
+Why I'm asking that is because not just, I understand that everything is possible right now, right?
+With all this AI out there, but because of our version of the software, for example, card notes that we have is a very, very old version.
+We actually, I think it's like a 10.3 or 10.2, something like that.
+And it's super old version.
+Data stage, it's not the latest version either.
+And so what I don't know is whether Because even in order for the AI agent to be able to go in and read stuff out of the software or this metadata,
+either this software has an open SQL server for some of that kind of database that you can just easily have the AI to go with, or it has an API endpoint or some sort.
+Otherwise, your agent It can be as smart as you can be.
+It won't be able to connect to that software.
+Then it's moot point, right?
+So I think that's one thing that I do want to see.
+Is it even possible, right?
+And also in terms of, I would think about having those multiple agents.
+Is it even possible that at the end of the day, having those agents created will definitely shorten our time in terms of the flow, right?
+So before we really committed to deep dive and create those agents, I think that's the whole point of what kind of the issue is asking.
+Now, whether it's a do a little proof of concept here without data or using your own data, you just mark something on the short to us, I need to be honest, I really don't care.
+At the end, I just want to make sure that the version and I feel comfortable that yes, the wild thinking is not wild, it's real, it can be done.
+Number two, YouTube guys is absolutely capable of delivering that, knowing that our software version is old, knowing that, you know, understand the flow, it's not just converting the, you know, making sure the report will work as is. but also the data behind the scene.
+That's the biggest part is to move the data and the table over to from EDW SQL Server to data platform as well.
+So that's the whole thing that we want to feel comfortable.
+Makes perfect sense.
+The good news with older software, to be honest with you, is the same reason why it gets old is because I shouldn't say it like this, but I will.
+It's easier to get into older software.
+That's the most professional way I can say that.
+So the reason why we go to a different version, yes, new features, but primarily because there's also a lot more security built in, especially even just the shift in software to move things up to the cloud.
+That kind of puts everything behind that smoke screen for the most part.
+Yeah, that's true.
+Yeah.
+And I'll think it's on-prem.
+So you're right.
+From that perspective, it's much easier.
+Yes.
+You are actually correct.
+Yes.
+The other advantage that you have is the more time passes and the more people use that.
+You have tools, they might be legacy, but they're not out of the ordinary.
+They're a fairly normal stack.
+Maybe they've dated a little bit now in their versions, but the more normal things are, the more support there is, the more likely it is that someone already has made a connector or that we can go back and get an existing connector.
+So it's actually sometimes better.
+It would be different if you said we had an on-prem thing that our in-house team developed themselves and then didn't look at for 15 years.
+That would be a way different conversation that we would have.
+But for the version of things, I think probably my only concern would be on speed.
+And if those things are in production or if they're kind of a staging server, because I also wouldn't want to kill the server if it's production and you need that data to do some business function.
+And I'm querying it a million times with an agent.
+So that's really the only bottlenecks that I have for things that are on-prem, even if they're old.
+I'll tell you right now we had a version of SQL Server that we were using that made our cybersecurity team literally shut it down behind a virtual net because it was that kind of old that even through VPN it wasn't accessible.
+But that's what our Oracle instance was on.
+So people don't like to change things and update them.
+That's a very common scenario because it works now and people are like, I don't want to touch it.
+So if it works right now, that update can keep its update.
+I don't really care, because it's still working as is.
+From an integration perspective, we can definitely show that.
+If even that is something that would be something good for the POC, that would actually be part of it for me, because that would also be part of the time estimate.
+So if we positively cannot interact with something, there's no possible way to do it, you're right.
+So we would want to have that confidence on our own, because even if you give us your confidence, And we still can't do it.
+We're still a fish out of water at that point.
+Yeah.
+So I guess, again, next step, probably we have maybe one more just to kind of give that session in terms of architecture.
+And even, you know, she has an enterprise architect working for her right now that have been laying out a architecturally, in terms of the data migration, right?
+You know, how what data breaks tools that we're going to use, how it's going to work, how the whole mapping work, I think it would be good kind of a, you know, 30 minutes or not, like a conversation just to show what we have, how we plan to go about it.
+And then that will give you guys more information, right, then can go back and digest and then maybe then propose. you know,
+how do we go about either the POC or a show using the old data showcase their capability and then even and then also kind of give you guys idea how you can, you know, come back with a final proposal, right?
+That'd be awesome.
+That'd be awesome.
+And if I can add one more item onto that would just be of and this does not have to be granular or deep if there's a priority ranking. of things that would be, even from our concerns perspective, or things that we'd like to be done as pain points or deliverables perspective, that'd be super helpful.
+Because we could take this in a lot of different directions, but I want to make sure whatever we're doing is definitely aligned with what you want to see.
+So that would be really helpful.
+So Guruji, you're good with that, right?
+Like I said, I think that demo would really be helpful, and it could be on your data, right?
+I just want to see before we go and spend a lot of time, I wanna see that you guys have done something like this, that done created agents that is capable of doing these kind of things, right?
+So I think that's something very selfishly, very important for me.
+And yeah, sure, we can have conversation about, deep dive conversation about how we are strategizing this migration.
+Yeah, sounds great to me.
+And I think the POC, I think we have fun doing those.
+So even to show you this in action, it's a lot of fun to watch, I will say.
+So it's kind of like you're watching almost like an army of little ants crawl across the screen at some point.
+So we have a pretty cool visual for it as well.
+But let's plan on that.
+So that'll give you some confidence to start with.
+And we can know after a deep dive where to go.
+I do ideal would be like my ideal would be Databricks, right?
+I don't want to add too many things if you have it on Databricks, but again, like you will have your own tools I'm guessing.
+So I can't promise that one.
+Not for POC, but I can at least give you the equivalent.
+Databricks wouldn't like me saying that it's similar to Snowflake, but in a lot of places it is.
+So we can at least show you with a simple version.
+We can also show you the cloud version of that as well.
+You guys, I'm so sorry.
+We have a 12.30, so I just want to wrap this up.
+So two things.
+We're going to put together a demo for you.
+Colin, do you think, how much time do you think you'll need?
+So I will need, so I'm traveling this week.
+I'm going to leave tonight.
+I will be back next week.
+So do you think, I guess that's my question for Andrew and Gary.
+So is that something, what's your timeline for a demo?
+Is that something that you want immediate or is that something that we can take some time on or do we want to do that after the discovery session?
+All up to you.
+Wednesday could work, Wednesdays, Thursdays.
+Okay, Thursday?
+We can shoot back an email on the time slots.
+Okay, we're going to send an email.
+I'll copy, call in on that email.
+Let's aim for next Thursday, share your availability, so we'll get that on the calendar.
+And then for the deep dive, who is the architect that you wanted to include in that?
+My hair, and I'll send that person's name as well.
+Perfect.
+We'll schedule that sometime next week as well, so leave the coordination up to us.
+We have a timeline now, so we'll act upon that.
+You'll have access to Colin as well in case anything else comes to mind.
+Feel free to reach out, you guys.
+Thank you so much for your time, and we're super excited.
+Super, super excited.
+Thank you.
+Thank you very much.
+Thank you so much.
+Thank you.
+Thank you so much.
+I have one quick question.
+This is off-topic.
+Regarding the email you sent earlier, both of them are confirmed.
+I want to check whom you want to schedule.
+It's with me.
+We'll set out the invite.
+And Shafar, we will be there at 10, 15.
+Is it going to be like a meet and greet with the team or it's going to be a technical?
+No, no, it's an interview.
+OK.
+Thank you.
+I appreciate it.
+Thanks.
+Awesome.
+Thank you.
+Great to meet you.
+Bye.
+Thanks.
+Bye bye.

@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DalTile Smart Factory Opportunity - Team Briefing</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #334155;
+  line-height: 1.7;
+  font-size: 15px;
+  background: #ffffff;
+}
+
+/* Cover */
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px;
+  background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 80%;
+  height: 200%;
+  background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+  transform: rotate(-12deg);
+}
+
+.cover::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 60%;
+  height: 80%;
+  background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+.cover-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #e879f9;
+  margin-bottom: 24px;
+}
+
+.cover h1 {
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+}
+
+.cover-subtitle {
+  font-size: 20px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 48px;
+  max-width: 600px;
+}
+
+.cover-meta {
+  display: flex;
+  gap: 48px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.cover-meta-item label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 8px;
+}
+
+.cover-meta-item span {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.logo {
+  position: absolute;
+  bottom: 80px;
+  right: 80px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.logo span { color: #e879f9; }
+
+/* Layout */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 64px 40px;
+}
+
+.section { margin-bottom: 64px; }
+
+.section-number {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #a855f7;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  padding: 6px 14px;
+  background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%);
+  border-radius: 4px;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 24px;
+  letter-spacing: -0.5px;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 32px 0 16px;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 24px 0 12px;
+}
+
+p { margin-bottom: 16px; }
+
+.lead {
+  font-size: 18px;
+  color: #64748b;
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+/* Highlight box */
+.highlight-box {
+  background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+  border-left: 4px solid #a855f7;
+  padding: 24px 28px;
+  margin: 32px 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.highlight-box p:last-child { margin-bottom: 0; }
+
+.highlight-box ul {
+  margin: 12px 0 0 20px;
+  padding: 0;
+}
+
+.highlight-box li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+/* Stat cards */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 32px 0;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, rgba(124,58,237,0.06) 0%, rgba(168,85,247,0.04) 100%);
+  border: 1px solid rgba(124,58,237,0.1);
+  padding: 24px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: #7c3aed;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 14px;
+}
+
+th {
+  text-align: left;
+  padding: 14px 16px;
+  background: #5b21b6;
+  color: #fff;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-right: 1px solid rgba(255,255,255,0.15);
+}
+
+th:last-child { border-right: none; }
+th:first-child { border-radius: 8px 0 0 0; }
+th:last-child { border-radius: 0 8px 0 0; }
+
+td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: top;
+}
+
+tr:last-child td { border-bottom: none; }
+tr:nth-child(even) { background: #f8fafc; }
+
+/* Cards */
+.card {
+  background: #fff;
+  border: 1px solid rgba(124,58,237,0.15);
+  border-radius: 12px;
+  padding: 28px;
+  margin: 24px 0;
+  box-shadow: 0 1px 3px rgba(124,58,237,0.06);
+}
+
+.card h4 {
+  margin-top: 0;
+  color: #5b21b6;
+}
+
+.card ul {
+  margin: 0 0 0 20px;
+  padding: 0;
+}
+
+.card li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.card p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.card p:last-child { margin-bottom: 0; }
+
+/* Two column grid */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 24px 0;
+}
+
+/* Process flow */
+.process-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin: 24px 0;
+}
+
+.process-step {
+  background: linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(168,85,247,0.12) 100%);
+  border: 1px solid rgba(124,58,237,0.15);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #0f172a;
+}
+
+.process-step.highlight {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff;
+  border-color: transparent;
+}
+
+.process-step.optional {
+  border-style: dashed;
+  color: #64748b;
+}
+
+.process-arrow {
+  color: #a855f7;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* Workflow grid */
+.workflow-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 24px 0;
+}
+
+.workflow-step {
+  background: #fff;
+  border: 1px solid rgba(124,58,237,0.15);
+  border-radius: 12px;
+  padding: 20px 24px;
+  position: relative;
+}
+
+.workflow-step-number {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.workflow-step h5 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 8px 0;
+}
+
+.workflow-step p {
+  font-size: 14px;
+  margin: 0;
+  color: #334155;
+  line-height: 1.6;
+}
+
+/* Lists */
+ul.content-list {
+  margin: 0 0 0 20px;
+  padding: 0;
+}
+
+ul.content-list li {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 48px 40px;
+  border-top: 1px solid #e2e8f0;
+  margin-top: 64px;
+}
+
+.footer-logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+
+.footer-logo span { color: #a855f7; }
+
+.footer p {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Print */
+@media print {
+  .cover { min-height: 100vh; page-break-after: always; }
+  .section { page-break-inside: avoid; }
+}
+/* Mermaid diagram container */
+.mermaid-container {
+  margin: 32px 0;
+  padding: 24px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow-x: auto;
+}
+
+.mermaid-container .mermaid {
+  display: flex;
+  justify-content: center;
+}
+</style>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#ede9fe',
+      primaryBorderColor: '#7c3aed',
+      primaryTextColor: '#0f172a',
+      lineColor: '#7c3aed',
+      secondaryColor: '#f8fafc',
+      tertiaryColor: '#fff',
+      fontSize: '14px'
+    },
+    flowchart: {
+      curve: 'basis',
+      padding: 16,
+      nodeSpacing: 30,
+      rankSpacing: 40
+    }
+  });
+</script>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-content">
+    <div class="cover-label">Smart Factory Opportunity</div>
+    <h1>DalTile Tile Manufacturing Modernization</h1>
+    <div class="cover-subtitle">Internal team briefing on computer vision, sensor architecture, and quality detection opportunities in ceramic tile manufacturing</div>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <label>Client</label>
+        <span>DalTile (Mohawk Industries)</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Date</label>
+        <span>April 2026</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Classification</label>
+        <span>Internal - Team Briefing</span>
+      </div>
+    </div>
+  </div>
+  <div class="logo">Bay<span>One</span></div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+  <!-- Section 1: The Client -->
+  <div class="section">
+    <div class="section-number">01 &mdash; CONTEXT</div>
+    <h2>The Client and the Relationship</h2>
+    <p class="lead">DalTile is a division of Mohawk Industries, the world's largest flooring manufacturer. They produce ceramic and porcelain tiles at multiple plants across the United States.</p>
+
+    <p>Our primary contact is <strong>Mahesh Adnani</strong>, an IT leader responsible for manufacturing technology at DalTile. Colin and Mahesh worked together previously at Coherent Corporation, where they built a custom manufacturing visibility platform for semiconductor materials production. That shared history means this is a relationship-driven engagement with high trust and no competitive bid.</p>
+
+    <p>Mahesh is highly motivated to modernize DalTile's manufacturing technology. He has a software budget of approximately $250,000 across multiple plants. Hardware investment (sensors, cameras, PLCs) falls under a separate team's budget that Mahesh does not control, but he wants to demonstrate what is possible with a proof of concept to build the case for broader investment.</p>
+
+    <div class="highlight-box">
+      <p><strong>Why this matters for us:</strong> Mahesh is a technical buyer who understands the problem deeply. He walked the factory floor personally to record videos for our discovery call. He is looking for a partner who can bring smart factory expertise that does not exist inside DalTile today.</p>
+    </div>
+  </div>
+
+  <!-- Section 2: The Factory -->
+  <div class="section">
+    <div class="section-number">02 &mdash; ENVIRONMENT</div>
+    <h2>The Factory</h2>
+    <p class="lead">The target facility is DalTile's plant in Muskogee, Oklahoma, referred to internally as "Plant 2." It is the larger of two adjacent plants.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-value">400K</div>
+        <div class="stat-label">Sq Ft / Day Production</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">6</div>
+        <div class="stat-label">Production Lines (Press through Printer)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">4</div>
+        <div class="stat-label">Kilns</div>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>Equipment</th>
+        <th>Count</th>
+        <th>Notes</th>
+      </tr>
+      <tr>
+        <td>Hydraulic Presses</td>
+        <td>6</td>
+        <td>Various tile sizes from 6x48 to 24x24 inches</td>
+      </tr>
+      <tr>
+        <td>Glaze Lines</td>
+        <td>6</td>
+        <td>Multiple coats per tile, proprietary glaze material</td>
+      </tr>
+      <tr>
+        <td>Digital Printers</td>
+        <td>6</td>
+        <td>Industrial inkjet, applies design/pattern</td>
+      </tr>
+      <tr>
+        <td>Kilns</td>
+        <td>4</td>
+        <td>Massive, multi-zone temperature control</td>
+      </tr>
+      <tr>
+        <td>Qualitron Machines</td>
+        <td>5</td>
+        <td>Shade and caliber inspection (only quality gate)</td>
+      </tr>
+      <tr>
+        <td>Sorting Lines</td>
+        <td>5</td>
+        <td>Classifies tiles into SKUs by shade/caliber grade</td>
+      </tr>
+      <tr>
+        <td>Palletizer</td>
+        <td>1</td>
+        <td>Stacking, wrapping, final labeling</td>
+      </tr>
+    </table>
+
+    <h3>Physical Environment Considerations</h3>
+    <ul class="content-list">
+      <li><strong>Dusty atmosphere</strong> throughout the manufacturing floor. Existing light curtain sensors already fail due to dust contamination. Any cameras or sensors deployed will need industrial-grade protection.</li>
+      <li><strong>Large footprint</strong> with limited network infrastructure. The manufacturing floor is significantly larger than the office building. Network drops are costly, WiFi coverage is spotty, and there is interference potential from large equipment.</li>
+      <li><strong>Existing 80/20 aluminum extrusion framing</strong> throughout the facility provides ready-made mounting points for cameras and sensors without building new infrastructure.</li>
+      <li><strong>Safety guarding</strong> is already in place around automated equipment, creating defined sightlines and additional mounting opportunities.</li>
+      <li><strong>Flat, open ceiling</strong> warehouse-style construction, which is favorable for radio-based communication (XBee or similar).</li>
+    </ul>
+  </div>
+
+  <!-- Section 3: Manufacturing Process -->
+  <div class="section">
+    <div class="section-number">03 &mdash; PROCESS</div>
+    <h2>How Tiles Are Made</h2>
+    <p class="lead">The manufacturing process is linear and highly automated. When the line is running properly, no human intervention is required. People are present primarily to respond when something goes wrong.</p>
+
+    <div class="mermaid-container">
+      <pre class="mermaid">
+flowchart LR
+  RM["Raw Material"] --> BP["Body Prep"] --> PR["Press"] --> DR["Dryer"] --> GL["Glaze Lines"]
+  GP["Glaze Prep"] --> GL
+  GL --> PT["Printer"]
+  PT --> KN["Kiln"]:::critical
+  KN --> PO["Polishing"]:::optional
+  PO --> RE["Rectification"]:::optional
+  RE --> QT["Qualitron\n(Shade & Caliber)"]:::critical
+  QT --> SO["Sorting\n(MES Integration)"]
+  SO --> PK["Packaging"]
+  PK --> WH["Warehouse\n(FGI)"]
+
+  classDef critical fill:#7c3aed,stroke:#5b21b6,color:#fff,font-weight:700
+  classDef optional fill:#fff,stroke:#7c3aed,color:#64748b,stroke-dasharray: 5 5
+      </pre>
+    </div>
+
+    <p><em>Dashed borders indicate optional steps (polishing and rectification are not performed at this plant). Purple nodes are key inflection points: the kiln divides green waste from fired waste, and the Qualitron is the sole automated quality gate.</em></p>
+
+    <h3>Key Process Characteristics</h3>
+
+    <div class="two-col">
+      <div class="card">
+        <h4>Continuous Segments</h4>
+        <p>Press through Printer is a continuous conveyor belt process. Tiles move as pairs through each stage with no human touch and no batching. This is the segment with the highest opportunity for inline vision-based inspection.</p>
+      </div>
+      <div class="card">
+        <h4>WIP Buffer Points</h4>
+        <p>Four points where tiles are stacked, batched, and staged: before the kiln, after the kiln, at palletization, and finished goods. At these points, tile identity is lost because tiles from multiple lines are mixed together. LGVs (automated guided vehicles) transport stacked tiles between buffer areas.</p>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h4>Fan-In / Fan-Out</h4>
+        <p>Equipment does not map 1:1. Six press lines can feed six glaze lines, which converge to four kilns, then fan back out to five sorting lines. One press can feed two glaze lines; three glaze lines can feed one kiln. This creates traceability challenges.</p>
+      </div>
+      <div class="card">
+        <h4>The Kiln as Inflection Point</h4>
+        <p>The kiln is the critical dividing line. Pre-kiln waste ("green waste") is fully recyclable. Post-kiln waste ("fired waste") can only constitute 6% of raw material input. Detecting defects before firing has dramatically higher economic value.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4: The Problem -->
+  <div class="section">
+    <div class="section-number">04 &mdash; THE PROBLEM</div>
+    <h2>Quality Detection Happens Too Late</h2>
+    <p class="lead">The entire manufacturing line, from press to kiln, operates with zero inline quality testing. Defects are only caught after firing, when the economic damage is already done.</p>
+
+    <h3>The Single Quality Gate</h3>
+    <p>The <strong>Qualitron machine</strong>, positioned after the kiln and before the sorting line, is the only automated quality check in the entire process. It evaluates tiles on two dimensions:</p>
+
+    <div class="two-col">
+      <div class="card">
+        <h4>Shade (Color Consistency)</h4>
+        <p>Whether the tile's color matches the target specification. Shade is determined by the combined effect of glaze application, printer output, and kiln firing temperature and duration. The sorting line classifies tiles into up to three shade grades.</p>
+      </div>
+      <div class="card">
+        <h4>Caliber (Dimensional Accuracy)</h4>
+        <p>Whether the tile meets dimensional specifications: thickness, flatness, and whether it has warped or curved during firing. Caliber deviations are driven by raw material moisture content and kiln conditions. Up to three caliber grades are allowed.</p>
+      </div>
+    </div>
+
+    <p>Mahesh stated directly: "They only reject for shade and caliber. So if we can figure shade and caliber somewhere upstream in the process, we are golden."</p>
+
+    <div class="highlight-box">
+      <p><strong>Research finding:</strong> "Qualitron" is manufactured by <strong>System Ceramics</strong> (Coesia Group, Italy). Critically, the Qualitron itself handles only shade classification and surface defect detection using CIE L*a*b* color space analysis. Caliber (dimensional measurement) is performed by a separate companion device called <strong>LINER</strong>, also from System Ceramics. Planarity is measured by yet another device, <strong>RedLine</strong> or <strong>PLANAR</strong>. What DalTile refers to as "the Qualitron" is likely a suite of two to three devices installed together at the sorting line. This distinction matters for integration: each device may expose different data and use different communication protocols.</p>
+    </div>
+
+    <h3>The Hourly Manual Check</h3>
+    <p>The only upstream quality monitoring is a manual hourly process: a worker pulls a tile from the printer, marks it with a physical marker, places it at the front of the kiln queue, waits for it to fire, then visually inspects it. By the time a defect is detected through this process, thousands of square feet of tile are already in the pipeline with no ability to take corrective action.</p>
+
+    <h3>Waste Is Underreported</h3>
+    <p>Finance reports approximately 9% waste based solely on sorting line rejections. But waste occurs at every upstream stage during line startup, changeover, and steady-state operation. None of this upstream waste is measured. Mahesh believes the true waste figure is significantly higher. Critically, the 9% figure represents only <em>fired</em> waste, which is the most expensive kind because of the 6% recycling constraint.</p>
+
+    <div class="highlight-box">
+      <p><strong>The ceramic engineers' position:</strong> "You cannot do testing until it is baked." Colin's counterpoint, drawn from experience with silicon carbide and diamond polishing: this is demonstrably false if you have the data to build upstream correlations. The data simply is not being captured today.</p>
+    </div>
+  </div>
+
+  <!-- Section 5: The Opportunity -->
+  <div class="section">
+    <div class="section-number">05 &mdash; THE OPPORTUNITY</div>
+    <h2>Where Computer Vision and Sensors Fit</h2>
+    <p class="lead">There are four distinct technical threads where smart factory expertise is needed. Each can start independently, and together they form a comprehensive manufacturing intelligence system.</p>
+
+    <h3>1. Vision-Based Upstream Quality Detection</h3>
+    <p>The tile's printed design is visible between the printer stage and the protective glaze coat application. Even though the final fired color differs from the pre-fire appearance, correlating pre-fire images to post-fire quality outcomes over time would build a predictive model for shade defects.</p>
+    <p>The window of visibility varies by plant. At the facility shown in the walkthrough, there are several seconds between printer and protective coat. At other plants, the protective coat follows within five seconds of printing. Camera placement and capture timing would need to account for this variation.</p>
+    <p>For caliber, vision is less directly applicable, but dimensional measurement (thickness, flatness, edge straightness) could potentially be captured via structured light or laser profiling before firing.</p>
+
+    <h3>2. Sensor Architecture for Process Correlation</h3>
+
+    <table>
+      <tr>
+        <th>Measurement</th>
+        <th>Where</th>
+        <th>Why It Matters</th>
+      </tr>
+      <tr>
+        <td>Humidity / moisture content</td>
+        <td>Kiln output</td>
+        <td>The "missing data point" for caliber prediction. Combined with raw material moisture and kiln temperature profiles, this creates a predictive dataset for dimensional outcomes.</td>
+      </tr>
+      <tr>
+        <td>Raw material moisture</td>
+        <td>Body prep / press input</td>
+        <td>Some sites already do moisture checks here. This is a key input variable for downstream quality.</td>
+      </tr>
+      <tr>
+        <td>Press operational parameters</td>
+        <td>Press machines</td>
+        <td>Existing readout displays show pressure, cycle counts. Data is visible but not captured digitally.</td>
+      </tr>
+      <tr>
+        <td>Glaze thickness</td>
+        <td>Glaze lines</td>
+        <td>Some existing light curtains may measure thickness (not just presence) depending on angle. Needs verification on-site.</td>
+      </tr>
+      <tr>
+        <td>Kiln zone temperatures</td>
+        <td>Kiln</td>
+        <td>Already captured by some sites via PI Historian. Critical for both shade and caliber correlation.</td>
+      </tr>
+    </table>
+
+    <p>Colin's strong recommendation: before specifying new hardware, inventory what signals the existing equipment already produces but nobody is capturing. Every press, kiln, and glaze line has built-in sensors. There is likely significant low-hanging fruit before any new hardware investment is needed.</p>
+
+    <h3>3. Camera Deployment in a Challenging Environment</h3>
+    <p>The factory environment presents specific challenges for camera and sensor deployment:</p>
+
+    <div class="card">
+      <h4>Environment Challenges and Mitigations</h4>
+      <ul>
+        <li><strong>Dust contamination:</strong> Three proven mitigations: purge gas (air jets near the lens), cameras with built-in miniature windshield wipers (industrial-grade, purpose-built), and IP-rated housings matched to the dust rating of existing equipment on the floor.</li>
+        <li><strong>Mounting:</strong> Extensive 80/20 aluminum extrusion framing already present throughout the facility. Cameras can mount directly to existing struts using standard T-slot hardware. Safety guarding provides additional mounting points with clear sightlines to conveyors.</li>
+        <li><strong>Coverage estimate:</strong> Approximately 15 to 20 cameras per production line, possibly fewer. The constraining factor is typically network complexity rather than coverage gaps. Final count to be determined during a site visit.</li>
+        <li><strong>Networking:</strong> The factory floor has limited wired infrastructure and spotty WiFi. XBee radio modules or similar low-power, long-range communication protocols are the likely solution for a large, flat, open-ceiling facility. No heavy metal interference sources were observed.</li>
+      </ul>
+    </div>
+
+    <h3>4. PLC Data Extraction for Traceability</h3>
+    <p>One of the most promising opportunities does not involve cameras at all. All tile movement through WIP staging areas is PLC-driven: automated stackers, laser-guided vehicles (LGVs), and kiln feeders follow deterministic programmed logic. Because there is no human in the loop moving tiles randomly, tile position can be inferred computationally from PLC control data even when tiles are out of camera vision (stacked in racks, inside the kiln).</p>
+    <p>Colin observed modern Siemens PLCs on the factory walls during the video walkthrough. Modern Siemens controllers support OPC-UA and other standardized data extraction protocols. Older controllers may require different approaches. The site visit will need to catalog the PLC inventory and connectivity options.</p>
+    <p>This PLC-based tracking approach, combined with cameras at the continuous conveyor segments, would close the traceability gap through the entire process without requiring cameras at every point.</p>
+
+    <div class="highlight-box">
+      <p><strong>The key insight:</strong> Traceability through WIP staging does not require vision. It requires extracting the deterministic movement logic from existing PLCs. Vision is most valuable in the continuous conveyor segments where inline quality inspection can happen.</p>
+    </div>
+  </div>
+
+  <!-- Section 6: Reliability -->
+  <div class="section">
+    <div class="section-number">06 &mdash; CONSTRAINTS</div>
+    <h2>Reliability and Architecture Requirements</h2>
+    <p class="lead">Any solution deployed on the factory floor must operate independently of cloud connectivity.</p>
+
+    <p>The factory runs 24/7 and cannot stop production if Azure (or any cloud service) goes down. This is a non-negotiable constraint that Mahesh raised explicitly. The architecture must follow a <strong>total separation of concerns</strong> principle:</p>
+
+    <ul class="content-list">
+      <li><strong>On-floor edge processing</strong> for anything latency-critical or operationally essential. Sensor data collection, quality monitoring, and any real-time alerts must work with zero cloud dependency.</li>
+      <li><strong>Cloud sync for analytics</strong> when connectivity is available. Dashboards, historical analysis, and ML model training happen in Azure. If Azure is down, the factory is unaffected.</li>
+      <li><strong>Local data buffering</strong> so that no data is lost during connectivity interruptions. When the connection resumes, data syncs automatically.</li>
+    </ul>
+
+    <p>The planned cloud stack is Python, PostgreSQL on Azure, and Azure Container Apps for deployment. Edge components will need to complement this architecture.</p>
+  </div>
+
+  <!-- Section 7: What we need -->
+  <div class="section">
+    <div class="section-number">07 &mdash; YOUR ROLE</div>
+    <h2>Where We Need Your Expertise</h2>
+    <p class="lead">Your background in computer vision and smart factory systems maps directly to the technical threads in this engagement.</p>
+
+    <div class="workflow-grid">
+      <div class="workflow-step">
+        <div class="workflow-step-number">1</div>
+        <h5>Camera Strategy</h5>
+        <p>Placement planning, hardware specification for dusty industrial environments, and coverage optimization across a six-line production facility.</p>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-step-number">2</div>
+        <h5>Vision-Based Quality</h5>
+        <p>Feasibility assessment for correlating pre-fire tile images to post-fire shade outcomes. Evaluate dimensional measurement options for caliber prediction.</p>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-step-number">3</div>
+        <h5>Sensor Architecture</h5>
+        <p>Design the sensor network: what to capture, where, and how to get data back to a central system in a large facility with limited networking infrastructure.</p>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-step-number">4</div>
+        <h5>Edge Computing</h5>
+        <p>On-floor processing architecture that operates independently of cloud connectivity, with sync to Azure for analytics and dashboards.</p>
+      </div>
+    </div>
+
+    <p>The next step is a <strong>site visit</strong> to the Muskogee plant. During that visit, we will catalog the PLC inventory, assess camera mounting options, test communication protocols, and determine the minimum sensor deployment for a proof of concept on one production line.</p>
+  </div>
+
+  <!-- Section 8: Equipment Vendor Ecosystem -->
+  <div class="section">
+    <div class="section-number">08 &mdash; VENDOR ECOSYSTEM</div>
+    <h2>Equipment Vendors and Data Integration Landscape</h2>
+    <p class="lead">Three major vendors supply virtually all tile manufacturing equipment globally. Understanding their data capabilities is critical for integration scoping.</p>
+
+    <h3>SACMI (Imola, Italy)</h3>
+    <p>SACMI is a EUR 1.7 billion Italian worker cooperative, founded in 1919, and the world leader in ceramic press manufacturing. They employ over 4,700 people across 70+ companies in 25+ countries, with a U.S. office in Brentwood, Tennessee serving the southeastern ceramic manufacturing district.</p>
+
+    <p>SACMI supplies equipment across the full tile manufacturing line:</p>
+    <table>
+      <tr>
+        <th>Product Line</th>
+        <th>Equipment</th>
+        <th>Relevance</th>
+      </tr>
+      <tr>
+        <td>Pressing</td>
+        <td>PH series hydraulic presses, Continua+ continuous compaction</td>
+        <td>Likely the press machines at Muskogee. Newer models have digital controls and sensor outputs.</td>
+      </tr>
+      <tr>
+        <td>Drying</td>
+        <td>Multi-tier horizontal dryers</td>
+        <td>Temperature and humidity data potentially available from controls.</td>
+      </tr>
+      <tr>
+        <td>Glazing and Decoration</td>
+        <td>DHD series inkjet printers, DDG texture application</td>
+        <td>Digital printers may expose print quality metrics. Glaze application systems have flow sensors.</td>
+      </tr>
+      <tr>
+        <td>Firing</td>
+        <td>MAESTRO kilns (including hydrogen and electric prototypes)</td>
+        <td>Multi-zone temperature control with data logging capabilities on newer models.</td>
+      </tr>
+      <tr>
+        <td>Quality Inspection</td>
+        <td>Flawmaster+ (AI-powered surface inspection)</td>
+        <td>Competes with Qualitron/System Ceramics. Uses AI for defect classification.</td>
+      </tr>
+    </table>
+
+    <div class="highlight-box">
+      <p><strong>Critical discovery item: SACMI H.E.R.E. platform.</strong> SACMI offers its own MES-level software platform called H.E.R.E. with modules for plant monitoring, machine control, trend analysis, alarms, production reports, recipe management, ERP integration, and individual tile tracking (called "ID-Tiles"). If H.E.R.E. is deployed at the Muskogee plant, any custom solution must either integrate with it, replace it, or coexist. This is a key question for the site visit.</p>
+    </div>
+
+    <p><strong>Data connectivity:</strong> SACMI's newer equipment uses Ethernet Powerlink fieldbus (not OPC-UA natively). Specific APIs or data export formats from H.E.R.E. are not publicly documented. Integration will depend on what PLCs sit underneath the SACMI machines (likely B&amp;R Automation or Siemens, both of which can support OPC-UA) and whether H.E.R.E. is deployed.</p>
+
+    <h3>System Ceramics / Qualitron (Fiorano Modenese, Italy)</h3>
+    <p>System Ceramics, part of the Coesia Group, manufactures the Qualitron quality inspection system used at DalTile. Their product suite for the inspection and sorting segment includes:</p>
+
+    <table>
+      <tr>
+        <th>Device</th>
+        <th>Function</th>
+        <th>Measurement Method</th>
+      </tr>
+      <tr>
+        <td>Qualitron</td>
+        <td>Shade classification and surface defect detection</td>
+        <td>CIE L*a*b* color space with configurable shade groups and thresholds</td>
+      </tr>
+      <tr>
+        <td>LINER</td>
+        <td>Caliber (dimensional accuracy)</td>
+        <td>Laser-based dimensional gauging for thickness, width, and length</td>
+      </tr>
+      <tr>
+        <td>RedLine / PLANAR</td>
+        <td>Planarity (flatness and warping)</td>
+        <td>Laser profiling for surface flatness deviation</td>
+      </tr>
+      <tr>
+        <td>Multigecko</td>
+        <td>Sorting line</td>
+        <td>Receives classification from Qualitron/LINER, physically sorts tiles into SKU stacks</td>
+      </tr>
+    </table>
+
+    <p><strong>Data integration pathway:</strong> System Ceramics offers a data platform called <strong>Hypermate</strong> that aggregates per-tile data records from Qualitron, LINER, and other line equipment in real time. Hypermate operates as a Manufacturing Operations Management (MOM) layer. This is likely the most viable integration path for pulling quality data into a custom system, rather than tapping Qualitron hardware directly. The Qualitron-to-Multigecko communication uses Ethernet with proprietary control logic signals.</p>
+
+    <h3>Third Vendor (Unidentified)</h3>
+    <p>Mahesh referenced a third equipment vendor described as a "surface/in-surface defect tracking" company. Based on research, this likely refers to <strong>Surface Inspection</strong>, a brand within the SACMI Group (recently consolidated with BMR and Italvision in 2023 to 2025). They manufacture the competing <strong>Flawmaster</strong> inspection system. Alternatively, it could be <strong>SITI B&amp;T Group</strong> (Italy, complete plant solutions) or <strong>KEDA Industrial Group</strong> (China, price-competitive equipment). Confirmation is needed during the site visit.</p>
+
+    <div class="highlight-box">
+      <p><strong>Business model note:</strong> Mahesh described these vendors as companies that "also produce tiles and sell to competitors." Research clarifies the picture: SACMI itself does not manufacture tiles, but a closely related entity (Cooperativa Ceramica d'Imola) does. System Ceramics and its parent Coesia Group are pure technology vendors. The tile-manufacturing-plus-equipment model may apply to one of the other vendors or to a broader Italian ceramics cooperative network.</p>
+    </div>
+  </div>
+
+  <!-- Section 9: Technical Deep Dive - Computer Vision -->
+  <div class="section">
+    <div class="section-number">09 &mdash; TECHNICAL DEEP DIVE</div>
+    <h2>Computer Vision Opportunities in Detail</h2>
+    <p class="lead">The tile manufacturing process has several characteristics that make it well suited for vision-based inspection: flat surfaces, controlled conveyor speeds, consistent lighting conditions, and repeating patterns with known reference designs.</p>
+
+    <h3>Pre-Fire Shade Prediction via Image Correlation</h3>
+    <p>The core computer vision hypothesis: if we capture images of tiles after the printer stage (where the design is visible) and correlate them with post-fire Qualitron shade classifications over thousands of tiles, we can build a predictive model that flags shade anomalies before firing.</p>
+
+    <div class="card">
+      <h4>Technical Considerations</h4>
+      <ul>
+        <li><strong>Capture window:</strong> After the printer, tiles briefly show their full printed design before a protective white glaze coat is applied. At this plant, the window is several seconds. At other DalTile plants, it may be as short as five seconds. High-speed line-scan cameras triggered by conveyor encoders would be appropriate.</li>
+        <li><strong>Color space:</strong> The Qualitron system uses CIE L*a*b* for shade classification. Pre-fire image capture should also use a calibrated color pipeline so that a meaningful correlation model can be built between pre-fire L*a*b* values and post-fire L*a*b* classification outcomes.</li>
+        <li><strong>Illumination:</strong> Consistent, repeatable illumination is essential for color measurement. The conveyor environment is semi-enclosed at the printer stage, which is favorable for controlled lighting (enclosed LED bar arrays or dome illumination).</li>
+        <li><strong>Reference comparison:</strong> Each tile has a known target design from the printer's digital file. Comparing captured images to the reference design creates a deviation metric that may predict shade classification without waiting for kiln output.</li>
+        <li><strong>Training data:</strong> The initial deployment would collect paired pre-fire and post-fire data to train the correlation model. During this data collection phase, the system provides no predictions but builds the dataset for supervised learning.</li>
+      </ul>
+    </div>
+
+    <h3>Dimensional Measurement for Caliber Prediction</h3>
+    <p>Caliber defects (thickness variation, warping, curvature) are currently only detected by the LINER device at the sorting line, after firing. Upstream dimensional measurement before the kiln could predict which tiles are likely to fail caliber specs.</p>
+
+    <div class="card">
+      <h4>Measurement Approaches</h4>
+      <ul>
+        <li><strong>Laser triangulation profiling:</strong> A laser line projected across the tile surface with a camera at an angle measures height variations. This captures thickness uniformity and edge straightness. Suitable for the continuous conveyor segments before the kiln.</li>
+        <li><strong>Structured light scanning:</strong> For full 3D surface profiling to detect pre-fire warping or bowing. More complex setup but provides comprehensive flatness data that correlates to post-fire planarity outcomes.</li>
+        <li><strong>Correlation target:</strong> Raw material moisture content plus pre-fire dimensional data plus kiln temperature profiles should strongly predict post-fire caliber classification. The hypothesis is that moisture variation in the raw material is the primary driver of caliber deviation after firing.</li>
+      </ul>
+    </div>
+
+    <h3>Conveyor Counting and Tile Tracking</h3>
+    <p>The existing light curtain sensors for tile counting are unreliable (dust, false triggers, impossible count increases). Vision-based counting using overhead cameras on the continuous conveyor segments would be inherently more reliable: a camera counting physical tiles in its field of view cannot produce phantom counts from dust or obstruction. Additionally, vision-based tracking can assign a temporary identity to each tile (based on position, size, and visual characteristics) for traceability through the continuous segments.</p>
+
+    <h3>Waste Detection at Reject Points</h3>
+    <p>Waste currently goes untracked at every stage before the Qualitron. Cameras positioned at known reject or discard points along the line (where operators remove defective tiles or where conveyors dump misaligned tiles) could count and classify waste events in real time, providing the upstream waste visibility that finance currently lacks.</p>
+  </div>
+
+  <!-- Section 10: Site Visit Discovery Questions -->
+  <div class="section">
+    <div class="section-number">10 &mdash; SITE VISIT PREPARATION</div>
+    <h2>Discovery Questions for the Factory Visit</h2>
+    <p class="lead">Questions to answer during the on-site assessment, organized by technical domain.</p>
+
+    <h3>Equipment and Vendor Data</h3>
+    <ul class="content-list">
+      <li>Which equipment at Muskogee is SACMI vs. System Ceramics vs. the third vendor? What model/generation is each piece of equipment?</li>
+      <li>Is the SACMI H.E.R.E. platform deployed at this plant? If so, which modules are active?</li>
+      <li>Is System Ceramics Hypermate deployed alongside the Qualitron installation?</li>
+      <li>What data does each machine's native controller expose? What protocols (OPC-UA, Modbus, Ethernet Powerlink, proprietary)?</li>
+      <li>What generation are the Siemens PLCs observed in the walkthrough videos? S7-300 (legacy), S7-1500 (modern), or a mix?</li>
+    </ul>
+
+    <h3>Vision and Camera Deployment</h3>
+    <ul class="content-list">
+      <li>What is the exact conveyor speed at each stage? This determines camera frame rate and exposure requirements.</li>
+      <li>What is the ambient lighting at the printer output? Is it consistent or variable (skylights, time of day)?</li>
+      <li>How long is the window between printer output and protective glaze coat application at this specific plant?</li>
+      <li>Where are the physical reject/discard points along the line? Are they consistent or ad hoc?</li>
+      <li>What is the dust particle size and density? This determines the IP rating needed and cleaning interval for camera housings.</li>
+    </ul>
+
+    <h3>Sensor and Network Infrastructure</h3>
+    <ul class="content-list">
+      <li>What sensor data is already captured by the PI Historian at this plant? What is the polling interval?</li>
+      <li>What signals do the press readout displays show? Are these available as digital outputs or only visual?</li>
+      <li>Do the glaze line light curtains measure thickness (angled) or only presence (perpendicular)?</li>
+      <li>What is the network topology on the factory floor? Where are the existing Ethernet drops?</li>
+      <li>Are there any existing wireless access points or mesh networks on the floor?</li>
+      <li>What is the distance from the furthest production equipment to the nearest network closet or server room?</li>
+    </ul>
+
+    <h3>PLC and Traceability</h3>
+    <ul class="content-list">
+      <li>Can we access the PLC programs for the WIP stacking and kiln feeding systems? Are they documented?</li>
+      <li>What determines which rack position a tile stack goes to before the kiln? Is it deterministic or first-available?</li>
+      <li>What determines which kiln a stack is fed to? Is routing logic in the PLC or manual operator decision?</li>
+      <li>Can the LGV fleet management system export movement logs?</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-logo">Bay<span>One</span> Solutions</div>
+  <p>Internal Team Briefing &middot; Confidential</p>
+</div>
+
+</body>
+</html>

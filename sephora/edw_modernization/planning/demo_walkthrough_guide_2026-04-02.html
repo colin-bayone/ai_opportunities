@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo Walkthrough Guide - Sephora EDW</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+      --green: #16a34a;
+      --green-bg: #f0fdf4;
+      --green-border: #bbf7d0;
+      --amber: #d97706;
+      --amber-bg: #fffbeb;
+      --amber-border: #fde68a;
+      --red: #dc2626;
+      --red-bg: #fef2f2;
+      --red-border: #fecaca;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    .cover {
+      min-height: 45vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 48px 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%; width: 80%; height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+
+    .cover-content { position: relative; z-index: 1; }
+
+    .cover-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--purple-glow); margin-bottom: 24px;
+    }
+
+    .cover h1 { font-size: 40px; font-weight: 700; line-height: 1.15; letter-spacing: -1px; margin-bottom: 16px; }
+    .cover .subtitle { font-size: 18px; font-weight: 300; opacity: 0.85; line-height: 1.5; max-width: 620px; }
+    .cover-meta { margin-top: 28px; font-size: 13px; opacity: 0.6; }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 48px 40px; }
+    .section { margin-bottom: 52px; }
+
+    .section-number {
+      font-size: 12px; font-weight: 600; color: var(--purple-accent);
+      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;
+    }
+
+    h2 { font-size: 26px; font-weight: 700; color: var(--primary); margin-bottom: 20px; letter-spacing: -0.5px; }
+    h3 { font-size: 17px; font-weight: 600; color: var(--primary); margin: 24px 0 10px; }
+    p { margin-bottom: 14px; }
+    .lead { font-size: 17px; color: var(--text-light); line-height: 1.8; margin-bottom: 24px; }
+
+    /* Screen cards */
+    .screen-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .screen-header {
+      background: linear-gradient(135deg, rgba(124,58,237,0.06) 0%, rgba(168,85,247,0.1) 100%);
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .screen-num {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: #fff; border-radius: 50%; display: flex;
+      align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; flex-shrink: 0;
+    }
+
+    .screen-title { font-weight: 700; color: var(--primary); font-size: 17px; }
+    .screen-subtitle { font-size: 13px; color: var(--text-light); }
+
+    .screen-body { padding: 20px 24px; }
+    .screen-body p { font-size: 14px; margin-bottom: 10px; }
+    .screen-body ul { margin: 8px 0 12px 18px; font-size: 14px; }
+    .screen-body li { margin-bottom: 6px; }
+
+    /* Say/Do boxes */
+    .say-box {
+      background: var(--primary);
+      color: #e2e8f0;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 12px 0;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .say-box .say-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--purple-accent); margin-bottom: 8px;
+    }
+
+    .do-box {
+      background: var(--green-bg);
+      border: 1px solid var(--green-border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 10px 0;
+      font-size: 14px;
+    }
+
+    .do-box .do-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--green); margin-bottom: 6px;
+    }
+
+    .avoid-box {
+      background: var(--red-bg);
+      border: 1px solid var(--red-border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 10px 0;
+      font-size: 14px;
+    }
+
+    .avoid-box .avoid-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--red); margin-bottom: 6px;
+    }
+
+    .wait-box {
+      background: var(--amber-bg);
+      border: 1px solid var(--amber-border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 10px 0;
+      font-size: 14px;
+    }
+
+    .wait-box .wait-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--amber); margin-bottom: 6px;
+    }
+
+    /* Q&A cards */
+    .qa-card {
+      border-left: 3px solid var(--purple-accent);
+      padding: 14px 18px;
+      margin-bottom: 16px;
+      background: var(--bg-subtle);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .qa-card .qa-q {
+      font-weight: 600; color: var(--primary); font-size: 14px; margin-bottom: 8px;
+    }
+
+    .qa-card .qa-a { font-size: 14px; color: var(--text); line-height: 1.6; }
+
+    .qa-card .qa-who {
+      font-size: 11px; color: var(--text-light); margin-top: 6px; font-style: italic;
+    }
+
+    /* Command block */
+    .cmd-block {
+      background: var(--primary);
+      color: #a5f3fc;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 12px 0;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      overflow-x: auto;
+    }
+
+    .cmd-block .cmd-comment { color: #94a3b8; }
+
+    /* Highlight box */
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.04) 0%, rgba(168,85,247,0.08) 100%);
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      padding: 22px 26px;
+      margin: 20px 0;
+    }
+
+    .highlight-box .box-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--purple-accent); margin-bottom: 10px;
+    }
+
+    .highlight-box p { font-size: 14px; margin-bottom: 8px; }
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    @media print {
+      .cover { min-height: auto; padding: 40px; }
+      body { font-size: 12px; }
+      .screen-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-content">
+    <div class="cover-label">Internal Prep Document</div>
+    <h1>Demo Walkthrough Guide</h1>
+    <p class="subtitle">Screen-by-screen guide for the Sephora EDW demo. What to click, what to say, what to expect, what to avoid, and how to handle questions.</p>
+    <div class="cover-meta">April 2, 2026 | Demo at 6:00 PM ET | Confidential</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: STARTING THE APPLICATION -->
+  <div class="section">
+    <div class="section-number">01</div>
+    <h2>Starting the Application</h2>
+    <p class="lead">Get the demo running on your machine before the call starts. Allow 2-3 minutes for everything to come up.</p>
+
+    <div class="cmd-block">
+      <span class="cmd-comment"># Make sure you have the latest code</span><br>
+      cd ~/programming/sephora_edw-1<br>
+      git pull<br><br>
+      <span class="cmd-comment"># Start Postgres (for checkpointing + run history)</span><br>
+      docker compose up -d<br><br>
+      <span class="cmd-comment"># Install dependencies (if anything changed)</span><br>
+      poetry install<br><br>
+      <span class="cmd-comment"># Verify .env has Azure AI + LangSmith keys</span><br>
+      cat .env<br><br>
+      <span class="cmd-comment"># Start the application server</span><br>
+      PYTHONPATH=src uvicorn etl_agent.api_server:app --host 0.0.0.0 --port 8100<br><br>
+      <span class="cmd-comment"># Open in browser</span><br>
+      http://localhost:8100
+    </div>
+
+    <div class="wait-box">
+      <div class="wait-label">Before the call</div>
+      Do a full test run to warm the pipeline and verify everything works. Check that the run history page shows previous runs (Saurav added sample entries). Have LangSmith open in a separate browser tab.
+    </div>
+  </div>
+
+  <!-- SECTION 2: SCREEN-BY-SCREEN -->
+  <div class="section">
+    <div class="section-number">02</div>
+    <h2>Screen-by-Screen Walkthrough</h2>
+    <p class="lead">Follow this sequence exactly. Each screen card tells you what is on screen, what to do, what to say, and what to watch out for.</p>
+
+    <!-- SCREEN 1 -->
+    <div class="screen-card">
+      <div class="screen-header">
+        <div class="screen-num">1</div>
+        <div>
+          <div class="screen-title">Run History (Main Page)</div>
+          <div class="screen-subtitle">http://localhost:8100 — the landing page</div>
+        </div>
+      </div>
+      <div class="screen-body">
+        <p><strong>What is on screen:</strong> A list of previous pipeline runs with run IDs, project names, timestamps, and status (pass, pending, failed). Saurav pre-populated a few sample entries so it looks active.</p>
+
+        <p><strong>What the application is doing:</strong> The FastAPI server queries PostgreSQL (<code>GET /runs</code>) and returns all stored pipeline runs. Each row is clickable and loads the cached results from that run.</p>
+
+        <div class="say-box">
+          <div class="say-label">What to say</div>
+          "This is the control center. Every pipeline run is tracked here with a unique ID. You can go back to any previous run and see exactly what happened, what was generated, what the validation score was. Think of this as the audit trail for the entire migration effort."
+        </div>
+
+        <div class="do-box">
+          <div class="do-label">Do</div>
+          Point out the different project names and statuses to show variety. Then click "New Run" to proceed.
+        </div>
+
+        <div class="avoid-box">
+          <div class="avoid-label">Do not</div>
+          Do not click on the sample runs to expand them. They have cached data but the detail view may not be fully populated for all of them. Go straight to New Run.
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 2 -->
+    <div class="screen-card">
+      <div class="screen-header">
+        <div class="screen-num">2</div>
+        <div>
+          <div class="screen-title">New Run Page</div>
+          <div class="screen-subtitle">File upload and configuration</div>
+        </div>
+      </div>
+      <div class="screen-body">
+        <p><strong>What is on screen:</strong> A file upload area (drag-and-drop placeholder), a "Load Demo Files" button, and configuration dropdowns (concurrency, model selection, target platform, retry count).</p>
+
+        <p><strong>What the application is doing:</strong> Nothing yet. This is the setup screen. The "Load Demo Files" button triggers a hardcoded load of 9 files that Sephora provided: DataStage XML, stored procedures, DDLs, views, Databricks schemas, and target framework examples (Scala app, YAML templates, HQL).</p>
+
+        <div class="say-box">
+          <div class="say-label">What to say</div>
+          "These are your actual files. The DataStage XML for the inventory pipeline, the stored procedures, the DDLs, the view definitions, the Databricks source schemas, and the target framework examples that Sergey's team provided. Nine files total. In production, these would come from the MCP connectors or from your file system directly."
+        </div>
+
+        <div class="do-box">
+          <div class="do-label">Do</div>
+          Click "Load Demo Files." Point out the file names as they appear. Then click "Start Pipeline."
+        </div>
+
+        <div class="avoid-box">
+          <div class="avoid-label">Do not</div>
+          Do not interact with the configuration dropdowns (concurrency, model, target platform, retries). They are visual placeholders and are not functional. Do not try drag-and-drop, it is a placeholder. If asked about the dropdowns, say: "Those are configurable in production. For the demo we have them set to the optimal values for your data."
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 3 -->
+    <div class="screen-card">
+      <div class="screen-header">
+        <div class="screen-num">3</div>
+        <div>
+          <div class="screen-title">Pipeline Execution</div>
+          <div class="screen-subtitle">This is the main event. The pipeline runs for approximately 9-10 minutes.</div>
+        </div>
+      </div>
+      <div class="screen-body">
+        <p><strong>What is on screen:</strong> A DAG visualization with nodes that light up as each stage completes. Below it, an execution log with live spinners showing what each agent is doing in real time (e.g., "Parsing XML structure... 4s", "Analyzing stored procedure logic... 12s"). A progress bar tracks overall completion.</p>
+
+        <p><strong>What the application is doing:</strong> The FastAPI server runs the LangGraph pipeline asynchronously (<code>POST /run</code>). A <code>LiveActivityHandler</code> callback tracks every tool call and LLM invocation. The frontend polls <code>GET /status</code> and <code>GET /live</code> to update the DAG, execution log, and progress bar in near-real-time.</p>
+
+        <p><strong>The pipeline stages in order:</strong></p>
+        <ul>
+          <li><strong>Orchestrator</strong> (Sonnet) — loads and classifies all 9 files, identifies the inventory_periodic_daily pipeline from the target Scala app</li>
+          <li><strong>Gate 1</strong> — verifies all artifacts loaded, DataStage XML present, targets found, run ID generated</li>
+          <li><strong>Three parallel parsers</strong> (2 at a time due to concurrency limit):
+            <ul>
+              <li><strong>DataStage Parser</strong> (Opus) — extracts job stages, embedded SQL, column definitions from XML via Python/sqlglot, then one Opus synthesis call</li>
+              <li><strong>SQL Interpreter</strong> (Sonnet) — extracts tables, joins, CTEs, temp tables from stored procedures via sqlglot, then parallel Sonnet batch for business rules</li>
+              <li><strong>DDL Parser</strong> (Sonnet) — extracts table schemas with exact decimal precision via sqlglot, then parallel Sonnet batch for semantic analysis</li>
+            </ul>
+          </li>
+          <li><strong>Gate 2</strong> — verifies parser outputs, cross-checks deterministic vs LLM table extraction, grounds column names in source files</li>
+          <li><strong>Pattern Mapper</strong> (Opus) — single call, creates the SQL-to-Spark translation dictionary from all parser outputs plus target examples</li>
+          <li><strong>Gate 3</strong> — verifies mapping references actual tables and includes source refs, type mappings, column mappings</li>
+          <li><strong>Spark SQL Generator</strong> (Opus + Sonnet) — plans all stages with dependency graph, generates independent stages in parallel (Sonnet), then dependent stages (Opus)</li>
+          <li><strong>Gate 4</strong> — sqlglot syntax check, DDL table and column coverage, source table grounding, truncation detection, then LLM business logic check at 75% threshold</li>
+          <li><strong>Config Generator</strong> (3x Sonnet) — three parallel calls producing pipeline YAML, deployment YAML, and create.HQL by copying target templates exactly</li>
+          <li><strong>Gate 5</strong> — YAML validity, HQL has CREATE TABLE, columns grounded in target, sourceFiles grounded in source, then LLM cross-reference check</li>
+          <li><strong>Schema Validator</strong> — deterministic cross-checks, assembles all gate LLM findings, computes overall score</li>
+        </ul>
+
+        <div class="say-box">
+          <div class="say-label">What to say (as parsers start)</div>
+          "Three agents are now working simultaneously. The DataStage parser is analyzing the XML structure to extract job stages and embedded SQL. The SQL interpreter is analyzing your stored procedures for business logic, flag calculations, and aggregation patterns. And the DDL parser is mapping every column with exact precision from your table definitions. Each one uses sqlglot for deterministic extraction first, then the LLM fills in semantic understanding."
+        </div>
+
+        <div class="say-box">
+          <div class="say-label">What to say (as gates pass)</div>
+          "Each of these gates is a deterministic checkpoint. Zero LLM cost. It verifies that the tables the agents found actually exist in your source files, not hallucinated. If anything fails, the gate routes the agent back to retry with the specific error, so it knows exactly what to fix."
+        </div>
+
+        <div class="say-box">
+          <div class="say-label">What to say (during pattern mapper, the slowest step)</div>
+          "This is the pattern mapper. It is reading everything the three parsers found, plus your target Scala application and YAML templates, and building a complete translation dictionary. Surrogate keys to business keys, SQL Server types to Databricks types, temp table patterns to intermediate views. This is a single Opus call because it needs the full context to get the mappings right."
+        </div>
+
+        <div class="wait-box">
+          <div class="wait-label">If throttling makes it slow</div>
+          "We submitted a quota increase request on Azure AI Foundry earlier today. In production, this runs faster with higher concurrency. The architecture supports as many parallel agents as you want. Right now we are running at conservative concurrency to stay within our demo quota."
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 4 -->
+    <div class="screen-card">
+      <div class="screen-header">
+        <div class="screen-num">4</div>
+        <div>
+          <div class="screen-title">Gate Results</div>
+          <div class="screen-subtitle">Expandable dropdowns showing pass/fail for each gate</div>
+        </div>
+      </div>
+      <div class="screen-body">
+        <p><strong>What is on screen:</strong> Collapsible sections for each gate. If the score is 100%, the section is closed. If there are issues, it stays open and shows the specific checks that passed or failed, with details.</p>
+
+        <p><strong>What the application is doing:</strong> The <code>Schema Validator</code> node assembles results from all five gates into a structured <code>validation_result</code> with four sections (Spark SQL, HQL DDL, Pipeline YAML, Deployment Config). Each section has named checks with pass/fail and detail strings. The frontend renders these as expandable cards.</p>
+
+        <div class="say-box">
+          <div class="say-label">What to say</div>
+          "Every check here is something you can trace. Column mapping shows how many columns from your DDL were found in the generated SQL. Source table grounding confirms every FROM and JOIN reference in the SQL actually exists in your original files. If something was hallucinated, it would be flagged right here before it ever gets to a human."
+        </div>
+
+        <div class="do-box">
+          <div class="do-label">Do</div>
+          Open one or two gate sections to show the detail. Point out specific checks like "DDL table coverage: 8/8 referenced" or "sqlglot syntax: 22/24 statements parsed." These are concrete numbers Grishi will appreciate.
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 5 -->
+    <div class="screen-card">
+      <div class="screen-header">
+        <div class="screen-num">5</div>
+        <div>
+          <div class="screen-title">Review Step</div>
+          <div class="screen-subtitle">The human-in-the-loop moment. This is where the demo lands hardest.</div>
+        </div>
+      </div>
+      <div class="screen-body">
+        <p><strong>What is on screen:</strong> Overall validation score (e.g., 97.3%), a list of flagged issues categorized as warnings and infos (never errors), preview of generated SQL with syntax highlighting (highlight.js), and buttons for AI Review, Auto-Fix, Approve, and Reject.</p>
+
+        <p><strong>What the application is doing:</strong> The pipeline has reached the <code>human_approval</code> node, which uses LangGraph's <code>interrupt()</code> to pause execution and wait for a human decision. The frontend displays the <code>validation_result</code> and generated outputs. The pipeline is paused, not stopped. Approving resumes it to completion.</p>
+
+        <h3>The Confidence Score</h3>
+        <p>This is the most important talking point of the entire demo.</p>
+
+        <div class="say-box">
+          <div class="say-label">What to say</div>
+          "97% confidence does not mean 97% accuracy. It means 97% of the conversion was handled automatically with full validation. The remaining 3% are items flagged for a quick human review. They are not errors. The orchestrator retries until actual errors resolve. What you see here are things like implicit decimal type casts and performance considerations. An engineer would look at these and say, 'yes, I see this all the time.' That is exactly where the human-in-the-loop value is."
+        </div>
+
+        <h3>The Issues List</h3>
+        <p>Issues are carefully categorized as <strong>warnings</strong> and <strong>infos</strong>, never errors. Saurav designed this deliberately. If an actual error existed, the orchestrator's retry loop would have caught it and sent the agent back to fix it before reaching this screen.</p>
+
+        <div class="say-box">
+          <div class="say-label">What to say about issues</div>
+          "Notice these are all warnings and infos, not errors. An implicit decimal cast is worth flagging so an engineer can confirm the precision is correct. A performance advisory about worker count is worth knowing about for production tuning. These are insights, not failures. And this is a team that does reporting. The moment you show them insights, you have their attention."
+        </div>
+
+        <h3>AI Review Button</h3>
+
+        <div class="do-box">
+          <div class="do-label">Do</div>
+          Click "AI Review." This sends all validation details, the generated SQL, the target Scala application, and the gate LLM findings to the review agent for an audit. The agent has tools to read the SQL, read the Scala, read the validation results, and it produces a detailed analysis. The output is descriptive enough that a data engineer can act on it in one read.
+        </div>
+
+        <div class="say-box">
+          <div class="say-label">What to say while AI Review runs</div>
+          "This is an independent audit. The review agent gets the full context: the generated SQL, the original Scala application, the validation results, and the gate findings. It checks for false positives in the validation and looks for anything the deterministic checks might have missed. Think of it as a second set of eyes before an engineer even looks at it."
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 6 -->
+    <div class="screen-card">
+      <div class="screen-header">
+        <div class="screen-num">6</div>
+        <div>
+          <div class="screen-title">Auto-Fix</div>
+          <div class="screen-subtitle">Like Claude Code for your pipeline</div>
+        </div>
+      </div>
+      <div class="screen-body">
+        <p><strong>What is on screen:</strong> After the AI Review completes, the Auto-Fix button becomes available. Clicking it triggers the review agent to make surgical edits to the generated SQL based on the review findings.</p>
+
+        <p><strong>What the application is doing:</strong> The review agent (<code>review_agent.py</code>) has tools: <code>read_sql</code>, <code>read_scala</code>, <code>read_validation</code>, <code>patch_view</code> (replace a specific view's SQL), and <code>run_validation</code> (re-run checks). It maintains a single conversation thread, reads the SQL as a file, identifies what needs to change, and makes targeted edits. It does not regenerate everything. It patches specific views.</p>
+
+        <div class="say-box">
+          <div class="say-label">What to say</div>
+          "This is like Claude Code for your pipeline. The agent treats the generated SQL as files. It has tools to read them, edit specific views, and re-validate after changes. It does not regenerate everything from scratch. It makes surgical corrections based on the review findings. After the fix, it runs validation again to confirm the issues are resolved."
+        </div>
+
+        <div class="do-box">
+          <div class="do-label">Do</div>
+          Click Auto-Fix. Wait for it to complete. The validation will re-run and the score should improve.
+        </div>
+
+        <div class="avoid-box">
+          <div class="avoid-label">Do not</div>
+          Do NOT click "Reject and Retry." This works on the backend (routes back to Spark SQL Generator for full regeneration through all downstream nodes), but the DAG animation breaks on retries because the frontend is vanilla HTML/JS without a framework. The execution log will show it running correctly, but the DAG will not light up properly. Use Auto-Fix instead.
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 7 -->
+    <div class="screen-card">
+      <div class="screen-header">
+        <div class="screen-num">7</div>
+        <div>
+          <div class="screen-title">Approve and Download</div>
+          <div class="screen-subtitle">The payoff. Show the output files.</div>
+        </div>
+      </div>
+      <div class="screen-body">
+        <p><strong>What is on screen:</strong> Approve button, and after approval, download buttons for each generated file. Preview tabs show the content with syntax highlighting.</p>
+
+        <p><strong>What the application is doing:</strong> Clicking Approve sends <code>POST /approve</code> with <code>{"approved": true}</code>. The LangGraph pipeline resumes from the <code>human_approval</code> interrupt, the approval count increments, and the pipeline reaches END. The run is saved to PostgreSQL. Generated files are available via <code>GET /output/{key}</code>.</p>
+
+        <div class="do-box">
+          <div class="do-label">Do</div>
+          Click Approve. Then download each file individually and show them:
+          <ul>
+            <li><strong>Spark SQL</strong> — syntax highlighted, all CREATE TEMP VIEW statements with the transformation logic</li>
+            <li><strong>Pipeline YAML</strong> — matches the AggregationApplication framework format exactly</li>
+            <li><strong>Deployment YAML</strong> — deployment configuration matching Sephora's existing pattern</li>
+            <li><strong>Create.HQL</strong> — the Databricks table definition</li>
+          </ul>
+        </div>
+
+        <div class="say-box">
+          <div class="say-label">What to say</div>
+          "These are the three config files Sergey described. Pipeline YAML, deployment YAML, and HQL. They plug directly into your existing AggregationApplication framework. No new code, no notebooks, no new framework for your support team to learn. The Spark SQL contains the transformation logic. Everything here is production-ready structure. Your team would review it, approve it, and commit it to the repo."
+        </div>
+
+        <div class="avoid-box">
+          <div class="avoid-label">Do not</div>
+          Do not try the "Download All (ZIP)" button. It is broken. Download files individually.
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 8 -->
+    <div class="screen-card">
+      <div class="screen-header">
+        <div class="screen-num">8</div>
+        <div>
+          <div class="screen-title">LangSmith (If Asked)</div>
+          <div class="screen-subtitle">The technical deep-dive tool. Open only when someone wants to go deeper.</div>
+        </div>
+      </div>
+      <div class="screen-body">
+        <p><strong>What is on screen:</strong> LangSmith's waterfall view showing every API call, tool invocation, and node transition for the pipeline run. Blue nodes are LangGraph stage level. Orange nodes are individual LLM calls. You can click any node to see its input and output.</p>
+
+        <p><strong>What the application is doing:</strong> LangSmith receives trace data from the <code>LiveActivityHandler</code> callback via the LangSmith SDK. It is not real-time (1-2 minute delay), but once the run completes, the full trace is available. You can switch between "trace" and "thread" views, and toggle waterfall mode.</p>
+
+        <div class="say-box">
+          <div class="say-label">What to say</div>
+          "This is the full execution trace. Every API call, every tool invocation, every node transition. You can see the parallel parsers running simultaneously. You can click any stage to see exactly what went in and what came out. No question you have about how this works cannot be answered from this view."
+        </div>
+
+        <div class="highlight-box">
+          <div class="box-label">When to open LangSmith</div>
+          <p>Do not open LangSmith proactively. Wait for someone to ask a question that the dashboard cannot answer. If Maher asks about the agent architecture internals, parallel execution, or how a specific stage processed the data, that is when you switch to LangSmith. It is the safety net for any technical question.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: KNOWN ISSUES -->
+  <div class="section">
+    <div class="section-number">03</div>
+    <h2>Known Issues and Workarounds</h2>
+
+    <div class="avoid-box">
+      <div class="avoid-label">Reject and Retry button</div>
+      Backend works fine (routes back to SQL Generator for full regeneration). But the DAG animation breaks on the retry path because the frontend is vanilla HTML/JS. The execution log shows everything running correctly. <strong>Use Auto-Fix instead.</strong>
+    </div>
+
+    <div class="avoid-box">
+      <div class="avoid-label">ZIP download</div>
+      Not working. Individual file downloads work fine. Download one at a time.
+    </div>
+
+    <div class="wait-box">
+      <div class="wait-label">Duration timer</div>
+      Includes human wait time. If you spend 15 minutes talking during the review step, the total duration will show an inflated number. If asked, explain: "That includes the time we spent reviewing together. The actual pipeline processing time is visible in the LangSmith waterfall."
+    </div>
+
+    <div class="wait-box">
+      <div class="wait-label">API throttling</div>
+      At concurrency 4, Azure AI Foundry may return 529 (Overloaded) errors. The pipeline handles this with exponential backoff (up to 5 retries, starting at 2 seconds). It will not crash, just run slower. A 4-5X quota increase was requested.
+    </div>
+
+    <div class="wait-box">
+      <div class="wait-label">Configuration dropdowns</div>
+      Target platform, model selection, retry count are visual placeholders. They look good but do not do anything. Do not interact with them during the demo.
+    </div>
+
+    <div class="wait-box">
+      <div class="wait-label">Advisory text rendering</div>
+      The auto-fix advisory section has a badge/label and "Click to view" but the text body may not render fully. The data is there. If it looks incomplete, pivot to the AI Review output which has the same findings in full detail.
+    </div>
+  </div>
+
+  <!-- SECTION 4: COMMON QUESTIONS -->
+  <div class="section">
+    <div class="section-number">04</div>
+    <h2>Common Questions and Answers</h2>
+    <p class="lead">Anticipated questions from Andrew, Grishi, and Maher based on their concerns from prior meetings and Maher's technical background.</p>
+
+    <div class="qa-card">
+      <div class="qa-q">"You showed one pipeline. How does this work across hundreds of different types?"</div>
+      <div class="qa-a">The orchestrator identifies pipeline types from target examples. The knowledge base accumulates approved patterns from each run. Once the first few pipelines of a type are approved, similar ones move through with minimal human intervention. The exploration phase we are proposing is specifically designed to map the full complexity distribution so we can quantify that acceleration.</div>
+      <div class="qa-who">Likely from: Andrew (scalability) or Maher (generalization)</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-q">"What happens when the agent encounters something it cannot translate?"</div>
+      <div class="qa-a">The deterministic gates catch failures before they propagate. If a gate fails, the producer retries with the specific error context injected into state. After max retries (configurable, default 2), the pipeline proceeds and flags the issue for human review. Nothing gets silently dropped. Every decision is auditable in LangSmith.</div>
+      <div class="qa-who">Likely from: Maher (error handling)</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-q">"Can you trace every transformation back to its source?"</div>
+      <div class="qa-a">Yes. Source grounding is built into every gate. The validators check that generated table names, column names, and source file references actually exist in the original artifacts. LangSmith provides the full execution trace. Nothing is a black box.</div>
+      <div class="qa-who">Likely from: Maher (auditability, lineage)</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-q">"How does the Cognos MCP work technically?"</div>
+      <div class="qa-a">Cognos has full Java and .NET SDKs going back to version 10, post-2003. The MCP server wraps the SDK to give agents programmatic access to report metadata, embedded SQL, and RBAC information. For this demo, we used exported files because live MCP requires access to your Cognos environment. The exploration phase would include validating the connector against your specific version.</div>
+      <div class="qa-who">Likely from: Maher (deep Cognos expertise, 8 years at IBM)</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-q">"Does the output actually fit our existing framework?"</div>
+      <div class="qa-a">The config generator copies the target templates Sergey's team provided and only changes values where the pipeline data requires it. The gate validators check that YAML token names, HQL column types, and deployment config patterns match the target examples. The output is pipeline YAML, deployment YAML, and HQL. No notebooks, no new framework.</div>
+      <div class="qa-who">Likely from: Grishi or Maher (framework fit)</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-q">"What model are you using and how do you handle token costs at scale?"</div>
+      <div class="qa-a">Claude Opus for heavy reasoning (pattern mapping, SQL generation planning, dependent stages). Claude Sonnet for lighter tasks (orchestration, independent stages, config generation). Both through Azure AI Foundry, which is significantly cheaper than the commercial API. Deterministic gates are zero LLM cost. The architecture minimizes token usage by doing as much as possible with Python and sqlglot before involving the LLM.</div>
+      <div class="qa-who">Likely from: Maher (production viability)</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-q">"How long does this take per pipeline?"</div>
+      <div class="qa-a">This run takes approximately 9-10 minutes end to end on our current demo quota. In production with higher concurrency and optimized quotas, that comes down. But the real acceleration is not per-pipeline speed. It is that the same pipeline handles the next hundred with the same effort because the knowledge base accumulates patterns. The work to do 100 is about the same as 1,000 once patterns are established.</div>
+      <div class="qa-who">Likely from: Andrew (timeline compression)</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-q">"Does it beat what we are doing with Claude today?"</div>
+      <div class="qa-a">Your team uses Claude for one step in the workflow: SQL conversion, getting about 30% efficiency. This pipeline automates the entire workflow: parsing, interpretation, mapping, generation, validation, and review. The efficiency gain compounds across all steps, and the deterministic gates ensure consistency that manual Claude interactions cannot provide.</div>
+      <div class="qa-who">Likely from: Grishi (30% baseline)</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-q">"What about table data migration from SQL Server to Databricks?"</div>
+      <div class="qa-a">Table data migration is absolutely within scope. It is the other half of what we showed today. This demo covers ETL pipeline conversion. The data migration layer uses the same agent architecture but requires access to the source SQL Server and target Databricks to build that pipeline. That is part of the exploration phase we are proposing.</div>
+      <div class="qa-who">Likely from: Andrew (scope expansion from Set 04)</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-q">"What is the next step?"</div>
+      <div class="qa-a">Two options. One, we deploy this on Azure with secure credentials so your team can try the workflow directly this week. Two, and this is what we recommend, a focused two-week exploration. Week one, your technical team walks us through the full landscape. Week two, we build the complexity map autonomously and give you a data-driven engagement proposal with real acceleration numbers.</div>
+      <div class="qa-who">This question will come from Andrew. Have the demo package document ready to share screen.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: RECOVERY -->
+  <div class="section">
+    <div class="section-number">05</div>
+    <h2>If Something Goes Wrong</h2>
+
+    <div class="highlight-box">
+      <div class="box-label">The safety net is LangSmith</div>
+      <p>LangSmith has the complete pipeline data for every run. If the dashboard has a rendering issue, if a section does not load, or if something looks wrong on the frontend, pivot to LangSmith. It can answer any technical question and show any pipeline data that the frontend cannot display.</p>
+      <p>If the pipeline crashes entirely (unlikely but possible with throttling), you can show the most recent completed run in LangSmith and walk through the waterfall view. The data is there even if the frontend is not cooperating.</p>
+    </div>
+
+    <div class="say-box">
+      <div class="say-label">If something visually glitches</div>
+      "Let me show you this in more detail." Switch to LangSmith. Do not apologize for the UI. Reframe it as going deeper.
+    </div>
+
+    <div class="say-box">
+      <div class="say-label">If throttling makes it very slow</div>
+      "We are running on demo-tier quotas right now. A quota increase was submitted earlier today. In production this runs at full concurrency. Let me show you a completed run while this one finishes." Switch to a previous run in the run history, or show the LangSmith waterfall of a prior run.
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

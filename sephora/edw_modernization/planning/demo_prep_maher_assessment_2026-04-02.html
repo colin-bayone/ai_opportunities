@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maher Burhan: Assessment and Risk Analysis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+      --green: #16a34a;
+      --green-bg: #f0fdf4;
+      --green-border: #bbf7d0;
+      --amber: #d97706;
+      --amber-bg: #fffbeb;
+      --amber-border: #fde68a;
+      --red: #dc2626;
+      --red-bg: #fef2f2;
+      --red-border: #fecaca;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    .cover {
+      min-height: 42vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+
+    .cover-content { position: relative; z-index: 1; }
+
+    .cover-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--purple-glow);
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 40px;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+
+    .cover .subtitle {
+      font-size: 18px;
+      font-weight: 300;
+      opacity: 0.85;
+      line-height: 1.5;
+      max-width: 620px;
+    }
+
+    .cover-meta {
+      margin-top: 32px;
+      font-size: 13px;
+      opacity: 0.6;
+    }
+
+    .container {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 48px 40px;
+    }
+
+    .section { margin-bottom: 52px; }
+
+    .section-number {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    h3 {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 24px 0 10px;
+    }
+
+    p { margin-bottom: 14px; }
+
+    .lead {
+      font-size: 17px;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    /* Profile card */
+    .profile-card {
+      display: flex;
+      gap: 28px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.04) 0%, rgba(168,85,247,0.08) 100%);
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 14px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+    }
+
+    .profile-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .profile-details { flex: 1; }
+
+    .profile-details .p-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+
+    .profile-details .p-title {
+      font-size: 14px;
+      color: var(--purple-accent);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .profile-details .p-meta {
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    .profile-details .p-meta strong { color: var(--text); }
+
+    /* Skill tags */
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .skill-tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: rgba(124,58,237,0.1);
+      color: var(--purple-mid);
+    }
+
+    .skill-tag.critical {
+      background: var(--red-bg);
+      color: var(--red);
+      border: 1px solid var(--red-border);
+    }
+
+    /* Company card */
+    .company-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+    }
+
+    .company-card .c-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .company-card .c-tagline {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 14px;
+    }
+
+    .company-card .c-stats {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 14px;
+    }
+
+    .c-stat {
+      text-align: center;
+    }
+
+    .c-stat .c-num {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--purple-bright);
+    }
+
+    .c-stat .c-label {
+      font-size: 11px;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Alert boxes */
+    .alert-box {
+      border-radius: 12px;
+      padding: 22px 26px;
+      margin: 20px 0;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .alert-box .alert-title {
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .alert-red {
+      background: var(--red-bg);
+      border: 1px solid var(--red-border);
+    }
+
+    .alert-red .alert-title { color: var(--red); }
+
+    .alert-amber {
+      background: var(--amber-bg);
+      border: 1px solid var(--amber-border);
+    }
+
+    .alert-amber .alert-title { color: var(--amber); }
+
+    .alert-green {
+      background: var(--green-bg);
+      border: 1px solid var(--green-border);
+    }
+
+    .alert-green .alert-title { color: var(--green); }
+
+    /* Comparison table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+
+    th {
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple-bright));
+      color: var(--white);
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    /* Question cards */
+    .q-card {
+      border-left: 3px solid var(--purple-accent);
+      padding: 14px 18px;
+      margin-bottom: 14px;
+      background: var(--bg-subtle);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .q-card .q-question {
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .q-card .q-answer {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .q-card .q-why {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-top: 6px;
+      font-style: italic;
+    }
+
+    /* Do / Don't */
+    .do-list, .dont-list { list-style: none; padding: 0; }
+
+    .do-list li, .dont-list li {
+      padding: 10px 16px 10px 44px;
+      margin-bottom: 8px;
+      border-radius: 8px;
+      font-size: 14px;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .do-list li {
+      background: var(--green-bg);
+      border: 1px solid var(--green-border);
+    }
+
+    .do-list li::before {
+      content: "\f00c";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      left: 16px;
+      color: var(--green);
+    }
+
+    .dont-list li {
+      background: var(--red-bg);
+      border: 1px solid var(--red-border);
+    }
+
+    .dont-list li::before {
+      content: "\f00d";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      left: 16px;
+      color: var(--red);
+    }
+
+    @media print {
+      .cover { min-height: auto; padding: 40px; }
+      .container { padding: 20px; }
+      body { font-size: 12px; }
+      th, .cover, .profile-icon, .skill-tag {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-content">
+    <div class="cover-label">Internal Intelligence Brief</div>
+    <h1>Maher Burhan<br>Assessment and Risk Analysis</h1>
+    <p class="subtitle">New attendee added to the Sephora demo call. Enterprise Architect embedded at Sephora, employed by Xebia. His employer has a directly competing agentic migration product.</p>
+    <div class="cover-meta">April 2, 2026 | Pre-Demo Intelligence | Confidential</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: WHO HE IS -->
+  <div class="section">
+    <div class="section-number">01</div>
+    <h2>Who He Is</h2>
+
+    <div class="profile-card">
+      <div class="profile-icon"><i class="fa-solid fa-user-tie"></i></div>
+      <div class="profile-details">
+        <div class="p-name">Maher Burhan</div>
+        <div class="p-title">Senior Architect at Xebia, embedded at Sephora as Enterprise Architect for Data Platform</div>
+        <div class="p-meta">
+          <strong>Location:</strong> Ontario, Canada (remote)<br>
+          <strong>At Xebia since:</strong> May 2025 (~1 year)<br>
+          <strong>Prior:</strong> GlobalLogic (Databricks Unity Catalog, SAP), IBM (8 years), CBSA (12+ years enterprise integration), Innovapost
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag critical">IBM Cognos</span>
+          <span class="skill-tag critical">Data Warehouse Design</span>
+          <span class="skill-tag">Java / J2EE / .NET</span>
+          <span class="skill-tag">SQL Server</span>
+          <span class="skill-tag">DB2 / Oracle / Teradata</span>
+          <span class="skill-tag">Databricks Unity Catalog</span>
+          <span class="skill-tag">Enterprise Integration</span>
+          <span class="skill-tag">Data Modeling</span>
+        </div>
+      </div>
+    </div>
+
+    <h3>He Is Not New to This Engagement</h3>
+    <p>This is "Meher" / "my hair" from the Set 04 technical deep dive transcript. He was on that call. He was on the CC for all Malika email correspondence. He suggested the disconnected demo approach (share exported XML, skip Sephora security) that made this PoC feasible in the first place. He has seen Colin's agent architecture slides and heard the technical walkthrough.</p>
+  </div>
+
+  <!-- SECTION 2: WHO XEBIA IS -->
+  <div class="section">
+    <div class="section-number">02</div>
+    <h2>Who Xebia Is</h2>
+
+    <div class="company-card">
+      <div class="c-name">Xebia</div>
+      <div class="c-tagline">"Shaping Tomorrow with AI Today" | AI-first consulting, software engineering, and training</div>
+      <div class="c-stats">
+        <div class="c-stat">
+          <div class="c-num">1,000+</div>
+          <div class="c-label">Employees</div>
+        </div>
+        <div class="c-stat">
+          <div class="c-num">60+</div>
+          <div class="c-label">Certified Data Experts</div>
+        </div>
+        <div class="c-stat">
+          <div class="c-num">Elite</div>
+          <div class="c-label">Databricks Partner Tier</div>
+        </div>
+      </div>
+      <p style="font-size: 14px; margin: 0;">HQ in Atlanta. Delivery in US, Europe, nearshore (Poland, Latin America), offshore (India). Databricks Elite Consulting Partner and Gold Partner (March 2026). End-to-end Databricks services including advisory, migrations, Lakehouse optimization, and training.</p>
+    </div>
+
+    <h3>Xebia's Relationship with Sephora</h3>
+    <p>Maher is embedded as Enterprise Architect for Sephora's Data Platform. Sephora's VP of Engineering (Data Insights and Marketing) participated as a guest panelist at a Xebia fireside chat at Gartner. Xebia appears to have an established presence at Sephora beyond just Maher.</p>
+  </div>
+
+  <!-- SECTION 3: THE COMPETING PRODUCT -->
+  <div class="section">
+    <div class="section-number">03</div>
+    <h2>The Competing Product</h2>
+    <p class="lead">Xebia has a shipping product that does almost exactly what BayOne's demo does.</p>
+
+    <div class="alert-red">
+      <div class="alert-title"><i class="fa-solid fa-triangle-exclamation"></i> Xebia Agentic Data Pipeline Migrator</div>
+      <p>Multi-agent architecture that automatically converts entire SQL and ETL codebases from legacy systems into Databricks-ready workflows. Translates SQL dialects, resolves macros, validates schemas, and assembles projects. Supports 7 SQL platforms. Featured on the Databricks blog as a GenAI Partner Accelerator. Claims to complete in hours what once required weeks.</p>
+    </div>
+
+    <h3>Head-to-Head Comparison</h3>
+
+    <table>
+      <tr>
+        <th>Aspect</th>
+        <th>BayOne Demo</th>
+        <th>Xebia Migrator</th>
+      </tr>
+      <tr>
+        <td><strong>Architecture</strong></td>
+        <td>Multi-agent with LangGraph, custom deterministic gates, LLM quality checks</td>
+        <td>Multi-agent (specialized agents for orchestration, analysis, translation, validation)</td>
+      </tr>
+      <tr>
+        <td><strong>Source support</strong></td>
+        <td>DataStage XML, SQL Server (Sephora-specific)</td>
+        <td>7 platforms: Redshift, Databricks, Snowflake, BigQuery, Postgres, MySQL, SQL Server</td>
+      </tr>
+      <tr>
+        <td><strong>Output</strong></td>
+        <td style="color: var(--green); font-weight: 600;">Sephora's AggregationApplication YAML configs + Spark SQL + HQL</td>
+        <td>Generic Databricks-ready workflows</td>
+      </tr>
+      <tr>
+        <td><strong>Customization</strong></td>
+        <td style="color: var(--green); font-weight: 600;">Built specifically for Sephora's data, framework, and patterns</td>
+        <td>Product/accelerator (likely needs customization per client)</td>
+      </tr>
+      <tr>
+        <td><strong>Validation</strong></td>
+        <td style="color: var(--green); font-weight: 600;">Deterministic gates + LLM checks + human-in-the-loop + surgical auto-fix</td>
+        <td>Auditable reports, graceful error handling (skip and mark)</td>
+      </tr>
+      <tr>
+        <td><strong>Knowledge base</strong></td>
+        <td style="color: var(--green); font-weight: 600;">Learns from approved patterns for future runs</td>
+        <td>Not mentioned</td>
+      </tr>
+      <tr>
+        <td><strong>Cognos MCP</strong></td>
+        <td>Architecture designed, Java hook confirmed, requires env access</td>
+        <td>Not mentioned</td>
+      </tr>
+      <tr>
+        <td><strong>Error handling</strong></td>
+        <td>Retry loops: gate failures route back to producer with error context</td>
+        <td>Skip non-translatable code, mark with comments, continue</td>
+      </tr>
+      <tr>
+        <td><strong>Maturity</strong></td>
+        <td>PoC built in 2 weeks on Sephora's actual data</td>
+        <td>Shipping product, listed on Databricks partner page</td>
+      </tr>
+    </table>
+
+    <div class="alert-green">
+      <div class="alert-title"><i class="fa-solid fa-shield-halved"></i> BayOne's Key Differentiators</div>
+      <p><strong>1. Output format.</strong> BayOne produces Sephora's specific YAML configs for the AggregationApplication framework. A generic migrator produces Databricks notebooks or raw SQL. Sergey explicitly rejected that ("spaghetti code, nightmare to debug").</p>
+      <p><strong>2. Knowledge base learning.</strong> Approved patterns get saved and improve future runs. Generic products start fresh every time.</p>
+      <p><strong>3. Human-in-the-loop with surgical control.</strong> Review step with confidence scoring and auto-fix. Not a black-box "run and hope" migration.</p>
+      <p><strong>4. Custom solution, not a product.</strong> Built for Sephora's environment, not a generic tool adapted to fit.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 4: RISK ASSESSMENT -->
+  <div class="section">
+    <div class="section-number">04</div>
+    <h2>Risk Assessment</h2>
+
+    <div class="alert-amber">
+      <div class="alert-title"><i class="fa-solid fa-scale-balanced"></i> Overall Risk: MODERATE</div>
+      <p>Maher is almost certainly on the call as a trusted technical assessor for Andrew and Grishi. He is not pitching Xebia. He is helping them evaluate BayOne. But he works for a company that builds the same thing, so the bar is higher with him in the room. He knows what good looks like.</p>
+    </div>
+
+    <h3>Why He Is Probably Not a Competitive Threat</h3>
+    <ul class="do-list">
+      <li>All other vendors were dismissed as of March 30. If Xebia were competing, they would already be in the running.</li>
+      <li>He is embedded as a Sephora consultant, not selling Xebia services. His role is "Enterprise Architect for Sephora Data Platform."</li>
+      <li>He has been collaborative throughout the engagement. He helped make the demo possible with the disconnected approach.</li>
+      <li>Andrew and Grishi added him because they need a technical voice they trust. That is a normal thing to do.</li>
+    </ul>
+
+    <h3>Why the Bar Is Higher with Him Present</h3>
+    <ul class="dont-list">
+      <li>He works at a company that builds a directly competing multi-agent migration product. He knows the space.</li>
+      <li>He has deep Cognos expertise (listed as a specialty, 8 years at IBM). He can assess MCP claims with authority.</li>
+      <li>He has Databricks Unity Catalog experience from GlobalLogic. He can assess output quality and framework fit.</li>
+      <li>The unspoken comparison in his mind will be "could Xebia's product do this?" even if he never says it.</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 5: WHAT HE WILL ASK -->
+  <div class="section">
+    <div class="section-number">05</div>
+    <h2>What He Will Likely Ask</h2>
+    <p class="lead">Based on his background, Xebia's product capabilities, and what he already knows from Set 04.</p>
+
+    <div class="q-card">
+      <div class="q-question">"You showed one pipeline. How does this work across hundreds of different pipeline types?"</div>
+      <div class="q-answer">The orchestrator identifies pipeline types from target examples. The knowledge base accumulates patterns from each approved run. Once the first few pipelines of a type are approved, similar ones move through with minimal human intervention. The exploration phase we are proposing is specifically designed to map the full complexity distribution so we can quantify that acceleration.</div>
+      <div class="q-why">He asks this because Xebia's product handles 7 SQL platforms generically. He will be thinking about generalization.</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-question">"What happens when the agent encounters something it cannot translate?"</div>
+      <div class="q-answer">The deterministic gates catch failures before they propagate. If a gate fails, the producer retries with the specific error context injected into state. After max retries, the pipeline proceeds and flags the issue for human review. Nothing gets silently dropped. Every decision is auditable in LangSmith.</div>
+      <div class="q-why">He asks this because Xebia's product "skips non-translatable code and marks with comments." BayOne's approach (retry with context) is arguably stronger here.</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-question">"Can you trace every transformation back to its source?"</div>
+      <div class="q-answer">Yes. Source grounding is built into every gate. The validators check that generated table names, column names, and source file references actually exist in the original artifacts. LangSmith provides the full execution trace for every API call and every node. Nothing is a black box.</div>
+      <div class="q-why">He asks this because Xebia emphasizes "fully auditable reports preserving logic, lineage, and performance." He will want to see BayOne's equivalent.</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-question">"How does the Cognos MCP connectivity work technically?"</div>
+      <div class="q-answer">Cognos has full Java and .NET SDKs going back to version 10 (post-2003). The MCP server wraps the SDK to give agents programmatic access to report metadata, embedded SQL, and RBAC information. For this demo, we used exported XML because live MCP requires access to the Cognos environment. The exploration phase would include validating the MCP connector against Sephora's specific Cognos version.</div>
+      <div class="q-why">He has deep Cognos expertise and 8 years at IBM. He can assess this claim technically. Be precise. Do not handwave.</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-question">"Does the generated output actually conform to the existing framework?"</div>
+      <div class="q-answer">The config generator copies the target templates provided by Sephora's team exactly and only changes values where the pipeline data requires it. The gate validators check that YAML token names, HQL column types, and deployment config patterns match the target examples. The output is pipeline YAML, deployment YAML, and HQL, exactly as Sergey specified. No notebooks, no new framework.</div>
+      <div class="q-why">He is the Enterprise Architect for Sephora's Data Platform. He will check whether the output fits what he maintains.</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-question">"What model are you using and how do you handle token costs at scale?"</div>
+      <div class="q-answer">Claude Opus for heavy reasoning tasks (pattern mapping, SQL generation planning, dependent stage generation). Claude Sonnet for lighter tasks (orchestration, independent stage generation, config generation). Both via Azure AI Foundry, which is significantly cheaper than commercial API. Deterministic gates are zero LLM cost. The architecture minimizes token usage by doing as much as possible with Python and sqlglot before involving the LLM.</div>
+      <div class="q-why">As an architect, he will think about production viability. Token costs at 6,000 reports is a real question.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: HOW TO HANDLE HIM -->
+  <div class="section">
+    <div class="section-number">06</div>
+    <h2>How to Handle Him in the Demo</h2>
+
+    <h3>Do</h3>
+    <ul class="do-list">
+      <li><strong>Acknowledge him warmly.</strong> He has been part of this since the technical deep dive. "Good to see you again, Maher."</li>
+      <li><strong>Be technically precise.</strong> He will notice handwaving. Use specific terms: deterministic gates, sqlglot for AST parsing, source grounding, dependency graph, LangGraph StateGraph.</li>
+      <li><strong>Lean into custom output format.</strong> "These YAML configs plug into the existing AggregationApplication framework. No new frameworks, no notebooks, no code for your support team to learn."</li>
+      <li><strong>Lean into the knowledge base.</strong> "The system learns from each approved run. A generic migration tool starts from scratch every time."</li>
+      <li><strong>Welcome his questions.</strong> Treat them as validation opportunities, not challenges. His approval carries weight with Andrew and Grishi.</li>
+      <li><strong>Offer LangSmith.</strong> If he asks about traceability or auditability, open LangSmith. It answers every technical question he could have.</li>
+    </ul>
+
+    <h3>Do Not</h3>
+    <ul class="dont-list">
+      <li><strong>Do not mention Xebia or their product.</strong> Do not acknowledge the competitive overlap. Let him draw his own conclusions.</li>
+      <li><strong>Do not position this as a "product."</strong> That is Xebia's lane. BayOne builds custom solutions. The word "product" hands them the comparison.</li>
+      <li><strong>Do not oversimplify the architecture.</strong> He will see through it. If anything, go deeper than you would for Andrew and Grishi alone.</li>
+      <li><strong>Do not be defensive if he asks hard questions.</strong> He is doing his job. A defensive response signals insecurity. A precise response signals competence.</li>
+      <li><strong>Do not speculate about what Xebia can or cannot do.</strong> Stay in BayOne's lane. Talk about what was built, not what others have not built.</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 7: BOTTOM LINE -->
+  <div class="section">
+    <div class="section-number">07</div>
+    <h2>Bottom Line</h2>
+
+    <div class="alert-green">
+      <div class="alert-title"><i class="fa-solid fa-bullseye"></i> If Maher validates the approach, it is stronger than Andrew or Grishi validating it alone.</div>
+      <p>He is the most technically qualified person who will have evaluated BayOne's demo. His endorsement (even implicit, through his body language and questions) carries enormous weight. The goal is not to convince him BayOne is better than Xebia. The goal is to demonstrate technical depth, honesty about limitations, and a custom approach that fits Sephora's specific environment. That is what wins trust from an architect.</p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
