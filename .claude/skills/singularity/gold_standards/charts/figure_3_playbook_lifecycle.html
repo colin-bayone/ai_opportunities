@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Figure 3: Playbook Lifecycle</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <style>
+    :root { --primary: #0f172a; --text: #334155; --text-light: #64748b; --border: #e2e8f0; --bg-subtle: #f8fafc; --white: #ffffff; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); background: var(--white); }
+    .page { max-width: 900px; margin: 40px auto; padding: 24px; background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 12px; overflow: visible; }
+    .page h1 { text-align: center; color: var(--text-light); font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 24px; }
+    .page svg { overflow: visible !important; max-width: none !important; width: 100% !important; }
+    .mermaid { display: flex; justify-content: center; }
+    .mermaid .node rect, .mermaid .node polygon { rx: 8 !important; ry: 8 !important; }
+    .mermaid .node foreignObject { overflow: visible !important; }
+    .mermaid .node foreignObject div { overflow: visible !important; }
+    .mermaid .edgeLabel rect { fill: #ede9fe !important; fill-opacity: 1 !important; stroke: none !important; }
+    .footer { text-align: center; padding: 16px; font-size: 12px; color: var(--text-light); }
+    @media print { @page { size: 8.5in 11in; margin: 0.5in; } .page { margin: 0; border: none; border-radius: 0; max-width: 100%; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <pre class="mermaid">
+graph TB
+    classDef active fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    classDef trigger fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    classDef decision fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+    classDef outcome fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#3b0764
+
+    CREATE["<b>fa:fa-brain Workflow Discovered</b><br/>▸ Agent finds effective test pattern<br/>▸ Human validates and approves<br/> "]:::active
+    SAVE["<b>fa:fa-list-check Playbook Saved</b><br/>▸ Mapped to features and code paths<br/>▸ Added to regression library<br/> "]:::active
+    TRIGGER["<b>fa:fa-code-branch Release or Change</b><br/>▸ CI/CD detects relevant change<br/>▸ Airflow runs scheduled sweep<br/> "]:::trigger
+    RUN["<b>fa:fa-gears Playbook Executes</b><br/>▸ Deterministic, no AI required<br/>▸ Full traceability logged<br/> "]:::trigger
+    CHECK{"<b>fa:fa-circle-check Pass or Fail?</b>"}:::decision
+    PASS["<b>fa:fa-eye Results Logged</b><br/>▸ Confidence record updated<br/>▸ Metrics captured<br/> "]:::outcome
+    FAIL["<b>fa:fa-bolt Defect or Update?</b><br/>▸ Genuine defect: flag for team<br/>▸ Intentional change: update playbook<br/> "]:::outcome
+
+    CREATE --> SAVE
+    SAVE --> TRIGGER
+    TRIGGER --> RUN
+    RUN --> CHECK
+    CHECK -->|"Pass"| PASS
+    CHECK -->|"Fail"| FAIL
+    FAIL -.->|"Rediscover"| CREATE
+    </pre>
+  </div>
+  <script>
+    mermaid.initialize({
+      startOnLoad: false, theme: 'base',
+      themeVariables: { primaryColor: '#dbeafe', primaryTextColor: '#0f172a', primaryBorderColor: '#2563eb', lineColor: '#7c3aed', secondaryColor: '#eff6ff', secondaryTextColor: '#1e3a5f', secondaryBorderColor: '#3b82f6', edgeLabelBackground: '#ede9fe', clusterBkg: '#f8fafc', clusterBorder: '#94a3b8', fontSize: '14px', fontFamily: 'Inter, sans-serif' },
+      flowchart: { curve: 'basis', nodeSpacing: 30, rankSpacing: 70, htmlLabels: true, useMaxWidth: true, padding: 40, wrappingWidth: 600 }
+    });
+    async function render() {
+      await mermaid.run({ querySelector: '.mermaid' });
+      const svg = document.querySelector('.mermaid svg');
+      if (!svg) return;
+      svg.querySelectorAll('.node').forEach(nodeGroup => {
+        const fo = nodeGroup.querySelector('foreignObject'), rect = nodeGroup.querySelector('rect');
+        if (!fo || !rect) return;
+        let strokeColor = rect.getAttribute('stroke') || '#94a3b8';
+        fo.querySelectorAll('b').forEach(b => { b.style.display = 'block'; b.style.background = 'rgba(255,255,255,0.85)'; b.style.border = '1px solid ' + strokeColor; b.style.borderRadius = '4px'; b.style.padding = '4px 10px'; b.style.marginBottom = '6px'; b.style.fontSize = '13px'; b.style.letterSpacing = '0.3px'; });
+        const h = parseFloat(rect.getAttribute('height')); rect.setAttribute('height', h + 12); fo.setAttribute('height', h + 12);
+      });
+    }
+    render();
+  </script>
+</body>
+</html>

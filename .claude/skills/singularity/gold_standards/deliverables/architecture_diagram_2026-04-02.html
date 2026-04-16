@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EDW Modernization: Solution Architecture</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+      --azure-blue: #0078d4;
+      --azure-light: #e8f4fd;
+      --azure-border: #b3d7f2;
+    }
+
+    @page {
+      size: landscape;
+      margin: 0.5in;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    .cover {
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 48px 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .cover-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--purple-glow);
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+
+    .cover .subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      opacity: 0.85;
+      line-height: 1.5;
+      max-width: 600px;
+    }
+
+    .cover-footer {
+      position: absolute;
+      bottom: 40px;
+      left: 80px;
+      right: 80px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      opacity: 0.6;
+      z-index: 1;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 48px 60px;
+    }
+
+    .section { margin-bottom: 64px; }
+
+    .section-number {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 32px 0 16px;
+    }
+
+    p { margin-bottom: 16px; }
+
+    .lead {
+      font-size: 18px;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    /* Mermaid container */
+    .diagram-container {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 48px;
+      margin: 24px 0;
+      overflow-x: auto;
+      min-height: 400px;
+    }
+
+    .diagram-container .diagram-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-light);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .mermaid {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ── Mermaid overrides (SVG text mode) ── */
+
+    .mermaid .node rect,
+    .mermaid .node polygon {
+      rx: 8 !important;
+      ry: 8 !important;
+    }
+
+    .mermaid .edgeLabel rect {
+      fill: #ede9fe !important;
+      fill-opacity: 1 !important;
+      stroke: none !important;
+      stroke-width: 0 !important;
+      opacity: 1 !important;
+    }
+
+
+    /* Component cards */
+    .comp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .comp-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+    }
+
+    .comp-card.azure {
+      background: var(--azure-light);
+      border-color: var(--azure-border);
+    }
+
+    .comp-card .comp-icon {
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .comp-card .comp-icon .badge {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-azure {
+      background: var(--azure-blue);
+      color: white;
+    }
+
+    .badge-oss {
+      background: #059669;
+      color: white;
+    }
+
+    .badge-ext {
+      background: var(--purple-mid);
+      color: white;
+    }
+
+    .comp-card .comp-title {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .comp-card .comp-desc {
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* Highlight box */
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin: 24px 0;
+    }
+
+    .highlight-box .box-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--purple-accent);
+      margin-bottom: 12px;
+    }
+
+    .highlight-box p {
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+
+    th {
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple-bright));
+      color: var(--white);
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    @media print {
+      @page { size: landscape; margin: 0.4in; }
+      .cover { min-height: auto; padding: 40px; page-break-after: always; }
+      .container { padding: 20px; max-width: 100%; }
+      .comp-grid { grid-template-columns: 1fr 1fr; }
+      .section { page-break-inside: avoid; }
+      th, .cover, .badge-azure, .badge-oss, .badge-ext, .highlight-box {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-content">
+    <div class="cover-label">Sephora EDW Modernization</div>
+    <h1>Solution Architecture</h1>
+    <p class="subtitle">Azure-hosted multi-agent pipeline for ETL migration, with integrated observability and secure credential-based access.</p>
+  </div>
+  <div class="cover-footer">
+    <span>BayOne Solutions | AI Practice</span>
+    <span>April 2, 2026</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: HIGH-LEVEL ARCHITECTURE -->
+  <div class="section">
+    <div class="section-number">01</div>
+    <h2>Deployment Architecture</h2>
+    <p class="lead">The solution runs entirely on Azure, using Azure AI Foundry for model inference and Azure Container Apps for the application layer. No data leaves the Azure environment.</p>
+
+    <div class="diagram-container">
+      <div class="diagram-title">High-Level Architecture</div>
+      <div class="mermaid">
+        <pre class="mermaid-src">
+graph TB
+    subgraph SEPHORA["`**SEPHORA ON-PREM**`"]
+        direction TB
+        COGNOS["`**IBM Cognos**
+        Report Server`"]
+        DS["`**IBM DataStage**
+        ETL Job Server`"]
+        SQLSRV["`**SQL Server**
+        Enterprise Data Warehouse`"]
+    end
+
+    subgraph AZURE["`**AZURE CLOUD**`"]
+        direction TB
+        subgraph ACA["`**Azure Container Apps**`"]
+            API["`**FastAPI**
+            Application Server`"]
+            DASH["`**Dashboard**
+            HTML / CSS / JavaScript`"]
+        end
+
+        subgraph FOUNDRY["`**Azure AI Foundry**`"]
+            OPUS["`**Claude Opus 4.6**
+            Heavy Reasoning Tasks`"]
+            SONNET["`**Claude Sonnet 4.6**
+            Fast Parallel Tasks`"]
+        end
+
+        PG["`**Azure Database for PostgreSQL**
+        Checkpointing + Run History`"]
+        BLOB["`**Azure Blob Storage**
+        Source Artifacts + Pipeline Outputs`"]
+    end
+
+    subgraph OBS["`**OBSERVABILITY**`"]
+        LS["`**LangSmith**
+        Execution Tracing + Waterfall View`"]
+    end
+
+    subgraph DB["`**SEPHORA DATABRICKS**`"]
+        DBSQL["`**Databricks SQL**
+        Target Platform`"]
+        UNITY["`**Unity Catalog**
+        Schema Governance`"]
+    end
+
+    COGNOS -.->|"`MCP Connector Phase 2`"| API
+    DS -.->|"`Exported XML`"| BLOB
+    SQLSRV -.->|"`DDL + Stored Procs`"| BLOB
+
+    BLOB -->|"`Source files`"| API
+    API -->|"`Opus calls`"| OPUS
+    API -->|"`Sonnet calls`"| SONNET
+    API -->|"`Checkpoints`"| PG
+    API -->|"`Traces`"| LS
+    API -->|"`Serves UI`"| DASH
+
+    API -->|"`YAML + SQL + HQL`"| BLOB
+    BLOB -.->|"`Deploy configs`"| DBSQL
+
+    DBSQL --- UNITY
+
+    style SEPHORA fill:#fef2f2,stroke:#f87171,stroke-width:2px,color:#991b1b
+    style AZURE fill:#eff6ff,stroke:#0078d4,stroke-width:3px,color:#0c4a6e
+    style ACA fill:#dbeafe,stroke:#3b82f6,stroke-width:2px,color:#1e3a5f
+    style FOUNDRY fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#3b0764
+    style OBS fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    style DB fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+
+    style API fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    style DASH fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    style OPUS fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#3b0764
+    style SONNET fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#3b0764
+    style PG fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+    style BLOB fill:#ccfbf1,stroke:#0d9488,stroke-width:2px,color:#134e4a
+
+    style COGNOS fill:#fef2f2,stroke:#ef4444,stroke-width:1px,color:#7f1d1d
+    style DS fill:#fef2f2,stroke:#ef4444,stroke-width:1px,color:#7f1d1d
+    style SQLSRV fill:#fef2f2,stroke:#ef4444,stroke-width:1px,color:#7f1d1d
+
+    style LS fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+
+    style DBSQL fill:#dcfce7,stroke:#16a34a,stroke-width:1px,color:#14532d
+    style UNITY fill:#dcfce7,stroke:#16a34a,stroke-width:1px,color:#14532d
+        </pre>
+      </div>
+      <!-- Static fallback for when mermaid JS is not loaded -->
+      <noscript>
+        <p style="text-align: center; color: var(--text-light);">Architecture diagram requires JavaScript (Mermaid.js) to render.</p>
+      </noscript>
+    </div>
+  </div>
+
+  <!-- SECTION 2: PIPELINE ARCHITECTURE -->
+  <div class="section">
+    <div class="section-number">02</div>
+    <h2>Agent Pipeline Architecture</h2>
+    <p class="lead">A LangGraph StateGraph with 15 nodes, 5 deterministic quality gates, and conditional retry routing. The pipeline proceeds through orchestration, parallel parsing, pattern mapping, code generation, configuration, validation, and human approval.</p>
+
+    <div class="diagram-container">
+      <div class="diagram-title">Pipeline Flow</div>
+      <div class="mermaid">
+        <pre class="mermaid-src">
+graph LR
+    START(("Start")) --> ORCH["`**Orchestrator**
+    Load + Classify`"]
+    ORCH --> G1{"G1"}
+    G1 -->|"`Pass`"| FAN["Fan-Out"]
+    G1 -.->|"`Retry`"| ORCH
+
+    FAN --> DSP["`**DataStage Parser**
+    Opus`"]
+    FAN --> SQL["`**SQL Interpreter**
+    Sonnet`"]
+    FAN --> DDL["`**DDL Parser**
+    Sonnet`"]
+
+    DSP --> G2{"G2"}
+    SQL --> G2
+    DDL --> G2
+    G2 -->|"`Pass`"| PM["`**Pattern Mapper**
+    Opus`"]
+    G2 -.->|"`Retry`"| FAN
+
+    PM --> G3{"G3"}
+    G3 -->|"`Pass`"| GEN["`**Spark SQL Generator**
+    Opus + Sonnet`"]
+    G3 -.->|"`Retry`"| PM
+
+    GEN --> G4{"G4"}
+    G4 -->|"`Pass`"| CFG["`**Config Generator**
+    3x Sonnet`"]
+    G4 -.->|"`Retry`"| GEN
+
+    CFG --> G5{"G5"}
+    G5 -->|"`Pass`"| VAL["`**Schema Validator**
+    Deterministic`"]
+    G5 -.->|"`Retry`"| CFG
+
+    VAL -->|"`Score >= 0.80`"| HUMAN["`**Human Review**
+    Approve or Reject`"]
+    VAL -.->|"`Score < 0.80`"| GEN
+    HUMAN -->|"`Approve`"| DONE(("End"))
+    HUMAN -.->|"`Reject`"| GEN
+
+    style START fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    style DONE fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+
+    style G1 fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    style G2 fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    style G3 fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    style G4 fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    style G5 fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+
+    style ORCH fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    style FAN fill:#f1f5f9,stroke:#94a3b8,stroke-width:1px,color:#475569
+
+    style DSP fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#3b0764
+    style SQL fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e
+    style DDL fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e
+
+    style PM fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#831843
+
+    style GEN fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#3b0764
+    style CFG fill:#ccfbf1,stroke:#0d9488,stroke-width:2px,color:#134e4a
+    style VAL fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+
+    style HUMAN fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+        </pre>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="box-label">Design Principle</div>
+      <p><strong>Deterministic first, LLM second.</strong> Every gate runs Python and sqlglot checks at zero LLM cost before proceeding. LLM-based quality checks only run after deterministic checks pass. This minimizes token usage while maintaining high validation standards.</p>
+      <p><strong>Source grounding at every gate.</strong> Generated table names, column names, and source file references are checked against the original artifacts. If a name does not exist in the source data, the gate flags it as potentially hallucinated before it propagates downstream.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 3: AZURE COMPONENTS -->
+  <div class="section">
+    <div class="section-number">03</div>
+    <h2>Azure Component Map</h2>
+
+    <div class="comp-grid">
+      <div class="comp-card azure">
+        <div class="comp-icon"><span class="badge badge-azure">Azure</span></div>
+        <div class="comp-title">Azure AI Foundry</div>
+        <div class="comp-desc">Claude Opus 4.6 and Sonnet 4.6 model inference. Enterprise-grade security (same as Outlook/Teams). Significantly lower cost than commercial API. Quota-based rate limiting with configurable concurrency.</div>
+      </div>
+      <div class="comp-card azure">
+        <div class="comp-icon"><span class="badge badge-azure">Azure</span></div>
+        <div class="comp-title">Azure Container Apps</div>
+        <div class="comp-desc">Hosts the FastAPI application server and PostgreSQL sidecar. Serverless scaling, HTTPS by default, time-bound credential access for secure demo environments.</div>
+      </div>
+      <div class="comp-card azure">
+        <div class="comp-icon"><span class="badge badge-azure">Azure</span></div>
+        <div class="comp-title">Azure Blob Storage</div>
+        <div class="comp-desc">Four containers: source artifacts (DataStage XML, stored procedures, DDLs), pipeline input, target examples (Scala apps, YAML templates, HQL), and pipeline output (generated configs).</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-icon"><span class="badge badge-oss">Open Source</span></div>
+        <div class="comp-title">LangGraph</div>
+        <div class="comp-desc">StateGraph orchestration framework. Manages the 15-node pipeline with conditional edges, parallel fan-out, retry routing, and human-in-the-loop interrupts via checkpointing.</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-icon"><span class="badge badge-oss">Open Source</span></div>
+        <div class="comp-title">PostgreSQL</div>
+        <div class="comp-desc">LangGraph checkpoint persistence and pipeline run history. Enables resume from any pipeline state, run comparison, and historical audit trail.</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-icon"><span class="badge badge-oss">Open Source</span></div>
+        <div class="comp-title">sqlglot</div>
+        <div class="comp-desc">AST-based SQL parsing for deterministic validation. Extracts tables, columns, joins, CTEs from both T-SQL (source) and Spark SQL (generated). Powers all gate checks at zero LLM cost.</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-icon"><span class="badge badge-ext">External</span></div>
+        <div class="comp-title">LangSmith</div>
+        <div class="comp-desc">Full execution tracing with waterfall visualization. Every API call, tool invocation, and node transition is recorded. Enables deep technical audit of any pipeline run.</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-icon"><span class="badge badge-azure">Azure</span> <span style="font-size: 12px; color: var(--text-light);">Phase 2</span></div>
+        <div class="comp-title">MCP Connector (Cognos)</div>
+        <div class="comp-desc">Custom Model Context Protocol server wrapping the IBM Cognos Java SDK. Provides programmatic agent access to report metadata, embedded SQL, and RBAC. Requires Sephora Cognos environment access.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: MODEL ALLOCATION -->
+  <div class="section">
+    <div class="section-number">04</div>
+    <h2>Model Allocation</h2>
+    <p class="lead">Opus handles reasoning-intensive stages. Sonnet handles formulaic and parallelizable tasks. Deterministic gates use zero LLM tokens.</p>
+
+    <table>
+      <tr>
+        <th>Pipeline Stage</th>
+        <th>Model</th>
+        <th>Rationale</th>
+      </tr>
+      <tr>
+        <td>Orchestrator</td>
+        <td>Sonnet</td>
+        <td>Fast artifact classification and pipeline identification</td>
+      </tr>
+      <tr>
+        <td>DataStage Parser</td>
+        <td><strong>Opus</strong></td>
+        <td>Complex XML analysis requiring deep context understanding</td>
+      </tr>
+      <tr>
+        <td>SQL Interpreter</td>
+        <td>Sonnet</td>
+        <td>Batch parallel processing of stored procedures and views</td>
+      </tr>
+      <tr>
+        <td>DDL Parser</td>
+        <td>Sonnet</td>
+        <td>Schema extraction with deterministic sqlglot pre-processing</td>
+      </tr>
+      <tr>
+        <td>Pattern Mapper</td>
+        <td><strong>Opus</strong></td>
+        <td>Critical mapping step requiring full upstream context</td>
+      </tr>
+      <tr>
+        <td>Spark SQL Planner</td>
+        <td><strong>Opus</strong></td>
+        <td>Plans all stages and builds dependency graph from Scala source</td>
+      </tr>
+      <tr>
+        <td>SQL Generator (independent)</td>
+        <td>Sonnet</td>
+        <td>Parallel generation of stages with no upstream dependencies</td>
+      </tr>
+      <tr>
+        <td>SQL Generator (dependent)</td>
+        <td><strong>Opus</strong></td>
+        <td>Generates stages that depend on previously generated views</td>
+      </tr>
+      <tr>
+        <td>Config Generator (3 files)</td>
+        <td>Sonnet</td>
+        <td>Template-based generation, 3 parallel calls</td>
+      </tr>
+      <tr>
+        <td>Schema Validator</td>
+        <td>Sonnet</td>
+        <td>Cross-artifact comparison and scoring</td>
+      </tr>
+      <tr>
+        <td>All 5 Deterministic Gates</td>
+        <td><strong>None</strong></td>
+        <td>Python + sqlglot only, zero LLM cost</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- SECTION 5: SECURITY -->
+  <div class="section">
+    <div class="section-number">05</div>
+    <h2>Security and Data Handling</h2>
+
+    <div class="highlight-box">
+      <div class="box-label">Key Security Properties</div>
+      <p><strong>All model inference runs through Azure AI Foundry.</strong> No data is sent to commercial API endpoints. Azure AI Foundry provides the same enterprise security guarantees as Azure Active Directory, Outlook, and Teams.</p>
+      <p><strong>Source data stays in Azure Blob Storage.</strong> Sephora's DataStage XML, stored procedures, and schema files are uploaded to a private storage account. Generated outputs are written back to the same storage account.</p>
+      <p><strong>Time-bound access.</strong> Demo environments are provisioned with credentials that expire automatically. The server shuts down after a defined period. Access can be restricted to specific individuals.</p>
+      <p><strong>Read-only exploration.</strong> The proposed exploration phase requires only read access to Sephora's systems. No writes, no modifications, no data extraction beyond what is necessary for complexity mapping.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 6: PORTABILITY -->
+  <div class="section">
+    <div class="section-number">06</div>
+    <h2>Portability</h2>
+    <p class="lead">The solution is designed to run on Sephora's infrastructure.</p>
+
+    <p>The current deployment runs on BayOne's Azure subscription for demonstration purposes. For a production engagement, the same application deploys to Sephora's Azure environment with no architectural changes. The components are:</p>
+
+    <table>
+      <tr>
+        <th>Component</th>
+        <th>Current (Demo)</th>
+        <th>Production (Sephora)</th>
+      </tr>
+      <tr>
+        <td>Model inference</td>
+        <td>BayOne Azure AI Foundry</td>
+        <td>Sephora Azure AI Foundry (or existing enterprise Claude subscription)</td>
+      </tr>
+      <tr>
+        <td>Application hosting</td>
+        <td>BayOne Azure Container Apps</td>
+        <td>Sephora Azure Container Apps (or equivalent)</td>
+      </tr>
+      <tr>
+        <td>Data storage</td>
+        <td>BayOne Azure Blob Storage</td>
+        <td>Sephora Azure Blob Storage (or direct MCP connectivity to on-prem systems)</td>
+      </tr>
+      <tr>
+        <td>Checkpointing</td>
+        <td>PostgreSQL sidecar</td>
+        <td>Azure Database for PostgreSQL (managed) or sidecar</td>
+      </tr>
+      <tr>
+        <td>Observability</td>
+        <td>LangSmith (BayOne project)</td>
+        <td>LangSmith (Sephora project) or self-hosted alternative</td>
+      </tr>
+      <tr>
+        <td>Source connectivity</td>
+        <td>Exported files via Blob Storage</td>
+        <td>MCP connectors to Cognos, DataStage, SQL Server (with environment access)</td>
+      </tr>
+    </table>
+
+    <div class="highlight-box">
+      <div class="box-label">No Additional Tooling Required</div>
+      <p>The solution does not introduce any proprietary frameworks, commercial middleware, or additional SaaS subscriptions beyond what Sephora already uses. LangGraph and sqlglot are open source. The application is a standard Python FastAPI service containerized with Docker. Everything runs within Azure services that Sephora's infrastructure team is already familiar with.</p>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#ede9fe',
+      primaryTextColor: '#1e1b4b',
+      primaryBorderColor: '#7c3aed',
+      lineColor: '#7c3aed',
+      secondaryColor: '#e8f4fd',
+      secondaryTextColor: '#0c4a6e',
+      secondaryBorderColor: '#0078d4',
+      tertiaryColor: '#f0fdf4',
+      tertiaryTextColor: '#14532d',
+      tertiaryBorderColor: '#16a34a',
+      edgeLabelBackground: '#ede9fe',
+      clusterBkg: '#f8fafc',
+      clusterBorder: '#94a3b8',
+      fontSize: '14px',
+      fontFamily: 'Inter, sans-serif'
+    },
+    flowchart: {
+      curve: 'basis',
+      nodeSpacing: 60,
+      rankSpacing: 70,
+      htmlLabels: false,
+      useMaxWidth: false,
+      padding: 20
+    }
+  });
+
+  document.querySelectorAll('.mermaid-src').forEach(async (el) => {
+    const src = el.textContent.trim();
+    const container = el.parentElement;
+    try {
+      const { svg } = await mermaid.render('mermaid-' + Math.random().toString(36).slice(2), src);
+      container.innerHTML = svg;
+    } catch (e) {
+      console.error('Mermaid render error:', e);
+      container.innerHTML = '<p style="text-align:center;color:#64748b;">Diagram rendering failed. Open in a browser with JavaScript enabled.</p>';
+    }
+  });
+</script>
+
+</body>
+</html>

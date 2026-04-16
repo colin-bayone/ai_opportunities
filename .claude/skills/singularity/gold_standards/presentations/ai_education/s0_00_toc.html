@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table of Contents</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-darkest: #0c1929;
+      --blue-dark: #15293e;
+      --blue-mid: #1e3a5f;
+      --blue-bright: #2563eb;
+      --blue-accent: #3b82f6;
+      --steel-light: #64748b;
+      --steel-glow: #94a3b8;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e6e8eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--blue-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 22px 40px 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 16px;
+      flex-shrink: 0;
+    }
+
+    .sections {
+      display: flex;
+      gap: 14px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .section-card {
+      flex: 1;
+      background: #fff;
+      border: 1px solid rgba(37,99,235,0.10);
+      border-radius: 10px;
+      padding: 14px 16px;
+      box-shadow: 0 1px 6px rgba(37,99,235,0.04);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      transition: box-shadow 0.2s;
+    }
+
+    .section-card:hover {
+      box-shadow: 0 4px 16px rgba(37,99,235,0.12);
+    }
+
+    .section-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .section-card:nth-child(1)::before { background: linear-gradient(90deg, #0c1929, #1e3a5f); }
+    .section-card:nth-child(2)::before { background: linear-gradient(90deg, #1e3a5f, #2563eb); }
+    .section-card:nth-child(3)::before { background: linear-gradient(90deg, #2563eb, #3b82f6); }
+    .section-card:nth-child(4)::before { background: linear-gradient(90deg, #3b82f6, #4f93f7); }
+    .section-card:nth-child(5)::before { background: linear-gradient(90deg, #4f93f7, #64748b); }
+
+    .section-card .sc-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #fff;
+      flex-shrink: 0;
+      margin-bottom: 8px;
+    }
+
+    .section-card:nth-child(1) .sc-icon { background: linear-gradient(135deg, #0c1929, #1e3a5f); }
+    .section-card:nth-child(2) .sc-icon { background: linear-gradient(135deg, #1e3a5f, #2563eb); }
+    .section-card:nth-child(3) .sc-icon { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+    .section-card:nth-child(4) .sc-icon { background: linear-gradient(135deg, #3b82f6, #4f93f7); }
+    .section-card:nth-child(5) .sc-icon { background: linear-gradient(135deg, #4f93f7, #64748b); }
+
+    .section-card h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .section-card .topics {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .section-card .topic {
+      font-size: 12px;
+      color: var(--text-light);
+      line-height: 1.4;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .section-card .topic i {
+      font-size: 5px;
+      color: var(--blue-accent);
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 10px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-darkest), var(--blue-mid), var(--blue-accent), var(--steel-glow));
+      border-radius: 2px;
+    }
+
+    .slide-nav { position: fixed; bottom: 18px; left: 18px; display: flex; gap: 6px; z-index: 100; }
+    .slide-nav a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: rgba(12,25,41,0.75); color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: background 0.2s, color 0.2s; border: 1px solid rgba(255,255,255,0.1); }
+    .slide-nav a:hover { background: rgba(37,99,235,0.9); color: #fff; }
+    .slide-nav a.disabled { opacity: 0.25; pointer-events: none; }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Master<span>minds</span></div>
+      <div class="header-title">April 2026</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>Agenda</h2>
+
+      <div class="sections">
+        <a class="section-card" href="s1_01_three_branches_overview.html">
+          <div class="sc-icon"><i class="fa-solid fa-brain"></i></div>
+          <h3>What AI Actually Is</h3>
+          <div class="topics">
+            <div class="topic"><i class="fa-solid fa-circle"></i> Machine Learning, Computer Vision, Generative AI</div>
+            <div class="topic"><i class="fa-solid fa-circle"></i> How language models work</div>
+            <div class="topic"><i class="fa-solid fa-circle"></i> Ground truth and training data</div>
+            <div class="topic"><i class="fa-solid fa-circle"></i> Five failure modes</div>
+          </div>
+        </a>
+
+        <a class="section-card" href="s2_01_what_problem.html">
+          <div class="sc-icon"><i class="fa-solid fa-tools"></i></div>
+          <h3>How It Works in Practice</h3>
+          <div class="topics">
+            <div class="topic"><i class="fa-solid fa-circle"></i> Starting from the problem</div>
+            <div class="topic"><i class="fa-solid fa-circle"></i> The 70/30 reality</div>
+            <div class="topic"><i class="fa-solid fa-circle"></i> What works and what does not</div>
+            <div class="topic"><i class="fa-solid fa-circle"></i> The AI audit</div>
+          </div>
+        </a>
+
+        <a class="section-card" href="s3_01_agentic_what.html">
+          <div class="sc-icon"><i class="fa-solid fa-rocket"></i></div>
+          <h3>Agentic AI</h3>
+          <div class="topics">
+            <div class="topic"><i class="fa-solid fa-circle"></i> Traditional software vs. language models vs. agentic</div>
+            <div class="topic"><i class="fa-solid fa-circle"></i> Why it is not scary</div>
+            <div class="topic"><i class="fa-solid fa-circle"></i> Tools available today</div>
+          </div>
+        </a>
+
+        <a class="section-card" href="s4_01_replacement_question.html">
+          <div class="sc-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3>Resilience</h3>
+          <div class="topics">
+            <div class="topic"><i class="fa-solid fa-circle"></i> The replacement question</div>
+            <div class="topic"><i class="fa-solid fa-circle"></i> Cost of waiting vs. doing it wrong</div>
+          </div>
+        </a>
+
+        <a class="section-card" href="s5_01_compliance_pii.html">
+          <div class="sc-icon"><i class="fa-solid fa-check-double"></i></div>
+          <h3>Getting Real</h3>
+          <div class="topics">
+            <div class="topic"><i class="fa-solid fa-circle"></i> Compliance and PII</div>
+            <div class="topic"><i class="fa-solid fa-circle"></i> Vendor pitch filter</div>
+            <div class="topic"><i class="fa-solid fa-circle"></i> Myth-busting</div>
+            <div class="topic"><i class="fa-solid fa-circle"></i> Business applications</div>
+            <div class="topic"><i class="fa-solid fa-circle"></i> Getting started</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+    </div>
+  </div>
+
+  <div class="slide-nav">
+    <a href="s0_00_title.html"><i class="fa-solid fa-chevron-left"></i></a>
+    <a href="s0_profile.html"><i class="fa-solid fa-chevron-right"></i></a>
+    <a href="s0_00_toc.html" style="margin-left: 6px;"><i class="fa-solid fa-house"></i></a>
+  </div>
+
+</body>
+</html>

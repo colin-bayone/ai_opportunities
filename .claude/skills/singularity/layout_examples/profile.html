@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile: Colin Moore</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-darkest: #0c1929;
+      --blue-dark: #15293e;
+      --blue-mid: #1e3a5f;
+      --blue-bright: #2563eb;
+      --blue-accent: #3b82f6;
+      --steel-light: #64748b;
+      --steel-glow: #94a3b8;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e6e8eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--blue-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+    }
+
+    /* Left: photo + name */
+    .left-panel {
+      width: 35%;
+      background: linear-gradient(135deg, var(--blue-darkest) 0%, var(--blue-mid) 100%);
+      padding: 30px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-placeholder {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: 3px solid rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .photo-placeholder i {
+      font-size: 48px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .left-panel h2 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+      text-align: center;
+    }
+
+    .left-panel .title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--blue-accent);
+      text-align: center;
+      margin-bottom: 4px;
+    }
+
+    .left-panel .company {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+    }
+
+    /* Right: background */
+    .right-panel {
+      width: 65%;
+      padding: 24px 30px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .right-panel .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 10px;
+    }
+
+    .highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .highlight {
+      background: #fff;
+      border: 1px solid rgba(37,99,235,0.10);
+      border-radius: 10px;
+      padding: 12px 16px;
+      box-shadow: 0 1px 6px rgba(37,99,235,0.04);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .highlight::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 3px;
+    }
+
+    .highlight:nth-child(1)::before { background: linear-gradient(180deg, #0c1929, #1e3a5f); }
+    .highlight:nth-child(2)::before { background: linear-gradient(180deg, #1e3a5f, #2563eb); }
+    .highlight:nth-child(3)::before { background: linear-gradient(180deg, #2563eb, #3b82f6); }
+    .highlight:nth-child(4)::before { background: linear-gradient(180deg, #3b82f6, #4f93f7); }
+    .highlight:nth-child(5)::before { background: linear-gradient(180deg, #4f93f7, #64748b); }
+
+    .highlight .h-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #fff;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .highlight:nth-child(1) .h-icon { background: linear-gradient(135deg, #0c1929, #1e3a5f); }
+    .highlight:nth-child(2) .h-icon { background: linear-gradient(135deg, #1e3a5f, #2563eb); }
+    .highlight:nth-child(3) .h-icon { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+    .highlight:nth-child(4) .h-icon { background: linear-gradient(135deg, #3b82f6, #4f93f7); }
+    .highlight:nth-child(5) .h-icon { background: linear-gradient(135deg, #4f93f7, #64748b); }
+
+    .highlight h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+
+    .highlight p {
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 10px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-darkest), var(--blue-mid), var(--blue-accent), var(--steel-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">BayOne <span>Solutions</span></div>
+      <div class="header-title">April 2026</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="left-panel">
+        <div class="photo-placeholder">
+          <i class="fa-solid fa-user" style="font-size: 48px; color: rgba(255,255,255,0.3);"></i>
+        </div>
+        <h2>Colin Moore</h2>
+        <div class="title">Director of AI</div>
+        <div class="company">BayOne Solutions</div>
+      </div>
+
+      <div class="right-panel">
+        <div class="section-label">Background</div>
+
+        <div class="highlights">
+          <div class="highlight">
+            <div class="h-icon"><i class="fa-solid fa-rocket"></i></div>
+            <div>
+              <h4>Director of AI at BayOne Solutions</h4>
+              <p>Leads AI strategy, architecture, and delivery across BayOne's enterprise client portfolio. Technical lead on engagements with Cisco, Sephora, Google, Meta, Bayer, Walmart, JPMC, Tailored Brands, and others.</p>
+            </div>
+          </div>
+          <div class="highlight">
+            <div class="h-icon"><i class="fa-solid fa-building"></i></div>
+            <div>
+              <h4>Built an AI Center of Excellence from scratch</h4>
+              <p>Previously at Coherent Corporation, where he established and led a global team of 120+ AI engineers and data scientists across the US, EU, and APAC, delivering 60+ AI initiatives with over $70M in measurable annual impact.</p>
+            </div>
+          </div>
+          <div class="highlight">
+            <div class="h-icon"><i class="fa-solid fa-server"></i></div>
+            <div>
+              <h4>Enterprise AI platforms serving 40,000+ users</h4>
+              <p>Architected and deployed a FedRAMP-authorized Azure-hosted platform across aerospace, defense, and global manufacturing operations supporting 25+ languages.</p>
+            </div>
+          </div>
+          <div class="highlight">
+            <div class="h-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <div>
+              <h4>AI risk advisor for legal, compliance, and cybersecurity</h4>
+              <p>Primary technical advisor on AI deployment risks, data privacy, and regulatory compliance for enterprise organizations navigating AI governance frameworks.</p>
+            </div>
+          </div>
+          <div class="highlight">
+            <div class="h-icon"><i class="fa-solid fa-industry"></i></div>
+            <div>
+              <h4>From EV batteries to enterprise AI</h4>
+              <p>Started in biomedical engineering and chemical process R&D, developing lithium-sulfur battery technology for General Motors before transitioning into AI leadership. Has delivered AI solutions across manufacturing, aerospace, defense, retail, financial services, and professional services.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">00</div>
+    </div>
+  </div>
+
+</body>
+</html>

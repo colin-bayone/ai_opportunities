@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technical Foundation — An Agentic Platform for Quality Engineering</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <style>
+    :root {
+      --purple-darkest: #2e1065; --purple-dark: #4c1d95; --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9; --purple-accent: #a855f7; --purple-glow: #e879f9;
+      --primary: #0f172a; --text: #334155; --text-light: #64748b;
+      --border: #e2e8f0; --bg-subtle: #f8fafc; --white: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); line-height: 1.7; font-size: 15px; background: var(--white); }
+
+    .cover {
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: var(--white); position: relative; overflow: hidden;
+    }
+    .cover::before { content: ''; position: absolute; top: -50%; right: -20%; width: 80%; height: 200%; background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%); transform: rotate(-12deg); }
+    .cover::after { content: ''; position: absolute; bottom: -30%; left: -10%; width: 60%; height: 80%; background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%); border-radius: 50%; }
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+    .cover-label { font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #e879f9; margin-bottom: 24px; }
+    .cover h1 { font-size: 48px; font-weight: 700; line-height: 1.1; margin-bottom: 24px; letter-spacing: -1px; }
+    .cover-subtitle { font-size: 20px; font-weight: 300; color: rgba(255,255,255,0.8); margin-bottom: 48px; max-width: 600px; }
+    .cover-meta { display: flex; gap: 48px; padding-top: 48px; border-top: 1px solid rgba(255,255,255,0.15); }
+    .cover-meta-item label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+    .cover-meta-item span { font-size: 15px; font-weight: 500; }
+    .logo { position: absolute; bottom: 80px; right: 80px; font-size: 24px; font-weight: 700; color: var(--white); letter-spacing: -0.5px; }
+    .logo span { color: #e879f9; }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 80px 40px; }
+
+    .toc { margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+    .toc h2 { font-size: 24px; font-weight: 700; color: var(--primary); margin-bottom: 20px; }
+    .toc-list { list-style: none; margin: 0; padding: 0; }
+    .toc-list li { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; align-items: baseline; gap: 16px; }
+    .toc-list li:last-child { border-bottom: none; }
+    .toc-number { font-size: 12px; font-weight: 600; color: var(--purple-accent); letter-spacing: 2px; min-width: 28px; }
+    .toc-title { font-size: 15px; font-weight: 500; color: var(--primary); }
+
+    .section { margin-bottom: 56px; }
+    .section-number { display: inline-block; font-size: 12px; font-weight: 600; color: var(--purple-accent); letter-spacing: 2px; margin-bottom: 12px; padding: 6px 14px; background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%); border-radius: 4px; }
+    h2 { font-size: 28px; font-weight: 700; color: var(--primary); margin-bottom: 20px; letter-spacing: -0.5px; }
+    h3 { font-size: 18px; font-weight: 600; color: var(--primary); margin: 28px 0 12px; }
+    p { margin-bottom: 14px; }
+    .lead { font-size: 17px; color: var(--text-light); line-height: 1.8; margin-bottom: 24px; }
+
+    .highlight-box { background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%); border-left: 4px solid #a855f7; padding: 20px 24px; margin: 24px 0; border-radius: 0 8px 8px 0; }
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+    th { text-align: left; padding: 12px 14px; background: #5b21b6; color: var(--white); font-weight: 600; font-size: 12px; letter-spacing: 0.5px; text-transform: uppercase; border-right: 1px solid rgba(255,255,255,0.15); }
+    th:last-child { border-right: none; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+    td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 20px 0; }
+    .card { background: var(--white); border: 1px solid rgba(124,58,237,0.15); border-radius: 12px; padding: 24px; }
+    .card h4 { margin-top: 0; color: var(--purple-mid); font-size: 15px; }
+    .card p { font-size: 14px; line-height: 1.6; }
+    .card p:last-child { margin-bottom: 0; }
+    .badge { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%); color: var(--purple-accent); margin-bottom: 8px; }
+
+    .diagram-container { margin: 24px 0; padding: 24px 24px 48px; background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 12px; overflow: visible; }
+    .diagram-container h4 { text-align: center; margin: 0 0 12px; color: var(--text-light); font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+    .diagram-container svg { overflow: visible !important; }
+
+    .mermaid { display: flex; justify-content: center; }
+    .mermaid .node rect, .mermaid .node polygon { rx: 8 !important; ry: 8 !important; }
+    .mermaid .node foreignObject { overflow: visible !important; }
+    .mermaid .node foreignObject div { overflow: visible !important; }
+    .mermaid .edgeLabel rect { fill: #ede9fe !important; fill-opacity: 1 !important; stroke: none !important; }
+
+    .footer { text-align: center; padding: 40px; border-top: 1px solid var(--border); margin-top: 48px; }
+    .footer-logo { font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+    .footer-logo span { color: #a855f7; }
+    .footer p { font-size: 13px; color: var(--text-light); margin: 0; }
+
+    @media print {
+      @page { size: 8.5in 11in; margin: 0.4in; }
+      body { font-size: 9pt; line-height: 1.4; }
+      .cover { min-height: 0; height: 10in; padding: 50px; page-break-after: always; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .cover h1 { font-size: 28pt; }
+      .logo { position: relative; bottom: auto; right: auto; margin-top: 32px; }
+      .container { padding: 0; max-width: 100%; }
+      .section { margin-bottom: 16px; }
+      h2 { font-size: 13pt; margin-bottom: 8px; page-break-after: avoid; }
+      h3 { font-size: 10pt; margin: 10px 0 6px; page-break-after: avoid; }
+      p { margin-bottom: 5px; font-size: 9pt; }
+      .lead { font-size: 10pt; margin-bottom: 10px; }
+      table { font-size: 8pt; margin: 8px 0; }
+      th, td { padding: 5px 7px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .highlight-box { padding: 10px 14px; margin: 10px 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; break-inside: avoid; page-break-inside: avoid; }
+      .two-col { gap: 12px; break-inside: avoid; page-break-inside: avoid; }
+      .card { padding: 14px; break-inside: avoid; page-break-inside: avoid; }
+      table { break-inside: avoid; page-break-inside: avoid; }
+      .section-number { break-after: avoid; page-break-after: avoid; }
+      tr { break-inside: avoid; page-break-inside: avoid; }
+      .diagram-container { padding: 10px 10px 24px; margin: 10px 0; }
+      .footer { margin-top: 16px; padding: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-label">Agentic Quality Engineering</div>
+      <h1>Technical Foundation</h1>
+      <div class="cover-subtitle">Companion document: technology stack, production infrastructure, design principles, and cost model</div>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <label>Prepared For</label>
+          <span>Sephora</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Prepared By</label>
+          <span>BayOne Solutions</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Date</label>
+          <span>April 2026</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Status</label>
+          <span>Preliminary</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo">Bay<span>One</span></div>
+  </div>
+
+  <div class="container">
+
+    <!-- TOC -->
+    <div class="toc">
+      <h2>Contents</h2>
+      <ul class="toc-list">
+        <li><span class="toc-number">01</span><span class="toc-title">Core Technology Stack</span></li>
+        <li><span class="toc-number">02</span><span class="toc-title">Design Principles</span></li>
+        <li><span class="toc-number">03</span><span class="toc-title">Production Infrastructure</span></li>
+        <li><span class="toc-number">04</span><span class="toc-title">Integration and Extensibility</span></li>
+      </ul>
+    </div>
+
+    <!-- SECTION 01: CORE TECHNOLOGY STACK -->
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>Core Technology Stack</h2>
+      <p class="lead">BayOne builds with the same tools it uses internally for its own quality engineering practice. The recommended stack is deliberately conservative: battle-tested frameworks that have reached production maturity, are extensible, and are maintainable by the team that will eventually own the system. Every component has crossed the threshold from experimental to production-grade.</p>
+
+      <table>
+        <tr>
+          <th>Layer</th>
+          <th>Technology</th>
+          <th>Purpose</th>
+        </tr>
+        <tr>
+          <td><strong>Browser automation</strong></td>
+          <td>Playwright</td>
+          <td>Visual testing, UI interaction, screenshot capture, cross-device and cross-browser execution. Microsoft-native, aligned with Azure environments. Eliminates the delay and uncertainty issues that legacy Selenium-based automation introduces.</td>
+        </tr>
+        <tr>
+          <td><strong>Agent orchestration</strong></td>
+          <td>LangGraph</td>
+          <td>Multi-agent workflows, state management, tool routing, deterministic-to-agentic flow control. Manages the coordination between exploratory agents, review agents, and the playbook engine.</td>
+        </tr>
+        <tr>
+          <td><strong>Model hosting</strong></td>
+          <td>Azure AI Foundry</td>
+          <td>LLM inference and visual understanding models with enterprise-grade hosting, security, and scaling. Supports multi-model selection, allowing the platform to use the best model for each task type.</td>
+        </tr>
+        <tr>
+          <td><strong>Workflow orchestration</strong></td>
+          <td>Apache Airflow</td>
+          <td>Scheduling and orchestrating test suites at scale: nightly regression sweeps, post-deploy validation, periodic production monitoring, and batch processing of large test libraries.</td>
+        </tr>
+        <tr>
+          <td><strong>CI/CD integration</strong></td>
+          <td>GitHub Actions</td>
+          <td>Event-driven test triggering on code changes. Developers receive visual QE feedback within their existing workflow without context-switching to a separate testing tool.</td>
+        </tr>
+        <tr>
+          <td><strong>Web application</strong></td>
+          <td>Django or FastAPI</td>
+          <td>Unified platform hub providing user management, repository integration, SSO, playbook governance, configuration management, and reporting. Python-native for direct compatibility with LangGraph, Playwright, and Azure SDK, eliminating translation layers between the application and the agent infrastructure.</td>
+        </tr>
+      </table>
+
+      <div class="diagram-container">
+        <h4>Technology Stack Integration</h4>
+        <div id="diagram-stack">
+          <pre class="mermaid">
+graph TB
+    classDef user fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    classDef app fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    classDef agent fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#3b0764
+    classDef infra fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    classDef ext fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+
+    USERS["<b>fa:fa-users Teams and Leadership</b><br/>▸ QE, Development, UI/UX, Producers<br/>▸ SSO authentication<br/> "]:::user
+    HUB["<b>fa:fa-server Platform Hub (Django/FastAPI)</b><br/>▸ Configuration, playbook management, reporting<br/>▸ Repository integration, user scoping<br/> "]:::app
+    AGENTS["<b>fa:fa-brain LangGraph Agent Orchestration</b><br/>▸ Exploratory agents, review agents<br/>▸ Deterministic playbook execution<br/> "]:::agent
+    PW["<b>fa:fa-hammer Playwright</b><br/>▸ Browser automation<br/>▸ Screenshot capture<br/> "]:::agent
+    AI["<b>fa:fa-microchip Azure AI Foundry</b><br/>▸ Visual understanding models<br/>▸ General reasoning models<br/> "]:::agent
+    CICD["<b>fa:fa-code-branch GitHub Actions</b><br/>▸ Event-driven triggers<br/>▸ Developer workflow integration<br/> "]:::ext
+    AIRFLOW["<b>fa:fa-clock Apache Airflow</b><br/>▸ Scheduled test suites<br/>▸ Nightly regressions, sweeps<br/> "]:::ext
+    AZURE["<b>fa:fa-cloud Azure Container Apps</b><br/>▸ PostgreSQL, Redis<br/>▸ Pay-by-usage scaling<br/> "]:::infra
+
+    USERS --> HUB
+    HUB --> AGENTS
+    AGENTS --> PW
+    AGENTS --> AI
+    CICD --> AGENTS
+    AIRFLOW --> AGENTS
+    AGENTS --> AZURE
+          </pre>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <p><strong>Stack philosophy:</strong> If a capability is not covered by the core stack, BayOne either builds it or finds it within the Microsoft ecosystem. This ensures IT administrability and business continuity. The platform does not introduce vendor dependencies that require specialized knowledge to maintain.</p>
+      </div>
+    </div>
+
+    <!-- SECTION 02: DESIGN PRINCIPLES -->
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>Design Principles</h2>
+      <p class="lead">The architectural decisions behind the technology stack reflect a set of principles that govern how the platform is built and how it behaves.</p>
+
+      <h3>Deterministic-First</h3>
+      <p>Deterministic processes handle everything they can handle reliably. Playwright executes browser actions with precision. Saved playbooks replay exact sequences without interpretation. CI/CD triggers fire based on mapped code changes and recursive dependency analysis. AI is layered on top only for work that requires judgment: exploring unfamiliar application states, interpreting visual discrepancies, distinguishing intentional changes from defects, and generating new testing workflows.</p>
+      <p>This layering keeps the reliability floor high. The deterministic foundation operates at near-100% consistency. The AI layer adds capability without introducing variability into the critical path.</p>
+
+      <h3>Multi-Model Strategy</h3>
+      <p>Visual quality engineering benefits from selecting models based on what each does best rather than standardizing on a single provider. General reasoning and test orchestration use one model family. Visual understanding and pixel-level comparison may use another. This flexibility is managed within the platform through Azure AI Foundry and is transparent to end users. Model selection is a platform configuration choice, not a user-facing decision.</p>
+
+      <h3>Recursive Dependency Coverage</h3>
+      <p>Coverage extends beyond surface-level file associations. When the platform maps the codebase, it traces recursive downstream dependencies so that a change in one module triggers tests for everything that module affects, not just the module itself. This means the CI/CD integration targets the right tests on every change without executing the entire suite or relying on manual selection.</p>
+
+      <h3>Automated Consistency at Scale</h3>
+      <p>At scale, automated visual consistency exceeds what human reviewers can maintain. Across large volumes of pages, device and browser combinations, and A/B test variants, attention fatigue degrades human accuracy. The platform maintains consistent precision regardless of volume, and the deterministic playbook library ensures that validated tests execute identically every time.</p>
+
+      <div class="highlight-box">
+        <p><strong>Framework determines the ceiling:</strong> When platform performance plateaus, the constraint is typically in the framework and the deterministic foundation, not in the AI models. Investing in framework quality (the deterministic layer, the codebase mapping, the feedback loops) yields more than investing in better models. This insight informs every architectural decision in the platform.</p>
+      </div>
+    </div>
+
+    <!-- SECTION 03: PRODUCTION INFRASTRUCTURE -->
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>Production Infrastructure</h2>
+      <p class="lead">In production, the platform runs entirely on Azure, consistent with the existing cloud environment. The infrastructure follows a pay-by-usage model with no fixed commitments.</p>
+
+      <table>
+        <tr>
+          <th>Component</th>
+          <th>Service</th>
+          <th>Characteristics</th>
+        </tr>
+        <tr>
+          <td><strong>Application hosting</strong></td>
+          <td>Azure Container Apps</td>
+          <td>Containers with compute allocated based on actual usage. Automatic scaling up during high-demand periods (nightly regression sweeps, post-deploy validation) and down during quiet periods. No idle infrastructure cost.</td>
+        </tr>
+        <tr>
+          <td><strong>Database</strong></td>
+          <td>Azure PostgreSQL</td>
+          <td>Default recommendation for test results, playbook metadata, configuration state, and confidence records. Flexible to accommodate alternative databases based on team preference, including on-premises options if required.</td>
+        </tr>
+        <tr>
+          <td><strong>Model inference</strong></td>
+          <td>Azure AI Foundry</td>
+          <td>Managed model hosting with enterprise security, compliance, and scaling. Supports multiple model deployments for the multi-model strategy.</td>
+        </tr>
+        <tr>
+          <td><strong>Caching</strong></td>
+          <td>Azure Redis</td>
+          <td>Available as needed for performance optimization, session management, job queuing, and real-time result streaming to the platform hub.</td>
+        </tr>
+        <tr>
+          <td><strong>Development environments</strong></td>
+          <td>Docker</td>
+          <td>Isolated, reproducible execution environments for development and testing. Every test runs in a clean, known state. Docker containers mirror the production Azure Container Apps configuration.</td>
+        </tr>
+      </table>
+
+      <div class="diagram-container">
+        <h4>Production Deployment Architecture</h4>
+        <div id="diagram-prod">
+          <pre class="mermaid">
+graph TB
+    classDef azure fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    classDef data fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    classDef ai fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#3b0764
+    classDef ext fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+
+    ACA["<b>fa:fa-cloud Azure Container Apps</b><br/>▸ Platform hub (Django/FastAPI)<br/>▸ Agent workers (LangGraph)<br/>▸ Auto-scaling on demand<br/> "]:::azure
+    PG["<b>fa:fa-database Azure PostgreSQL</b><br/>▸ Test results and metadata<br/>▸ Playbook definitions<br/>▸ Confidence records<br/> "]:::data
+    REDIS["<b>fa:fa-bolt Azure Redis</b><br/>▸ Caching and queuing<br/>▸ Session management<br/> "]:::data
+    FOUNDRY["<b>fa:fa-brain Azure AI Foundry</b><br/>▸ Visual understanding models<br/>▸ Reasoning models<br/>▸ Managed scaling<br/> "]:::ai
+    GH["<b>fa:fa-code-branch GitHub Actions</b><br/>▸ CI/CD triggers<br/>▸ Code change events<br/> "]:::ext
+    BS["<b>fa:fa-globe BrowserStack</b><br/>▸ Cross-device testing<br/>▸ Cross-browser execution<br/> "]:::ext
+
+    GH --> ACA
+    ACA --> PG
+    ACA --> REDIS
+    ACA --> FOUNDRY
+    ACA --> BS
+          </pre>
+        </div>
+      </div>
+
+      <h3>Cost Model</h3>
+      <p>The infrastructure follows a pay-by-usage model. Azure Container Apps allocate compute based on actual demand and scale automatically, ensuring cost remains proportional to usage at all times. There is no fixed infrastructure commitment.</p>
+      <p>During early stages (single consumer group, initial playbook library), the platform runs on minimal compute. As adoption grows across consumer groups and the playbook library expands, the infrastructure scales smoothly without rearchitecting. This means the investment grows with the value delivered, not ahead of it.</p>
+
+      <div class="highlight-box">
+        <p><strong>Production-grade from day one:</strong> The development and production environments share the same architecture (Docker containers locally, Azure Container Apps in production). There is no prototype that requires rebuilding for scale. The platform that the team develops against is architecturally identical to the platform that runs in production.</p>
+      </div>
+    </div>
+
+    <!-- SECTION 04: INTEGRATION AND EXTENSIBILITY -->
+    <div class="section">
+      <div class="section-number">04</div>
+      <h2>Integration and Extensibility</h2>
+      <p class="lead">The platform is designed to connect with existing tools and workflows without requiring changes to the systems it integrates with.</p>
+
+      <h3>Model Context Protocol (MCP)</h3>
+      <p>The platform's modular architecture natively supports MCP integration, consistent with the organizational requirement that all new tooling integrates seamlessly into existing workflows through MCP servers. This is a standard capability of the architecture, not an add-on. MCP connectors are available for Figma (design file references for development teams), Canva and WordPress (content and marketing tool integration), and additional connectors can be built as needed for any tool that supports the protocol.</p>
+
+      <h3>Repository and CI/CD Integration</h3>
+      <p>The platform connects to code repositories through the unified hub and through GitHub Actions for CI/CD triggers. When a developer pushes a change, the platform receives the event, identifies which visual tests are relevant based on the codebase map, and executes them. Results flow back to the developer within their existing workflow. No context-switching to a separate testing application is required.</p>
+
+      <h3>Single Sign-On and Access Control</h3>
+      <p>The platform hub integrates with existing SSO infrastructure. Each user sees the platform scoped to their role: QE teams see their test results and playbook library, development teams see CI/CD-triggered feedback on their changes, UI/UX teams see governance dashboards and approval workflows, content production teams see publishing validation reports, and leadership sees aggregate performance and coverage metrics.</p>
+
+      <h3>Extensibility Beyond Visual QE</h3>
+      <p>The modular architecture is not limited to visual quality engineering. The same agent orchestration layer (LangGraph), the same playbook engine, and the same observability framework can support additional testing types (API testing, accessibility compliance, performance monitoring) as organizational needs evolve. Each new capability is an addition to the platform, not a separate system. The shared knowledge generated by the platform (codebase maps, playbook libraries, traceability data, confidence metrics) can also complement broader organizational initiatives around unified knowledge bases and cross-functional quality standards.</p>
+
+      <div class="highlight-box">
+        <p><strong>Designed for ownership:</strong> Every technology choice in this stack is made with long-term ownership in mind. The platform uses standard, well-documented frameworks with large community support. The team that eventually owns this system will find extensive documentation, community resources, and readily available talent for every component. BayOne does not build platforms that create dependency on BayOne.</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Confidential &mdash; Prepared for Sephora</p>
+    </div>
+  </div>
+
+  <script>
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'base',
+      themeVariables: {
+        primaryColor: '#dbeafe', primaryTextColor: '#0f172a', primaryBorderColor: '#2563eb',
+        lineColor: '#7c3aed', secondaryColor: '#eff6ff', secondaryTextColor: '#1e3a5f',
+        secondaryBorderColor: '#3b82f6', edgeLabelBackground: '#ede9fe',
+        clusterBkg: '#f8fafc', clusterBorder: '#94a3b8',
+        fontSize: '14px', fontFamily: 'Inter, sans-serif'
+      },
+      flowchart: { curve: 'basis', nodeSpacing: 30, rankSpacing: 70, htmlLabels: true, useMaxWidth: true, padding: 40, wrappingWidth: 600 }
+    });
+    async function renderDiagrams() {
+      await mermaid.run({ querySelector: '.mermaid' });
+
+      document.querySelectorAll('.mermaid svg').forEach(svg => {
+        svg.querySelectorAll('.node').forEach(nodeGroup => {
+          const fo = nodeGroup.querySelector('foreignObject');
+          const rect = nodeGroup.querySelector('rect');
+          if (!fo || !rect) return;
+
+          let strokeColor = rect.getAttribute('stroke') || '#94a3b8';
+          fo.querySelectorAll('b').forEach(b => {
+            b.style.display = 'block';
+            b.style.background = 'rgba(255,255,255,0.85)';
+            b.style.border = '1px solid ' + strokeColor;
+            b.style.borderRadius = '4px';
+            b.style.padding = '4px 10px';
+            b.style.marginBottom = '6px';
+            b.style.fontSize = '13px';
+            b.style.letterSpacing = '0.3px';
+          });
+
+          const currentHeight = parseFloat(rect.getAttribute('height'));
+          const pad = 12;
+          rect.setAttribute('height', currentHeight + pad);
+          fo.setAttribute('height', currentHeight + pad);
+        });
+      });
+    }
+    renderDiagrams();
+  </script>
+</body>
+</html>

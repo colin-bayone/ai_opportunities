@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TalentAI Platform Architecture</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px;
+    }
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+    .subtitle {
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 32px;
+    }
+    .mermaid { width: 100%; display: flex; justify-content: center; }
+    .mermaid .node rect, .mermaid .node polygon { rx: 8 !important; ry: 8 !important; }
+    .mermaid .edgeLabel rect { fill: #ede9fe !important; fill-opacity: 1 !important; stroke: none !important; }
+  </style>
+</head>
+<body>
+  <h1>TalentAI Platform Architecture</h1>
+  <p class="subtitle">19 Django Apps across 6 Functional Domains</p>
+  <div class="mermaid">
+    <pre class="mermaid-src">
+graph TB
+    subgraph FOUNDATION["`**FOUNDATION**`"]
+        direction TB
+        SHARED["`**core/shared**
+        Base Templates, Template Tags
+        CDN, Global Search, Services`"]
+        ACCOUNTS["`**core/accounts**
+        Auth, SSO, Roles
+        User Profiles, Approval`"]
+        AUDIT["`**compliance/audit**
+        SOC2 Audit Logging
+        Request Tracking`"]
+    end
+
+    subgraph INFRA["`**INFRASTRUCTURE**`"]
+        direction TB
+        CELERY["`**core/celery**
+        Task Queue, Base Classes
+        Beat Scheduler`"]
+        STORAGE["`**core/storage**
+        Azure Blob Storage
+        Media Proxy`"]
+        CONV["`**core/conversion**
+        PDF to Text
+        Document Conversion`"]
+        VALID["`**core/validation**
+        Magika File Validation
+        Type Detection`"]
+        DIAG["`**core/diagnostics**
+        Pulsecheck Monitoring
+        Request Logging`"]
+    end
+
+    subgraph INTEL["`**INTELLIGENCE LAYER**`"]
+        direction TB
+        AIMODELS["`**intelligence/ai_models**
+        Multi-Provider AI
+        Model Management`"]
+        AISEARCH["`**intelligence/ai_search**
+        Semantic Search, Embeddings
+        Azure AI Search`"]
+        TOOLKIT["`**intelligence/ai_toolkit**
+        AI Features Hub`"]
+        EXTRACT["`**intelligence/extraction**
+        Document Extraction
+        Pipeline + REST API`"]
+    end
+
+    subgraph PIPELINE["`**RECRUITMENT PIPELINE**`"]
+        direction TB
+        CANDS["`**recruitment/candidates**
+        Candidate Management
+        Search, Job Fit, CV Parsing`"]
+        CERTS["`**recruitment/certifications**
+        Certification Ontology
+        Classification`"]
+    end
+
+    subgraph INTEGRATIONS["`**INTEGRATIONS**`"]
+        direction TB
+        JOBDIVA["`**integrations/jobdiva**
+        JobDiva ATS ETL
+        Candidate Import`"]
+        MSGRAPH["`**integrations/microsoft/graph**
+        OAuth, Email
+        Calendar, Users`"]
+    end
+
+    subgraph COMMS["`**COMMUNICATIONS**`"]
+        direction TB
+        COMM["`**communications**
+        Email Tracking, Meetings
+        Calendar, WebSocket`"]
+        NOTIF["`**user_notifications**
+        Real-Time Notifications
+        WebSocket Delivery`"]
+        BUGS["`**core/bugs**
+        Bug Reporting
+        Screenshot Capture`"]
+    end
+
+    FOUNDATION -->|"`Auth + Templates`"| PIPELINE
+    FOUNDATION -->|"`Auth + Audit`"| INTEL
+    FOUNDATION -->|"`Auth + Audit`"| INTEGRATIONS
+    INFRA -->|"`Tasks + Storage`"| INTEL
+    INFRA -->|"`Tasks + Storage`"| PIPELINE
+    INFRA -->|"`Tasks`"| INTEGRATIONS
+    INTEL -->|"`Search + AI`"| PIPELINE
+    INTEGRATIONS -->|"`Candidate Data`"| PIPELINE
+    PIPELINE -->|"`Events`"| COMMS
+    INTEGRATIONS -->|"`Email + Calendar`"| COMMS
+
+    style FOUNDATION fill:#ede9fe,stroke:#7c3aed,stroke-width:3px,color:#3b0764
+    style INFRA fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#14532d
+    style INTEL fill:#dbeafe,stroke:#2563eb,stroke-width:3px,color:#1e3a5f
+    style PIPELINE fill:#fef2f2,stroke:#ef4444,stroke-width:3px,color:#991b1b
+    style INTEGRATIONS fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+    style COMMS fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+
+    style SHARED fill:#ede9fe,stroke:#7c3aed,stroke-width:1px,color:#3b0764
+    style ACCOUNTS fill:#ede9fe,stroke:#7c3aed,stroke-width:1px,color:#3b0764
+    style AUDIT fill:#ede9fe,stroke:#7c3aed,stroke-width:1px,color:#3b0764
+
+    style CELERY fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#14532d
+    style STORAGE fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#14532d
+    style CONV fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#14532d
+    style VALID fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#14532d
+    style DIAG fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#14532d
+
+    style AIMODELS fill:#dbeafe,stroke:#2563eb,stroke-width:1px,color:#1e3a5f
+    style AISEARCH fill:#dbeafe,stroke:#2563eb,stroke-width:1px,color:#1e3a5f
+    style TOOLKIT fill:#dbeafe,stroke:#2563eb,stroke-width:1px,color:#1e3a5f
+    style EXTRACT fill:#dbeafe,stroke:#2563eb,stroke-width:1px,color:#1e3a5f
+
+    style CANDS fill:#fef2f2,stroke:#ef4444,stroke-width:1px,color:#991b1b
+    style CERTS fill:#fef2f2,stroke:#ef4444,stroke-width:1px,color:#991b1b
+
+    style JOBDIVA fill:#ffedd5,stroke:#ea580c,stroke-width:1px,color:#7c2d12
+    style MSGRAPH fill:#ffedd5,stroke:#ea580c,stroke-width:1px,color:#7c2d12
+
+    style COMM fill:#fef9c3,stroke:#ca8a04,stroke-width:1px,color:#713f12
+    style NOTIF fill:#fef9c3,stroke:#ca8a04,stroke-width:1px,color:#713f12
+    style BUGS fill:#fef9c3,stroke:#ca8a04,stroke-width:1px,color:#713f12
+    </pre>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#ede9fe', primaryTextColor: '#1e1b4b', primaryBorderColor: '#7c3aed',
+      lineColor: '#7c3aed', secondaryColor: '#e8f4fd', secondaryTextColor: '#0c4a6e',
+      secondaryBorderColor: '#0078d4', edgeLabelBackground: '#ede9fe',
+      clusterBkg: '#f8fafc', clusterBorder: '#94a3b8',
+      fontSize: '13px', fontFamily: 'Inter, sans-serif'
+    },
+    flowchart: { curve: 'basis', nodeSpacing: 50, rankSpacing: 60, htmlLabels: false, useMaxWidth: false, padding: 16 }
+  });
+  document.querySelectorAll('.mermaid-src').forEach(async (el) => {
+    const src = el.textContent.trim();
+    const container = el.parentElement;
+    try {
+      const { svg } = await mermaid.render('mermaid-' + Math.random().toString(36).slice(2), src);
+      container.innerHTML = svg;
+    } catch (e) {
+      container.innerHTML = '<p style="text-align:center;color:#64748b;">Diagram rendering failed.</p>';
+    }
+  });
+</script>
+</body>
+</html>

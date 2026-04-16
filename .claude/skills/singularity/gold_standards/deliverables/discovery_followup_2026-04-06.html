@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discovery Session - Lam Research</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    .doc-header {
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: var(--white);
+      padding: 48px 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .doc-header-content h1 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    .doc-header-content p {
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .doc-header-meta {
+      text-align: right;
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .doc-header-meta strong {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span { color: #e879f9; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+
+    .section { margin-bottom: 56px; }
+
+    .section-number {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      padding: 6px 14px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%);
+      border-radius: 4px;
+    }
+
+    h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 28px 0 14px;
+    }
+
+    h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 20px 0 10px;
+    }
+
+    p { margin-bottom: 14px; }
+
+    .lead {
+      font-size: 17px;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border-left: 4px solid #a855f7;
+      padding: 20px 24px;
+      margin: 24px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    .highlight-box ul {
+      margin: 10px 0 0 20px;
+      padding: 0;
+    }
+
+    .highlight-box li {
+      margin-bottom: 6px;
+      line-height: 1.6;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      padding: 12px 16px;
+      background: #5b21b6;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+
+    th:last-child { border-right: none; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    ul.content-list {
+      margin: 0 0 16px 20px;
+      padding: 0;
+    }
+
+    ul.content-list li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin: 20px 0;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .card h4 {
+      margin-top: 0;
+      color: var(--purple-mid);
+    }
+
+    .card ul {
+      margin: 0 0 0 20px;
+      padding: 0;
+    }
+
+    .card li {
+      margin-bottom: 6px;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .card p {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .card p:last-child { margin-bottom: 0; }
+
+    .ask-card {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 16px 0;
+    }
+
+    .ask-card h4 {
+      margin-top: 0;
+      color: var(--purple-mid);
+      font-size: 16px;
+    }
+
+    .ask-card p {
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .ask-card p:last-child { margin-bottom: 0; }
+
+    .ask-card ul {
+      margin: 6px 0 0 20px;
+      padding: 0;
+    }
+
+    .ask-card li {
+      margin-bottom: 6px;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(168,85,247,0.12) 100%);
+      border: 2px solid rgba(124,58,237,0.2);
+      border-radius: 12px;
+      padding: 28px;
+      margin: 24px 0;
+    }
+
+    .cta-box h3 {
+      margin-top: 0;
+      color: var(--purple-mid);
+    }
+
+    .cta-box p:last-child { margin-bottom: 0; }
+
+    .footer {
+      text-align: center;
+      padding: 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 48px;
+    }
+
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .footer-logo span { color: #a855f7; }
+
+    .footer p {
+      font-size: 13px;
+      color: var(--text-light);
+      margin: 0;
+    }
+
+    @media print {
+      @page { size: 8.5in 11in; margin: 0.4in; }
+      body { font-size: 9pt; line-height: 1.4; }
+      .doc-header {
+        padding: 32px 40px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .doc-header h1 { font-size: 22pt; }
+      .container { padding: 0; max-width: 100%; }
+      .section { margin-bottom: 20px; }
+      h2 { font-size: 14pt; margin-bottom: 10px; }
+      h3 { font-size: 11pt; margin: 12px 0 6px; }
+      h4 { font-size: 10pt; margin: 8px 0 4px; }
+      p { margin-bottom: 5px; }
+      .lead { font-size: 10pt; margin-bottom: 12px; }
+      table { font-size: 8pt; margin: 8px 0; }
+      th, td { padding: 5px 8px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .highlight-box { padding: 10px 14px; margin: 10px 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .ask-card { padding: 10px 14px; margin: 8px 0; }
+      .two-col { gap: 12px; }
+      .card { padding: 14px; }
+      .cta-box { padding: 14px; margin: 10px 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .footer { margin-top: 16px; padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="doc-header">
+    <div class="doc-header-content">
+      <h1>Discovery Session</h1>
+      <p>IP Protection and Knowledge Enablement</p>
+    </div>
+    <div class="doc-header-meta">
+      <div class="logo">Bay<span>One</span></div>
+      <p style="margin-top: 8px;">Prepared for <strong>Lam Research</strong><br>April 2026</p>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- SECTION 1: THE PROBLEM -->
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>The Problem</h2>
+
+      <h3>The Core Challenge</h3>
+      <p>Lam Research services competing customers simultaneously, including TSMC, Samsung, Intel, and Micron. Years of field service, troubleshooting, and escalation work have built a deep internal knowledge base. The technical knowledge within that base is largely generic and transferable across customers, but it is contaminated with customer-identifiable information: customer names, fab identifiers, site-specific details, and proprietary process references.</p>
+      <p>Because there is no reliable way to separate the generic knowledge from the customer-specific information, everything is restricted by default. The result is that Lam's own engineers cannot access solutions that already exist within the organization.</p>
+
+      <h3>The Business Impact</h3>
+      <table>
+        <tr>
+          <th>Impact Area</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td><strong>Throttled productivity</strong></td>
+          <td>Support efficiency is constrained by the inability to share knowledge safely across customer boundaries. Engineers spend time re-solving problems that have already been resolved in a different customer context.</td>
+        </tr>
+        <tr>
+          <td><strong>Blocked feedback loop</strong></td>
+          <td>The troubleshooting workflow (self-help, ask for help, escalate) is designed to drive resolution at the lowest tier. The feedback loop from escalation back to self-help is broken because cleaned solutions cannot re-enter the general knowledge base.</td>
+        </tr>
+        <tr>
+          <td><strong>Repeated escalation costs</strong></td>
+          <td>Problems that have already been solved get re-escalated because the solutions are locked behind customer restrictions. This costs time, money, and customer trust.</td>
+        </tr>
+        <tr>
+          <td><strong>Fragmented search</strong></td>
+          <td>Over-restriction has driven the creation of multiple segmented search systems, each covering a different knowledge pool with different access rules, compounding the problem rather than solving it.</td>
+        </tr>
+      </table>
+
+      <h3>Use Cases Under Discussion</h3>
+      <p>Two high-level use cases have been identified, both tied to the troubleshooting workflow:</p>
+      <div class="two-col">
+        <div class="card">
+          <h4>Enabling Self-Help Search</h4>
+          <p>Processing stored content to remove customer-identifiable information so the underlying technical knowledge can be surfaced across customer boundaries. Users searching for solutions would see relevant results regardless of which customer engagement originally produced the answer.</p>
+        </div>
+        <div class="card">
+          <h4>Protecting Escalation Entry Points</h4>
+          <p>Detecting potential customer IP at the point of data entry and notifying users before the information enters the system. Awareness and deterrence at the source, catching policy violations before they propagate into the knowledge base.</p>
+        </div>
+      </div>
+      <p>These are broad, high-level use cases. The specific applications, data types, and workflows involved have not yet been fully defined.</p>
+
+      <h3>The Infrastructure Landscape</h3>
+      <p>The technology environment is highly heterogeneous: a mix of on-premises systems, cloud-hosted systems, systems in the process of migrating to cloud, internally hosted AI tools, and cloud-based services. There is no unified data lake. Data is fragmented across many systems with different segmentation and access models. There are six or more search systems covering different knowledge pools. The organization aspires to move cloud-first and has expressed interest in a microservice architecture long-term.</p>
+    </div>
+
+    <!-- SECTION 2: WHERE WE ARE TODAY -->
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>Where We Are Today</h2>
+
+      <p class="lead">Through the initial discovery session, we have established a shared understanding of the problem, confirmed by the Lam team. We understand the two high-level use cases, the infrastructure landscape, and the limitations of prior approaches.</p>
+
+      <div class="highlight-box">
+        <p><strong>Discovery areas for this session:</strong></p>
+        <ul>
+          <li>Understanding what has been tried technically, what it was tried on, and why it did not succeed</li>
+          <li>Identifying a concrete starting point for proof of concept scope</li>
+          <li>Going deeper on the technical landscape and the specific application environment</li>
+          <li>Understanding what a successful outcome looks like for the team</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 3: PRIOR WORK -->
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>Prior Work</h2>
+
+      <div class="ask-card">
+        <h4>The Application Context</h4>
+        <p>What specific application or system was the prior effort running against? What was that application supposed to do for its users, and how does improving the detection and redaction capability help it function better?</p>
+        <p>The approaches tried and the results they produced are much more meaningful when we understand the specific environment they were tested in.</p>
+      </div>
+
+      <div class="ask-card">
+        <h4>What Was Tried</h4>
+        <p>We know at a high level that ML-based approaches were explored, that rule-based models were considered, and that a labeling exercise was evaluated. We would like to understand the scope and intent of each attempt, what it was trying to achieve, what data it ran on, and what specifically fell short.</p>
+      </div>
+
+      <div class="ask-card">
+        <h4>Defining Success</h4>
+        <p>What was the prior effort supposed to deliver as an outcome? Not in terms of technical metrics, but in terms of what would have changed for the team if it had worked. What would have made the team say "this is working, let us keep going"?</p>
+      </div>
+    </div>
+
+    <!-- SECTION 4: SELECTING THE POC TARGET -->
+    <div class="section">
+      <div class="section-number">04</div>
+      <h2>Selecting the Proof of Concept Target</h2>
+
+      <p class="lead">To scope a meaningful proof of concept, we need to anchor on one specific application.</p>
+
+      <h3>Starting Point</h3>
+      <p>If the prior work was tested against a specific application, that application may still be the right starting point. Alternatively, the team may have identified a different, more impactful target since the prior effort. The prior effort or a new target can both serve as the starting point.</p>
+
+      <div class="highlight-box">
+        <p><strong>Signals that can help identify the right target:</strong></p>
+        <ul>
+          <li>Which application is the most critical to daily operations?</li>
+          <li>Which one has the most active users?</li>
+          <li>Which one is the largest and most mature?</li>
+        </ul>
+        <p>Alternatively, if BayOne is given visibility into the application landscape through a catalog or further conversations with the engineering team, we can help identify the highest-impact starting point.</p>
+      </div>
+
+      <h3>Understanding the Selected Application</h3>
+      <p>Once a target application is identified, we need enough context to scope the proof of concept accurately:</p>
+
+      <table>
+        <tr>
+          <th>Area</th>
+          <th>What We Need to Understand</th>
+        </tr>
+        <tr>
+          <td><strong>Purpose and users</strong></td>
+          <td>What the application does, who uses it, and where it sits in the troubleshooting workflow</td>
+        </tr>
+        <tr>
+          <td><strong>Data sources</strong></td>
+          <td>What feeds into it: documents, databases, APIs, user-entered text, transcripts, images, or other inputs</td>
+        </tr>
+        <tr>
+          <td><strong>Sensitive content</strong></td>
+          <td>What customer-identifiable information looks like in this application's context: customer names, abbreviations, identifiers, and their known spelling variations</td>
+        </tr>
+        <tr>
+          <td><strong>Volume and scale</strong></td>
+          <td>How much content flows through the application and how frequently</td>
+        </tr>
+        <tr>
+          <td><strong>Technical environment</strong></td>
+          <td>Whether the application is on Azure, on-premises, or hybrid, and what services and infrastructure support it</td>
+        </tr>
+        <tr>
+          <td><strong>Existing architecture</strong></td>
+          <td>How data enters the application, how it is stored, how it is served to users, and any existing pipelines or middleware</td>
+        </tr>
+      </table>
+
+      <h3>Representative Data</h3>
+      <p>To validate any approach against the selected application, we need to see examples of its actual content:</p>
+      <ul class="content-list">
+        <li><strong>Content that should be flagged:</strong> Documents, tickets, or entries that contain customer-identifiable information. These are the failure cases, representing what the system needs to catch.</li>
+        <li><strong>Content that is clean:</strong> Documents or entries that are free of customer-identifiable information and should pass through without flagging.</li>
+        <li><strong>Coverage across data types:</strong> If the application ingests multiple content types, examples of each type that is in scope.</li>
+      </ul>
+      <p>If security or IP concerns prevent sharing actual content, sanitized examples or synthetic representations that preserve the structure and patterns of real data are also valuable.</p>
+    </div>
+
+    <!-- SECTION 5: AN APPROACH THAT WORKS -->
+    <div class="section">
+      <div class="section-number">05</div>
+      <h2>BayOne's Approach</h2>
+
+      <p class="lead">BayOne has built detection and IP protection systems in similar environments, including semiconductor equipment companies with defense and export control constraints. The following reflects what has been proven to work, adapted to what we understand about the Lam environment so far.</p>
+
+      <p>This is a proven approach that will be adapted to the specific target application and infrastructure.</p>
+
+      <h3>Hybrid Detection Architecture</h3>
+      <div class="two-col">
+        <div class="card">
+          <h4>Deterministic Layer</h4>
+          <p>For known, enumerable entities, deterministic matching provides the fastest and most accurate detection. Zero false positives on known patterns because it is exact matching against curated dictionaries, not probabilistic AI.</p>
+          <ul>
+            <li>Entity lookup tables for customer names, fab identifiers, and their variations</li>
+            <li>Pattern matching for structured identifiers with predictable formats</li>
+            <li>Maintained as configuration, not model weights</li>
+          </ul>
+          <p>Enterprise tooling such as Microsoft Purview provides this capability with custom Sensitive Information Types designed for domain-specific entities.</p>
+        </div>
+        <div class="card">
+          <h4>AI Classification Layer</h4>
+          <p>For content where deterministic matching cannot reach, AI-based classification provides contextual analysis.</p>
+          <ul>
+            <li>Contextual sensitivity: determining whether a mention is sensitive in its specific context</li>
+            <li>Unstructured text analysis for freeform descriptions and transcripts</li>
+            <li>Document-level classification for overall risk assessment</li>
+          </ul>
+          <p>Hosted on Azure AI Foundry for scalability, manageability, and integration with enterprise identity and compliance controls.</p>
+        </div>
+      </div>
+
+      <h3>Common Data Plane</h3>
+      <p>Both detection layers are unified through a common data plane hosted in Azure. This provides a single, governed layer through which all applications connect, with centralized ingestion, credential and access management integrated with IAM and RBAC, and compliance controls that IT teams can manage directly.</p>
+      <p>Content is analyzed as it enters the system. Clean content proceeds into the knowledge base immediately. Flagged content is routed for review with specifics on what was detected and where. New content entering the system is clean by construction. Historical content already in the system is processed through the same pipeline as a bounded, one-time cleanup effort, one application at a time.</p>
+
+      <h3>Why Azure</h3>
+      <table>
+        <tr>
+          <th>Azure Advantage</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td><strong>Scalability</strong></td>
+          <td>Auto-scales with usage. The system grows with the organization without requiring infrastructure re-architecture.</td>
+        </tr>
+        <tr>
+          <td><strong>Maintainability</strong></td>
+          <td>Accessible to IT teams to manage, monitor, and operate directly. Detection rules, entity dictionaries, and classification models are updated through standard tooling.</td>
+        </tr>
+        <tr>
+          <td><strong>Compliance integration</strong></td>
+          <td>Native integration with identity and access management, role-based access control, and data governance capabilities out of the box.</td>
+        </tr>
+        <tr>
+          <td><strong>Cost efficiency</strong></td>
+          <td>Enterprise Azure services like Purview and AI Foundry provide mature, supported capabilities at a fraction of the cost of building and maintaining equivalent custom infrastructure.</td>
+        </tr>
+        <tr>
+          <td><strong>Production maturity</strong></td>
+          <td>Azure deployments grow into production systems that the organization owns and operates. Custom or on-premises deployments can succeed, but the maturity tends to remain at proof-of-concept level rather than scaling into operational systems.</td>
+        </tr>
+      </table>
+
+      <p>The same architecture can work on-premises or in a hybrid model if required. Azure is not the only option, but it is definitively the most scalable, maintainable, and cost-effective path. This is the approach that worked in practice at a comparable semiconductor equipment company, and BayOne has tried the alternatives as well.</p>
+
+      <div class="highlight-box">
+        <p><strong>What this means for the team:</strong> This is a custom solution built on Lam's own environment using proven methodology. BayOne builds it, and the team can maintain and extend it. The architecture is designed so that once the first application is solved, expanding to additional applications follows the same pattern with decreasing effort. The goal is to empower the team to own and operate the capability independently.</p>
+      </div>
+
+      <h3>A Note on Infrastructure</h3>
+      <p>The recommended approach leverages Azure enterprise services for compliance, scalability, and IT manageability. Understanding the current relationship between the initiative team and the corporate Azure environment is important for scoping the deployment model accurately. If the team has direct access to Azure infrastructure, the deployment is straightforward. If the infrastructure landscape is more complex, BayOne can adapt the approach to work within whatever constraints exist, though the deployment model and timeline may differ.</p>
+      <p>The earlier this is understood, the more accurately we can scope the work and avoid surprises downstream.</p>
+    </div>
+
+    <!-- SECTION 6: CONTINUING THE CONVERSATION -->
+    <div class="section">
+      <div class="section-number">06</div>
+      <h2>Next Steps</h2>
+
+
+      <div class="cta-box">
+        <h3>Where We Go from Here</h3>
+        <p>Based on what we learn today, BayOne will prepare a scoped proposal tailored to the specific application and environment discussed. </p>
+        <p>If there are areas that require further exploration after today, whether through additional conversations with the engineering team, access to representative data, or a deeper look at the application landscape, we are prepared to continue that discovery process at the Lam team's pace.</p>
+      </div>
+
+      <table>
+        <tr>
+          <th>Area</th>
+          <th>Status</th>
+          <th>Next Step</th>
+        </tr>
+        <tr>
+          <td><strong>Problem understanding</strong></td>
+          <td>Confirmed</td>
+          <td>Established in prior session, validated by Lam team</td>
+        </tr>
+        <tr>
+          <td><strong>Target application</strong></td>
+          <td>To be identified</td>
+          <td>Discussed in this session; one application to anchor the proof of concept</td>
+        </tr>
+        <tr>
+          <td><strong>Prior work context</strong></td>
+          <td>To be discussed</td>
+          <td>Understanding what was tried and what it was tried on</td>
+        </tr>
+        <tr>
+          <td><strong>Representative data</strong></td>
+          <td>To be provided</td>
+          <td>Examples from the selected application for validation</td>
+        </tr>
+        <tr>
+          <td><strong>Scoped proposal</strong></td>
+          <td>Pending inputs</td>
+          <td>BayOne prepares based on today's discussion</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Confidential - Prepared for Lam Research</p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TalentAI — App Fishbone Diagram</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px;
+    }
+    h1 { font-size: 24px; font-weight: 700; color: #0f172a; margin-bottom: 8px; letter-spacing: -0.5px; }
+    .subtitle { font-size: 14px; color: #64748b; margin-bottom: 32px; }
+    .mermaid { width: 100%; display: flex; justify-content: center; }
+    .mermaid .node rect, .mermaid .node polygon { rx: 8 !important; ry: 8 !important; }
+    .mermaid .edgeLabel rect { fill: #ede9fe !important; fill-opacity: 1 !important; stroke: none !important; }
+  </style>
+</head>
+<body>
+  <h1>TalentAI Platform — App Fishbone</h1>
+  <p class="subtitle">19 Apps organized by functional domain</p>
+  <div class="mermaid">
+    <pre class="mermaid-src">
+graph LR
+    %% Top branches (left side)
+    shared["`**core/shared**
+    Templates, CDN, Search`"] --> FOUND
+    accounts["`**core/accounts**
+    Auth, SSO, Roles`"] --> FOUND
+    audit["`**compliance/audit**
+    SOC2 Logging`"] --> FOUND
+    FOUND["`**Foundation**`"] --> TALENT
+
+    celery["`**core/celery**
+    Task Queue`"] --> INFRA
+    storage["`**core/storage**
+    Azure Blob`"] --> INFRA
+    conversion["`**core/conversion**
+    Doc Conversion`"] --> INFRA
+    validation["`**core/validation**
+    File Validation`"] --> INFRA
+    diagnostics["`**core/diagnostics**
+    Monitoring`"] --> INFRA
+    INFRA["`**Infrastructure**`"] --> TALENT
+
+    ai_search["`**ai_search**
+    Semantic Search`"] --> INTEL
+    ai_models["`**ai_models**
+    AI Orchestration`"] --> INTEL
+    extraction["`**extraction**
+    Doc Pipeline`"] --> INTEL
+    ai_toolkit["`**ai_toolkit**
+    AI Hub`"] --> INTEL
+    INTEL["`**Intelligence**`"] --> TALENT
+
+    %% Center
+    TALENT["`**TalentAI
+    Platform**`"]
+
+    %% Bottom branches (right side)
+    TALENT --> PIPE["`**Pipeline**`"]
+    PIPE --> candidates["`**candidates**
+    Profiles, Search, Job Fit`"]
+    PIPE --> certifications["`**certifications**
+    Cert Ontology`"]
+
+    TALENT --> INTEG["`**Integrations**`"]
+    INTEG --> jobdiva["`**jobdiva**
+    ATS ETL Import`"]
+    INTEG --> msgraph["`**microsoft/graph**
+    OAuth, Email, Calendar`"]
+
+    TALENT --> COMMS["`**Communications**`"]
+    COMMS --> communications["`**communications**
+    Email, Meetings, Calendar`"]
+    COMMS --> notifications["`**user_notifications**
+    Real-Time Alerts`"]
+    COMMS --> bugs["`**core/bugs**
+    Bug Reporting`"]
+
+    %% Domain node styles
+    style TALENT fill:#ede9fe,stroke:#7c3aed,stroke-width:3px,color:#3b0764
+    style FOUND fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#3b0764
+    style INFRA fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#14532d
+    style INTEL fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    style PIPE fill:#fef2f2,stroke:#ef4444,stroke-width:2px,color:#991b1b
+    style INTEG fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+    style COMMS fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+
+    %% Foundation app styles
+    style shared fill:#ede9fe,stroke:#7c3aed,stroke-width:1px,color:#3b0764
+    style accounts fill:#ede9fe,stroke:#7c3aed,stroke-width:1px,color:#3b0764
+    style audit fill:#ede9fe,stroke:#7c3aed,stroke-width:1px,color:#3b0764
+
+    %% Infrastructure app styles
+    style celery fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#14532d
+    style storage fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#14532d
+    style conversion fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#14532d
+    style validation fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#14532d
+    style diagnostics fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#14532d
+
+    %% Intelligence app styles
+    style ai_search fill:#dbeafe,stroke:#2563eb,stroke-width:1px,color:#1e3a5f
+    style ai_models fill:#dbeafe,stroke:#2563eb,stroke-width:1px,color:#1e3a5f
+    style extraction fill:#dbeafe,stroke:#2563eb,stroke-width:1px,color:#1e3a5f
+    style ai_toolkit fill:#dbeafe,stroke:#2563eb,stroke-width:1px,color:#1e3a5f
+
+    %% Pipeline app styles
+    style candidates fill:#fef2f2,stroke:#ef4444,stroke-width:1px,color:#991b1b
+    style certifications fill:#fef2f2,stroke:#ef4444,stroke-width:1px,color:#991b1b
+
+    %% Integration app styles
+    style jobdiva fill:#ffedd5,stroke:#ea580c,stroke-width:1px,color:#7c2d12
+    style msgraph fill:#ffedd5,stroke:#ea580c,stroke-width:1px,color:#7c2d12
+
+    %% Communications app styles
+    style communications fill:#fef9c3,stroke:#ca8a04,stroke-width:1px,color:#713f12
+    style notifications fill:#fef9c3,stroke:#ca8a04,stroke-width:1px,color:#713f12
+    style bugs fill:#fef9c3,stroke:#ca8a04,stroke-width:1px,color:#713f12
+    </pre>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#ede9fe', primaryTextColor: '#1e1b4b', primaryBorderColor: '#7c3aed',
+      lineColor: '#94a3b8', secondaryColor: '#e8f4fd', secondaryTextColor: '#0c4a6e',
+      secondaryBorderColor: '#0078d4', edgeLabelBackground: '#ede9fe',
+      clusterBkg: '#f8fafc', clusterBorder: '#94a3b8',
+      fontSize: '13px', fontFamily: 'Inter, sans-serif'
+    },
+    flowchart: { curve: 'basis', nodeSpacing: 30, rankSpacing: 80, htmlLabels: false, useMaxWidth: false, padding: 16 }
+  });
+  document.querySelectorAll('.mermaid-src').forEach(async (el) => {
+    const src = el.textContent.trim();
+    const container = el.parentElement;
+    try {
+      const { svg } = await mermaid.render('mermaid-' + Math.random().toString(36).slice(2), src);
+      container.innerHTML = svg;
+    } catch (e) {
+      console.error('Mermaid render error:', e);
+      container.innerHTML = '<p style="text-align:center;color:#64748b;">Diagram rendering failed.</p>';
+    }
+  });
+</script>
+</body>
+</html>

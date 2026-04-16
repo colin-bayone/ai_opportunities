@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sephora Agentic QE - Opportunity Brief</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .cover-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e879f9;
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .cover-subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 48px;
+      max-width: 600px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 48px;
+      padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .cover-meta-item label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+
+    .cover-meta-item span {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .logo {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span { color: #e879f9; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .section { margin-bottom: 56px; }
+
+    .section-number {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      padding: 6px 14px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%);
+      border-radius: 4px;
+    }
+
+    h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 28px 0 12px;
+    }
+
+    h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--purple-mid);
+      margin: 0 0 8px;
+    }
+
+    p { margin-bottom: 14px; }
+
+    .lead {
+      font-size: 17px;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border-left: 4px solid #a855f7;
+      padding: 20px 24px;
+      margin: 28px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin: 24px 0;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .card p {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .card p:last-child { margin-bottom: 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      padding: 12px 16px;
+      background: #5b21b6;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+
+    th:last-child { border-right: none; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    .status-ready {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      color: #059669;
+      background: #ecfdf5;
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+
+    .status-active {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      color: #2563eb;
+      background: #eff6ff;
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+
+    .status-pending {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      color: #d97706;
+      background: #fffbeb;
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+
+    ol.next-steps {
+      margin: 0 0 0 20px;
+      padding: 0;
+    }
+
+    ol.next-steps li {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 48px;
+    }
+
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .footer-logo span { color: #a855f7; }
+
+    .footer p {
+      font-size: 13px;
+      color: var(--text-light);
+      margin: 0;
+    }
+
+    @media print {
+      @page {
+        size: 8.5in 11in;
+        margin: 0.4in;
+      }
+
+      body { font-size: 9pt; line-height: 1.4; }
+
+      .cover {
+        min-height: 0;
+        height: 10in;
+        padding: 50px;
+        page-break-after: always;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .cover h1 { font-size: 32pt; }
+      .cover-subtitle { font-size: 13pt; }
+      .cover-meta { padding-top: 32px; gap: 32px; }
+      .logo { position: relative; bottom: auto; right: auto; margin-top: 32px; }
+
+      .container { padding: 0; max-width: 100%; }
+
+      .section {
+        margin-bottom: 16px;
+        page-break-inside: avoid;
+      }
+
+      h2 { font-size: 13pt; margin-bottom: 8px; page-break-after: avoid; }
+      h3 { font-size: 10pt; margin: 10px 0 6px; page-break-after: avoid; }
+      h4 { font-size: 9pt; margin: 8px 0 4px; page-break-after: avoid; }
+      p { margin-bottom: 5px; font-size: 9pt; }
+      .lead { font-size: 10pt; margin-bottom: 10px; }
+
+      table {
+        font-size: 8pt;
+        margin: 8px 0;
+        page-break-inside: avoid;
+      }
+
+      th, td {
+        padding: 5px 8px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .highlight-box {
+        padding: 10px 14px;
+        margin: 10px 0;
+        page-break-inside: avoid;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .two-col { gap: 12px; }
+      .card { padding: 14px; page-break-inside: avoid; }
+
+      .section-number {
+        break-after: avoid;
+        page-break-after: avoid;
+      }
+
+      tr {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .footer {
+        margin-top: 16px;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-label">Sephora Agentic QE</div>
+      <h1>Opportunity Brief</h1>
+      <p class="cover-subtitle">Quality engineering transformation through agentic automation, Playwright migration, and AI-native talent</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <label>Classification</label>
+          <span>Internal</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Prepared By</label>
+          <span>Colin Moore, Director of AI</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Date</label>
+          <span>March 2026</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo">Bay<span>One</span></div>
+  </div>
+
+  <div class="container">
+
+    <div class="section">
+      <div class="section-number">OVERVIEW</div>
+      <h2>The Opportunity</h2>
+      <p class="lead">Sephora's Quality Engineering organization is undergoing a significant transformation, creating immediate demand for automation capabilities and AI-native talent that BayOne is well positioned to deliver.</p>
+      <p>Since August 2025, Sephora has mandated AI adoption across the entire software development lifecycle (SDLC). The organization is restructuring teams into Agentic Micro Pods (AMP), lean two-to-three person units focused on small, frequent enhancements. This model accelerates development velocity and demands equally fast, reliable testing to keep pace.</p>
+      <p>BayOne has existing relationships with multiple Sephora stakeholders across QE, DevOps, and infrastructure. The March 2026 introductory meeting with QE leadership confirmed strong alignment between Sephora's direction and BayOne's capabilities in test automation, agent evaluation, and technical talent delivery.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>What Sephora Needs</h2>
+
+      <div class="two-col">
+        <div class="card">
+          <h4>QE Automation at Speed</h4>
+          <p>The QE function has historically been the bottleneck in the development lifecycle. The AMP model is accelerating development velocity, and testing must keep pace. The team is migrating from Selenium to Playwright, building QE agents across the testing lifecycle, and investing in a unified knowledge base that connects development and testing functions.</p>
+        </div>
+        <div class="card">
+          <h4>Trust in Agentic Systems</h4>
+          <p>QE leadership is actively working to establish a framework for measuring agent reliability. Current trust levels in agent-generated output sit in the 40 to 50 percent range, and closing the gap to production-grade confidence is a top priority. There is no established method for computing a composite trust index across agent performance.</p>
+        </div>
+        <div class="card">
+          <h4>Talent Across Geographies</h4>
+          <p>Open roles exist across onshore, nearshore, and offshore locations. The AMP model requires co-location for pod members, driving a predicted shift from offshore to nearshore staffing over the next six to twelve months. QE leadership has expressed willingness to create roles for exceptional talent even outside existing headcount.</p>
+        </div>
+        <div class="card">
+          <h4>Upskilling and Readiness</h4>
+          <p>Offshore teams are not upskilling at the same pace as onshore and nearshore counterparts. There is a stated need for training that enables teams to orchestrate and manage agentic workflows, moving contributors from execution roles into decision-making roles supported by agent teams.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>Where BayOne Fits</h2>
+      <p class="lead">The capabilities described below come from BayOne's AI practice, led by Colin Moore, Director of AI. This is methodology developed and proven within BayOne's AI practice, distinct from the broader service lines.</p>
+
+      <h3>Playwright and Test Automation</h3>
+      <p>BayOne's AI practice follows a deterministic-first methodology. Every engagement begins with automated codebase mapping that produces a state graph of module dependencies, library usage, and dead code. This state graph integrates directly with continuous integration and delivery (CI/CD) pipelines so that when files change, the system identifies exactly which tests need to run rather than executing the full suite. AI is layered on last, only where deterministic approaches cannot reach.</p>
+      <p>Playwright is the core testing framework. It eliminates the delay and wait-time problems inherent to Selenium, handles authenticated and password-protected flows, supports mobile testing natively, and works effectively with AI agents. Because Playwright is Microsoft-native, it fits cleanly into Sephora's existing Azure environment with no additional tooling or external products.</p>
+      <p>The harder, more valuable work is the state graph, the CI/CD integration, and the feedback loop that captures missed edge cases and feeds them back into the system so coverage improves continuously over time.</p>
+
+      <h3>Agent Evaluation and Trust Scoring</h3>
+      <p>BayOne's AI practice has a working framework for building and measuring agent trust, which maps directly to Sephora's stated challenge of computing a composite confidence index. The core principle is to evaluate agents the same way organizations evaluate people, with defined performance indicators, tracked outcomes, and proportional responses to mistakes.</p>
+      <p>In practice, this works through a simplified reinforcement learning mechanism. Human reviewers approve or reject agent output, and repeated successful approvals build a tracked record that progressively reduces the need for human involvement. Agents are never allowed to assess themselves or each other, as they produce unreliable evaluations when doing so. When improvement plateaus, the diagnosis targets the surrounding framework rather than the models themselves.</p>
+
+      <h3>Technical Screening</h3>
+      <p>Every candidate Colin has recommended to Sephora has been accepted, a 100 percent placement rate that has held consistently. BayOne's standard recruiting pipeline, including internal tools like TechScore, was previously forwarding candidates where fewer than 15 percent warranted consideration. Colin restructured the upstream process by training a subset of BayOne recruiters on his evaluation approach. Within two weeks, the proportion of qualified candidates reaching Colin improved from under 10 percent to over 85 percent.</p>
+      <p>Colin's screening process runs as an hour-long technical session that goes well beyond a standard assessment or automated tool like HackerRank. He evaluates technical depth, communication, and whether the candidate has the mindset to operate in an AI-native environment. The evaluation is based on demonstrated ability during the session, not on credentials or resume presentation. Sephora's QE leadership described their own hiring philosophy during the meeting in very similar terms. Both organizations have independently arrived at the same conclusion about what separates a strong candidate from a weak one, which is why the placement rate has remained at 100 percent.</p>
+
+      <h3>Training and Incubation</h3>
+      <p>Every new hire within the AI practice is trained as an AI engineer regardless of their original specialty. Two web developers on the team, for example, have been cross-trained into agentic AI specialists working in Django. The aspiration is to extend this model across all BayOne staffing placements so that candidates placed at clients receive AI readiness training from the start. This was presented during the meeting to gauge interest and was received positively.</p>
+      <p>Beyond baseline training, the AI practice has proposed an incubation model as an alternative to traditional contract-to-hire. A candidate works on the client's project from day one while BayOne simultaneously provides ongoing development. The client receives a productive contributor immediately and a fully validated, upskilled professional at transition, reducing the risk that resumes and interviews cannot fully predict on-the-job performance.</p>
+      <p>BayOne's AI practice also serves as a filter for emerging tools and technologies, maintaining a production-grade maturity threshold before recommending anything to clients. This advisory function helps teams separate genuine capability from industry hype, which was identified as a shared concern during the meeting.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>Engagement Paths</h2>
+
+      <table>
+        <tr>
+          <th>Path</th>
+          <th>Description</th>
+          <th>Status</th>
+        </tr>
+        <tr>
+          <td><strong>QE COE Staffing</strong></td>
+          <td>Open roles under QE Center of Excellence. Onshore, nearshore, and offshore positions available at competitive rates.</td>
+          <td><span class="status-ready">Ready to submit</span></td>
+        </tr>
+        <tr>
+          <td><strong>QE Lead Staffing</strong></td>
+          <td>Additional budget holders across the QE organization with project-specific needs and openness to strong candidates.</td>
+          <td><span class="status-active">Relationship established</span></td>
+        </tr>
+        <tr>
+          <td><strong>Outcome-Based Project</strong></td>
+          <td>Small starter engagement in QE automation to demonstrate capability. Sephora leadership is open to beginning with a focused scope.</td>
+          <td><span class="status-pending">Needs scoping</span></td>
+        </tr>
+        <tr>
+          <td><strong>Upskilling Services</strong></td>
+          <td>Training for existing teams on agentic workflows and AI-native testing practices.</td>
+          <td><span class="status-pending">Interest confirmed</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">NEXT STEPS</div>
+      <h2>Recommended Actions</h2>
+      <ol class="next-steps">
+        <li>Submit Colin-screened candidates to Sephora QE leadership for nearshore and offshore roles</li>
+        <li>Reconnect with the QE COE lead on open agentic AI positions</li>
+        <li>Scope a focused outcome-based engagement around Playwright test automation or agent trust scoring</li>
+        <li>Explore upskilling as a complementary offering alongside staffing</li>
+      </ol>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Internal - Opportunity Brief</p>
+    </div>
+  </div>
+</body>
+</html>

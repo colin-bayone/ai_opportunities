@@ -117,6 +117,13 @@ Beyond the standard files, the set of detail files is not fixed. Different sourc
 4. Each document set covers one source event (a meeting, an email, a document, a discussion).
 5. The methodology document (`/<client_name>/<opportunity_name>/research/00_methodology_<date>.md`) is the only file that can be updated, because it describes the system itself.
 6. The org chart (`/<client_name>/<opportunity_name>/org_chart.md`) is the only other file that can be updated (see People Tracking).
+7. Tracking files in sub-singularity `tracking/` folders are living documents (editable). They are the exception to the append-only rule, alongside the org chart and methodology doc. See `tracking_folder_pattern.md` for details.
+
+## Application to Sub-Singularities
+
+The blockchain methodology applies identically within each sub-singularity. A sub-singularity has its own research chain with its own numbering (01, 02, 03...) independent of the parent. The same immutability rules apply: research documents are never edited after creation, summaries are always last, bridge documents are retrospective.
+
+The one addition for sub-singularities is the `tracking/` folder, which contains living operational documents (action items, blockers, decisions) that ARE editable. These complement the immutable research chain with a current-state operational view. See `nested_singularity.md` for the full pattern and `tracking_folder_pattern.md` for the tracking document specifications.
 
 ## Reading Order for a New Session
 

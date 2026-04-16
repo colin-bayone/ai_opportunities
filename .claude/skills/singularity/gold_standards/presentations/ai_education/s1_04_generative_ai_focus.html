@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 04: Generative AI and Language Models</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-darkest: #0c1929;
+      --blue-dark: #15293e;
+      --blue-mid: #1e3a5f;
+      --blue-bright: #2563eb;
+      --blue-accent: #3b82f6;
+      --steel-light: #64748b;
+      --steel-glow: #94a3b8;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e6e8eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--blue-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 18px 40px 10px;
+    }
+
+    /* Top row: title + definition */
+    .top-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      margin-bottom: 14px;
+      flex-shrink: 0;
+    }
+
+    .top-row .title-block {
+      flex-shrink: 0;
+    }
+
+    .title-block .subtitle {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 3px;
+    }
+
+    .title-block h2 {
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .top-row .definition {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    /* Main content: image left, cards + platforms right */
+    .main-row {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      gap: 16px;
+    }
+
+    /* Left: image */
+    .image-col {
+      width: 45%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .main-image {
+      flex: 1;
+      min-height: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fafafa;
+    }
+
+    .main-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .connection-strip {
+      padding: 9px 14px;
+      background: linear-gradient(135deg, var(--blue-darkest), var(--blue-mid));
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .connection-strip p {
+      font-size: 10.5px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.5;
+    }
+
+    .connection-strip strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* Right: cards + platforms */
+    .right-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 0;
+    }
+
+    /* Use case cards - compact 2x3, equal height */
+    .use-cases {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      gap: 5px;
+    }
+
+    .use-case {
+      background: #fff;
+      border: 1px solid rgba(37,99,235,0.10);
+      border-radius: 8px;
+      padding: 8px 10px;
+      box-shadow: 0 1px 4px rgba(37,99,235,0.04);
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      overflow: hidden;
+    }
+
+    .use-case .uc-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #fff;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .use-case:nth-child(1) .uc-icon { background: linear-gradient(135deg, #1e3a5f, #2563eb); }
+    .use-case:nth-child(2) .uc-icon { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+    .use-case:nth-child(3) .uc-icon { background: linear-gradient(135deg, #3b82f6, #4f93f7); }
+    .use-case:nth-child(4) .uc-icon { background: linear-gradient(135deg, #4f93f7, #5ba0f8); }
+    .use-case:nth-child(5) .uc-icon { background: linear-gradient(135deg, #5ba0f8, #64748b); }
+    .use-case:nth-child(6) .uc-icon { background: linear-gradient(135deg, #64748b, #94a3b8); }
+
+    .use-case h4 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 1px;
+    }
+
+    .use-case p {
+      font-size: 11px;
+      color: var(--text-light);
+      line-height: 1.4;
+    }
+
+    /* Platforms row */
+    .platforms-row {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+      margin-top: auto;
+    }
+
+    .platform {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      background: linear-gradient(135deg, var(--blue-darkest), var(--blue-mid));
+      border-radius: 8px;
+    }
+
+    .platform .p-logo {
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+    }
+
+    .platform .p-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .platform .p-text h4 {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .platform .p-text p {
+      font-size: 11px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.4;
+    }
+
+    /* Distinction bar - bottom right */
+    .bottom-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+
+    .distinction {
+      display: flex;
+      gap: 8px;
+    }
+
+    .distinction-item {
+      text-align: center;
+      padding: 6px 14px;
+      border-radius: 6px;
+    }
+
+    .distinction-item.active {
+      background: linear-gradient(135deg, var(--blue-darkest), var(--blue-dark));
+    }
+
+    .distinction-item.inactive {
+      background: #f1f5f9;
+    }
+
+    .distinction-item .d-label {
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 1px;
+    }
+
+    .distinction-item.active .d-label { color: rgba(255,255,255,0.6); }
+    .distinction-item.inactive .d-label { color: var(--steel-light); }
+
+    .distinction-item .d-value {
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .distinction-item.active .d-value { color: #fff; }
+    .distinction-item.inactive .d-value { color: #94a3b8; }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 10px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-darkest), var(--blue-mid), var(--blue-accent), var(--steel-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 2px;
+    }
+    .slide-nav { position: fixed; bottom: 18px; left: 18px; display: flex; gap: 6px; z-index: 100; }
+    .slide-nav a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: rgba(12,25,41,0.75); color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: background 0.2s, color 0.2s; border: 1px solid rgba(255,255,255,0.1); }
+    .slide-nav a:hover { background: rgba(37,99,235,0.9); color: #fff; }
+    .slide-nav a.disabled { opacity: 0.25; pointer-events: none; }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Master<span>minds</span></div>
+      <div class="header-title">April 2026</div>
+    </div>
+
+    <div class="slide-content">
+      <!-- Top: title + definition side by side -->
+      <div class="top-row">
+        <div class="title-block">
+          <div class="subtitle">The Content Branch</div>
+          <h2>Generative AI and<br>Language Models</h2>
+        </div>
+        <p class="definition">Generative AI is a type of artificial intelligence that creates new content based on instructions you give it. Text, images, code, audio, and video can all be generated from a prompt. Language models are the most widely adopted form, trained on massive amounts of text to understand and produce written language.</p>
+      </div>
+
+      <!-- Main: image left, cards + platforms right -->
+      <div class="main-row">
+        <!-- Left: token probability image -->
+        <div class="image-col">
+          <div class="main-image">
+            <img src="resources/s1_04_genai_comic.png" alt="Token probability tree showing how language models predict the next word">
+          </div>
+          <div class="connection-strip">
+            <p>Unlike machine learning and computer vision, which work behind the scenes, <strong>generative AI is the first branch that most people interact with directly</strong> through a conversation. That is why it gets so much attention and why understanding its strengths and limitations matters.</p>
+          </div>
+        </div>
+
+        <!-- Right: cards + platforms -->
+        <div class="right-col">
+          <div class="use-cases">
+            <div class="use-case">
+              <div class="uc-icon"><i class="fa-solid fa-file-lines"></i></div>
+              <div>
+                <h4>Document Summarization</h4>
+                <p>Upload a 50-page contract or policy and get a structured breakdown of key terms in minutes</p>
+              </div>
+            </div>
+            <div class="use-case">
+              <div class="uc-icon"><i class="fa-solid fa-envelope"></i></div>
+              <div>
+                <h4>Client Communications</h4>
+                <p>Draft polished emails and meeting recaps from rough notes, tailored to the right tone</p>
+              </div>
+            </div>
+            <div class="use-case">
+              <div class="uc-icon"><i class="fa-solid fa-microphone"></i></div>
+              <div>
+                <h4>Meeting Transcription</h4>
+                <p>Otter.ai and Copilot capture conversations and produce organized notes with action items</p>
+              </div>
+            </div>
+            <div class="use-case">
+              <div class="uc-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+              <div>
+                <h4>Research and Analysis</h4>
+                <p>Synthesize information across multiple documents and surface patterns in the data</p>
+              </div>
+            </div>
+            <div class="use-case">
+              <div class="uc-icon"><i class="fa-solid fa-image"></i></div>
+              <div>
+                <h4>Image Generation</h4>
+                <p>DALL-E and Midjourney create visuals from text descriptions for presentations and marketing</p>
+              </div>
+            </div>
+            <div class="use-case">
+              <div class="uc-icon"><i class="fa-solid fa-bullhorn"></i></div>
+              <div>
+                <h4>Marketing and Outreach</h4>
+                <p>Generate newsletters, social posts, campaign copy, and thought leadership content</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Platforms row -->
+          <div class="platforms-row">
+            <div class="platform chatgpt">
+              <div class="p-logo">
+  <img src="resources/openai.png">
+              </div>
+              <div class="p-text">
+                <h4>ChatGPT</h4>
+                <p>Built by OpenAI. The most widely adopted consumer AI platform in the world.</p>
+              </div>
+            </div>
+            <div class="platform claude">
+              <div class="p-logo">
+  <img src="resources/claude.png">
+              </div>
+              <div class="p-text">
+                <h4>Claude</h4>
+                <p>Built by Anthropic. Known for strong reasoning and handling long, complex documents.</p>
+              </div>
+            </div>
+            <div class="platform gemini">
+              <div class="p-logo">
+  <img src="resources/gemini.png">
+              </div>
+              <div class="p-text">
+                <h4>Gemini</h4>
+                <p>Built by Google. Integrated into Gmail, Docs, and Search across the Google ecosystem.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Distinction bar - bottom right -->
+      <div class="bottom-bar">
+        <div class="distinction">
+          <div class="distinction-item inactive">
+            <div class="d-label">Machine Learning</div>
+            <div class="d-value">Numbers and Tabular Data</div>
+          </div>
+          <div class="distinction-item inactive">
+            <div class="d-label">Computer Vision</div>
+            <div class="d-value">Images and Video</div>
+          </div>
+          <div class="distinction-item active">
+            <div class="d-label">Generative AI</div>
+            <div class="d-value">Text and Content</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">04</div>
+    </div>
+  </div>
+
+  <div class="slide-nav">
+    <a href="s1_03_computer_vision_focus.html"><i class="fa-solid fa-chevron-left"></i></a>
+    <a href="s1_05_genai_deep_dive.html"><i class="fa-solid fa-chevron-right"></i></a>
+    <a href="s0_00_toc.html" style="margin-left: 6px;"><i class="fa-solid fa-house"></i></a>
+  </div>
+</body>
+</html>

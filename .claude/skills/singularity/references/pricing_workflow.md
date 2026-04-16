@@ -14,9 +14,9 @@ It typically happens after the discovery decomposition is complete, after the ap
 
 The skill includes two reference files for pricing:
 
-1. **Template prompt** (`.claude/skills/singularity/assets/prompts/excel_template_prompt.md`): A complete specification that Claude in Excel can execute to create a blank costing workbook from scratch. This exists in case the template file is lost, needs to be recreated, or needs to be built in a new format. It includes dummy data (Acme Corp, 120 screens, $350K), an Instructions tab, all formulas, formatting, and validation rules.
+1. **Template prompt** (`.claude/skills/singularity/templates/excel_template_prompt.md`): A complete specification that Claude in Excel can execute to create a blank costing workbook from scratch. This exists in case the template file is lost, needs to be recreated, or needs to be built in a new format. It includes dummy data (Acme Corp, 120 screens, $350K), an Instructions tab, all formulas, formatting, and validation rules.
 
-2. **Excel template** (`.claude/skills/singularity/assets/templates/ProjectCostingTemplate.xlsx`): The ready-to-use workbook. This is the normal starting point. A user opens it, clears the dummy data, and enters their project details. Or Claude in Excel opens it and customizes it based on a pricing spec.
+2. **Excel template** (`.claude/skills/singularity/templates/ProjectCostingTemplate.xlsx`): The ready-to-use workbook. This is the normal starting point. A user opens it, clears the dummy data, and enters their project details. Or Claude in Excel opens it and customizes it based on a pricing spec.
 
 ## The Workflow
 

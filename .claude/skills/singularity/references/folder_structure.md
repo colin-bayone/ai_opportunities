@@ -9,9 +9,17 @@ When the skill is invoked for a new engagement, create the following folder stru
 ├── org_chart.md                                        (living document, always current)
 │
 ├── source/                                             (raw input files. NEVER modified.)
-│   ├── call_prep_2026-03-12.txt
-│   ├── discovery_call_transcript_2026-03-12.txt
-│   └── ...
+│   ├── README.md                                       (explains the week/day structure)
+│   ├── week_2026-03-10/                                (week folder, named by Monday date)
+│   │   ├── day_2026-03-12/                             (day folder, date files were UPLOADED)
+│   │   │   ├── call_prep_2026-03-12.txt
+│   │   │   ├── discovery_call_transcript_2026-03-12.txt
+│   │   │   └── ...
+│   │   └── day_2026-03-14/
+│   │       └── follow_up_email_2026-03-14.txt
+│   └── week_2026-03-17/
+│       └── day_2026-03-20/
+│           └── debrief_transcript_2026-03-20.txt
 │
 ├── research/                                           (blockchain-style decomposition. Append-only.)
 │   ├── 00_methodology_<date>.md                        (explains the approach, first file created)
@@ -45,14 +53,16 @@ When the skill is invoked for a new engagement, create the following folder stru
 │
 ├── decisions/                                          (open questions and agreed decisions)
 │
-└── progress/                                           (running status tracking)
+├── progress/                                           (running status tracking)
+│
+└── inventory/                                          (auto-generated snapshots. Overwritten by script.)
 ```
 
 ### Folder Purposes
 
 | Folder | Purpose | Mutability | Dated? |
 |--------|---------|------------|--------|
-| `/<client_name>/<opportunity_name>/source/` | Raw input files (transcripts, emails, docs) | Never modified | Yes (source date) |
+| `/<client_name>/<opportunity_name>/source/` | Raw input files (transcripts, emails, docs). Organized into `week_YYYY-MM-DD/day_YYYY-MM-DD/` subfolders. Week uses Monday date, day is the **upload date** (when the file was added to the repo), not the source material date. | Never modified | Yes (upload date for folders, source date in filenames) |
 | `/<client_name>/<opportunity_name>/research/` | Blockchain decomposition documents | Append-only (new files, never edit old) | Yes (source date) |
 | `/<client_name>/<opportunity_name>/planning/` | Approach planning, skill notes, glossary, session handoffs | Editable | Yes |
 | `/<client_name>/<opportunity_name>/pricing/` | Pricing specs, correction prompts, cost models, workbooks | Editable, versioned | Yes |
@@ -60,10 +70,68 @@ When the skill is invoked for a new engagement, create the following folder stru
 | `/<client_name>/<opportunity_name>/presentations/` | Slide decks, pitch materials, executive briefings | Editable, versioned | Yes |
 | `/<client_name>/<opportunity_name>/decisions/` | Open questions and agreed decisions | Editable | Yes |
 | `/<client_name>/<opportunity_name>/progress/` | Running status tracking | Editable | Yes |
+| `/<client_name>/<opportunity_name>/inventory/` | Auto-generated engagement inventory snapshots (see `references/inventory_design.md`) | Overwritten by script | No |
 
 ### Ask Before Creating
 
 The skill should ask the user if they want the full folder structure when starting a new engagement. Not every engagement needs every folder. The minimum is `/<client_name>/<opportunity_name>/source/` and `/<client_name>/<opportunity_name>/research/`.
+
+## Sub-Singularity Folder Structure
+
+Sub-singularities are self-contained mini-singularities nested within an engagement. They live at the engagement root level as siblings of `source/`, `research/`, etc. See `nested_singularity.md` for the full pattern.
+
+```
+/<client_name>/<opportunity_name>/
+├── [standard engagement folders above]
+│
+├── team/                                    (sub-singularity: team operations)
+│   ├── source/                              (raw team meeting transcripts)
+│   │   ├── README.md                        (explains the week/day/person structure)
+│   │   └── week_2026-04-14/
+│   │       └── day_2026-04-16/
+│   │           ├── colin/                   (person subfolder — who uploaded)
+│   │           │   └── standup_transcript.txt
+│   │           └── srinivas/
+│   │               └── build_log_analysis.pdf
+│   ├── research/                            (blockchain chain, own numbering)
+│   │   ├── 00_methodology_<date>.md
+│   │   ├── 01_standup_people_<date>.md
+│   │   ├── 01_standup_action_items_<date>.md
+│   │   └── ...
+│   ├── tracking/                            (living operational docs, always created)
+│   │   ├── action_items.md
+│   │   ├── blockers.md
+│   │   └── decisions.md
+│   ├── documents/                           (formatted outputs: HTML reports, etc.)
+│   ├── planning/                            (session handoffs, notes)
+│   └── cross_reference.md                   (maps to parent chain)
+│
+└── <other_sub_singularity>/                 (additional parallel tracks as needed)
+    ├── source/
+    ├── research/
+    ├── tracking/
+    ├── documents/
+    ├── planning/
+    └── cross_reference.md
+```
+
+### Sub-Singularity Folder Purposes
+
+| Folder | Purpose | Mutability | Dated? |
+|--------|---------|------------|--------|
+| `<sub>/source/` | Raw input files for this track. Uses `week_YYYY-MM-DD/day_YYYY-MM-DD/<person>/` structure. Person subfolders identify who uploaded the file. Week uses Monday date, day is upload date. | Never modified | Yes (upload date for folders, source date in filenames) |
+| `<sub>/research/` | Blockchain decomposition, own numbering chain | Append-only | Yes |
+| `<sub>/tracking/` | Living operational documents (action items, blockers, decisions) | Editable, updated after each set | Yes (via "Last updated after" header) |
+| `<sub>/documents/` | Formatted outputs (HTML reports, status summaries) | Editable | Yes |
+| `<sub>/planning/` | Session handoffs, notes for this track | Editable | Yes |
+| `<sub>/cross_reference.md` | Maps sub-singularity sets to parent/sibling sets | Editable (living) | N/A |
+
+### Key Distinctions
+
+- **`deliverables/`** at the engagement root = client-facing documents (multi-page, narrative, sent to client)
+- **`presentations/`** at the engagement root = slide decks (individual slides for presenting/walking through)
+- **`planning/`** at the engagement root = internal-only documents (meeting summaries for BayOne use, prep notes, session handoffs)
+- **`documents/`** within a sub-singularity = formatted outputs specific to that track (not client-facing deliverables, which go in the parent's `deliverables/`)
 
 ## File Naming Convention
 

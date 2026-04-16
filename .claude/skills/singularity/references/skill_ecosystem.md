@@ -34,16 +34,15 @@ For big4 specifically, the skill should offer to run it on any deliverable befor
 
 ## Shared Company Context
 
-### Location: `.claude/context/`
+### Location: `.claude/skills/singularity/references/`
 
-Company-level context that transcends any single skill or engagement lives in `.claude/context/`. This is NOT owned by singularity. Any skill can read from it. Updates happen when the user provides new information.
+Company-level context lives in `.claude/skills/singularity/references/`. Updates happen when the user provides new information.
 
-### Files in `.claude/context/`
+### Key Files
 
 | File | Purpose | Updated By |
 |------|---------|-----------|
 | `bayone_team.md` | BayOne team directory. Names, titles, roles, expertise, contact info. Living document that grows as the team changes. | Any skill or session when the user mentions team changes |
-| `bayone_positioning.md` | BayOne's core positioning, capabilities, differentiators, target markets. The "who we are" reference. | Any skill or session when positioning evolves |
 
 ### `bayone_team.md` Structure
 
@@ -100,15 +99,14 @@ Company-level context that transcends any single skill or engagement lives in `.
 
 ### How Skills Reference Company Context
 
-Any skill that needs company context reads from `.claude/context/`:
+Any skill that needs company context reads from `.claude/skills/singularity/references/`:
 
 ```
-Read .claude/context/bayone_team.md for the current team directory.
-Read .claude/context/bayone_positioning.md for BayOne's positioning and capabilities.
+Read .claude/skills/singularity/references/bayone_team.md for the current team directory.
 ```
 
 Singularity references these when:
-- Writing the org chart for an engagement (BayOne side of the org chart pulls from `bayone_team.md`)
+- Writing the org chart for an engagement (BayOne side of the org chart pulls from `.claude/skills/singularity/references/bayone_team.md`)
 - Drafting deliverables that reference "BayOne will..." or "The BayOne team..."
 - Populating cover pages with "Prepared By" metadata
 - Building pricing models (team names and roles)
@@ -119,10 +117,10 @@ The following assets move from `.claude/skills/sales-forge/` into `.claude/skill
 
 | From Sales-Forge | To Singularity | Notes |
 |-----------------|----------------|-------|
-| `assets/templates/proposal-template.html` | `.claude/skills/singularity/assets/templates/proposal_template.html` | The HTML shell with placeholder variables |
+| `assets/templates/proposal-template.html` | `.claude/skills/singularity/templates/proposal_template.html` | The HTML shell with placeholder variables |
 | `assets/templates/slide-cover-template.html` | Slide skill (TBD) | Moves to the slide generation skill, not singularity |
 | `assets/templates/slide-content-template.html` | Slide skill (TBD) | Moves to the slide generation skill, not singularity |
-| `references/bayone-design-spec.md` | `.claude/skills/singularity/assets/design/bayone_design_spec.md` | Own copy, to be updated with gold standards |
+| `references/bayone-design-spec.md` | `.claude/skills/singularity/references/bayone_design_spec.md` | Own copy, to be updated with gold standards |
 | `references/slide-format.md` | Slide skill (TBD) | Moves to the slide generation skill |
 | `scripts/html_to_pdf.py` | `.claude/skills/singularity/scripts/html_to_pdf.py` | PDF conversion utility. Also copy to slide skill. |
 
@@ -132,7 +130,7 @@ The current `bayone_design_spec.md` is outdated. It does not reflect all the pat
 
 ### Gold Standard References
 
-The following files serve as the definitive examples of what BayOne deliverables should look like. They are included in `.claude/skills/singularity/assets/design/gold_standards/`:
+The following files serve as the definitive examples of what BayOne deliverables should look like. They are included in `.claude/skills/singularity/gold_standards/deliverables/`:
 
 | File | What It Demonstrates |
 |------|---------------------|
@@ -153,4 +151,4 @@ The design spec at `/home/cmoore/programming/cisco_projects/cicd/specs/bayone-de
 - **Print styles updated** to match gold standards
 - **Quick reference reorganized** into categorized tables (Core, Content, Process/Timeline, Request/Priority, Specialized)
 
-The spec in the skill at `.claude/skills/singularity/assets/design/bayone_design_spec.md` should be a copy of this updated v2.0 file.
+The spec in the skill at `.claude/skills/singularity/references/bayone_design_spec.md` should be a copy of this updated v2.0 file.

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 11: What Is Agentic AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-darkest: #0c1929;
+      --blue-dark: #15293e;
+      --blue-mid: #1e3a5f;
+      --blue-bright: #2563eb;
+      --blue-accent: #3b82f6;
+      --steel-light: #64748b;
+      --steel-glow: #94a3b8;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e6e8eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--blue-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Dark header */
+    .definition-bar {
+      background: linear-gradient(135deg, var(--blue-darkest) 0%, var(--blue-mid) 100%);
+      padding: 18px 40px;
+      flex-shrink: 0;
+    }
+
+    .definition-bar .db-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 4px;
+    }
+
+    .definition-bar h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .definition-bar p {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+      max-width: 900px;
+    }
+
+    /* Main area */
+    .main-area {
+      flex: 1;
+      min-height: 0;
+      padding: 14px 24px 10px;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(180deg, #fcfdff 0%, #f7f9fc 100%);
+    }
+
+    /* Three evolution cards */
+    .evolution-row {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .evo-card {
+      flex: 1;
+      background: #fff;
+      border: 1px solid rgba(37,99,235,0.10);
+      border-radius: 12px;
+      padding: 12px 14px;
+      box-shadow: 0 1px 6px rgba(37,99,235,0.04);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .evo-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .evo-card:nth-child(1)::before { background: linear-gradient(90deg, #94a3b8, #b4bec9); }
+    .evo-card:nth-child(2)::before { background: linear-gradient(90deg, #2563eb, #3b82f6); }
+    .evo-card:nth-child(3)::before { background: linear-gradient(90deg, #0c1929, #1e3a5f); }
+
+    .evo-card .evo-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 2px;
+    }
+
+    .evo-card .evo-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .evo-card:nth-child(1) .evo-icon { background: linear-gradient(135deg, #94a3b8, #b4bec9); }
+    .evo-card:nth-child(2) .evo-icon { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+    .evo-card:nth-child(3) .evo-icon { background: linear-gradient(135deg, #0c1929, #1e3a5f); }
+
+    .evo-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .evo-card .evo-tag {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      margin-bottom: 8px;
+    }
+
+    .evo-card .evo-desc {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+
+    .evo-card .evo-example {
+      font-size: 11px;
+      color: var(--text-light);
+      line-height: 1.45;
+      padding-top: 6px;
+      border-top: 1px solid var(--border);
+      flex: 1;
+    }
+
+    .image-row {
+      margin-top: 12px;
+      flex: 1;
+      min-height: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .image-row img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 10px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-darkest), var(--blue-mid), var(--blue-accent), var(--steel-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 2px;
+    }
+    .slide-nav { position: fixed; bottom: 18px; left: 18px; display: flex; gap: 6px; z-index: 100; }
+    .slide-nav a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: rgba(12,25,41,0.75); color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: background 0.2s, color 0.2s; border: 1px solid rgba(255,255,255,0.1); }
+    .slide-nav a:hover { background: rgba(37,99,235,0.9); color: #fff; }
+    .slide-nav a.disabled { opacity: 0.25; pointer-events: none; }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Master<span>minds</span></div>
+      <div class="header-title">April 2026</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="definition-bar">
+        <div class="db-label">Section 3</div>
+        <h2>Agentic AI</h2>
+        <p>Agentic AI is already here. These are systems that can take a goal, break it into steps, execute those steps, evaluate the results, and adjust course with minimal human intervention. The distinction from traditional AI is not intelligence. It is autonomy within constraints.</p>
+      </div>
+
+      <div class="main-area">
+        <div class="evolution-row">
+          <div class="evo-card">
+            <div class="evo-header">
+              <div class="evo-icon"><i class="fa-solid fa-code"></i></div>
+              <div><h3>Traditional Software</h3><div class="evo-tag">Rigid, pre-programmed</div></div>
+            </div>
+            <p class="evo-desc">Follows fixed rules that a developer wrote in advance. If X happens, do Y. No flexibility, no adaptation, no ability to handle situations that were not explicitly coded for.</p>
+            <p class="evo-example">A form that rejects your input because you put a dash in your phone number. The system was told to expect 10 digits, and it has no way to interpret anything else.</p>
+          </div>
+
+          <div class="evo-card">
+            <div class="evo-header">
+              <div class="evo-icon"><i class="fa-solid fa-message"></i></div>
+              <div><h3>Language Models</h3><div class="evo-tag">Flexible, but passive</div></div>
+            </div>
+            <p class="evo-desc">Responds to prompts one at a time. You ask a question, you get an answer. You give an instruction, you get an output. The human drives every step of the process.</p>
+            <p class="evo-example">You paste a document into ChatGPT and ask it to summarize. You read the summary. You copy it into an email. You edit the email. You send it. Every step is manual.</p>
+          </div>
+
+          <div class="evo-card">
+            <div class="evo-header">
+              <div class="evo-icon"><i class="fa-solid fa-rocket"></i></div>
+              <div><h3>Agentic AI</h3><div class="evo-tag">Flexible and proactive</div></div>
+            </div>
+            <p class="evo-desc">Chains multiple steps together, uses tools, and makes intermediate decisions within boundaries you define. The human sets the goal and the guardrails, and the system executes.</p>
+            <p class="evo-example">You say "review this client's quarterly portfolio, compare it to their plan, draft a summary of deviations, and prepare an email to schedule a review meeting." It does all of that and holds everything for your approval.</p>
+          </div>
+        </div>
+
+        <div class="image-row">
+          <img src="resources/s3_01_agentic_workflow.jpg" alt="Agentic workflow diagram showing planning, tool use, and reflection loop">
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">11</div>
+    </div>
+  </div>
+
+  <div class="slide-nav">
+    <a href="s2_04_ai_audit.html"><i class="fa-solid fa-chevron-left"></i></a>
+    <a href="s3_02_agentic_not_scary.html"><i class="fa-solid fa-chevron-right"></i></a>
+    <a href="s0_00_toc.html" style="margin-left: 6px;"><i class="fa-solid fa-house"></i></a>
+  </div>
+</body>
+</html>

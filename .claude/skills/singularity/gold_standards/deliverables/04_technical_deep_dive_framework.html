@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EDW Modernization - Technical Deep Dive</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .cover-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e879f9;
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 56px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .cover-subtitle {
+      font-size: 22px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 48px;
+      max-width: 600px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 48px;
+      padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .cover-meta-item label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+
+    .cover-meta-item span {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .logo {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .logo span { color: #e879f9; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .section { margin-bottom: 64px; }
+
+    .section-number {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 32px 0 16px;
+    }
+
+    h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 24px 0 12px;
+    }
+
+    p { margin-bottom: 16px; }
+
+    .lead {
+      font-size: 18px;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      padding: 14px 16px;
+      background: var(--purple-mid);
+      color: #fff;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+
+    th:last-child { border-right: none; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border-left: 4px solid var(--purple-accent);
+      padding: 24px 28px;
+      margin: 32px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      margin: 32px 0;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, rgba(124,58,237,0.06) 0%, rgba(168,85,247,0.04) 100%);
+      border: 1px solid rgba(124,58,237,0.1);
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: #7c3aed;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      padding: 28px;
+      margin: 24px 0;
+      box-shadow: 0 1px 3px rgba(124,58,237,0.06);
+    }
+
+    .card h4 { margin-top: 0; }
+
+    ul, ol {
+      margin: 16px 0;
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .phase-grid {
+      display: grid;
+      gap: 20px;
+      margin: 24px 0;
+    }
+
+    .phase-card {
+      background: linear-gradient(135deg, rgba(124,58,237,0.03) 0%, rgba(168,85,247,0.05) 100%);
+      border: 1px solid rgba(124,58,237,0.1);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .phase-card h4 {
+      color: var(--purple-mid);
+      margin: 0 0 12px 0;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .phase-card ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .capability-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 24px 0;
+    }
+
+    .capability-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .capability-card h4 {
+      margin: 0 0 8px 0;
+      font-size: 15px;
+    }
+
+    .capability-card p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--text-light);
+    }
+
+    .discussion-list {
+      list-style: none;
+      padding: 0;
+      margin: 24px 0;
+    }
+
+    .discussion-list li {
+      padding: 20px 24px;
+      background: var(--bg-subtle);
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+
+    .discussion-list strong {
+      color: var(--primary);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 48px 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 64px;
+    }
+
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .footer-logo span { color: var(--purple-accent); }
+
+    .footer p {
+      font-size: 13px;
+      color: var(--text-light);
+      margin: 0;
+    }
+
+    @media print {
+      @page {
+        size: 8.5in 11in;
+        margin: 0.4in;
+      }
+
+      body { font-size: 9pt; line-height: 1.4; }
+
+      .cover {
+        min-height: 0;
+        height: 10in;
+        padding: 50px;
+        page-break-after: always;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .cover h1 { font-size: 36pt; }
+      .cover-subtitle { font-size: 14pt; }
+
+      .container { padding: 0; max-width: 100%; }
+
+      .section { margin-bottom: 20px; }
+
+      h2 { font-size: 18pt; margin-bottom: 12px; }
+      h3 { font-size: 12pt; margin: 16px 0 8px; }
+      p { margin-bottom: 8px; }
+      .lead { font-size: 11pt; margin-bottom: 16px; }
+
+      table { font-size: 8pt; margin: 12px 0; }
+      th, td { padding: 8px 10px; }
+
+      th, .cover, .highlight-box, .stat-card {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .section-number { break-after: avoid; page-break-after: avoid; }
+      h1, h2, h3, h4, h5, h6 { break-after: avoid; page-break-after: avoid; break-inside: avoid; page-break-inside: avoid; }
+      table { break-inside: avoid; page-break-inside: avoid; }
+      tr { break-inside: avoid; page-break-inside: avoid; }
+      .card, .stat-card, .highlight-box, .phase-card { break-inside: avoid; page-break-inside: avoid; }
+      .stat-grid { break-inside: avoid; page-break-inside: avoid; }
+      p { orphans: 3; widows: 3; }
+
+      .stat-grid { grid-template-columns: repeat(5, 1fr); gap: 8px; }
+      .stat-card { padding: 12px; }
+      .stat-value { font-size: 18pt; }
+      .stat-label { font-size: 8pt; }
+
+      .capability-grid { gap: 12px; }
+      .capability-card { padding: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-label">Technical Deep Dive</div>
+      <h1>EDW Modernization</h1>
+      <p class="cover-subtitle">Agent-Assisted Acceleration for Enterprise Data Warehouse Re-engineering</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <label>Prepared For</label>
+          <span>Sephora</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Date</label>
+          <span>March 2026</span>
+        </div>
+        <div class="cover-meta-item">
+          <label>Classification</label>
+          <span>Confidential</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo">Bay<span>One</span> Solutions</div>
+  </div>
+
+  <div class="container">
+
+    <!-- Section 01: Our Understanding -->
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>Our Understanding</h2>
+      <p class="lead">Sephora is executing a three-year EDW re-engineering program, transitioning from SQL Server, IBM Cognos, and IBM DataStage to Databricks. The emphasis is on re-engineering: a complete rebuild of data pipelines and reporting assets for a modern architecture.</p>
+
+      <p>The Finance track is underway and making progress, with work continuing through the end of this year. The patterns established in Finance will inform the approach for Merchandising, Supply Chain, and subsequent domains.</p>
+
+      <h3>Scale</h3>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-value">6,000+</div>
+          <div class="stat-label">Cognos Reports</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">8</div>
+          <div class="stat-label">SSAS Cubes</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">800+</div>
+          <div class="stat-label">KPIs</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">300</div>
+          <div class="stat-label">Dimensions</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">20+</div>
+          <div class="stat-label">Source Systems</div>
+        </div>
+      </div>
+
+      <h3>Legacy Environment</h3>
+      <p>The current systems include older but stable versions of Cognos (10.2/10.3 era) and DataStage, running on-premises. This is advantageous from an integration perspective: mature, well-documented systems with multiple established integration paths.</p>
+
+      <div class="highlight-box">
+        <h4>Cognos Integration Options</h4>
+        <ul>
+          <li>IBM Cognos SDK (Java/.NET) providing full access to the BI Bus API and Content Manager</li>
+          <li>Content Store database (SQL Server/Oracle) containing all report definitions and metadata</li>
+          <li>Report specifications exportable as XML documents</li>
+          <li>Content Administration deployment exports for bulk extraction</li>
+        </ul>
+      </div>
+
+      <div class="highlight-box">
+        <h4>DataStage Integration Options</h4>
+        <ul>
+          <li>dsjob command-line interface for job management and XML report generation</li>
+          <li>dsexport utility for exporting job definitions directly to XML format</li>
+          <li>Native XML storage format for job definitions</li>
+        </ul>
+      </div>
+
+      <p>These are documented, supported integration methods that have been used for years in enterprise environments.</p>
+
+      <h3>Current AI Usage</h3>
+      <p>The team has already achieved approximately 30% efficiency gains using AI tools like Claude for SQL transformation. However, the current workflow is manual: open a report, extract the SQL, run it through AI, validate the output, and deploy. Each step requires human intervention.</p>
+      <p>The aspiration is to move from this fragmented workflow to an orchestrated agent workflow that can run multiple steps in parallel with minimal human intervention.</p>
+
+      <h3>Semantic Layer Architecture</h3>
+      <p>A common semantic layer is being established across all reporting tools: Cognos, ThoughtSpot, and any future BI tools. The goal is tool agnosticism. Any reporting tool pointed at the same dataset produces consistent KPIs, eliminating discrepancies between report outputs.</p>
+
+      <h3>Resource Constraints</h3>
+      <p>SME bandwidth remains the bottleneck. The same experts needed to keep production systems running are also needed to validate re-engineering work. AI acceleration is valuable to the extent it reduces this burden, surfacing decisions that need human judgment while automating the mechanical work.</p>
+    </div>
+
+    <!-- Section 02: Key Technical Challenges -->
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>Key Technical Challenges</h2>
+
+      <div class="card">
+        <h4>Challenge 1: SSAS to Databricks Transition</h4>
+        <p>The eight SSAS cubes currently feed Excel pivot tables that business users rely on heavily. The drag-and-drop KPI experience in Excel is deeply embedded in workflows. Moving to Databricks while preserving this Excel experience is a significant change management challenge.</p>
+        <p>The current approach exposes aggregated data through ThoughtSpot, but this requires users to learn a new interface. Retaining the familiar Excel experience while pointing to Databricks backends would minimize disruption.</p>
+        <p><strong>Potential approach:</strong> Custom Excel connectivity to Databricks, similar to how Hyperion environments have addressed this challenge. This is infrastructure work, but critical to the overall program success.</p>
+      </div>
+
+      <div class="card">
+        <h4>Challenge 2: Cognos Report Re-engineering Automation</h4>
+        <p>Today's workflow for each Cognos report:</p>
+        <ol>
+          <li>Manually open the report in Cognos</li>
+          <li>Extract the embedded SQL</li>
+          <li>Run the SQL through AI for transformation</li>
+          <li>Validate the Databricks-compatible output</li>
+          <li>Deploy and test</li>
+        </ol>
+        <p>At 6,000+ reports, this manual process creates a years-long timeline even with AI assistance. The goal is an agent that can integrate directly with Cognos, read report definitions programmatically, and orchestrate the re-engineering workflow end-to-end.</p>
+      </div>
+
+      <div class="card">
+        <h4>Challenge 3: DataStage Pipeline Migration</h4>
+        <p>DataStage jobs contain embedded business logic spread across XML job definitions. The same manual pattern applies: extract XML, feed to AI, validate, deploy to Databricks pipelines. Automating this integration would enable parallel processing of hundreds of jobs.</p>
+      </div>
+    </div>
+
+    <!-- Section 03: Agent Orchestration Approach -->
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>Agent Orchestration Approach</h2>
+
+      <h3>Design Philosophy</h3>
+      <p>Agent swarms work best when modeled after real-world team structures. The design models agent roles after traditional team structures, with each role becoming an agent with a specific responsibility.</p>
+
+      <p>The key principle: <strong>agents work better when they are more specific</strong>. A swarm might include:</p>
+      <ul>
+        <li>A report metadata extraction agent</li>
+        <li>A SQL parsing agent</li>
+        <li>A transformation validation agent</li>
+        <li>A deployment preparation agent</li>
+      </ul>
+      <p>Each agent does one thing well, and orchestration coordinates their work.</p>
+
+      <h3>Human Oversight Model</h3>
+      <p>Agent automation shifts human effort from mechanical tasks to judgment calls:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Agents Handle</th>
+            <th>Humans Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Extraction</td>
+            <td>Business logic verification</td>
+          </tr>
+          <tr>
+            <td>Transformation</td>
+            <td>Edge case decisions</td>
+          </tr>
+          <tr>
+            <td>Pattern matching</td>
+            <td>Final approval</td>
+          </tr>
+          <tr>
+            <td>Validation checks</td>
+            <td>Exception handling</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Reports can be generated throughout the workflow to keep humans aware of progress and flag items that need attention, maintaining full visibility into the process.</p>
+    </div>
+
+    <!-- Section 04: Schema Mapping Methodology -->
+    <div class="section">
+      <div class="section-number">04</div>
+      <h2>Schema Mapping Methodology</h2>
+      <p class="lead">Schema mapping between SQL Server EDW and Databricks is not a one-to-one exercise. Three tables in EDW might become one table in Databricks, or vice versa. The complexity of these transformations makes pure AI approaches unreliable.</p>
+
+      <h3>Deterministic Foundation First</h3>
+      <p>Before AI touches anything, establish certainty where certainty is possible:</p>
+
+      <div class="phase-grid">
+        <div class="phase-card">
+          <h4>Phase 1: Structural Discovery (No AI)</h4>
+          <ul>
+            <li>Enumerate all tables, views, and schemas in both environments</li>
+            <li>Map data types, column names, and relationships</li>
+            <li>Create a reliable baseline that AI can reference without hallucination risk</li>
+          </ul>
+        </div>
+
+        <div class="phase-card">
+          <h4>Phase 2: Rule-Based Mapping (No AI)</h4>
+          <ul>
+            <li>Exact column name matches</li>
+            <li>Tables with identical structures</li>
+            <li>Known migration patterns from earlier tracks</li>
+          </ul>
+          <p style="margin-top: 12px; font-size: 14px; color: var(--text-light);">This typically resolves 30-40% of mappings with near-perfect certainty. These become anchor points that AI cannot contradict.</p>
+        </div>
+
+        <div class="phase-card">
+          <h4>Phase 3: AI-Assisted Mapping</h4>
+          <ul>
+            <li>Semantic similarity between column names</li>
+            <li>Data type compatibility analysis</li>
+            <li>Sample value pattern matching</li>
+            <li>Contextual clues from related tables</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Confidence-Based Routing</h3>
+      <p>Not all mappings require the same level of attention. Each mapping receives a confidence score. Confidence scores reflect pattern recognition based on human feedback.</p>
+
+      <div class="highlight-box">
+        <h4>How Confidence Builds</h4>
+        <ul>
+          <li>When a human approves an AI-suggested mapping, that approval is stored with full context</li>
+          <li>The next time the system encounters a structurally similar situation, it recognizes the pattern</li>
+          <li>If the same pattern has been approved multiple times, confidence is high</li>
+          <li>Each human approval reinforces the system's understanding</li>
+        </ul>
+        <p style="margin-top: 16px;">This creates a feedback loop. Early in the process, more items require human review. As approvals accumulate, the system learns what "correct" looks like for this specific environment. High confidence means humans have already validated this type of change repeatedly.</p>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Confidence Level</th>
+            <th>Criteria</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>High</strong></td>
+            <td>Pattern matches multiple prior approvals</td>
+            <td>Auto-proceed</td>
+          </tr>
+          <tr>
+            <td><strong>Medium</strong></td>
+            <td>Similar to approved patterns but with variations</td>
+            <td>Flagged for quick verification</td>
+          </tr>
+          <tr>
+            <td><strong>Low</strong></td>
+            <td>No matching patterns or conflicting signals</td>
+            <td>Routed to SME for judgment</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Human effort concentrates on genuinely novel cases.</p>
+
+      <h3>Persistent Knowledge Graph</h3>
+      <p>In a typical AI workflow, each mapping is independent. Insights from one report do not inform the next. A structured approach maintains a central knowledge graph that accumulates learnings:</p>
+      <ul>
+        <li>Patterns discovered in Finance track carry forward to Merchandising</li>
+        <li>Entity relationships learned once are applied everywhere</li>
+        <li>Edge cases and exceptions are remembered</li>
+      </ul>
+      <p>Accuracy improves over time as the system processes more assets.</p>
+
+      <h3>Validation and Guardrails</h3>
+      <p>Before any mapping reaches human review, it passes through validation that checks for:</p>
+      <ul>
+        <li>Internal consistency (does this mapping contradict other mappings?)</li>
+        <li>Pattern compliance (does this follow established conventions?)</li>
+        <li>Completeness (are there obvious gaps?)</li>
+      </ul>
+      <p>Obvious errors are caught and corrected before consuming human attention.</p>
+
+      <div class="highlight-box">
+        <h4>Failure Handling</h4>
+        <ul>
+          <li>If validation fails, the system retries with adjusted parameters</li>
+          <li>If retries continue to fail, the item is escalated to human review</li>
+          <li>All failures are logged with full context so patterns of failure can be identified and addressed</li>
+          <li>Humans always have visibility into what is being processed and can intervene at any point</li>
+        </ul>
+        <p style="margin-top: 12px;">The goal is automation with guardrails and full visibility. Items that the system cannot resolve confidently become human decisions.</p>
+      </div>
+    </div>
+
+    <!-- Section 05: Tool Integration Strategy -->
+    <div class="section">
+      <div class="section-number">05</div>
+      <h2>Tool Integration Strategy</h2>
+
+      <h3>MCP for Reliable Connections</h3>
+      <p>Agents need to interact with actual systems: Cognos, DataStage, SQL Server, Databricks. MCP (Model Context Protocol) provides stable, reliable interfaces for these connections.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>MCP Benefit</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Reusability</td>
+            <td>Connection logic is defined once and reused</td>
+          </tr>
+          <tr>
+            <td>Consistency</td>
+            <td>Agents call consistent functions</td>
+          </tr>
+          <tr>
+            <td>Reliability</td>
+            <td>Error handling is standardized</td>
+          </tr>
+          <tr>
+            <td>Testability</td>
+            <td>Testing becomes deterministic</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>This is particularly important for legacy systems where connection patterns might be non-obvious.</p>
+
+      <h3>Infrastructure Integration</h3>
+      <p>Any agent development should use existing enterprise infrastructure:</p>
+      <ul>
+        <li>Enterprise AI accounts (Claude, Azure AI Foundry, Vertex AI)</li>
+        <li>Existing cloud environments (Azure, GCP)</li>
+        <li>Current security and compliance frameworks</li>
+      </ul>
+      <p>This avoids introducing new tools that create ongoing maintenance burden. When the re-engineering program completes, there should be capability gained without ongoing dependency.</p>
+      <p>Azure AI Foundry models, for example, are significantly cheaper than commercial API equivalents while meeting the same enterprise security standards as other Azure services.</p>
+    </div>
+
+    <!-- Section 06: Acceleration Capabilities -->
+    <div class="section">
+      <div class="section-number">06</div>
+      <h2>Acceleration Capabilities</h2>
+
+      <div class="capability-grid">
+        <div class="capability-card">
+          <h4>Report Similarity Clustering</h4>
+          <p>Analyze Cognos report metadata to group reports by structural similarity. Reports sharing data sources and query patterns can be re-engineered together as batches.</p>
+        </div>
+        <div class="capability-card">
+          <h4>Business Logic Extraction</h4>
+          <p>Parse report definitions and embedded SQL to create a readable catalog of calculations, filters, and business rules. Years of accumulated logic becomes visible and documented.</p>
+        </div>
+        <div class="capability-card">
+          <h4>Dependency Mapping</h4>
+          <p>Trace relationships between tables, views, reports, and cubes to create a complete dependency graph. Prevent mid-project surprises from unexpected dependencies.</p>
+        </div>
+        <div class="capability-card">
+          <h4>KPI Lineage Tracing</h4>
+          <p>Map the 800+ KPIs back to their source calculations. Identify where the same KPI is calculated differently in different places. Standardizing KPI definitions is prerequisite to a clean semantic layer.</p>
+        </div>
+        <div class="capability-card">
+          <h4>Change Impact Analysis</h4>
+          <p>Before making changes to source systems or transformation logic, simulate downstream impact across the entire reporting portfolio.</p>
+        </div>
+        <div class="capability-card">
+          <h4>Documentation Generation</h4>
+          <p>Generate documentation for undocumented stored procedures, DataStage jobs, and report logic. Institutional knowledge embedded in code becomes explicit and reviewable.</p>
+        </div>
+        <div class="capability-card">
+          <h4>Consolidation Detection</h4>
+          <p>Identify reports with nearly identical functions and minor variations. Surfacing consolidation opportunities reduces the total volume requiring re-engineering.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 07: Implementation Approach -->
+    <div class="section">
+      <div class="section-number">07</div>
+      <h2>Implementation Approach</h2>
+
+      <h3>Proof-of-Concept Approach</h3>
+      <p>A focused proof-of-concept on representative samples demonstrates feasibility with actual systems. A handful of Cognos reports and DataStage jobs is enough to show:</p>
+      <ul>
+        <li>Agent integration with legacy systems works</li>
+        <li>The orchestration pattern handles real complexity</li>
+        <li>Output quality meets validation requirements</li>
+      </ul>
+
+      <h3>Infrastructure Integration</h3>
+      <p>Development happens within existing security and compliance frameworks. This might mean:</p>
+      <ul>
+        <li>Using client-issued hardware with standard images</li>
+        <li>Working through VPN and approved access methods</li>
+        <li>Leveraging existing enterprise AI accounts</li>
+        <li>Deploying to existing cloud environments</li>
+      </ul>
+      <p>No new tools to evaluate, license, or maintain long-term.</p>
+
+      <h3>Scale Based on Results</h3>
+      <p>Once the proof-of-concept validates the approach, the same patterns scale to larger batches. The work to process 100 reports is not dramatically different from processing 1,000 once the foundation is established.</p>
+    </div>
+
+    <!-- Section 08: Discussion Topics -->
+    <div class="section">
+      <div class="section-number">08</div>
+      <h2>Discussion Topics</h2>
+
+      <ol class="discussion-list">
+        <li><strong>Architecture Deep Dive</strong> &mdash; How is the Databricks environment structured? What tools have been selected for pipelines? How is the semantic layer being implemented?</li>
+        <li><strong>Representative Samples</strong> &mdash; What would a good cross-section of reports and jobs look like for a proof-of-concept? What represents the range of complexity?</li>
+        <li><strong>Integration Points</strong> &mdash; What access methods exist for Cognos and DataStage in the current environment? Are staging servers available for experimentation without production impact?</li>
+        <li><strong>Priority Ranking</strong> &mdash; Of the challenges discussed, which would deliver the most value if solved first? Where is the team spending the most manual effort today?</li>
+        <li><strong>Success Criteria</strong> &mdash; What would a successful proof-of-concept need to demonstrate to build confidence in a larger engagement?</li>
+      </ol>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <p>Confidential &mdash; Prepared for Sephora</p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sephora EDW Modernization: Demonstration Summary, Architecture, and Next Steps</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+      --azure-blue: #0078d4;
+      --azure-light: #e8f4fd;
+      --azure-border: #b3d7f2;
+    }
+
+    @page { size: landscape; margin: 0.5in; }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    /* ── Cover ── */
+    .cover {
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 48px 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%; width: 80%; height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -30%; left: -10%; width: 60%; height: 80%;
+      background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+    .cover-label {
+      font-size: 12px; font-weight: 600; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--purple-glow); margin-bottom: 24px;
+    }
+    .cover h1 {
+      font-size: 48px; font-weight: 700; line-height: 1.1;
+      letter-spacing: -1px; margin-bottom: 20px;
+    }
+    .cover .subtitle {
+      font-size: 20px; font-weight: 300; opacity: 0.85;
+      line-height: 1.5; max-width: 600px;
+    }
+    .cover-footer {
+      position: absolute; bottom: 40px; left: 80px; right: 80px;
+      display: flex; justify-content: space-between;
+      font-size: 13px; opacity: 0.6; z-index: 1;
+    }
+
+    /* ── Container ── */
+    .container { max-width: 1400px; margin: 0 auto; padding: 48px 60px; }
+    .section { margin-bottom: 64px; }
+
+    .section-number {
+      font-size: 12px; font-weight: 600; color: var(--purple-accent);
+      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;
+    }
+    h2 { font-size: 32px; font-weight: 700; color: var(--primary); margin-bottom: 24px; letter-spacing: -0.5px; }
+    h3 { font-size: 20px; font-weight: 600; color: var(--primary); margin: 32px 0 16px; }
+    p { margin-bottom: 16px; }
+    .lead { font-size: 18px; color: var(--text-light); line-height: 1.8; margin-bottom: 32px; }
+
+    /* ── Highlight box ── */
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border: 1px solid rgba(124,58,237,0.15); border-radius: 12px;
+      padding: 28px 32px; margin: 24px 0;
+    }
+    .highlight-box .box-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--purple-accent); margin-bottom: 12px;
+    }
+    .highlight-box p { font-size: 15px; margin-bottom: 10px; }
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    /* ── Capability grid (from demo_next_steps) ── */
+    .cap-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 24px 0; }
+    .cap-card { background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; }
+    .cap-card .cap-icon {
+      width: 40px; height: 40px; background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: #fff; border-radius: 10px; display: flex; align-items: center;
+      justify-content: center; font-size: 16px; margin-bottom: 14px;
+    }
+    .cap-card .cap-title { font-weight: 600; color: var(--primary); font-size: 15px; margin-bottom: 6px; }
+    .cap-card .cap-desc { font-size: 13px; color: var(--text-light); line-height: 1.6; }
+
+    /* ── Mermaid ── */
+    .diagram-container {
+      background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 16px;
+      padding: 40px 48px; margin: 24px 0; overflow-x: auto; min-height: 400px;
+    }
+    .diagram-container .diagram-title {
+      font-size: 13px; font-weight: 600; color: var(--text-light);
+      letter-spacing: 1px; text-transform: uppercase; margin-bottom: 24px; text-align: center;
+    }
+    .mermaid { display: flex; justify-content: center; }
+
+    .mermaid .node rect, .mermaid .node polygon { rx: 8 !important; ry: 8 !important; }
+    .mermaid .edgeLabel rect {
+      fill: #ede9fe !important; fill-opacity: 1 !important;
+      stroke: none !important; stroke-width: 0 !important; opacity: 1 !important;
+    }
+
+    /* ── Component cards (from architecture) ── */
+    .comp-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 24px 0; }
+    .comp-card { border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; }
+    .comp-card.azure { background: var(--azure-light); border-color: var(--azure-border); }
+    .comp-card .comp-icon { font-size: 13px; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 10px; }
+    .comp-card .comp-icon .badge {
+      font-size: 10px; font-weight: 600; padding: 2px 8px;
+      border-radius: 10px; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .badge-azure { background: var(--azure-blue); color: white; }
+    .badge-oss { background: #059669; color: white; }
+    .badge-ext { background: var(--purple-mid); color: white; }
+    .comp-card .comp-title { font-weight: 700; color: var(--primary); font-size: 16px; margin-bottom: 6px; }
+    .comp-card .comp-desc { font-size: 13px; color: var(--text-light); line-height: 1.6; }
+
+    /* ── Timeline cards (from demo_next_steps) ── */
+    .timeline-row { display: flex; gap: 20px; margin: 24px 0; }
+    .timeline-card { flex: 1; border: 1px solid var(--border); border-radius: 12px; padding: 28px; position: relative; }
+    .timeline-card .tl-badge {
+      position: absolute; top: -12px; left: 24px;
+      background: linear-gradient(135deg, #7c3aed, #a855f7); color: #fff;
+      font-size: 11px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; padding: 4px 14px; border-radius: 20px;
+    }
+    .timeline-card .tl-title { font-weight: 700; color: var(--primary); font-size: 17px; margin-bottom: 6px; margin-top: 8px; }
+    .timeline-card .tl-hours { font-size: 13px; color: var(--purple-accent); font-weight: 600; margin-bottom: 12px; }
+    .timeline-card ul { margin: 0 0 0 16px; font-size: 14px; color: var(--text); }
+    .timeline-card li { margin-bottom: 6px; }
+
+    /* ── Deliverables (from demo_next_steps) ── */
+    .del-item { display: flex; align-items: flex-start; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--border); }
+    .del-item:last-child { border-bottom: none; }
+    .del-icon {
+      width: 42px; height: 42px; background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: #fff; border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-size: 16px; flex-shrink: 0;
+    }
+    .del-title { font-weight: 600; color: var(--primary); font-size: 16px; margin-bottom: 4px; }
+    .del-desc { font-size: 14px; color: var(--text-light); line-height: 1.6; }
+
+    /* ── Requirements list (from demo_next_steps) ── */
+    .req-list { list-style: none; padding: 0; margin: 20px 0; }
+    .req-list li {
+      padding: 14px 18px 14px 50px; margin-bottom: 10px;
+      background: var(--bg-subtle); border: 1px solid var(--border);
+      border-radius: 10px; font-size: 15px; position: relative;
+    }
+    .req-list li::before {
+      content: "\f058"; font-family: "Font Awesome 6 Free"; font-weight: 900;
+      position: absolute; left: 18px; top: 15px; color: var(--purple-accent); font-size: 16px;
+    }
+
+    /* ── CTA box (from demo_next_steps) ── */
+    .cta-box {
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: #fff; border-radius: 16px; padding: 40px 44px; margin: 32px 0;
+      position: relative; overflow: hidden;
+    }
+    .cta-box::before {
+      content: ''; position: absolute; top: -40%; right: -15%; width: 60%; height: 180%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.2) 0%, transparent 60%);
+      transform: rotate(-12deg);
+    }
+    .cta-box .cta-content { position: relative; z-index: 1; }
+    .cta-box .cta-title { font-size: 24px; font-weight: 700; margin-bottom: 12px; }
+    .cta-box p { font-size: 16px; opacity: 0.9; line-height: 1.7; margin-bottom: 0; }
+
+    /* ── Tables ── */
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+    th {
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple-bright));
+      color: var(--white); padding: 12px 16px; text-align: left;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;
+    }
+    td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    /* ── Print ── */
+    @media print {
+      @page { size: landscape; margin: 0.4in; }
+      .cover { min-height: auto; padding: 40px; page-break-after: always; }
+      .container { padding: 20px; max-width: 100%; }
+      .comp-grid, .cap-grid { grid-template-columns: 1fr 1fr; }
+      .timeline-row { flex-direction: column; }
+      .section { page-break-inside: avoid; }
+      th, .cover, .badge-azure, .badge-oss, .badge-ext, .highlight-box,
+      .del-icon, .cap-icon, .tl-badge, .cta-box {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ COVER ═══════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-content">
+    <div class="cover-label">Sephora EDW Modernization</div>
+    <h1>Demonstration Summary,<br>Architecture, and Next Steps</h1>
+    <p class="subtitle">Agent-driven ETL pipeline conversion for the enterprise data warehouse re-engineering program. Built on Azure, designed for Sephora.</p>
+  </div>
+  <div class="cover-footer">
+    <span>BayOne Solutions | AI Practice</span>
+    <span>April 2, 2026</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ═══════ 01: WHAT WAS DEMONSTRATED ═══════ -->
+  <div class="section">
+    <div class="section-number">01</div>
+    <h2>What Was Demonstrated</h2>
+    <p class="lead">A multi-agent pipeline built specifically around Sephora's DataStage jobs, stored procedures, source schemas, and target framework over the past two weeks.</p>
+
+    <div class="cap-grid">
+      <div class="cap-card">
+        <div class="cap-icon"><i class="fa-solid fa-diagram-project"></i></div>
+        <div class="cap-title">Agent Orchestration</div>
+        <div class="cap-desc">Multiple specialized agents coordinating across parsing, interpretation, mapping, generation, and validation stages with deterministic quality gates between each step.</div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon"><i class="fa-solid fa-code"></i></div>
+        <div class="cap-title">DataStage ETL Conversion</div>
+        <div class="cap-desc">DataStage XML, SQL Server stored procedures, DDLs, and views parsed and converted to Databricks-compatible Spark SQL and YAML configuration files.</div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="cap-title">Deterministic Quality Gates</div>
+        <div class="cap-desc">Every agent output is validated by deterministic checks (zero LLM cost) before proceeding. Source table grounding, syntax validation, column mapping, and business logic verification.</div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon"><i class="fa-solid fa-file-code"></i></div>
+        <div class="cap-title">Framework-Compatible Output</div>
+        <div class="cap-desc">Generated output follows the existing AggregationApplication framework format: pipeline YAML, deployment YAML, and HQL table definitions. No new frameworks introduced.</div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon"><i class="fa-solid fa-user-check"></i></div>
+        <div class="cap-title">Human-in-the-Loop Review</div>
+        <div class="cap-desc">AI-powered review identifies conversion items for human validation. Auto-fix applies surgical corrections. The system learns from approved patterns for future runs.</div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon"><i class="fa-solid fa-bolt"></i></div>
+        <div class="cap-title">Parallel Execution</div>
+        <div class="cap-desc">Independent pipeline stages run concurrently. Three parsers execute in parallel. SQL generation plans a dependency graph and generates independent stages simultaneously.</div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="box-label">Key Result</div>
+      <p>The pipeline processed Sephora's actual source materials end to end and produced output that conforms to the existing production framework. The approach is proven. The remaining question is how to apply it across the full environment.</p>
+    </div>
+  </div>
+
+  <!-- ═══════ 02: DEPLOYMENT ARCHITECTURE ═══════ -->
+  <div class="section">
+    <div class="section-number">02</div>
+    <h2>Deployment Architecture</h2>
+    <p class="lead">The solution runs entirely on Azure, using Azure AI Foundry for model inference and Azure Container Apps for the application layer. No data leaves the Azure environment.</p>
+
+    <div class="diagram-container">
+      <div class="diagram-title">High-Level Architecture</div>
+      <div class="mermaid">
+        <pre class="mermaid-src">
+graph TB
+    subgraph SEPHORA["`**SEPHORA ON-PREM**`"]
+        direction TB
+        COGNOS["`**IBM Cognos**
+        Report Server`"]
+        DS["`**IBM DataStage**
+        ETL Job Server`"]
+        SQLSRV["`**SQL Server**
+        Enterprise Data Warehouse`"]
+    end
+
+    subgraph AZURE["`**AZURE CLOUD**`"]
+        direction TB
+        subgraph ACA["`**Azure Container Apps**`"]
+            API["`**FastAPI**
+            Application Server`"]
+            DASH["`**Dashboard**
+            HTML / CSS / JavaScript`"]
+        end
+
+        subgraph FOUNDRY["`**Azure AI Foundry**`"]
+            OPUS["`**Claude Opus 4.6**
+            Heavy Reasoning Tasks`"]
+            SONNET["`**Claude Sonnet 4.6**
+            Fast Parallel Tasks`"]
+        end
+
+        PG["`**Azure Database for PostgreSQL**
+        Checkpointing + Run History`"]
+        BLOB["`**Azure Blob Storage**
+        Source Artifacts + Pipeline Outputs`"]
+    end
+
+    subgraph OBS["`**OBSERVABILITY**`"]
+        LS["`**LangSmith**
+        Execution Tracing + Waterfall View`"]
+    end
+
+    subgraph DB["`**SEPHORA DATABRICKS**`"]
+        DBSQL["`**Databricks SQL**
+        Target Platform`"]
+        UNITY["`**Unity Catalog**
+        Schema Governance`"]
+    end
+
+    COGNOS -.->|"`MCP Connector Phase 2`"| API
+    DS -.->|"`Exported XML`"| BLOB
+    SQLSRV -.->|"`DDL + Stored Procs`"| BLOB
+
+    BLOB -->|"`Source files`"| API
+    API -->|"`Opus calls`"| OPUS
+    API -->|"`Sonnet calls`"| SONNET
+    API -->|"`Checkpoints`"| PG
+    API -->|"`Traces`"| LS
+    API -->|"`Serves UI`"| DASH
+
+    API -->|"`YAML + SQL + HQL`"| BLOB
+    BLOB -.->|"`Deploy configs`"| DBSQL
+
+    DBSQL --- UNITY
+
+    style SEPHORA fill:#fef2f2,stroke:#f87171,stroke-width:2px,color:#991b1b
+    style AZURE fill:#eff6ff,stroke:#0078d4,stroke-width:3px,color:#0c4a6e
+    style ACA fill:#dbeafe,stroke:#3b82f6,stroke-width:2px,color:#1e3a5f
+    style FOUNDRY fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#3b0764
+    style OBS fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    style DB fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+
+    style API fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    style DASH fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    style OPUS fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#3b0764
+    style SONNET fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#3b0764
+    style PG fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+    style BLOB fill:#ccfbf1,stroke:#0d9488,stroke-width:2px,color:#134e4a
+
+    style COGNOS fill:#fef2f2,stroke:#ef4444,stroke-width:1px,color:#7f1d1d
+    style DS fill:#fef2f2,stroke:#ef4444,stroke-width:1px,color:#7f1d1d
+    style SQLSRV fill:#fef2f2,stroke:#ef4444,stroke-width:1px,color:#7f1d1d
+
+    style LS fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+
+    style DBSQL fill:#dcfce7,stroke:#16a34a,stroke-width:1px,color:#14532d
+    style UNITY fill:#dcfce7,stroke:#16a34a,stroke-width:1px,color:#14532d
+        </pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ 03: PIPELINE ARCHITECTURE ═══════ -->
+  <div class="section">
+    <div class="section-number">03</div>
+    <h2>Agent Pipeline Architecture</h2>
+    <p class="lead">A LangGraph StateGraph with 15 nodes, 5 deterministic quality gates, and conditional retry routing. The pipeline proceeds through orchestration, parallel parsing, pattern mapping, code generation, configuration, validation, and human approval.</p>
+
+    <div class="diagram-container">
+      <div class="diagram-title">Pipeline Flow</div>
+      <div class="mermaid">
+        <pre class="mermaid-src">
+graph LR
+    START(("Start")) --> ORCH["`**Orchestrator**
+    Load + Classify`"]
+    ORCH --> G1{"G1"}
+    G1 -->|"`Pass`"| FAN["Fan-Out"]
+    G1 -.->|"`Retry`"| ORCH
+
+    FAN --> DSP["`**DataStage Parser**
+    Opus`"]
+    FAN --> SQL["`**SQL Interpreter**
+    Sonnet`"]
+    FAN --> DDL["`**DDL Parser**
+    Sonnet`"]
+
+    DSP --> G2{"G2"}
+    SQL --> G2
+    DDL --> G2
+    G2 -->|"`Pass`"| PM["`**Pattern Mapper**
+    Opus`"]
+    G2 -.->|"`Retry`"| FAN
+
+    PM --> G3{"G3"}
+    G3 -->|"`Pass`"| GEN["`**Spark SQL Generator**
+    Opus + Sonnet`"]
+    G3 -.->|"`Retry`"| PM
+
+    GEN --> G4{"G4"}
+    G4 -->|"`Pass`"| CFG["`**Config Generator**
+    3x Sonnet`"]
+    G4 -.->|"`Retry`"| GEN
+
+    CFG --> G5{"G5"}
+    G5 -->|"`Pass`"| VAL["`**Schema Validator**
+    Deterministic`"]
+    G5 -.->|"`Retry`"| CFG
+
+    VAL -->|"`Score >= 0.80`"| HUMAN["`**Human Review**
+    Approve or Reject`"]
+    VAL -.->|"`Score < 0.80`"| GEN
+    HUMAN -->|"`Approve`"| DONE(("End"))
+    HUMAN -.->|"`Reject`"| GEN
+
+    style START fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    style DONE fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+
+    style G1 fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    style G2 fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    style G3 fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    style G4 fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    style G5 fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+
+    style ORCH fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    style FAN fill:#f1f5f9,stroke:#94a3b8,stroke-width:1px,color:#475569
+
+    style DSP fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#3b0764
+    style SQL fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e
+    style DDL fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e
+
+    style PM fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#831843
+
+    style GEN fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#3b0764
+    style CFG fill:#ccfbf1,stroke:#0d9488,stroke-width:2px,color:#134e4a
+    style VAL fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+
+    style HUMAN fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+        </pre>
+      </div>
+    </div>
+
+    <h3>Quality Gates</h3>
+    <table>
+      <tr><th>Gate</th><th>Name</th><th>What It Checks</th></tr>
+      <tr>
+        <td><strong>G1</strong></td>
+        <td>Orchestrator Gate</td>
+        <td>All source artifacts loaded, DataStage XML present, target examples loaded, all artifacts have content, run ID generated</td>
+      </tr>
+      <tr>
+        <td><strong>G2</strong></td>
+        <td>Parser Gate</td>
+        <td>DataStage parser returned stages and embedded SQL, SQL interpreter produced results, DDL schemas parsed, column names grounded in source files, cross-check between deterministic and LLM table extraction</td>
+      </tr>
+      <tr>
+        <td><strong>G3</strong></td>
+        <td>Mapper Gate</td>
+        <td>Pattern mapping is non-empty, mapping references actual source table names from DDL schemas, mentions source references, type mappings, and column mappings</td>
+      </tr>
+      <tr>
+        <td><strong>G4</strong></td>
+        <td>SQL Gate</td>
+        <td>SQL is substantial (5,000+ chars), sqlglot syntax check (50%+ statements parse), DDL table coverage (30%+), column coverage (20%+), source table grounding (FROM/JOIN refs exist in source artifacts), truncation detection (end-of-file and per-view), HQL column match. Then LLM check for business logic preservation and column existence against the Scala source</td>
+      </tr>
+      <tr>
+        <td><strong>G5</strong></td>
+        <td>Config Gate</td>
+        <td>Pipeline YAML valid and substantial (200+ chars), deployment YAML valid (100+ chars), HQL has CREATE TABLE, HQL columns grounded in target, YAML sourceFile names grounded in source. Then LLM check for token name matching, column type consistency against SQL CASTs, and deployment config structure</td>
+      </tr>
+    </table>
+
+    <h3>Agent Roles</h3>
+    <table>
+      <tr><th>Agent</th><th>Model</th><th>What It Does</th></tr>
+      <tr>
+        <td><strong>Orchestrator</strong></td>
+        <td>Sonnet</td>
+        <td>Loads all source files, classifies each by type (DataStage XML, stored procedure, DDL, view, schema, Scala app, YAML, HQL), identifies which pipeline to build from target examples, generates run ID</td>
+      </tr>
+      <tr>
+        <td><strong>DataStage Parser</strong></td>
+        <td>Opus</td>
+        <td>Parses DataStage XML: extracts job stages, transformations, embedded SQL, and column definitions using Python and sqlglot deterministically, then one Opus call to synthesize findings into structured analysis</td>
+      </tr>
+      <tr>
+        <td><strong>SQL Interpreter</strong></td>
+        <td>Sonnet</td>
+        <td>Analyzes stored procedures and views: extracts tables, joins, CTEs, and temp tables via sqlglot, then parallel Sonnet batch calls for business rule extraction (flag calculations, aggregation patterns, temporal logic)</td>
+      </tr>
+      <tr>
+        <td><strong>DDL Parser</strong></td>
+        <td>Sonnet</td>
+        <td>Parses DDL files and views: extracts table names, column names with exact decimal precision, nullable constraints, and primary keys via sqlglot, then parallel Sonnet batch calls for semantic analysis</td>
+      </tr>
+      <tr>
+        <td><strong>Pattern Mapper</strong></td>
+        <td>Opus</td>
+        <td>Single Opus call. Reads all parser outputs plus target Scala and YAML examples. Produces translation dictionary: surrogate keys to business keys, SQL Server types to Databricks types, temp tables to intermediate views, CASE WHEN patterns, GETDATE to current_date</td>
+      </tr>
+      <tr>
+        <td><strong>Spark SQL Generator</strong></td>
+        <td>Opus + Sonnet</td>
+        <td>Three-phase generation: (1) Opus plans all stages and builds a dependency graph of independent vs dependent stages, (2) Sonnet generates independent stages in parallel, (3) Opus generates dependent stages with Phase 1 output as context. On retry, a single Opus call with previous SQL plus errors for targeted fix</td>
+      </tr>
+      <tr>
+        <td><strong>Config Generator</strong></td>
+        <td>3x Sonnet</td>
+        <td>Three parallel Sonnet calls, one per file: pipeline YAML, deployment YAML, and create.HQL. Each copies the target template structure exactly, only changing values where the generated Spark SQL requires it</td>
+      </tr>
+      <tr>
+        <td><strong>Schema Validator</strong></td>
+        <td>None</td>
+        <td>Zero LLM calls. Cross-references all generated outputs against each other and against source artifacts. Assembles gate LLM findings from upstream. Computes overall validation score. Produces the result for the review screen</td>
+      </tr>
+      <tr>
+        <td><strong>Human Approval</strong></td>
+        <td>None</td>
+        <td>Presents validation score and flagged issues for human review. Approve proceeds to completion. Reject routes back to the Spark SQL Generator with error context for targeted correction</td>
+      </tr>
+    </table>
+
+    <div class="highlight-box">
+      <div class="box-label">Design Principle</div>
+      <p><strong>Deterministic first, LLM second.</strong> Every gate runs Python and sqlglot checks at zero LLM cost before proceeding. LLM-based quality checks only run after deterministic checks pass. This minimizes token usage while maintaining high validation standards.</p>
+      <p><strong>Source grounding at every gate.</strong> Generated table names, column names, and source file references are checked against the original artifacts. If a name does not exist in the source data, the gate flags it as potentially hallucinated before it propagates downstream.</p>
+    </div>
+  </div>
+
+  <!-- ═══════ 04: AZURE COMPONENTS ═══════ -->
+  <div class="section">
+    <div class="section-number">04</div>
+    <h2>Azure Component Map</h2>
+
+    <div class="comp-grid">
+      <div class="comp-card azure">
+        <div class="comp-icon"><span class="badge badge-azure">Azure</span></div>
+        <div class="comp-title">Azure AI Foundry</div>
+        <div class="comp-desc">Claude Opus 4.6 and Sonnet 4.6 model inference. Enterprise-grade security (same as Outlook/Teams). Significantly lower cost than commercial API. Quota-based rate limiting with configurable concurrency.</div>
+      </div>
+      <div class="comp-card azure">
+        <div class="comp-icon"><span class="badge badge-azure">Azure</span></div>
+        <div class="comp-title">Azure Container Apps</div>
+        <div class="comp-desc">Hosts the FastAPI application server and dashboard. Serverless scaling, HTTPS by default, time-bound credential access for secure demo environments.</div>
+      </div>
+      <div class="comp-card azure">
+        <div class="comp-icon"><span class="badge badge-azure">Azure</span></div>
+        <div class="comp-title">Azure Blob Storage</div>
+        <div class="comp-desc">Four containers: source artifacts (DataStage XML, stored procedures, DDLs), pipeline input, target examples (Scala apps, YAML templates, HQL), and pipeline output (generated configs).</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-icon"><span class="badge badge-oss">Open Source</span></div>
+        <div class="comp-title">LangGraph</div>
+        <div class="comp-desc">StateGraph orchestration framework. Manages the 15-node pipeline with conditional edges, parallel fan-out, retry routing, and human-in-the-loop interrupts via checkpointing.</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-icon"><span class="badge badge-oss">Open Source</span></div>
+        <div class="comp-title">PostgreSQL</div>
+        <div class="comp-desc">LangGraph checkpoint persistence and pipeline run history. Enables resume from any pipeline state, run comparison, and historical audit trail.</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-icon"><span class="badge badge-oss">Open Source</span></div>
+        <div class="comp-title">sqlglot</div>
+        <div class="comp-desc">AST-based SQL parsing for deterministic validation. Extracts tables, columns, joins, CTEs from both T-SQL (source) and Spark SQL (generated). Powers all gate checks at zero LLM cost.</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-icon"><span class="badge badge-ext">External</span></div>
+        <div class="comp-title">LangSmith</div>
+        <div class="comp-desc">Full execution tracing with waterfall visualization. Every API call, tool invocation, and node transition is recorded. Enables deep technical audit of any pipeline run.</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-icon"><span class="badge badge-azure">Azure</span> <span style="font-size: 12px; color: var(--text-light);">Phase 2</span></div>
+        <div class="comp-title">MCP Connector (Cognos)</div>
+        <div class="comp-desc">Custom Model Context Protocol server wrapping the IBM Cognos Java SDK. Provides programmatic agent access to report metadata, embedded SQL, and RBAC. Requires Sephora Cognos environment access.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ 05: MODEL ALLOCATION ═══════ -->
+  <div class="section">
+    <div class="section-number">05</div>
+    <h2>Model Allocation</h2>
+    <p class="lead">Opus handles reasoning-intensive stages. Sonnet handles formulaic and parallelizable tasks. Deterministic gates use zero LLM tokens.</p>
+
+    <table>
+      <tr><th>Pipeline Stage</th><th>Model</th><th>Rationale</th></tr>
+      <tr><td>Orchestrator</td><td>Sonnet</td><td>Fast artifact classification and pipeline identification</td></tr>
+      <tr><td>DataStage Parser</td><td><strong>Opus</strong></td><td>Complex XML analysis requiring deep context understanding</td></tr>
+      <tr><td>SQL Interpreter</td><td>Sonnet</td><td>Batch parallel processing of stored procedures and views</td></tr>
+      <tr><td>DDL Parser</td><td>Sonnet</td><td>Schema extraction with deterministic sqlglot pre-processing</td></tr>
+      <tr><td>Pattern Mapper</td><td><strong>Opus</strong></td><td>Critical mapping step requiring full upstream context</td></tr>
+      <tr><td>Spark SQL Planner</td><td><strong>Opus</strong></td><td>Plans all stages and builds dependency graph from Scala source</td></tr>
+      <tr><td>SQL Generator (independent)</td><td>Sonnet</td><td>Parallel generation of stages with no upstream dependencies</td></tr>
+      <tr><td>SQL Generator (dependent)</td><td><strong>Opus</strong></td><td>Generates stages that depend on previously generated views</td></tr>
+      <tr><td>Config Generator (3 files)</td><td>Sonnet</td><td>Template-based generation, 3 parallel calls</td></tr>
+      <tr><td>Schema Validator</td><td>Sonnet</td><td>Cross-artifact comparison and scoring</td></tr>
+      <tr><td>All 5 Deterministic Gates</td><td><strong>None</strong></td><td>Python + sqlglot only, zero LLM cost</td></tr>
+    </table>
+  </div>
+
+  <!-- ═══════ 06: PROPOSED NEXT STEPS ═══════ -->
+  <div class="section">
+    <div class="section-number">06</div>
+    <h2>Proposed Next Steps</h2>
+    <p class="lead">A focused two-week exploration to map the full complexity of the EDW environment and produce a data-driven engagement proposal.</p>
+
+    <p>The demonstration validated the approach on one pipeline. To provide an accurate engagement plan with real acceleration estimates, BayOne needs to understand the full distribution of report types, DataStage jobs, and data flows across the environment. This exploration also enables the Cognos MCP validation that was identified as a priority during the technical deep dive.</p>
+
+    <div class="timeline-row">
+      <div class="timeline-card">
+        <div class="tl-badge">Week 1</div>
+        <div class="tl-title">Guided Discovery</div>
+        <div class="tl-hours">Approximately 8 hours of meetings</div>
+        <ul>
+          <li>Technical SMEs walk BayOne through the full landscape of reports, DataStage jobs, and data flows</li>
+          <li>Understand the locations and structures across all tracks (finance, supply chain, merchandising, stores, e-commerce)</li>
+          <li>Validate Cognos MCP connectivity against the specific Cognos version and environment</li>
+          <li>Paced by Sephora's team availability</li>
+        </ul>
+      </div>
+      <div class="timeline-card">
+        <div class="tl-badge">Week 2</div>
+        <div class="tl-title">Autonomous Mapping</div>
+        <div class="tl-hours">Approximately 20 hours of analysis</div>
+        <ul>
+          <li>Build a comprehensive knowledge graph and dependency map of all reports</li>
+          <li>Classify every pipeline by type and complexity</li>
+          <li>Identify acceleration opportunities: where patterns repeat and where parallel execution compresses timelines</li>
+          <li>Produce the deliverables</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ 07: WHAT WE NEED ═══════ -->
+  <div class="section">
+    <div class="section-number">07</div>
+    <h2>What We Need from Sephora</h2>
+
+    <ul class="req-list">
+      <li><strong>Sephora accounts for two BayOne team members</strong> with read-only access within the confines of what is necessary for integration and exploration</li>
+      <li><strong>Cognos environment access</strong> to validate the MCP connector against the specific version in use, addressing the integration layer identified during the technical deep dive</li>
+      <li><strong>Read access to relevant data platforms</strong> (DataStage, SQL Server EDW, Databricks) as directed by Sephora's technical team, sufficient for complexity mapping and table migration assessment</li>
+      <li><strong>Technical SME availability for Week 1</strong> to walk through the locations, structures, and priorities across the environment</li>
+    </ul>
+  </div>
+
+  <!-- ═══════ 08: WHAT WE DELIVER ═══════ -->
+  <div class="section">
+    <div class="section-number">08</div>
+    <h2>What BayOne Delivers</h2>
+
+    <div class="del-item">
+      <div class="del-icon"><i class="fa-solid fa-map"></i></div>
+      <div>
+        <div class="del-title">Complexity Mapping and State Analysis</div>
+        <div class="del-desc">Full inventory of report types, DataStage job types, and data flows with complexity classification and distribution analysis. This is the foundation for accurate timeline and pricing estimates.</div>
+      </div>
+    </div>
+
+    <div class="del-item">
+      <div class="del-icon"><i class="fa-solid fa-plug"></i></div>
+      <div>
+        <div class="del-title">Cognos MCP Validation</div>
+        <div class="del-desc">Confirmation that the MCP connector works against Sephora's specific Cognos version and environment. This closes the loop on the integration layer identified as a priority during the technical deep dive and addresses the Track A scope.</div>
+      </div>
+    </div>
+
+    <div class="del-item">
+      <div class="del-icon"><i class="fa-solid fa-database"></i></div>
+      <div>
+        <div class="del-title">Table Migration Assessment</div>
+        <div class="del-desc">Assessment of what is needed for SQL Server to Databricks table data migration and identification of what the agent pipeline can automate. This addresses the data migration scope alongside the ETL pipeline conversion demonstrated today.</div>
+      </div>
+    </div>
+
+    <div class="del-item">
+      <div class="del-icon"><i class="fa-solid fa-file-lines"></i></div>
+      <div>
+        <div class="del-title">Data-Driven Engagement Proposal</div>
+        <div class="del-desc">Scope, timeline with acceleration estimates, and pricing for the full modernization effort, grounded in actual system complexity rather than flat assumptions. Includes identification of the flywheel opportunities where agents accelerate through pattern reuse and parallel execution.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ 09: WHY THIS APPROACH ═══════ -->
+  <div class="section">
+    <div class="section-number">09</div>
+    <h2>Why This Approach</h2>
+    <p class="lead">The most responsible path to an accurate engagement plan.</p>
+
+    <p>Without the exploration, any engagement estimate is a flat calculation: the total number of reports and data flows multiplied by the time required for one conversion. That approach does not account for the acceleration that agents provide through pattern reuse, knowledge base learning, and parallel execution.</p>
+
+    <p>The agent-driven flywheel only takes effect when there is a clear picture of the overall complexity distribution, both in terms of pipeline types and their relative complexity. Some pipelines will closely resemble the one demonstrated today and can move through the system with minimal human intervention. Others will present unique patterns that require additional configuration.</p>
+
+    <p>This exploration produces the data needed to distinguish between those categories and provide acceleration estimates grounded in the actual environment rather than assumptions. It also seeds the knowledge base with the real complexity distribution, so the agent flywheel begins accelerating from the first day of the full engagement rather than learning from scratch.</p>
+
+    <div class="highlight-box">
+      <div class="box-label">Additional Benefit</div>
+      <p>The exploration also validates the Cognos MCP integration, which was identified as a priority during the technical deep dive but could not be demonstrated without access to the Cognos environment. With access, BayOne can confirm the connector works and scope the full end-to-end automation that includes automated report extraction, conversion, and deployment.</p>
+    </div>
+  </div>
+
+  <!-- ═══════ 10: SECURITY ═══════ -->
+  <div class="section">
+    <div class="section-number">10</div>
+    <h2>Security and Data Handling</h2>
+
+    <div class="highlight-box">
+      <div class="box-label">Key Security Properties</div>
+      <p><strong>All model inference runs through Azure AI Foundry.</strong> No data is sent to commercial API endpoints. Azure AI Foundry provides the same enterprise security guarantees as Azure Active Directory, Outlook, and Teams.</p>
+      <p><strong>Source data stays in Azure Blob Storage.</strong> Sephora's DataStage XML, stored procedures, and schema files are uploaded to a private storage account. Generated outputs are written back to the same storage account.</p>
+      <p><strong>Time-bound access.</strong> Demo environments are provisioned with credentials that expire automatically. The server shuts down after a defined period. Access can be restricted to specific individuals.</p>
+      <p><strong>Read-only exploration.</strong> The proposed exploration phase requires only read access to Sephora's systems. No writes, no modifications, no data extraction beyond what is necessary for complexity mapping.</p>
+    </div>
+  </div>
+
+  <!-- ═══════ 11: PORTABILITY ═══════ -->
+  <div class="section">
+    <div class="section-number">11</div>
+    <h2>Portability</h2>
+    <p class="lead">The solution is designed to run on Sephora's infrastructure.</p>
+
+    <p>The current deployment runs on BayOne's Azure subscription for demonstration purposes. For a production engagement, the same application deploys to Sephora's Azure environment with no architectural changes.</p>
+
+    <table>
+      <tr><th>Component</th><th>Current (Demo)</th><th>Production (Sephora)</th></tr>
+      <tr><td>Model inference</td><td>BayOne Azure AI Foundry</td><td>Sephora Azure AI Foundry (or existing enterprise Claude subscription)</td></tr>
+      <tr><td>Application hosting</td><td>BayOne Azure Container Apps</td><td>Sephora Azure Container Apps (or equivalent)</td></tr>
+      <tr><td>Data storage</td><td>BayOne Azure Blob Storage</td><td>Sephora Azure Blob Storage (or direct MCP connectivity to on-prem systems)</td></tr>
+      <tr><td>Checkpointing</td><td>PostgreSQL sidecar</td><td>Azure Database for PostgreSQL (managed) or sidecar</td></tr>
+      <tr><td>Observability</td><td>LangSmith (BayOne project)</td><td>LangSmith (Sephora project) or self-hosted alternative</td></tr>
+      <tr><td>Source connectivity</td><td>Exported files via Blob Storage</td><td>MCP connectors to Cognos, DataStage, SQL Server (with environment access)</td></tr>
+    </table>
+
+    <div class="highlight-box">
+      <div class="box-label">No Additional Tooling Required</div>
+      <p>The solution does not introduce any proprietary frameworks, commercial middleware, or additional SaaS subscriptions beyond what Sephora already uses. LangGraph and sqlglot are open source. The application is a standard Python FastAPI service containerized with Docker. Everything runs within Azure services that Sephora's infrastructure team is already familiar with.</p>
+    </div>
+  </div>
+
+  <!-- ═══════ 12: GETTING STARTED ═══════ -->
+  <div class="section">
+    <div class="section-number">12</div>
+    <h2>Getting Started</h2>
+
+    <div class="cta-box">
+      <div class="cta-content">
+        <div class="cta-title">The fastest path forward is access.</div>
+        <p>BayOne can begin the complexity mapping as soon as read-only access is provisioned. The two-week exploration produces the deliverables needed for a properly scoped engagement, and the Cognos MCP validation can happen in parallel during Week 1. In the interim, BayOne can also deploy the demonstrated pipeline on Azure with secure, time-bound credentials so the Sephora team can interact with the workflow directly.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#ede9fe',
+      primaryTextColor: '#1e1b4b',
+      primaryBorderColor: '#7c3aed',
+      lineColor: '#7c3aed',
+      secondaryColor: '#e8f4fd',
+      secondaryTextColor: '#0c4a6e',
+      secondaryBorderColor: '#0078d4',
+      tertiaryColor: '#f0fdf4',
+      tertiaryTextColor: '#14532d',
+      tertiaryBorderColor: '#16a34a',
+      edgeLabelBackground: '#ede9fe',
+      clusterBkg: '#f8fafc',
+      clusterBorder: '#94a3b8',
+      fontSize: '14px',
+      fontFamily: 'Inter, sans-serif'
+    },
+    flowchart: {
+      curve: 'basis',
+      nodeSpacing: 60,
+      rankSpacing: 70,
+      htmlLabels: false,
+      useMaxWidth: false,
+      padding: 20
+    }
+  });
+
+  document.querySelectorAll('.mermaid-src').forEach(async (el) => {
+    const src = el.textContent.trim();
+    const container = el.parentElement;
+    try {
+      const { svg } = await mermaid.render('mermaid-' + Math.random().toString(36).slice(2), src);
+      container.innerHTML = svg;
+    } catch (e) {
+      console.error('Mermaid render error:', e);
+      container.innerHTML = '<p style="text-align:center;color:#64748b;">Diagram rendering failed. Open in a browser with JavaScript enabled.</p>';
+    }
+  });
+</script>
+
+</body>
+</html>

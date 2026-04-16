@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classic Node Shapes — Mermaid Shape Library</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; padding: 40px; color: #0f172a; }
+        h1 { text-align: center; font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+        .subtitle { text-align: center; font-size: 14px; color: #64748b; margin-bottom: 32px; }
+        .section { max-width: 1200px; margin: 0 auto 40px; }
+        .section h2 { font-size: 18px; font-weight: 600; color: #1e3a5f; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid #dbeafe; }
+        .section p { font-size: 13px; color: #64748b; margin-bottom: 16px; line-height: 1.6; }
+        .section code { background: #eff6ff; padding: 2px 6px; border-radius: 4px; font-size: 12px; color: #1e40af; }
+        .diagram-box { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+        .mermaid { display: flex; justify-content: center; }
+        .mermaid .node rect, .mermaid .node polygon { rx: 8 !important; ry: 8 !important; }
+        .mermaid .node foreignObject { overflow: visible !important; }
+        .mermaid .node foreignObject div { overflow: visible !important; }
+        .mermaid .edgeLabel rect { fill: #dbeafe !important; fill-opacity: 1 !important; stroke: none !important; }
+        .nav { max-width: 1200px; margin: 0 auto 32px; display: flex; gap: 8px; flex-wrap: wrap; }
+        .nav a { font-size: 12px; padding: 6px 12px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; color: #1e40af; text-decoration: none; }
+        .nav a:hover { background: #dbeafe; }
+        .nav a.current { background: #2563eb; color: white; border-color: #2563eb; }
+        .syntax-table { max-width: 1200px; margin: 0 auto 32px; }
+        .syntax-table table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .syntax-table th { text-align: left; padding: 8px 12px; background: #eff6ff; color: #1e3a5f; font-weight: 600; border-bottom: 2px solid #dbeafe; }
+        .syntax-table td { padding: 8px 12px; border-bottom: 1px solid #e2e8f0; }
+        .syntax-table code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 12px; color: #1e40af; }
+    </style>
+</head>
+<body>
+    <h1>Classic Node Shapes</h1>
+    <p class="subtitle">Mermaid Shape Library — Visual Reference</p>
+
+    <div class="nav">
+        <a href="01_classic_shapes.html" class="current">Classic Shapes</a>
+        <a href="02_v11_shapes.html">v11 Shapes</a>
+        <a href="03_arrows_and_edges.html">Arrows</a>
+        <a href="04_text_formatting.html">Text Formatting</a>
+        <a href="05_icons_reference.html">Icons</a>
+        <a href="06_classdef_styling.html">ClassDef</a>
+        <a href="07_subgraphs_and_layout.html">Subgraphs</a>
+        <a href="08_diagram_types_gallery.html">Diagram Types</a>
+    </div>
+
+    <div class="section">
+        <h2>All 14 Classic Shapes</h2>
+        <p>Every classic node shape available in all mermaid versions. Each node shows its name. Syntax for each is in the reference table below. Shapes are color-coded by group so every shape is visually distinct.</p>
+    </div>
+
+    <!-- Row 1: Basic Shapes -->
+    <div class="section">
+        <h2>Basic Shapes</h2>
+        <p>The four fundamental container shapes used in most diagrams.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph LR
+    classDef blue fill:#93c5fd,stroke:#1d4ed8,stroke-width:2px,color:#1e3a5f
+    classDef indigo fill:#a5b4fc,stroke:#4338ca,stroke-width:2px,color:#1e1b4b
+    classDef sky fill:#7dd3fc,stroke:#0369a1,stroke-width:2px,color:#0c4a6e
+    classDef teal fill:#5eead4,stroke:#0f766e,stroke-width:2px,color:#134e4a
+
+    R["<b>Rectangle</b>"]:::blue
+    RND("<b>Rounded</b>"):::indigo
+    STD(["<b>Stadium</b>"]):::sky
+    SUB[["<b>Subroutine</b>"]]:::teal
+
+    R ~~~ RND ~~~ STD ~~~ SUB
+            </div>
+        </div>
+    </div>
+
+    <!-- Row 2: Geometric Shapes -->
+    <div class="section">
+        <h2>Geometric Shapes</h2>
+        <p>Shapes with distinct geometric forms — each carries strong semantic meaning in flowcharts.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph LR
+    classDef amber fill:#fcd34d,stroke:#b45309,stroke-width:2px,color:#78350f
+    classDef violet fill:#c4b5fd,stroke:#6d28d9,stroke-width:2px,color:#3b0764
+    classDef rose fill:#fda4af,stroke:#e11d48,stroke-width:2px,color:#881337
+    classDef emerald fill:#6ee7b7,stroke:#047857,stroke-width:2px,color:#064e3b
+
+    CYL[("<b>Cylinder</b>")]:::amber
+    CIR(("<b>Circle</b>")):::violet
+    DIA{"<b>Diamond</b>"}:::rose
+    HEX{{"<b>Hexagon</b>"}}:::emerald
+
+    CYL ~~~ CIR ~~~ DIA ~~~ HEX
+            </div>
+        </div>
+    </div>
+
+    <!-- Row 3: Directional Shapes -->
+    <div class="section">
+        <h2>Directional Shapes</h2>
+        <p>Parallelograms and trapezoids — angled shapes used for input/output and manual operations.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph LR
+    classDef orange fill:#fdba74,stroke:#c2410c,stroke-width:2px,color:#7c2d12
+    classDef pink fill:#f9a8d4,stroke:#be185d,stroke-width:2px,color:#831843
+    classDef lime fill:#bef264,stroke:#4d7c0f,stroke-width:2px,color:#365314
+    classDef cyan fill:#67e8f9,stroke:#0e7490,stroke-width:2px,color:#155e75
+
+    PLR[/"<b>Parallelogram</b>"/]:::orange
+    PLRR[\"<b>Para. Reverse</b>"\]:::pink
+    TRAP[/"<b>Trapezoid</b>"\]:::lime
+    TRAPR[\"<b>Trap. Reverse</b>"/]:::cyan
+
+    PLR ~~~ PLRR ~~~ TRAP ~~~ TRAPR
+            </div>
+        </div>
+    </div>
+
+    <!-- Row 4: Special Shapes -->
+    <div class="section">
+        <h2>Special Shapes</h2>
+        <p>Unique shapes for emphasis and signaling.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph LR
+    classDef purple fill:#d8b4fe,stroke:#7e22ce,stroke-width:2px,color:#3b0764
+    classDef fuchsia fill:#f0abfc,stroke:#a21caf,stroke-width:2px,color:#701a75
+
+    DCIRC((("<b>Double Circle</b>"))):::purple
+    ASYM>"<b>Asymmetric</b>"]:::fuchsia
+
+    DCIRC ~~~ ASYM
+            </div>
+        </div>
+    </div>
+
+    <!-- Syntax Reference Table -->
+    <div class="section">
+        <h2>Syntax Reference</h2>
+        <p>Copy-paste syntax for each shape. The <code>A</code> is the node ID (use any name). The brackets determine the shape.</p>
+    </div>
+    <div class="syntax-table">
+        <table>
+            <tr><th>Shape</th><th>Syntax</th><th>Best For</th></tr>
+            <tr><td>Rectangle</td><td><code>A["Text"]</code></td><td>General process steps, actions</td></tr>
+            <tr><td>Rounded</td><td><code>A("Text")</code></td><td>Events, AI/ML components, soft processes</td></tr>
+            <tr><td>Stadium</td><td><code>A(["Text"])</code></td><td>Start/end terminals, entry/exit points</td></tr>
+            <tr><td>Subroutine</td><td><code>A[["Text"]]</code></td><td>Predefined processes, build tools, function calls</td></tr>
+            <tr><td>Cylinder</td><td><code>A[("Text")]</code></td><td>Databases, data stores, storage</td></tr>
+            <tr><td>Circle</td><td><code>A(("Text"))</code></td><td>Connectors, junction points</td></tr>
+            <tr><td>Diamond</td><td><code>A{"Text"}</code></td><td>Decisions, verification, branching</td></tr>
+            <tr><td>Hexagon</td><td><code>A{{"Text"}}</code></td><td>Orchestrators, engines, central coordinators</td></tr>
+            <tr><td>Parallelogram</td><td><code>A[/"Text"/]</code></td><td>Input/output</td></tr>
+            <tr><td>Parallelogram Reverse</td><td><code>A[\"Text"\]</code></td><td>Alternative input/output</td></tr>
+            <tr><td>Trapezoid</td><td><code>A[/"Text"\]</code></td><td>Manual operations</td></tr>
+            <tr><td>Trapezoid Reverse</td><td><code>A[\"Text"/]</code></td><td>Alternative manual ops</td></tr>
+            <tr><td>Double Circle</td><td><code>A((("Text")))</code></td><td>Important connectors, emphasis</td></tr>
+            <tr><td>Asymmetric</td><td><code>A>"Text"]</code></td><td>Flags, signals, events</td></tr>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#dbeafe', primaryTextColor: '#0f172a', primaryBorderColor: '#2563eb',
+                lineColor: '#2563eb', secondaryColor: '#eff6ff', secondaryTextColor: '#1e3a5f',
+                secondaryBorderColor: '#3b82f6', edgeLabelBackground: '#dbeafe',
+                clusterBkg: '#f8fafc', clusterBorder: '#94a3b8',
+                fontSize: '13px', fontFamily: 'Inter, sans-serif'
+            },
+            flowchart: { curve: 'basis', nodeSpacing: 50, rankSpacing: 60, htmlLabels: true, useMaxWidth: false, padding: 32 }
+        });
+    </script>
+</body>
+</html>

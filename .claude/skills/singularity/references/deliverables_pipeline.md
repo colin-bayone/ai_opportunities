@@ -27,13 +27,13 @@ Based on the engagement state and user direction. The full catalog of deliverabl
 
 | Deliverable Type | Gold Standard | When to Use | Key Characteristics |
 |---|---|---|---|
-| Problem restatement | `.claude/skills/singularity/assets/design/gold_standards/problem_restatement.html` | After discovery, to demonstrate understanding before proposing solutions | Uses client's own framing. No solutions, no technology names, no individual names. Satisfies the "repeat back" requirement. |
-| Information request | `.claude/skills/singularity/assets/design/gold_standards/information_request.html` | When specific information is needed from the client to proceed | Prioritized tiers (business team vs. technical team vs. working session). Specific, actionable asks. |
-| Preliminary approach | `.claude/skills/singularity/assets/design/gold_standards/preliminary_approach.html` | Initial solution direction, before full scoping | Explicitly framed as preliminary. Reframes the problem from authority. Shows methodology without over-committing. |
-| Formal proposal (concise) | `.claude/skills/singularity/assets/design/gold_standards/poc_proposal_v5.html` | Scoped engagement with pricing, timeline, and deliverables | Standard structure: Cover → Challenge → Approach → Capabilities → Engagement → Why BayOne → Next Steps. |
-| Formal proposal (detailed) | `.claude/skills/singularity/assets/design/gold_standards/poc_proposal_v5_detailed.html` | Extended version with deeper technical justification | Same structure as concise but with expanded technical sections. Used when the audience is technical. |
+| Problem restatement | `.claude/skills/singularity/gold_standards/deliverables/problem_restatement.html` | After discovery, to demonstrate understanding before proposing solutions | Uses client's own framing. No solutions, no technology names, no individual names. Satisfies the "repeat back" requirement. |
+| Information request | `.claude/skills/singularity/gold_standards/deliverables/information_request.html` | When specific information is needed from the client to proceed | Prioritized tiers (business team vs. technical team vs. working session). Specific, actionable asks. |
+| Preliminary approach | `.claude/skills/singularity/gold_standards/deliverables/preliminary_approach.html` | Initial solution direction, before full scoping | Explicitly framed as preliminary. Reframes the problem from authority. Shows methodology without over-committing. |
+| Formal proposal (concise) | `.claude/skills/singularity/gold_standards/deliverables/poc_proposal_v5.html` | Scoped engagement with pricing, timeline, and deliverables | Standard structure: Cover → Challenge → Approach → Capabilities → Engagement → Why BayOne → Next Steps. |
+| Formal proposal (detailed) | `.claude/skills/singularity/gold_standards/deliverables/poc_proposal_v5_detailed.html` | Extended version with deeper technical justification | Same structure as concise but with expanded technical sections. Used when the audience is technical. |
 | Follow-up email | (markdown only, no HTML) | After meetings, to maintain momentum and request next steps | Professional but warm. Not salesy. References attached documents. Single clear ask. |
-| Resource plan | `.claude/skills/singularity/assets/design/gold_standards/resource_plan_for_cisco.html` (silver) | Staffing and team structure documents | Team composition, allocation, timeline visualization. |
+| Resource plan | `.claude/skills/singularity/gold_standards/deliverables/resource_plan_for_cisco.html` | Staffing and team structure documents | Team composition, allocation, timeline visualization. |
 
 The skill should reference the appropriate gold standard when creating each deliverable type. Gold standards are style and structure references, not fill-in-the-blanks templates. Deliverables are crafted from the research library, not templated.
 
@@ -70,11 +70,11 @@ Use the BayOne design system for client-facing HTML documents:
 
 **Template vs. Crafted:**
 
-The `proposal_template.html` in `.claude/skills/singularity/assets/templates/` is a **structural reference** showing standard section order and CSS patterns. It is NOT a fill-in-the-blanks template with `{{PLACEHOLDER}}` variables. Deliverables are written from the research library using the design spec (`.claude/skills/singularity/assets/design/bayone_design_spec.md`) and gold standards (`.claude/skills/singularity/assets/design/gold_standards/`) as style guides. This produces engagement-specific documents that read naturally, not template-shaped output.
+The `proposal_template.html` in `.claude/skills/singularity/templates/` is a **structural reference** showing standard section order and CSS patterns. It is NOT a fill-in-the-blanks template with `{{PLACEHOLDER}}` variables. Deliverables are written from the research library using the design spec (`.claude/skills/singularity/references/bayone_design_spec.md`) and gold standards (`.claude/skills/singularity/gold_standards/deliverables/`) as style guides. This produces engagement-specific documents that read naturally, not template-shaped output.
 
 **Company Context:**
 
-When writing deliverables that reference BayOne (cover pages, "Prepared By" metadata, "Why BayOne" sections, team descriptions), read `.claude/context/bayone_team.md` for the current team directory and `.claude/context/bayone_positioning.md` for positioning language.
+When writing deliverables that reference BayOne (cover pages, "Prepared By" metadata, "Why BayOne" sections, team descriptions), read `.claude/skills/singularity/references/bayone_team.md` for the current team directory.
 
 ### Step 4: Quality Review
 

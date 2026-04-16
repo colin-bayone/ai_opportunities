@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TalentAI Platform Overview — Knowledge Transfer Session 0</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      transform: rotate(-12deg);
+    }
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -30%; left: -10%;
+      width: 60%; height: 80%;
+      background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .cover-content { position: relative; z-index: 1; max-width: 800px; }
+    .cover-label {
+      font-size: 12px; font-weight: 600; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--purple-glow); margin-bottom: 24px;
+    }
+    .cover h1 {
+      font-size: 56px; font-weight: 700; line-height: 1.1;
+      margin-bottom: 24px; letter-spacing: -1px;
+    }
+    .cover-subtitle {
+      font-size: 22px; font-weight: 300; color: rgba(255,255,255,0.8);
+      margin-bottom: 48px; max-width: 600px;
+    }
+    .cover-meta {
+      display: flex; gap: 48px; padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+    .cover-meta-item label {
+      display: block; font-size: 11px; font-weight: 600;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(255,255,255,0.5); margin-bottom: 8px;
+    }
+    .cover-meta-item span { font-size: 15px; font-weight: 500; }
+    .logo {
+      position: absolute; bottom: 80px; right: 80px;
+      font-size: 24px; font-weight: 700; color: #fff; z-index: 1;
+    }
+    .logo span { color: var(--purple-glow); }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 80px 40px; }
+    .section { margin-bottom: 64px; }
+    .section-number {
+      font-size: 12px; font-weight: 600; color: var(--purple-accent);
+      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;
+    }
+    h2 {
+      font-size: 32px; font-weight: 700; color: var(--primary);
+      margin-bottom: 24px; letter-spacing: -0.5px;
+    }
+    h3 { font-size: 20px; font-weight: 600; color: var(--primary); margin: 32px 0 16px; }
+    p { margin-bottom: 16px; }
+    .lead { font-size: 18px; color: var(--text-light); line-height: 1.8; margin-bottom: 32px; }
+
+    .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 32px 0; }
+    .stat-card {
+      background: linear-gradient(135deg, rgba(124,58,237,0.06) 0%, rgba(168,85,247,0.04) 100%);
+      border: 1px solid rgba(124,58,237,0.1); padding: 24px; border-radius: 12px; text-align: center;
+    }
+    .stat-value { font-size: 36px; font-weight: 700; color: #7c3aed; line-height: 1; margin-bottom: 8px; }
+    .stat-label { font-size: 13px; color: var(--text-light); font-weight: 500; }
+
+    .diagram-container {
+      background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 16px;
+      padding: 32px; margin: 24px 0; overflow-x: auto; min-height: 300px;
+    }
+    .diagram-container .diagram-title {
+      font-size: 13px; font-weight: 600; color: var(--text-light);
+      letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; text-align: center;
+    }
+    .diagram-link {
+      display: block; text-align: center; margin-top: 12px;
+      font-size: 13px; color: var(--purple-accent); text-decoration: none;
+    }
+    .diagram-link:hover { text-decoration: underline; }
+    .mermaid { display: flex; justify-content: center; }
+    .mermaid .node rect, .mermaid .node polygon { rx: 8 !important; ry: 8 !important; }
+    .mermaid .edgeLabel rect { fill: #ede9fe !important; fill-opacity: 1 !important; stroke: none !important; }
+
+    table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+    th {
+      text-align: left; padding: 14px 16px; background: #5b21b6; color: #fff;
+      font-weight: 600; font-size: 12px; letter-spacing: 0.5px; text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+    th:last-child { border-right: none; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+    td { padding: 14px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: var(--bg-subtle); }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border-left: 4px solid var(--purple-accent);
+      padding: 24px 28px; margin: 32px 0; border-radius: 0 8px 8px 0;
+    }
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    .toc {
+      background: linear-gradient(135deg, rgba(124,58,237,0.04) 0%, rgba(168,85,247,0.06) 100%);
+      border: 1px solid rgba(124,58,237,0.1); padding: 40px; border-radius: 12px; margin: 40px 0;
+    }
+    .toc h3 { margin-top: 0; margin-bottom: 24px; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-light); }
+    .toc-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 40px; }
+    .toc-list li { display: flex; align-items: baseline; gap: 8px; }
+    .toc-num { font-size: 12px; font-weight: 600; color: var(--purple-accent); width: 24px; }
+    .toc-link { color: var(--text); text-decoration: none; font-weight: 500; }
+
+    .footer { text-align: center; padding: 48px 40px; border-top: 1px solid var(--border); margin-top: 64px; }
+    .footer-logo { font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+    .footer-logo span { color: var(--purple-accent); }
+    .footer p { font-size: 13px; color: var(--text-light); margin: 0; }
+
+    @media print {
+      @page { size: 8.5in 11in; margin: 0.4in; }
+      body { font-size: 9pt; line-height: 1.4; }
+      .cover { min-height: 0; height: 10in; padding: 50px; page-break-after: always; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .cover h1 { font-size: 36pt; }
+      .container { padding: 0; max-width: 100%; }
+      .section { margin-bottom: 20px; }
+      h2 { font-size: 18pt; margin-bottom: 12px; }
+      h3 { font-size: 12pt; margin: 16px 0 8px; }
+      p { margin-bottom: 8px; }
+      .lead { font-size: 11pt; margin-bottom: 16px; }
+      table { font-size: 8pt; margin: 12px 0; }
+      th, td { padding: 8px 10px; }
+      th, .cover, .highlight-box, .stat-card { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .section-number { break-after: avoid; page-break-after: avoid; }
+      h1, h2, h3 { break-after: avoid; page-break-after: avoid; break-inside: avoid; }
+      table, tr, .card, .stat-card, .highlight-box { break-inside: avoid; page-break-inside: avoid; }
+      p { orphans: 3; widows: 3; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-content">
+    <div class="cover-label">Knowledge Transfer — Session 0</div>
+    <h1>TalentAI Platform Overview</h1>
+    <p class="cover-subtitle">A high-level tour of the platform architecture, data flow, and app ecosystem for the extended team knowledge transfer.</p>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <label>Prepared By</label>
+        <span>Colin Moore</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Date</label>
+        <span>April 2026</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Classification</label>
+        <span>Internal</span>
+      </div>
+    </div>
+  </div>
+  <div class="logo">Bay<span>One</span> Solutions</div>
+</div>
+
+<div class="container">
+
+  <!-- FISHBONE: APP OVERVIEW -->
+  <div class="section" id="fishbone">
+    <div class="diagram-container" style="min-height: 400px;">
+      <div class="diagram-title">TalentAI App Ecosystem</div>
+      <div class="mermaid">
+        <pre class="mermaid-src">
+graph LR
+    shared["`**core/shared**
+    Templates, CDN, Search`"] --> FOUND
+    accounts["`**core/accounts**
+    Auth, SSO, Roles`"] --> FOUND
+    audit["`**compliance/audit**
+    SOC2 Logging`"] --> FOUND
+    FOUND["`**Foundation**`"] --> TALENT
+
+    celery["`**core/celery**
+    Task Queue`"] --> INFRA
+    storage["`**core/storage**
+    Azure Blob`"] --> INFRA
+    conversion["`**core/conversion**
+    Doc Conversion`"] --> INFRA
+    validation["`**core/validation**
+    File Validation`"] --> INFRA
+    diagnostics["`**core/diagnostics**
+    Monitoring`"] --> INFRA
+    INFRA["`**Infrastructure**`"] --> TALENT
+
+    ai_search["`**ai_search**
+    Semantic Search`"] --> INTEL
+    ai_models["`**ai_models**
+    AI Orchestration`"] --> INTEL
+    extraction["`**extraction**
+    Doc Pipeline`"] --> INTEL
+    ai_toolkit["`**ai_toolkit**
+    AI Hub`"] --> INTEL
+    INTEL["`**Intelligence**`"] --> TALENT
+
+    TALENT["`**TalentAI
+    Platform**`"]
+
+    TALENT --> PIPE["`**Pipeline**`"]
+    PIPE --> candidates["`**candidates**
+    Profiles, Search, Job Fit`"]
+    PIPE --> certifications["`**certifications**
+    Cert Ontology`"]
+
+    TALENT --> INTEG["`**Integrations**`"]
+    INTEG --> jobdiva["`**jobdiva**
+    ATS ETL Import`"]
+    INTEG --> msgraph["`**microsoft/graph**
+    OAuth, Email, Calendar`"]
+
+    TALENT --> COMMS["`**Communications**`"]
+    COMMS --> communications["`**communications**
+    Email, Meetings, Calendar`"]
+    COMMS --> notifications["`**user_notifications**
+    Real-Time Alerts`"]
+    COMMS --> bugs["`**core/bugs**
+    Bug Reporting`"]
+
+    style TALENT fill:#ede9fe,stroke:#7c3aed,stroke-width:3px,color:#3b0764
+    style FOUND fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#3b0764
+    style INFRA fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#14532d
+    style INTEL fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    style PIPE fill:#fef2f2,stroke:#ef4444,stroke-width:2px,color:#991b1b
+    style INTEG fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+    style COMMS fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+
+    style shared fill:#ede9fe,stroke:#7c3aed,stroke-width:1px,color:#3b0764
+    style accounts fill:#ede9fe,stroke:#7c3aed,stroke-width:1px,color:#3b0764
+    style audit fill:#ede9fe,stroke:#7c3aed,stroke-width:1px,color:#3b0764
+    style celery fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#14532d
+    style storage fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#14532d
+    style conversion fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#14532d
+    style validation fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#14532d
+    style diagnostics fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#14532d
+    style ai_search fill:#dbeafe,stroke:#2563eb,stroke-width:1px,color:#1e3a5f
+    style ai_models fill:#dbeafe,stroke:#2563eb,stroke-width:1px,color:#1e3a5f
+    style extraction fill:#dbeafe,stroke:#2563eb,stroke-width:1px,color:#1e3a5f
+    style ai_toolkit fill:#dbeafe,stroke:#2563eb,stroke-width:1px,color:#1e3a5f
+    style candidates fill:#fef2f2,stroke:#ef4444,stroke-width:1px,color:#991b1b
+    style certifications fill:#fef2f2,stroke:#ef4444,stroke-width:1px,color:#991b1b
+    style jobdiva fill:#ffedd5,stroke:#ea580c,stroke-width:1px,color:#7c2d12
+    style msgraph fill:#ffedd5,stroke:#ea580c,stroke-width:1px,color:#7c2d12
+    style communications fill:#fef9c3,stroke:#ca8a04,stroke-width:1px,color:#713f12
+    style notifications fill:#fef9c3,stroke:#ca8a04,stroke-width:1px,color:#713f12
+    style bugs fill:#fef9c3,stroke:#ca8a04,stroke-width:1px,color:#713f12
+        </pre>
+      </div>
+      <a class="diagram-link" href="charts/fishbone_apps.html" target="_blank">Open full-screen diagram</a>
+    </div>
+  </div>
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc">
+    <h3>Contents</h3>
+    <ul class="toc-list">
+      <li><span class="toc-num">01</span> <a class="toc-link" href="#platform">Platform at a Glance</a></li>
+      <li><span class="toc-num">02</span> <a class="toc-link" href="#architecture">Architecture Overview</a></li>
+      <li><span class="toc-num">03</span> <a class="toc-link" href="#dataflow">Candidate Data Flow</a></li>
+      <li><span class="toc-num">04</span> <a class="toc-link" href="#foundation">Foundation</a></li>
+      <li><span class="toc-num">05</span> <a class="toc-link" href="#infra">Infrastructure</a></li>
+      <li><span class="toc-num">06</span> <a class="toc-link" href="#intelligence">Intelligence Layer</a></li>
+      <li><span class="toc-num">07</span> <a class="toc-link" href="#pipeline">Recruitment Pipeline</a></li>
+      <li><span class="toc-num">08</span> <a class="toc-link" href="#integrations">Integrations</a></li>
+      <li><span class="toc-num">09</span> <a class="toc-link" href="#comms">Communications</a></li>
+      <li><span class="toc-num">10</span> <a class="toc-link" href="#next">Next Steps</a></li>
+    </ul>
+  </div>
+
+  <!-- SECTION 01: PLATFORM AT A GLANCE -->
+  <div class="section" id="platform">
+    <div class="section-number">01</div>
+    <h2>Platform at a Glance</h2>
+    <p class="lead">TalentAI is BayOne's internal recruitment platform, built with Django and powered by Azure cloud services. It manages the full candidate lifecycle from sourcing through hiring manager submission.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-value">19</div>
+        <div class="stat-label">Django Apps</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">6</div>
+        <div class="stat-label">Functional Domains</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">1.1M+</div>
+        <div class="stat-label">Lines of Code</div>
+      </div>
+    </div>
+
+    <table>
+      <tr><th>Technology</th><th>Usage</th></tr>
+      <tr><td>Django 4.2+</td><td>Web framework, ORM, admin, auth</td></tr>
+      <tr><td>PostgreSQL 17+</td><td>Primary database with pgvector for embeddings</td></tr>
+      <tr><td>Celery + Redis</td><td>Background task processing, scheduled jobs</td></tr>
+      <tr><td>HTMX + WebSockets</td><td>Dynamic UI updates, real-time notifications</td></tr>
+      <tr><td>Azure Blob Storage</td><td>File storage (resumes, documents, media)</td></tr>
+      <tr><td>Azure AI Foundry</td><td>LLM inference for extraction, search, analysis</td></tr>
+      <tr><td>Azure AI Search</td><td>Semantic search with embeddings</td></tr>
+      <tr><td>Microsoft Graph API</td><td>SSO authentication, email, calendar</td></tr>
+    </table>
+  </div>
+
+  <!-- SECTION 02: ARCHITECTURE OVERVIEW -->
+  <div class="section" id="architecture">
+    <div class="section-number">02</div>
+    <h2>Architecture Overview</h2>
+    <p class="lead">The platform is organized into six functional domains. Each domain contains one or more Django apps with clear boundaries and responsibilities.</p>
+
+    <div class="diagram-container">
+      <div class="diagram-title">Platform Architecture — 6 Domains, 19 Apps</div>
+      <div class="mermaid">
+        <pre class="mermaid-src">
+graph TB
+    subgraph FOUNDATION["`**FOUNDATION**`"]
+        direction TB
+        SHARED["`**core/shared**
+        Base Templates, CDN, Services`"]
+        ACCOUNTS["`**core/accounts**
+        Auth, SSO, Roles`"]
+        AUDIT["`**compliance/audit**
+        SOC2 Audit Logging`"]
+    end
+
+    subgraph INFRA["`**INFRASTRUCTURE**`"]
+        direction TB
+        CELERY["`**core/celery**
+        Task Queue`"]
+        STORAGE["`**core/storage**
+        Azure Blob`"]
+        CONV["`**core/conversion**
+        Doc Conversion`"]
+        VALID["`**core/validation**
+        File Validation`"]
+        DIAG["`**core/diagnostics**
+        Monitoring`"]
+    end
+
+    subgraph INTEL["`**INTELLIGENCE**`"]
+        direction TB
+        AIMODELS["`**ai_models**
+        AI Orchestration`"]
+        AISEARCH["`**ai_search**
+        Semantic Search`"]
+        TOOLKIT["`**ai_toolkit**
+        AI Hub`"]
+        EXTRACT["`**extraction**
+        Doc Pipeline`"]
+    end
+
+    subgraph PIPELINE["`**PIPELINE**`"]
+        direction TB
+        CANDS["`**candidates**
+        Candidate Mgmt`"]
+        CERTS["`**certifications**
+        Cert Ontology`"]
+    end
+
+    subgraph INTEGRATIONS["`**INTEGRATIONS**`"]
+        direction TB
+        JOBDIVA["`**jobdiva**
+        ATS ETL`"]
+        MSGRAPH["`**microsoft/graph**
+        OAuth + Email`"]
+    end
+
+    subgraph COMMS["`**COMMUNICATIONS**`"]
+        direction TB
+        COMM["`**communications**
+        Email + Meetings`"]
+        NOTIF["`**notifications**
+        Real-Time Alerts`"]
+        BUGS["`**bugs**
+        Bug Reports`"]
+    end
+
+    FOUNDATION --> PIPELINE
+    FOUNDATION --> INTEL
+    INFRA --> INTEL
+    INFRA --> PIPELINE
+    INTEL --> PIPELINE
+    INTEGRATIONS --> PIPELINE
+    PIPELINE --> COMMS
+    INTEGRATIONS --> COMMS
+
+    style FOUNDATION fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#3b0764
+    style INFRA fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#14532d
+    style INTEL fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    style PIPELINE fill:#fef2f2,stroke:#ef4444,stroke-width:2px,color:#991b1b
+    style INTEGRATIONS fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+    style COMMS fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+
+    style SHARED fill:#ede9fe,stroke:#7c3aed,stroke-width:1px,color:#3b0764
+    style ACCOUNTS fill:#ede9fe,stroke:#7c3aed,stroke-width:1px,color:#3b0764
+    style AUDIT fill:#ede9fe,stroke:#7c3aed,stroke-width:1px,color:#3b0764
+    style CELERY fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#14532d
+    style STORAGE fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#14532d
+    style CONV fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#14532d
+    style VALID fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#14532d
+    style DIAG fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#14532d
+    style AIMODELS fill:#dbeafe,stroke:#2563eb,stroke-width:1px,color:#1e3a5f
+    style AISEARCH fill:#dbeafe,stroke:#2563eb,stroke-width:1px,color:#1e3a5f
+    style TOOLKIT fill:#dbeafe,stroke:#2563eb,stroke-width:1px,color:#1e3a5f
+    style EXTRACT fill:#dbeafe,stroke:#2563eb,stroke-width:1px,color:#1e3a5f
+    style CANDS fill:#fef2f2,stroke:#ef4444,stroke-width:1px,color:#991b1b
+    style CERTS fill:#fef2f2,stroke:#ef4444,stroke-width:1px,color:#991b1b
+    style JOBDIVA fill:#ffedd5,stroke:#ea580c,stroke-width:1px,color:#7c2d12
+    style MSGRAPH fill:#ffedd5,stroke:#ea580c,stroke-width:1px,color:#7c2d12
+    style COMM fill:#fef9c3,stroke:#ca8a04,stroke-width:1px,color:#713f12
+    style NOTIF fill:#fef9c3,stroke:#ca8a04,stroke-width:1px,color:#713f12
+    style BUGS fill:#fef9c3,stroke:#ca8a04,stroke-width:1px,color:#713f12
+        </pre>
+      </div>
+      <a class="diagram-link" href="charts/architecture_overview.html" target="_blank">Open full-screen diagram</a>
+    </div>
+  </div>
+
+  <!-- SECTION 03: DATA FLOW -->
+  <div class="section" id="dataflow">
+    <div class="section-number">03</div>
+    <h2>Candidate Data Flow</h2>
+    <p class="lead">Data enters the platform from two sources: the JobDiva ATS via automated ETL sync, and manual entry through resume uploads and career pages. From there, it flows through parsing, AI enrichment, and into the candidate management system.</p>
+
+    <div class="diagram-container">
+      <div class="diagram-title">How Data Moves Through TalentAI</div>
+      <div class="mermaid">
+        <pre class="mermaid-src">
+graph LR
+    JD["`**JobDiva ETL**`"] -->|"`Records`"| PARSE["`**Parsers**
+    Resume + JD`"]
+    MANUAL["`**Manual Upload**`"] -->|"`Files`"| PARSE
+
+    PARSE -->|"`Structured Data`"| AI["`**AI Processing**
+    Embeddings + Search`"]
+    AI -->|"`Enriched`"| CAND["`**Candidates**
+    Profiles + Job Fit`"]
+    CAND -->|"`Events`"| COMMS["`**Communications**
+    Email + Notifications`"]
+
+    style JD fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+    style MANUAL fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+    style PARSE fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#14532d
+    style AI fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    style CAND fill:#fef2f2,stroke:#ef4444,stroke-width:2px,color:#991b1b
+    style COMMS fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+        </pre>
+      </div>
+      <a class="diagram-link" href="charts/candidate_data_flow.html" target="_blank">Open full-screen diagram</a>
+    </div>
+  </div>
+
+  <!-- SECTION 04: FOUNDATION -->
+  <div class="section" id="foundation">
+    <div class="section-number">04</div>
+    <h2>Foundation</h2>
+    <p class="lead">These three apps form the base that every other app depends on: shared templates and utilities, authentication and authorization, and compliance audit logging.</p>
+
+    <table>
+      <tr><th>App</th><th>Purpose</th><th>Key Capabilities</th></tr>
+      <tr>
+        <td><strong>core/shared</strong></td>
+        <td>Shared foundation for the entire platform</td>
+        <td>Base templates (main_base, auth_base, splash_base), global template tags, CDN asset management with SRI, global search autocomplete, service registry singleton, health checks, PostgreSQL extension management (pg_trgm, pgvector), Azure email backend</td>
+      </tr>
+      <tr>
+        <td><strong>core/accounts</strong></td>
+        <td>Authentication, authorization, and user management</td>
+        <td>Microsoft SSO for staff, email/password for external users, magic links for candidates, 8-level role hierarchy (External through Principal), user approval workflow, staff session timeout, Microsoft Graph profile sync, 5 security middleware classes, delegated permissions</td>
+      </tr>
+      <tr>
+        <td><strong>compliance/audit</strong></td>
+        <td>SOC2-compliant audit logging</td>
+        <td>Write-once, immutable audit logs (cannot be modified or deleted). AuditedModel abstract base class inherited across the platform. AuditContextMiddleware captures request context per-thread. Logs: authentication events, data changes, permission modifications, management commands, access denials. Separate JobDivaAuditLog for API-specific auditing. @audit_command decorator for management commands. AuditService and utility helpers (log_access_denied, require_permission_with_audit).</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- SECTION 05: INFRASTRUCTURE -->
+  <div class="section" id="infra">
+    <div class="section-number">05</div>
+    <h2>Infrastructure</h2>
+    <p class="lead">Background processing, file management, and monitoring. These apps provide the plumbing that the business logic apps rely on.</p>
+
+    <table>
+      <tr><th>App</th><th>Purpose</th><th>Key Capabilities</th></tr>
+      <tr>
+        <td><strong>core/celery</strong></td>
+        <td>Background task system</td>
+        <td>Four base task classes (BaseTask with auto-retry, CriticalTask with no retries for payment-safe ops, IdempotentTask safe for multiple retries, QuickTask with short timeouts). Task registry that whitelists allowed tasks with per-task config. TaskService abstraction for dispatching without direct Celery coupling. Celery Beat scheduler for periodic tasks. Redis broker. Used by 9+ other apps.</td>
+      </tr>
+      <tr>
+        <td><strong>core/storage</strong></td>
+        <td>File storage management</td>
+        <td>Azure Blob Storage integration, media proxy for VNet-isolated blobs, file upload/download, configurable containers per blob type</td>
+      </tr>
+      <tr>
+        <td><strong>core/conversion</strong></td>
+        <td>Document conversion</td>
+        <td>PDF to text extraction, format conversion pipeline, used by resume and job parsers</td>
+      </tr>
+      <tr>
+        <td><strong>core/validation</strong></td>
+        <td>File type validation</td>
+        <td>Magika AI-based file type detection, validates uploaded files before processing</td>
+      </tr>
+      <tr>
+        <td><strong>core/diagnostics</strong></td>
+        <td>Monitoring and logging</td>
+        <td>Pulsecheck request tracking, structured logging (get_logger), performance metrics middleware, WebSocket consumer for live diagnostics</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- SECTION 06: INTELLIGENCE LAYER -->
+  <div class="section" id="intelligence">
+    <div class="section-number">06</div>
+    <h2>Intelligence Layer</h2>
+    <p class="lead">The AI/ML brain of the platform. These apps power semantic search, document understanding, and AI-assisted features across the recruitment workflow.</p>
+
+    <table>
+      <tr><th>App</th><th>Purpose</th><th>Key Capabilities</th></tr>
+      <tr>
+        <td><strong>intelligence/ai_search</strong></td>
+        <td>Search engine powering the candidate search page</td>
+        <td>Multi-strategy search: PostgreSQL full-text search, trigram similarity, fuzzy matching, pgvector semantic search, and LLM-powered features. Includes AI-assisted boolean query generation, keyword expansion, multi-vector embedding service, distance calculator for job fit scoring, embedding visualization (UMAP), and a page action registry pattern. 22 service files, 7 models, 9 management commands. Largest intelligence app at 76K+ lines.</td>
+      </tr>
+      <tr>
+        <td><strong>intelligence/ai_models</strong></td>
+        <td>AI model management and orchestration</td>
+        <td>Multi-provider AI model configuration, model versioning, parameter management, unified processor interface used by other apps to call AI services</td>
+      </tr>
+      <tr>
+        <td><strong>intelligence/extraction</strong></td>
+        <td>Document extraction pipeline</td>
+        <td>REST API (ModelViewSet at /api/v1/extraction/), document data extraction services, pipeline processing for uploaded documents</td>
+      </tr>
+      <tr>
+        <td><strong>intelligence/ai_toolkit</strong></td>
+        <td>AI features hub</td>
+        <td>Landing page and coordination point for AI features, discovery interface for available AI capabilities</td>
+      </tr>
+    </table>
+
+    <div class="highlight-box">
+      <p><strong>ai_search is critical path.</strong> It directly powers the main candidate search page that recruiters use daily. The candidates app imports heavily from it: PageActionMixin, PostgresSearchUtil, AIAssistService, DistanceCalculator, MultiVectorEmbeddingService, and EmbeddingVisualizationService.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 07: RECRUITMENT PIPELINE -->
+  <div class="section" id="pipeline">
+    <div class="section-number">07</div>
+    <h2>Recruitment Pipeline</h2>
+    <p class="lead">The core business logic. The candidates app is the largest in the project at 174K+ lines and serves as the central hub that most other apps interact with.</p>
+
+    <table>
+      <tr><th>App</th><th>Purpose</th><th>Key Capabilities</th></tr>
+      <tr>
+        <td><strong>recruitment/candidates</strong></td>
+        <td>Candidate management and search</td>
+        <td>Single source of truth for candidate identity and profile data. 11 database models including Candidate, CandidateDocument, ComponentEmbedding, SearchConfiguration. ~27 view classes and ~35 URL patterns. Full search pipeline (keyword, Boolean, semantic, fuzzy) with caching, hydration, and paginated results. Embedding explorer (3D scatter plot), job fit visualization (radar + 3D molecular match), decomposed match API. Celery tasks for cleanup and hydration. 12 admin classes with custom sync actions. Referenced by nearly every other recruitment app. ~174K lines.</td>
+      </tr>
+      <tr>
+        <td><strong>recruitment/certifications</strong></td>
+        <td>Certification ontology</td>
+        <td>Certification classification and tracking, ontology mapping for candidate certifications, Celery tasks for async processing</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- SECTION 08: INTEGRATIONS -->
+  <div class="section" id="integrations">
+    <div class="section-number">08</div>
+    <h2>Integrations</h2>
+    <p class="lead">How TalentAI connects to external systems. JobDiva provides candidate data through an ETL pipeline, and Microsoft Graph handles authentication and communication.</p>
+
+    <table>
+      <tr><th>App</th><th>Purpose</th><th>Key Capabilities</th></tr>
+      <tr>
+        <td><strong>integrations/jobdiva</strong></td>
+        <td>JobDiva ATS integration</td>
+        <td>Full ETL pipeline syncing candidates, companies, jobs, contacts, divisions, and roles from JobDiva into TalentAI. Also supports reverse sync (TalentAI to JobDiva) for job postings. 26+ database models, dedicated API client with rate limiting, mock mode for local/stage development, admin panel with ETL dashboard for configuration and monitoring. The largest app by line count (229K+ lines). ETL internals will be covered in a dedicated separate session.</td>
+      </tr>
+      <tr>
+        <td><strong>integrations/microsoft/graph</strong></td>
+        <td>Microsoft Graph API</td>
+        <td>OAuth token management with automatic refresh via Celery Beat (every 5 minutes). Service layer: GraphAuthService, GraphClient, GraphUserService, GraphMailService, ProfileSyncService. Supports both delegated (user) and app-only (service account) authentication. 12 URL endpoints across user, mail, organization, and debug sections. No models of its own — uses allauth SocialToken. Consumed heavily by communications app for email sync.</td>
+      </tr>
+    </table>
+
+    <div class="highlight-box">
+      <p><strong>JobDiva ETL is complex enough for its own session.</strong> For this overview, the key takeaway is that JobDiva is the primary source of candidate data entering the platform. The admin panel provides configuration and monitoring capabilities that the team should be familiar with.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 09: COMMUNICATIONS -->
+  <div class="section" id="comms">
+    <div class="section-number">09</div>
+    <h2>Communications</h2>
+    <p class="lead">How the platform communicates with users and tracks all interactions. Includes email tracking, real-time notifications via WebSocket, and a built-in bug reporting system.</p>
+
+    <table>
+      <tr><th>App</th><th>Purpose</th><th>Key Capabilities</th></tr>
+      <tr>
+        <td><strong>communications</strong></td>
+        <td>Email tracking, meetings, calendar</td>
+        <td>13 database models covering email, calendar, booking, transcripts, and sync. Full email client (inbox, sent, compose, drafts, thread detail) synced via Microsoft Graph. Magic link meeting booking for candidates (unauthenticated). Meeting transcript processing pipeline. ~20 Celery tasks for email sync, calendar, and transcripts. WebSocket consumer for real-time email notifications. MS Graph webhook endpoint. 15+ service classes. ~127K lines.</td>
+      </tr>
+      <tr>
+        <td><strong>user_notifications</strong></td>
+        <td>Real-time notification system</td>
+        <td>Notification type registry pattern — other apps register their types (bug reports, approvals, status changes, etc.) and the system handles delivery. WebSocket consumer for real-time push. Per-user preferences with per-channel granularity. Resolution keys for grouping related notifications. NotificationMixin for models, NotificationService API for creating and pushing. HTMX-based notification panel UI.</td>
+      </tr>
+      <tr>
+        <td><strong>core/bugs</strong></td>
+        <td>Bug reporting system</td>
+        <td>Modal-based bug submission from any page, automatic DOM screenshot capture, native screenshot support, browser metadata collection, draft persistence with minimize/restore, severity classification, staff triage interface with quick-view panel, notification integration</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- SECTION 10: NEXT STEPS -->
+  <div class="section" id="next">
+    <div class="section-number">10</div>
+    <h2>Next Steps</h2>
+    <p class="lead">This overview is the starting point. The goal is for the team to identify which areas need the deepest knowledge transfer so we can prioritize follow-up sessions effectively.</p>
+
+    <h3>Proposed Follow-Up Sessions</h3>
+    <table>
+      <tr><th>Session</th><th>Focus Area</th><th>Apps Covered</th></tr>
+      <tr><td>1</td><td>Candidate Lifecycle</td><td>candidates, certifications</td></tr>
+      <tr><td>2</td><td>AI and Search Engine</td><td>ai_search, ai_models, extraction, ai_toolkit</td></tr>
+      <tr><td>3</td><td>External Integrations</td><td>jobdiva (high-level), microsoft/graph</td></tr>
+      <tr><td>4</td><td>Communications and Notifications</td><td>communications, user_notifications, bugs</td></tr>
+      <tr><td>5</td><td>Auth and Security</td><td>accounts, audit</td></tr>
+      <tr><td>6</td><td>Certifications</td><td>certifications</td></tr>
+      <tr><td>7</td><td>Infrastructure</td><td>celery, storage, conversion, validation, diagnostics, shared</td></tr>
+      <tr><td>Separate</td><td>JobDiva ETL Deep Dive</td><td>jobdiva (internals)</td></tr>
+    </table>
+
+    <div class="highlight-box">
+      <p><strong>We need your input.</strong> Which of these sessions should we prioritize? Where does the team want to go deep first? The order and grouping can be adjusted based on what matters most to you right now.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-logo">Bay<span>One</span> Solutions</div>
+    <p>Internal — Knowledge Transfer Documentation</p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#ede9fe', primaryTextColor: '#1e1b4b', primaryBorderColor: '#7c3aed',
+      lineColor: '#7c3aed', secondaryColor: '#e8f4fd', secondaryTextColor: '#0c4a6e',
+      secondaryBorderColor: '#0078d4', edgeLabelBackground: '#ede9fe',
+      clusterBkg: '#f8fafc', clusterBorder: '#94a3b8',
+      fontSize: '13px', fontFamily: 'Inter, sans-serif'
+    },
+    flowchart: { curve: 'basis', nodeSpacing: 50, rankSpacing: 60, htmlLabels: false, useMaxWidth: false, padding: 16 }
+  });
+  document.querySelectorAll('.mermaid-src').forEach(async (el) => {
+    const src = el.textContent.trim();
+    const container = el.parentElement;
+    try {
+      const { svg } = await mermaid.render('mermaid-' + Math.random().toString(36).slice(2), src);
+      container.innerHTML = svg;
+    } catch (e) {
+      container.innerHTML = '<p style="text-align:center;color:#64748b;">Diagram rendering failed. Open in a browser with JavaScript enabled.</p>';
+    }
+  });
+</script>
+
+</body>
+</html>

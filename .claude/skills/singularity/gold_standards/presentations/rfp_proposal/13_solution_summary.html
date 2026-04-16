@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 7: Solution Summary</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--purple-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 12px 40px 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+      flex-shrink: 0;
+    }
+
+    .lead {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 10px;
+      flex-shrink: 0;
+    }
+
+    /* Section labels */
+    .section-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+      flex-shrink: 0;
+    }
+
+    /* Outcomes Grid: 3 cards */
+    .outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      flex: 5;
+      min-height: 0;
+      margin-bottom: 8px;
+    }
+
+    .outcome-card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 10px;
+      padding: 10px 14px;
+      box-shadow: 0 2px 6px rgba(124,58,237,0.06);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .outcome-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .outcome-card.c1::before { background: linear-gradient(90deg, #4C1D95, #5B21B6); }
+    .outcome-card.c2::before { background: linear-gradient(90deg, #5B21B6, #7C3AED); }
+    .outcome-card.c3::before { background: linear-gradient(90deg, #7C3AED, #A855F7); }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .card-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .outcome-card.c1 .card-icon { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .outcome-card.c2 .card-icon { background: linear-gradient(135deg, #5B21B6, #7C3AED); }
+    .outcome-card.c3 .card-icon { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+
+    .card-header h3 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      line-height: 1.3;
+    }
+
+    .metric-items {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .metric-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10.5px;
+      line-height: 1.4;
+      color: #475569;
+      padding: 4px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .metric-item:last-child { border-bottom: none; }
+
+    .metric-item i.metric-icon {
+      font-size: 10px;
+      width: 14px;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    .outcome-card.c1 .metric-icon { color: #4C1D95; }
+    .outcome-card.c2 .metric-icon { color: #5B21B6; }
+    .outcome-card.c3 .metric-icon { color: #7C3AED; }
+
+    .metric-text { flex: 1; }
+
+    .metric-text strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    .trend {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 5px;
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    .trend.up {
+      background: rgba(16,185,129,0.1);
+      color: #059669;
+    }
+
+    .trend.down {
+      background: rgba(16,185,129,0.1);
+      color: #059669;
+    }
+
+    /* Enablers Grid: 3 cards */
+    .enablers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      flex: 4;
+      min-height: 0;
+    }
+
+    .enabler-card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 10px;
+      padding: 10px 14px;
+      box-shadow: 0 2px 6px rgba(124,58,237,0.06);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .enabler-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .enabler-card.e1::before { background: linear-gradient(90deg, #A855F7, #C026D3); }
+    .enabler-card.e2::before { background: linear-gradient(90deg, #C026D3, #DB2777); }
+    .enabler-card.e3::before { background: linear-gradient(90deg, #DB2777, #E11D48); }
+
+    .enabler-card .card-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .enabler-card.e1 .card-icon { background: linear-gradient(135deg, #A855F7, #C026D3); }
+    .enabler-card.e2 .card-icon { background: linear-gradient(135deg, #C026D3, #DB2777); }
+    .enabler-card.e3 .card-icon { background: linear-gradient(135deg, #DB2777, #E11D48); }
+
+    .enabler-items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      flex: 1;
+    }
+
+    .enabler-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      font-size: 10.5px;
+      line-height: 1.45;
+      color: #475569;
+    }
+
+    .enabler-item i {
+      font-size: 5px;
+      margin-top: 5px;
+      width: 8px;
+      flex-shrink: 0;
+    }
+
+    .enabler-card.e1 .enabler-item i { color: #A855F7; }
+    .enabler-card.e2 .enabler-item i { color: #C026D3; }
+    .enabler-card.e3 .enabler-item i { color: #DB2777; }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>Solution Summary</h2>
+      <p class="lead">Measurable outcomes and foundational enablers that drive sustained value across McGrath's NextGen environment</p>
+
+      <div class="section-label">Expected Outcomes & Metrics</div>
+
+      <div class="outcomes-grid">
+
+        <!-- Business Outcomes -->
+        <div class="outcome-card c1">
+          <div class="card-header">
+            <div class="card-icon"><i class="fa-solid fa-briefcase"></i></div>
+            <h3>Business</h3>
+          </div>
+          <div class="metric-items">
+            <div class="metric-item">
+              <i class="fa-solid fa-stopwatch metric-icon"></i>
+              <span class="metric-text"><strong>End-to-end cycle time</strong> reduced through streamlined processes</span>
+              <span class="trend down"><i class="fa-solid fa-arrow-down"></i></span>
+            </div>
+            <div class="metric-item">
+              <i class="fa-solid fa-comments metric-icon"></i>
+              <span class="metric-text"><strong>Effective communication</strong> across stakeholders and vendors</span>
+              <span class="trend up"><i class="fa-solid fa-arrow-up"></i></span>
+            </div>
+            <div class="metric-item">
+              <i class="fa-solid fa-sitemap metric-icon"></i>
+              <span class="metric-text"><strong>Process standardization</strong> and simplification across operations</span>
+              <span class="trend up"><i class="fa-solid fa-arrow-up"></i></span>
+            </div>
+            <div class="metric-item">
+              <i class="fa-solid fa-face-smile metric-icon"></i>
+              <span class="metric-text"><strong>Customer satisfaction</strong> and ease of doing business</span>
+              <span class="trend up"><i class="fa-solid fa-arrow-up"></i></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Efficiency & Services -->
+        <div class="outcome-card c2">
+          <div class="card-header">
+            <div class="card-icon"><i class="fa-solid fa-gauge-high"></i></div>
+            <h3>Efficiency & Services</h3>
+          </div>
+          <div class="metric-items">
+            <div class="metric-item">
+              <i class="fa-solid fa-chart-line metric-icon"></i>
+              <span class="metric-text"><strong>Productivity</strong> gains across support and enhancement delivery</span>
+              <span class="trend up"><i class="fa-solid fa-arrow-up"></i></span>
+            </div>
+            <div class="metric-item">
+              <i class="fa-solid fa-graduation-cap metric-icon"></i>
+              <span class="metric-text"><strong>Knowledge management</strong> and training effectiveness</span>
+              <span class="trend up"><i class="fa-solid fa-arrow-up"></i></span>
+            </div>
+            <div class="metric-item">
+              <i class="fa-solid fa-hand metric-icon"></i>
+              <span class="metric-text"><strong>Manual touches</strong> reduced through automation</span>
+              <span class="trend down"><i class="fa-solid fa-arrow-down"></i></span>
+            </div>
+            <div class="metric-item">
+              <i class="fa-solid fa-coins metric-icon"></i>
+              <span class="metric-text"><strong>Total cost of ownership</strong> and management overhead</span>
+              <span class="trend down"><i class="fa-solid fa-arrow-down"></i></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Transformation -->
+        <div class="outcome-card c3">
+          <div class="card-header">
+            <div class="card-icon"><i class="fa-solid fa-rocket"></i></div>
+            <h3>Transformation</h3>
+          </div>
+          <div class="metric-items">
+            <div class="metric-item">
+              <i class="fa-solid fa-robot metric-icon"></i>
+              <span class="metric-text"><strong>Automation and self-serve</strong> capabilities expanded</span>
+              <span class="trend up"><i class="fa-solid fa-arrow-up"></i></span>
+            </div>
+            <div class="metric-item">
+              <i class="fa-solid fa-brain metric-icon"></i>
+              <span class="metric-text"><strong>AI and GenAI interventions</strong> across support operations</span>
+              <span class="trend up"><i class="fa-solid fa-arrow-up"></i></span>
+            </div>
+            <div class="metric-item">
+              <i class="fa-solid fa-users metric-icon"></i>
+              <span class="metric-text"><strong>Overall annual headcount</strong> optimized through efficiency</span>
+              <span class="trend down"><i class="fa-solid fa-arrow-down"></i></span>
+            </div>
+            <div class="metric-item">
+              <i class="fa-solid fa-bolt metric-icon"></i>
+              <span class="metric-text"><strong>Transformation speed</strong> accelerated with proven frameworks</span>
+              <span class="trend up"><i class="fa-solid fa-arrow-up"></i></span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="section-label">Key Enablers</div>
+
+      <div class="enablers-grid">
+
+        <!-- Industry Leadership -->
+        <div class="enabler-card e1">
+          <div class="card-header">
+            <div class="card-icon"><i class="fa-solid fa-trophy"></i></div>
+            <h3>Industry Leadership</h3>
+          </div>
+          <div class="enabler-items">
+            <div class="enabler-item">
+              <i class="fa-solid fa-circle"></i>
+              <span>End-to-end understanding of managed services support processes across enterprise platforms</span>
+            </div>
+            <div class="enabler-item">
+              <i class="fa-solid fa-circle"></i>
+              <span>Deep expertise in industry tools and technology platforms including Oracle Fusion, Salesforce, and MuleSoft</span>
+            </div>
+            <div class="enabler-item">
+              <i class="fa-solid fa-circle"></i>
+              <span>Proven track record supporting multiple customers with similar service requirements and complexity</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Process & Framework -->
+        <div class="enabler-card e2">
+          <div class="card-header">
+            <div class="card-icon"><i class="fa-solid fa-gears"></i></div>
+            <h3>Process & Framework</h3>
+          </div>
+          <div class="enabler-items">
+            <div class="enabler-item">
+              <i class="fa-solid fa-circle"></i>
+              <span>Best-in-class operating model and service design refined across 100+ customer engagements</span>
+            </div>
+            <div class="enabler-item">
+              <i class="fa-solid fa-circle"></i>
+              <span>End-to-end process visibility and continuous improvement through automation frameworks</span>
+            </div>
+            <div class="enabler-item">
+              <i class="fa-solid fa-circle"></i>
+              <span>Assured quality through operational audits, standardized playbooks, and knowledge management</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Governance & People -->
+        <div class="enabler-card e3">
+          <div class="card-header">
+            <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <h3>Governance & People</h3>
+          </div>
+          <div class="enabler-items">
+            <div class="enabler-item">
+              <i class="fa-solid fa-circle"></i>
+              <span>Strong governance structure for operational excellence with defined escalation and review cadences</span>
+            </div>
+            <div class="enabler-item">
+              <i class="fa-solid fa-circle"></i>
+              <span>Flexible resourcing model scaled to customer needs with onsite, offshore, and burst capacity options</span>
+            </div>
+            <div class="enabler-item">
+              <i class="fa-solid fa-circle"></i>
+              <span>Structured induction program and training academy for rapid resource onboarding and upskilling</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">07</div>
+    </div>
+  </div>
+
+</body>
+</html>

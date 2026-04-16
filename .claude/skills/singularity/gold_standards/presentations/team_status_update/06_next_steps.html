@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 06: Next Steps</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-darkest: #0c1929;
+      --blue-dark: #15293e;
+      --blue-mid: #1e3a5f;
+      --blue-bright: #2563eb;
+      --blue-accent: #3b82f6;
+      --steel-light: #64748b;
+      --steel-glow: #94a3b8;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e6e8eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fcfdff 60%, #f7f9fc 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--blue-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 14px 40px 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .split-panel {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 16px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .left-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .left-panel .label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .left-panel h2 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .left-panel .lead {
+      font-size: 12px;
+      color: var(--text-light);
+      line-height: 1.55;
+      margin-bottom: 16px;
+    }
+
+    .connection-strip {
+      background: linear-gradient(135deg, var(--blue-darkest), var(--blue-mid));
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+
+    .connection-strip p {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.5;
+    }
+
+    .right-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .step-card {
+      background: #fff;
+      border: 1px solid rgba(37, 99, 235, 0.10);
+      border-radius: 10px;
+      padding: 10px 14px;
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.05);
+      display: flex;
+      gap: 12px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .step-number {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .step-card:nth-child(1) .step-number { background: linear-gradient(135deg, #0c1929, #1e3a5f); }
+    .step-card:nth-child(2) .step-number { background: linear-gradient(135deg, #1e3a5f, #2563eb); }
+    .step-card:nth-child(3) .step-number { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+    .step-card:nth-child(4) .step-number { background: linear-gradient(135deg, #3b82f6, #4f93f7); }
+
+    .step-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .step-body h4 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .step-body .items {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .step-body .item {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 10.5px;
+      color: var(--text-light);
+      line-height: 1.4;
+    }
+
+    .step-body .item i {
+      font-size: 4px;
+      color: var(--blue-accent);
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+
+    .step-body .item strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-darkest), var(--blue-mid), var(--blue-accent), var(--steel-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 2px;
+    }
+
+    .slide-nav { position: fixed; bottom: 18px; left: 18px; display: flex; gap: 6px; z-index: 100; }
+    .slide-nav a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: rgba(12,25,41,0.75); color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: background 0.2s, color 0.2s; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; }
+    .slide-nav a:hover { background: rgba(37,99,235,0.9); color: #fff; }
+    .slide-nav a.disabled { opacity: 0.25; pointer-events: none; }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">BayOne <span>Solutions</span></div>
+      <div class="header-title">CI/CD Track Status</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="split-panel">
+
+        <div class="left-panel">
+          <div class="label">Looking Ahead</div>
+          <h2>Next Steps</h2>
+          <p class="lead">The team is transitioning from discovery to hands-on work. The following priorities are planned for the coming week, with the goal of having initial findings and an architecture proposal ready for discussion by the next sync.</p>
+          <div class="connection-strip">
+            <p>All next steps are contingent on the scope alignment discussed earlier. The team will adjust priorities based on the outcome of today's discussion.</p>
+          </div>
+        </div>
+
+        <div class="right-panel">
+
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-body">
+              <h4>Inspect Build Logs Firsthand</h4>
+              <div class="items">
+                <div class="item"><i class="fa-solid fa-circle"></i><span><strong>Access the NFS location</strong> through the newly granted ADS machine and examine actual log files</span></div>
+                <div class="item"><i class="fa-solid fa-circle"></i><span><strong>Sample logs from different time periods</strong> (oldest available, midpoint, most recent) to identify format changes</span></div>
+                <div class="item"><i class="fa-solid fa-circle"></i><span><strong>Determine the source of truth:</strong> verify whether logs are raw Bazel output or have been processed by intermediate tooling</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <div class="step-body">
+              <h4>Evaluate Existing Code</h4>
+              <div class="items">
+                <div class="item"><i class="fa-solid fa-circle"></i><span><strong>Review the build analysis automation</strong> (PR #642 in the DCN/tools repository) to understand the current implementation</span></div>
+                <div class="item"><i class="fa-solid fa-circle"></i><span><strong>Assess the WebEx tools</strong> (Pulse and Scribble) once repository access is confirmed</span></div>
+                <div class="item"><i class="fa-solid fa-circle"></i><span><strong>Document what can be extended vs. what needs redesign</strong> based on firsthand code review</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-body">
+              <h4>Prepare Architecture Overview</h4>
+              <div class="items">
+                <div class="item"><i class="fa-solid fa-circle"></i><span><strong>Develop an initial architecture diagram</strong> for the build log analysis system based on what was found in the logs</span></div>
+                <div class="item"><i class="fa-solid fa-circle"></i><span><strong>Frame as initial thinking</strong> with clear caveats about what still needs validation</span></div>
+                <div class="item"><i class="fa-solid fa-circle"></i><span><strong>Include the tiered analysis approach</strong> (rule-based, ML-assisted, LLM for complex cases) tailored to the actual error patterns observed</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">4</div>
+            <div class="step-body">
+              <h4>Extend WebEx Prototype</h4>
+              <div class="items">
+                <div class="item"><i class="fa-solid fa-circle"></i><span><strong>Connect the working bot to the NXOCI workflow space</strong> once membership is granted</span></div>
+                <div class="item"><i class="fa-solid fa-circle"></i><span><strong>Run an initial extraction and categorization</strong> of user-reported issues to produce a prioritized pain point list</span></div>
+                <div class="item"><i class="fa-solid fa-circle"></i><span><strong>Design the downstream workflow</strong> (issue categorization, trend analysis, automated triage) based on actual data patterns</span></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">06</div>
+    </div>
+  </div>
+
+  <div class="slide-nav">
+    <a href="05_access_status.html"><i class="fa-solid fa-chevron-left"></i></a>
+    <a class="disabled"><i class="fa-solid fa-chevron-right"></i></a>
+    <a href="00_title.html" style="margin-left: 6px;"><i class="fa-solid fa-house"></i></a>
+  </div>
+
+</body>
+</html>

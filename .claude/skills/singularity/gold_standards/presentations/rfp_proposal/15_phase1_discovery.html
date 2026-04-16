@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 9: Phase 1 - Discovery & Transition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcff 60%, #f9f7ff 100%);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--purple-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 10px 40px 6px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 2px;
+      flex-shrink: 0;
+    }
+
+    .title-row h2 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .timeline-badge {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      background: rgba(168,85,247,0.08);
+      border: 1px solid rgba(168,85,247,0.2);
+      border-radius: 12px;
+      padding: 3px 12px;
+      letter-spacing: 0.3px;
+    }
+
+    .lead {
+      font-size: 12.5px;
+      color: var(--text-light);
+      margin-bottom: 10px;
+      flex-shrink: 0;
+    }
+
+    /* Responsibility bars */
+    .responsibility-bar {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      flex-shrink: 0;
+    }
+
+    .responsibility-bar.mcgrath {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+    }
+
+    .resp-label {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      padding-top: 1px;
+    }
+
+    .responsibility-bar.mcgrath .resp-label { color: var(--text-light); }
+
+    .resp-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px 12px;
+    }
+
+    .resp-items span {
+      font-size: 9.5px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .resp-items span i {
+      font-size: 4px;
+      color: #94a3b8;
+    }
+
+    /* Chevron flow bar */
+    .flow-bar {
+      display: flex;
+      gap: 0;
+      flex-shrink: 0;
+      margin-bottom: 8px;
+    }
+
+    .flow-item {
+      flex: 1;
+      position: relative;
+      padding: 12px 18px 12px 24px;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%, 12px 50%);
+      margin-left: -12px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .flow-item:first-child {
+      margin-left: 0;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%);
+      padding-left: 14px;
+      border-radius: 6px 0 0 6px;
+    }
+
+    .flow-item:last-child {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 12px 50%);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .flow-item:nth-child(1) { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
+    .flow-item:nth-child(2) { background: linear-gradient(135deg, #5B21B6, #6D28D9); }
+    .flow-item:nth-child(3) { background: linear-gradient(135deg, #6D28D9, #7C3AED); }
+    .flow-item:nth-child(4) { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+
+    .flow-item .flow-icon {
+      font-size: 12px;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .flow-item .title {
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    /* Phase detail cards: 4 columns */
+    .phase-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .phase-card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 8px;
+      padding: 10px 12px;
+      box-shadow: 0 2px 6px rgba(124,58,237,0.08);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .phase-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .phase-card.p1::before { background: linear-gradient(90deg, #4C1D95, #5B21B6); }
+    .phase-card.p2::before { background: linear-gradient(90deg, #5B21B6, #6D28D9); }
+    .phase-card.p3::before { background: linear-gradient(90deg, #6D28D9, #7C3AED); }
+    .phase-card.p4::before { background: linear-gradient(90deg, #7C3AED, #A855F7); }
+
+    .phase-objective {
+      font-size: 11px;
+      color: var(--text);
+      line-height: 1.45;
+      margin-bottom: 6px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .phase-objective strong {
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    .activity-label {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+
+    .activity-items {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .activity-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 10.5px;
+      line-height: 1.45;
+      color: #475569;
+    }
+
+    .activity-item i {
+      font-size: 4px;
+      margin-top: 4px;
+      width: 6px;
+      flex-shrink: 0;
+    }
+
+    .phase-card.p1 .activity-item i { color: #4C1D95; }
+    .phase-card.p2 .activity-item i { color: #5B21B6; }
+    .phase-card.p3 .activity-item i { color: #6D28D9; }
+    .phase-card.p4 .activity-item i { color: #7C3AED; }
+
+    /* BayOne responsibilities bar */
+    .bayone-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 5px 12px;
+      background: linear-gradient(135deg, rgba(76,29,149,0.06), rgba(168,85,247,0.08));
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 6px;
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    .bayone-bar .resp-label {
+      color: var(--purple-dark);
+    }
+
+    .bayone-bar .resp-items span {
+      color: var(--text);
+    }
+
+    .bayone-bar .resp-items span i {
+      color: var(--purple-accent);
+    }
+
+    /* Footnote bar directly above footer */
+    .slide-footnote {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 6px 40px;
+      margin-top: auto;
+      font-size: 10px;
+      color: var(--text-light);
+      border-top: 1px solid var(--border);
+    }
+
+    .slide-footnote strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .slide-footnote .sep {
+      width: 1px;
+      height: 14px;
+      background: var(--border);
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 6px 40px 10px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--purple-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span> Solutions</div>
+      <div class="header-title">McGrath Support Proposal</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="title-row">
+        <h2>Phase 1: Discovery & Transition</h2>
+        <span class="timeline-badge">Week 1 to Week 13</span>
+      </div>
+      <p class="lead">Structured knowledge transfer and operational handover across four progressive stages</p>
+
+      <!-- Chevron flow bar -->
+      <div class="flow-bar">
+        <div class="flow-item">
+          <i class="fa-solid fa-clipboard-list flow-icon"></i>
+          <div class="title">Preliminary</div>
+        </div>
+        <div class="flow-item">
+          <i class="fa-solid fa-book-open flow-icon"></i>
+          <div class="title">Knowledge Acquisition</div>
+        </div>
+        <div class="flow-item">
+          <i class="fa-solid fa-eye flow-icon"></i>
+          <div class="title">Shadow Support</div>
+        </div>
+        <div class="flow-item">
+          <i class="fa-solid fa-handshake flow-icon"></i>
+          <div class="title">Reverse Shadow & Ownership</div>
+        </div>
+      </div>
+
+      <!-- Phase detail cards -->
+      <div class="phase-cards">
+
+        <!-- Preliminary -->
+        <div class="phase-card p1">
+          <p class="phase-objective"><strong>Objective:</strong> Transition preparation by establishing plans for knowledge transfer</p>
+          <div class="activity-label">Activities</div>
+          <div class="activity-items">
+            <div class="activity-item"><i class="fa-solid fa-circle"></i><span>Kick-off meeting and alignment</span></div>
+            <div class="activity-item"><i class="fa-solid fa-circle"></i><span>Access to customer infrastructure, email, environments</span></div>
+            <div class="activity-item"><i class="fa-solid fa-circle"></i><span>Documentation review of existing processes</span></div>
+            <div class="activity-item"><i class="fa-solid fa-circle"></i><span>Required tools and access provisioning</span></div>
+            <div class="activity-item"><i class="fa-solid fa-circle"></i><span>Risk assessment and mitigation planning</span></div>
+          </div>
+        </div>
+
+        <!-- Knowledge Acquisition -->
+        <div class="phase-card p2">
+          <p class="phase-objective"><strong>Objective:</strong> Gain understanding of processes and tools through knowledge transfer</p>
+          <div class="activity-label">Activities</div>
+          <div class="activity-items">
+            <div class="activity-item"><i class="fa-solid fa-circle"></i><span>Current implementation assessment, system architecture review</span></div>
+            <div class="activity-item"><i class="fa-solid fa-circle"></i><span>Integration assessment and review across 50+ touchpoints</span></div>
+            <div class="activity-item"><i class="fa-solid fa-circle"></i><span>Technical documentation creation</span></div>
+            <div class="activity-item"><i class="fa-solid fa-circle"></i><span>Test case execution to build understanding</span></div>
+            <div class="activity-item"><i class="fa-solid fa-circle"></i><span>Data flow overview and dependency mapping</span></div>
+          </div>
+        </div>
+
+        <!-- Shadow Support -->
+        <div class="phase-card p3">
+          <p class="phase-objective"><strong>Objective:</strong> Observe incumbents for ticket resolution and practical understanding</p>
+          <div class="activity-label">Activities</div>
+          <div class="activity-items">
+            <div class="activity-item"><i class="fa-solid fa-circle"></i><span>Attend meetings and calls with stakeholders</span></div>
+            <div class="activity-item"><i class="fa-solid fa-circle"></i><span>Document observed processes and workflows</span></div>
+            <div class="activity-item"><i class="fa-solid fa-circle"></i><span>Identify areas for additional training</span></div>
+            <div class="activity-item"><i class="fa-solid fa-circle"></i><span>Clarify doubts and edge cases with incumbents</span></div>
+          </div>
+        </div>
+
+        <!-- Reverse Shadow & Ownership -->
+        <div class="phase-card p4">
+          <p class="phase-objective"><strong>Objective:</strong> BayOne resolves tickets in collaboration with McGrath and incumbent guidance</p>
+          <div class="activity-label">Activities</div>
+          <div class="activity-items">
+            <div class="activity-item"><i class="fa-solid fa-circle"></i><span>Handle live tickets with incumbent supervision</span></div>
+            <div class="activity-item"><i class="fa-solid fa-circle"></i><span>Receive feedback and implement best practices</span></div>
+            <div class="activity-item"><i class="fa-solid fa-circle"></i><span>Ensure process SLA adherence</span></div>
+            <div class="activity-item"><i class="fa-solid fa-circle"></i><span>Knowledge validation and sign-off</span></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">09</div>
+    </div>
+  </div>
+
+</body>
+</html>

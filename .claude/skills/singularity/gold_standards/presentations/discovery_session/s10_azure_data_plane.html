@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 10: Common Data Plane and Azure</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --steel-light: #64748b;
+      --steel-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e6e8eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--purple-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .definition-bar {
+      background: linear-gradient(135deg, var(--purple-darkest) 0%, var(--purple-mid) 100%);
+      padding: 14px 40px;
+      flex-shrink: 0;
+    }
+
+    .definition-bar .db-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 4px;
+    }
+
+    .definition-bar h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .definition-bar p {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+      max-width: 900px;
+    }
+
+    .main-area {
+      flex: 1;
+      min-height: 0;
+      padding: 12px 40px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: linear-gradient(180deg, #fcfdff 0%, #f7f9fc 100%);
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 2px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+
+    th {
+      text-align: left;
+      padding: 7px 12px;
+      background: var(--purple-mid);
+      color: #fff;
+      font-weight: 600;
+      font-size: 10px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+
+    th:last-child { border-right: none; }
+    th:first-child { border-radius: 6px 0 0 0; }
+    th:last-child { border-radius: 0 6px 0 0; }
+
+    td {
+      padding: 6px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.45;
+      color: var(--text);
+    }
+
+    td strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: #f8fafc; }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+      border-left: 4px solid var(--purple-accent);
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .highlight-box p {
+      font-size: 11px;
+      line-height: 1.55;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .highlight-box strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .infra-note {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .infra-note i {
+      color: var(--purple-accent);
+      font-size: 13px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .infra-note p {
+      font-size: 10.5px;
+      line-height: 1.5;
+      color: var(--text-light);
+      margin: 0;
+    }
+
+    .infra-note strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 10px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-darkest), var(--purple-mid), var(--purple-accent), var(--steel-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-accent);
+      letter-spacing: 2px;
+    }
+
+    .slide-nav { position: fixed; bottom: 18px; left: 18px; display: flex; gap: 6px; z-index: 100; }
+    .slide-nav a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: rgba(46,16,101,0.75); color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: background 0.2s, color 0.2s; border: 1px solid rgba(255,255,255,0.1); }
+    .slide-nav a:hover { background: rgba(109,40,217,0.9); color: #fff; }
+    .slide-nav a.disabled { opacity: 0.25; pointer-events: none; }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Bay<span>One</span></div>
+      <div class="header-title">Lam Research | April 2026</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="definition-bar">
+        <div class="db-label">05 BayOne's Approach</div>
+        <h2>Common Data Plane and Azure</h2>
+        <p>Both detection layers are unified through a common data plane: a single, governed layer with centralized ingestion, IAM and RBAC integration, and compliance controls that IT teams can manage directly.</p>
+      </div>
+
+      <div class="main-area">
+
+        <div class="section-label">Why Azure</div>
+        <table>
+          <tr>
+            <th style="width: 22%;">Azure Advantage</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><strong>Scalability</strong></td>
+            <td>Auto-scales with usage. The system grows with the organization without requiring infrastructure re-architecture.</td>
+          </tr>
+          <tr>
+            <td><strong>Maintainability</strong></td>
+            <td>Accessible to IT teams to manage, monitor, and operate directly. Detection rules, entity dictionaries, and classification models are updated through standard tooling.</td>
+          </tr>
+          <tr>
+            <td><strong>Compliance integration</strong></td>
+            <td>Native integration with identity and access management, role-based access control, and data governance capabilities out of the box.</td>
+          </tr>
+          <tr>
+            <td><strong>Cost efficiency</strong></td>
+            <td>Enterprise Azure services like Purview and AI Foundry provide mature, supported capabilities at a fraction of the cost of building and maintaining equivalent custom infrastructure.</td>
+          </tr>
+          <tr>
+            <td><strong>Production maturity</strong></td>
+            <td>Custom or on-premises deployments can succeed, but the maturity tends to remain at proof-of-concept level rather than scaling into operational systems.</td>
+          </tr>
+        </table>
+
+        <div class="highlight-box">
+          <p><strong>What this means for the team:</strong> This is a custom solution built on Lam's own environment using proven methodology. BayOne builds it, and the team can maintain and extend it. The goal is to empower the team to own and operate the capability independently.</p>
+        </div>
+
+        <div class="infra-note">
+          <i class="fa-solid fa-circle-info"></i>
+          <p><strong>A note on infrastructure:</strong> Understanding the relationship between the initiative team and the corporate Azure environment is important for scoping the deployment model accurately. The earlier this is understood, the more accurately we can scope the work.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">10</div>
+    </div>
+  </div>
+
+  <div class="slide-nav">
+    <a href="s09_hybrid_architecture.html"><i class="fa-solid fa-chevron-left"></i></a>
+    <a href="s11_next_steps.html"><i class="fa-solid fa-chevron-right"></i></a>
+    <a href="s01_title.html" style="margin-left: 6px;"><i class="fa-solid fa-house"></i></a>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagram Types Gallery — Mermaid Shape Library</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; padding: 40px; color: #0f172a; }
+        h1 { text-align: center; font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+        .subtitle { text-align: center; font-size: 14px; color: #64748b; margin-bottom: 32px; }
+        .section { max-width: 1200px; margin: 0 auto 40px; }
+        .section h2 { font-size: 18px; font-weight: 600; color: #1e3a5f; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid #dbeafe; }
+        .section p { font-size: 13px; color: #64748b; margin-bottom: 16px; line-height: 1.6; }
+        .section code { background: #eff6ff; padding: 2px 6px; border-radius: 4px; font-size: 12px; color: #1e40af; }
+        .diagram-box { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+        .mermaid { display: flex; justify-content: center; }
+        .nav { max-width: 1200px; margin: 0 auto 32px; display: flex; gap: 8px; flex-wrap: wrap; }
+        .nav a { font-size: 12px; padding: 6px 12px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; color: #1e40af; text-decoration: none; }
+        .nav a:hover { background: #dbeafe; }
+        .nav a.current { background: #2563eb; color: white; border-color: #2563eb; }
+        .use-for { font-size: 12px; color: #1e40af; background: #eff6ff; display: inline-block; padding: 4px 10px; border-radius: 6px; margin-bottom: 16px; }
+    </style>
+</head>
+<body>
+    <h1>Diagram Types Gallery</h1>
+    <p class="subtitle">Mermaid Shape Library — Visual Reference</p>
+
+    <div class="nav">
+        <a href="01_classic_shapes.html">Classic Shapes</a>
+        <a href="02_v11_shapes.html">v11 Shapes</a>
+        <a href="03_arrows_and_edges.html">Arrows</a>
+        <a href="04_text_formatting.html">Text Formatting</a>
+        <a href="05_icons_reference.html">Icons</a>
+        <a href="06_classdef_styling.html">ClassDef</a>
+        <a href="07_subgraphs_and_layout.html">Subgraphs</a>
+        <a href="08_diagram_types_gallery.html" class="current">Diagram Types</a>
+    </div>
+
+    <!-- Flowchart -->
+    <div class="section">
+        <h2>Flowchart</h2>
+        <span class="use-for">Keyword: <code>graph TB</code> or <code>graph LR</code> — Architecture, workflows, data flows, pipelines</span>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph LR
+    A(["Start"]) --> B{"Decision?"}
+    B -->|Yes| C["Process A"]
+    B -->|No| D["Process B"]
+    C --> E[("Database")]
+    D --> E
+    E --> F(["End"])
+            </div>
+        </div>
+    </div>
+
+    <!-- Sequence Diagram -->
+    <div class="section">
+        <h2>Sequence Diagram</h2>
+        <span class="use-for">Keyword: <code>sequenceDiagram</code> — API calls, message flows, protocol exchanges</span>
+        <div class="diagram-box">
+            <div class="mermaid">
+sequenceDiagram
+    participant C as Client
+    participant A as API Gateway
+    participant S as Service
+    participant D as Database
+
+    C->>A: POST /api/data
+    A->>S: Validate & Route
+    S->>D: INSERT query
+    D-->>S: Success (201)
+    S-->>A: Response payload
+    A-->>C: 201 Created
+    Note over C,A: HTTPS encrypted
+    Note over S,D: Internal VNet
+            </div>
+        </div>
+    </div>
+
+    <!-- Class Diagram -->
+    <div class="section">
+        <h2>Class Diagram</h2>
+        <span class="use-for">Keyword: <code>classDiagram</code> — Object models, class hierarchies</span>
+        <div class="diagram-box">
+            <div class="mermaid">
+classDiagram
+    class BaseModel {
+        +id: int
+        +created_at: datetime
+        +updated_at: datetime
+        +save()
+        +delete()
+    }
+    class User {
+        +email: str
+        +name: str
+        +is_active: bool
+        +authenticate()
+    }
+    class Project {
+        +title: str
+        +status: str
+        +owner: User
+        +get_members()
+    }
+    class Task {
+        +description: str
+        +priority: int
+        +assignee: User
+        +complete()
+    }
+
+    BaseModel <|-- User
+    BaseModel <|-- Project
+    BaseModel <|-- Task
+    User "1" --> "*" Project : owns
+    Project "1" --> "*" Task : contains
+    User "1" --> "*" Task : assigned
+            </div>
+        </div>
+    </div>
+
+    <!-- State Diagram -->
+    <div class="section">
+        <h2>State Diagram</h2>
+        <span class="use-for">Keyword: <code>stateDiagram-v2</code> — State machines, lifecycle workflows</span>
+        <div class="diagram-box">
+            <div class="mermaid">
+stateDiagram-v2
+    [*] --> Draft
+    Draft --> Review : Submit
+    Review --> Approved : Approve
+    Review --> Draft : Request Changes
+    Approved --> Published : Publish
+    Published --> Archived : Archive
+    Archived --> [*]
+
+    state Review {
+        [*] --> PeerReview
+        PeerReview --> ManagerReview
+        ManagerReview --> [*]
+    }
+            </div>
+        </div>
+    </div>
+
+    <!-- ER Diagram -->
+    <div class="section">
+        <h2>Entity Relationship Diagram</h2>
+        <span class="use-for">Keyword: <code>erDiagram</code> — Database schemas, entity relationships</span>
+        <div class="diagram-box">
+            <div class="mermaid">
+erDiagram
+    CUSTOMER ||--o{ ORDER : places
+    CUSTOMER {
+        int id PK
+        string name
+        string email
+    }
+    ORDER ||--|{ LINE_ITEM : contains
+    ORDER {
+        int id PK
+        date order_date
+        string status
+    }
+    LINE_ITEM }|--|| PRODUCT : references
+    LINE_ITEM {
+        int quantity
+        decimal price
+    }
+    PRODUCT {
+        int id PK
+        string name
+        decimal unit_price
+    }
+            </div>
+        </div>
+    </div>
+
+    <!-- Gantt Chart -->
+    <div class="section">
+        <h2>Gantt Chart</h2>
+        <span class="use-for">Keyword: <code>gantt</code> — Timelines, project schedules</span>
+        <div class="diagram-box">
+            <div class="mermaid">
+gantt
+    title Project Timeline
+    dateFormat YYYY-MM-DD
+    axisFormat %b %d
+
+    section Discovery
+        Stakeholder Interviews   :done, d1, 2026-01-06, 10d
+        Requirements Gathering   :done, d2, after d1, 5d
+
+    section Design
+        Architecture Design      :active, des1, after d2, 7d
+        Prototype                :des2, after des1, 5d
+
+    section Build
+        Core Development         :b1, after des2, 14d
+        Integration              :b2, after b1, 7d
+
+    section Launch
+        Testing                  :t1, after b2, 7d
+        Deployment               :milestone, after t1, 0d
+            </div>
+        </div>
+    </div>
+
+    <!-- Pie Chart -->
+    <div class="section">
+        <h2>Pie Chart</h2>
+        <span class="use-for">Keyword: <code>pie</code> — Proportional breakdowns</span>
+        <div class="diagram-box">
+            <div class="mermaid">
+pie title Build Failure Root Causes
+    "Dependency Issues" : 35
+    "Configuration Errors" : 25
+    "Test Failures" : 20
+    "Infrastructure" : 12
+    "Other" : 8
+            </div>
+        </div>
+    </div>
+
+    <!-- Mindmap -->
+    <div class="section">
+        <h2>Mindmap</h2>
+        <span class="use-for">Keyword: <code>mindmap</code> — Brainstorming, topic hierarchies</span>
+        <div class="diagram-box">
+            <div class="mermaid">
+mindmap
+    root((AI Strategy))
+        Data Foundation
+            Data Quality
+            Data Governance
+            Master Data
+        ML Platform
+            Model Training
+            Feature Store
+            Model Registry
+        Applications
+            NLP/NER
+            Computer Vision
+            Recommendation
+        Operations
+            MLOps
+            Monitoring
+            Cost Management
+            </div>
+        </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="section">
+        <h2>Timeline</h2>
+        <span class="use-for">Keyword: <code>timeline</code> — Historical progression, milestones</span>
+        <div class="diagram-box">
+            <div class="mermaid">
+timeline
+    title Engagement Milestones
+    Q1 2026 : Discovery Complete
+           : Stakeholder Alignment
+    Q2 2026 : Architecture Approved
+           : POC Delivered
+    Q3 2026 : Phase 1 Production
+           : Team Ramp Complete
+    Q4 2026 : Full Production
+           : Knowledge Transfer
+            </div>
+        </div>
+    </div>
+
+    <!-- Git Graph -->
+    <div class="section">
+        <h2>Git Graph</h2>
+        <span class="use-for">Keyword: <code>gitGraph</code> — Branch/merge visualization</span>
+        <div class="diagram-box">
+            <div class="mermaid">
+gitGraph
+    commit id: "Initial"
+    commit id: "Setup CI"
+    branch feature/auth
+    commit id: "Add login"
+    commit id: "Add OAuth"
+    checkout main
+    commit id: "Hotfix"
+    merge feature/auth id: "Merge auth"
+    branch feature/api
+    commit id: "REST endpoints"
+    commit id: "GraphQL"
+    checkout main
+    merge feature/api id: "Merge API"
+    commit id: "Release v1.0" tag: "v1.0"
+            </div>
+        </div>
+    </div>
+
+    <!-- User Journey -->
+    <div class="section">
+        <h2>User Journey Diagram</h2>
+        <span class="use-for">Keyword: <code>journey</code> — User experience flows, satisfaction mapping</span>
+        <div class="diagram-box">
+            <div class="mermaid">
+journey
+    title Onboarding Experience
+    section Sign Up
+        Visit landing page: 5: User
+        Fill registration form: 3: User
+        Email verification: 2: User
+    section First Use
+        Dashboard tutorial: 4: User, System
+        Create first project: 4: User
+        Invite team members: 3: User
+    section Adoption
+        Complete first workflow: 5: User, System
+        View analytics: 4: User
+            </div>
+        </div>
+    </div>
+
+    <!-- Quadrant Chart -->
+    <div class="section">
+        <h2>Quadrant Chart</h2>
+        <span class="use-for">Keyword: <code>quadrantChart</code> — Priority matrices, risk assessment, effort/impact analysis</span>
+        <div class="diagram-box">
+            <div class="mermaid">
+quadrantChart
+    title Technology Adoption Matrix
+    x-axis Low Effort --> High Effort
+    y-axis Low Impact --> High Impact
+    quadrant-1 Do First
+    quadrant-2 Plan Carefully
+    quadrant-3 Delegate
+    quadrant-4 Eliminate
+    CI/CD Pipeline: [0.8, 0.9]
+    Code Review Tool: [0.3, 0.7]
+    Custom Dashboard: [0.6, 0.4]
+    Legacy Migration: [0.9, 0.5]
+    Monitoring Setup: [0.4, 0.85]
+    Doc Generator: [0.2, 0.3]
+            </div>
+        </div>
+    </div>
+
+    <!-- Requirement Diagram -->
+    <div class="section">
+        <h2>Requirement Diagram</h2>
+        <span class="use-for">Keyword: <code>requirementDiagram</code> — Requirements traceability, compliance mapping</span>
+        <div class="diagram-box">
+            <div class="mermaid">
+requirementDiagram
+    requirement high_availability {
+        id: REQ-001
+        text: System must achieve 99.9% uptime
+        risk: high
+        verifymethod: test
+    }
+    requirement disaster_recovery {
+        id: REQ-002
+        text: Recovery time under 4 hours
+        risk: medium
+        verifymethod: inspection
+    }
+    element load_balancer {
+        type: service
+    }
+    element backup_system {
+        type: service
+    }
+    load_balancer - satisfies -> high_availability
+    backup_system - satisfies -> disaster_recovery
+    high_availability - traces -> disaster_recovery
+            </div>
+        </div>
+    </div>
+
+    <!-- Sankey Diagram -->
+    <div class="section">
+        <h2>Sankey Diagram</h2>
+        <span class="use-for">Keyword: <code>sankey-beta</code> — Flow quantities, budget allocation, energy/resource flows</span>
+        <div class="diagram-box">
+            <div class="mermaid">
+sankey-beta
+    Revenue,Engineering,40
+    Revenue,Sales,25
+    Revenue,Operations,20
+    Revenue,Marketing,15
+    Engineering,Frontend,15
+    Engineering,Backend,15
+    Engineering,Infrastructure,10
+    Sales,Enterprise,15
+    Sales,SMB,10
+            </div>
+        </div>
+    </div>
+
+    <!-- XY Chart -->
+    <div class="section">
+        <h2>XY Chart</h2>
+        <span class="use-for">Keyword: <code>xychart-beta</code> — Bar charts, line charts, data trends</span>
+        <div class="diagram-box">
+            <div class="mermaid">
+xychart-beta
+    title "Build Success Rate by Month"
+    x-axis [Jan, Feb, Mar, Apr, May, Jun]
+    y-axis "Success Rate (%)" 70 --> 100
+    bar [78, 82, 85, 88, 92, 95]
+    line [78, 82, 85, 88, 92, 95]
+            </div>
+        </div>
+    </div>
+
+    <!-- Block Diagram -->
+    <div class="section">
+        <h2>Block Diagram</h2>
+        <span class="use-for">Keyword: <code>block-beta</code> — Column layouts, layered architecture, component grids (v11.0+)</span>
+        <div class="diagram-box">
+            <div class="mermaid">
+block-beta
+    columns 3
+    Frontend["Frontend App"]:3
+    space API["API Gateway"] space
+    Auth["Auth Service"] Core["Core Service"] Data["Data Service"]
+    space db[("Database")]:2
+
+    Frontend --> API
+    API --> Auth
+    API --> Core
+    API --> Data
+    Core --> db
+    Data --> db
+            </div>
+        </div>
+    </div>
+
+    <!-- Architecture Diagram -->
+    <div class="section">
+        <h2>Architecture Diagram</h2>
+        <span class="use-for">Keyword: <code>architecture-beta</code> — Cloud infrastructure, deployment topology (v11.1+)</span>
+        <div class="diagram-box">
+            <div class="mermaid">
+architecture-beta
+    group cloud(cloud)[Cloud Platform]
+
+    service web(server)[Web Server] in cloud
+    service api(server)[API Server] in cloud
+    service db(database)[Database] in cloud
+    service store(disk)[Storage] in cloud
+
+    web:R --> L:api
+    api:R --> L:db
+    api:B --> T:store
+            </div>
+        </div>
+    </div>
+
+    <!-- Kanban Diagram -->
+    <div class="section">
+        <h2>Kanban Diagram</h2>
+        <span class="use-for">Keyword: <code>kanban</code> — Task boards, agile workflows, project status (v11.4+)</span>
+        <div class="diagram-box">
+            <div class="mermaid">
+kanban
+    Backlog
+        task1[Design system architecture]
+        task2[Write API specification]
+    In Progress
+        task3[Implement authentication]
+        task4[Build CI/CD pipeline]
+    Review
+        task5[Database schema migration]
+    Done
+        task6[Project kickoff]
+        task7[Environment setup]
+            </div>
+        </div>
+    </div>
+
+    <!-- Packet Diagram -->
+    <div class="section">
+        <h2>Packet Diagram</h2>
+        <span class="use-for">Keyword: <code>packet-beta</code> — Network protocol headers, bit-level data formats (v11.0+)</span>
+        <div class="diagram-box">
+            <div class="mermaid">
+packet-beta
+    0-15: "Source Port"
+    16-31: "Destination Port"
+    32-63: "Sequence Number"
+    64-95: "Acknowledgment Number"
+    96-99: "Offset"
+    100-105: "Reserved"
+    106: "URG"
+    107: "ACK"
+    108: "PSH"
+    109: "RST"
+    110: "SYN"
+    111: "FIN"
+    112-127: "Window Size"
+    128-143: "Checksum"
+    144-159: "Urgent Pointer"
+            </div>
+        </div>
+    </div>
+
+    <!-- C4 Context Diagram -->
+    <div class="section">
+        <h2>C4 Context Diagram</h2>
+        <span class="use-for">Keyword: <code>C4Context</code> — C4 architecture model, system landscape (experimental)</span>
+        <div class="diagram-box">
+            <div class="mermaid">
+C4Context
+    title System Context — Build Analytics Platform
+
+    Person(engineer, "Engineer", "Monitors build health")
+
+    Enterprise_Boundary(b0, "Organization") {
+        System(analytics, "Build Analytics", "Analyzes CI/CD build logs")
+        System(ci, "CI/CD System", "Jenkins, GitHub Actions")
+    }
+
+    System_Ext(cloud, "Cloud Provider", "Azure / AWS infrastructure")
+    System_Ext(notify, "Notification Service", "Slack, Email alerts")
+
+    Rel(engineer, analytics, "Views dashboards")
+    Rel(analytics, ci, "Reads build logs")
+    Rel(analytics, cloud, "Deploys to")
+    Rel(analytics, notify, "Sends alerts via")
+            </div>
+        </div>
+    </div>
+
+    <!-- ZenUML Note -->
+    <div class="section">
+        <h2>ZenUML (Alternative Sequence Diagram)</h2>
+        <span class="use-for">Keyword: <code>zenuml</code> — Code-like sequence diagram syntax (requires external plugin)</span>
+        <p style="color: #713f12; background: #fef9c3; border: 1px solid #fde047; border-radius: 10px; padding: 16px;">
+            <strong>Plugin required:</strong> ZenUML is an alternative sequence diagram syntax that uses a code-like format. It requires the ZenUML plugin to be registered with mermaid and does not render with the standard CDN alone. See <a href="https://mermaid.js.org/syntax/zenuml.html" style="color: #92400e;">mermaid ZenUML docs</a> for setup.
+        </p>
+    </div>
+
+    <!-- Diagram Type Reference -->
+    <div class="section">
+        <h2>All Diagram Types — Quick Reference</h2>
+        <p>Mermaid v11 supports 21 diagram types. All are listed below with their keyword, version, and use case. Types marked <strong>beta</strong> may have limited rendering depending on the exact CDN version.</p>
+        <div class="diagram-box" style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                <tr style="background: #eff6ff;">
+                    <th style="padding: 8px 12px; text-align: left; border-bottom: 2px solid #dbeafe;">Type</th>
+                    <th style="padding: 8px 12px; text-align: left; border-bottom: 2px solid #dbeafe;">Keyword</th>
+                    <th style="padding: 8px 12px; text-align: left; border-bottom: 2px solid #dbeafe;">Since</th>
+                    <th style="padding: 8px 12px; text-align: left; border-bottom: 2px solid #dbeafe;">Best For</th>
+                </tr>
+                <tr><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Flowchart</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;"><code style="background:#eff6ff;padding:2px 6px;border-radius:4px;font-size:12px;color:#1e40af;">graph TB/LR</code></td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">v0.x</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Architecture, workflows, data flows</td></tr>
+                <tr><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Sequence</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;"><code style="background:#eff6ff;padding:2px 6px;border-radius:4px;font-size:12px;color:#1e40af;">sequenceDiagram</code></td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">v0.x</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">API calls, message flows</td></tr>
+                <tr><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Class</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;"><code style="background:#eff6ff;padding:2px 6px;border-radius:4px;font-size:12px;color:#1e40af;">classDiagram</code></td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Early</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Object models, hierarchies</td></tr>
+                <tr><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">State</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;"><code style="background:#eff6ff;padding:2px 6px;border-radius:4px;font-size:12px;color:#1e40af;">stateDiagram-v2</code></td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Early</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">State machines, lifecycles</td></tr>
+                <tr><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">ER</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;"><code style="background:#eff6ff;padding:2px 6px;border-radius:4px;font-size:12px;color:#1e40af;">erDiagram</code></td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Early</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Database schemas, entity relationships</td></tr>
+                <tr><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">User Journey</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;"><code style="background:#eff6ff;padding:2px 6px;border-radius:4px;font-size:12px;color:#1e40af;">journey</code></td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Early</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">UX flows, satisfaction mapping</td></tr>
+                <tr><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Gantt</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;"><code style="background:#eff6ff;padding:2px 6px;border-radius:4px;font-size:12px;color:#1e40af;">gantt</code></td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Early</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Timelines, project schedules</td></tr>
+                <tr><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Pie</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;"><code style="background:#eff6ff;padding:2px 6px;border-radius:4px;font-size:12px;color:#1e40af;">pie</code></td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Early</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Proportional breakdowns</td></tr>
+                <tr><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Requirement</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;"><code style="background:#eff6ff;padding:2px 6px;border-radius:4px;font-size:12px;color:#1e40af;">requirementDiagram</code></td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">v8.x</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Requirements traceability, compliance</td></tr>
+                <tr><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Git Graph</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;"><code style="background:#eff6ff;padding:2px 6px;border-radius:4px;font-size:12px;color:#1e40af;">gitGraph</code></td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">v8.x</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Branch/merge flows</td></tr>
+                <tr><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Mindmap</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;"><code style="background:#eff6ff;padding:2px 6px;border-radius:4px;font-size:12px;color:#1e40af;">mindmap</code></td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">v9.3</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Brainstorming, topic trees</td></tr>
+                <tr><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Timeline</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;"><code style="background:#eff6ff;padding:2px 6px;border-radius:4px;font-size:12px;color:#1e40af;">timeline</code></td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">v9.3</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Milestones, progression</td></tr>
+                <tr><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">C4</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;"><code style="background:#eff6ff;padding:2px 6px;border-radius:4px;font-size:12px;color:#1e40af;">C4Context / C4Container</code></td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">v9.x</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">C4 architecture model</td></tr>
+                <tr><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Quadrant</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;"><code style="background:#eff6ff;padding:2px 6px;border-radius:4px;font-size:12px;color:#1e40af;">quadrantChart</code></td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">v10.x</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Priority matrices, effort/impact</td></tr>
+                <tr><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">ZenUML</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;"><code style="background:#eff6ff;padding:2px 6px;border-radius:4px;font-size:12px;color:#1e40af;">zenuml</code></td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">v10.x</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Code-style sequence diagrams (plugin)</td></tr>
+                <tr><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Sankey</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;"><code style="background:#eff6ff;padding:2px 6px;border-radius:4px;font-size:12px;color:#1e40af;">sankey-beta</code></td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">v10.3</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Flow quantities, resource allocation</td></tr>
+                <tr><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">XY Chart</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;"><code style="background:#eff6ff;padding:2px 6px;border-radius:4px;font-size:12px;color:#1e40af;">xychart-beta</code></td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">v10.x</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Bar charts, line charts, data trends</td></tr>
+                <tr><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Block</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;"><code style="background:#eff6ff;padding:2px 6px;border-radius:4px;font-size:12px;color:#1e40af;">block-beta</code></td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">v11.0</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Column layouts, grid diagrams</td></tr>
+                <tr><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Packet</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;"><code style="background:#eff6ff;padding:2px 6px;border-radius:4px;font-size:12px;color:#1e40af;">packet-beta</code></td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">v11.0</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Protocol headers, bit-level layouts</td></tr>
+                <tr><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Architecture</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;"><code style="background:#eff6ff;padding:2px 6px;border-radius:4px;font-size:12px;color:#1e40af;">architecture-beta</code></td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">v11.1</td><td style="padding: 6px 12px; border-bottom: 1px solid #e2e8f0;">Cloud infrastructure, deployment topology</td></tr>
+                <tr><td style="padding: 6px 12px;">Kanban</td><td style="padding: 6px 12px;"><code style="background:#eff6ff;padding:2px 6px;border-radius:4px;font-size:12px;color:#1e40af;">kanban</code></td><td style="padding: 6px 12px;">v11.4</td><td style="padding: 6px 12px;">Task boards, agile workflows</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#dbeafe', primaryTextColor: '#0f172a', primaryBorderColor: '#2563eb',
+                lineColor: '#2563eb', secondaryColor: '#eff6ff', secondaryTextColor: '#1e3a5f',
+                secondaryBorderColor: '#3b82f6', edgeLabelBackground: '#dbeafe',
+                clusterBkg: '#f8fafc', clusterBorder: '#94a3b8',
+                fontSize: '13px', fontFamily: 'Inter, sans-serif'
+            },
+            flowchart: { curve: 'basis', nodeSpacing: 50, rankSpacing: 60, htmlLabels: true, useMaxWidth: false, padding: 20 }
+        });
+    </script>
+</body>
+</html>

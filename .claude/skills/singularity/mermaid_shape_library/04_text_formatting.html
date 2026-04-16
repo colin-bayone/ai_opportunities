@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Formatting in Nodes — Mermaid Shape Library</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; padding: 40px; color: #0f172a; }
+        h1 { text-align: center; font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+        .subtitle { text-align: center; font-size: 14px; color: #64748b; margin-bottom: 32px; }
+        .section { max-width: 1200px; margin: 0 auto 40px; }
+        .section h2 { font-size: 18px; font-weight: 600; color: #1e3a5f; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid #dbeafe; }
+        .section p { font-size: 13px; color: #64748b; margin-bottom: 16px; line-height: 1.6; }
+        .section code { background: #eff6ff; padding: 2px 6px; border-radius: 4px; font-size: 12px; color: #1e40af; }
+        .diagram-box { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+        .mermaid { display: flex; justify-content: center; }
+        .mermaid .node rect, .mermaid .node polygon { rx: 8 !important; ry: 8 !important; }
+        .mermaid .edgeLabel rect { fill: #dbeafe !important; fill-opacity: 1 !important; stroke: none !important; }
+        .nav { max-width: 1200px; margin: 0 auto 32px; display: flex; gap: 8px; flex-wrap: wrap; }
+        .nav a { font-size: 12px; padding: 6px 12px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; color: #1e40af; text-decoration: none; }
+        .nav a:hover { background: #dbeafe; }
+        .nav a.current { background: #2563eb; color: white; border-color: #2563eb; }
+        .note-box { max-width: 1200px; margin: 0 auto 24px; padding: 16px 20px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; font-size: 13px; color: #1e3a5f; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <h1>Text Formatting in Nodes</h1>
+    <p class="subtitle">Mermaid Shape Library — Visual Reference</p>
+
+    <div class="nav">
+        <a href="01_classic_shapes.html">Classic Shapes</a>
+        <a href="02_v11_shapes.html">v11 Shapes</a>
+        <a href="03_arrows_and_edges.html">Arrows</a>
+        <a href="04_text_formatting.html" class="current">Text Formatting</a>
+        <a href="05_icons_reference.html">Icons</a>
+        <a href="06_classdef_styling.html">ClassDef</a>
+        <a href="07_subgraphs_and_layout.html">Subgraphs</a>
+        <a href="08_diagram_types_gallery.html">Diagram Types</a>
+    </div>
+
+    <div class="note-box">
+        All examples on this page use <code>htmlLabels: true</code>, which is required for FontAwesome icon rendering and HTML formatting in mermaid v11. This is the recommended mode for the Singularity skill.
+    </div>
+
+    <!-- Bold Text -->
+    <div class="section">
+        <h2>Bold Text with HTML Tags</h2>
+        <p>Use <code>&lt;b&gt;...&lt;/b&gt;</code> tags for bold text within node labels when <code>htmlLabels: true</code> is enabled.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph LR
+    A["<b>Bold Title</b>"]
+    B["Regular text only"]
+    C["<b>Bold</b> and regular mixed"]
+
+    A ~~~ B ~~~ C
+            </div>
+        </div>
+    </div>
+
+    <!-- Multi-line Text -->
+    <div class="section">
+        <h2>Multi-line Text with Line Breaks</h2>
+        <p>Use <code>&lt;br/&gt;</code> for line breaks in HTML mode. Each break creates a new line within the same node.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph LR
+    A["<b>Server Name</b><br/>Line 2<br/>Line 3"]
+    B["<b>Database</b><br/>Host: db-prod-01<br/>Port: 5432<br/>Version: 15.2"]
+
+    A ~~~ B
+            </div>
+        </div>
+    </div>
+
+    <!-- Bullet Characters -->
+    <div class="section">
+        <h2>Bullet Characters for Detail Lines</h2>
+        <p>Unicode bullet characters create structured, list-like content inside nodes. Each character has a different visual weight and style.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph TB
+    B1["<b>Small Triangle ▸</b><br/>▸ Clean, modern look<br/>▸ Recommended default"]
+    B2["<b>Round Bullet •</b><br/>• Traditional bullet<br/>• Familiar to all readers"]
+    B3["<b>Open Circle ◦</b><br/>◦ Lighter weight<br/>◦ Good for secondary items"]
+    B4["<b>Arrow →</b><br/>→ Implies sequence<br/>→ Good for flow items"]
+    B5["<b>Triangular ‣</b><br/>‣ Alternative to ▸<br/>‣ Slightly different weight"]
+    B6["<b>En Dash –</b><br/>– Subtle separator<br/>– Minimal visual weight"]
+
+    B1 ~~~ B2 ~~~ B3
+    B4 ~~~ B5 ~~~ B6
+            </div>
+        </div>
+    </div>
+
+    <!-- FontAwesome Icons in Labels -->
+    <div class="section">
+        <h2>FontAwesome Icons in Labels</h2>
+        <p>Use <code>fa:fa-icon-name</code> syntax to embed FontAwesome icons directly in node labels. Requires <code>htmlLabels: true</code> and the FA CSS loaded in the page.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph LR
+    A["fa:fa-server Server"]
+    B["fa:fa-database Database"]
+    C["fa:fa-cloud Cloud Service"]
+    D["fa:fa-lock Secure Endpoint"]
+    E["fa:fa-brain AI Model"]
+
+    A --> B --> C
+    A --> D --> E
+            </div>
+        </div>
+    </div>
+
+    <!-- Combined Pattern: Icon + Bold + Bullets -->
+    <div class="section">
+        <h2>Combined Pattern: Icon + Bold Title + Bullet Details</h2>
+        <p>The recommended pattern for information-dense nodes: a FontAwesome icon, a bold title, then bullet-pointed details with <code>▸</code>. This is the standard format used across Singularity diagrams.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph TB
+    classDef codeRepo fill:#eff6ff,stroke:#2563eb,stroke-width:1px,color:#1e3a5f
+    classDef storage fill:#fef9c3,stroke:#ca8a04,stroke-width:1px,color:#713f12
+    classDef aiComp fill:#ede9fe,stroke:#7c3aed,stroke-width:1px,color:#3b0764
+    classDef buildTool fill:#dbeafe,stroke:#3b82f6,stroke-width:1px,color:#1e3a5f
+
+    REPO["<b>fa:fa-code-branch Repository</b><br/>▸ Production branch<br/>▸ 50+ contributors<br/>▸ Nightly builds"]:::codeRepo
+    DB[("<b>fa:fa-database PostgreSQL</b><br/>▸ Build metadata<br/>▸ Test results<br/>▸ Metrics history")]:::storage
+    AI("<b>fa:fa-brain AI Analysis Engine</b><br/>▸ Error classification<br/>▸ Fix suggestion<br/>▸ Confidence scoring"):::aiComp
+    CI{{"<b>fa:fa-gears CI/CD Pipeline</b><br/>▸ Automated triggers<br/>▸ Parallel builds<br/>▸ Deploy gates"}}:::buildTool
+
+    REPO --> CI
+    CI --> DB
+    CI --> AI
+            </div>
+        </div>
+    </div>
+
+    <!-- Syntax Summary -->
+    <div class="section">
+        <h2>Syntax Comparison: htmlLabels true vs false</h2>
+        <p>Mermaid v11 supports two formatting modes. <code>htmlLabels: true</code> (recommended) gives you icons + HTML formatting. <code>htmlLabels: false</code> gives markdown-style bold but no icon rendering.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph LR
+    subgraph HTML["<b>htmlLabels: true (Recommended)</b>"]
+        direction TB
+        H1["<b>fa:fa-server Bold + Icon</b><br/>▸ Detail line"]
+    end
+    subgraph MD["<b>htmlLabels: false (Markdown)</b>"]
+        direction TB
+        M1["Icons render as text<br/>No glyph support"]
+    end
+
+    style HTML fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    style MD fill:#fef2f2,stroke:#f87171,stroke-width:2px,color:#991b1b
+            </div>
+        </div>
+        <p><strong>Trade-off:</strong> With <code>htmlLabels: true</code>, use <code>&lt;b&gt;</code> for bold and <code>&lt;br/&gt;</code> for line breaks (not <code>**</code> or literal newlines). With <code>htmlLabels: false</code>, use <code>**bold**</code> markdown syntax and backtick-wrapped text with literal newlines, but <code>fa:</code> icons will render as literal text.</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#dbeafe', primaryTextColor: '#0f172a', primaryBorderColor: '#2563eb',
+                lineColor: '#2563eb', secondaryColor: '#eff6ff', secondaryTextColor: '#1e3a5f',
+                secondaryBorderColor: '#3b82f6', edgeLabelBackground: '#dbeafe',
+                clusterBkg: '#f8fafc', clusterBorder: '#94a3b8',
+                fontSize: '13px', fontFamily: 'Inter, sans-serif'
+            },
+            flowchart: { curve: 'basis', nodeSpacing: 50, rankSpacing: 60, htmlLabels: true, useMaxWidth: false, padding: 20 }
+        });
+    </script>
+</body>
+</html>

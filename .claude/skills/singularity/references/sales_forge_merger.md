@@ -57,7 +57,7 @@ Sales-forge creates a glossary of key terms and definitions, with web research f
 | Generates proposal HTML from template | Singularity drafts markdown first, then generates HTML using gold standard patterns and the design spec. | **Covered** (superior: markdown source of truth + HTML formatting) |
 | Generates individual slide HTML files | **Slide generation moves to a separate slide skill.** Singularity can invoke it. Output goes to `/<client_name>/<opportunity_name>/presentations/`. | **Covered via sibling skill** |
 | Standard proposal structure (Cover → Challenge → Approach → Capabilities → Engagement → Why BayOne → Next Steps) | Singularity supports multiple deliverable types, not just proposals. The structure varies by deliverable type (problem restatement, information request, preliminary approach, formal proposal). Gold standards define the patterns. | **Covered** (superior: multiple deliverable types, not one fixed structure) |
-| Uses `proposal-template.html` with placeholder variables | Singularity uses the gold standard files in `.claude/skills/singularity/assets/design/gold_standards/` as references, plus the design spec. Not a fill-in-the-blanks template. Deliverables are crafted, not templated. | **Covered** (superior: crafted from research, not templated) |
+| Uses `proposal-template.html` with placeholder variables | Singularity uses the gold standard files in `.claude/skills/singularity/gold_standards/deliverables/` as references, plus the design spec. Not a fill-in-the-blanks template. Deliverables are crafted, not templated. | **Covered** (superior: crafted from research, not templated) |
 
 **Key difference:** Sales-forge uses a single proposal template with placeholder variables (`{{TITLE}}`, `{{CLIENT}}`, etc.) and fills it in. Singularity writes content from the research library and formats it using the design spec and gold standards as style references. This produces more natural, engagement-specific documents rather than template-shaped output.
 
@@ -95,12 +95,12 @@ Sales-forge creates a glossary of key terms and definitions, with web research f
 
 ---
 
-### Sales-Forge: BayOne Context → Singularity: `.claude/context/`
+### Sales-Forge: BayOne Context → Singularity: `.claude/skills/singularity/references/`
 
 | Sales-Forge Does | Singularity Equivalent | Status |
 |---|---|---|
-| Hardcoded team: Colin, Zahra, Neha, Rahul | `.claude/context/bayone_team.md` - living document, grows with the team. | **Covered** (superior: not hardcoded, shared across skills) |
-| Hardcoded positioning statements | `.claude/context/bayone_positioning.md` - living document, evolves over time. | **Covered** (superior: not hardcoded, shared across skills) |
+| Hardcoded team: Colin, Zahra, Neha, Rahul | `.claude/skills/singularity/references/bayone_team.md` - living document, grows with the team. | **Covered** (superior: not hardcoded, self-contained in skill) |
+| Hardcoded positioning statements | `.claude/skills/singularity/references/bayone_team.md` (Positioning section) - living document, evolves over time. | **Covered** (superior: not hardcoded, self-contained in skill) |
 
 ---
 
@@ -178,7 +178,7 @@ During source processing, if the skill encounters unfamiliar technologies, compa
 
 Clarify in `06_deliverables_pipeline.md`:
 
-The `proposal_template.html` in `.claude/skills/singularity/assets/templates/` is a **structural reference**, not a fill-in-the-blanks template. It shows the standard section order and CSS patterns for proposals. Deliverables are written from the research library using the design spec and gold standards as style guides, not by populating template placeholders.
+The `proposal_template.html` was originally a structural reference showing the standard section order and CSS patterns for proposals. It has since been removed; the gold standards in `.claude/skills/singularity/gold_standards/deliverables/` now serve this purpose. Deliverables are written from the research library using the design spec and gold standards as style guides, not by populating template placeholders.
 
 ---
 
@@ -190,9 +190,9 @@ The `proposal_template.html` in `.claude/skills/singularity/assets/templates/` i
 4. **Phase 4:** After confirmation period, archive sales-forge
 
 Sales-forge's assets that move to singularity:
-- `assets/templates/proposal-template.html` → `.claude/skills/singularity/assets/templates/proposal_template.html`
+- `assets/templates/proposal-template.html` → removed (gold standards now serve this purpose)
 - `scripts/html_to_pdf.py` → `.claude/skills/singularity/scripts/html_to_pdf.py`
-- `references/bayone-design-spec.md` → `.claude/skills/singularity/assets/design/bayone_design_spec.md` (to be updated by the design spec session)
+- `references/bayone-design-spec.md` → `.claude/skills/singularity/references/bayone_design_spec.md` (to be updated by the design spec session)
 
 Sales-forge's assets that move to the slide skill:
 - `assets/templates/slide-cover-template.html`

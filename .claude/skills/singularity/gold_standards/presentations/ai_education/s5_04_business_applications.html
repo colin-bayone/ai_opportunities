@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 19: Business Applications You Can Use Now</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-darkest: #0c1929;
+      --blue-dark: #15293e;
+      --blue-mid: #1e3a5f;
+      --blue-bright: #2563eb;
+      --blue-accent: #3b82f6;
+      --steel-light: #64748b;
+      --steel-glow: #94a3b8;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e6e8eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--blue-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Dark header */
+    .definition-bar {
+      background: linear-gradient(135deg, var(--blue-darkest) 0%, var(--blue-mid) 100%);
+      padding: 18px 40px;
+      flex-shrink: 0;
+    }
+
+    .definition-bar h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .definition-bar p {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+    }
+
+    /* Main area */
+    .main-area {
+      flex: 1;
+      min-height: 0;
+      padding: 14px 40px 10px;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(180deg, #fcfdff 0%, #f7f9fc 100%);
+    }
+
+    /* 3x2 card grid */
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 1fr 1fr;
+      gap: 10px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .app-card {
+      background: #fff;
+      border: 1px solid rgba(37,99,235,0.10);
+      border-radius: 10px;
+      padding: 14px 16px;
+      box-shadow: 0 1px 6px rgba(37,99,235,0.04);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .app-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .app-card:nth-child(1)::before { background: linear-gradient(90deg, #0c1929, #1e3a5f); }
+    .app-card:nth-child(2)::before { background: linear-gradient(90deg, #1e3a5f, #2563eb); }
+    .app-card:nth-child(3)::before { background: linear-gradient(90deg, #2563eb, #3b82f6); }
+    .app-card:nth-child(4)::before { background: linear-gradient(90deg, #3b82f6, #4f93f7); }
+    .app-card:nth-child(5)::before { background: linear-gradient(90deg, #4f93f7, #64748b); }
+    .app-card:nth-child(6)::before { background: linear-gradient(90deg, #64748b, #94a3b8); }
+
+    .app-card .ac-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .app-card .ac-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .app-card:nth-child(1) .ac-icon { background: linear-gradient(135deg, #0c1929, #1e3a5f); }
+    .app-card:nth-child(2) .ac-icon { background: linear-gradient(135deg, #1e3a5f, #2563eb); }
+    .app-card:nth-child(3) .ac-icon { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+    .app-card:nth-child(4) .ac-icon { background: linear-gradient(135deg, #3b82f6, #4f93f7); }
+    .app-card:nth-child(5) .ac-icon { background: linear-gradient(135deg, #4f93f7, #64748b); }
+    .app-card:nth-child(6) .ac-icon { background: linear-gradient(135deg, #64748b, #94a3b8); }
+
+    .app-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .app-card p {
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    /* Takeaway */
+    .takeaway {
+      margin-top: 10px;
+      padding: 11px 18px;
+      background: linear-gradient(135deg, var(--blue-darkest), var(--blue-mid));
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .takeaway p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.55;
+    }
+
+    .takeaway strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 10px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-darkest), var(--blue-mid), var(--blue-accent), var(--steel-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 2px;
+    }
+    .slide-nav { position: fixed; bottom: 18px; left: 18px; display: flex; gap: 6px; z-index: 100; }
+    .slide-nav a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: rgba(12,25,41,0.75); color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: background 0.2s, color 0.2s; border: 1px solid rgba(255,255,255,0.1); }
+    .slide-nav a:hover { background: rgba(37,99,235,0.9); color: #fff; }
+    .slide-nav a.disabled { opacity: 0.25; pointer-events: none; }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Master<span>minds</span></div>
+      <div class="header-title">April 2026</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="definition-bar">
+        <h2>Business Applications You Can Use Now</h2>
+        <p>Beyond document summarization and email drafting, here are specific ways AI is already being used in professional services practices for marketing, growth, and operations.</p>
+      </div>
+
+      <div class="main-area">
+        <div class="apps-grid">
+          <div class="app-card">
+            <div class="ac-header">
+              <div class="ac-icon"><i class="fa-solid fa-bullhorn"></i></div>
+              <h3>Marketing and Outreach</h3>
+            </div>
+            <p>Draft client newsletters, refine messaging for specific audiences, create campaign copy, and develop content calendars. AI handles the first draft so you can focus on the positioning and voice.</p>
+          </div>
+
+          <div class="app-card">
+            <div class="ac-header">
+              <div class="ac-icon"><i class="fa-solid fa-share-nodes"></i></div>
+              <h3>Social Media and Thought Leadership</h3>
+            </div>
+            <p>Generate LinkedIn posts, article outlines, and commentary on industry trends based on your perspective and expertise. Builds your professional presence without consuming hours of writing time.</p>
+          </div>
+
+          <div class="app-card">
+            <div class="ac-header">
+              <div class="ac-icon"><i class="fa-solid fa-binoculars"></i></div>
+              <h3>Competitive Research</h3>
+            </div>
+            <p>Synthesize publicly available information about market trends, competitor positioning, and industry developments. AI compiles and organizes what would otherwise take hours of manual searching and reading.</p>
+          </div>
+
+          <div class="app-card">
+            <div class="ac-header">
+              <div class="ac-icon"><i class="fa-solid fa-file-signature"></i></div>
+              <h3>Proposal and Pitch Preparation</h3>
+            </div>
+            <p>Draft proposals, prepare talking points for prospect meetings, and tailor pitch materials for specific audiences. Start from a template and let AI customize the details for each opportunity.</p>
+          </div>
+
+          <div class="app-card">
+            <div class="ac-header">
+              <div class="ac-icon"><i class="fa-solid fa-book"></i></div>
+              <h3>Internal Process Documentation</h3>
+            </div>
+            <p>Turn informal workflows into documented procedures. AI can take a verbal description of how something gets done in your office and turn it into a structured, repeatable process that new team members can follow.</p>
+          </div>
+
+          <div class="app-card">
+            <div class="ac-header">
+              <div class="ac-icon"><i class="fa-solid fa-user-plus"></i></div>
+              <h3>Client Onboarding Materials</h3>
+            </div>
+            <p>Generate welcome packets, FAQ documents, intake questionnaires, and orientation guides tailored to different client types. Standardize the experience without making every new client feel like a template.</p>
+          </div>
+        </div>
+
+        <div class="takeaway">
+          <p><strong>Every one of these is something you can try this week</strong> with a paid ChatGPT, Claude, or Gemini subscription. No special software, no IT department, no integration project. Just a prompt and your professional expertise guiding the output.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">19</div>
+    </div>
+  </div>
+
+  <div class="slide-nav">
+    <a href="s5_03_myth_busting.html"><i class="fa-solid fa-chevron-left"></i></a>
+    <a href="s5_05_getting_started.html"><i class="fa-solid fa-chevron-right"></i></a>
+    <a href="s0_00_toc.html" style="margin-left: 6px;"><i class="fa-solid fa-house"></i></a>
+  </div>
+</body>
+</html>

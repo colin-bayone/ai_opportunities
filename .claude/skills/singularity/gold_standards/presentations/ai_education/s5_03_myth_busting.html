@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 18: Myth-Busting</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-darkest: #0c1929;
+      --blue-dark: #15293e;
+      --blue-mid: #1e3a5f;
+      --blue-bright: #2563eb;
+      --blue-accent: #3b82f6;
+      --steel-light: #64748b;
+      --steel-glow: #94a3b8;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e6e8eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fcfdff 60%, #f7f9fc 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--blue-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 20px 40px 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+      flex-shrink: 0;
+    }
+
+    .lead {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 14px;
+      line-height: 1.5;
+      flex-shrink: 0;
+    }
+
+    /* Myth cards: 2x3 grid */
+    .myths-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      gap: 8px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .myth-card {
+      background: #fff;
+      border: 1px solid rgba(37,99,235,0.10);
+      border-radius: 10px;
+      padding: 12px 16px;
+      box-shadow: 0 1px 6px rgba(37,99,235,0.04);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .myth-card .myth-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--steel-light);
+      margin-bottom: 5px;
+      font-style: italic;
+    }
+
+    .myth-card .reality-text {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .myth-card .reality-text strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 10px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-darkest), var(--blue-mid), var(--blue-accent), var(--steel-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 2px;
+    }
+    .slide-nav { position: fixed; bottom: 18px; left: 18px; display: flex; gap: 6px; z-index: 100; }
+    .slide-nav a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: rgba(12,25,41,0.75); color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: background 0.2s, color 0.2s; border: 1px solid rgba(255,255,255,0.1); }
+    .slide-nav a:hover { background: rgba(37,99,235,0.9); color: #fff; }
+    .slide-nav a.disabled { opacity: 0.25; pointer-events: none; }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Master<span>minds</span></div>
+      <div class="header-title">April 2026</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>Myth-Busting</h2>
+      <p class="lead">Common misconceptions about AI that circulate in professional circles, and what is actually going on</p>
+
+      <div class="myths-grid">
+        <div class="myth-card">
+          <p class="myth-text">"AI is going to replace my profession in 5 years"</p>
+          <p class="reality-text">Every industry that has adopted AI so far has seen the same pattern. <strong>The practitioner who uses AI outperforms the one who does not.</strong> The profession evolves, the work shifts toward higher judgment, and demand for the human side actually increases.</p>
+        </div>
+
+        <div class="myth-card">
+          <p class="myth-text">"AI is too unreliable to use for anything serious"</p>
+          <p class="reality-text">AI is unreliable when used without constraints. <strong>When you control the input and verify the output, reliability improves dramatically.</strong> The same tool that invents fake citations also summarizes a 50-page contract flawlessly. The difference is how you use it.</p>
+        </div>
+
+        <div class="myth-card">
+          <p class="myth-text">"If I use AI, my work product is somehow lesser"</p>
+          <p class="reality-text">Nobody thinks less of you for using spell check, tax software, or legal research databases. <strong>AI is the next version of tools professionals already rely on.</strong> The value of your work comes from your judgment and expertise, not from typing every word yourself.</p>
+        </div>
+
+        <div class="myth-card">
+          <p class="myth-text">"AI understands what I am saying"</p>
+          <p class="reality-text">It does not, and that is fine. <strong>Language models predict the most likely next sequence of words based on patterns.</strong> The output can look like understanding, but knowing that it is pattern matching helps you use it more effectively and trust it appropriately.</p>
+        </div>
+
+        <div class="myth-card">
+          <p class="myth-text">"The free version is basically the same as the paid version"</p>
+          <p class="reality-text">The difference goes beyond features and speed. <strong>Free tiers often use your inputs to train the model and offer weaker privacy guarantees.</strong> For any professional handling client information, the paid tier is the minimum responsible starting point.</p>
+        </div>
+
+        <div class="myth-card">
+          <p class="myth-text">"I need to learn to code to use AI effectively"</p>
+          <p class="reality-text">The most effective AI users are not programmers. <strong>They are people who know how to ask clear questions and evaluate the answers.</strong> If you can write a good email brief to a colleague, you can write a good prompt. The skills transfer directly.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">18</div>
+    </div>
+  </div>
+
+  <div class="slide-nav">
+    <a href="s5_02_vendor_pitch_filter.html"><i class="fa-solid fa-chevron-left"></i></a>
+    <a href="s5_04_business_applications.html"><i class="fa-solid fa-chevron-right"></i></a>
+    <a href="s0_00_toc.html" style="margin-left: 6px;"><i class="fa-solid fa-house"></i></a>
+  </div>
+</body>
+</html>
