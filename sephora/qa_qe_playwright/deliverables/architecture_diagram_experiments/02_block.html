@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architecture Diagram — Block</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #f8fafc; padding: 40px; color: #0f172a; }
+    h1 { text-align: center; font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+    .subtitle { text-align: center; font-size: 13px; color: #64748b; margin-bottom: 32px; }
+    .diagram-box { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 32px; max-width: 1000px; margin: 0 auto; }
+    .nav { max-width: 1000px; margin: 0 auto 24px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .nav a { font-size: 12px; padding: 6px 12px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; color: #1e40af; text-decoration: none; }
+    .nav a:hover { background: #dbeafe; }
+    .nav a.current { background: #2563eb; color: white; border-color: #2563eb; }
+  </style>
+</head>
+<body>
+  <h1>Platform Architecture — Block Diagram</h1>
+  <p class="subtitle">Experiment 2 of 5 — Stacked block layout showing layers as horizontal bands</p>
+  <div class="nav">
+    <a href="01_mindmap.html">Mindmap</a>
+    <a href="02_block.html" class="current">Block</a>
+    <a href="03_architecture.html">Architecture</a>
+    <a href="04_flowchart.html">Flowchart</a>
+    <a href="05_gitgraph.html">Git Graph</a>
+  </div>
+  <div class="diagram-box">
+    <div class="mermaid">
+block-beta
+  columns 3
+
+  block:CONFIG["Configuration Layer"]:3
+    BASELINE["Baseline References"] TOLERANCE["Tolerance Settings"] CONNECTORS["MCP Connectors"]
+  end
+
+  space:3
+
+  block:L1["Layer 1: Deterministic Automation"]:3
+    PW["Playwright"] MAP["Codebase Mapping"] DOCKER["Isolated Execution"]
+  end
+
+  space:3
+
+  block:L2["Layer 2: Saved Playbooks"]:3
+    PLAY["Deterministic Playbooks"] CICD["CI/CD Triggers"] SCHED["Scheduled Execution"]
+  end
+
+  space:3
+
+  block:L3["Layer 3: Agentic Exploration"]:3
+    EXPLORE["Exploratory Testing"] VISUAL["Visual Understanding"] DISCOVER["Workflow Discovery"]
+  end
+
+  space:3
+
+  block:L4["Layer 4: Review and Confidence"]:3
+    REVIEW["Review Agent"] CONFIDENCE["Confidence Scoring"] FEEDBACK["Bidirectional Feedback"]
+  end
+
+  space:3
+
+  block:L5["Layer 5: Observability"]:3
+    TRACE["Action Traceability"] METRICS["Performance Metrics"] LEARNING["Edge Case Learning"]
+  end
+
+  CONFIG --> L1
+  L1 --> L2
+  L2 --> L3
+  DISCOVER --> PLAY
+  L3 --> L4
+  L4 --> L5
+
+  style CONFIG fill:#f8fafc,stroke:#94a3b8,stroke-width:2px
+  style L1 fill:#dbeafe,stroke:#2563eb,stroke-width:2px
+  style L2 fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+  style L3 fill:#ede9fe,stroke:#7c3aed,stroke-width:2px
+  style L4 fill:#ffedd5,stroke:#ea580c,stroke-width:2px
+  style L5 fill:#fef9c3,stroke:#ca8a04,stroke-width:2px
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'base',
+      themeVariables: {
+        primaryColor: '#ede9fe', primaryTextColor: '#1e1b4b', primaryBorderColor: '#7c3aed',
+        lineColor: '#7c3aed', secondaryColor: '#dbeafe', secondaryTextColor: '#1e3a5f',
+        fontSize: '14px', fontFamily: 'Inter, sans-serif'
+      }
+    });
+  </script>
+</body>
+</html>

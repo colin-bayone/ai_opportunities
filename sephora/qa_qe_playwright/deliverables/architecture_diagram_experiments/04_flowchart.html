@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architecture Diagram — Flowchart (Improved)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #f8fafc; padding: 40px; color: #0f172a; }
+    h1 { text-align: center; font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+    .subtitle { text-align: center; font-size: 13px; color: #64748b; margin-bottom: 32px; }
+    .diagram-box { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 32px; padding-bottom: 64px; max-width: 1000px; margin: 0 auto; overflow: visible; }
+    .diagram-box svg { overflow: visible !important; }
+    .diagram-title {
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #64748b;
+      margin-bottom: 16px;
+      padding: 8px 20px;
+      background: white;
+      border: 1px solid #7c3aed;
+      border-radius: 6px;
+      display: inline-block;
+    }
+    .diagram-title-wrapper { text-align: center; margin-bottom: 16px; }
+    #diagram-container { display: flex; justify-content: center; }
+    .mermaid .node rect, .mermaid .node polygon { rx: 8 !important; ry: 8 !important; }
+    .mermaid .node foreignObject { overflow: visible !important; }
+    .mermaid .node foreignObject div { overflow: visible !important; }
+    .mermaid .edgeLabel rect { fill: #ede9fe !important; fill-opacity: 1 !important; stroke: none !important; }
+    .nav { max-width: 1000px; margin: 0 auto 24px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .nav a { font-size: 12px; padding: 6px 12px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; color: #1e40af; text-decoration: none; }
+    .nav a:hover { background: #dbeafe; }
+    .nav a.current { background: #2563eb; color: white; border-color: #2563eb; }
+  </style>
+</head>
+<body>
+  <h1>Platform Architecture — Flowchart (Improved)</h1>
+  <p class="subtitle">Experiment 4 of 5 — Single-node-per-layer with boxed title</p>
+  <div class="nav">
+    <a href="01_mindmap.html">Mindmap</a>
+    <a href="02_block.html">Block</a>
+    <a href="03_architecture.html">Architecture</a>
+    <a href="04_flowchart.html" class="current">Flowchart</a>
+    <a href="05_gitgraph.html">Git Graph</a>
+  </div>
+  <div class="diagram-box">
+    <div class="diagram-title-wrapper">
+      <span class="diagram-title">Platform Architecture</span>
+    </div>
+    <div id="diagram-container">
+      <pre class="mermaid">
+graph TB
+    classDef foundation fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    classDef playbooks fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    classDef agentic fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#3b0764
+    classDef review fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+    classDef observe fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    classDef config fill:#f8fafc,stroke:#94a3b8,stroke-width:2px,color:#475569
+
+    CONFIG["<b>fa:fa-plug Configuration Layer</b><br/>▸ Baseline references<br/>▸ Tolerance settings<br/>▸ Workflow integration<br/>▸ MCP connectors<br/> "]:::config
+
+    L1["<b>fa:fa-server Layer 1: Deterministic Automation</b><br/>▸ Playwright browser automation<br/>▸ Codebase mapping and dependency analysis<br/>▸ Isolated execution (Docker / Azure Container Apps)<br/> "]:::foundation
+
+    L2["<b>fa:fa-list-check Layer 2: Saved Playbooks</b><br/>▸ AI-discovered workflows saved as deterministic assets<br/>▸ CI/CD triggers via GitHub Actions<br/>▸ Scheduled execution via Apache Airflow<br/> "]:::playbooks
+
+    L3["<b>fa:fa-brain Layer 3: Agentic Exploration</b><br/>▸ Exploratory testing of unfamiliar application states<br/>▸ Visual understanding (intentional changes vs. defects)<br/>▸ New workflow discovery for validation and save<br/> "]:::agentic
+
+    L4["<b>fa:fa-shield-halved Layer 4: Review and Confidence</b><br/>▸ Review agent filters noise before human review<br/>▸ Confidence scoring from human-validated track records<br/>▸ Bidirectional feedback (approvals and corrections)<br/> "]:::review
+
+    L5["<b>fa:fa-eye Layer 5: Observability</b><br/>▸ Full action traceability and audit trail<br/>▸ Performance metrics and coverage trends<br/>▸ Edge case learning and diagnostic insights<br/> "]:::observe
+
+    CONFIG -.-> L1
+    L1 --> L2
+    L2 --> L3
+    L3 -.->|"Validated workflows"| L2
+    L3 --> L4
+    L4 --> L5
+      </pre>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'base',
+      themeVariables: {
+        primaryColor: '#dbeafe', primaryTextColor: '#0f172a', primaryBorderColor: '#2563eb',
+        lineColor: '#7c3aed', secondaryColor: '#eff6ff', secondaryTextColor: '#1e3a5f',
+        secondaryBorderColor: '#3b82f6', edgeLabelBackground: '#ede9fe',
+        clusterBkg: '#f8fafc', clusterBorder: '#94a3b8',
+        fontSize: '14px', fontFamily: 'Inter, sans-serif'
+      },
+      flowchart: { curve: 'basis', nodeSpacing: 30, rankSpacing: 70, htmlLabels: true, useMaxWidth: true, padding: 40, wrappingWidth: 600 }
+    });
+    async function renderDiagram() {
+      await mermaid.run({ querySelector: '.mermaid' });
+
+      const svg = document.querySelector('.mermaid svg');
+      if (!svg) return;
+
+      svg.querySelectorAll('.node').forEach(nodeGroup => {
+        const fo = nodeGroup.querySelector('foreignObject');
+        const rect = nodeGroup.querySelector('rect');
+        if (!fo || !rect) return;
+
+        // Style bold tags as title bars
+        let strokeColor = rect.getAttribute('stroke') || '#94a3b8';
+        fo.querySelectorAll('b').forEach(b => {
+          b.style.display = 'block';
+          b.style.background = 'rgba(255,255,255,0.85)';
+          b.style.border = '1px solid ' + strokeColor;
+          b.style.borderRadius = '4px';
+          b.style.padding = '4px 10px';
+          b.style.marginBottom = '6px';
+          b.style.fontSize = '13px';
+          b.style.letterSpacing = '0.3px';
+        });
+
+        // Add bottom padding by directly growing the rect
+        const currentHeight = parseFloat(rect.getAttribute('height'));
+        const pad = 12;
+        rect.setAttribute('height', currentHeight + pad);
+        fo.setAttribute('height', currentHeight + pad);
+      });
+    }
+    renderDiagram();
+  </script>
+</body>
+</html>

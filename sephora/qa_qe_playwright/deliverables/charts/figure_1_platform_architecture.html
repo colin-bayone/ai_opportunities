@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Figure 1</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: white; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    svg { overflow: visible !important; max-width: none !important; width: 100% !important; }
+    .mermaid .node rect, .mermaid .node polygon { rx: 8 !important; ry: 8 !important; }
+    .mermaid .node foreignObject { overflow: visible !important; }
+    .mermaid .node foreignObject div { overflow: visible !important; }
+    .mermaid .edgeLabel rect { fill: #ede9fe !important; fill-opacity: 1 !important; stroke: none !important; }
+  </style>
+</head>
+<body>
+  <pre class="mermaid">
+graph TB
+    classDef foundation fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    classDef playbooks fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    classDef agentic fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#3b0764
+    classDef review fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+    classDef observe fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    classDef config fill:#f8fafc,stroke:#94a3b8,stroke-width:2px,color:#475569
+
+    CONFIG["<b>fa:fa-plug Configuration Layer</b><br/>▸ Baseline references<br/>▸ Tolerance settings<br/>▸ Workflow integration<br/>▸ MCP connectors<br/> "]:::config
+
+    L1["<b>fa:fa-server Layer 1: Deterministic Automation</b><br/>▸ Playwright browser automation<br/>▸ Codebase mapping and dependency analysis<br/>▸ Isolated execution (Docker / Azure Container Apps)<br/> "]:::foundation
+
+    L2["<b>fa:fa-list-check Layer 2: Saved Playbooks</b><br/>▸ AI-discovered workflows saved as deterministic assets<br/>▸ CI/CD triggers via GitHub Actions<br/>▸ Scheduled execution via Apache Airflow<br/> "]:::playbooks
+
+    L3["<b>fa:fa-brain Layer 3: Agentic Exploration</b><br/>▸ Exploratory testing of unfamiliar application states<br/>▸ Visual understanding (intentional changes vs. defects)<br/>▸ New workflow discovery for validation and save<br/> "]:::agentic
+
+    L4["<b>fa:fa-shield-halved Layer 4: Review and Confidence</b><br/>▸ Review agent filters noise before human review<br/>▸ Confidence scoring from human-validated track records<br/>▸ Bidirectional feedback (approvals and corrections)<br/> "]:::review
+
+    L5["<b>fa:fa-eye Layer 5: Observability</b><br/>▸ Full action traceability and audit trail<br/>▸ Performance metrics and coverage trends<br/>▸ Edge case learning and diagnostic insights<br/> "]:::observe
+
+    CONFIG -.-> L1
+    L1 --> L2
+    L2 --> L3
+    L3 -.->|"Validated workflows"| L2
+    L3 --> L4
+    L4 --> L5
+  </pre>
+  <script>
+    mermaid.initialize({
+      startOnLoad: false, theme: 'base',
+      themeVariables: { primaryColor: '#dbeafe', primaryTextColor: '#0f172a', primaryBorderColor: '#2563eb', lineColor: '#7c3aed', secondaryColor: '#eff6ff', secondaryTextColor: '#1e3a5f', secondaryBorderColor: '#3b82f6', edgeLabelBackground: '#ede9fe', clusterBkg: '#f8fafc', clusterBorder: '#94a3b8', fontSize: '14px', fontFamily: 'Inter, sans-serif' },
+      flowchart: { curve: 'basis', nodeSpacing: 30, rankSpacing: 70, htmlLabels: true, useMaxWidth: true, padding: 40, wrappingWidth: 600 }
+    });
+    async function render() {
+      await mermaid.run({ querySelector: '.mermaid' });
+      const svg = document.querySelector('.mermaid svg');
+      if (!svg) return;
+      svg.querySelectorAll('.node').forEach(n => {
+        const fo = n.querySelector('foreignObject'), rect = n.querySelector('rect');
+        if (!fo || !rect) return;
+        let sc = rect.getAttribute('stroke') || '#94a3b8';
+        fo.querySelectorAll('b').forEach(b => { b.style.display='block'; b.style.background='rgba(255,255,255,0.85)'; b.style.border='1px solid '+sc; b.style.borderRadius='4px'; b.style.padding='4px 10px'; b.style.marginBottom='6px'; b.style.fontSize='13px'; b.style.letterSpacing='0.3px'; });
+        const h = parseFloat(rect.getAttribute('height')); rect.setAttribute('height', h+12); fo.setAttribute('height', h+12);
+      });
+    }
+    render();
+  </script>
+</body>
+</html>

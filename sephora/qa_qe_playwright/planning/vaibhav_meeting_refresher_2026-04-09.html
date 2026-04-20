@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Vaibhav Meeting Refresher - April 2026</title>
+<style>
+body { font-family: system-ui, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; font-size: 14px; line-height: 1.5; }
+h1 { font-size: 18px; margin-bottom: 4px; }
+h2 { font-size: 15px; margin-top: 24px; margin-bottom: 8px; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+ul { margin: 4px 0; padding-left: 20px; }
+li { margin-bottom: 4px; }
+.sub { font-size: 13px; color: #666; margin-bottom: 20px; }
+.quote { font-style: italic; color: #444; margin: 4px 0 4px 12px; border-left: 2px solid #ccc; padding-left: 8px; }
+</style>
+</head>
+<body>
+
+<h1>Refresher: What You Told Vaibhav (March 24)</h1>
+<p class="sub">Quick recap of your positioning, methodology, and where you two aligned.</p>
+
+<h2>Your Core Methodology</h2>
+<ul>
+<li><strong>Deterministic-first, AI-last.</strong> Minimize the surface area where AI variability can compound. You target 97%+, not 80%.</li>
+<li><strong>State graph mapping.</strong> Autonomous process that deterministically explores the codebase and produces a dependency map — modules, CVEs, libraries, dead code. This is always step one, even outside QA/QE.</li>
+<li><strong>CI/CD integration.</strong> State graph plugs into pipelines so file changes map to specific tests that need to run. Change-aware, dependency-informed test targeting — not running the full suite every time.</li>
+<li><strong>Coverage = recursive downstream dependencies.</strong> A unit test that only covers branches within a function but ignores what it feeds into is incomplete.</li>
+<li><strong>You do this with two other people.</strong> You emphasized the leverage — small team, big output.</li>
+</ul>
+
+<h2>Playwright</h2>
+<ul>
+<li>You called Selenium-to-Playwright "night and day." Playwright eliminates the delay/wait problems, works much better with AI.</li>
+<li>Playwright is Microsoft-native — perfect fit for their Azure environment. Visual understanding tools within Azure, everything hosted in one place. IT and cybersecurity happy because no separate tool.</li>
+<li>Handles mobile testing, password-protected flows, ADA compliance testing.</li>
+<li>Writing Playwright tests is "the easiest part by far" — you have an agent that writes playbooks for everyone else to run.</li>
+</ul>
+
+<h2>Agent Evaluation &amp; Trust (Where He Was Most Engaged)</h2>
+<ul>
+<li><strong>Evaluate agents like people.</strong> Same way you assess whether you trust a person to do a task — that's how you assess agents.</li>
+<li><strong>Never let agents self-assess or peer-assess.</strong> They oscillate between "everything's perfect" and "everything's awful." Use human-defined KPIs instead.</li>
+<li><strong>Confidence = reinforcement from human feedback.</strong> Agent does task, human approves/rejects. Repeated approvals build a pattern library. Threshold for human-in-the-loop decreases over time. Human re-enters only on mistakes.</li>
+<li><strong>The reliability score analogy.</strong> You used the example of a person who promises Wednesday delivery but always delivers the following week — what score would you give them? Same question for agents.</li>
+<li><strong>Proportional response to mistakes.</strong> 99% perfect, one mistake — don't throw it out. What would you do with a person? Pull them aside, give better instructions. Same for agents. Always iterative.</li>
+<li><strong>Humans must stay for course correction.</strong> Agents "tend to simplify" and "tend to go off-road" when self-correcting. Human expertise is structurally necessary.</li>
+<li><strong>Chef analogy.</strong> You transition from line cook to executive chef — walking around tasting everyone else's work, not cooking yourself.</li>
+</ul>
+
+<h2>Multi-Model Strategy</h2>
+<ul>
+<li>Claude for ~90% of tasks. Gemini for visual understanding (better at it than Claude). Very little OpenAI.</li>
+<li>Agents checking agents — visual understanding catches things like button repositioning that would break brittle Selenium tests.</li>
+</ul>
+
+<h2>Observability &amp; Transparency</h2>
+<ul>
+<li>You stressed this as commonly missed. "How are my agents doing?"</li>
+<li>Traceability matters especially for testing — if an error occurs and should have been caught upstream, why didn't it?</li>
+<li>Mature systems produce the most interesting edge case analysis — is it being too strict? Are we fundamentally wrong about something?</li>
+<li><strong>"System autonomy" not "autonomous systems."</strong> The autonomy is a property of the design, not of any individual agent.</li>
+</ul>
+
+<h2>Key Philosophy Statements You Made</h2>
+<ul>
+<li>"Don't let the mechanism of the outcome drive what you want the outcome to be." Your goal isn't 100% agentic QA/QE — it's the velocity and quality you want.</li>
+<li>"If there was a magic rock that fell from space and everything works perfectly, you wouldn't even care about AI anymore."</li>
+<li>Framework quality determines the ceiling, not model quality. If you see a cap forming, it's the framework, not the models.</li>
+<li>No out-of-the-box solution from anyone (you, OpenAI, Anthropic) is 100% ready. The trick is to evaluate agents like people.</li>
+</ul>
+
+<h2>Training &amp; Upskilling (You Pitched This)</h2>
+<ul>
+<li>All BayOne new hires get AI upskilling training, regardless of role.</li>
+<li>Incubation model: person works on client project while BayOne trains them simultaneously. De-risks the hire — you see them "in the wild" before transition.</li>
+<li>External team upskilling as a service offering (demand-driven, already had requests).</li>
+<li>BayOne as noise filter — you vet tools at the cutting edge so clients don't have to chase every new release. Version 1.0 minimum maturity threshold.</li>
+</ul>
+
+<h2>Where Vaibhav Aligned With You</h2>
+<ul>
+<li><strong>Trust scoring.</strong> His biggest unsolved problem. He wants a composite trust index but admitted "How do you compute 4.8? I don't know." Your reinforcement approach directly answers this.</li>
+<li><strong>Deterministic-first.</strong> He was visibly engaged with this philosophy.</li>
+<li><strong>Agent evaluation like people.</strong> He validated the screening parallel — "To be able to screen that mindset, you need a like-minded person."</li>
+<li><strong>Human-in-the-loop necessity.</strong> He described trust progression from 40-50% to 60-80% as needing thorough human review. Called it "a big hurdle we have to cross together."</li>
+<li><strong>Business outcomes over buzzwords.</strong> His North Star is "don't be the bottleneck" — velocity and quality, not agentic-for-the-sake-of-agentic.</li>
+</ul>
+
+</body>
+</html>

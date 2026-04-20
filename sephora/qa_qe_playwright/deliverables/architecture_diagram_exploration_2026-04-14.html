@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture Diagram Exploration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; padding: 40px; color: #0f172a; }
+        h1 { text-align: center; font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+        .subtitle { text-align: center; font-size: 14px; color: #64748b; margin-bottom: 40px; }
+        .section { max-width: 1100px; margin: 0 auto 48px; }
+        .section h2 { font-size: 20px; font-weight: 600; color: #1e3a5f; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 2px solid #dbeafe; }
+        .section p { font-size: 13px; color: #64748b; margin-bottom: 16px; line-height: 1.6; }
+        .section code { background: #eff6ff; padding: 2px 6px; border-radius: 4px; font-size: 12px; color: #1e40af; }
+        .diagram-box { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 32px; margin-bottom: 16px; overflow-x: auto; }
+        .mermaid { display: flex; justify-content: center; }
+        .mermaid .node rect, .mermaid .node polygon { rx: 8 !important; ry: 8 !important; }
+        .mermaid .edgeLabel rect { fill: #ede9fe !important; fill-opacity: 1 !important; stroke: none !important; }
+        .verdict { font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 6px; display: inline-block; margin-top: 8px; }
+        .verdict-good { background: #dcfce7; color: #14532d; border: 1px solid #16a34a; }
+        .verdict-ok { background: #fef9c3; color: #713f12; border: 1px solid #ca8a04; }
+        .verdict-bad { background: #fef2f2; color: #991b1b; border: 1px solid #f87171; }
+    </style>
+</head>
+<body>
+    <h1>Architecture Diagram Exploration</h1>
+    <p class="subtitle">Five diagram types representing the same five-layer platform architecture</p>
+
+    <!-- 1. MINDMAP -->
+    <div class="section">
+        <h2>1. Mind Map</h2>
+        <p>Keyword: <code>mindmap</code>. Radiates outward from a central concept. Good for showing relationships without implying sequence.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+mindmap
+    root((Agentic QE Platform))
+        Layer 1: Deterministic Automation
+            Playwright Browser Automation
+            Codebase Mapping
+            Isolated Execution
+            Docker / Azure Container Apps
+        Layer 2: Saved Playbooks
+            Deterministic Replay
+            CI/CD Triggers via GitHub Actions
+            Scheduled Execution via Airflow
+            Release-Mapped Test Assets
+        Layer 3: Agentic Exploration
+            Exploratory Testing
+            Visual Understanding
+            Workflow Discovery
+            Non-Destructive Guardrails
+        Layer 4: Review and Confidence
+            Review Agent Filtering
+            Human-Validated Confidence Scoring
+            Bidirectional Feedback Loop
+        Layer 5: Observability
+            Full Action Traceability
+            Performance Metrics
+            Edge Case Learning
+        Configuration
+            Baseline References
+            Tolerance Settings
+            Workflow Integration
+            MCP Tool Connectors
+            </div>
+        </div>
+        <span class="verdict verdict-ok">DECENT: Clean hierarchy, but does not show the layered progression or feedback loops</span>
+    </div>
+
+    <!-- 2. BLOCK-BETA -->
+    <div class="section">
+        <h2>2. Block Diagram (block-beta)</h2>
+        <p>Keyword: <code>block-beta</code>. Arranges blocks in explicit columns. Designed for layered and grid-based layouts. Mermaid v11+.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+block-beta
+    columns 1
+
+    block:config["Configuration: Baselines | Tolerances | Workflows | MCP Connectors"]:1
+    end
+
+    space
+
+    block:l1["Layer 1: Deterministic Automation"]:1
+        pw["Playwright"] map["Codebase Mapping"] dock["Isolated Execution"]
+    end
+
+    space
+
+    block:l2["Layer 2: Saved Playbooks"]:1
+        pb["Deterministic Playbooks"] cicd["CI/CD Triggers"] sched["Scheduled Execution"]
+    end
+
+    space
+
+    block:l3["Layer 3: Agentic Exploration"]:1
+        exp["Exploratory Testing"] vis["Visual Understanding"] disc["Workflow Discovery"]
+    end
+
+    space
+
+    block:l4["Layer 4: Review and Confidence"]:1
+        rev["Review Agent"] conf["Confidence Scoring"]
+    end
+
+    space
+
+    block:l5["Layer 5: Observability"]:1
+        trace["Traceability"] metrics["Performance Metrics"] edge["Edge Case Learning"]
+    end
+
+    style config fill:#f8fafc,stroke:#94a3b8,stroke-width:2px
+    style l1 fill:#dbeafe,stroke:#2563eb,stroke-width:2px
+    style l2 fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    style l3 fill:#ede9fe,stroke:#7c3aed,stroke-width:2px
+    style l4 fill:#ffedd5,stroke:#ea580c,stroke-width:2px
+    style l5 fill:#fef9c3,stroke:#ca8a04,stroke-width:2px
+            </div>
+        </div>
+        <span class="verdict verdict-good">STRONG: Clean layers, consistent width, color-coded, no layout fighting. Best for print.</span>
+    </div>
+
+    <!-- 3. ARCHITECTURE DIAGRAM -->
+    <div class="section">
+        <h2>3. Architecture Diagram</h2>
+        <p>Keyword: <code>architecture-beta</code>. Purpose-built for infrastructure and system diagrams. Mermaid v11+. Uses services, groups, and junctions.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+architecture-beta
+    group config(cloud)[Configuration Layer]
+    group layer1(cloud)[Layer 1: Deterministic Automation]
+    group layer2(cloud)[Layer 2: Saved Playbooks]
+    group layer3(cloud)[Layer 3: Agentic Exploration]
+    group layer4(cloud)[Layer 4: Review and Confidence]
+    group layer5(cloud)[Layer 5: Observability]
+
+    service playwright(server)[Playwright] in layer1
+    service mapping(database)[Codebase Map] in layer1
+    service docker(disk)[Containers] in layer1
+
+    service playbooks(server)[Playbooks] in layer2
+    service cicd(server)[CI/CD] in layer2
+    service scheduler(server)[Scheduler] in layer2
+
+    service explore(server)[Exploratory] in layer3
+    service visual(server)[Visual AI] in layer3
+    service discover(server)[Discovery] in layer3
+
+    service review(server)[Review Agent] in layer4
+    service confidence(server)[Confidence] in layer4
+
+    service trace(server)[Traceability] in layer5
+    service metrics(server)[Metrics] in layer5
+
+    service baselines(server)[Baselines] in config
+    service tolerances(server)[Tolerances] in config
+    service connectors(server)[MCP] in config
+
+    playwright:R --> L:playbooks
+    playbooks:R --> L:explore
+    explore:R --> L:review
+    review:R --> L:trace
+    discover:B --> T:playbooks
+            </div>
+        </div>
+        <span class="verdict verdict-ok">DECENT: Infrastructure-native look, but layout control is limited and groups do not stack vertically well</span>
+    </div>
+
+    <!-- 4. GIT GRAPH -->
+    <div class="section">
+        <h2>4. Git Graph</h2>
+        <p>Keyword: <code>gitGraph</code>. Shows branching and merging. Unconventional for architecture, but effective for showing how workflows fork and converge.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+gitGraph
+    commit id: "Configuration" tag: "Baselines, Tolerances, MCP"
+    commit id: "L1: Deterministic" tag: "Playwright, Mapping, Docker"
+    commit id: "L2: Playbooks" tag: "Saved Workflows, CI/CD, Airflow"
+    branch exploration
+    commit id: "L3: Explore" tag: "Exploratory Testing"
+    commit id: "L3: Visual AI" tag: "Visual Understanding"
+    commit id: "L3: Discover" tag: "Workflow Discovery"
+    checkout main
+    merge exploration id: "Validated Workflows" tag: "Back to Playbooks"
+    commit id: "L4: Review" tag: "Review Agent, Confidence"
+    commit id: "L5: Observe" tag: "Traceability, Metrics, Edge Cases"
+            </div>
+        </div>
+        <span class="verdict verdict-ok">CREATIVE: Shows the feedback loop naturally (branch and merge). Unusual for architecture but readable.</span>
+    </div>
+
+    <!-- 5. FLOWCHART (current approach, improved) -->
+    <div class="section">
+        <h2>5. Flowchart (Current Approach, Adjusted)</h2>
+        <p>Keyword: <code>graph TB</code>. The existing approach with single nodes per layer. Included for comparison.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph TB
+    classDef foundation fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    classDef playbooks fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    classDef agentic fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#3b0764
+    classDef review fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+    classDef observe fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    classDef config fill:#f8fafc,stroke:#94a3b8,stroke-width:2px,color:#475569
+
+    CONFIG["<b>fa:fa-plug Configuration</b><br/>Baselines, Tolerances, Workflows, MCP Connectors"]:::config
+    L1["<b>fa:fa-server Layer 1: Deterministic Automation</b><br/>Playwright, Codebase Mapping, Isolated Execution"]:::foundation
+    L2["<b>fa:fa-list-check Layer 2: Saved Playbooks</b><br/>Deterministic Replay, CI/CD Triggers, Scheduled Execution"]:::playbooks
+    L3["<b>fa:fa-brain Layer 3: Agentic Exploration</b><br/>Exploratory Testing, Visual Understanding, Workflow Discovery"]:::agentic
+    L4["<b>fa:fa-shield-halved Layer 4: Review and Confidence</b><br/>Review Agent, Confidence Scoring, Bidirectional Feedback"]:::review
+    L5["<b>fa:fa-eye Layer 5: Observability</b><br/>Traceability, Performance Metrics, Edge Case Learning"]:::observe
+
+    CONFIG -.-> L1
+    L1 --> L2
+    L2 --> L3
+    L3 -.->|"Validated Workflows"| L2
+    L3 --> L4
+    L4 --> L5
+            </div>
+        </div>
+        <span class="verdict verdict-ok">FUNCTIONAL: Clear vertical flow, but nodes may truncate text depending on renderer width</span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#ede9fe', primaryTextColor: '#1e1b4b', primaryBorderColor: '#7c3aed',
+                lineColor: '#7c3aed', secondaryColor: '#e8f4fd', secondaryTextColor: '#0c4a6e',
+                secondaryBorderColor: '#0078d4', edgeLabelBackground: '#ede9fe',
+                clusterBkg: '#f8fafc', clusterBorder: '#94a3b8',
+                fontSize: '14px', fontFamily: 'Inter, sans-serif',
+                gitGraph0: '#dbeafe', gitGraph1: '#ede9fe',
+                git0: '#2563eb', git1: '#7c3aed',
+                gitBranchLabel0: '#1e3a5f', gitBranchLabel1: '#3b0764'
+            },
+            flowchart: { curve: 'basis', nodeSpacing: 40, rankSpacing: 50, htmlLabels: true, useMaxWidth: true, padding: 32, wrappingWidth: 500 },
+            mindmap: { useMaxWidth: true, padding: 20 },
+            block: { useMaxWidth: true, padding: 16 }
+        });
+    </script>
+</body>
+</html>

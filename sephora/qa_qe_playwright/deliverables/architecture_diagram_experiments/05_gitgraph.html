@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architecture Diagram — Git Graph</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #f8fafc; padding: 40px; color: #0f172a; }
+    h1 { text-align: center; font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+    .subtitle { text-align: center; font-size: 13px; color: #64748b; margin-bottom: 32px; }
+    .diagram-box { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 32px; max-width: 1000px; margin: 0 auto; }
+    .note { max-width: 1000px; margin: 24px auto 0; padding: 16px 20px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; font-size: 13px; color: #1e3a5f; line-height: 1.6; }
+    .nav { max-width: 1000px; margin: 0 auto 24px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .nav a { font-size: 12px; padding: 6px 12px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; color: #1e40af; text-decoration: none; }
+    .nav a:hover { background: #dbeafe; }
+    .nav a.current { background: #2563eb; color: white; border-color: #2563eb; }
+  </style>
+</head>
+<body>
+  <h1>Platform Architecture — Git Graph</h1>
+  <p class="subtitle">Experiment 5 of 5 — Timeline/evolution view showing how capabilities build on each other</p>
+  <div class="nav">
+    <a href="01_mindmap.html">Mindmap</a>
+    <a href="02_block.html">Block</a>
+    <a href="03_architecture.html">Architecture</a>
+    <a href="04_flowchart.html">Flowchart</a>
+    <a href="05_gitgraph.html" class="current">Git Graph</a>
+  </div>
+  <div class="diagram-box">
+    <div class="mermaid">
+gitGraph
+  commit id: "Configuration Layer" tag: "CONFIG"
+  commit id: "Baseline references"
+  commit id: "Tolerance settings"
+  commit id: "MCP connectors (Figma, Canva, WordPress)"
+
+  commit id: "Layer 1: Deterministic Automation" tag: "L1"
+  commit id: "Playwright browser automation"
+  commit id: "Codebase mapping and dependency analysis"
+  commit id: "Isolated execution (Docker / Azure Container Apps)"
+
+  commit id: "Layer 2: Saved Playbooks" tag: "L2"
+  branch agentic order: 1
+  commit id: "Layer 3: Agentic Exploration" tag: "L3"
+  commit id: "Exploratory testing"
+  commit id: "Visual understanding"
+  commit id: "Workflow discovery"
+
+  checkout main
+  commit id: "Deterministic playbooks (saved from L3)"
+  commit id: "CI/CD triggers via GitHub Actions"
+  commit id: "Scheduled execution via Apache Airflow"
+
+  checkout agentic
+  commit id: "Validated workflows feed back to L2"
+  checkout main
+  merge agentic id: "Discovered workflows become playbooks" tag: "FEEDBACK"
+
+  commit id: "Layer 4: Review and Confidence" tag: "L4"
+  commit id: "Review agent filters noise"
+  commit id: "Confidence scoring (human-validated)"
+  commit id: "Bidirectional feedback loop"
+
+  commit id: "Layer 5: Observability" tag: "L5"
+  commit id: "Full action traceability"
+  commit id: "Performance metrics and trends"
+  commit id: "Edge case learning"
+    </div>
+  </div>
+  <div class="note">
+    <strong>Reading this diagram:</strong> The main branch represents the deterministic backbone of the platform. The "agentic" branch shows how AI exploration runs in parallel and feeds validated workflows back into the deterministic playbook library (the merge point). Tags mark each architectural layer. This view emphasizes how capabilities build sequentially and how the agentic and deterministic tracks interact.
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'base',
+      themeVariables: {
+        git0: '#7c3aed', git1: '#2563eb',
+        gitBranchLabel0: '#ffffff', gitBranchLabel1: '#ffffff',
+        tagLabelColor: '#ffffff', tagLabelBackground: '#7c3aed', tagLabelBorder: '#5b21b6',
+        commitLabelColor: '#1e1b4b', commitLabelBackground: '#ede9fe', commitLabelFontSize: '13px',
+        fontSize: '13px', fontFamily: 'Inter, sans-serif'
+      },
+      gitGraph: { mainBranchName: 'main', showCommitLabel: true, rotateCommitLabel: false }
+    });
+  </script>
+</body>
+</html>

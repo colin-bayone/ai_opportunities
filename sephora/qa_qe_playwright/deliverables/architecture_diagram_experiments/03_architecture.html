@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architecture Diagram — Architecture Type</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #f8fafc; padding: 40px; color: #0f172a; }
+    h1 { text-align: center; font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+    .subtitle { text-align: center; font-size: 13px; color: #64748b; margin-bottom: 32px; }
+    .diagram-box { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 32px; max-width: 1000px; margin: 0 auto; }
+    .nav { max-width: 1000px; margin: 0 auto 24px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .nav a { font-size: 12px; padding: 6px 12px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; color: #1e40af; text-decoration: none; }
+    .nav a:hover { background: #dbeafe; }
+    .nav a.current { background: #2563eb; color: white; border-color: #2563eb; }
+  </style>
+</head>
+<body>
+  <h1>Platform Architecture — Architecture Diagram</h1>
+  <p class="subtitle">Experiment 3 of 5 — Mermaid architecture diagram type with service groups and edges</p>
+  <div class="nav">
+    <a href="01_mindmap.html">Mindmap</a>
+    <a href="02_block.html">Block</a>
+    <a href="03_architecture.html" class="current">Architecture</a>
+    <a href="04_flowchart.html">Flowchart</a>
+    <a href="05_gitgraph.html">Git Graph</a>
+  </div>
+  <div class="diagram-box">
+    <div class="mermaid">
+architecture-beta
+  group config(cloud)[Configuration Layer]
+  group layer1(server)[Layer 1 - Deterministic Automation]
+  group layer2(disk)[Layer 2 - Saved Playbooks]
+  group layer3(cloud)[Layer 3 - Agentic Exploration]
+  group layer4(server)[Layer 4 - Review and Confidence]
+  group layer5(disk)[Layer 5 - Observability]
+
+  service baselines(database)[Baselines] in config
+  service tolerances(server)[Tolerances] in config
+  service connectors(internet)[MCP Connectors] in config
+
+  service playwright(server)[Playwright] in layer1
+  service mapping(database)[Codebase Map] in layer1
+  service docker(server)[Containers] in layer1
+
+  service playbooks(disk)[Playbooks] in layer2
+  service cicd(server)[CI/CD] in layer2
+  service airflow(server)[Airflow] in layer2
+
+  service explore(cloud)[Exploration] in layer3
+  service visual(cloud)[Visual AI] in layer3
+  service discover(cloud)[Discovery] in layer3
+
+  service review(server)[Review Agent] in layer4
+  service confidence(server)[Confidence] in layer4
+
+  service trace(database)[Traceability] in layer5
+  service metrics(server)[Metrics] in layer5
+  service learning(database)[Edge Cases] in layer5
+
+  connectors --> playwright
+  playwright --> playbooks
+  playbooks --> explore
+  discover --> playbooks
+  explore --> review
+  review --> trace
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'base',
+      themeVariables: {
+        primaryColor: '#ede9fe', primaryTextColor: '#1e1b4b', primaryBorderColor: '#7c3aed',
+        lineColor: '#7c3aed', secondaryColor: '#dbeafe', secondaryTextColor: '#1e3a5f',
+        fontSize: '14px', fontFamily: 'Inter, sans-serif'
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,26 +1,28 @@
 # Sephora QA/QE Playwright - Org Chart
 
-**Last Updated:** 2026-03-30 (from Set 01, meeting 2026-03-24)
+**Last Updated:** 2026-04-09 (from Set 02, meeting 2026-04-09)
 
 ---
 
 ## Sephora
 
-### Vaibhav
+### Vaibhav (Bhargava)
 - **Title:** QE Leader (manages the QE function broadly)
 - **Background:** Joined from Walmart Labs ~2024. Led APG-to-microservices migration, then Azure cloud platform setup, now manages QE
 - **Reports:** 10-11 QE leads
 - **Hiring authority:** Can place strong talent into roles even outside existing openings
 - **Hiring philosophy:** Communication over resume, whiteboard problem-solving interviews, intuition-based final filter
-- **Key quote:** "Give me a good resource, I'll find the right role"
+- **Role in Visual QA project:** Internal champion. Driving the project, needs to bring a proposal to leadership for budget approval. Leaning toward build over buy for personalization. Target: mid-2026 delivery. Has budget but did not disclose amount.
+- **Staffing rates:** Confirmed team has not exceeded benchmark rates. Comfortable with $90/hr onsite.
 
-### Deepika
+### Deepika (Paruchuri)
 - **Title:** QE COE Lead
 - **Reports to:** Under Vaibhav's umbrella
 - **Team size:** ~5 people
-- **Focus:** QE Center of Excellence, agentic AI for QE
-- **Hiring:** Open roles for agentic AI work, ~$120/hr onsite (flexible, working with HR), once-per-week in-office requirement
-- **Status:** Had been on PTO; still has open positions (unclear if filled)
+- **Focus:** QE Center of Excellence, responsible for creating all AI solutions across the QE org. Partners at enterprise level with other functions to define guardrails and testing strategy.
+- **Hiring:** Previously had open roles for agentic AI work. Found someone at $90/hr onsite (confirmed Set 02). Original rate discussion was ~$120/hr (Set 01) but $90/hr is achievable for mid-to-senior agentic AI talent.
+- **Role in Visual QA project:** Governance and scrutiny layer. BayOne builds under her team's shadow. Her team observes, provides integration/governance input, gets trained during build, and eventually owns maintenance. Vaibhav described her as someone who "scrutinizes everything with very heavy lens."
+- **Status:** Active and present in Set 02 meeting. First direct meeting with Colin.
 
 ### Nikhil
 - **Team:** MCP and DevOps
