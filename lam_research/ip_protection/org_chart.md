@@ -1,6 +1,6 @@
 # Lam Research IP Protection - Org Chart
 
-**Last Updated:** 2026-04-06 (from document sets 01, 02, 02a, 03, 04, 04a, 05, 05a)
+**Last Updated:** 2026-04-17 (from document sets 01, 02, 02a, 03, 04, 04a, 05, 05a, 06, 07, 08, 08a, 09)
 
 This is a living document. It always reflects the most current understanding of all people involved in this engagement. For historical tracking of when information was learned, see the per-set people documents in research/.
 
@@ -27,7 +27,9 @@ This is a living document. It always reflects the most current understanding of 
 - **Key Quote:** "So we just basically accidentally picked literally every single thing, one of each." (Set 05, recognizing the prior approach was fundamentally unsound)
 - **Set 05 Development:** Revealed as the actual technical driver of the prior ML work (not Daniel). Named Presidio models, described the 12-to-5-to-3 model selection, explained the reconciliation algorithm, described the on-prem Kubernetes deployment. Had a genuine recognition moment where he understood the prior approaches were fundamentally wrong. Engaged substantively on the labeling discussion. Credibility was gained with him. He is the person on the Lam side who will understand and champion the approach.
 - **Relationship to Brad:** Functions as a unit with Brad but in distinct roles. Brad sets rules and guards boundaries; Mikhail delivers substance. Defers to Brad on organizational questions but leads the technical presentation independently.
-- **Known Since:** Set 01 (call prep), significantly deepened in Set 02 (meeting), credibility milestone in Set 05
+- **Set 06 Confirmation:** Colin confirmed Mikhail is "probably the real person that was masterminding that whole thing," despite Mikhail's prior claim of not being the technical person. Pat observed Mikhail actively looking up technology names in JIRA emails during the April 6 call to keep up with the discussion. Both interpreted this positively: Mikhail wants to be on top of the details. He is the person BayOne should treat as the real technical counterpart.
+- **Set 09 Activation:** Sent direct email to BayOne team on 2026-04-16 confirming Option A (Lam environment) as Lam's preferred execution mode and directing Colin to coordinate tech access with Daniel Harrison. Acting as facilitator and escalator: not deciding the technical access himself, but pushing it to the right people in parallel with whatever procurement is doing on the SOW. The pattern (tech sponsor pings team to coordinate before contract is signed) signals Lam wants to be "ready to start" the moment the SOW is countersigned. Confirms his championing role from Set 05 is operational, not just verbal.
+- **Known Since:** Set 01 (call prep), significantly deepened in Set 02 (meeting), credibility milestone in Set 05, confirmed as real technical driver in Set 06, activated as facilitator on tech access in Set 09
 
 ### Daniel Harrison
 - **Title:** Director of Engineering, GFSO area
@@ -37,7 +39,9 @@ This is a living document. It always reflects the most current understanding of 
 - **Current Work:** Working with BayOne's Philippines team on knowledge management engagement. .NET stack.
 - **Set 05 Performance:** Self-described as "more on the information gathering side." Primary contribution was pushing on disconnected/air-gapped/edge AI environments for customer fabs. Did not drive or contribute to the prior ML work discussion. Appears to not understand model hosting or the distinction between model architecture and deployment topology. The least useful and least clear participant on the April 6 call.
 - **Assessment:** Daniel is a software engineering leader, not an AI/ML resource. Communication with his team should be calibrated accordingly. His edge AI concerns are legitimate for future phases but were premature and distracting in the POC scoping context.
-- **Known Since:** Set 01 (call prep), confirmed Set 02, background Set 04, first met Set 05
+- **Set 06 Assessment (internal, NEVER client-facing):** Colin: "C grade person at best. I don't care how many years of experience someone has, that's just bad." Pat added: "His challenge is he's not motivated at all. Very into family, taking time off, a lot of time remote. He's never present." However, Pat balanced: "The guy is very good, very supportive... definitely not a detractor. He's neutral and towards us, so definitely can be a coach." Consensus: can be nurtured into a coach over time but is not a technical resource. Classified as a "distractor" (not negative, but diverts discussion) rather than a detractor.
+- **Set 09 Activation:** Designated by Mikhail as Colin's tech-access counterpart. The Colin↔Daniel coordination call is the next active engagement touchpoint with Lam. Daniel's software-engineering-leader profile (vs. AI/ML resource) is appropriate for this scope: environment provisioning, account access, tooling approvals, and Lam IT navigation are exactly the things Daniel is positioned to handle. This reframes Daniel's utility: he is not the technical AI counterpart (Mikhail is), but he is the right counterpart for execution-prep logistics. Watch his motivation/availability per Set 06 assessment — tech-access workstreams stall if the counterpart is slow to respond.
+- **Known Since:** Set 01 (call prep), confirmed Set 02, background Set 04, first met Set 05, candidly assessed Set 06, activated as tech access counterpart in Set 09
 
 ### Christian (last name unknown)
 - **Title:** Unknown (part of Brad's team)
@@ -66,6 +70,7 @@ This is a living document. It always reflects the most current understanding of 
 - **Relevant Experience:** Coherent Corp (same semiconductor equipment industry), defense primes (Raytheon, Northrop Grumman), AI governance for 40,000+ users, detection/redaction systems, shadow AI programs, ITAR/CMMC/DFARS/NIST 800-171
 - **Meeting Performance:** Strongest moment was the 20%/ChatGPT diagnosis ("that's pretty much out-of-the-box ChatGPT"). Unified control plane concept also landed well. Got redirected once by Brad/Mikhail when veering into IAM territory. Tendency toward verbosity and solution-drift, but recovered well after redirection.
 - **Technical Vision (from Set 03):** Hybrid deterministic + AI architecture, ingestion-first philosophy, unified control plane, application-by-application migration
+- **Set 06 Bandwidth:** Managing 7 active streams. Has Lam specifically earmarked in his capacity plan. Other opportunities (Tailored Brands) explicitly deprioritized. Pushing for team expansion: "Can I please get one hire please?" All AI conversations across BayOne funnel to Colin as the only resource.
 - **Known Since:** Set 01
 
 ### Anuj Sehgal
@@ -93,7 +98,13 @@ This is a living document. It always reflects the most current understanding of 
 - **Role in Engagement:** Delivery management, operational bridge to current Lam-BayOne engagement (Philippines team). First substantive participation in Set 04.
 - **Value to Engagement:** Has direct working knowledge of Daniel Harrison and Lam's current technical environment from the existing Philippines team engagement. Provides operational intelligence that a cold vendor would not have.
 - **Set 04 Contributions:** Provided intel on Daniel's background, flagged .NET stack and Test Complete exploration, questioned the 1,000-hour labeling estimate's realism, received the costing workbook for scenario modeling.
-- **Known Since:** Set 01 (listed), active participation in Set 04 (internal prep)
+- **Set 06:** In receive mode. Asked whether the POC should be free; immediately overruled by Colin and Anuj. Not yet aligned with the team's pricing philosophy for this engagement. Suggested moving the follow-up call earlier (2:00 PM instead of 2:30).
+- **Known Since:** Set 01 (listed), active participation in Set 04 (internal prep), Set 06 (pricing call)
+
+### Suresh ("RS")
+- **Title:** Unknown (internal BayOne sales leadership)
+- **Role in Engagement:** Referenced in Sets 04 and 06 as providing commercial guidance. His advice from Set 04: "Keep their procurement teams the heck away from headcounts." In Set 06, Colin disagreed with what appears to be Suresh's position of not wasting time if the client doesn't have budget. Colin's counter: if they can't solve this in 18 months, BayOne has leverage, so take smaller bites at fair price rather than walking away.
+- **Known Since:** Set 04 (referenced), Set 06 (disagreement surfaced)
 
 ### Zahra
 - **Title:** Sales
@@ -112,4 +123,4 @@ This is a living document. It always reflects the most current understanding of 
 - **Anuj is the deal driver.** VP of Sales, quarterbacking the commercial strategy. He controls the sales tempo and sequences Colin's technical work with client-facing milestones.
 - **BayOne sales friction** with Zahra around communication/scheduling is a background issue, separate from the technical engagement.
 - **Competitive landscape:** Deloitte and Capgemini are long-term embedded incumbents at Lam. Accenture was the prior partner who attempted the text classification work and failed. BayOne's model is to replicate the embed-and-expand approach with superior technical delivery.
-- **Next engagement point:** Proposal delivery by Friday April 10, 2026. Brad reviews following week, decision by approximately April 17. SOW/legal approximately one week. POC on Escalation Solver approximately two weeks from data access. Orion dependency for some data access (critical COS project). Brad requested customer name redaction from all BayOne documents.
+- **Engagement decision (Set 09):** Brad's expected April 17 decision landed favorably. SOW template (BAYON-MAS-0013142, MSA dated June 12, 2018) issued by Lam procurement on 2026-04-17 for BayOne to fill and return. Mikhail confirmed Option A (Lam environment) on 2026-04-16. Three-week POC timeline from access provisioning intact. Tech access workstream (Colin↔Daniel) opened in parallel with SOW execution. Orion dependency for data access remains the primary timeline risk. Brad's standing instruction (customer name redaction from all BayOne documents) remains in force.

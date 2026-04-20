@@ -80,6 +80,13 @@ Between numbered document sets, a **bridge document** captures what changed (e.g
 | 02 | Discovery call transcript | 2026-03-12 | First meeting with Lam Research team |
 | 02a | Internal debrief | 2026-03-12 | Colin and Anuj post-call debrief |
 | 03 | Prior working discussion | 2026-03-20 | Technical approach and strategy discussion (from prior Claude session) |
+| 04 | Internal prep call | 2026-04-01 | BayOne internal prep for April 6 Lam meeting |
+| 04a | Day-of pre-call | 2026-04-06 | Morning alignment before the Lam meeting |
+| 05 | Follow-up meeting | 2026-04-06 | Meeting with Brad, Mikhail, Daniel |
+| 05a | Post-meeting discussion | 2026-04-06 | Technical decomposition with Colin + Claude |
+| 06 | Internal pricing call | 2026-04-09 | BayOne pricing strategy and post-meeting assessment |
+| 07 | Pricing discussion | 2026-04-09 | POC pricing, scope, deliverables, and assumptions (Colin + Claude) |
+| 08 | Internal sync 2 | 2026-04-09 | Team review of proposal, pricing pushed up, environment options added |
 
 ### Processing Order for New Sets
 

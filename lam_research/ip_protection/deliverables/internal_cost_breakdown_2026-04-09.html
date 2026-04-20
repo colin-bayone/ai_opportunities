@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lam Research POC - Internal Cost Breakdown</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    @page { size: 8.5in 11in; margin: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #334155; line-height: 1.5; font-size: 12px; background: #fff;
+    }
+
+    .page {
+      width: 8.5in; min-height: 11in; margin: 0 auto;
+      padding: 0.4in 0.65in 0.4in; position: relative;
+    }
+
+    /* Header */
+    .header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding-bottom: 8px; border-bottom: 2px solid #dc2626; margin-bottom: 12px;
+    }
+    .header-left { display: flex; flex-direction: column; }
+    .logo { font-size: 22px; font-weight: 700; color: #0f172a; letter-spacing: -0.5px; }
+    .logo span { color: #dc2626; }
+    .header-office { font-size: 10px; color: #dc2626; font-weight: 600; margin-top: 1px; letter-spacing: 0.3px; }
+    .header-right { text-align: right; font-size: 11px; color: #64748b; line-height: 1.6; }
+    .header-right strong { color: #0f172a; font-weight: 600; }
+
+    .confidential-banner {
+      background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px;
+      padding: 8px 12px; margin-bottom: 20px; text-align: center;
+      font-size: 11px; font-weight: 600; color: #dc2626; letter-spacing: 1px; text-transform: uppercase;
+    }
+
+    /* Title */
+    .doc-title { margin-bottom: 12px; }
+    .doc-title h1 { font-size: 24px; font-weight: 700; color: #0f172a; letter-spacing: -0.4px; line-height: 1.2; }
+    .doc-title .subtitle { font-size: 16px; font-weight: 400; color: #64748b; margin-top: 0px; }
+
+    /* Sections */
+    .section { margin-bottom: 14px; }
+    .section-header {
+      font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: #5b21b6;
+      margin-bottom: 4px; padding-bottom: 3px; border-bottom: 1px solid #e2e8f0;
+    }
+
+    p { margin-bottom: 8px; font-size: 11.5px; }
+
+    /* Tables */
+    table {
+      width: 100%; border-collapse: separate; border-spacing: 0; font-size: 11px;
+      border: 1px solid #d4d4d8; border-radius: 6px; overflow: hidden;
+    }
+    th {
+      text-align: left; padding: 5px 10px; background: #5b21b6; color: #fff;
+      font-weight: 600; font-size: 9.5px; letter-spacing: 0.3px; text-transform: uppercase;
+    }
+    td { padding: 5px 10px; border-bottom: 1px solid #f1f5f9; }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: #fafafa; }
+
+    /* Right-align number columns */
+    .num { text-align: right; }
+    th.num { text-align: right; }
+
+    /* Total/summary rows */
+    .total-row td {
+      font-weight: 700; color: #0f172a; font-size: 11px;
+      border-top: 2px solid #d4d4d8; padding-top: 6px; padding-bottom: 6px;
+      background: #f5f3ff;
+    }
+
+    .margin-positive { color: #16a34a; font-weight: 700; }
+    .margin-row td { background: #f0fdf4; }
+
+    /* Notes */
+    .note-box {
+      font-size: 10.5px; color: #334155; line-height: 1.45;
+      padding: 8px 10px; background: #f8fafc;
+      border: 1px solid #e2e8f0; border-radius: 6px; margin-top: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      position: absolute; bottom: 0.35in; left: 0.65in; right: 0.65in;
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 6px; border-top: 1px solid #e2e8f0; font-size: 10px; color: #94a3b8;
+    }
+    .footer-logo { font-size: 12px; font-weight: 700; color: #64748b; }
+    .footer-logo span { color: #dc2626; }
+
+    @media print {
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page { padding: 0.35in 0.6in 0.35in; }
+      .footer { bottom: 0.3in; left: 0.6in; right: 0.6in; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- Header (red accent for internal) -->
+    <div class="header">
+      <div class="header-left">
+        <div class="logo">Bay<span>One</span> Solutions</div>
+        <div class="header-office">Internal Use Only</div>
+      </div>
+      <div class="header-right">
+        <strong>Lam Research POC</strong><br>
+        April 2026
+      </div>
+    </div>
+
+    <div class="confidential-banner">Internal Document - Do Not Share With Client</div>
+
+    <!-- Title -->
+    <div class="doc-title">
+      <h1>Confidential Information Detection POC</h1>
+      <div class="subtitle">Internal Cost Breakdown</div>
+    </div>
+
+    <!-- Engagement Summary -->
+    <div class="section">
+      <div class="section-header">Engagement Summary</div>
+      <table>
+        <tr>
+          <th style="width: 160px;">Item</th>
+          <th>Detail</th>
+        </tr>
+        <tr>
+          <td style="font-weight: 600; color: #0f172a;">Client</td>
+          <td>Lam Research</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600; color: #0f172a;">Engagement</td>
+          <td>Confidential Information Detection, Proof-of-Concept</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600; color: #0f172a;">Client Price</td>
+          <td>$15,000 (fixed price, outcome-based)</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600; color: #0f172a;">Duration</td>
+          <td>Three weeks from data access (one week discovery, two weeks build)</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600; color: #0f172a;">Environment</td>
+          <td>BayOne infrastructure (unless Lam requires otherwise)</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Team and Cost -->
+    <div class="section">
+      <div class="section-header">Personnel Cost</div>
+      <table>
+        <tr>
+          <th>Resource</th>
+          <th>Allocation</th>
+          <th>Duration</th>
+          <th class="num">Hours</th>
+          <th class="num">Rate</th>
+          <th class="num">Cost</th>
+        </tr>
+        <tr>
+          <td style="font-weight: 600; color: #0f172a;">Colin Moore (Director of AI)</td>
+          <td>10%</td>
+          <td>3 weeks</td>
+          <td class="num">12 hrs</td>
+          <td class="num">--</td>
+          <td class="num">$1,246.20</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600; color: #0f172a;">India Resource (Mid-Level)</td>
+          <td>100%</td>
+          <td>3 weeks</td>
+          <td class="num">120 hrs</td>
+          <td class="num">$45.00/hr</td>
+          <td class="num">$5,400.00</td>
+        </tr>
+        <tr class="total-row">
+          <td colspan="5">Personnel Base Cost</td>
+          <td class="num">$6,646.20</td>
+        </tr>
+      </table>
+      <div class="note-box">Colin's hourly rate is not disclosed in this document. His cost is shown as a total for hours worked. The India resource rate is loaded (base + 20% load factor). All rates are from the standard BayOne costing workbook.</div>
+    </div>
+
+    <!-- Cost Buildup -->
+    <div class="section">
+      <div class="section-header">Cost Buildup and Margin</div>
+      <table>
+        <tr>
+          <th>Line Item</th>
+          <th class="num">Amount</th>
+          <th class="num">Notes</th>
+        </tr>
+        <tr>
+          <td style="font-weight: 600; color: #0f172a;">Personnel Base Cost</td>
+          <td class="num">$6,646.20</td>
+          <td class="num">Colin + India resource</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600; color: #0f172a;">Risk Reserve (25%)</td>
+          <td class="num">$1,661.55</td>
+          <td class="num">Buffer for scope variance</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600; color: #0f172a;">Travel</td>
+          <td class="num">$2,500.00</td>
+          <td class="num">One in-person trip for POC demo/execution</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600; color: #0f172a;">Infrastructure</td>
+          <td class="num">$0.00</td>
+          <td class="num">BayOne environment; minimal compute</td>
+        </tr>
+        <tr class="total-row">
+          <td>Loaded Cost</td>
+          <td class="num">$10,807.75</td>
+          <td class="num"></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Margin Analysis -->
+    <div class="section">
+      <div class="section-header">Margin Analysis</div>
+      <table>
+        <tr>
+          <th>Metric</th>
+          <th class="num">On Base + Travel</th>
+          <th class="num">On Loaded Cost</th>
+        </tr>
+        <tr>
+          <td style="font-weight: 600; color: #0f172a;">Client Price</td>
+          <td class="num">$15,000.00</td>
+          <td class="num">$15,000.00</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600; color: #0f172a;">Cost</td>
+          <td class="num">$9,146.20</td>
+          <td class="num">$10,807.75</td>
+        </tr>
+        <tr class="margin-row">
+          <td style="font-weight: 600; color: #0f172a;">Margin ($)</td>
+          <td class="num margin-positive">$5,853.80</td>
+          <td class="num margin-positive">$4,192.25</td>
+        </tr>
+        <tr class="margin-row">
+          <td style="font-weight: 600; color: #0f172a;">Margin (%)</td>
+          <td class="num margin-positive">39.0%</td>
+          <td class="num margin-positive">27.9%</td>
+        </tr>
+      </table>
+      <div class="note-box">Loaded margin of 27.9% is slightly below the 30% floor due to travel cost addition. The 25% risk reserve provides buffer for scope variance. If the risk reserve is not consumed, effective margin on base cost plus travel rises to 39.0%. The travel investment supports Anuj's recommendation for in-person presence during the POC, which strengthens the relationship with Brad's team.</div>
+    </div>
+
+    <!-- Strategic Context -->
+    <div class="section">
+      <div class="section-header">Strategic Context</div>
+      <p>The primary value of this POC is access to the Lam Research environment, systems, and internal landscape. A Lam account and data access enables discovery of additional opportunities beyond the POC scope. The POC margin is secondary to the embed-and-expand potential of the account.</p>
+      <p>The $15,000 price point was selected to signal commitment from Lam (not free, tests purchasing authority) while avoiding sticker shock that would slow approval. Brad (Managing Director, decision-maker) reviews the proposal and is expected to provide a decision within one week of receipt.</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="footer-logo">Bay<span>One</span> Solutions</div>
+      <div>Internal Use Only - Not for Distribution</div>
+    </div>
+
+  </div>
+
+</body>
+</html>

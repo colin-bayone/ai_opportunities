@@ -1,0 +1,32 @@
+# Folder Descriptions — lam_research/ip_protection
+
+Generated: 2026-04-20
+
+lam_research/ip_protection/
+├── archive/                            — Pre-restructure historical files (last updated: 2026-04-06)
+│   ├── context/                        — Contains 0 files (empty)
+│   │   └── 2026-03-12_source_transcripts/— Contains 3 files (last updated: 2026-04-06)
+│   ├── deliverables/                   — Client-facing documents (markdown + HTML) (empty)
+│   │   └── 2026-03-12_discovery_call/  — Contains 8 files (last updated: 2026-04-06)
+│   ├── planning/                       — Approach planning, session handoffs, notes (empty)
+│   │   └── 2026-03-20_session/         — Contains 2 files (last updated: 2026-04-06)
+│   └── project/                        — Contains 0 files (empty)
+│       ├── 2026-03-12_research/        — Contains 2 files (last updated: 2026-04-06)
+│       │   ├── set_01_call_prep/       — Contains 5 files (last updated: 2026-04-06)
+│       │   ├── set_02_discovery_call/  — Contains 8 files (last updated: 2026-04-06)
+│       │   ├── set_02a_debrief/        — Contains 4 files (last updated: 2026-04-06)
+│       │   └── set_03_discussion/      — Contains 7 files (last updated: 2026-04-06)
+│       └── 2026-03-20_quality_review/  — Contains 3 files (last updated: 2026-04-06)
+├── decisions/                          — Open questions and agreed decisions (empty)
+├── deliverables/                       — Client-facing documents (markdown + HTML) (last updated: 2026-04-09)
+├── planning/                           — Approach planning, session handoffs, notes (last updated: 2026-04-17)
+├── presentations/                      — Slide decks, presentation materials (empty)
+│   └── discovery_2026-04-06/           — Contains 11 files (last updated: 2026-04-06)
+├── pricing/                            — Pricing specs, corrections, cost models (last updated: 2026-04-09)
+├── progress/                           — Running status tracking (empty)
+├── research/                           — Blockchain-style research decomposition (append-only) (last updated: 2026-04-20)
+└── source/                             — Raw input files (never modified) (last updated: 2026-04-17)
+    └── lam_sow/                        — Contains 2 files (last updated: 2026-04-17)
+        ├── page_01/                    — Contains 5 files (last updated: 2026-04-17)
+        ├── page_02/                    — Contains 5 files (last updated: 2026-04-17)
+        └── page_03/                    — Contains 5 files (last updated: 2026-04-17)
