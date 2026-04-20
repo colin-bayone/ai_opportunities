@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CI/CD Automation: What We Learned - April 16, 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #334155;
+  line-height: 1.7;
+  font-size: 15px;
+  background: #ffffff;
+}
+
+/* ============================================
+   COVER PAGE
+   ============================================ */
+
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px;
+  background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  page-break-after: always;
+}
+
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 80%;
+  height: 200%;
+  background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+  transform: rotate(-12deg);
+}
+
+.cover::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 60%;
+  height: 80%;
+  background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+.cover-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #e879f9;
+  margin-bottom: 24px;
+}
+
+.cover h1 {
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+}
+
+.cover-subtitle {
+  font-size: 20px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 48px;
+  max-width: 600px;
+}
+
+.cover-meta {
+  display: flex;
+  gap: 48px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.cover-meta-item label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 8px;
+}
+
+.cover-meta-item span {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.logo {
+  position: absolute;
+  bottom: 80px;
+  right: 80px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  z-index: 1;
+}
+
+.logo span { color: #e879f9; }
+
+/* ============================================
+   LAYOUT
+   ============================================ */
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+
+.section { margin-bottom: 64px; }
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+
+h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 24px;
+  letter-spacing: -0.5px;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 32px 0 16px;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 24px 0 12px;
+}
+
+p { margin-bottom: 16px; }
+
+.lead {
+  font-size: 18px;
+  color: #64748b;
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.section-number {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #a855f7;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  padding: 6px 14px;
+  background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%);
+  border-radius: 4px;
+}
+
+/* ============================================
+   TABLES
+   ============================================ */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 14px;
+}
+
+th {
+  text-align: left;
+  padding: 14px 16px;
+  background: #5b21b6;
+  color: #fff;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-right: 1px solid rgba(255,255,255,0.15);
+}
+
+th:last-child { border-right: none; }
+th:first-child { border-radius: 8px 0 0 0; }
+th:last-child { border-radius: 0 8px 0 0; }
+
+td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: top;
+}
+
+tr:last-child td { border-bottom: none; }
+tr:nth-child(even) { background: #f8fafc; }
+
+/* ============================================
+   HIGHLIGHT BOX
+   ============================================ */
+
+.highlight-box {
+  background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+  border-left: 4px solid #a855f7;
+  padding: 24px 28px;
+  margin: 32px 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.highlight-box p:last-child { margin-bottom: 0; }
+
+.highlight-box h4 {
+  color: #5b21b6;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.highlight-box ol, .highlight-box ul {
+  margin: 12px 0 0 20px;
+  padding: 0;
+}
+
+.highlight-box li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+/* ============================================
+   CARDS
+   ============================================ */
+
+.card {
+  background: #fff;
+  border: 1px solid rgba(124,58,237,0.15);
+  border-radius: 12px;
+  padding: 28px;
+  margin: 24px 0;
+  box-shadow: 0 1px 3px rgba(124,58,237,0.06);
+}
+
+.card h4 {
+  margin-top: 0;
+  color: #5b21b6;
+}
+
+.card ul {
+  margin: 0 0 0 20px;
+  padding: 0;
+}
+
+.card li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.card p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.card p:last-child { margin-bottom: 0; }
+
+/* ============================================
+   STAT CARDS
+   ============================================ */
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 32px 0;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, rgba(124,58,237,0.06) 0%, rgba(168,85,247,0.04) 100%);
+  border: 1px solid rgba(124,58,237,0.1);
+  padding: 24px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: #7c3aed;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================
+   WORKFLOW GRID
+   ============================================ */
+
+.workflow-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 24px 0;
+}
+
+.workflow-step {
+  background: #fff;
+  border: 1px solid rgba(124,58,237,0.15);
+  border-radius: 12px;
+  padding: 20px 24px;
+  position: relative;
+}
+
+.workflow-step-number {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.workflow-step h5 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 8px 0;
+}
+
+.workflow-step p {
+  font-size: 14px;
+  margin: 0;
+  color: #334155;
+  line-height: 1.6;
+}
+
+/* ============================================
+   TWO COLUMN LAYOUT
+   ============================================ */
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin: 24px 0;
+}
+
+/* ============================================
+   CTA BOX
+   ============================================ */
+
+.cta-box {
+  background: linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(168,85,247,0.12) 100%);
+  border: 2px solid rgba(124,58,237,0.2);
+  border-radius: 12px;
+  padding: 32px;
+  margin: 32px 0;
+}
+
+.cta-box h3 {
+  margin-top: 0;
+  color: #5b21b6;
+}
+
+.cta-box p:last-child { margin-bottom: 0; }
+
+/* ============================================
+   STYLED LISTS
+   ============================================ */
+
+ul.content-list {
+  margin: 0 0 0 20px;
+  padding: 0;
+}
+
+ul.content-list li {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+/* ============================================
+   CHART IMAGE CONTAINER
+   ============================================ */
+
+.chart-container {
+  text-align: center;
+  margin: 32px 0;
+}
+
+.chart-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.chart-caption {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 12px;
+  font-style: italic;
+}
+
+/* ============================================
+   ARCHITECTURE DIAGRAM
+   ============================================ */
+
+.architecture-container {
+  margin: 32px 0;
+  overflow-x: auto;
+}
+
+.architecture-container svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 32px;
+  margin: 32px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.notes-grid-item h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #5b21b6;
+  margin: 0 0 8px 0;
+}
+
+.notes-grid-item p {
+  font-size: 13px;
+  margin-bottom: 4px;
+  color: #334155;
+  line-height: 1.6;
+}
+
+.notes-grid-item p:last-child { margin-bottom: 0; }
+
+.pending-badge {
+  display: inline-block;
+  font-size: 10px;
+  background: #fff3e0;
+  color: #e65100;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: 6px;
+  border: 1px solid #e65100;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================
+   SUMMARY TABLE
+   ============================================ */
+
+.summary-table {
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 32px 0;
+  border: 1px solid #e2e8f0;
+}
+
+.summary-table th {
+  background: #5b21b6;
+}
+
+.summary-table tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer {
+  text-align: center;
+  padding: 48px 40px;
+  border-top: 1px solid #e2e8f0;
+  margin-top: 64px;
+}
+
+.footer-logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+
+.footer-logo span { color: #a855f7; }
+
+.footer p {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0;
+}
+
+.footer-bar {
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #5b21b6, #a855f7, #e879f9);
+  margin-bottom: 32px;
+  border-radius: 2px;
+}
+
+/* ============================================
+   TABLE OF CONTENTS
+   ============================================ */
+
+.toc {
+  background: linear-gradient(135deg, rgba(124,58,237,0.04) 0%, rgba(168,85,247,0.06) 100%);
+  border: 1px solid rgba(124,58,237,0.1);
+  padding: 40px;
+  border-radius: 12px;
+  margin: 40px 0;
+}
+
+.toc h3 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.toc-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 40px;
+}
+
+.toc-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.toc-num {
+  font-size: 12px;
+  font-weight: 600;
+  color: #a855f7;
+  width: 24px;
+  flex-shrink: 0;
+}
+
+.toc-link {
+  color: #334155;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* ============================================
+   PIPELINE COMPONENT LIST
+   ============================================ */
+
+.pipeline-list {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0;
+}
+
+.pipeline-list li {
+  padding: 12px 16px;
+  border-left: 3px solid #a855f7;
+  margin-bottom: 8px;
+  background: #f8fafc;
+  border-radius: 0 8px 8px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.pipeline-list li strong {
+  color: #5b21b6;
+}
+
+/* ============================================
+   FINDING CARDS
+   ============================================ */
+
+.finding-card {
+  background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+  border-left: 4px solid #a855f7;
+  padding: 24px 28px;
+  margin: 20px 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.finding-card h4 {
+  color: #5b21b6;
+  margin: 0 0 8px 0;
+  font-size: 15px;
+}
+
+.finding-card p {
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  @page {
+    size: 8.5in 11in;
+    margin: 0.4in;
+  }
+
+  body { font-size: 9pt; line-height: 1.4; }
+
+  .cover {
+    min-height: 0;
+    height: 10in;
+    padding: 50px;
+    page-break-after: always;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .cover h1 { font-size: 32pt; }
+  .cover-subtitle { font-size: 13pt; }
+
+  .cover-meta { padding-top: 32px; gap: 32px; }
+  .logo { position: relative; bottom: auto; right: auto; margin-top: 32px; }
+
+  .container { padding: 0; max-width: 100%; }
+
+  .section { margin-bottom: 20px; }
+
+  h2 { font-size: 14pt; margin-bottom: 10px; page-break-after: avoid; }
+  h3 { font-size: 11pt; margin: 14px 0 8px; page-break-after: avoid; }
+  h4 { font-size: 10pt; margin: 10px 0 6px; page-break-after: avoid; }
+  p { margin-bottom: 6px; }
+  .lead { font-size: 10pt; margin-bottom: 14px; }
+
+  table { font-size: 8pt; margin: 10px 0; }
+  th, td { padding: 6px 8px; }
+
+  th, .cover, .highlight-box, .stat-card, .summary-table,
+  .workflow-step-number, .finding-card {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .section-number {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    break-after: avoid;
+    page-break-after: avoid;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  table {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  thead { display: table-header-group; }
+
+  tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .card, .stat-card, .highlight-box, .finding-card, .cta-box {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .stat-grid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .toc {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .lead {
+    break-before: avoid;
+    page-break-before: avoid;
+  }
+
+  .highlight-box, .finding-card {
+    padding: 12px 16px;
+    margin: 14px 0;
+  }
+
+  .two-col { gap: 16px; }
+  .card { padding: 16px; }
+  .workflow-grid { gap: 12px; }
+  .workflow-step { padding: 12px 16px; }
+  .notes-grid { gap: 12px 16px; }
+  .cta-box { padding: 16px; margin: 14px 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .stat-grid { gap: 12px; margin: 20px 0; }
+  .stat-card { padding: 14px; }
+  .stat-value { font-size: 20pt; }
+  .stat-label { font-size: 8pt; }
+
+  .footer { margin-top: 20px; padding: 16px; }
+
+  .chart-container img { max-width: 85%; }
+
+  .architecture-container svg { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     COVER PAGE
+     ============================================ -->
+
+<div class="cover">
+  <div class="cover-content">
+    <div class="cover-label">Engagement Progress Update</div>
+    <h1>CI/CD Automation: What We Learned</h1>
+    <p class="cover-subtitle">Team progress and findings from April 10 through April 16, structured to support a productive meeting discussion.</p>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <label>Date</label>
+        <span>April 16, 2026</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Prepared For</label>
+        <span>Srinivas Pitta</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Prepared By</label>
+        <span>BayOne AI Practice</span>
+      </div>
+    </div>
+  </div>
+  <div class="logo">Bay<span>One</span> Solutions</div>
+</div>
+
+<!-- ============================================
+     MAIN CONTENT
+     ============================================ -->
+
+<div class="container">
+
+  <!-- Table of Contents -->
+  <div class="toc">
+    <h3>Contents</h3>
+    <ul class="toc-list">
+      <li><span class="toc-num">01</span><span class="toc-link">Pain Point Analysis</span></li>
+      <li><span class="toc-num">02</span><span class="toc-link">Build Log Infrastructure</span></li>
+      <li><span class="toc-num">03</span><span class="toc-link">Proposed Architecture</span></li>
+      <li><span class="toc-num">04</span><span class="toc-link">WebEx Integration</span></li>
+      <li><span class="toc-num">05</span><span class="toc-link">Open Questions for Discussion</span></li>
+      <li><span class="toc-num">06</span><span class="toc-link">Access Items Requiring Action</span></li>
+    </ul>
+  </div>
+
+  <!-- ============================================
+       SECTION 01 — PAIN POINT ANALYSIS
+       ============================================ -->
+
+  <div class="section">
+    <div class="section-number">01</div>
+    <h2>Pain Point Analysis</h2>
+    <p class="lead">The team scraped and categorized messages from the NxOS CI workflow WebEx space. The dataset spans approximately three years (April 2023 through March 2026) and contains over 4,200 actionable messages across 25 categories.</p>
+
+    <h3>Top Issue Categories by Volume</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Messages</th>
+          <th>% of Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Bug/Error</td>
+          <td>463</td>
+          <td>10.9%</td>
+        </tr>
+        <tr>
+          <td>Question/Help Request</td>
+          <td>460</td>
+          <td>10.9%</td>
+        </tr>
+        <tr>
+          <td>Infrastructure/Deployment Problem</td>
+          <td>410</td>
+          <td>9.7%</td>
+        </tr>
+        <tr>
+          <td>Test Failure</td>
+          <td>396</td>
+          <td>9.4%</td>
+        </tr>
+        <tr>
+          <td>Code Review</td>
+          <td>349</td>
+          <td>8.2%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="chart-container">
+      <img src="category_distribution.png" alt="Distribution of message categories across the NxOS CI workflow channel">
+      <p class="chart-caption">Distribution of 4,200+ categorized messages from the NxOS CI workflow WebEx space (April 2023 through March 2026)</p>
+    </div>
+
+    <h3>Response Time and Coverage</h3>
+    <p>For resolvable issue categories, the team measured average first response time and what percentage of threads received any reply.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Avg Response</th>
+          <th>Median</th>
+          <th>Response Coverage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Blocker/Dependency</td>
+          <td>12 min</td>
+          <td>7 min</td>
+          <td>44%</td>
+        </tr>
+        <tr>
+          <td>QA/Testing Issue</td>
+          <td>46 min</td>
+          <td>5 min</td>
+          <td>39%</td>
+        </tr>
+        <tr>
+          <td>Infrastructure/Deployment</td>
+          <td>249 min (~4 hrs)</td>
+          <td>20 min</td>
+          <td>61%</td>
+        </tr>
+        <tr>
+          <td>Bug/Error</td>
+          <td>263 min (~4.4 hrs)</td>
+          <td>51 min</td>
+          <td>49%</td>
+        </tr>
+        <tr>
+          <td>Test Failure</td>
+          <td>321 min (~5.4 hrs)</td>
+          <td>44 min</td>
+          <td>46%</td>
+        </tr>
+        <tr>
+          <td>Question/Help Request</td>
+          <td>440 min (~7.3 hrs)</td>
+          <td>13 min</td>
+          <td>34%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="chart-container">
+      <img src="avg_response_time.png" alt="Average first response time by issue category">
+      <p class="chart-caption">Average first response time across resolvable issue categories, measured from initial post to first reply</p>
+    </div>
+
+    <h3>Key Findings</h3>
+
+    <div class="finding-card">
+      <h4>Two-thirds of help requests receive no response</h4>
+      <p>Question/Help Request is the highest-volume category (tied with Bug/Error), yet only 34% of threads receive any reply. Engineers are asking for help and receiving silence.</p>
+    </div>
+
+    <div class="finding-card">
+      <h4>Build failures take half a workday to get first acknowledgment</h4>
+      <p>Bug/Error and Test Failure threads average 4 to 5 hours before a first response. At the 90th percentile, engineers wait over 10 hours.</p>
+    </div>
+
+    <div class="finding-card">
+      <h4>Explicit blockers get resolved in minutes</h4>
+      <p>When an issue is specifically flagged as a blocker, the average first response time drops to 12 minutes. The organization responds when urgency is communicated. The gap is in identifying what should be escalated.</p>
+    </div>
+
+    <div class="finding-card">
+      <h4>Channel volume has tripled over three years</h4>
+      <p>Weekly message volume has grown from 20 to 40 messages per week in 2023 to 60 to 120 in 2026. The manual triage approach is not scaling with the growing engineering organization.</p>
+    </div>
+
+    <h3>Recommendation</h3>
+    <div class="highlight-box">
+      <p>This data suggests the highest-impact first target for AI-driven triage is the Question/Help Request category: high volume, lowest response coverage, and longest average wait. An automated system that can surface relevant documentation, link to known solutions, or route questions to the right person would address the single largest gap in the current workflow.</p>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 02 — BUILD LOG INFRASTRUCTURE
+       ============================================ -->
+
+  <div class="section">
+    <div class="section-number">02</div>
+    <h2>Build Log Infrastructure</h2>
+    <p class="lead">The team gained hands-on access to the build log system through working sessions on April 8 and April 9. The following was verified through direct observation and discussion with the build infrastructure team.</p>
+
+    <h3>Build System Landscape</h3>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-value">2</div>
+        <div class="stat-label">Build Systems</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">13</div>
+        <div class="stat-label">Bazel Error Log Types</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">40+</div>
+        <div class="stat-label">Log Files Per Build</div>
+      </div>
+    </div>
+
+    <p>Two build systems are in use: Gmake (nx_main branch, legacy, being phased out) and Bazel (nx_dev branch, current focus). Both produce CI builds (developer PRs) and CD builds (official nightly). CI and CD builds have different NFS paths, different log formats, and different retention policies.</p>
+
+    <h3>Log Infrastructure Details</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Attribute</th>
+          <th>CI Builds</th>
+          <th>CD Builds</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>NFS path pattern</td>
+          <td><code>/auto/paw-sjc-scratch/paw-logs/{uuid}/...</code></td>
+          <td><code>/auto/ins-bld-tools/branches/{branch}/nexus/logs/{tag}</code></td>
+        </tr>
+        <tr>
+          <td>Path discovery</td>
+          <td>UUID extracted from PR metadata</td>
+          <td>Predictable from branch + build tag</td>
+        </tr>
+        <tr>
+          <td>Retention (success)</td>
+          <td>Deleted at PR merge</td>
+          <td>2 weeks</td>
+        </tr>
+        <tr>
+          <td>Retention (failure)</td>
+          <td>3 to 5 days</td>
+          <td>5 years</td>
+        </tr>
+        <tr>
+          <td>Triage entry point</td>
+          <td>No build_log.html</td>
+          <td>build_log.html available</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Build metadata (build number, status, timestamps) is stored in MySQL. Logs are stored separately on NFS in a flat directory structure with 40 or more individual log files per build. The 13 distinct Bazel error log types are organized per image and stage (nxos64, nxos64_msx, linecardimages, core_64_n9000, and others).</p>
+
+    <h3>Existing Automation Review</h3>
+    <p>The team reviewed the existing build repair automation pipeline (PR #642 on DCN/tools) at the code level. The pipeline consists of 7 components:</p>
+
+    <ol class="pipeline-list">
+      <li><strong>analyze_and_fix_build.py</strong> serves as the entry point, parsing build_log.html for :STATUS: lines and routing to the Gmake or Bazel workflow.</li>
+      <li><strong>automated_workflow.py</strong> (Gmake) and <strong>automated_bazel_workflow.py</strong> (Bazel) provide two parallel execution paths.</li>
+      <li><strong>find_earliest_error_log.py</strong> (Gmake) and <strong>bzl_error_report.py</strong> (Bazel) handle error extraction from the respective log formats.</li>
+      <li><strong>BUILD_ERROR_ANALYSIS_NO_BUILD.md</strong> contains the Codex prompt template used for fix generation.</li>
+      <li>Verification builds run with up to 3 retries per attempt.</li>
+      <li>Email notification with git diff is sent upon completion.</li>
+    </ol>
+
+    <h4>Identified Limitations</h4>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Limitation</th>
+          <th>Detail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Incomplete context extraction</td>
+          <td>Error extraction captures only a subset of available context. The mtime-based file selection and backward scan that stops at ARCH lines miss relevant information.</td>
+        </tr>
+        <tr>
+          <td>No persistence across runs</td>
+          <td>Analysis results are not preserved. Workspace files are overwritten each attempt, with no traceability from a fix back to the root cause that motivated it.</td>
+        </tr>
+        <tr>
+          <td>Gmake inefficiency</td>
+          <td>The Gmake path rebuilds all targets on every retry. The Bazel path correctly tracks remaining failures only.</td>
+        </tr>
+        <tr>
+          <td>Fragile configuration</td>
+          <td>Hard-coded absolute paths throughout the codebase make the pipeline fragile to infrastructure changes.</td>
+        </tr>
+        <tr>
+          <td>Unused parameters</td>
+          <td>The <code>error_output</code> parameter is accepted but never passed to the Codex prompt, leaving available context on the table.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight-box">
+      <p>The Bazel workflow is the more mature path and serves as the better foundation for improvement. The proposed architecture (Section 03) builds on this assessment.</p>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 03 — PROPOSED ARCHITECTURE
+       ============================================ -->
+
+  <div class="section">
+    <div class="section-number">03</div>
+    <h2>Proposed Architecture</h2>
+    <p class="lead">Based on the current-state review and the technical understanding gained through hands-on sessions, the team has drafted a proposed end-to-end architecture for the build log analysis system. This is initial thinking, and several decisions remain pending.</p>
+
+    <h3>Architecture Diagram</h3>
+
+    <div class="architecture-container">
+      <svg width="1240" height="720" viewBox="0 0 1240 720" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="aBlue" markerWidth="9" markerHeight="6" refX="9" refY="3" orient="auto"><polygon points="0 0,9 3,0 6" fill="#0077b6"></polygon></marker>
+          <marker id="aIndigo" markerWidth="9" markerHeight="6" refX="9" refY="3" orient="auto"><polygon points="0 0,9 3,0 6" fill="#3949ab"></polygon></marker>
+          <marker id="aGreen" markerWidth="9" markerHeight="6" refX="9" refY="3" orient="auto"><polygon points="0 0,9 3,0 6" fill="#2e7d32"></polygon></marker>
+          <marker id="aOrange" markerWidth="9" markerHeight="6" refX="9" refY="3" orient="auto"><polygon points="0 0,9 3,0 6" fill="#e65100"></polygon></marker>
+          <marker id="aPurple" markerWidth="9" markerHeight="6" refX="9" refY="3" orient="auto"><polygon points="0 0,9 3,0 6" fill="#6a1b9a"></polygon></marker>
+          <marker id="aAmber" markerWidth="9" markerHeight="6" refX="9" refY="3" orient="auto"><polygon points="0 0,9 3,0 6" fill="#f57f17"></polygon></marker>
+          <marker id="aRed" markerWidth="9" markerHeight="6" refX="9" refY="3" orient="auto"><polygon points="0 0,9 3,0 6" fill="#c62828"></polygon></marker>
+          <marker id="aNavy" markerWidth="9" markerHeight="6" refX="9" refY="3" orient="auto"><polygon points="0 0,9 3,0 6" fill="#0d47a1"></polygon></marker>
+          <marker id="aTeal" markerWidth="9" markerHeight="6" refX="9" refY="3" orient="auto"><polygon points="0 0,9 3,0 6" fill="#00695c"></polygon></marker>
+
+          <filter id="sh" x="-12%" y="-12%" width="124%" height="135%">
+            <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000018"></feDropShadow>
+          </filter>
+
+          <linearGradient id="gGreen" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#1b5e20"></stop>
+            <stop offset="100%" stop-color="#388e3c"></stop>
+          </linearGradient>
+          <linearGradient id="gOrange" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#bf360c"></stop>
+            <stop offset="100%" stop-color="#e64a19"></stop>
+          </linearGradient>
+          <linearGradient id="gRed" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#6a0080"></stop>
+            <stop offset="100%" stop-color="#ad1457"></stop>
+          </linearGradient>
+          <linearGradient id="gTeal" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#004d40"></stop>
+            <stop offset="100%" stop-color="#00897b"></stop>
+          </linearGradient>
+          <linearGradient id="gNavy" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#0d47a1"></stop>
+            <stop offset="100%" stop-color="#1976d2"></stop>
+          </linearGradient>
+          <linearGradient id="gPurple" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#4a148c"></stop>
+            <stop offset="100%" stop-color="#7b1fa2"></stop>
+          </linearGradient>
+        </defs>
+
+        <!-- BLOCK 1 — NFS Ingestion -->
+        <rect x="20" y="230" width="170" height="150" rx="12" fill="#d0ebff" stroke="#0077b6" stroke-width="2" filter="url(#sh)"></rect>
+        <rect x="20" y="230" width="170" height="36" rx="12" fill="#0077b6"></rect>
+        <rect x="20" y="254" width="170" height="12" fill="#0077b6"></rect>
+        <text x="105" y="253" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#fff">BLOCK 1: NFS Ingestion</text>
+        <text x="105" y="282" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#003f5c">Bazel Logs (CI + CD)</text>
+        <text x="33" y="302" font-size="10" fill="#003f5c">&#9656; Mode: Batched (15-30 min)</text>
+        <text x="33" y="317" font-size="10" fill="#003f5c">&#9656; Alt: Event-driven / realtime</text>
+        <text x="33" y="332" font-size="10" fill="#003f5c">&#9656; Watcher / scheduled poll</text>
+        <text x="33" y="347" font-size="10" fill="#003f5c">&#9656; Manifest + checksum</text>
+        <rect x="28" y="355" width="154" height="18" rx="5" fill="#fff3e0" stroke="#e65100" stroke-width="1"></rect>
+        <text x="105" y="368" text-anchor="middle" font-size="9.5" fill="#e65100">Pending: batch vs realtime decision</text>
+
+        <!-- Arrow B1 to B2 -->
+        <line x1="190" y1="305" x2="218" y2="305" stroke="#0077b6" stroke-width="2" marker-end="url(#aBlue)"></line>
+
+        <!-- BLOCK 2 — Log Parsing and Chunking -->
+        <rect x="218" y="210" width="180" height="190" rx="12" fill="#e8eaf6" stroke="#3949ab" stroke-width="2" filter="url(#sh)"></rect>
+        <rect x="218" y="210" width="180" height="36" rx="12" fill="#3949ab"></rect>
+        <rect x="218" y="234" width="180" height="12" fill="#3949ab"></rect>
+        <text x="308" y="233" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#fff">BLOCK 2: Parsing &amp; Chunking</text>
+        <text x="308" y="264" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#1a237e">Structured extraction</text>
+        <text x="232" y="284" font-size="10" fill="#3949ab">&#9656; Regex parsing (uniform formats)</text>
+        <text x="232" y="299" font-size="10" fill="#3949ab">&#9656; NLP chunking (varied formats)</text>
+        <text x="232" y="314" font-size="10" fill="#3949ab">&#9656; Semantic chunk boundaries</text>
+        <text x="232" y="329" font-size="10" fill="#3949ab">&#9656; NLP summarisation to shrink</text>
+        <text x="232" y="344" font-size="10" fill="#3949ab">   text prior to tier 2/3 calls</text>
+        <text x="232" y="363" font-size="10" fill="#c62828" font-style="italic">Critical: 300K-500K line files</text>
+        <rect x="226" y="372" width="164" height="18" rx="5" fill="#fff3e0" stroke="#e65100" stroke-width="1"></rect>
+        <text x="308" y="385" text-anchor="middle" font-size="9.5" fill="#e65100">Pending: CI vs CD format check</text>
+
+        <!-- Arrows from Parsing to each Tier -->
+        <path d="M398 240 Q440 155 478 142" stroke="#2e7d32" stroke-width="1.8" fill="none" marker-end="url(#aGreen)"></path>
+        <text x="410" y="195" font-size="10" fill="#2e7d32" transform="rotate(-40,410,195)">known errors</text>
+
+        <line x1="398" y1="305" x2="478" y2="305" stroke="#e65100" stroke-width="1.8" marker-end="url(#aOrange)"></line>
+        <text x="420" y="298" font-size="10" fill="#e65100">contextual</text>
+
+        <path d="M398 370 Q440 460 478 478" stroke="#880e4f" stroke-width="1.8" fill="none" marker-end="url(#aRed)"></path>
+        <text x="410" y="440" font-size="10" fill="#880e4f" transform="rotate(40,410,440)">complex</text>
+
+        <!-- BLOCK 3 — Tier 1 Deterministic -->
+        <rect x="478" y="60" width="210" height="170" rx="12" fill="#f1f8e9" stroke="#2e7d32" stroke-width="2" filter="url(#sh)"></rect>
+        <rect x="478" y="60" width="210" height="40" rx="12" fill="url(#gGreen)"></rect>
+        <rect x="478" y="88" width="210" height="12" fill="url(#gGreen)"></rect>
+        <text x="583" y="78" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#fff">BLOCK 3 / TIER 1: Rule-Based</text>
+        <text x="583" y="93" text-anchor="middle" font-size="10" fill="#c8e6c9">Deterministic - No AI</text>
+        <text x="583" y="120" text-anchor="middle" font-size="11" font-weight="bold" fill="#1b5e20">Rule-Based Error Detection</text>
+        <text x="492" y="140" font-size="10" fill="#2e7d32">&#9656; Bazel docs error code registry</text>
+        <text x="492" y="156" font-size="10" fill="#2e7d32">&#9656; Regex / pattern matching</text>
+        <text x="492" y="172" font-size="10" fill="#2e7d32">&#9656; Error description lookup</text>
+        <text x="492" y="188" font-size="10" fill="#2e7d32">&#9656; Fast path - low cost</text>
+        <text x="492" y="212" font-size="10" fill="#888" font-style="italic">Handles majority of errors</text>
+
+        <!-- Escalation T1 to T2 -->
+        <line x1="583" y1="232" x2="583" y2="272" stroke="#f57f17" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#aAmber)"></line>
+        <text x="590" y="258" font-size="10" fill="#f57f17" font-style="italic">unresolved</text>
+
+        <!-- BLOCK 4 — Tier 2 NLP / ML -->
+        <rect x="478" y="274" width="210" height="160" rx="12" fill="#fff8f0" stroke="#e65100" stroke-width="2" filter="url(#sh)"></rect>
+        <rect x="478" y="274" width="210" height="40" rx="12" fill="url(#gOrange)"></rect>
+        <rect x="478" y="302" width="210" height="12" fill="url(#gOrange)"></rect>
+        <text x="583" y="292" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#fff">BLOCK 4 / TIER 2: NLP / ML</text>
+        <text x="583" y="307" text-anchor="middle" font-size="10" fill="#ffe0cc">Invoked when T1 cannot resolve</text>
+        <text x="583" y="334" text-anchor="middle" font-size="11" font-weight="bold" fill="#bf360c">Contextual Classification</text>
+        <text x="492" y="354" font-size="10" fill="#e65100">&#9656; Specialised small ML model</text>
+        <text x="492" y="370" font-size="10" fill="#e65100">&#9656; Error category / issue type</text>
+        <text x="492" y="386" font-size="10" fill="#e65100">&#9656; Semantic similarity matching</text>
+        <text x="492" y="402" font-size="10" fill="#e65100">&#9656; Confidence scoring</text>
+        <text x="492" y="422" font-size="10" fill="#888" font-style="italic">Contextual, non-trivial errors</text>
+
+        <!-- Escalation T2 to T3 -->
+        <line x1="583" y1="436" x2="583" y2="474" stroke="#c62828" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#aRed)"></line>
+        <text x="590" y="460" font-size="10" fill="#c62828" font-style="italic">unresolved</text>
+
+        <!-- BLOCK 5 — Tier 3 LLM Complex Analysis -->
+        <rect x="478" y="476" width="210" height="170" rx="12" fill="#fdf0f8" stroke="#880e4f" stroke-width="2" filter="url(#sh)"></rect>
+        <rect x="478" y="476" width="210" height="40" rx="12" fill="url(#gRed)"></rect>
+        <rect x="478" y="504" width="210" height="12" fill="url(#gRed)"></rect>
+        <text x="583" y="494" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#fff">BLOCK 5 / TIER 3: LLM</text>
+        <text x="583" y="509" text-anchor="middle" font-size="10" fill="#f8bbd0">Only when T1 + T2 cannot resolve</text>
+        <text x="583" y="536" text-anchor="middle" font-size="11" font-weight="bold" fill="#880e4f">Complex Analysis</text>
+        <text x="492" y="556" font-size="10" fill="#880e4f">&#9656; Root cause investigation</text>
+        <text x="492" y="572" font-size="10" fill="#880e4f">&#9656; Fix suggestion generation</text>
+        <text x="492" y="588" font-size="10" fill="#880e4f">&#9656; Summary generation</text>
+        <text x="492" y="604" font-size="10" fill="#880e4f">&#9656; Novel / compound errors</text>
+        <text x="492" y="626" font-size="10" fill="#888" font-style="italic">Complex, unknown errors only</text>
+
+        <!-- BLOCK 5.1 — LLM Code Change and PR -->
+        <rect x="720" y="225" width="215" height="210" rx="12" fill="#e0f2f1" stroke="#00695c" stroke-width="2" filter="url(#sh)"></rect>
+        <rect x="720" y="225" width="215" height="40" rx="12" fill="url(#gTeal)"></rect>
+        <rect x="720" y="253" width="215" height="12" fill="url(#gTeal)"></rect>
+        <text x="827" y="243" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#fff">BLOCK 5.1: Auto-Fix &amp; PR</text>
+        <text x="827" y="258" text-anchor="middle" font-size="10" fill="#b2dfdb">LLM code change + GitHub PR</text>
+        <text x="827" y="286" text-anchor="middle" font-size="11" font-weight="bold" fill="#004d40">Consumes outputs of B3/B4/B5</text>
+        <text x="734" y="306" font-size="10" fill="#00695c">&#9656; Generate code patch (diff)</text>
+        <text x="734" y="322" font-size="10" fill="#00695c">&#9656; Branch + commit via Git</text>
+        <text x="734" y="338" font-size="10" fill="#00695c">&#9656; Open PR with root cause + fix</text>
+        <text x="734" y="354" font-size="10" fill="#00695c">&#9656; Trigger build verification</text>
+        <text x="734" y="370" font-size="10" fill="#00695c">&#9656; Human review gate on PR</text>
+        <text x="734" y="386" font-size="10" fill="#00695c">&#9656; Status feedback to storage</text>
+        <rect x="728" y="394" width="200" height="18" rx="5" fill="#fff3e0" stroke="#e65100" stroke-width="1"></rect>
+        <text x="828" y="407" text-anchor="middle" font-size="9.5" fill="#e65100">Human-in-the-loop review required</text>
+        <text x="827" y="427" text-anchor="middle" font-size="10" fill="#888" font-style="italic">Builds on existing POC approach</text>
+
+        <!-- Arrows from Tiers 1/2/3 to Block 5.1 -->
+        <path d="M688 145 Q708 200 722 265" stroke="#2e7d32" stroke-width="1.6" stroke-dasharray="6,3" fill="none" marker-end="url(#aGreen)"></path>
+        <line x1="688" y1="354" x2="720" y2="330" stroke="#e65100" stroke-width="1.6" stroke-dasharray="6,3" marker-end="url(#aOrange)"></line>
+        <path d="M688 560 Q708 460 722 400" stroke="#880e4f" stroke-width="1.6" stroke-dasharray="6,3" fill="none" marker-end="url(#aRed)"></path>
+        <text x="700" y="238" font-size="10" fill="#00695c" font-style="italic" transform="rotate(-65,700,238)">fix context</text>
+
+        <!-- Arrow B5.1 to B6 -->
+        <line x1="935" y1="330" x2="978" y2="330" stroke="#00695c" stroke-width="2" marker-end="url(#aTeal)"></line>
+        <text x="945" y="322" font-size="10" fill="#00695c">analysis + PR</text>
+
+        <!-- Arrows from tiers to storage -->
+        <path d="M688 120 Q850 120 978 240" stroke="#2e7d32" stroke-width="1.4" stroke-dasharray="6,3" fill="none" marker-end="url(#aGreen)"></path>
+        <path d="M688 394 Q900 500 978 390" stroke="#e65100" stroke-width="1.4" stroke-dasharray="6,3" fill="none" marker-end="url(#aOrange)"></path>
+        <path d="M688 600 Q900 640 978 400" stroke="#880e4f" stroke-width="1.4" stroke-dasharray="6,3" fill="none" marker-end="url(#aRed)"></path>
+        <text x="870" y="115" font-size="10" fill="#0d47a1" font-style="italic">classification results</text>
+
+        <!-- BLOCK 6 — Structured Storage -->
+        <rect x="978" y="220" width="240" height="200" rx="12" fill="#e3f2fd" stroke="#0d47a1" stroke-width="2" filter="url(#sh)"></rect>
+        <rect x="978" y="220" width="240" height="40" rx="12" fill="url(#gNavy)"></rect>
+        <rect x="978" y="248" width="240" height="12" fill="url(#gNavy)"></rect>
+        <text x="1098" y="238" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#fff">BLOCK 6: Structured Storage</text>
+        <text x="1098" y="253" text-anchor="middle" font-size="10" fill="#bbdefb">Star Schema - Relational DB</text>
+        <text x="1098" y="282" text-anchor="middle" font-size="11" font-weight="bold" fill="#0d47a1">Fact + Dimensions</text>
+        <text x="994" y="302" font-size="10" fill="#0d47a1">&#9656; build_analysis_facts (1 row/err)</text>
+        <text x="994" y="318" font-size="10" fill="#1565c0">&#9656; dim_builds - dim_errors</text>
+        <text x="994" y="334" font-size="10" fill="#1565c0">&#9656; dim_repos - dim_branches</text>
+        <text x="994" y="350" font-size="10" fill="#1565c0">&#9656; dim_log_files</text>
+        <text x="994" y="370" font-size="10" fill="#0d47a1">&#9656; Summaries - suggested fixes</text>
+        <text x="994" y="386" font-size="10" fill="#0d47a1">&#9656; SHA hashes - PR numbers</text>
+        <text x="994" y="406" font-size="10" fill="#888" font-style="italic">Commit-level traceability</text>
+
+        <!-- Arrow B6 to B7 -->
+        <line x1="1098" y1="420" x2="1098" y2="460" stroke="#6a1b9a" stroke-width="2" marker-end="url(#aPurple)"></line>
+
+        <!-- BLOCK 7 — MCP Tool Interface -->
+        <rect x="978" y="460" width="240" height="190" rx="12" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="2" filter="url(#sh)"></rect>
+        <rect x="978" y="460" width="240" height="40" rx="12" fill="url(#gPurple)"></rect>
+        <rect x="978" y="488" width="240" height="12" fill="url(#gPurple)"></rect>
+        <text x="1098" y="478" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#fff">BLOCK 7: MCP Tool Interface</text>
+        <text x="1098" y="493" text-anchor="middle" font-size="10" fill="#e1bee7">Agentic AI access layer</text>
+        <text x="1098" y="520" text-anchor="middle" font-size="11" font-weight="bold" fill="#4a148c">Query + Action Tools</text>
+        <text x="994" y="540" font-size="10" fill="#6a1b9a">&#9656; Query analysis results</text>
+        <text x="994" y="556" font-size="10" fill="#6a1b9a">&#9656; Trace error to commit / PR</text>
+        <text x="994" y="572" font-size="10" fill="#6a1b9a">&#9656; Fetch fix suggestions</text>
+        <text x="994" y="588" font-size="10" fill="#6a1b9a">&#9656; Build failure summaries</text>
+        <text x="994" y="604" font-size="10" fill="#6a1b9a">&#9656; Live Git / GitHub API lookups</text>
+        <text x="994" y="620" font-size="10" fill="#6a1b9a">&#9656; CI / CD build status</text>
+        <text x="994" y="640" font-size="10" fill="#888" font-style="italic">Downstream agents / users</text>
+
+        <!-- Bazel Docs Scraper -->
+        <rect x="218" y="62" width="180" height="54" rx="8" fill="#fff9c4" stroke="#f9a825" stroke-width="1.4"></rect>
+        <text x="308" y="84" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#e65100">Bazel Docs Scraper</text>
+        <text x="308" y="100" text-anchor="middle" font-size="10" fill="#888">Populates T1 error code registry</text>
+        <line x1="398" y1="90" x2="478" y2="110" stroke="#f9a825" stroke-width="1.4" stroke-dasharray="4,3" marker-end="url(#aAmber)"></line>
+
+        <!-- MySQL metadata and Git/GitHub side inputs -->
+        <rect x="20" y="60" width="170" height="54" rx="8" fill="#eceff1" stroke="#455a64" stroke-width="1.4"></rect>
+        <text x="105" y="82" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#263238">MySQL - Build Metadata</text>
+        <text x="105" y="98" text-anchor="middle" font-size="10" fill="#546e7a">build id - timestamp - status</text>
+        <line x1="105" y1="114" x2="105" y2="228" stroke="#455a64" stroke-width="1.2" stroke-dasharray="4,3"></line>
+        <text x="112" y="180" font-size="10" fill="#455a64" font-style="italic">correlate</text>
+
+        <rect x="978" y="60" width="240" height="54" rx="8" fill="#eceff1" stroke="#455a64" stroke-width="1.4"></rect>
+        <text x="1098" y="82" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#263238">Git / GitHub APIs</text>
+        <text x="1098" y="98" text-anchor="middle" font-size="10" fill="#546e7a">commits - diffs - PR review state (live)</text>
+        <line x1="1098" y1="114" x2="1098" y2="218" stroke="#455a64" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#aNavy)"></line>
+        <text x="1105" y="170" font-size="10" fill="#455a64" font-style="italic">SHA lookup</text>
+
+        <!-- Human Review Gate badge -->
+        <rect x="720" y="445" width="215" height="26" rx="6" fill="#fff3e0" stroke="#e65100" stroke-width="1.2"></rect>
+        <text x="827" y="462" text-anchor="middle" font-size="10.5" fill="#e65100">Human Review Gate: PR approval</text>
+
+        <!-- Footer labels -->
+        <text x="105" y="420" font-size="10" fill="#888" font-style="italic">B1 - ingestion</text>
+        <text x="308" y="420" font-size="10" fill="#888" font-style="italic">B2 - parse/chunk</text>
+        <text x="583" y="670" font-size="10" fill="#888" font-style="italic">B3 / B4 / B5 - tiered classification</text>
+        <text x="827" y="685" font-size="10" fill="#888" font-style="italic">B5.1 - fix + PR</text>
+        <text x="1098" y="685" font-size="10" fill="#888" font-style="italic">B6 - storage - B7 - MCP</text>
+      </svg>
+    </div>
+
+    <h3>Block-by-Block Notes</h3>
+
+    <div class="notes-grid">
+      <div class="notes-grid-item">
+        <h4>Block 1: NFS Ingestion <span class="pending-badge">Decision Pending</span></h4>
+        <p>Reads Bazel CI/CD logs from the NFS mount. Two viable modes: (a) scheduled batches every 15 to 30 minutes, which is simpler and predictable, or (b) event-driven realtime using a filesystem watcher or webhook, which offers lower latency but more moving parts. The proposal is to start with 15 to 30 minute batching to match current build cadence, then revisit once queue patterns and SLA targets are confirmed.</p>
+      </div>
+      <div class="notes-grid-item">
+        <h4>Block 2: Parsing and Chunking</h4>
+        <p>Regex/structured parsing when log formats are uniform. NLP-based chunking where formats vary across job types. NLP summarization reduces chunk size before any Tier 2 or Tier 3 call to control token cost. This is critical given 300K to 500K line files. Final parsing strategy is pending log-format verification across CI versus CD and composite versus individual files.</p>
+      </div>
+      <div class="notes-grid-item">
+        <h4>Blocks 3, 4, and 5: Tiered Error Evaluation</h4>
+        <p>Tier 1 (Block 3): deterministic rule-based detection using the Bazel error-code registry and regex over error descriptions. Tier 2 (Block 4): a smaller specialized ML model classifies errors that Tier 1 cannot match. Tier 3 (Block 5): LLM performs root-cause investigation and fix suggestion only for novel or compound errors. Escalation is explicit, and each tier records its confidence.</p>
+      </div>
+      <div class="notes-grid-item">
+        <h4>Block 5.1: Auto-Fix and PR</h4>
+        <p>Consumes the root cause, fix suggestion, and context from Blocks 3, 4, and 5. The LLM produces a code patch, the system branches and commits via Git, opens a PR with root-cause summary and proposed fix, and triggers build verification. A human review gate on the PR is mandatory. PR status (merged, rejected, build pass) flows back into Block 6 for traceability.</p>
+      </div>
+      <div class="notes-grid-item">
+        <h4>Block 6: Structured Storage (Star Schema)</h4>
+        <p>Fact table <code>build_analysis_facts</code> (one row per error per build) linked to dimensions <code>dim_builds</code>, <code>dim_errors</code>, <code>dim_repos</code>, <code>dim_branches</code>, and optionally <code>dim_log_files</code>. Persists summaries, suggested fixes, confidence scores, SHA hashes, and PR numbers. Full commit diffs and PR comments are queried live, not persisted.</p>
+      </div>
+      <div class="notes-grid-item">
+        <h4>Block 7: MCP Tool Interface</h4>
+        <p>Exposes the schema to downstream agents and users via MCP tools: query analysis results, trace an error back to a commit or PR, fetch fix suggestions, pull build-failure summaries, and correlate with live Git/GitHub state. This is the primary consumption layer for agentic AI workflows.</p>
+      </div>
+    </div>
+
+    <h3>Pending Decisions</h3>
+
+    <div class="workflow-grid">
+      <div class="workflow-step">
+        <div class="workflow-step-number">1</div>
+        <h5>Ingestion Mode</h5>
+        <p>Batched polling versus event-driven/realtime for Block 1. The answer depends on build cadence patterns and latency requirements.</p>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-step-number">2</div>
+        <h5>Log Format Verification</h5>
+        <p>CI versus CD log format differences need hands-on verification before the parsing strategy in Block 2 can be finalized.</p>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-step-number">3</div>
+        <h5>ML Model Training Data</h5>
+        <p>Availability of labeled datasets for the Tier 2 ML model in Block 4. Without labeled data, the team would need to use pre-trained models or unsupervised approaches.</p>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-step-number">4</div>
+        <h5>Fix Delivery Mechanism</h5>
+        <p>PR comment, new branch/PR, or email for Block 5.1. The current approach uses email. The proposed architecture includes a PR-based approach with human review.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 04 — WEBEX INTEGRATION
+       ============================================ -->
+
+  <div class="section">
+    <div class="section-number">04</div>
+    <h2>WebEx Integration</h2>
+    <p class="lead">The team built and deployed two capabilities for WebEx integration: a chat scraping tool and a meeting recording extraction tool. Both are operational and have been validated against live data.</p>
+
+    <div class="two-col">
+      <div class="card">
+        <h4>Chat Scraping</h4>
+        <p>A working WebEx scraper was built and deployed into the team's own WebEx space. It captures full message history with structured fields (timestamp, author, email, bot flag, text, files, thread parent), stores to PostgreSQL, and supports per-room scoping and deduplication.</p>
+        <p>The NxOS CI workflow channel analysis presented in Section 01 was performed using this capability.</p>
+      </div>
+      <div class="card">
+        <h4>Meeting Recording Extraction</h4>
+        <p>A working extraction tool was built that retrieves transcripts, summaries, action items, and audio from WebEx meetings via the API.</p>
+        <p><strong>Key constraint discovered:</strong> The WebEx API restricts recording and transcript access to meeting owners. A regular attendee cannot extract these artifacts via API.</p>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <p>For meetings where the team is the organizer, the API path works as expected. For broader automation across the organization, either admin-scoped tokens or an alternative approach (such as audio-file-based transcription) would be needed. This constraint affects the automation architecture for meeting recording extraction at scale.</p>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 05 — OPEN QUESTIONS
+       ============================================ -->
+
+  <div class="section">
+    <div class="section-number">05</div>
+    <h2>Open Questions for Discussion</h2>
+    <p class="lead">The following questions require direction before the team can proceed on several fronts. Each is structured with context to support a focused discussion.</p>
+
+    <div class="highlight-box">
+      <h4>1. Scope Clarification for WebEx Work</h4>
+      <p>The team has built both a chat scraper and a meeting recording extractor. Should the focus remain on the NxOS CI workflow channel specifically, or should this be generalized for the broader set of WebEx spaces?</p>
+    </div>
+
+    <div class="highlight-box">
+      <h4>2. Relationship to Existing Work</h4>
+      <p>The team observed the Nexus T agent in the NxOS CI workflow space. How does the work being done here relate to that effort? Should the team be collaborating with that group, building on their work, or focusing on a different aspect of the problem?</p>
+    </div>
+
+    <div class="highlight-box">
+      <h4>3. Fix Delivery Preference</h4>
+      <p>For the build log analysis pipeline, when AI generates a fix: should the system comment on the existing PR, open a new PR with the fix, or notify via another channel? The current workflow uses email. The proposed architecture includes a PR-based approach with human review.</p>
+    </div>
+
+    <div class="highlight-box">
+      <h4>4. Tiered Processing and ML Model Data</h4>
+      <p>The proposed architecture includes a Tier 2 ML model for error classification. Does the team have access to labeled datasets of past build errors and their resolutions? If not, should Tier 2 initially use pre-trained models or unsupervised approaches?</p>
+    </div>
+
+    <div class="highlight-box">
+      <h4>5. Batch Versus Realtime for Log Ingestion</h4>
+      <p>For CI builds (where developers are waiting), is near-realtime processing expected? For CD nightly builds, is batch processing on a 15 to 30 minute cycle acceptable?</p>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 06 — ACCESS ITEMS
+       ============================================ -->
+
+  <div class="section">
+    <div class="section-number">06</div>
+    <h2>Access Items Requiring Action</h2>
+    <p class="lead">Three access items remain outstanding. Each has been requested previously and requires action from the Cisco side to resolve.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>First Requested</th>
+          <th>Current Status</th>
+          <th>What Is Needed</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>DeepSight platform access</td>
+          <td>~4 weeks ago</td>
+          <td>No access</td>
+          <td>Direct grant from platform owner</td>
+        </tr>
+        <tr>
+          <td>Pulse/Scribble repository access</td>
+          <td>April 9</td>
+          <td>Repo links not yet provided. Naming confusion between "Scribble" and "Scrubber" in GitHub.</td>
+          <td>Direction to the repo owner to share exact links and grant access</td>
+        </tr>
+        <tr>
+          <td>Permanent ADS machine</td>
+          <td>April 3 (tenant), April 11 (bundle)</td>
+          <td>Tenant approved but not reflected in portal. Bundle (CN-SJC-STANDALONE) is sequential and can only be added after ADS machine is provisioned.</td>
+          <td>Follow-up on the tenant portal issue per guidance provided on April 16</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight-box">
+      <p>The team has temporary ADS access (4-week lease, RHEL8) which enables current work, but permanent access is needed for sustained development. All environment setup and tooling configuration done on temporary machines would need to be repeated every 4 weeks.</p>
+    </div>
+  </div>
+
+  <!-- ============================================
+       COMPANION MATERIALS
+       ============================================ -->
+
+  <div class="section">
+    <div class="section-number">APPENDIX</div>
+    <h2>Companion Materials Available</h2>
+    <p class="lead">The following are available as separate files if deeper review is desired.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Material</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Current-state architecture diagram</td>
+          <td>Interactive HTML showing the existing 7-component build repair pipeline with annotated limitations (expandable detail per component)</td>
+        </tr>
+        <tr>
+          <td>NxOS CI workflow analysis (full dataset)</td>
+          <td>CSV with categorized messages, response times, and thread structure</td>
+        </tr>
+        <tr>
+          <td>Log type mapping</td>
+          <td>Complete catalog of all 13 Bazel error log types with CI/CD differentiation, NFS paths, and retention policies</td>
+        </tr>
+        <tr>
+          <td>WebEx API endpoint reference</td>
+          <td>Verified endpoints for chat scraping and meeting recording extraction</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+
+  <div class="footer">
+    <div class="footer-bar"></div>
+    <div class="footer-logo">Bay<span>One</span> Solutions</div>
+    <p>Confidential. Prepared for Cisco Systems.</p>
+  </div>
+
+</div>
+
+</body>
+</html>

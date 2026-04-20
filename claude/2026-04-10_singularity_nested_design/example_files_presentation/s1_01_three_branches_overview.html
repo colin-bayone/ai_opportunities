@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 01: The Three Branches of AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-darkest: #0c1929;
+      --blue-dark: #15293e;
+      --blue-mid: #1e3a5f;
+      --blue-bright: #2563eb;
+      --blue-accent: #3b82f6;
+      --steel-light: #64748b;
+      --steel-glow: #94a3b8;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e6e8eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fcfdff 60%, #f7f9fc 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--blue-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 20px 40px 12px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+      flex-shrink: 0;
+    }
+
+    .slide-content .lead {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+      line-height: 1.6;
+      flex-shrink: 0;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid rgba(37,99,235,0.10);
+      border-radius: 14px;
+      padding: 16px 18px;
+      box-shadow: 0 2px 10px rgba(37,99,235,0.05);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .card .icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .card.ml .icon { background: linear-gradient(135deg, #1e3a5f, #2563eb); }
+    .card.cv .icon { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+    .card.gen .icon { background: linear-gradient(135deg, #3b82f6, #64748b); }
+
+    .card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .card .tagline {
+      font-size: 10.5px;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.45;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card .items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      flex: 1;
+    }
+
+    .card .item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 10px;
+      line-height: 1.45;
+      color: #475569;
+    }
+
+    .card .item i {
+      color: var(--blue-accent);
+      font-size: 11px;
+      margin-top: 3px;
+      width: 14px;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    .card .item strong {
+      color: var(--blue-dark);
+      font-weight: 600;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 10px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-darkest), var(--blue-mid), var(--blue-accent), var(--steel-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 2px;
+    }
+
+    .slide-nav {
+      position: fixed;
+      bottom: 18px;
+      left: 18px;
+      display: flex;
+      gap: 6px;
+      z-index: 100;
+    }
+
+    .slide-nav a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(12, 25, 41, 0.75);
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 14px;
+      transition: background 0.2s, color 0.2s;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .slide-nav a:hover {
+      background: rgba(37, 99, 235, 0.9);
+      color: #fff;
+    }
+
+    .slide-nav a.disabled {
+      opacity: 0.25;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Master<span>minds</span></div>
+      <div class="header-title">April 2026</div>
+    </div>
+
+    <div class="slide-content">
+      <h2>The Three Branches of Artificial Intelligence</h2>
+      <p class="lead">AI can generally be thought of in three distinct areas, each built for different kinds of problems and already showing up in different parts of your daily life.</p>
+
+      <div class="cards-grid">
+
+        <!-- Machine Learning -->
+        <div class="card ml">
+          <div class="header">
+            <div class="icon"><i class="fa-solid fa-chart-line"></i></div>
+            <h3>Machine Learning</h3>
+          </div>
+          <p class="tagline">Systems that learn patterns from historical data to make predictions and decisions. This is the oldest area, and it has been quietly embedded in everyday tools for over a decade.</p>
+          <div class="items">
+            <div class="item">
+              <i class="fa-solid fa-credit-card"></i>
+              <span><strong>Visa and Mastercard fraud detection</strong> flags unusual transactions in real time before you even notice them</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-tv"></i>
+              <span><strong>Netflix, Spotify, and Amazon recommendations</strong> learn your preferences over time to suggest what to watch, listen to, or buy next</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-envelope-circle-check"></i>
+              <span><strong>Google's Gmail spam filtering</strong> keeps the vast majority of junk email out of your inbox without any manual rules</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-cloud-sun"></i>
+              <span><strong>Weather forecasting</strong> from services like The Weather Channel and AccuWeather uses ML models processing satellite, radar, and sensor data continuously</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-calculator"></i>
+              <span><strong>FICO scores and insurance underwriting</strong> use pattern recognition across millions of data points to assess risk and set pricing</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-industry"></i>
+              <span><strong>Manufacturing predictive maintenance</strong> at companies like Siemens and GE monitors equipment sensor data to predict failures before they cause downtime</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Computer Vision -->
+        <div class="card cv">
+          <div class="header">
+            <div class="icon"><i class="fa-solid fa-eye"></i></div>
+            <h3>Computer Vision</h3>
+          </div>
+          <p class="tagline">Systems that interpret and act on visual information. These models process what cameras see and make decisions based on images, video, and physical environments.</p>
+          <div class="items">
+            <div class="item">
+              <i class="fa-solid fa-face-smile"></i>
+              <span><strong>Apple Face ID and Samsung facial recognition</strong> use real-time 3D mapping to unlock your phone securely</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-car"></i>
+              <span><strong>Tesla Autopilot and Google's Waymo</strong> rely entirely on visual processing to navigate roads and avoid obstacles</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-x-ray"></i>
+              <span><strong>GE Healthcare and Siemens medical imaging</strong> detects tumors, reads X-rays, and identifies abnormalities faster than manual review</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-camera"></i>
+              <span><strong>Chase and Bank of America mobile deposit</strong> reads and processes handwritten checks from a photo through your banking app</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-industry"></i>
+              <span><strong>Factory quality inspection</strong> at companies like BMW and Toyota uses cameras on assembly lines to catch defects that human inspectors would miss at production speed</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-video"></i>
+              <span><strong>Ring and Nest security cameras</strong> distinguish between people, vehicles, animals, and packages to send you relevant alerts</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Generative AI -->
+        <div class="card gen">
+          <div class="header">
+            <div class="icon"><i class="fa-solid fa-message"></i></div>
+            <h3>Generative AI and Language Models</h3>
+          </div>
+          <p class="tagline">The newest area and the one generating the most attention right now. These systems produce text, images, code, and other content based on the instructions you give them.</p>
+          <div class="items">
+            <div class="item">
+              <i class="fa-solid fa-robot"></i>
+              <span><strong>OpenAI's ChatGPT, Anthropic's Claude, and Google's Gemini</strong> are the major platforms driving business and consumer adoption</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-file-lines"></i>
+              <span><strong>Document summarization and drafting</strong> can condense a 50-page report into key takeaways or draft a client letter from rough notes</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-image"></i>
+              <span><strong>Image generation</strong> through tools like DALL-E and Midjourney creates visuals from text descriptions for marketing, presentations, and design</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-microphone"></i>
+              <span><strong>Meeting transcription and summarization</strong> from tools like Otter.ai and Microsoft Copilot captures conversations and produces structured notes automatically</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-envelope"></i>
+              <span><strong>Email and communication drafting</strong> takes a few bullet points and produces polished client-ready messages tailored to your tone and audience</span>
+            </div>
+            <div class="item">
+              <i class="fa-solid fa-magnifying-glass-chart"></i>
+              <span><strong>Research and analysis</strong> can synthesize information across multiple documents, compare options, and surface patterns you might not catch manually</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">01</div>
+    </div>
+  </div>
+
+  <div class="slide-nav">
+    <a href="s0_profile.html"><i class="fa-solid fa-chevron-left"></i></a>
+    <a href="s1_02_machine_learning_focus.html"><i class="fa-solid fa-chevron-right"></i></a>
+    <a href="s0_00_toc.html" style="margin-left: 6px;"><i class="fa-solid fa-house"></i></a>
+  </div>
+
+</body>
+</html>

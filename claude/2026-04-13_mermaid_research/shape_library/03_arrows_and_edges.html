@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow and Edge Types — Mermaid Shape Library</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; padding: 40px; color: #0f172a; }
+        h1 { text-align: center; font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+        .subtitle { text-align: center; font-size: 14px; color: #64748b; margin-bottom: 32px; }
+        .section { max-width: 1200px; margin: 0 auto 40px; }
+        .section h2 { font-size: 18px; font-weight: 600; color: #1e3a5f; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid #dbeafe; }
+        .section p { font-size: 13px; color: #64748b; margin-bottom: 16px; line-height: 1.6; }
+        .section code { background: #eff6ff; padding: 2px 6px; border-radius: 4px; font-size: 12px; color: #1e40af; }
+        .diagram-box { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+        .mermaid { display: flex; justify-content: center; }
+        .mermaid .node rect, .mermaid .node polygon { rx: 8 !important; ry: 8 !important; }
+        .mermaid .edgeLabel rect { fill: #dbeafe !important; fill-opacity: 1 !important; stroke: none !important; }
+        .nav { max-width: 1200px; margin: 0 auto 32px; display: flex; gap: 8px; flex-wrap: wrap; }
+        .nav a { font-size: 12px; padding: 6px 12px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; color: #1e40af; text-decoration: none; }
+        .nav a:hover { background: #dbeafe; }
+        .nav a.current { background: #2563eb; color: white; border-color: #2563eb; }
+    </style>
+</head>
+<body>
+    <h1>Arrow and Edge Types</h1>
+    <p class="subtitle">Mermaid Shape Library — Visual Reference</p>
+
+    <div class="nav">
+        <a href="01_classic_shapes.html">Classic Shapes</a>
+        <a href="02_v11_shapes.html">v11 Shapes</a>
+        <a href="03_arrows_and_edges.html" class="current">Arrows</a>
+        <a href="04_text_formatting.html">Text Formatting</a>
+        <a href="05_icons_reference.html">Icons</a>
+        <a href="06_classdef_styling.html">ClassDef</a>
+        <a href="07_subgraphs_and_layout.html">Subgraphs</a>
+        <a href="08_diagram_types_gallery.html">Diagram Types</a>
+    </div>
+
+    <!-- Line Styles with Arrows -->
+    <div class="section">
+        <h2>Line Styles with Arrows</h2>
+        <p>The three core line styles: solid (<code>--></code>), dotted (<code>-.-></code>), and thick (<code>==></code>). Solid = current/confirmed flow, dotted = proposed/optional, thick = primary/emphasized path.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph LR
+    A1["Source"] -->|"-->"| B1["Solid Arrow"]
+    A2["Source"] -.->|"-.->"| B2["Dotted Arrow"]
+    A3["Source"] ==>|"==>"| B3["Thick Arrow"]
+            </div>
+        </div>
+    </div>
+
+    <!-- Open Links (No Arrowhead) -->
+    <div class="section">
+        <h2>Open Links (No Arrowhead)</h2>
+        <p>Lines without arrowheads, useful for bidirectional associations or neutral connections.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph LR
+    C1["Node"] ---|"---"| D1["Solid Open"]
+    C2["Node"] -.-|"-.-"| D2["Dotted Open"]
+    C3["Node"] ===|"==="| D3["Thick Open"]
+            </div>
+        </div>
+    </div>
+
+    <!-- Arrowhead Variants -->
+    <div class="section">
+        <h2>Arrowhead Variants</h2>
+        <p>Beyond the standard pointed arrow, mermaid supports circle (<code>--o</code>) and cross (<code>--x</code>) terminators.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph LR
+    E1["Node"] -->|"-->  Arrow"| F1["Target"]
+    E2["Node"] --o|"--o  Circle"| F2["Target"]
+    E3["Node"] --x|"--x  Cross"| F3["Target"]
+            </div>
+        </div>
+    </div>
+
+    <!-- Bidirectional Arrows -->
+    <div class="section">
+        <h2>Bidirectional Arrows</h2>
+        <p>Arrows with terminators on both ends, for two-way communication or mutual relationships.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph LR
+    G1["Node A"] <-->|"<-->"| H1["Node B"]
+    G2["Node A"] o--o|"o--o"| H2["Node B"]
+    G3["Node A"] x--x|"x--x"| H3["Node B"]
+            </div>
+        </div>
+    </div>
+
+    <!-- Edge Length Control -->
+    <div class="section">
+        <h2>Edge Length Control</h2>
+        <p>Extra dashes make edges longer. Compare normal, long (one extra dash), and extra long (two extra dashes) for each style.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph LR
+    subgraph SOLID["<b>Solid Length</b>"]
+        direction LR
+        S1["A"] -->|"Normal -->"| S2["B"]
+        S3["C"] --->|"Long --->"| S4["D"]
+        S5["E"] ---->|"Extra ---->"| S6["F"]
+    end
+
+    subgraph DOTTED["<b>Dotted Length</b>"]
+        direction LR
+        D1a["A"] -.->|"Normal -.->"| D2a["B"]
+        D3a["C"] -..->|"Long -..->"| D4a["D"]
+        D5a["E"] -...->|"Extra -...->"| D6a["F"]
+    end
+
+    subgraph THICK["<b>Thick Length</b>"]
+        direction LR
+        T1["A"] ==>|"Normal ==>"| T2["B"]
+        T3["C"] ===>|"Long ===>"| T4["D"]
+        T5["E"] ====>|"Extra ====>"| T6["F"]
+    end
+
+    style SOLID fill:#f8fafc,stroke:#94a3b8,stroke-width:2px,color:#1e3a5f
+    style DOTTED fill:#f8fafc,stroke:#94a3b8,stroke-width:2px,color:#1e3a5f
+    style THICK fill:#f8fafc,stroke:#94a3b8,stroke-width:2px,color:#1e3a5f
+            </div>
+        </div>
+    </div>
+
+    <!-- Labeled Edges -->
+    <div class="section">
+        <h2>Labeled Edges</h2>
+        <p>Two syntax options for adding labels to edges: pipe syntax and inline syntax.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph LR
+    L1["Source"] -->|"Pipe Syntax"| L2["Target"]
+    L3["Source"] -- "Inline Syntax" --> L4["Target"]
+    L5["Source"] -.->|"Dotted + Label"| L6["Target"]
+    L7["Source"] == "Thick + Label" ==> L8["Target"]
+            </div>
+        </div>
+    </div>
+
+    <!-- Invisible Links -->
+    <div class="section">
+        <h2>Invisible Links for Spacing</h2>
+        <p>Use <code>~~~</code> to create invisible connections that influence layout without drawing a visible line. Useful for aligning nodes that have no logical connection.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph LR
+    I1["Node A"] ~~~ I2["Node B"]
+    I1 --> I3["Connected to A"]
+    I2 --> I4["Connected to B"]
+            </div>
+        </div>
+        <p>Without the invisible link <code>~~~</code>, Node A and Node B might stack vertically. The invisible link encourages them to sit side by side.</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#dbeafe', primaryTextColor: '#0f172a', primaryBorderColor: '#2563eb',
+                lineColor: '#2563eb', secondaryColor: '#eff6ff', secondaryTextColor: '#1e3a5f',
+                secondaryBorderColor: '#3b82f6', edgeLabelBackground: '#dbeafe',
+                clusterBkg: '#f8fafc', clusterBorder: '#94a3b8',
+                fontSize: '13px', fontFamily: 'Inter, sans-serif'
+            },
+            flowchart: { curve: 'basis', nodeSpacing: 50, rankSpacing: 60, htmlLabels: true, useMaxWidth: false, padding: 20 }
+        });
+    </script>
+</body>
+</html>

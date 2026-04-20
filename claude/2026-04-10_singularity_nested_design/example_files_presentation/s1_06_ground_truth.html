@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 05: Ground Truth and Training Data</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-darkest: #0c1929;
+      --blue-dark: #15293e;
+      --blue-mid: #1e3a5f;
+      --blue-bright: #2563eb;
+      --blue-accent: #3b82f6;
+      --steel-light: #64748b;
+      --steel-glow: #94a3b8;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e6e8eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--blue-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Dark header bar */
+    .definition-bar {
+      background: linear-gradient(135deg, var(--blue-darkest) 0%, var(--blue-mid) 100%);
+      padding: 16px 40px;
+      flex-shrink: 0;
+    }
+
+    .definition-bar .db-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 4px;
+    }
+
+    .definition-bar h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .definition-bar p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.6;
+      max-width: 900px;
+    }
+
+    .definition-bar strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* Main area */
+    .main-area {
+      flex: 1;
+      min-height: 0;
+      padding: 14px 40px 10px;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(180deg, #fcfdff 0%, #f7f9fc 100%);
+    }
+
+    /* Content row */
+    .content-row {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      gap: 16px;
+    }
+
+    /* Left: three concept cards stacked */
+    .concept-cards {
+      width: 55%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .concept-card {
+      flex: 1;
+      background: #fff;
+      border: 1px solid rgba(37,99,235,0.10);
+      border-radius: 10px;
+      padding: 12px 16px;
+      box-shadow: 0 1px 6px rgba(37,99,235,0.04);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .concept-card .cc-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #fff;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .concept-card:nth-child(1) .cc-icon { background: linear-gradient(135deg, #1e3a5f, #2563eb); }
+    .concept-card:nth-child(2) .cc-icon { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+    .concept-card:nth-child(3) .cc-icon { background: linear-gradient(135deg, #3b82f6, #64748b); }
+
+    .concept-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 3px;
+    }
+
+    .concept-card p {
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    /* Right: image placeholder */
+    .image-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .image-area {
+      flex: 1;
+      min-height: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fafafa;
+    }
+
+    .image-area img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 10px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-darkest), var(--blue-mid), var(--blue-accent), var(--steel-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 2px;
+    }
+    .slide-nav { position: fixed; bottom: 18px; left: 18px; display: flex; gap: 6px; z-index: 100; }
+    .slide-nav a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: rgba(12,25,41,0.75); color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: background 0.2s, color 0.2s; border: 1px solid rgba(255,255,255,0.1); }
+    .slide-nav a:hover { background: rgba(37,99,235,0.9); color: #fff; }
+    .slide-nav a.disabled { opacity: 0.25; pointer-events: none; }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">Master<span>minds</span></div>
+      <div class="header-title">April 2026</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="definition-bar">
+        <div class="db-label">How Language Models Learn</div>
+        <h2>Ground Truth and Training Data</h2>
+        <p>Ground truth is the verified, accepted correct answer that a model is trained against. In fraud detection, ground truth is whether a transaction was actually fraudulent. In medical imaging, ground truth is a confirmed biopsy result. <strong>In language models, ground truth is the massive body of text the model learned from</strong>, and that distinction changes everything about how you should think about AI output.</p>
+      </div>
+
+      <div class="main-area">
+        <div class="content-row">
+          <div class="concept-cards">
+            <div class="concept-card">
+              <div class="cc-icon"><i class="fa-solid fa-database"></i></div>
+              <div>
+                <h4>What the model "knows" is what it was trained on</h4>
+                <p>A language model's knowledge is the statistical patterns across billions of text examples. It learned what words tend to follow other words in what contexts. It does not know things the way a person knows things. It has learned what language looks like when people write about those things.</p>
+              </div>
+            </div>
+            <div class="concept-card">
+              <div class="cc-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+              <div>
+                <h4>The training data's strengths and weaknesses carry forward</h4>
+                <p>If the training data contains biases, outdated information, or errors, the model carries those forward into its responses. It has no independent way to verify whether something in its training data was accurate. It reflects what it was given.</p>
+              </div>
+            </div>
+            <div class="concept-card">
+              <div class="cc-icon"><i class="fa-solid fa-link"></i></div>
+              <div>
+                <h4>Connections between ideas come from patterns, not understanding</h4>
+                <p>When a model draws a conclusion or links two concepts together, it is doing so because that pattern existed in the training data. Sometimes that connection is genuinely insightful. Sometimes it is a statistical artifact with no real-world validity. The model cannot tell the difference.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="image-col">
+            <div class="image-area">
+              <img src="resources/s1_06_ground_truth.jpg" alt="Ground truth concept">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">06</div>
+    </div>
+  </div>
+
+  <div class="slide-nav">
+    <a href="s1_05_genai_deep_dive.html"><i class="fa-solid fa-chevron-left"></i></a>
+    <a href="s1_07_five_failure_modes.html"><i class="fa-solid fa-chevron-right"></i></a>
+    <a href="s0_00_toc.html" style="margin-left: 6px;"><i class="fa-solid fa-house"></i></a>
+  </div>
+</body>
+</html>

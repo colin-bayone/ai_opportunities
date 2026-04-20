@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClassDef Styling Examples — Mermaid Shape Library</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; padding: 40px; color: #0f172a; }
+        h1 { text-align: center; font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+        .subtitle { text-align: center; font-size: 14px; color: #64748b; margin-bottom: 32px; }
+        .section { max-width: 1200px; margin: 0 auto 40px; }
+        .section h2 { font-size: 18px; font-weight: 600; color: #1e3a5f; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid #dbeafe; }
+        .section p { font-size: 13px; color: #64748b; margin-bottom: 16px; line-height: 1.6; }
+        .section code { background: #eff6ff; padding: 2px 6px; border-radius: 4px; font-size: 12px; color: #1e40af; }
+        .diagram-box { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+        .mermaid { display: flex; justify-content: center; }
+        .mermaid .node rect, .mermaid .node polygon { rx: 8 !important; ry: 8 !important; }
+        .mermaid .edgeLabel rect { fill: #dbeafe !important; fill-opacity: 1 !important; stroke: none !important; }
+        .nav { max-width: 1200px; margin: 0 auto 32px; display: flex; gap: 8px; flex-wrap: wrap; }
+        .nav a { font-size: 12px; padding: 6px 12px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; color: #1e40af; text-decoration: none; }
+        .nav a:hover { background: #dbeafe; }
+        .nav a.current { background: #2563eb; color: white; border-color: #2563eb; }
+        .syntax-block { max-width: 1200px; margin: 0 auto 24px; padding: 16px 20px; background: #1e293b; border-radius: 10px; font-family: 'Courier New', monospace; font-size: 12px; color: #e2e8f0; line-height: 1.7; overflow-x: auto; white-space: pre; }
+    </style>
+</head>
+<body>
+    <h1>ClassDef Styling Examples</h1>
+    <p class="subtitle">Mermaid Shape Library — Visual Reference</p>
+
+    <div class="nav">
+        <a href="01_classic_shapes.html">Classic Shapes</a>
+        <a href="02_v11_shapes.html">v11 Shapes</a>
+        <a href="03_arrows_and_edges.html">Arrows</a>
+        <a href="04_text_formatting.html">Text Formatting</a>
+        <a href="05_icons_reference.html">Icons</a>
+        <a href="06_classdef_styling.html" class="current">ClassDef</a>
+        <a href="07_subgraphs_and_layout.html">Subgraphs</a>
+        <a href="08_diagram_types_gallery.html">Diagram Types</a>
+    </div>
+
+    <!-- Semantic Color Palette -->
+    <div class="section">
+        <h2>Semantic Color Palette</h2>
+        <p>The standard color palette from the Singularity design standards. Each color maps to a semantic category so diagrams are self-explanatory. Apply with <code>:::className</code> after the node definition.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph TB
+    classDef codeRepo fill:#eff6ff,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    classDef buildTool fill:#dbeafe,stroke:#3b82f6,stroke-width:2px,color:#1e3a5f
+    classDef storage fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    classDef existingPoc fill:#fef2f2,stroke:#f87171,stroke-width:2px,color:#991b1b
+    classDef proposed fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    classDef aiComponent fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#3b0764
+    classDef external fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+    classDef deprecated fill:#e2e8f0,stroke:#94a3b8,stroke-width:1px,color:#475569,stroke-dasharray:5 5
+
+    CODE["<b>Code / Source</b><br/>fill: #eff6ff<br/>stroke: #2563eb"]:::codeRepo
+    BUILD["<b>Build / Compute</b><br/>fill: #dbeafe<br/>stroke: #3b82f6"]:::buildTool
+    STORE[("<b>Storage / Data</b><br/>fill: #fef9c3<br/>stroke: #ca8a04")]:::storage
+    EXIST["<b>Existing / POC</b><br/>fill: #fef2f2<br/>stroke: #f87171"]:::existingPoc
+    PROP["<b>Proposed / New</b><br/>fill: #dcfce7<br/>stroke: #16a34a"]:::proposed
+    AI("<b>AI / Intelligence</b><br/>fill: #ede9fe<br/>stroke: #7c3aed"):::aiComponent
+    EXT["<b>External / Integration</b><br/>fill: #ffedd5<br/>stroke: #ea580c"]:::external
+    DEP["<b>Deprecated / Inactive</b><br/>fill: #e2e8f0<br/>stroke: #94a3b8<br/>stroke-dasharray: 5 5"]:::deprecated
+
+    CODE ~~~ BUILD ~~~ STORE ~~~ EXIST
+    PROP ~~~ AI ~~~ EXT ~~~ DEP
+            </div>
+        </div>
+    </div>
+
+    <!-- ClassDef Syntax -->
+    <div class="section">
+        <h2>ClassDef Syntax</h2>
+        <p>Define styles with <code>classDef</code>, then apply using <code>:::className</code> inline or <code>class A,B,C className</code> for batch application.</p>
+        <div class="syntax-block">classDef codeRepo fill:#eff6ff,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+classDef deprecated fill:#e2e8f0,stroke:#94a3b8,stroke-width:1px,color:#475569,stroke-dasharray:5 5
+
+%% Inline application
+A["Node A"]:::codeRepo
+B["Node B"]:::deprecated
+
+%% Batch application
+class C,D,E codeRepo</div>
+    </div>
+
+    <!-- Supported CSS Properties -->
+    <div class="section">
+        <h2>Supported CSS Properties</h2>
+        <p>Each property in a <code>classDef</code> maps to an SVG style. These are the properties you can use.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph LR
+    classDef fillDemo fill:#dbeafe,stroke:#2563eb,stroke-width:1px,color:#1e3a5f
+    classDef strokeDemo fill:#eff6ff,stroke:#dc2626,stroke-width:3px,color:#1e3a5f
+    classDef dashDemo fill:#eff6ff,stroke:#2563eb,stroke-width:2px,color:#1e3a5f,stroke-dasharray:5 5
+    classDef thinDemo fill:#eff6ff,stroke:#2563eb,stroke-width:1px,color:#1e3a5f
+    classDef thickDemo fill:#eff6ff,stroke:#2563eb,stroke-width:4px,color:#1e3a5f
+
+    F["<b>fill</b><br/>Background color"]:::fillDemo
+    S["<b>stroke</b><br/>Border color (red)"]:::strokeDemo
+    D["<b>stroke-dasharray</b><br/>Dashed border"]:::dashDemo
+    T["<b>stroke-width: 1px</b><br/>Thin border"]:::thinDemo
+    TH["<b>stroke-width: 4px</b><br/>Thick border"]:::thickDemo
+
+    F ~~~ S ~~~ D
+    T ~~~ TH
+            </div>
+        </div>
+    </div>
+
+    <!-- Styled vs Unstyled Comparison -->
+    <div class="section">
+        <h2>Styled vs Unstyled Comparison</h2>
+        <p>Nodes with <code>classDef</code> styling applied (left) compared to default-styled nodes (right). Notice how color coding immediately communicates purpose.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph TB
+    classDef codeRepo fill:#eff6ff,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    classDef storage fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    classDef aiComponent fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#3b0764
+    classDef deprecated fill:#e2e8f0,stroke:#94a3b8,stroke-width:1px,color:#475569,stroke-dasharray:5 5
+
+    subgraph STYLED["<b>With ClassDef Styling</b>"]
+        direction TB
+        SR["<b>fa:fa-code-branch Repository</b>"]:::codeRepo
+        SD[("<b>fa:fa-database Database</b>")]:::storage
+        SA("<b>fa:fa-brain AI Engine</b>"):::aiComponent
+        SX["<b>Legacy System</b>"]:::deprecated
+        SR --> SD --> SA
+        SR --> SX
+    end
+
+    subgraph UNSTYLED["<b>Without Styling (Defaults)</b>"]
+        direction TB
+        UR["Repository"]
+        UD["Database"]
+        UA["AI Engine"]
+        UX["Legacy System"]
+        UR --> UD --> UA
+        UR --> UX
+    end
+
+    style STYLED fill:#f8fafc,stroke:#16a34a,stroke-width:2px,color:#14532d
+    style UNSTYLED fill:#f8fafc,stroke:#94a3b8,stroke-width:2px,color:#475569
+            </div>
+        </div>
+    </div>
+
+    <!-- Edge Styling -->
+    <div class="section">
+        <h2>Edge Styling with linkStyle</h2>
+        <p>Use <code>linkStyle N</code> to style individual edges by their index (0-based, in the order they appear in the diagram source). Use <code>linkStyle default</code> to style all edges.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph LR
+    A["Start"] --> B["Step 1"]
+    B --> C["Step 2"]
+    C --> D["Step 3"]
+    D --> E["End"]
+
+    linkStyle 0 stroke:#2563eb,stroke-width:2px
+    linkStyle 1 stroke:#16a34a,stroke-width:3px
+    linkStyle 2 stroke:#dc2626,stroke-width:2px,stroke-dasharray:5 5
+    linkStyle 3 stroke:#7c3aed,stroke-width:4px
+            </div>
+        </div>
+        <p>Edge 0 (blue, 2px) — Edge 1 (green, 3px) — Edge 2 (red, dashed) — Edge 3 (purple, 4px). Index is determined by the order edges appear in the mermaid source.</p>
+    </div>
+
+    <!-- linkStyle default -->
+    <div class="section">
+        <h2>linkStyle default — Style All Edges at Once</h2>
+        <p>Use <code>linkStyle default</code> to apply a uniform style to every edge in the diagram, instead of targeting each by index.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph LR
+    A["Start"] --> B["Step 1"]
+    B --> C["Step 2"]
+    C --> D["Step 3"]
+    D --> E["End"]
+
+    linkStyle default stroke:#7c3aed,stroke-width:2px
+            </div>
+        </div>
+        <p>All four edges are styled uniformly with purple 2px stroke via a single <code>linkStyle default</code> declaration.</p>
+    </div>
+
+    <!-- Batch class application -->
+    <div class="section">
+        <h2>Batch Application with class Statement</h2>
+        <p>Instead of applying <code>:::className</code> to each node individually, use <code>class A,B,C className</code> to apply a style to multiple nodes in one statement.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph LR
+    classDef highlight fill:#fcd34d,stroke:#b45309,stroke-width:2px,color:#78350f
+    classDef muted fill:#e2e8f0,stroke:#94a3b8,stroke-width:1px,color:#475569
+
+    A["Node A"]
+    B["Node B"]
+    C["Node C"]
+    D["Node D"]
+    E["Node E"]
+
+    A --> B --> C --> D --> E
+
+    class A,B,C highlight
+    class D,E muted
+            </div>
+        </div>
+        <p>Nodes A, B, C are all styled amber via <code>class A,B,C highlight</code>. Nodes D, E are styled gray via <code>class D,E muted</code>. Useful when many nodes share a style.</p>
+    </div>
+
+    <!-- Corner radius (rx) -->
+    <div class="section">
+        <h2>Corner Radius with rx</h2>
+        <p>The <code>rx</code> property controls how rounded the corners of rectangle nodes are. Higher values create more rounding. Note: the CSS override <code>.node rect { rx: 8 }</code> in the page stylesheet may override per-node rx values — this example shows the property in isolation.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph LR
+    classDef sharp fill:#93c5fd,stroke:#1d4ed8,stroke-width:2px,color:#1e3a5f,rx:0
+    classDef slight fill:#93c5fd,stroke:#1d4ed8,stroke-width:2px,color:#1e3a5f,rx:4
+    classDef medium fill:#93c5fd,stroke:#1d4ed8,stroke-width:2px,color:#1e3a5f,rx:8
+    classDef round fill:#93c5fd,stroke:#1d4ed8,stroke-width:2px,color:#1e3a5f,rx:16
+    classDef pill fill:#93c5fd,stroke:#1d4ed8,stroke-width:2px,color:#1e3a5f,rx:24
+
+    A["<b>rx: 0</b><br/>Sharp corners"]:::sharp
+    B["<b>rx: 4</b><br/>Slight rounding"]:::slight
+    C["<b>rx: 8</b><br/>Medium rounding"]:::medium
+    D["<b>rx: 16</b><br/>Heavy rounding"]:::round
+    E["<b>rx: 24</b><br/>Pill shape"]:::pill
+
+    A ~~~ B ~~~ C ~~~ D ~~~ E
+            </div>
+        </div>
+    </div>
+
+    <!-- CSS Properties Reference -->
+    <div class="section">
+        <h2>CSS Properties Quick Reference</h2>
+        <div class="syntax-block">| Property         | Example              | Effect                         |
+|-----------------|----------------------|--------------------------------|
+| fill            | fill:#eff6ff         | Node background color          |
+| stroke          | stroke:#2563eb       | Border color                   |
+| stroke-width    | stroke-width:2px     | Border thickness               |
+| stroke-dasharray| stroke-dasharray:5 5 | Dashed border                  |
+| color           | color:#1e3a5f        | Text color                     |
+| rx              | rx:8                 | Corner radius (rounded)        |</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#dbeafe', primaryTextColor: '#0f172a', primaryBorderColor: '#2563eb',
+                lineColor: '#2563eb', secondaryColor: '#eff6ff', secondaryTextColor: '#1e3a5f',
+                secondaryBorderColor: '#3b82f6', edgeLabelBackground: '#dbeafe',
+                clusterBkg: '#f8fafc', clusterBorder: '#94a3b8',
+                fontSize: '13px', fontFamily: 'Inter, sans-serif'
+            },
+            flowchart: { curve: 'basis', nodeSpacing: 50, rankSpacing: 60, htmlLabels: true, useMaxWidth: false, padding: 20 }
+        });
+    </script>
+</body>
+</html>

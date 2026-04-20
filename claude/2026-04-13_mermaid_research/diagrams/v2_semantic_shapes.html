@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CI/CD Build Log Ecosystem — v2 Semantic Shapes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            padding: 40px;
+            color: #0f172a;
+        }
+        .back-btn {
+            position: fixed; top: 20px; left: 20px;
+            display: flex; align-items: center; gap: 8px;
+            padding: 8px 16px;
+            background: rgba(12, 25, 41, 0.85); color: rgba(255,255,255,0.8);
+            border: 1px solid rgba(255,255,255,0.15); border-radius: 8px;
+            font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+            text-decoration: none; cursor: pointer;
+            transition: background 0.2s, color 0.2s; z-index: 100;
+        }
+        .back-btn:hover { background: rgba(37, 99, 235, 0.9); color: #fff; }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 24px;
+        }
+        .changelog {
+            max-width: 800px; margin: 0 auto 24px; padding: 16px 20px;
+            background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px;
+            font-size: 13px; color: #1e3a5f; line-height: 1.6;
+        }
+        .changelog h3 { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: #1e40af; }
+        .changelog ul { margin: 0; padding-left: 20px; }
+        .changelog li { margin-bottom: 4px; }
+        #diagram-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 24px;
+        }
+    </style>
+</head>
+<body>
+    <a class="back-btn" onclick="history.back()"><i class="fa-solid fa-arrow-left"></i> Back</a>
+
+    <h1>CI/CD Build Log Ecosystem</h1>
+    <p class="subtitle">Cisco NX-OS Build Infrastructure and Analysis Pipeline</p>
+
+    <div class="changelog">
+        <h3>Changelog</h3>
+        <p>v2 — Semantic Shapes: Nodes now use shapes that convey their function (cylinders for storage, hexagons for orchestrators, diamonds for decisions, rounded for AI components).</p>
+        <ul>
+            <li>NXMAIN, NXDEV: Cylinder shape (repositories / data stores)</li>
+            <li>JENKINS: Hexagon shape (orchestration engine)</li>
+            <li>GMAKE, BAZEL: Subroutine shape (build tools)</li>
+            <li>NFS, MYSQL: Cylinder shape (storage / database)</li>
+            <li>LLM: Rounded shape (AI/ML component)</li>
+            <li>VERIFY: Diamond shape (decision / verification)</li>
+            <li>T1, T2, T3: Rounded shape (tiered approach)</li>
+        </ul>
+    </div>
+
+    <div id="diagram-container">
+        <pre class="mermaid">
+graph TB
+    subgraph REPOS["`**CODE REPOSITORIES**`"]
+        direction TB
+        NXMAIN[("`**nx_main**
+        Production Repository
+        Gmake Legacy`")]
+        NXDEV[("`**nx_dev**
+        Development Repository
+        Bazel Current`")]
+    end
+
+    subgraph BUILD["`**BUILD SYSTEM**`"]
+        direction TB
+        JENKINS{{"`**Jenkins**
+        Build Orchestration
+        Nightly + PR Triggers`"}}
+        GMAKE[["`**Gmake**
+        Legacy Build Tool
+        Being Phased Out`"]]
+        BAZEL[["`**Bazel**
+        Current Build Tool
+        Recommended Focus`"]]
+    end
+
+    subgraph STORAGE["`**DATA STORAGE**`"]
+        direction TB
+        NFS[("`**NFS ADS Machines**
+        Build Log Files
+        12-15 files per build
+        50K-500K lines each
+        3-5 day retention failed
+        Up to 5 years nightly`")]
+        MYSQL[("`**MySQL Database**
+        Build Metadata
+        Status Dates Sanity Results
+        Accessible via Web Portal`")]
+    end
+
+    subgraph EXISTING["`**EXISTING AUTOMATION POC**`"]
+        direction TB
+        PYTHON["`**Python Script**
+        Regex Error Extraction
+        Subset of Errors Only`"]
+        LLM("`**LLM Analysis**
+        Summary Generation
+        Fix Suggestion + Apply`")
+        VERIFY{"`**Build Verification**
+        Re-run After AI Fix
+        Pass/Fail Check`"}
+    end
+
+    subgraph PROPOSED["`**PROPOSED APPROACH**`"]
+        direction TB
+        T1("`**Tier 1: Rule-Based**
+        Known Bazel Error Codes
+        Deterministic Matching`")
+        T2("`**Tier 2: NLP/ML**
+        Ambiguous Patterns
+        Smaller Models`")
+        T3("`**Tier 3: LLM**
+        Complex Reasoning
+        Fix Generation + Governance`")
+    end
+
+    NXMAIN -->|"`Commits`"| JENKINS
+    NXDEV -->|"`Commits + PRs`"| JENKINS
+    JENKINS --> GMAKE
+    JENKINS --> BAZEL
+    GMAKE -->|"`Log Output`"| NFS
+    BAZEL -->|"`Log Output`"| NFS
+    JENKINS -->|"`Build Status`"| MYSQL
+
+    NFS -->|"`Error Extraction`"| PYTHON
+    PYTHON -->|"`Top Errors`"| LLM
+    LLM -->|"`Applied Fix`"| VERIFY
+
+    NFS -.->|"`Full Log Analysis`"| T1
+    T1 -.->|"`Unmatched Errors`"| T2
+    T2 -.->|"`Complex Cases`"| T3
+
+    style REPOS fill:#eff6ff,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    style BUILD fill:#dbeafe,stroke:#3b82f6,stroke-width:2px,color:#1e3a5f
+    style STORAGE fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    style EXISTING fill:#fef2f2,stroke:#f87171,stroke-width:2px,color:#991b1b
+    style PROPOSED fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+
+    style NXMAIN fill:#eff6ff,stroke:#2563eb,stroke-width:1px,color:#1e3a5f
+    style NXDEV fill:#eff6ff,stroke:#2563eb,stroke-width:1px,color:#1e3a5f
+    style JENKINS fill:#dbeafe,stroke:#3b82f6,stroke-width:1px,color:#1e3a5f
+    style GMAKE fill:#e2e8f0,stroke:#94a3b8,stroke-width:1px,color:#475569
+    style BAZEL fill:#dbeafe,stroke:#3b82f6,stroke-width:1px,color:#1e3a5f
+    style NFS fill:#fef9c3,stroke:#ca8a04,stroke-width:1px,color:#713f12
+    style MYSQL fill:#fef9c3,stroke:#ca8a04,stroke-width:1px,color:#713f12
+    style PYTHON fill:#fef2f2,stroke:#f87171,stroke-width:1px,color:#991b1b
+    style LLM fill:#fef2f2,stroke:#f87171,stroke-width:1px,color:#991b1b
+    style VERIFY fill:#fef2f2,stroke:#f87171,stroke-width:1px,color:#991b1b
+    style T1 fill:#dcfce7,stroke:#16a34a,stroke-width:1px,color:#14532d
+    style T2 fill:#dcfce7,stroke:#16a34a,stroke-width:1px,color:#14532d
+    style T3 fill:#dcfce7,stroke:#16a34a,stroke-width:1px,color:#14532d
+        </pre>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#dbeafe', primaryTextColor: '#0f172a', primaryBorderColor: '#2563eb',
+                lineColor: '#2563eb', secondaryColor: '#eff6ff', secondaryTextColor: '#1e3a5f',
+                secondaryBorderColor: '#3b82f6', edgeLabelBackground: '#dbeafe',
+                clusterBkg: '#f8fafc', clusterBorder: '#94a3b8',
+                fontSize: '13px', fontFamily: 'Inter, sans-serif'
+            },
+            flowchart: { curve: 'basis', nodeSpacing: 50, rankSpacing: 60, htmlLabels: false, useMaxWidth: false, padding: 16 }
+        });
+        async function renderDiagram() {
+            await mermaid.run({ querySelector: '.mermaid' });
+        }
+        renderDiagram();
+    </script>
+</body>
+</html>

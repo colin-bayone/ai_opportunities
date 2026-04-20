@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subgraphs, Nesting, and Layout — Mermaid Shape Library</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; padding: 40px; color: #0f172a; }
+        h1 { text-align: center; font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+        .subtitle { text-align: center; font-size: 14px; color: #64748b; margin-bottom: 32px; }
+        .section { max-width: 1200px; margin: 0 auto 40px; }
+        .section h2 { font-size: 18px; font-weight: 600; color: #1e3a5f; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid #dbeafe; }
+        .section p { font-size: 13px; color: #64748b; margin-bottom: 16px; line-height: 1.6; }
+        .section code { background: #eff6ff; padding: 2px 6px; border-radius: 4px; font-size: 12px; color: #1e40af; }
+        .diagram-box { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+        .mermaid { display: flex; justify-content: center; }
+        .mermaid .node rect, .mermaid .node polygon { rx: 8 !important; ry: 8 !important; }
+        .mermaid .edgeLabel rect { fill: #dbeafe !important; fill-opacity: 1 !important; stroke: none !important; }
+        .nav { max-width: 1200px; margin: 0 auto 32px; display: flex; gap: 8px; flex-wrap: wrap; }
+        .nav a { font-size: 12px; padding: 6px 12px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; color: #1e40af; text-decoration: none; }
+        .nav a:hover { background: #dbeafe; }
+        .nav a.current { background: #2563eb; color: white; border-color: #2563eb; }
+        .syntax-block { max-width: 1200px; margin: 0 auto 24px; padding: 16px 20px; background: #1e293b; border-radius: 10px; font-family: 'Courier New', monospace; font-size: 12px; color: #e2e8f0; line-height: 1.7; overflow-x: auto; white-space: pre; }
+        .note-box { max-width: 1200px; margin: 0 auto 24px; padding: 16px 20px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; font-size: 13px; color: #1e3a5f; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <h1>Subgraphs, Nesting, and Layout</h1>
+    <p class="subtitle">Mermaid Shape Library — Visual Reference</p>
+
+    <div class="nav">
+        <a href="01_classic_shapes.html">Classic Shapes</a>
+        <a href="02_v11_shapes.html">v11 Shapes</a>
+        <a href="03_arrows_and_edges.html">Arrows</a>
+        <a href="04_text_formatting.html">Text Formatting</a>
+        <a href="05_icons_reference.html">Icons</a>
+        <a href="06_classdef_styling.html">ClassDef</a>
+        <a href="07_subgraphs_and_layout.html" class="current">Subgraphs</a>
+        <a href="08_diagram_types_gallery.html">Diagram Types</a>
+    </div>
+
+    <!-- Basic Subgraph -->
+    <div class="section">
+        <h2>Basic Subgraph with Title</h2>
+        <p>Subgraphs create visual groupings (clusters) around related nodes. Syntax: <code>subgraph ID["Label"]...end</code>. The ID is used for styling, the label is displayed.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph TB
+    subgraph FRONTEND["<b>Frontend Layer</b>"]
+        A["React App"]
+        B["API Client"]
+    end
+
+    subgraph BACKEND["<b>Backend Layer</b>"]
+        C["Django Views"]
+        D["Services"]
+    end
+
+    subgraph DATA["<b>Data Layer</b>"]
+        E[("PostgreSQL")]
+        F[("Redis Cache")]
+    end
+
+    A --> B --> C --> D
+    D --> E
+    D --> F
+
+    style FRONTEND fill:#eff6ff,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    style BACKEND fill:#dbeafe,stroke:#3b82f6,stroke-width:2px,color:#1e3a5f
+    style DATA fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+            </div>
+        </div>
+    </div>
+
+    <!-- Nested Subgraphs -->
+    <div class="section">
+        <h2>Nested Subgraphs (2 Levels)</h2>
+        <p>Subgraphs can be nested to create hierarchical groupings. Keep nesting to 2-3 levels maximum for readability.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph TB
+    subgraph CLOUD["<b>Azure Cloud</b>"]
+        subgraph AKS["<b>AKS Cluster</b>"]
+            WEB["Web Pod"]
+            WORKER["Worker Pod"]
+        end
+        subgraph MANAGED["<b>Managed Services</b>"]
+            DB[("SQL Database")]
+            BLOB[("Blob Storage")]
+        end
+    end
+
+    WEB --> WORKER
+    WORKER --> DB
+    WORKER --> BLOB
+
+    style CLOUD fill:#f0f9ff,stroke:#0284c7,stroke-width:3px,color:#0c4a6e
+    style AKS fill:#dbeafe,stroke:#3b82f6,stroke-width:2px,color:#1e3a5f
+    style MANAGED fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+            </div>
+        </div>
+    </div>
+
+    <!-- Direction Override -->
+    <div class="section">
+        <h2>Direction Override Within Subgraphs</h2>
+        <p>The parent graph flows top-to-bottom (<code>TB</code>), but each subgraph can override its internal direction with <code>direction LR</code>. This creates a mixed layout.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph TB
+    subgraph INPUT["<b>Input Sources</b>"]
+        direction LR
+        EMAIL["Email"]
+        API["API"]
+        UPLOAD["Upload"]
+    end
+
+    PROC{{"<b>Processor</b>"}}
+
+    subgraph OUTPUT["<b>Output Targets</b>"]
+        direction LR
+        DB[("Database")]
+        QUEUE["Queue"]
+        LOG["Log"]
+    end
+
+    INPUT --> PROC --> OUTPUT
+
+    style INPUT fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    style OUTPUT fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#3b0764
+            </div>
+        </div>
+    </div>
+
+    <!-- Subgraph Styling -->
+    <div class="section">
+        <h2>Subgraph Styling (Colored Backgrounds and Borders)</h2>
+        <p>Style subgraphs with <code>style ID fill:...,stroke:...,stroke-width:...,color:...</code>. The <code>color</code> property sets the title text color.</p>
+        <div class="diagram-box">
+            <div class="mermaid">
+graph LR
+    subgraph CODE["<b>Code / Source</b>"]
+        C1["Node"]
+    end
+    subgraph BUILD["<b>Build / Compute</b>"]
+        B1["Node"]
+    end
+    subgraph STORE["<b>Storage / Data</b>"]
+        S1["Node"]
+    end
+    subgraph EXIST["<b>Existing / POC</b>"]
+        E1["Node"]
+    end
+    subgraph PROPOSE["<b>Proposed / New</b>"]
+        P1["Node"]
+    end
+    subgraph AIML["<b>AI / Intelligence</b>"]
+        A1["Node"]
+    end
+    subgraph EXTERN["<b>External</b>"]
+        X1["Node"]
+    end
+    subgraph DEPR["<b>Deprecated</b>"]
+        D1["Node"]
+    end
+
+    style CODE fill:#eff6ff,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    style BUILD fill:#dbeafe,stroke:#3b82f6,stroke-width:2px,color:#1e3a5f
+    style STORE fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    style EXIST fill:#fef2f2,stroke:#f87171,stroke-width:2px,color:#991b1b
+    style PROPOSE fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    style AIML fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#3b0764
+    style EXTERN fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+    style DEPR fill:#e2e8f0,stroke:#94a3b8,stroke-width:2px,color:#475569
+            </div>
+        </div>
+    </div>
+
+    <!-- Subgraph Syntax Reference -->
+    <div class="section">
+        <h2>Subgraph Syntax Reference</h2>
+        <div class="syntax-block">subgraph ID["Label Text"]
+    direction TB          %% or LR — overrides parent graph direction
+    A["Node inside"]
+    B["Another node"]
+    A --> B
+end
+
+%% Style the subgraph cluster
+style ID fill:#eff6ff,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+
+%% Nested subgraphs
+subgraph OUTER["Outer"]
+    subgraph INNER["Inner"]
+        C["Deeply nested"]
+    end
+end
+
+%% Labels support HTML (with htmlLabels: true)
+subgraph FANCY["&lt;b&gt;BOLD TITLE&lt;/b&gt;"]
+    D["Node"]
+end</div>
+    </div>
+
+    <!-- Post-Render Cluster Label Fix -->
+    <div class="section">
+        <h2>Post-Render Cluster Label Fix</h2>
+        <p>SVG renders elements in DOM order. Cluster (subgraph) labels render before edges, so arrows can cut through titles. The fix: after mermaid renders, clone label elements to the end of the SVG so they paint on top of edges.</p>
+        <div class="note-box">
+            <strong>When to use:</strong> Only needed when edges visually cross through subgraph title text. If your diagram doesn't have this issue, skip the fix.
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Cluster Label Fix — JavaScript</h2>
+        <div class="syntax-block">// Run AFTER mermaid.run() completes
+const svg = document.querySelector('.mermaid svg');
+if (svg) {
+    document.querySelectorAll('.cluster-label').forEach(label => {
+        const fo = label.querySelector('foreignObject');
+        if (fo) {
+            const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+
+            // Get position from the foreignObject
+            const x = parseFloat(fo.getAttribute('x')) || 0;
+            const y = parseFloat(fo.getAttribute('y')) || 0;
+            const w = parseFloat(fo.getAttribute('width')) || 0;
+            const h = parseFloat(fo.getAttribute('height')) || 0;
+
+            // Find the parent cluster's stroke color
+            const cluster = label.closest('.cluster');
+            let strokeColor = '#94a3b8';
+            if (cluster) {
+                const clusterRect = cluster.querySelector('rect');
+                if (clusterRect) {
+                    strokeColor = clusterRect.getAttribute('stroke') || strokeColor;
+                }
+            }
+
+            // White background rect with matching border
+            const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            bg.setAttribute('x', x - 6);
+            bg.setAttribute('y', y - 2);
+            bg.setAttribute('width', w + 12);
+            bg.setAttribute('height', h + 4);
+            bg.setAttribute('rx', '4');
+            bg.setAttribute('fill', 'white');
+            bg.setAttribute('stroke', strokeColor);
+            bg.setAttribute('stroke-width', '1');
+            g.appendChild(bg);
+
+            // Clone the foreignObject (the label text)
+            g.appendChild(fo.cloneNode(true));
+
+            // Copy transform from original label group
+            const transform = label.getAttribute('transform');
+            if (transform) g.setAttribute('transform', transform);
+
+            // Append to end of SVG (renders on top)
+            svg.appendChild(g);
+
+            // Hide original to prevent double-rendering
+            label.style.display = 'none';
+        }
+    });
+}</div>
+        <p class="section" style="margin-top: 12px;">See <code>claude/2026-04-13_mermaid_research/diagrams/v5_mermaid11_icons.html</code> for the complete working implementation of this technique.</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#dbeafe', primaryTextColor: '#0f172a', primaryBorderColor: '#2563eb',
+                lineColor: '#2563eb', secondaryColor: '#eff6ff', secondaryTextColor: '#1e3a5f',
+                secondaryBorderColor: '#3b82f6', edgeLabelBackground: '#dbeafe',
+                clusterBkg: '#f8fafc', clusterBorder: '#94a3b8',
+                fontSize: '13px', fontFamily: 'Inter, sans-serif'
+            },
+            flowchart: { curve: 'basis', nodeSpacing: 50, rankSpacing: 60, htmlLabels: true, useMaxWidth: false, padding: 20 }
+        });
+    </script>
+</body>
+</html>

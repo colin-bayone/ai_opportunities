@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CI/CD Build Log Ecosystem — v5 Mermaid v11 with Icons</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            padding: 40px;
+            color: #0f172a;
+        }
+        .back-btn {
+            position: fixed; top: 20px; left: 20px;
+            display: flex; align-items: center; gap: 8px;
+            padding: 8px 16px;
+            background: rgba(12, 25, 41, 0.85); color: rgba(255,255,255,0.8);
+            border: 1px solid rgba(255,255,255,0.15); border-radius: 8px;
+            font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+            text-decoration: none; cursor: pointer;
+            transition: background 0.2s, color 0.2s; z-index: 100;
+        }
+        .back-btn:hover { background: rgba(37, 99, 235, 0.9); color: #fff; }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 24px;
+        }
+        .changelog {
+            max-width: 800px; margin: 0 auto 24px; padding: 16px 20px;
+            background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px;
+            font-size: 13px; color: #1e3a5f; line-height: 1.6;
+        }
+        .changelog h3 { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: #1e40af; }
+        .changelog ul { margin: 0; padding-left: 20px; }
+        .changelog li { margin-bottom: 4px; }
+        #diagram-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 24px;
+        }
+        .mermaid .node rect, .mermaid .node polygon { rx: 8 !important; ry: 8 !important; }
+        .mermaid .edgeLabel rect { fill: #dbeafe !important; fill-opacity: 1 !important; stroke: none !important; }
+    </style>
+</head>
+<body>
+    <a class="back-btn" onclick="history.back()"><i class="fa-solid fa-arrow-left"></i> Back</a>
+
+    <h1>CI/CD Build Log Ecosystem</h1>
+    <p class="subtitle">Cisco NX-OS Build Infrastructure and Analysis Pipeline</p>
+
+    <div class="changelog">
+        <h3>v5 — Mermaid v11 Upgrade with Real Icons</h3>
+        <p>Upgraded from mermaid v10 to v11 to get both FontAwesome icons AND formatted text. Uses <code>htmlLabels: true</code> with HTML <code>&lt;b&gt;</code> tags for bold (replacing markdown <code>**</code> syntax). Icons render as actual Font Awesome glyphs.</p>
+        <ul>
+            <li>Mermaid CDN upgraded from v10 to v11</li>
+            <li><code>htmlLabels: true</code> enables icon rendering as glyphs</li>
+            <li>Bold text via <code>&lt;b&gt;</code> HTML tags instead of markdown <code>**</code></li>
+            <li>Multi-line text via <code>&lt;br/&gt;</code> instead of literal newlines</li>
+            <li>All v3 content preserved: semantic shapes, classDef classes, full detail text, deprecated dashed styling, AI purple</li>
+            <li>FontAwesome icons on every node</li>
+        </ul>
+    </div>
+
+    <div id="diagram-container">
+        <pre class="mermaid">
+graph TB
+    classDef codeRepo fill:#eff6ff,stroke:#2563eb,stroke-width:1px,color:#1e3a5f
+    classDef buildTool fill:#dbeafe,stroke:#3b82f6,stroke-width:1px,color:#1e3a5f
+    classDef deprecated fill:#e2e8f0,stroke:#94a3b8,stroke-width:1px,color:#475569,stroke-dasharray:5 5
+    classDef storage fill:#fef9c3,stroke:#ca8a04,stroke-width:1px,color:#713f12
+    classDef existingPoc fill:#fef2f2,stroke:#f87171,stroke-width:1px,color:#991b1b
+    classDef proposed fill:#dcfce7,stroke:#16a34a,stroke-width:1px,color:#14532d
+    classDef aiComponent fill:#ede9fe,stroke:#7c3aed,stroke-width:1px,color:#3b0764
+
+    subgraph REPOS["<b>CODE REPOSITORIES</b>"]
+        direction TB
+        NXMAIN[("<b>fa:fa-code-branch nx_main</b><br/>▸ Production Repository<br/>▸ Gmake Legacy")]:::codeRepo
+        NXDEV[("<b>fa:fa-code-branch nx_dev</b><br/>▸ Development Repository<br/>▸ Bazel Current")]:::codeRepo
+    end
+
+    subgraph BUILD["<b>BUILD SYSTEM</b>"]
+        direction TB
+        JENKINS{{"<b>fa:fa-gears Jenkins</b><br/>▸ Build Orchestration<br/>▸ Nightly + PR Triggers"}}:::buildTool
+        GMAKE[["<b>fa:fa-hammer Gmake</b><br/>▸ Legacy Build Tool<br/>▸ Being Phased Out"]]:::deprecated
+        BAZEL[["<b>fa:fa-hammer Bazel</b><br/>▸ Current Build Tool<br/>▸ Recommended Focus"]]:::buildTool
+    end
+
+    subgraph STORAGE["<b>DATA STORAGE</b>"]
+        direction TB
+        NFS[("<b>fa:fa-hard-drive NFS ADS Machines</b><br/>▸ Build Log Files<br/>▸ 12-15 files per build<br/>▸ 50K-500K lines each<br/>▸ 3-5 day retention failed<br/>▸ Up to 5 years nightly")]:::storage
+        MYSQL[("<b>fa:fa-database MySQL Database</b><br/>▸ Build Metadata<br/>▸ Status, Dates, Sanity Results<br/>▸ Accessible via Web Portal")]:::storage
+    end
+
+    subgraph EXISTING["<b>EXISTING AUTOMATION — POC</b>"]
+        direction TB
+        PYTHON["<b>fa:fa-file-code Python Script</b><br/>▸ Regex Error Extraction<br/>▸ Subset of Errors Only"]:::existingPoc
+        LLM("<b>fa:fa-brain LLM Analysis</b><br/>▸ Summary Generation<br/>▸ Fix Suggestion + Apply"):::aiComponent
+        VERIFY{"<b>fa:fa-circle-check Build Verification</b><br/>▸ Re-run After AI Fix<br/>▸ Pass/Fail Check"}:::existingPoc
+    end
+
+    subgraph PROPOSED["<b>PROPOSED APPROACH</b>"]
+        direction TB
+        T1("<b>fa:fa-list-check Tier 1: Rule-Based</b><br/>▸ Known Bazel Error Codes<br/>▸ Deterministic Matching"):::proposed
+        T2("<b>fa:fa-microchip Tier 2: NLP/ML</b><br/>▸ Ambiguous Patterns<br/>▸ Smaller Models"):::aiComponent
+        T3("<b>fa:fa-brain Tier 3: LLM</b><br/>▸ Complex Reasoning<br/>▸ Fix Generation + Governance"):::aiComponent
+    end
+
+    NXMAIN -->|Commits| JENKINS
+    NXDEV -->|Commits + PRs| JENKINS
+    JENKINS --> GMAKE
+    JENKINS --> BAZEL
+    GMAKE -->|Log Output| NFS
+    BAZEL -->|Log Output| NFS
+    JENKINS -->|Build Status| MYSQL
+
+    NFS -->|Error Extraction| PYTHON
+    PYTHON -->|Top Errors| LLM
+    LLM -->|Applied Fix| VERIFY
+
+    NFS -.->|Full Log Analysis| T1
+    T1 -.->|Unmatched Errors| T2
+    T2 -.->|Complex Cases| T3
+
+    style REPOS fill:#eff6ff,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    style BUILD fill:#dbeafe,stroke:#3b82f6,stroke-width:2px,color:#1e3a5f
+    style STORAGE fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    style EXISTING fill:#fef2f2,stroke:#f87171,stroke-width:2px,color:#991b1b
+    style PROPOSED fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+        </pre>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#dbeafe', primaryTextColor: '#0f172a', primaryBorderColor: '#2563eb',
+                lineColor: '#2563eb', secondaryColor: '#eff6ff', secondaryTextColor: '#1e3a5f',
+                secondaryBorderColor: '#3b82f6', edgeLabelBackground: '#dbeafe',
+                clusterBkg: '#f8fafc', clusterBorder: '#94a3b8',
+                fontSize: '13px', fontFamily: 'Inter, sans-serif'
+            },
+            flowchart: { curve: 'basis', nodeSpacing: 50, rankSpacing: 60, htmlLabels: true, useMaxWidth: false, padding: 24, subGraphTitleMargin: { top: 10, bottom: 14 } }
+        });
+        async function renderDiagram() {
+            await mermaid.run({ querySelector: '.mermaid' });
+
+            // Post-render: move cluster labels to the end of the SVG
+            // so they render ON TOP of edges (SVG paints in DOM order)
+            const svg = document.querySelector('.mermaid svg');
+            if (svg) {
+                document.querySelectorAll('.cluster-label').forEach(label => {
+                    // Clone the label group, add an opaque background, append to end of SVG
+                    const fo = label.querySelector('foreignObject');
+                    if (fo) {
+                        // Create a new group at the SVG root level (renders last = on top)
+                        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+
+                        // Get position from the foreignObject
+                        const x = parseFloat(fo.getAttribute('x')) || 0;
+                        const y = parseFloat(fo.getAttribute('y')) || 0;
+                        const w = parseFloat(fo.getAttribute('width')) || 0;
+                        const h = parseFloat(fo.getAttribute('height')) || 0;
+
+                        // Find the parent cluster's stroke color to match the border
+                        const cluster = label.closest('.cluster');
+                        let strokeColor = '#94a3b8'; // default fallback
+                        if (cluster) {
+                            const clusterRect = cluster.querySelector('rect');
+                            if (clusterRect) {
+                                strokeColor = clusterRect.getAttribute('stroke') || strokeColor;
+                            }
+                        }
+
+                        // White background rect with matching border
+                        const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                        bg.setAttribute('x', x - 6);
+                        bg.setAttribute('y', y - 2);
+                        bg.setAttribute('width', w + 12);
+                        bg.setAttribute('height', h + 4);
+                        bg.setAttribute('rx', '4');
+                        bg.setAttribute('fill', 'white');
+                        bg.setAttribute('stroke', strokeColor);
+                        bg.setAttribute('stroke-width', '1');
+                        g.appendChild(bg);
+
+                        // Clone the foreignObject (the label text)
+                        const foClone = fo.cloneNode(true);
+                        g.appendChild(foClone);
+
+                        // Copy the transform from the cluster-label group so positioning is correct
+                        const transform = label.getAttribute('transform');
+                        if (transform) {
+                            g.setAttribute('transform', transform);
+                        }
+
+                        // Append to end of SVG (renders on top of everything)
+                        svg.appendChild(g);
+
+                        // Hide the original label so there's no double-rendering
+                        label.style.display = 'none';
+                    }
+                });
+            }
+        }
+        renderDiagram();
+    </script>
+</body>
+</html>
