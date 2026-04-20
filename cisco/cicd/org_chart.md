@@ -1,6 +1,6 @@
 # Cisco CI/CD Engagement - Org Chart
 
-**Last Updated:** 2026-04-06 (updated through Set 10 — CI/CD Track Sync Up, Apr 2-3)
+**Last Updated:** 2026-04-20 (updated through Team Set 06 — IT security incident, Apr 20). Matt Healy added.
 
 ---
 
@@ -12,13 +12,14 @@
 - **Title:** Senior Director, Cloud Networking Group
 - **Role in Engagement:** Executive sponsor. Escalation point. Budget authority (~$100K/quarter). Created the original WebEx group on Feb 10 and directed the team to engage with Colin immediately.
 - **Ownership:** Budget allocation, team assignments, executive oversight. Can involve VP-level (Arun) when needed. Controls onboarding escalations -- added Shih-Ta Chi on Mar 26 specifically to unblock onboarding.
-- **Sentiment:** Supportive but patience is thinning. His WebEx messages have gotten progressively shorter and more direct over 4 weeks:
+- **Sentiment:** Supportive. On Apr 16, granted BayOne a full next-quarter contract extension without requiring a formal plan-in-hand. Said the team is "doing great" and would have signed a full-year extension, but held to three months in light of outstanding access issues. This signals patience is intact and confidence in the team is high despite the slow pace of Cisco-side access provisioning.
+- **Prior sentiment progression (pre-extension):** Patience was thinning across March. His WebEx messages got progressively shorter and more direct:
   - Mar 3: "How is it going? Is everyone on board?"
   - Mar 12: "Do you have any visibility? Anywhere I can help? This is losing steam."
   - Mar 23: "What are next steps? Is all access/permission taken care?"
   - Mar 27: "Can we come up with a tentative plan for next couple of weeks?"
   - Mar 31: "Any update on this?"
-  He is asking for a PLAN, not status updates. He wants concrete next steps and a cadence so he does not have to keep chasing.
+  He was asking for a PLAN, not status updates. The Apr 16 extension suggests he now has enough confidence to extend runway rather than demand a plan.
 - **Working Style:** Direct communicator. Checks in periodically but does not micromanage. Offered to help unblock procurement and access issues when escalated to. Monitors the WebEx space and will expedite if things are not moving. In the Feb 17 meeting, said he would monitor the WebEx group and intervene if questions go unanswered. Told Colin to keep him looped and ping him if anything stalls. Wants recorded sessions so onboarding scales. Understands "business reality versus engineering reality" -- flexible on quarter boundaries.
 - **Known Since:** Nov 2025 (first conversations about CI/CD opportunity); Feb 10, 2026 (created engagement WebEx group)
 
@@ -31,6 +32,7 @@
 - **Role in Engagement:** Technical visionary. Owns the DeepSight Atlas platform. Defines what BayOne builds and how it integrates. Will be BayOne's primary technical counterpart once development begins.
 - **Ownership:** DeepSight Atlas platform (Triage app live, Runbook launching, CI/CD app in progress). AI infrastructure, SDK, AI stack. Repo creation for new DeepSight applications. Technical strategy for agentic infrastructure and extensibility.
 - **Sentiment:** Enthusiastic, direct, fast-paced. Treats partners as colleagues, not vendors. Told Colin in Feb 17 meeting: "Once you are onboarding, you are my friend. So I'll treat you the way -- treat me the same way as a colleague." Expects candor and pushback -- "you have to correct me" and "feel good to correct me." Shared DeepSight recording and platform access proactively. Expressed "full trust and confidence" in Colin specifically. Self-aware about his intensity: "sometimes team might say, why Srini is so aggressive, right? Because that's my nature."
+- **Sentiment update (2026-04-20, Team Set 06):** On the morning of 2026-04-20, jointly with Anand Singh, called a 15-minute meeting with Colin to address the Cisco IT Security incident involving Namita's data-handling violations. The fact that Srinivas personally called this meeting rather than routing it through Matt Healy or handling it via chat represents the first executive-level friction event in the engagement. It is a material change from the Feb 17 "full trust and confidence" posture and the Apr 16 renewal-with-confidence posture. The 15-minute duration is mildly positive — indicates intent to address directly and move forward rather than open an extended review — but the escalation to a co-meeting with Anand means the trust posture is now being tested rather than assumed. Post-meeting, this entry must be updated again based on the tone and outcome of the conversation.
 - **Working Style:** Moves very fast. Values extensibility over point solutions -- always wants two hats: "current need and future need." Thinks in terms of agentic infrastructure. Will pull BayOne into broader meetings once development starts so they have context for future phases. Expects an app running live within two months of onboarding because "all the infrastructure is already built for you." Collaborative -- will include BayOne in heated technical discussions as equals.
 - **Known Since:** Feb 17, 2026 (in-person discovery meeting)
 
@@ -92,6 +94,17 @@
 
 ---
 
+### Matt Healy
+
+- **Title:** IT Security (Cisco). Exact title and seniority not yet confirmed.
+- **Role in Engagement:** Investigating a data-handling incident involving Namita (Set 06, 2026-04-20). Flagged four items: source code sharing with Vaishali over Teams, blocked log file transfer attempt, AirDrop of project deliverable from Cisco to BayOne laptop (spotted WebEx scraping content), and upload of Log_type_mapping.pdf to BayOne GitHub.
+- **Ownership:** Data-loss prevention review on the BayOne team's Cisco access.
+- **Sentiment:** Professional, direct. Asked specific questions rather than issuing blanket restrictions, which is a mildly constructive posture. Raised WebEx scraping as a concern to confirm Cisco team awareness rather than assuming unauthorized activity.
+- **Working Style:** Direct communication with Namita while review is in progress. Unknown whether he is the final decision-maker or is reporting up.
+- **Known Since:** Apr 20, 2026 (Team Set 06 — IT security incident)
+
+---
+
 ## BayOne Solutions
 
 ### Colin Moore
@@ -105,45 +118,72 @@
 
 ---
 
-### Srikar
+### Srikar Madarapu
 
+- **Email:** srmadara@cisco.com
 - **Title:** AI Engineer
-- **Role in Engagement:** On-site presence at Cisco (Bay Area based). Recently joined the team. Attended Mar 30 internal team meeting where Colin walked through full problem architecture, solution approach, and Q1 deliverables.
-- **Ownership:** On-site technical execution. Previously worked on computer vision and AI engineering.
-- **Sentiment:** New to engagement. Engaged in Mar 30 internal briefing.
-- **Working Style:** Bay Area based, on-site at Cisco. Has Cisco hardware. Recently joined.
-- **Known Since:** Mar 30, 2026 (first internal team meeting attendance)
+- **Role in Engagement:** On-site presence at Cisco (Bay Area based). WebEx scraper/transcriber track lead. Primary liaison for Naga's Pulse/Scribble repos and DeepSight GitHub access. Attended Mar 30 internal team meeting where Colin walked through full problem architecture, solution approach, and Q1 deliverables.
+- **Ownership:** On-site technical execution. WebEx/Naga discovery. Pulse/Scribble access chain. Previously worked on computer vision and AI engineering.
+- **Sentiment:** Self-directed and engaged. Watches training videos proactively (DeepSight day 1), reports meeting findings structured as lists, independently pursues repo access from Srinivas without being asked.
+- **Working Style:** Bay Area based, on-site at Cisco. Has Cisco hardware. Reports via structured written summaries in the team WebEx space. Asks practical questions (Miro access, diagram tools). Proactive on access requests. Discovered WebEx API owner-only recording limitation through independent research.
+- **Known Since:** Apr 1, 2026 (added to team WebEx space; first internal team meeting attendance Mar 30)
 
 ---
 
-### Namita
+### Namita Ravikiran Mane
 
+- **Email:** namane@cisco.com
 - **Title:** Agentic AI / Airflow Specialist
-- **Role in Engagement:** Colin's designated Airflow expert for the project. Critical for DeepSight integration and CI/CD pipeline orchestration work. Fifth team member.
-- **Ownership:** Airflow development and integration. 8 years of Airflow experience.
-- **Sentiment:** Not yet active on the engagement. H1B transfer in progress.
-- **Working Style:** Bay Area based. Expected to start next week (as of Mar 30) pending H1B transfer completion.
-- **Known Since:** Mar 30, 2026 (mentioned in internal team meeting; not yet active)
+- **Role in Engagement:** On-site build log analysis lead. Knowledge anchor for Task 3 (Build Log Analysis). Drives access requests, meets with Cisco counterparts (Justin, Divakar), produces architecture documents and technical mappings. Also Colin's designated Airflow expert for DeepSight integration and pipeline orchestration.
+- **Ownership:** Build log analysis track (primary lead). ADS machine access. NFS log infrastructure understanding. Architecture documentation. Log type mapping. 8 years of Airflow experience.
+- **Sentiment:** Highly engaged and proactive. Most thorough reporter on the team. Responds to requests within minutes with pre-prepared materials. Independently contacts Cisco support, discovers platform migrations, obtains correct training links from Justin, and escalates blockers with specific named contacts.
+- **Sentiment update (2026-04-20, Team Set 06):** On 2026-04-17, committed four data-handling violations that were flagged by Cisco IT Security (Matt Healy) on the morning of 2026-04-20: shared four of Justin's source code files with Vaishali over Teams, attempted a blocked log-file transfer, AirDropped a project presentation document from Cisco laptop to BayOne laptop, and uploaded Log_type_mapping.pdf to BayOne GitHub. Compounded the incident by engaging Cisco IT Security directly before flagging any of it to Colin, eliminating BayOne's opportunity for early damage control. The violations crossed standing verbal guidance Colin had given multiple times and the written access policies of both BayOne and Cisco. Colin has issued a final warning in writing. The pattern raises a judgment question distinct from her technical contribution: strong execution, thorough reporting, and proactive ramp-up remain true, but data-handling boundaries and incident-response instincts are now flagged as concerns requiring observation. Her prior remorse in the exchange was sincere and she is cooperating fully on remediation. Relationship is intact conditional on no repeat; a second incident of this kind triggers termination per the BayOne Client Data Handling Policy (2026-04-20).
+- **Working Style:** Bay Area based, on-site at Cisco. Has Cisco hardware. Produces structured deliverables without prompting (architecture diagrams, annotated limitations, log mappings). Mentors new team members (met with Vaishali proactively). Communicates in high-signal, low-noise messages. 13-minute response time to Colin's Srinivas prep request with four ready-made artifacts.
+- **Known Since:** Apr 7, 2026 (first visible activity in team chat; mentioned in internal team meeting Mar 30)
 
 ---
 
 ### Saurav Kumar Mishra
 
+- **Email:** sauravmi@cisco.com
 - **Title:** AI/ML Engineer
-- **Role in Engagement:** Offshore technical contributor. Attended both internal team meetings (Mar 18 and Mar 30). Has been briefed on problem architecture, key contacts, and ground rules.
-- **Ownership:** AI/ML development, document intelligence, business process automation. ~3+ years experience in AI/ML.
-- **Sentiment:** Active and engaged. Present at first internal team meeting on Mar 18.
-- **Working Style:** Offshore (India). Has both BayOne and Cisco laptops -- fully equipped.
+- **Role in Engagement:** Offshore technical contributor. Builder of Wall-E (formerly Volley), the team's working WebEx scraper bot. Asks the sharpest technical questions on the team. Independently builds and ships deliverables.
+- **Ownership:** WebEx scraper bot (Wall-E / Volley). WebEx API reference documentation. AI/ML development, document intelligence, business process automation. ~3+ years experience in AI/ML.
+- **Sentiment:** Highly engaged, ships independently, low message count but highest deliverable-to-message ratio on the team. Deployed Wall-E into the team's own WebEx space on a Friday evening without announcement or permission request.
+- **Working Style:** Offshore (India), working PST hours. Has both BayOne and Cisco laptops. Bursty communication pattern: concentrated activity followed by extended silence. Asks detailed architectural questions (OAuth2 provisioning, connector strategy, validation approaches). Builds first, asks questions second. Renamed bot from Volley to Wall-E between standup and evening deployment.
 - **Known Since:** Mar 18, 2026 (first internal team meeting)
+
+---
+
+### Vaishali Sonawane
+
+- **Title:** BayOne (role not yet documented in research library)
+- **Role in Engagement:** Newly onboarding. First appearance in the team research chain is Set 05 (Apr 17 prep meeting). Participated as a listener only — no active responsibilities for the Srinivas afternoon meeting. Colin framed her attendance as familiarization: "just be a sponge."
+- **Ownership:** To be determined. Onboarding in progress.
+- **Sentiment:** New to the engagement. Has completed BayOne paperwork (Individual NDA signed). Cisco-side onboarding contact is Ashish Singh. Colin plans to sync with her separately on pending onboarding items.
+- **Working Style:** Offshore (India). Colin explicitly excused her from the late Friday Srinivas meeting due to IST hour timing. Will consume the transcript and recording asynchronously.
+- **Known Since:** 2026-04-17 (Set 05, Friday prep meeting)
+
+---
+
+### Tanuja Raj
+
+- **Title:** BayOne (role not yet documented in research library)
+- **Role in Engagement:** Newly onboarding. First appearance in the team research chain is Set 05 (Apr 17 prep meeting). Not yet on the internal Teams chat at time of the meeting; Colin planned to add her and share the primer document.
+- **Ownership:** To be determined. Onboarding in progress.
+- **Sentiment:** New to the engagement. Listener-only in Set 05. No active responsibilities for the Srinivas afternoon meeting.
+- **Working Style:** Offshore (IST). Colin excused her from the late Friday Srinivas meeting in light of the time zone gap. Will consume the transcript and recording asynchronously.
+- **Known Since:** 2026-04-17 (Set 05, Friday prep meeting)
 
 ---
 
 ### Askari Sayed
 
+- **Email:** assayed@cisco.com
 - **Title:** AI Engineer
 - **Role in Engagement:** Offshore technical contributor. Attended both internal team meetings (Mar 18 and Mar 30). Has been briefed on problem architecture, key contacts, and ground rules.
 - **Ownership:** AI engineering. ~5 years experience, previously lead AI engineer at Ultratech Cement. Masters in data science.
-- **Sentiment:** Active and engaged. Present at first internal team meeting on Mar 18.
+- **Sentiment:** Near-total silence in team communications. 1 message in 16 days of team chat (4/2, reporting VPN did not resolve training access). No task assignments, no meeting participation reported, not part of either sub-team. Wall-E activity report quantified this at 2.6% of human messages. Status on engagement unclear.
 - **Working Style:** Offshore (India). Has Cisco laptop; BayOne laptop shipped Mar 18.
 - **Known Since:** Mar 18, 2026 (first internal team meeting)
 
@@ -212,13 +252,30 @@
 - **Working Style:** Hands-on engineer. Direct communicator. Will be Colin's primary technical counterpart for build infrastructure.
 - **Known Since:** 2026-04-02/03 (Set 10, CI/CD Track Sync Up)
 
-### Naga
+### Nagabhushan Bangalore Nanjaiah ("Naga")
 
+- **Email:** (not yet documented)
 - **Title:** Engineer (Srinivas's team)
-- **Role in Engagement:** Has existing WebEx plugins (chat content scraper, recording transcriber). May have committed code. Colin to connect with Naga for the first task.
-- **Ownership:** WebEx automation tools, possibly DeepSight plugins.
-- **Sentiment:** Unknown. Not present in meeting. Referenced by Srinivas.
-- **Known Since:** 2026-04-02/03 (Set 10, referenced by Srinivas)
+- **Role in Engagement:** Built Pulse (WebEx chat scraper) and Scribble (Whisper/Pyannote audio transcriber). Both repos on DeepSight GitHub. Met with Srikar on 4/9 and described scope as unclear. Responded on 4/16 after Srikar found him in person at Cisco.
+- **Ownership:** Pulse repo (Parser-Agent/pulse), Scribble repo (listed as "Scrubber" in GitHub teams — naming confusion confirmed). WebEx automation tools on DeepSight platform.
+- **Sentiment:** On 4/16 told Srikar that Srinivas's current expectations (CI-CD pipeline + WebEx interaction) differ from what was discussed for Pulse/Scribble. Advised Srikar to "sync again with Srini." This confirms the scope confusion is acknowledged even by Naga himself.
+- **Update 2026-04-17 (from Srikar's in-person meeting earlier in the week):** Naga's stated position is that the two projects (Pulse, Scribbler) are moving separately from BayOne's CI/CD work and that there is no meaningful overlap. Colin's position is that this is a decision Naga does not have authority to make, and that keeping the tools as separate standalone products contradicts Srinivas's directive to build modular, reusable components.
+- **Naming resolution (2026-04-17):** Three names in circulation (Scribble, Scribbler, Scrubber) refer to the same audio transcription tool. Scribbler is the final internal name per Srikar; Scrubber is a GitHub team artifact.
+- **Working Style:** Builds in isolation. Unresponsive to remote communication but engaged when approached in person. Redirects scope questions to Srinivas rather than answering them.
+- **Known Since:** 2026-04-02/03 (Set 10, referenced by Srinivas); met Srikar 2026-04-09; full name confirmed 2026-04-16; position re-confirmed 2026-04-17
+
+---
+
+### Rui Guo
+
+- **Title:** Engineer (on Arun's team, per Set 10 org chart)
+- **Role in Engagement:** Built "Nexus T" — an AI failure analysis agent using GPT 5.4 with auto-triage capabilities, topology views, and a chat interface. Already deployed/visible in the NxOS CI workflow WebEx space. Directly overlaps with BayOne's Task 3 scope. Was originally described (Set 10) as building the CI/CD app for DeepSight.
+- **Ownership:** Nexus T agent, DeepSight CI/CD application.
+- **Sentiment:** Unknown. No direct interaction with BayOne team. His work is visible in the WebEx space but he has not been engaged.
+- **Working Style:** Unknown. Appears to ship working tools to the CI workflow space independently.
+- **Known Since:** Feb 17, 2026 (mentioned by Srinivas); work discovered in NxOS CI workflow space Apr 16, 2026
+- **Key Issue:** Three-way scope overlap between Rui's Nexus T, Justin's Python+LLM workflow, and BayOne's assigned tasks. Colin raising with Srinivas to clarify roles.
+- **Update 2026-04-17 (via Srikar's discovery in the CICD repo Srinivas shared):** The CICD repo contains Nexus T plus a CDET bugs component. Two components interconnect via MCP. Both use LLMs for jobs/test tracking. Output actions push to WebEx as notifications, channel creation, room creation, and meeting creation. Scope overlap with BayOne's work is therefore deeper than Set 04 indicated.
 
 ---
 

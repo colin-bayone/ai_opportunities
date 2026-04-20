@@ -1,0 +1,1799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CI/CD Pipeline Intelligence: Progress and Open Items - April 16, 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #334155;
+  line-height: 1.7;
+  font-size: 15px;
+  background: #ffffff;
+}
+
+/* ============================================
+   COVER PAGE
+   ============================================ */
+
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px;
+  background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  page-break-after: always;
+}
+
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 80%;
+  height: 200%;
+  background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+  transform: rotate(-12deg);
+}
+
+.cover::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 60%;
+  height: 80%;
+  background: radial-gradient(ellipse, rgba(147,51,234,0.2) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+.cover-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #e879f9;
+  margin-bottom: 24px;
+}
+
+.cover h1 {
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+}
+
+.cover-subtitle {
+  font-size: 20px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 48px;
+  max-width: 600px;
+}
+
+.cover-meta {
+  display: flex;
+  gap: 48px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.cover-meta-item label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 8px;
+}
+
+.cover-meta-item span {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.logo {
+  position: absolute;
+  bottom: 80px;
+  right: 80px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  z-index: 1;
+}
+
+.logo span { color: #e879f9; }
+
+/* ============================================
+   LAYOUT
+   ============================================ */
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+
+.section { margin-bottom: 64px; }
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+
+h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 24px;
+  letter-spacing: -0.5px;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 32px 0 16px;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 24px 0 12px;
+}
+
+p { margin-bottom: 16px; }
+
+.lead {
+  font-size: 18px;
+  color: #64748b;
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.section-number {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #a855f7;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  padding: 6px 14px;
+  background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(168,85,247,0.15) 100%);
+  border-radius: 4px;
+}
+
+/* ============================================
+   TABLES
+   ============================================ */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 14px;
+}
+
+th {
+  text-align: left;
+  padding: 14px 16px;
+  background: #5b21b6;
+  color: #fff;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-right: 1px solid rgba(255,255,255,0.15);
+}
+
+th:last-child { border-right: none; }
+th:first-child { border-radius: 8px 0 0 0; }
+th:last-child { border-radius: 0 8px 0 0; }
+
+td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: top;
+}
+
+tr:last-child td { border-bottom: none; }
+tr:nth-child(even) { background: #f8fafc; }
+
+/* ============================================
+   HIGHLIGHT BOX
+   ============================================ */
+
+.highlight-box {
+  background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+  border-left: 4px solid #a855f7;
+  padding: 24px 28px;
+  margin: 32px 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.highlight-box p:last-child { margin-bottom: 0; }
+
+.highlight-box h4 {
+  color: #5b21b6;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.highlight-box ol, .highlight-box ul {
+  margin: 12px 0 0 20px;
+  padding: 0;
+}
+
+.highlight-box li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+/* ============================================
+   CARDS
+   ============================================ */
+
+.card {
+  background: #fff;
+  border: 1px solid rgba(124,58,237,0.15);
+  border-radius: 12px;
+  padding: 28px;
+  margin: 24px 0;
+  box-shadow: 0 1px 3px rgba(124,58,237,0.06);
+}
+
+.card h4 {
+  margin-top: 0;
+  color: #5b21b6;
+}
+
+.card ul {
+  margin: 0 0 0 20px;
+  padding: 0;
+}
+
+.card li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.card p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.card p:last-child { margin-bottom: 0; }
+
+/* ============================================
+   STAT CARDS
+   ============================================ */
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 32px 0;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, rgba(124,58,237,0.06) 0%, rgba(168,85,247,0.04) 100%);
+  border: 1px solid rgba(124,58,237,0.1);
+  padding: 24px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: #7c3aed;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================
+   WORKFLOW GRID
+   ============================================ */
+
+.workflow-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 24px 0;
+}
+
+.workflow-step {
+  background: #fff;
+  border: 1px solid rgba(124,58,237,0.15);
+  border-radius: 12px;
+  padding: 20px 24px;
+  position: relative;
+}
+
+.workflow-step-number {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.workflow-step h5 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 8px 0;
+}
+
+.workflow-step p {
+  font-size: 14px;
+  margin: 0;
+  color: #334155;
+  line-height: 1.6;
+}
+
+/* ============================================
+   TWO COLUMN LAYOUT
+   ============================================ */
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin: 24px 0;
+}
+
+/* ============================================
+   CTA BOX
+   ============================================ */
+
+.cta-box {
+  background: linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(168,85,247,0.12) 100%);
+  border: 2px solid rgba(124,58,237,0.2);
+  border-radius: 12px;
+  padding: 32px;
+  margin: 32px 0;
+}
+
+.cta-box h3 {
+  margin-top: 0;
+  color: #5b21b6;
+}
+
+.cta-box p:last-child { margin-bottom: 0; }
+
+/* ============================================
+   STYLED LISTS
+   ============================================ */
+
+ul.content-list {
+  margin: 0 0 0 20px;
+  padding: 0;
+}
+
+ul.content-list li {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+/* ============================================
+   CHART IMAGE CONTAINER
+   ============================================ */
+
+.chart-container {
+  text-align: center;
+  margin: 32px 0;
+}
+
+.chart-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.chart-caption {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 12px;
+  font-style: italic;
+}
+
+/* ============================================
+   ARCHITECTURE DIAGRAM (MERMAID)
+   ============================================ */
+
+.architecture-container {
+  margin: 32px 0;
+  overflow-x: auto;
+}
+
+.architecture-container svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.airflow-banner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 22px;
+  background: linear-gradient(135deg, rgba(124,58,237,0.06) 0%, rgba(168,85,247,0.10) 100%);
+  border: 1px solid rgba(124,58,237,0.2);
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #334155;
+  position: relative;
+}
+
+.airflow-banner::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 20px;
+  right: 20px;
+  height: 1px;
+  background: rgba(124,58,237,0.15);
+}
+
+.airflow-banner i {
+  font-size: 22px;
+  color: #5b21b6;
+}
+
+.airflow-banner strong {
+  color: #5b21b6;
+  font-weight: 700;
+}
+
+.diagram-card {
+  background: #ffffff;
+  border: 1px solid rgba(124,58,237,0.2);
+  border-radius: 0 0 14px 14px;
+  padding: 20px 28px 28px;
+  margin-bottom: 32px;
+  box-shadow: 0 2px 8px rgba(124,58,237,0.06);
+  overflow: visible;
+}
+
+.diagram-group {
+  margin-bottom: 32px;
+  box-shadow: 0 4px 16px rgba(124,58,237,0.08);
+  border-radius: 14px;
+  overflow: visible;
+}
+
+.diagram-group .diagram-card {
+  box-shadow: none;
+  margin-bottom: 0;
+  border-top: none;
+}
+
+.diagram-card svg { overflow: visible !important; }
+
+.mermaid-wrap {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding: 12px 0;
+}
+
+.mermaid {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+}
+
+.mermaid svg {
+  max-width: 100% !important;
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+  margin: 0 auto;
+}
+
+.mermaid .node rect, .mermaid .node polygon { rx: 8 !important; ry: 8 !important; }
+.mermaid .node foreignObject { overflow: visible !important; }
+.mermaid .node foreignObject div { overflow: visible !important; }
+.mermaid .node foreignObject div,
+.mermaid .node foreignObject span,
+.mermaid .node foreignObject p {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+  color: inherit;
+}
+.mermaid .edgeLabel foreignObject div,
+.mermaid .edgeLabel foreignObject span {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+.mermaid .node foreignObject b {
+  font-weight: 600;
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+  display: block;
+}
+.mermaid .node foreignObject br {
+  line-height: 1.35;
+}
+.mermaid .edgeLabel rect { fill: #ede9fe !important; fill-opacity: 1 !important; stroke: none !important; }
+.mermaid .cluster rect { rx: 12 !important; ry: 12 !important; }
+.mermaid .cluster-label foreignObject div,
+.mermaid .cluster-label foreignObject span {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  line-height: 1.4 !important;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 22px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.legend-item { display: flex; align-items: center; gap: 8px; }
+.legend-box { width: 18px; height: 13px; border-radius: 3px; border: 2px solid; }
+
+.principle-strip {
+  margin: 28px 0 0;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+  border-left: 4px solid #a855f7;
+  border-radius: 0 8px 8px 0;
+}
+
+.principle-strip h3 {
+  font-size: 12px;
+  font-weight: 600;
+  color: #a855f7;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+}
+
+.principle-strip p {
+  font-size: 13.5px;
+  color: #334155;
+  margin: 0;
+  line-height: 1.65;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px 28px;
+  margin: 32px 0;
+}
+
+.note-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 20px 24px;
+}
+
+.note-card h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #5b21b6;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.note-card p {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: #334155;
+}
+
+.pending-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  background: #fff3e0;
+  color: #c2410c;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid #fb923c;
+}
+
+.notes-grid-item h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #5b21b6;
+  margin: 0 0 8px 0;
+}
+
+.notes-grid-item p {
+  font-size: 13px;
+  margin-bottom: 4px;
+  color: #334155;
+  line-height: 1.6;
+}
+
+.notes-grid-item p:last-child { margin-bottom: 0; }
+
+.pending-badge {
+  display: inline-block;
+  font-size: 10px;
+  background: #fff3e0;
+  color: #e65100;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: 6px;
+  border: 1px solid #e65100;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================
+   SUMMARY TABLE
+   ============================================ */
+
+.summary-table {
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 32px 0;
+  border: 1px solid #e2e8f0;
+}
+
+.summary-table th {
+  background: #5b21b6;
+}
+
+.summary-table tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer {
+  text-align: center;
+  padding: 48px 40px;
+  border-top: 1px solid #e2e8f0;
+  margin-top: 64px;
+}
+
+.footer-logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+
+.footer-logo span { color: #a855f7; }
+
+.footer p {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0;
+}
+
+.footer-bar {
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #5b21b6, #a855f7, #e879f9);
+  margin-bottom: 32px;
+  border-radius: 2px;
+}
+
+/* ============================================
+   TABLE OF CONTENTS
+   ============================================ */
+
+.toc {
+  background: linear-gradient(135deg, rgba(124,58,237,0.04) 0%, rgba(168,85,247,0.06) 100%);
+  border: 1px solid rgba(124,58,237,0.1);
+  padding: 40px;
+  border-radius: 12px;
+  margin: 40px 0;
+}
+
+.toc h3 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.toc-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 40px;
+}
+
+.toc-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.toc-num {
+  font-size: 12px;
+  font-weight: 600;
+  color: #a855f7;
+  width: 24px;
+  flex-shrink: 0;
+}
+
+.toc-link {
+  color: #334155;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* ============================================
+   PIPELINE COMPONENT LIST
+   ============================================ */
+
+.pipeline-list {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0;
+}
+
+.pipeline-list li {
+  padding: 12px 16px;
+  border-left: 3px solid #a855f7;
+  margin-bottom: 8px;
+  background: #f8fafc;
+  border-radius: 0 8px 8px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.pipeline-list li strong {
+  color: #5b21b6;
+}
+
+/* ============================================
+   FINDING CARDS
+   ============================================ */
+
+.finding-card {
+  background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+  border-left: 4px solid #a855f7;
+  padding: 24px 28px;
+  margin: 20px 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.finding-card h4 {
+  color: #5b21b6;
+  margin: 0 0 8px 0;
+  font-size: 15px;
+}
+
+.finding-card p {
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  @page {
+    size: 8.5in 11in;
+    margin: 0.4in;
+  }
+
+  body { font-size: 9pt; line-height: 1.4; }
+
+  .cover {
+    min-height: 0;
+    height: 10in;
+    padding: 50px;
+    page-break-after: always;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .cover h1 { font-size: 32pt; }
+  .cover-subtitle { font-size: 13pt; }
+
+  .cover-meta { padding-top: 32px; gap: 32px; }
+  .logo { position: relative; bottom: auto; right: auto; margin-top: 32px; }
+
+  .container { padding: 0; max-width: 100%; }
+
+  .section { margin-bottom: 20px; }
+
+  h2 { font-size: 14pt; margin-bottom: 10px; page-break-after: avoid; }
+  h3 { font-size: 11pt; margin: 14px 0 8px; page-break-after: avoid; }
+  h4 { font-size: 10pt; margin: 10px 0 6px; page-break-after: avoid; }
+  p { margin-bottom: 6px; }
+  .lead { font-size: 10pt; margin-bottom: 14px; }
+
+  table { font-size: 8pt; margin: 10px 0; }
+  th, td { padding: 6px 8px; }
+
+  th, .cover, .highlight-box, .stat-card, .summary-table,
+  .workflow-step-number, .finding-card {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .section-number {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    break-after: avoid;
+    page-break-after: avoid;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  table {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  thead { display: table-header-group; }
+
+  tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .card, .stat-card, .highlight-box, .finding-card, .cta-box {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .stat-grid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .toc {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .lead {
+    break-before: avoid;
+    page-break-before: avoid;
+  }
+
+  .highlight-box, .finding-card {
+    padding: 12px 16px;
+    margin: 14px 0;
+  }
+
+  /* Force Mermaid diagram to fit on one print page */
+  .diagram-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    page-break-before: always;
+  }
+  .mermaid-wrap {
+    max-height: 8in;
+    overflow: hidden;
+  }
+  .mermaid-wrap svg {
+    max-height: 8in !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+  .diagram-group {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .airflow-banner {
+    font-size: 10pt !important;
+    padding: 8px 16px !important;
+  }
+  .legend {
+    font-size: 8pt !important;
+    gap: 8px !important;
+    padding: 8px 12px !important;
+  }
+  .principle-strip {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    padding: 10px 16px !important;
+  }
+  .note-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Compact the WebEx architecture diagram for print */
+  .webex-arch-diagram {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .webex-arch-diagram > div[style*="border-radius: 10px"] {
+    padding: 10px 14px !important;
+  }
+  .webex-arch-diagram > div[style*="font-size: 20px"] {
+    margin: 2px 0 !important;
+    font-size: 14px !important;
+  }
+  .webex-arch-diagram div[style*="border-radius: 8px"] {
+    padding: 6px 10px !important;
+  }
+  .webex-arch-diagram div[style*="gap: 8px"] {
+    gap: 4px !important;
+  }
+  .webex-arch-diagram div[style*="gap: 10px"] {
+    gap: 6px !important;
+  }
+  .webex-arch-diagram div[style*="font-size: 13px"] {
+    font-size: 10px !important;
+  }
+  .webex-arch-diagram div[style*="font-size: 11px"] {
+    font-size: 8.5px !important;
+    line-height: 1.3 !important;
+  }
+  .webex-arch-diagram div[style*="font-size: 10px"] {
+    font-size: 8px !important;
+  }
+  .webex-arch-diagram div[style*="font-size: 9px"] {
+    font-size: 7px !important;
+  }
+
+  .two-col { gap: 16px; }
+  .card { padding: 16px; }
+  .workflow-grid { gap: 12px; }
+  .workflow-step { padding: 12px 16px; }
+  .notes-grid { gap: 12px 16px; }
+  .cta-box { padding: 16px; margin: 14px 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .stat-grid { gap: 12px; margin: 20px 0; }
+  .stat-card { padding: 14px; }
+  .stat-value { font-size: 20pt; }
+  .stat-label { font-size: 8pt; }
+
+  .footer { margin-top: 20px; padding: 16px; }
+
+  .chart-container img { max-width: 85%; }
+
+  .architecture-container svg { max-width: 100%; }
+
+  .diagram-card { padding: 12px; page-break-inside: avoid; break-inside: avoid; }
+  .diagram-group { page-break-inside: avoid; break-inside: avoid; }
+  .note-card { padding: 10px 14px; page-break-inside: avoid; break-inside: avoid; }
+  .note-card h3 { font-size: 11pt; }
+  .note-card p { font-size: 9pt; line-height: 1.4; }
+  .principle-strip { page-break-inside: avoid; break-inside: avoid; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .legend { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .airflow-banner { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .mermaid svg {
+    max-width: 100% !important;
+    height: auto !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     COVER PAGE
+     ============================================ -->
+
+<div class="cover">
+  <div class="cover-content">
+    <div class="cover-label">Engagement Progress Update</div>
+    <h1>CI/CD Pipeline Intelligence: Progress and Open Items</h1>
+    <p class="cover-subtitle">Discovery findings, proposed architecture, and decisions needed. Covering April 10 through April 16.</p>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <label>Date</label>
+        <span>April 16, 2026</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Prepared For</label>
+        <span>Srinivas Pitta</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Prepared By</label>
+        <span>BayOne AI Practice</span>
+      </div>
+    </div>
+  </div>
+  <div class="logo">Bay<span>One</span> Solutions</div>
+</div>
+
+<!-- ============================================
+     MAIN CONTENT
+     ============================================ -->
+
+<div class="container">
+
+  <!-- Summary -->
+  <div class="highlight-box" style="margin-bottom: 40px;">
+    <p>Since the April 10 meeting, the team has focused on three areas that all feed the same overarching goal: building an AI system that helps engineers understand where their PR is stuck in the pipeline and how to unblock it. This document covers what was learned, what was built, and what decisions are needed to move forward.</p>
+  </div>
+
+  <!-- Table of Contents -->
+  <div class="toc">
+    <h3>Contents</h3>
+    <ul class="toc-list">
+      <li><span class="toc-num">01</span><span class="toc-link">Pain Point Analysis</span></li>
+      <li><span class="toc-num">02</span><span class="toc-link">Build Log Infrastructure</span></li>
+      <li><span class="toc-num">03</span><span class="toc-link">Proposed Architecture</span></li>
+      <li><span class="toc-num">04</span><span class="toc-link">WebEx Integration</span></li>
+      <li><span class="toc-num">05</span><span class="toc-link">Scope Alignment Needed</span></li>
+      <li><span class="toc-num">06</span><span class="toc-link">Open Questions for Discussion</span></li>
+      <li><span class="toc-num">07</span><span class="toc-link">Access Items Requiring Action</span></li>
+    </ul>
+  </div>
+
+  <!-- ============================================
+       SECTION 01 — PAIN POINT ANALYSIS
+       ============================================ -->
+
+  <div class="section">
+    <div class="section-number">01</div>
+    <h2>Pain Point Analysis</h2>
+    <p class="lead">The team scraped and categorized messages from the NxOS CI workflow WebEx space. The dataset spans approximately three years (April 2023 through March 2026) and contains over 4,200 messages across 25 categories, of which approximately 3,000 are actionable technical and operational threads.</p>
+
+    <h3>Top Issue Categories by Volume</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Messages</th>
+          <th>% of Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Bug/Error</td>
+          <td>463</td>
+          <td>10.9%</td>
+        </tr>
+        <tr>
+          <td>Question/Help Request</td>
+          <td>460</td>
+          <td>10.9%</td>
+        </tr>
+        <tr>
+          <td>Infrastructure/Deployment Problem</td>
+          <td>410</td>
+          <td>9.7%</td>
+        </tr>
+        <tr>
+          <td>Test Failure</td>
+          <td>396</td>
+          <td>9.4%</td>
+        </tr>
+        <tr>
+          <td>Code Review</td>
+          <td>349</td>
+          <td>8.2%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="chart-container">
+      <img src="category_distribution.png" alt="Distribution of message categories across the NxOS CI workflow channel">
+      <p class="chart-caption">Distribution of 4,200+ categorized messages from the NxOS CI workflow WebEx space (April 2023 through March 2026)</p>
+    </div>
+
+    <h3>Response Time and Coverage</h3>
+    <p>For resolvable issue categories, the team measured average first response time and what percentage of threads received any reply.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Avg Response</th>
+          <th>Median</th>
+          <th>Response Coverage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Blocker/Dependency</td>
+          <td>12 min</td>
+          <td>7 min</td>
+          <td>44%</td>
+        </tr>
+        <tr>
+          <td>QA/Testing Issue</td>
+          <td>46 min</td>
+          <td>5 min</td>
+          <td>39%</td>
+        </tr>
+        <tr>
+          <td>Infrastructure/Deployment</td>
+          <td>249 min (~4 hrs)</td>
+          <td>20 min</td>
+          <td>61%</td>
+        </tr>
+        <tr>
+          <td>Bug/Error</td>
+          <td>263 min (~4.4 hrs)</td>
+          <td>51 min</td>
+          <td>49%</td>
+        </tr>
+        <tr>
+          <td>Test Failure</td>
+          <td>321 min (~5.4 hrs)</td>
+          <td>44 min</td>
+          <td>46%</td>
+        </tr>
+        <tr>
+          <td>Question/Help Request</td>
+          <td>440 min (~7.3 hrs)</td>
+          <td>13 min</td>
+          <td>34%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="chart-container">
+      <img src="avg_response_time.png" alt="Average first response time by issue category">
+      <p class="chart-caption">Average first response time across resolvable issue categories, measured from initial post to first reply</p>
+    </div>
+
+    <h3>Volume Trend Over Time</h3>
+    <p>Weekly message volume across the top five categories shows a clear growth pattern over nearly three years.</p>
+
+    <div class="chart-container">
+      <img src="weekly_trend.png" alt="Weekly message volume trend for top 5 categories from April 2023 through March 2026">
+      <p class="chart-caption">Weekly message volume for the top five issue categories, April 2023 through March 2026. Volume has roughly tripled over this period.</p>
+    </div>
+
+    <h3>Key Findings</h3>
+
+    <div class="finding-card">
+      <h4>Two-thirds of help requests receive no response</h4>
+      <p>Question/Help Request is the highest-volume category (tied with Bug/Error), yet only 34% of threads receive any reply. Engineers are asking for help and receiving silence.</p>
+    </div>
+
+    <div class="finding-card">
+      <h4>Build failures take half a workday to get first acknowledgment</h4>
+      <p>Bug/Error and Test Failure threads average 4 to 5 hours before a first response. At the 90th percentile, engineers wait over 10 hours.</p>
+    </div>
+
+    <div class="finding-card">
+      <h4>Explicit blockers get resolved in minutes</h4>
+      <p>When an issue is specifically flagged as a blocker, the average first response time drops to 12 minutes (based on a small sample of 9 threads, but the pattern is consistent). The organization responds when urgency is communicated. The gap is in identifying what should be escalated.</p>
+    </div>
+
+    <div class="finding-card">
+      <h4>Channel volume has tripled over three years</h4>
+      <p>Weekly message volume has grown from 20 to 40 messages per week in 2023 to 60 to 120 in 2026. The manual triage approach is not scaling with the growing engineering organization.</p>
+    </div>
+
+    <h3>Recommendation</h3>
+    <div class="highlight-box">
+      <p>This data suggests the highest-impact first target for AI-driven triage is the Question/Help Request category: high volume, lowest response coverage, and longest average wait. An automated system that can surface relevant documentation, link to known solutions, or route questions to the right person would address the single largest gap in the current workflow.</p>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 02 — BUILD LOG INFRASTRUCTURE
+       ============================================ -->
+
+  <div class="section">
+    <div class="section-number">02</div>
+    <h2>Build Log Infrastructure</h2>
+    <p class="lead">The team gained hands-on access to the build log system through working sessions on April 8 and April 9. The following was verified through direct observation and discussion with the build infrastructure team.</p>
+
+    <h3>Build System Landscape</h3>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-value">2</div>
+        <div class="stat-label">Build Systems</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">13</div>
+        <div class="stat-label">Bazel Error Log Types</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">40+</div>
+        <div class="stat-label">Log Files Per Build</div>
+      </div>
+    </div>
+
+    <p>Two build systems are in use: Gmake (nx_main branch, legacy, being phased out) and Bazel (nx_dev branch, current focus). Both produce CI builds (developer PRs) and CD builds (official nightly). CI and CD builds have different NFS paths, different log formats, and different retention policies.</p>
+
+    <h3>Log Infrastructure Details</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Attribute</th>
+          <th>CI Builds</th>
+          <th>CD Builds</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>NFS path pattern</td>
+          <td><code>/auto/paw-sjc-scratch/paw-logs/{uuid}/...</code></td>
+          <td><code>/auto/ins-bld-tools/branches/{branch}/nexus/logs/{tag}</code></td>
+        </tr>
+        <tr>
+          <td>Path discovery</td>
+          <td>UUID extracted from PR metadata</td>
+          <td>Predictable from branch + build tag</td>
+        </tr>
+        <tr>
+          <td>Retention (success)</td>
+          <td>Deleted at PR merge</td>
+          <td>2 weeks</td>
+        </tr>
+        <tr>
+          <td>Retention (failure)</td>
+          <td>3 to 5 days</td>
+          <td>5 years</td>
+        </tr>
+        <tr>
+          <td>Triage entry point</td>
+          <td>No build_log.html</td>
+          <td>build_log.html available</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Build metadata (build number, status, timestamps) is stored in MySQL. Logs are stored separately on NFS in a flat directory structure with 40 or more individual log files per build. The 13 distinct Bazel error log types are organized per image and stage (nxos64, nxos64_msx, linecardimages, core_64_n9000, and others).</p>
+
+    <h3>Existing Automation Review</h3>
+    <p>The team reviewed the existing build repair automation pipeline (PR #642 on DCN/tools) at the code level. The pipeline consists of 7 components:</p>
+
+    <ol class="pipeline-list">
+      <li><strong>analyze_and_fix_build.py</strong> serves as the entry point, parsing build_log.html for :STATUS: lines and routing to the Gmake or Bazel workflow.</li>
+      <li><strong>automated_workflow.py</strong> (Gmake) and <strong>automated_bazel_workflow.py</strong> (Bazel) provide two parallel execution paths.</li>
+      <li><strong>find_earliest_error_log.py</strong> (Gmake) and <strong>bzl_error_report.py</strong> (Bazel) handle error extraction from the respective log formats.</li>
+      <li><strong>BUILD_ERROR_ANALYSIS_NO_BUILD.md</strong> contains the Codex prompt template used for fix generation.</li>
+      <li>Verification builds run with up to 3 retries per attempt.</li>
+      <li>Email notification with git diff is sent upon completion.</li>
+    </ol>
+
+    <h4>Identified Limitations</h4>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Limitation</th>
+          <th>Detail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Incomplete context extraction</td>
+          <td>Error extraction captures only a subset of available context. The mtime-based file selection and backward scan that stops at ARCH lines miss relevant information.</td>
+        </tr>
+        <tr>
+          <td>No persistence across runs</td>
+          <td>Analysis results are not preserved. Workspace files are overwritten each attempt, with no traceability from a fix back to the root cause that motivated it.</td>
+        </tr>
+        <tr>
+          <td>Gmake inefficiency</td>
+          <td>The Gmake path rebuilds all targets on every retry. The Bazel path correctly tracks remaining failures only.</td>
+        </tr>
+        <tr>
+          <td>Fragile configuration</td>
+          <td>Hard-coded absolute paths throughout the codebase make the pipeline fragile to infrastructure changes.</td>
+        </tr>
+        <tr>
+          <td>Unused parameters</td>
+          <td>The <code>error_output</code> parameter is accepted but never passed to the Codex prompt, leaving available context on the table.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight-box">
+      <p>The Bazel workflow is the more mature path and serves as the better foundation for improvement. The proposed architecture (Section 03) builds on this assessment.</p>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 03 — PROPOSED ARCHITECTURE
+       ============================================ -->
+
+  <div class="section">
+    <div class="section-number">03</div>
+    <h2>Proposed Architecture</h2>
+    <p class="lead">Based on the current-state review and the technical understanding gained through hands-on sessions, the team has drafted a proposed end-to-end architecture for the build log analysis system. This is initial thinking, and several decisions remain pending.</p>
+
+    <div class="chart-container">
+      <img src="architecture_diagram.png" alt="Proposed Build Log Analysis Architecture — Ingest, Parse, Three-Tier Classification Cascade, Remediate, Storage, Serve" style="max-width: 100%; border: 1px solid #e2e8f0; border-radius: 8px;">
+    </div>
+
+    <div class="principle-strip">
+        <h3>Architectural Principles</h3>
+        <p><strong>Simplest first, always.</strong> Deterministic regex (nanoseconds) precedes ML (tens of ms) precedes LLM (seconds + dollars). The inverted-pyramid cascade is mutually exclusive: each error is caught at exactly one tier. The bulk falls out at Tier 1; the remainder falls through to Tier 2; only novel or compound errors reach the LLM.</p>
+    </div>
+
+    <div class="notes-section">
+        <h2>Block-by-Block Notes</h2>
+        <div class="notes-grid">
+
+            <div class="note-card">
+                <h3>B1 · Ingest <span class="pending-tag">decision pending</span></h3>
+                <p>Reads Bazel CI and CD logs from the NFS mount. Recommended start: scheduled batches every 15–30 minutes to match current build cadence — simpler and predictable. Event-driven mode (filesystem watcher or webhook) is retained as a future option once queue patterns and SLA targets are confirmed. Manifest plus checksum on each batch for idempotency.</p>
+            </div>
+
+            <div class="note-card">
+                <h3>B2 · Parse</h3>
+                <p>Deterministic chunking only. Bazel logs have structural markers (timestamps, phase delimiters, error prefixes) that allow the pipeline to segment 300K–500K line files without NLP. NLP summarization is <em>not</em> performed here; it belongs inside the LLM tier and runs only when the LLM is actually invoked. This preserves the tiering cost gradient — cheap operations upstream, expensive operations only when needed.</p>
+            </div>
+
+            <div class="note-card">
+                <h3>B3 · Classify — Inverted Pyramid</h3>
+                <p>Every error enters Tier 1. Tier 1 (deterministic, regex plus catalog lookup) handles the bulk of errors at negligible cost. Unresolved errors escalate to Tier 2 (specialized ML model, semantic similarity, confidence scoring). Errors Tier 2 cannot classify escalate to Tier 3 (LLM, root cause analysis, fix suggestion). Each error is caught at exactly one tier; there is no situation where multiple tiers write for the same error.</p>
+            </div>
+
+            <div class="note-card">
+                <h3>B4 · Remediate</h3>
+                <p>Consumes classification and context from whichever tier caught the error. Generates a code patch, branches and commits via Git, opens a pull request with root cause plus proposed fix, and triggers build verification. A human review gate on the PR is mandatory — no auto-merge. PR outcome (merged / rejected / build pass) flows back to B5 for traceability and feeds the feedback loop into the Error Catalog Service.</p>
+            </div>
+
+            <div class="note-card">
+                <h3>B5 · Storage</h3>
+                <p>Star schema across two related tables. The <strong>classification fact table</strong> holds one row per error, written by whichever tier caught it. The <strong>remediation table</strong> is keyed by <code>error_id</code> and written by B4, joined to classification at read time. Dimensions: <code>dim_builds</code>, <code>dim_errors</code>, <code>dim_repos</code>, <code>dim_branches</code>, <code>dim_log_files</code>. Full commit diffs and PR comments are queried live, not persisted.</p>
+            </div>
+
+            <div class="note-card">
+                <h3>B6 · Serve</h3>
+                <p>Exposes the schema via MCP tools for downstream agents and users: query analysis results, trace errors to commits and PRs, fetch fix suggestions, and correlate with live Git / GitHub state. Analytics and alerting hooks attach at this layer without touching the fact table directly — MCP reads from derived views, keeping the write-path and read-path cleanly separated.</p>
+            </div>
+
+            <div class="note-card">
+                <h3>Error Catalog Service</h3>
+                <p>Replaces the brittle Bazel docs scraper. Sourced from Bazel release catalogs (version-locked, refreshed on Bazel upgrade — low frequency at Cisco) and historical Cisco build logs (what they actually hit). Grows via the feedback loop: every approved B4 fix is promoted into the catalog so the next occurrence of that error hits the cheap Tier 1 path. Catalog construction effort is scoped as a sub-project, not a flag to flip.</p>
+            </div>
+
+            <div class="note-card">
+                <h3>Cross-Cutting · Apache Airflow</h3>
+                <p>Airflow wraps the full pipeline end-to-end. Gives DAG topology, task retries with exponential backoff, dead-letter queue behavior on persistent failures, SLA monitoring, and observability hooks (logs, metrics, alerts) for every stage. Cisco already uses Airflow operationally, so orchestration and telemetry adopt the existing standard rather than introducing a new one.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <h3>Pending Decisions</h3>
+
+    <div class="workflow-grid">
+      <div class="workflow-step">
+        <div class="workflow-step-number">1</div>
+        <h5>Ingestion Mode</h5>
+        <p>Batched polling versus event-driven/realtime for B1. The answer depends on build cadence patterns and latency requirements.</p>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-step-number">2</div>
+        <h5>Error Catalog Scoping</h5>
+        <p>The Error Catalog Service is a sub-project. Construction effort from Bazel release catalogs and historical Cisco logs needs to be scoped before Tier 1 coverage targets can be set.</p>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-step-number">3</div>
+        <h5>ML Model Training Data</h5>
+        <p>Availability of labeled datasets for the Tier 2 ML model. Without labeled data, the team would need to use pre-trained models or unsupervised approaches.</p>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-step-number">4</div>
+        <h5>CI vs CD Differentiation</h5>
+        <p>Whether CI and CD logs flow through the same pipeline with a flag or require separate ingestion paths. Affects B1 and B2 design.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 04 — WEBEX INTEGRATION
+       ============================================ -->
+
+  <div class="section">
+    <div class="section-number">04</div>
+    <h2>WebEx Integration</h2>
+    <p class="lead">The team built and deployed two capabilities for WebEx integration: a chat scraping tool and a meeting recording extraction tool. Both are operational and have been validated against live data.</p>
+
+    <div class="two-col">
+      <div class="card">
+        <h4>Chat Scraping</h4>
+        <p>A working WebEx scraper was built and deployed into the team's own WebEx space. It captures full message history with structured fields (timestamp, author, email, bot flag, text, files, thread parent), stores to PostgreSQL, and supports per-room scoping and deduplication.</p>
+        <p>The NxOS CI workflow channel analysis presented in Section 01 was performed using this capability.</p>
+      </div>
+      <div class="card">
+        <h4>Meeting Recording Extraction</h4>
+        <p>A working extraction tool was built that retrieves transcripts, summaries, action items, and audio from WebEx meetings via the API.</p>
+        <p><strong>Key constraint discovered:</strong> The WebEx API restricts recording and transcript access to meeting owners. A regular attendee cannot extract these artifacts via API.</p>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <p>For meetings where the team is the organizer, the API path works as expected. For broader automation across the organization, either admin-scoped tokens or an alternative approach (such as audio-file-based transcription) would be needed. This constraint affects the automation architecture for meeting recording extraction at scale.</p>
+    </div>
+
+    <h3>Proposed WebEx Integration Architecture</h3>
+    <p>Based on the discovery work above, the team has drafted a proposed architecture for a unified WebEx intelligence platform. The design separates concerns into modular layers so that new data sources (email, GitHub, Jira) can be added without touching downstream components, and the agentic application layer can be swapped per use case.</p>
+
+    <!-- Current State -->
+    <h4>Current State</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Input</th>
+          <th>Output</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Pulse (scraper)</td>
+          <td>WebEx spaces</td>
+          <td>Database</td>
+          <td style="color:#b45309; font-weight:600;">Not deployed in NxOS. Service app status unknown.</td>
+        </tr>
+        <tr>
+          <td>Scribble (transcriber)</td>
+          <td>Audio files</td>
+          <td>Text output</td>
+          <td style="color:#b45309; font-weight:600;">Local only. No database integration.</td>
+        </tr>
+        <tr>
+          <td>Wall-E bot (BayOne)</td>
+          <td>WebEx spaces (webhook)</td>
+          <td>PostgreSQL</td>
+          <td style="color:#1d4ed8; font-weight:600;">Code on local machine (currently down). Not deployed.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Proposed Architecture - Vertical Flow -->
+    <h4>Proposed Architecture</h4>
+
+    <div class="webex-arch-diagram" style="max-width: 680px; margin: 24px auto;">
+
+      <!-- Layer 1: Data Sources -->
+      <div style="background: #eff6ff; border: 1.5px solid #3b82f6; border-radius: 10px; padding: 18px 20px; position: relative;">
+        <div style="position: absolute; top: -10px; right: 12px; font-size: 9px; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; color: #1d4ed8; background: #eff6ff; border: 1.5px solid #3b82f6; border-radius: 4px; padding: 2px 6px;">modular</div>
+        <div style="font-size: 10px; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; color: #1d4ed8; margin-bottom: 10px;">Data Sources</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
+          <div style="background: #dbeafe; border: 1.5px solid #3b82f6aa; border-radius: 8px; padding: 10px 12px;">
+            <div style="font-size: 13px; font-weight: 600;">WebEx Chats / Spaces</div>
+            <div style="font-size: 11px; color: #57606a; margin-top: 4px;">Messages, threads, files<br>Rooms and direct spaces</div>
+          </div>
+          <div style="background: #dbeafe; border: 1.5px solid #3b82f6aa; border-radius: 8px; padding: 10px 12px;">
+            <div style="font-size: 13px; font-weight: 600;">WebEx Meetings</div>
+            <div style="font-size: 11px; color: #57606a; margin-top: 4px;">Transcripts via Scribble<br>or built-in WebEx STT</div>
+          </div>
+          <div style="background: #f6f8fa; border: 1.5px solid #d0d7de; border-radius: 8px; padding: 10px 12px;">
+            <div style="font-size: 13px; font-weight: 600; color: #57606a;">+ Future Connectors</div>
+            <div style="font-size: 11px; color: #57606a; margin-top: 4px;">Email, GitHub,<br>Jira, and others</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arrow -->
+      <div style="text-align: center; color: #8c959f; font-size: 20px; margin: 6px 0;">&#x2193;</div>
+
+      <!-- Layer 2: Ingestion -->
+      <div style="background: #f0fdf4; border: 1.5px solid #22c55e; border-radius: 10px; padding: 18px 20px; position: relative;">
+        <div style="position: absolute; top: -10px; right: 12px; font-size: 9px; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; color: #15803d; background: #f0fdf4; border: 1.5px solid #22c55e; border-radius: 4px; padding: 2px 6px;">modular</div>
+        <div style="font-size: 10px; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; color: #15803d; margin-bottom: 10px;">Ingestion</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div style="background: #dcfce7; border: 1.5px solid #22c55eaa; border-radius: 8px; padding: 10px 12px;">
+            <div style="font-size: 13px; font-weight: 600;">Service App (WebEx API)</div>
+            <div style="font-size: 11px; color: #57606a; margin-top: 4px;">OAuth scoped space access<br>Read messages permission<br>Poll at configurable interval</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="background: #dcfce7; border: 1.5px solid #22c55eaa; border-radius: 8px; padding: 10px 12px; flex: 1;">
+              <div style="font-size: 13px; font-weight: 600;">Pre-processor</div>
+              <div style="font-size: 11px; color: #57606a; margin-top: 4px;">Normalize and deduplicate<br>Clean to LLM-ready format</div>
+            </div>
+            <div style="background: #f6f8fa; border: 1.5px solid #d0d7de; border-radius: 8px; padding: 10px 12px; flex: 1;">
+              <div style="font-size: 13px; font-weight: 600;">Raw Snapshot</div>
+              <div style="font-size: 11px; color: #57606a; margin-top: 4px;">Original source preserved<br>Replay and reprocessing</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arrow -->
+      <div style="text-align: center; color: #8c959f; font-size: 20px; margin: 6px 0;">&#x2193;</div>
+
+      <!-- Layer 3: Storage -->
+      <div style="background: #f0fdfa; border: 1.5px solid #14b8a6; border-radius: 10px; padding: 18px 20px;">
+        <div style="font-size: 10px; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; color: #0f766e; margin-bottom: 10px;">Storage</div>
+        <div style="background: #ccfbf1; border: 1.5px solid #14b8a6aa; border-radius: 8px; padding: 12px 14px;">
+          <div style="font-size: 13px; font-weight: 600;">Unified Database</div>
+          <div style="font-size: 11px; color: #57606a; margin-top: 4px;">Raw + processed snapshots<br>Indexed for semantic search<br>Timestamped history<br>Multi-source, serves all downstream consumers</div>
+        </div>
+      </div>
+
+      <!-- Arrow -->
+      <div style="text-align: center; color: #8c959f; font-size: 20px; margin: 6px 0;">&#x2193;</div>
+
+      <!-- Layer 4: Access Layer -->
+      <div style="background: #faf5ff; border: 1.5px solid #a855f7; border-radius: 10px; padding: 18px 20px; position: relative;">
+        <div style="position: absolute; top: -10px; right: 12px; font-size: 9px; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; color: #7e22ce; background: #faf5ff; border: 1.5px solid #a855f7; border-radius: 4px; padding: 2px 6px;">per-user auth</div>
+        <div style="font-size: 10px; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; color: #7e22ce; margin-bottom: 10px;">Access Layer</div>
+        <div style="background: #f3e8ff; border: 1.5px solid #a855f7aa; border-radius: 8px; padding: 12px 14px;">
+          <div style="font-size: 13px; font-weight: 600;">MCP Server</div>
+          <div style="font-size: 11px; color: #57606a; margin-top: 4px;">User token scoped per session<br>Search and query tools<br>Context-aware retrieval<br>Exposes database to downstream agents</div>
+        </div>
+      </div>
+
+      <!-- Arrow -->
+      <div style="text-align: center; color: #8c959f; font-size: 20px; margin: 6px 0;">&#x2193;</div>
+
+      <!-- Layer 5: Application + Auth side by side -->
+      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 10px;">
+        <div style="background: #fff7ed; border: 1.5px solid #f97316; border-radius: 10px; padding: 18px 20px; position: relative;">
+          <div style="position: absolute; top: -10px; right: 12px; font-size: 9px; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; color: #c2410c; background: #fff7ed; border: 1.5px solid #f97316; border-radius: 4px; padding: 2px 6px;">modular</div>
+          <div style="font-size: 10px; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; color: #c2410c; margin-bottom: 10px;">Application</div>
+          <div style="background: #ffedd5; border: 1.5px solid #f97316aa; border-radius: 8px; padding: 12px 14px;">
+            <div style="font-size: 13px; font-weight: 600;">Agentic WebEx App</div>
+            <div style="font-size: 11px; color: #57606a; margin-top: 4px;">Action item extraction<br>Meeting summaries<br>Compliance monitoring<br>Chat Q&A and analysis<br>Swappable per use case</div>
+          </div>
+        </div>
+        <div style="background: #fdf2f8; border: 1.5px solid #ec4899; border-radius: 10px; padding: 18px 20px;">
+          <div style="font-size: 10px; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; color: #be185d; margin-bottom: 10px;">Auth</div>
+          <div style="background: #fce7f3; border: 1.5px solid #ec4899aa; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px;">
+            <div style="font-size: 13px; font-weight: 600;">OAuth 2.0</div>
+            <div style="font-size: 11px; color: #57606a; margin-top: 4px;">User-level access control<br>Data isolation per user<br>No blanket bot access</div>
+          </div>
+          <div style="background: #fce7f3; border: 1.5px solid #ec4899aa; border-radius: 8px; padding: 10px 12px;">
+            <div style="font-size: 13px; font-weight: 600;">User</div>
+            <div style="font-size: 11px; color: #57606a; margin-top: 4px;">Via WebEx interface<br>or direct agent UI</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h4>Design Principles</h4>
+    <p>The architecture is designed for modularity: new data sources can be added without touching downstream layers, the agentic application can be swapped for a different use case while keeping the same database and MCP server, and multiple connectors can feed the same database in parallel. If Pulse is already a deployed service app, the ingestion layer can be skipped entirely by wiring the MCP directly onto its existing database output.</p>
+
+    <h4>Open Design Questions</h4>
+    <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 14px;">
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 18px;">
+        <div style="font-size: 13px; font-weight: 600; color: #0f172a; margin-bottom: 4px;">Deployment model</div>
+        <div style="font-size: 13px; color: #334155; line-height: 1.7;">Per-user local deployment (each user runs their own stack on ADS, simple but redundant scraping) versus shared team deployment (one database, session-scoped access, more efficient but requires an auth layer). <span style="font-weight: 500; color: #5b21b6;">Which model is expected, or should per-user be the starting point that evolves to shared?</span></div>
+      </div>
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 18px;">
+        <div style="font-size: 13px; font-weight: 600; color: #0f172a; margin-bottom: 4px;">Polling versus webhooks</div>
+        <div style="font-size: 13px; color: #334155; line-height: 1.7;">The proposed Service App uses polling at a configurable interval. The existing scraper prototype used webhooks, which are event-driven with no delay but require a publicly reachable endpoint. <span style="font-weight: 500; color: #5b21b6;">Is there a preference, or should both be supported depending on deployment context?</span></div>
+      </div>
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 18px;">
+        <div style="font-size: 13px; font-weight: 600; color: #0f172a; margin-bottom: 4px;">Scribble integration path</div>
+        <div style="font-size: 13px; color: #334155; line-height: 1.7;"><span style="font-weight: 500; color: #5b21b6;">Does Scribble transcript output feed the same database as the chat pipeline, or does it require a separate ingestion branch?</span> The answer depends on whether Scribble has a service layer writing to a database or is still producing local-only output.</div>
+      </div>
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 18px;">
+        <div style="font-size: 13px; font-weight: 600; color: #0f172a; margin-bottom: 4px;">Token security</div>
+        <div style="font-size: 13px; color: #334155; line-height: 1.7;">For the MCP layer, the proposed pattern is OAuth tokens stored server-side in the MCP session, never exposed in conversation context. <span style="font-weight: 500; color: #5b21b6;">Is there a preferred secret store for ADS deployments (Vault, environment variables, Cisco-specific secret manager)?</span></div>
+      </div>
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 18px;">
+        <div style="font-size: 13px; font-weight: 600; color: #0f172a; margin-bottom: 4px;">Pulse as a shortcut</div>
+        <div style="font-size: 13px; color: #334155; line-height: 1.7;">If Pulse and Scribble are already being built as ADS-deployable Podman containers, the most efficient integration path would be building the MCP layer on top of their existing database output rather than rebuilding ingestion. <span style="font-weight: 500; color: #5b21b6;">Can Naga confirm their deployment target?</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============================================
+       SECTION 05 — SCOPE ALIGNMENT
+       ============================================ -->
+
+  <div class="section">
+    <div class="section-number">05</div>
+    <h2>Scope Alignment Needed</h2>
+    <p class="lead">Two areas of scope overlap have surfaced that require clarification before the team can commit to architecture decisions. Both involve existing work at Cisco that may intersect with the current assignments.</p>
+
+    <h3>Nexus T Agent and Build Log Analysis</h3>
+    <p>The team discovered Rui Guo's Nexus T agent in the NxOS CI workflow WebEx space. It uses GPT-based analysis for auto-triage of build failures, includes topology views, and has a conversational interface. This directly relates to the build log analysis work assigned to our team, and it also overlaps with Justin Joseph's existing Python and Codex automation (reviewed in Section 02).</p>
+    <p>There are now three separate efforts touching build failure analysis: Rui's Nexus T agent, Justin's automation pipeline, and the work assigned to our team. We would like to understand how these relate to each other so we can focus our effort where it adds the most value. Specifically:</p>
+    <ul style="margin: 12px 0 12px 24px; color: #334155; line-height: 1.8;">
+      <li>Should we be building on top of Rui's work, collaborating with him directly, or solving a different part of the problem?</li>
+      <li>Is Nexus T considered a production tool, a POC, or an internal experiment?</li>
+      <li>How does Justin's automation pipeline fit relative to Nexus T? Are they aware of each other's work?</li>
+      <li>If there is a preferred direction, we can align our architecture to complement rather than duplicate.</li>
+    </ul>
+    <p>We are continuing with architecture design and discovery in the meantime and are ready to adjust direction once this is clarified.</p>
+
+    <h3>Pulse, Scribble, and WebEx Scope</h3>
+    <p>The team was originally directed to evaluate Naga's Pulse (WebEx scraper) and Scribble (audio transcriber) tools and build on them. The team has been attempting to get access to these repositories since April 9. Despite multiple outreach attempts, Naga has been difficult to reach. When the team was finally able to connect with him in person on April 16, Naga indicated that the current expectation from Srinivas is to work on the CI/CD pipeline and interact with WebEx, and that this is different from what was originally discussed for Pulse and Scribble. He recommended syncing with Srinivas again to confirm the direction.</p>
+    <p>The team would appreciate clarity on the following:</p>
+    <ul style="margin: 12px 0 12px 24px; color: #334155; line-height: 1.8;">
+      <li>Has the scope shifted from evaluating Pulse and Scribble to something broader? If so, what is the updated direction?</li>
+      <li>Should the team continue pursuing access to the Pulse and Scribble repositories, or redirect that effort toward the CI/CD pipeline integration directly?</li>
+      <li>Is there a preferred contact for the WebEx integration work going forward, or should the team continue coordinating with Naga?</li>
+    </ul>
+
+    <div class="highlight-box">
+      <p>Both of these are about making sure we are pointed in the right direction. The team is ready to move quickly once the boundaries are confirmed and can adapt to whatever direction makes the most sense for the project.</p>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 06 — OPEN QUESTIONS
+       ============================================ -->
+
+  <div class="section">
+    <div class="section-number">06</div>
+    <h2>Open Questions for Discussion</h2>
+    <p class="lead">Beyond the scope alignment items above, the following technical questions require direction before the team can finalize design decisions.</p>
+
+    <div class="highlight-box">
+      <h4>1. Scope Clarification for WebEx Work</h4>
+      <p>The team has built both a chat scraper and a meeting recording extractor. Should the focus remain on the NxOS CI workflow channel specifically, or should this be generalized for the broader set of WebEx spaces?</p>
+    </div>
+
+    <div class="highlight-box">
+      <h4>2. Fix Delivery Preference</h4>
+      <p>For the build log analysis pipeline, when AI generates a fix: should the system comment on the existing PR, open a new PR with the fix, or notify via another channel? The current workflow uses email. The proposed architecture includes a PR-based approach with human review.</p>
+    </div>
+
+    <div class="highlight-box">
+      <h4>3. Tiered Processing and ML Model Data</h4>
+      <p>The proposed architecture includes a Tier 2 ML model for error classification. Does the team have access to labeled datasets of past build errors and their resolutions? If not, should Tier 2 initially use pre-trained models or unsupervised approaches?</p>
+    </div>
+
+    <div class="highlight-box">
+      <h4>4. Batch Versus Realtime for Log Ingestion</h4>
+      <p>For CI builds (where developers are waiting), is near-realtime processing expected? For CD nightly builds, is batch processing on a 15 to 30 minute cycle acceptable?</p>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 07 — ACCESS ITEMS
+       ============================================ -->
+
+  <div class="section">
+    <div class="section-number">07</div>
+    <h2>Access Items Requiring Action</h2>
+    <p class="lead">Three access items remain outstanding. Each has been requested previously and requires action from the Cisco side to resolve.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>First Requested</th>
+          <th>Current Status</th>
+          <th>What Is Needed</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>DeepSight platform access</td>
+          <td>~4 weeks ago</td>
+          <td>No access</td>
+          <td>Direct grant from platform owner</td>
+        </tr>
+        <tr>
+          <td>Pulse/Scribble repository access</td>
+          <td>April 9</td>
+          <td>Repo links not yet provided. Naming confusion between "Scribble" and "Scrubber" in GitHub.</td>
+          <td>Direction to the repo owner to share exact links and grant access</td>
+        </tr>
+        <tr>
+          <td>Permanent ADS machine</td>
+          <td>April 3 (tenant), April 11 (bundle)</td>
+          <td>Tenant approved but not reflected in portal. Bundle (CN-SJC-STANDALONE) is sequential and can only be added after ADS machine is provisioned.</td>
+          <td>Follow-up on the tenant portal issue per guidance provided on April 16</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight-box">
+      <p>The team has temporary ADS access (4-week lease, RHEL8) which enables current work, but permanent access is needed for sustained development. All environment setup and tooling configuration done on temporary machines would need to be repeated every 4 weeks.</p>
+    </div>
+  </div>
+
+  <!-- ============================================
+       COMPANION MATERIALS
+       ============================================ -->
+
+  <div class="section">
+    <div class="section-number">APPENDIX</div>
+    <h2>Companion Materials Available</h2>
+    <p class="lead">The following are available as separate files if deeper review is desired.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Material</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Current-state architecture diagram</td>
+          <td>Interactive HTML showing the existing 7-component build repair pipeline with annotated limitations (expandable detail per component)</td>
+        </tr>
+        <tr>
+          <td>NxOS CI workflow analysis (full dataset)</td>
+          <td>CSV with categorized messages, response times, and thread structure</td>
+        </tr>
+        <tr>
+          <td>Log type mapping</td>
+          <td>Complete catalog of all 13 Bazel error log types with CI/CD differentiation, NFS paths, and retention policies</td>
+        </tr>
+        <tr>
+          <td>WebEx API endpoint reference</td>
+          <td>Verified endpoints for chat scraping and meeting recording extraction</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+
+  <div class="footer">
+    <div class="footer-bar"></div>
+    <div class="footer-logo">Bay<span>One</span> Solutions</div>
+    <p>Confidential. Prepared for Cisco Systems.</p>
+  </div>
+
+</div>
+
+
+</body>
+</html>

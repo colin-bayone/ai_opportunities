@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build Error Auto-Fix — Architecture</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f6f8;
+    --bg2: #ffffff;
+    --bg3: #eef0f3;
+    --bg4: #e4e6eb;
+    --border: rgba(50,55,70,0.1);
+    --border-h: rgba(50,55,70,0.2);
+    --t1: #1a1d23;
+    --t2: #555b68;
+    --t3: #878d99;
+    --coral: #c9392e;
+    --coral-bg: rgba(201,57,46,0.06);
+    --teal: #0d7360;
+    --teal-bg: rgba(13,115,96,0.06);
+    --purple: #5b3fb5;
+    --purple-bg: rgba(91,63,181,0.06);
+    --amber: #a37209;
+    --amber-bg: rgba(163,114,9,0.06);
+    --green: #197a2c;
+    --green-bg: rgba(25,122,44,0.06);
+    --red: #bf2c2c;
+    --red-bg: rgba(191,44,44,0.05);
+    --gray: #626873;
+    --gray-bg: rgba(98,104,115,0.05);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--t1);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .grid-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background-image:
+      linear-gradient(rgba(50,55,70,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(50,55,70,0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+  }
+
+  .glow-orb {
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .glow-1 { top: -200px; right: -100px; background: var(--purple); }
+  .glow-2 { bottom: -200px; left: -100px; background: var(--teal); }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 28px 80px;
+  }
+
+  header { margin-bottom: 40px; animation: fadeUp .6s ease-out; }
+  header .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--teal);
+    margin-bottom: 10px;
+  }
+  header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--t1);
+    margin-bottom: 12px;
+  }
+  header p {
+    font-size: 15px;
+    color: var(--t2);
+    max-width: 620px;
+    line-height: 1.7;
+  }
+
+  .flow-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    justify-content: center;
+  }
+  .flow-label .line {
+    height: 1px;
+    flex: 1;
+    max-width: 50px;
+    background: var(--border);
+  }
+  .flow-label span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--t3);
+    padding: 3px 10px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+  }
+
+  .flow-arrow {
+    display: flex;
+    justify-content: center;
+    padding: 4px 0;
+  }
+  .flow-arrow svg { opacity: 0.25; }
+
+  .tier { margin-bottom: 4px; }
+  .tier-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 600px) { .tier-grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: all .3s cubic-bezier(.4,0,.2,1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .card:hover {
+    border-color: var(--border-h);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  }
+  .card.active { border-color: var(--accent); }
+  .card.active .accent-bar { opacity: 1; }
+
+  .accent-bar {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    opacity: 0;
+    transition: opacity .3s;
+  }
+
+  .card-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .card-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 15px;
+    flex-shrink: 0;
+    color: #fff;
+  }
+  .card-meta { flex: 1; min-width: 0; }
+  .card-role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 2px;
+  }
+  .card-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--t1);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .card-summary {
+    font-size: 13px;
+    color: var(--t2);
+    line-height: 1.55;
+  }
+  .card-chevron {
+    flex-shrink: 0;
+    transition: transform .3s;
+    margin-top: 4px;
+  }
+  .card.active .card-chevron { transform: rotate(90deg); }
+
+  .card-details {
+    display: none;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    animation: fadeUp .3s ease-out;
+  }
+  .card.active .card-details { display: block; }
+
+  .detail-section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 10px;
+  }
+
+  .detail-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12.5px;
+    color: var(--t1);
+    line-height: 1.55;
+    padding: 4px 0;
+  }
+  .detail-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 7px;
+    opacity: 0.6;
+  }
+  .risk-dot {
+    width: 5px;
+    height: 5px;
+    flex-shrink: 0;
+    margin-top: 7px;
+    opacity: 0.7;
+    transform: rotate(45deg);
+    background: var(--red);
+  }
+
+  .risk-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--t2);
+    line-height: 1.55;
+    padding: 3px 0;
+  }
+
+  /* Verification panels */
+  .section-header {
+    margin-top: 48px;
+    margin-bottom: 20px;
+    animation: fadeUp .6s ease-out .2s both;
+  }
+  .section-header .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    margin-bottom: 6px;
+  }
+  .section-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+  .section-header p {
+    font-size: 14px;
+    color: var(--t2);
+    line-height: 1.65;
+  }
+
+  .verify-panel {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color .3s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .verify-panel.open { border-color: var(--accent); }
+
+  .verify-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .verify-head:hover { background: rgba(0,0,0,0.02); }
+
+  .pulse-group { display: flex; gap: 4px; align-items: center; }
+  .pulse-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 0.25; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.5); }
+  }
+
+  .verify-title {
+    flex: 1;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .verify-chevron {
+    transition: transform .3s;
+  }
+  .verify-panel.open .verify-chevron { transform: rotate(180deg); }
+
+  .verify-body {
+    display: none;
+    padding: 0 20px 20px;
+    animation: fadeUp .3s ease-out;
+  }
+  .verify-panel.open .verify-body { display: block; }
+
+  .callout {
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12.5px;
+    font-weight: 500;
+    margin-bottom: 18px;
+    border-left: 3px solid;
+  }
+
+  .step-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 7px 0;
+  }
+  .step-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .step-diamond {
+    width: 24px; height: 24px;
+    border-radius: 4px;
+    border: 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(45deg);
+    flex-shrink: 0;
+    margin: 0 2px;
+  }
+  .step-diamond span {
+    transform: rotate(-45deg);
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .step-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--t1);
+  }
+  .step-detail {
+    font-size: 11.5px;
+    color: var(--t2);
+    margin-top: 1px;
+  }
+
+  .branch-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 18px;
+  }
+  @media (max-width: 600px) { .branch-grid { grid-template-columns: 1fr; } }
+
+  .branch-box {
+    border-radius: 10px;
+    padding: 14px;
+  }
+  .branch-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .branch-item {
+    font-size: 12px;
+    color: var(--t1);
+    line-height: 1.6;
+    padding: 3px 0;
+  }
+  .branch-item strong {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 11.5px;
+  }
+  .branch-item .muted { color: var(--t2); }
+
+  .always-box {
+    margin-top: 12px;
+    border-radius: 10px;
+    padding: 14px;
+  }
+
+  .exhaust-line {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(248,81,73,0.15);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--red);
+  }
+
+  /* E2E summary */
+  .e2e {
+    margin-top: 48px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    animation: fadeUp .6s ease-out .4s both;
+  }
+  .e2e-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--t3);
+    margin-bottom: 16px;
+  }
+  .e2e-step {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 6px 0;
+    font-size: 13.5px;
+    color: var(--t1);
+    line-height: 1.5;
+  }
+  .e2e-num {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    background: var(--bg3);
+    color: var(--t2);
+  }
+  .e2e-num.highlight {
+    background: var(--coral);
+    color: #fff;
+  }
+  .e2e-connector {
+    width: 26px;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: -2px 0;
+  }
+  .e2e-connector .tick {
+    width: 1px;
+    height: 10px;
+    background: var(--border-h);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="glow-orb glow-1"></div>
+<div class="glow-orb glow-2"></div>
+
+<div class="container">
+  <header>
+    <div class="eyebrow">System architecture</div>
+    <h1>Build error auto-fix pipeline</h1>
+    <p>An automated loop that detects build failures, extracts structured error context, runs Codex to patch the source, verifies with real builds, and retries up to 3 times before notifying via email.</p>
+  </header>
+
+  <!-- TIER 1: Dispatcher -->
+  <div class="tier" id="tier-dispatch"></div>
+
+  <div class="flow-arrow"><svg width="14" height="20" viewBox="0 0 14 20"><path d="M7 0v14M2 10l5 6 5-6" fill="none" stroke="var(--t3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <div class="flow-label"><div class="line"></div><span>Routes by branch</span><div class="line"></div></div>
+  <div class="flow-arrow"><svg width="14" height="20" viewBox="0 0 14 20"><path d="M7 0v14M2 10l5 6 5-6" fill="none" stroke="var(--t3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+  <!-- TIER 2: Workflows -->
+  <div class="tier"><div class="tier-grid" id="tier-workflows"></div></div>
+
+  <div class="flow-arrow"><svg width="14" height="20" viewBox="0 0 14 20"><path d="M7 0v14M2 10l5 6 5-6" fill="none" stroke="var(--t3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <div class="flow-label"><div class="line"></div><span>Error extraction</span><div class="line"></div></div>
+  <div class="flow-arrow"><svg width="14" height="20" viewBox="0 0 14 20"><path d="M7 0v14M2 10l5 6 5-6" fill="none" stroke="var(--t3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+  <!-- TIER 3: Parsers -->
+  <div class="tier"><div class="tier-grid" id="tier-parsers"></div></div>
+
+  <div class="flow-arrow"><svg width="14" height="20" viewBox="0 0 14 20"><path d="M7 0v14M2 10l5 6 5-6" fill="none" stroke="var(--t3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <div class="flow-label"><div class="line"></div><span>Feeds context to Codex</span><div class="line"></div></div>
+  <div class="flow-arrow"><svg width="14" height="20" viewBox="0 0 14 20"><path d="M7 0v14M2 10l5 6 5-6" fill="none" stroke="var(--t3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+  <!-- TIER 4: Prompt -->
+  <div class="tier" id="tier-prompt"></div>
+
+  <div class="flow-arrow"><svg width="14" height="20" viewBox="0 0 14 20"><path d="M7 0v14M2 10l5 6 5-6" fill="none" stroke="var(--t3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <div class="flow-label"><div class="line"></div><span>Shared by both workflows</span><div class="line"></div></div>
+  <div class="flow-arrow"><svg width="14" height="20" viewBox="0 0 14 20"><path d="M7 0v14M2 10l5 6 5-6" fill="none" stroke="var(--t3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+  <!-- TIER 5: Common -->
+  <div class="tier" id="tier-common"></div>
+
+  <!-- VERIFICATION DETAIL -->
+  <div class="section-header">
+    <div class="eyebrow">Build verification detail</div>
+    <h2>Retry loop internals</h2>
+    <p>After Codex patches the code, the Python workflow runs external verification builds and loops up to 3 times if failures remain. The two workflows differ significantly in how they handle retries.</p>
+  </div>
+
+  <div id="verify-panels"></div>
+
+  <!-- E2E SUMMARY -->
+  <div class="e2e" id="e2e-section"></div>
+</div>
+
+<script>
+const COMPONENTS = [
+  {
+    id:"dispatcher", tier:"tier-dispatch",
+    role:"Dispatcher", title:"analyze_and_fix_build.py",
+    color:"var(--coral)", bg:"var(--coral-bg)", icon:"01",
+    summary:"Entry point — triages build failures from build_log.html",
+    details:[
+      "Parses build_log.html for :STATUS: lines",
+      "Build passed → exit 0",
+      "sdk_build_n9k failed → manual investigation email",
+      "nxos64_parallel failed → route to automation",
+      "Branch nx_dev → Bazel workflow, other → Make workflow",
+    ],
+    risks:[
+      "Duplicate :STATUS: lines are not deduplicated",
+      "Branch routing is hard-coded (only nx_dev uses Bazel)",
+      "Failure detection depends entirely on :STATUS: line format",
+    ]
+  },
+  {
+    id:"make", tier:"tier-workflows",
+    role:"Make workflow", title:"automated_workflow.py",
+    color:"var(--teal)", bg:"var(--teal-bg)", icon:"02",
+    summary:"Iterative make-based repair loop for non-nx_dev branches",
+    details:[
+      "Creates WIT workspace from latest build tag",
+      "Checks out failing tag into workspace",
+      "Finds earliest error log via find_earliest_error_log.py",
+      "Writes extracted errors to tools/current_errors.txt",
+      "Runs Codex to analyze and patch code",
+      "Verification: gmake -j16 per target, logged separately",
+    ],
+    risks:[
+      "Retries always rebuild ALL original targets, not just failures",
+      "run_codex_analysis() takes error_output but never uses it",
+      "Proceeds even if find_earliest_error_log() fails",
+    ]
+  },
+  {
+    id:"bazel", tier:"tier-workflows",
+    role:"Bazel workflow", title:"automated_bazel_workflow.py",
+    color:"var(--purple)", bg:"var(--purple-bg)", icon:"03",
+    summary:"More mature Bazel failure-repair workflow for nx_dev",
+    details:[
+      "Parses Bazel log + BEP via bzl_error_report.py → structured JSON",
+      "Writes both current_errors.txt and current_errors.json",
+      "Runs Codex with structured error context",
+      "Rebuilds ONLY remaining failed Bazel targets",
+      "Keeps explicit retry state with attempt_history",
+      "build_bazel_command(): .so/.bin/.klm → append _all suffix",
+    ],
+    risks:[
+      "BZL_ERROR_REPORT is a hard-coded absolute path",
+      "Codex runs with --sandbox danger-full-access",
+      "--use-existing-workspace skips checkout entirely",
+    ]
+  },
+  {
+    id:"errlog", tier:"tier-parsers",
+    role:"Make log miner", title:"find_earliest_error_log.py",
+    color:"var(--teal)", bg:"var(--teal-bg)", icon:"04",
+    summary:"Finds earliest error log and extracts Error 1 + compiler context",
+    details:[
+      "Scans directory for error.log.images* files, sorts by mtime",
+      "Finds Error 1 lines, walks backward for error: context",
+      "Deduplicates prior error lines across occurrences",
+      "Output modes: text, JSON, or compiler-style",
+      "Compiler mode feeds tools/current_errors.txt for Codex",
+    ],
+    risks:[
+      "'Earliest' based on mtime — may not be real first failure",
+      "Backward scan stops at ARCH line — log-format specific",
+      "Only scans immediate directory, not nested paths",
+    ]
+  },
+  {
+    id:"bzlrpt", tier:"tier-parsers",
+    role:"Bazel error parser", title:"bzl_error_report.py",
+    color:"var(--purple)", bg:"var(--purple-bg)", icon:"05",
+    summary:"Combines raw Bazel log + BEP stream into structured error report",
+    details:[
+      "Parses BEP JSON for build status, root cause, failed labels",
+      "Scans raw log for failure regions independently",
+      "Classifies: compilation, linker, analysis, RBE, generic",
+      "Extracts target/object names from Compiling...failed lines",
+      "Prioritizes remote execution failures to the front",
+      "JSON output: failed_targets, failed_objects, unique_errors",
+    ],
+    risks:[
+      "BEP parsing silently swallows all exceptions",
+      "Heavy regex heuristics — nonstandard output may be missed",
+      "get_error_logs_streaming() scans whole file (not truly streaming)",
+    ]
+  },
+  {
+    id:"prompt", tier:"tier-prompt",
+    role:"Codex prompt", title:"BUILD_ERROR_ANALYSIS_NO_BUILD.md",
+    color:"var(--amber)", bg:"var(--amber-bg)", icon:"06",
+    summary:"Behavior guide telling Codex how to analyze and fix build errors",
+    details:[
+      "Core rule: run automatically, do not prompt user, NO builds",
+      "Parse compiler errors → file, line, column, type, symbol",
+      "Search related symbols and read surrounding code",
+      "Infer root cause → choose minimal fix strategy",
+      "Generate and apply patch, verify with grep/git diff only",
+      "Includes walkthrough examples: duplicate function, deprecated macro",
+    ],
+    risks:[
+      "References stale tool names (grep_search, replace_string_in_file)",
+      "Error log location says build_XX_error.log but workflows use current_errors.txt",
+      "Mixes 'generate patch' and 'edit files directly' mental models",
+    ]
+  },
+  {
+    id:"common", tier:"tier-common",
+    role:"Shared utilities", title:"workflow_common.py",
+    color:"var(--gray)", bg:"var(--gray-bg)", icon:"07",
+    summary:"Operational backbone used by both workflows",
+    details:[
+      "find_latest_build_tag() — queries build tag API",
+      "create_wit_workspace() — shells out to WIT binary",
+      "checkout_error_tag() — git fetch + checkout in workspace",
+      "setup_codex() — sets NODEJS_HOME, prepends to PATH",
+      "get_git_diff() — captures git diff HEAD",
+      "send_email() — calls send_mail.pl with subject/body",
+      "preserve_existing_file() — timestamps old files before overwrite",
+    ],
+    risks:[
+      "find_latest_build_tag() sort logic may return oldest, not latest",
+      "create_wit_workspace() logs success even if WIT creation failed",
+      "Several helpers call os.chdir() without restoring previous dir",
+    ]
+  },
+];
+
+const VERIFY = [
+  {
+    title:"Make verification loop", color:"var(--teal)", accent:"#0d7360",
+    note:"Rebuilds ALL original targets on retry (not just failures)",
+    steps:[
+      {n:1, label:"run_build()", detail:"Load VBE module from config.files/vbe.mk"},
+      {n:2, label:"gmake -j16 &lt;target&gt;", detail:"Run per target, log each separately"},
+      {n:3, label:"Summarize results", detail:"Count passed vs failed targets"},
+      {n:"?", label:"All targets pass?", detail:"Decision point", diamond:true},
+    ],
+    pass:[
+      {label:"Collect git diff", detail:"Capture workspace changes"},
+      {label:"Write success_email.txt", detail:"Include diff + summary"},
+      {label:"Send email", detail:"Via send_mail.pl"},
+    ],
+    fail:[
+      {label:"Attempts left?", detail:"Max 3 attempts"},
+      {label:"Extract fresh errors", detail:"extract_errors_from_build_log()"},
+      {label:"Rewrite current_errors.txt", detail:"Rebuilds ALL original targets"},
+      {label:"Rerun Codex", detail:"Loop back to run_build()"},
+    ],
+    exhaust:"Exit code 1 — no email sent on exhaustion",
+    always:null,
+  },
+  {
+    title:"Bazel verification loop", color:"var(--purple)", accent:"#5b3fb5",
+    note:"Only rebuilds REMAINING failed targets (key improvement over Make)",
+    steps:[
+      {n:1, label:"run_bazel_builds()", detail:"From standalone dir, restore cwd in finally"},
+      {n:2, label:"build_bazel_command()", detail:".so/.bin/.klm targets get _all suffix"},
+      {n:3, label:"Build remaining targets", detail:"Only still-failing, log per target per attempt"},
+      {n:"?", label:"All remaining pass?", detail:"Decision point", diamond:true},
+    ],
+    pass:[
+      {label:"Stop retrying", detail:"No more rebuild cycles needed"},
+    ],
+    fail:[
+      {label:"analyze_retry_failures()", detail:"Parser output + raw log tails"},
+      {label:"Re-parse with bzl_error_report.py", detail:"Rewrite .txt + .json context"},
+      {label:"Update attempt_history", detail:"Append to bazel_build_history.log"},
+      {label:"Rerun Codex", detail:"Loop back with new context"},
+    ],
+    exhaust:null,
+    always:[
+      {label:"Generate email", detail:"bazel_build_email.txt with attempt history"},
+      {label:"Send email (always)", detail:"Even if failures remain"},
+    ],
+  },
+];
+
+const E2E = [
+  "Detect failing task from build_log.html",
+  "Triage: manual handling vs automation",
+  "Route to Make or Bazel workflow by branch",
+  "Create/reuse WIT workspace, checkout failing tag",
+  "Extract structured error context from logs",
+  "Feed context + prompt to Codex for code patches",
+  "Run verification builds externally",
+  "If failures remain → re-extract errors → re-run Codex → retry",
+  "Collect git diff and send summary email",
+];
+
+function renderCard(c, delay) {
+  return `
+  <div class="card" id="card-${c.id}" style="--accent:${c.color}; animation: fadeUp .5s ease-out ${delay}s both" onclick="toggleCard('${c.id}')">
+    <div class="accent-bar" style="background:${c.color}"></div>
+    <div class="card-head">
+      <div class="card-icon" style="background:${c.color}">${c.icon}</div>
+      <div class="card-meta">
+        <div class="card-role" style="color:${c.color}">${c.role}</div>
+        <div class="card-title">${c.title}</div>
+      </div>
+      <svg class="card-chevron" width="16" height="16" viewBox="0 0 16 16"><path d="M6 3l5 5-5 5" fill="none" stroke="var(--t3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="card-summary">${c.summary}</div>
+    <div class="card-details">
+      <div class="detail-section-label" style="color:${c.color}">Key behaviors</div>
+      ${c.details.map((d,i) => `<div class="detail-item" style="animation:fadeUp .25s ease-out ${i*0.04}s both"><div class="detail-dot" style="background:${c.color}"></div>${d}</div>`).join('')}
+      <div class="detail-section-label" style="color:var(--red); margin-top:16px">Risks / issues</div>
+      ${c.risks.map((r,i) => `<div class="risk-item" style="animation:fadeUp .25s ease-out ${(c.details.length+i)*0.04}s both"><div class="risk-dot"></div>${r}</div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function renderVerify(v, idx) {
+  const isOpen = true;
+  return `
+  <div class="verify-panel ${isOpen?'open':''}" id="vpanel-${idx}" style="--accent:${v.color}; animation: fadeUp .5s ease-out ${0.3+idx*0.1}s both">
+    <div class="verify-head" onclick="toggleVerify(${idx})">
+      <div class="pulse-group">
+        <div class="pulse-dot" style="background:${v.accent}"></div>
+        <div class="pulse-dot" style="background:${v.accent}; animation-delay:.3s"></div>
+        <div class="pulse-dot" style="background:${v.accent}; animation-delay:.6s"></div>
+      </div>
+      <div class="verify-title" style="color:${v.color}">${v.title}</div>
+      <svg class="verify-chevron" width="16" height="16" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" fill="none" stroke="${v.accent}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="verify-body">
+      <div class="callout" style="background:${v.color}10; border-color:${v.accent}; color:${v.accent}">${v.note}</div>
+
+      ${v.steps.map(s => `
+        <div class="step-row">
+          ${s.diamond
+            ? `<div class="step-diamond" style="border-color:${v.accent}"><span style="color:${v.accent}">?</span></div>`
+            : `<div class="step-num" style="background:${v.color}">${s.n}</div>`
+          }
+          <div>
+            <div class="step-label">${s.label}</div>
+            <div class="step-detail">${s.detail}</div>
+          </div>
+        </div>
+      `).join('')}
+
+      <div class="branch-grid">
+        <div class="branch-box" style="background:var(--green-bg)">
+          <div class="branch-label" style="color:var(--green)">
+            <svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6" fill="none" stroke="var(--green)" stroke-width="1.2"/><path d="M4 7l2 2 4-4" fill="none" stroke="var(--green)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Pass
+          </div>
+          ${v.pass.map(s => `<div class="branch-item"><strong>${s.label}</strong> <span class="muted">— ${s.detail}</span></div>`).join('')}
+        </div>
+        <div class="branch-box" style="background:var(--red-bg)">
+          <div class="branch-label" style="color:var(--red)">
+            <svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6" fill="none" stroke="var(--red)" stroke-width="1.2"/><path d="M7 4v4M7 10v.5" fill="none" stroke="var(--red)" stroke-width="1.2" stroke-linecap="round"/></svg>
+            Fail → retry (×3 max)
+          </div>
+          ${v.fail.map(s => `<div class="branch-item"><strong>${s.label}</strong> <span class="muted">— ${s.detail}</span></div>`).join('')}
+          ${v.exhaust ? `<div class="exhaust-line">${v.exhaust}</div>` : ''}
+        </div>
+      </div>
+
+      ${v.always ? `
+        <div class="always-box" style="background:${v.color}10">
+          <div class="branch-label" style="color:${v.accent}">Always (regardless of outcome)</div>
+          ${v.always.map(s => `<div class="branch-item"><strong>${s.label}</strong> <span class="muted">— ${s.detail}</span></div>`).join('')}
+        </div>
+      ` : ''}
+    </div>
+  </div>`;
+}
+
+// Render cards into tiers
+const tiers = {};
+COMPONENTS.forEach((c,i) => {
+  if(!tiers[c.tier]) tiers[c.tier] = [];
+  tiers[c.tier].push(renderCard(c, 0.1 + i * 0.08));
+});
+Object.keys(tiers).forEach(tid => {
+  const el = document.getElementById(tid);
+  if(el) el.innerHTML = tiers[tid].join('');
+});
+
+// Render verify panels
+document.getElementById('verify-panels').innerHTML = VERIFY.map((v,i) => renderVerify(v,i)).join('');
+
+// Render E2E
+document.getElementById('e2e-section').innerHTML = `
+  <div class="e2e-label">End-to-end flow</div>
+  ${E2E.map((step,i) => `
+    <div class="e2e-step" style="animation:fadeUp .4s ease-out ${0.5+i*0.05}s both">
+      <div class="e2e-num ${i===7?'highlight':''}">${i+1}</div>
+      ${step}
+    </div>
+    ${i < E2E.length-1 ? '<div class="e2e-connector"><div class="tick"></div></div>' : ''}
+  `).join('')}
+`;
+
+function toggleCard(id) {
+  const el = document.getElementById('card-'+id);
+  if(el.classList.contains('active')) {
+    el.classList.remove('active');
+  } else {
+    document.querySelectorAll('.card.active').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+  }
+}
+function toggleVerify(idx) {
+  document.getElementById('vpanel-'+idx).classList.toggle('open');
+}
+</script>
+</body>
+</html>

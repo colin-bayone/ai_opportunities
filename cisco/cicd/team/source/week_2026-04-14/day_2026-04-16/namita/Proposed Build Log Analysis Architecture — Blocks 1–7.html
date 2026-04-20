@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<!-- saved from url=(0095)file:///Users/namitamane/Documents/bayone_cisco/output/Proposed_Architecture_Blocks_1_to_7.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposed Build Log Analysis Architecture — Blocks 1–7</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      color: #1a1a2e;
+      padding: 36px 48px 48px;
+    }
+    h1 {
+      font-size: 23px;
+      font-weight: 700;
+      color: #003f5c;
+      border-bottom: 3px solid #0077b6;
+      padding-bottom: 10px;
+      margin-bottom: 6px;
+    }
+    .subtitle {
+      font-size: 12.5px;
+      color: #6c757d;
+      margin-bottom: 26px;
+      font-style: italic;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 3px 16px rgba(0,0,0,0.09);
+      padding: 28px 32px 24px;
+      margin-bottom: 24px;
+    }
+    .section-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #003f5c;
+      margin-bottom: 14px;
+    }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 20px;
+      font-size: 12px;
+      color: #444;
+    }
+    .legend-item { display: flex; align-items: center; gap: 6px; }
+    .legend-box { width: 18px; height: 14px; border-radius: 3px; }
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px 24px;
+      font-size: 12.5px;
+      color: #333;
+      line-height: 1.55;
+    }
+    .notes-grid h3 {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #0077b6;
+      margin-bottom: 4px;
+    }
+    .notes-grid p { margin-bottom: 4px; }
+    .pending {
+      display:inline-block;
+      font-size: 10.5px;
+      background: #fff3e0;
+      color: #e65100;
+      padding: 1px 6px;
+      border-radius: 4px;
+      margin-left: 4px;
+      border: 1px solid #e65100;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Proposed Build Log Analysis Architecture — Blocks 1–7</h1>
+<p class="subtitle">
+  End-to-end proposed pipeline · NFS → Parsing → Three-Tier Error Evaluation → Auto-Fix &amp; PR → Star Schema → MCP · Initial thinking; details pending log format verification.
+</p>
+
+<div class="card">
+  <div class="section-title">Proposed Architecture Diagram</div>
+
+  <svg width="1240" height="720" viewBox="0 0 1240 720" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <!-- Arrow heads -->
+      <marker id="aBlue" markerWidth="9" markerHeight="6" refX="9" refY="3" orient="auto"><polygon points="0 0,9 3,0 6" fill="#0077b6"></polygon></marker>
+      <marker id="aIndigo" markerWidth="9" markerHeight="6" refX="9" refY="3" orient="auto"><polygon points="0 0,9 3,0 6" fill="#3949ab"></polygon></marker>
+      <marker id="aGreen" markerWidth="9" markerHeight="6" refX="9" refY="3" orient="auto"><polygon points="0 0,9 3,0 6" fill="#2e7d32"></polygon></marker>
+      <marker id="aOrange" markerWidth="9" markerHeight="6" refX="9" refY="3" orient="auto"><polygon points="0 0,9 3,0 6" fill="#e65100"></polygon></marker>
+      <marker id="aPurple" markerWidth="9" markerHeight="6" refX="9" refY="3" orient="auto"><polygon points="0 0,9 3,0 6" fill="#6a1b9a"></polygon></marker>
+      <marker id="aAmber" markerWidth="9" markerHeight="6" refX="9" refY="3" orient="auto"><polygon points="0 0,9 3,0 6" fill="#f57f17"></polygon></marker>
+      <marker id="aRed" markerWidth="9" markerHeight="6" refX="9" refY="3" orient="auto"><polygon points="0 0,9 3,0 6" fill="#c62828"></polygon></marker>
+      <marker id="aNavy" markerWidth="9" markerHeight="6" refX="9" refY="3" orient="auto"><polygon points="0 0,9 3,0 6" fill="#0d47a1"></polygon></marker>
+      <marker id="aTeal" markerWidth="9" markerHeight="6" refX="9" refY="3" orient="auto"><polygon points="0 0,9 3,0 6" fill="#00695c"></polygon></marker>
+
+      <!-- Drop shadow -->
+      <filter id="sh" x="-12%" y="-12%" width="124%" height="135%">
+        <fedropshadow dx="1" dy="2" stdDeviation="3" flood-color="#00000018"></fedropshadow>
+      </filter>
+
+      <!-- Gradient fills for tier headers -->
+      <lineargradient id="gGreen" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#1b5e20"></stop>
+        <stop offset="100%" stop-color="#388e3c"></stop>
+      </lineargradient>
+      <lineargradient id="gOrange" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#bf360c"></stop>
+        <stop offset="100%" stop-color="#e64a19"></stop>
+      </lineargradient>
+      <lineargradient id="gRed" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#6a0080"></stop>
+        <stop offset="100%" stop-color="#ad1457"></stop>
+      </lineargradient>
+      <lineargradient id="gTeal" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#004d40"></stop>
+        <stop offset="100%" stop-color="#00897b"></stop>
+      </lineargradient>
+      <lineargradient id="gNavy" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#0d47a1"></stop>
+        <stop offset="100%" stop-color="#1976d2"></stop>
+      </lineargradient>
+      <lineargradient id="gPurple" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#4a148c"></stop>
+        <stop offset="100%" stop-color="#7b1fa2"></stop>
+      </lineargradient>
+    </defs>
+
+    <!-- ─────────────────────────────────────────────
+         BLOCK 1 — NFS Ingestion
+    ───────────────────────────────────────────── -->
+    <rect x="20" y="230" width="170" height="150" rx="12" fill="#d0ebff" stroke="#0077b6" stroke-width="2" filter="url(#sh)"></rect>
+    <rect x="20" y="230" width="170" height="36" rx="12" fill="#0077b6"></rect>
+    <rect x="20" y="254" width="170" height="12" fill="#0077b6"></rect>
+    <text x="105" y="253" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#fff">BLOCK 1 — NFS Ingestion</text>
+    <text x="105" y="282" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#003f5c">Bazel Logs (CI + CD)</text>
+    <text x="33" y="302" font-size="10" fill="#003f5c">▸ Mode: Batched (15–30 min)</text>
+    <text x="33" y="317" font-size="10" fill="#003f5c">▸ Alt: Event-driven / realtime</text>
+    <text x="33" y="332" font-size="10" fill="#003f5c">▸ Watcher / scheduled poll</text>
+    <text x="33" y="347" font-size="10" fill="#003f5c">▸ Manifest + checksum</text>
+    <rect x="28" y="355" width="154" height="18" rx="5" fill="#fff3e0" stroke="#e65100" stroke-width="1"></rect>
+    <text x="105" y="368" text-anchor="middle" font-size="9.5" fill="#e65100">Pending: batch vs realtime decision</text>
+
+    <!-- Arrow B1 → B2 -->
+    <line x1="190" y1="305" x2="218" y2="305" stroke="#0077b6" stroke-width="2" marker-end="url(#aBlue)"></line>
+
+    <!-- ─────────────────────────────────────────────
+         BLOCK 2 — Log Parsing & Chunking
+    ───────────────────────────────────────────── -->
+    <rect x="218" y="210" width="180" height="190" rx="12" fill="#e8eaf6" stroke="#3949ab" stroke-width="2" filter="url(#sh)"></rect>
+    <rect x="218" y="210" width="180" height="36" rx="12" fill="#3949ab"></rect>
+    <rect x="218" y="234" width="180" height="12" fill="#3949ab"></rect>
+    <text x="308" y="233" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#fff">BLOCK 2 — Parsing &amp; Chunking</text>
+    <text x="308" y="264" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#1a237e">Structured extraction</text>
+    <text x="232" y="284" font-size="10" fill="#3949ab">▸ Regex parsing (uniform formats)</text>
+    <text x="232" y="299" font-size="10" fill="#3949ab">▸ NLP chunking (varied formats)</text>
+    <text x="232" y="314" font-size="10" fill="#3949ab">▸ Semantic chunk boundaries</text>
+    <text x="232" y="329" font-size="10" fill="#3949ab">▸ NLP summarisation to shrink</text>
+    <text x="232" y="344" font-size="10" fill="#3949ab">   text prior to tier 2/3 calls</text>
+    <text x="232" y="363" font-size="10" fill="#c62828" font-style="italic">⚠ Critical: 300K–500K line files</text>
+    <rect x="226" y="372" width="164" height="18" rx="5" fill="#fff3e0" stroke="#e65100" stroke-width="1"></rect>
+    <text x="308" y="385" text-anchor="middle" font-size="9.5" fill="#e65100">Pending: CI vs CD format check</text>
+
+    <!-- Arrows from Parsing to each Tier -->
+    <path d="M398 240 Q440 155 478 142" stroke="#2e7d32" stroke-width="1.8" fill="none" marker-end="url(#aGreen)"></path>
+    <text x="410" y="195" font-size="10" fill="#2e7d32" transform="rotate(-40,410,195)">known errors</text>
+
+    <line x1="398" y1="305" x2="478" y2="305" stroke="#e65100" stroke-width="1.8" marker-end="url(#aOrange)"></line>
+    <text x="420" y="298" font-size="10" fill="#e65100">contextual</text>
+
+    <path d="M398 370 Q440 460 478 478" stroke="#880e4f" stroke-width="1.8" fill="none" marker-end="url(#aRed)"></path>
+    <text x="410" y="440" font-size="10" fill="#880e4f" transform="rotate(40,410,440)">complex</text>
+
+    <!-- ─────────────────────────────────────────────
+         BLOCK 3 — Tier 1 Deterministic
+    ───────────────────────────────────────────── -->
+    <rect x="478" y="60" width="210" height="170" rx="12" fill="#f1f8e9" stroke="#2e7d32" stroke-width="2" filter="url(#sh)"></rect>
+    <rect x="478" y="60" width="210" height="40" rx="12" fill="url(#gGreen)"></rect>
+    <rect x="478" y="88" width="210" height="12" fill="url(#gGreen)"></rect>
+    <text x="583" y="78" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#fff">BLOCK 3 · TIER 1 — Rule-Based</text>
+    <text x="583" y="93" text-anchor="middle" font-size="10" fill="#c8e6c9">Deterministic · No AI</text>
+    <text x="583" y="120" text-anchor="middle" font-size="11" font-weight="bold" fill="#1b5e20">Rule-Based Error Detection</text>
+    <text x="492" y="140" font-size="10" fill="#2e7d32">▸ Bazel docs error code registry</text>
+    <text x="492" y="156" font-size="10" fill="#2e7d32">▸ Regex / pattern matching</text>
+    <text x="492" y="172" font-size="10" fill="#2e7d32">▸ Error description lookup</text>
+    <text x="492" y="188" font-size="10" fill="#2e7d32">▸ Fast path · low cost</text>
+    <text x="492" y="212" font-size="10" fill="#888" font-style="italic">Handles majority of errors</text>
+
+    <!-- Escalation T1 → T2 -->
+    <line x1="583" y1="232" x2="583" y2="272" stroke="#f57f17" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#aAmber)"></line>
+    <text x="590" y="258" font-size="10" fill="#f57f17" font-style="italic">unresolved ↓</text>
+
+    <!-- ─────────────────────────────────────────────
+         BLOCK 4 — Tier 2 NLP / ML
+    ───────────────────────────────────────────── -->
+    <rect x="478" y="274" width="210" height="160" rx="12" fill="#fff8f0" stroke="#e65100" stroke-width="2" filter="url(#sh)"></rect>
+    <rect x="478" y="274" width="210" height="40" rx="12" fill="url(#gOrange)"></rect>
+    <rect x="478" y="302" width="210" height="12" fill="url(#gOrange)"></rect>
+    <text x="583" y="292" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#fff">BLOCK 4 · TIER 2 — NLP / ML</text>
+    <text x="583" y="307" text-anchor="middle" font-size="10" fill="#ffe0cc">Invoked when T1 can't resolve</text>
+    <text x="583" y="334" text-anchor="middle" font-size="11" font-weight="bold" fill="#bf360c">Contextual Classification</text>
+    <text x="492" y="354" font-size="10" fill="#e65100">▸ Specialised small ML model</text>
+    <text x="492" y="370" font-size="10" fill="#e65100">▸ Error category / issue type</text>
+    <text x="492" y="386" font-size="10" fill="#e65100">▸ Semantic similarity matching</text>
+    <text x="492" y="402" font-size="10" fill="#e65100">▸ Confidence scoring</text>
+    <text x="492" y="422" font-size="10" fill="#888" font-style="italic">Contextual, non-trivial errors</text>
+
+    <!-- Escalation T2 → T3 -->
+    <line x1="583" y1="436" x2="583" y2="474" stroke="#c62828" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#aRed)"></line>
+    <text x="590" y="460" font-size="10" fill="#c62828" font-style="italic">unresolved ↓</text>
+
+    <!-- ─────────────────────────────────────────────
+         BLOCK 5 — Tier 3 LLM Complex Analysis
+    ───────────────────────────────────────────── -->
+    <rect x="478" y="476" width="210" height="170" rx="12" fill="#fdf0f8" stroke="#880e4f" stroke-width="2" filter="url(#sh)"></rect>
+    <rect x="478" y="476" width="210" height="40" rx="12" fill="url(#gRed)"></rect>
+    <rect x="478" y="504" width="210" height="12" fill="url(#gRed)"></rect>
+    <text x="583" y="494" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#fff">BLOCK 5 · TIER 3 — LLM</text>
+    <text x="583" y="509" text-anchor="middle" font-size="10" fill="#f8bbd0">Only when T1 + T2 can't resolve</text>
+    <text x="583" y="536" text-anchor="middle" font-size="11" font-weight="bold" fill="#880e4f">Complex Analysis</text>
+    <text x="492" y="556" font-size="10" fill="#880e4f">▸ Root cause investigation</text>
+    <text x="492" y="572" font-size="10" fill="#880e4f">▸ Fix suggestion generation</text>
+    <text x="492" y="588" font-size="10" fill="#880e4f">▸ Summary generation</text>
+    <text x="492" y="604" font-size="10" fill="#880e4f">▸ Novel / compound errors</text>
+    <text x="492" y="626" font-size="10" fill="#888" font-style="italic">Complex, unknown errors only</text>
+
+    <!-- ─────────────────────────────────────────────
+         BLOCK 5.1 — LLM Code Change & PR
+    ───────────────────────────────────────────── -->
+    <rect x="720" y="225" width="215" height="210" rx="12" fill="#e0f2f1" stroke="#00695c" stroke-width="2" filter="url(#sh)"></rect>
+    <rect x="720" y="225" width="215" height="40" rx="12" fill="url(#gTeal)"></rect>
+    <rect x="720" y="253" width="215" height="12" fill="url(#gTeal)"></rect>
+    <text x="827" y="243" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#fff">BLOCK 5.1 — Auto-Fix &amp; PR</text>
+    <text x="827" y="258" text-anchor="middle" font-size="10" fill="#b2dfdb">LLM code change + GitHub PR</text>
+    <text x="827" y="286" text-anchor="middle" font-size="11" font-weight="bold" fill="#004d40">Consumes outputs of B3/B4/B5</text>
+    <text x="734" y="306" font-size="10" fill="#00695c">▸ Generate code patch (diff)</text>
+    <text x="734" y="322" font-size="10" fill="#00695c">▸ Branch + commit via Git</text>
+    <text x="734" y="338" font-size="10" fill="#00695c">▸ Open PR with root cause + fix</text>
+    <text x="734" y="354" font-size="10" fill="#00695c">▸ Trigger build verification</text>
+    <text x="734" y="370" font-size="10" fill="#00695c">▸ Human review gate on PR</text>
+    <text x="734" y="386" font-size="10" fill="#00695c">▸ Status feedback → storage</text>
+    <rect x="728" y="394" width="200" height="18" rx="5" fill="#fff3e0" stroke="#e65100" stroke-width="1"></rect>
+    <text x="828" y="407" text-anchor="middle" font-size="9.5" fill="#e65100">Human-in-the-loop review required</text>
+    <text x="827" y="427" text-anchor="middle" font-size="10" fill="#888" font-style="italic">Builds on Justin's POC approach</text>
+
+    <!-- Arrows from Tiers 1/2/3 → Block 5.1 -->
+    <path d="M688 145 Q708 200 722 265" stroke="#2e7d32" stroke-width="1.6" stroke-dasharray="6,3" fill="none" marker-end="url(#aGreen)"></path>
+    <line x1="688" y1="354" x2="720" y2="330" stroke="#e65100" stroke-width="1.6" stroke-dasharray="6,3" marker-end="url(#aOrange)"></line>
+    <path d="M688 560 Q708 460 722 400" stroke="#880e4f" stroke-width="1.6" stroke-dasharray="6,3" fill="none" marker-end="url(#aRed)"></path>
+    <text x="700" y="238" font-size="10" fill="#00695c" font-style="italic" transform="rotate(-65,700,238)">fix context</text>
+
+    <!-- Arrow B5.1 → B6 (feeds PR results + analysis to storage) -->
+    <line x1="935" y1="330" x2="978" y2="330" stroke="#00695c" stroke-width="2" marker-end="url(#aTeal)"></line>
+    <text x="945" y="322" font-size="10" fill="#00695c">analysis + PR</text>
+
+    <!-- Also arrows from tiers directly to storage (raw classification results) -->
+    <path d="M688 120 Q850 120 978 240" stroke="#2e7d32" stroke-width="1.4" stroke-dasharray="6,3" fill="none" marker-end="url(#aGreen)"></path>
+    <path d="M688 394 Q900 500 978 390" stroke="#e65100" stroke-width="1.4" stroke-dasharray="6,3" fill="none" marker-end="url(#aOrange)"></path>
+    <path d="M688 600 Q900 640 978 400" stroke="#880e4f" stroke-width="1.4" stroke-dasharray="6,3" fill="none" marker-end="url(#aRed)"></path>
+    <text x="870" y="115" font-size="10" fill="#0d47a1" font-style="italic">classification results</text>
+
+    <!-- ─────────────────────────────────────────────
+         BLOCK 6 — Structured Storage (Star Schema)
+    ───────────────────────────────────────────── -->
+    <rect x="978" y="220" width="240" height="200" rx="12" fill="#e3f2fd" stroke="#0d47a1" stroke-width="2" filter="url(#sh)"></rect>
+    <rect x="978" y="220" width="240" height="40" rx="12" fill="url(#gNavy)"></rect>
+    <rect x="978" y="248" width="240" height="12" fill="url(#gNavy)"></rect>
+    <text x="1098" y="238" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#fff">BLOCK 6 — Structured Storage</text>
+    <text x="1098" y="253" text-anchor="middle" font-size="10" fill="#bbdefb">Star Schema · Relational DB</text>
+    <text x="1098" y="282" text-anchor="middle" font-size="11" font-weight="bold" fill="#0d47a1">Fact + Dimensions</text>
+    <text x="994" y="302" font-size="10" fill="#0d47a1">▸ build_analysis_facts (1 row/err)</text>
+    <text x="994" y="318" font-size="10" fill="#1565c0">▸ dim_builds · dim_errors</text>
+    <text x="994" y="334" font-size="10" fill="#1565c0">▸ dim_repos · dim_branches</text>
+    <text x="994" y="350" font-size="10" fill="#1565c0">▸ dim_log_files</text>
+    <text x="994" y="370" font-size="10" fill="#0d47a1">▸ Summaries · suggested fixes</text>
+    <text x="994" y="386" font-size="10" fill="#0d47a1">▸ SHA hashes · PR numbers</text>
+    <text x="994" y="406" font-size="10" fill="#888" font-style="italic">Commit-level traceability</text>
+
+    <!-- Arrow B6 → B7 -->
+    <line x1="1098" y1="420" x2="1098" y2="460" stroke="#6a1b9a" stroke-width="2" marker-end="url(#aPurple)"></line>
+
+    <!-- ─────────────────────────────────────────────
+         BLOCK 7 — MCP Tool Interface
+    ───────────────────────────────────────────── -->
+    <rect x="978" y="460" width="240" height="190" rx="12" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="2" filter="url(#sh)"></rect>
+    <rect x="978" y="460" width="240" height="40" rx="12" fill="url(#gPurple)"></rect>
+    <rect x="978" y="488" width="240" height="12" fill="url(#gPurple)"></rect>
+    <text x="1098" y="478" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#fff">BLOCK 7 — MCP Tool Interface</text>
+    <text x="1098" y="493" text-anchor="middle" font-size="10" fill="#e1bee7">Agentic AI access layer</text>
+    <text x="1098" y="520" text-anchor="middle" font-size="11" font-weight="bold" fill="#4a148c">Query + Action Tools</text>
+    <text x="994" y="540" font-size="10" fill="#6a1b9a">▸ Query analysis results</text>
+    <text x="994" y="556" font-size="10" fill="#6a1b9a">▸ Trace error → commit / PR</text>
+    <text x="994" y="572" font-size="10" fill="#6a1b9a">▸ Fetch fix suggestions</text>
+    <text x="994" y="588" font-size="10" fill="#6a1b9a">▸ Build failure summaries</text>
+    <text x="994" y="604" font-size="10" fill="#6a1b9a">▸ Live Git / GitHub API lookups</text>
+    <text x="994" y="620" font-size="10" fill="#6a1b9a">▸ CI / CD build status</text>
+    <text x="994" y="640" font-size="10" fill="#888" font-style="italic">Downstream agents / users</text>
+
+    <!-- ─────────────────────────────────────────────
+         Bazel Docs Scraper — feeds Tier 1
+    ───────────────────────────────────────────── -->
+    <rect x="218" y="62" width="180" height="54" rx="8" fill="#fff9c4" stroke="#f9a825" stroke-width="1.4"></rect>
+    <text x="308" y="84" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#e65100">⚙ Bazel Docs Scraper</text>
+    <text x="308" y="100" text-anchor="middle" font-size="10" fill="#888">Populates T1 error code registry</text>
+    <line x1="398" y1="90" x2="478" y2="110" stroke="#f9a825" stroke-width="1.4" stroke-dasharray="4,3" marker-end="url(#aAmber)"></line>
+
+    <!-- ─────────────────────────────────────────────
+         MySQL metadata + Git / GitHub — side inputs
+    ───────────────────────────────────────────── -->
+    <rect x="20" y="60" width="170" height="54" rx="8" fill="#eceff1" stroke="#455a64" stroke-width="1.4"></rect>
+    <text x="105" y="82" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#263238">MySQL · Build Metadata</text>
+    <text x="105" y="98" text-anchor="middle" font-size="10" fill="#546e7a">build id · timestamp · status</text>
+    <line x1="105" y1="114" x2="105" y2="228" stroke="#455a64" stroke-width="1.2" stroke-dasharray="4,3"></line>
+    <text x="112" y="180" font-size="10" fill="#455a64" font-style="italic">correlate</text>
+
+    <rect x="978" y="60" width="240" height="54" rx="8" fill="#eceff1" stroke="#455a64" stroke-width="1.4"></rect>
+    <text x="1098" y="82" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#263238">Git / GitHub APIs</text>
+    <text x="1098" y="98" text-anchor="middle" font-size="10" fill="#546e7a">commits · diffs · PR review state (live)</text>
+    <line x1="1098" y1="114" x2="1098" y2="218" stroke="#455a64" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#aNavy)"></line>
+    <text x="1105" y="170" font-size="10" fill="#455a64" font-style="italic">SHA lookup</text>
+
+    <!-- Human Review Gate badge (anchored to B5.1) -->
+    <rect x="720" y="445" width="215" height="26" rx="6" fill="#fff3e0" stroke="#e65100" stroke-width="1.2"></rect>
+    <text x="827" y="462" text-anchor="middle" font-size="10.5" fill="#e65100">👤 Human Review Gate — PR approval</text>
+
+    <!-- Footer labels -->
+    <text x="105" y="420" font-size="10" fill="#888" font-style="italic">B1 · ingestion</text>
+    <text x="308" y="420" font-size="10" fill="#888" font-style="italic">B2 · parse/chunk</text>
+    <text x="583" y="670" font-size="10" fill="#888" font-style="italic">B3 / B4 / B5 · tiered classification</text>
+    <text x="827" y="685" font-size="10" fill="#888" font-style="italic">B5.1 · fix + PR</text>
+    <text x="1098" y="685" font-size="10" fill="#888" font-style="italic">B6 · storage · B7 · MCP</text>
+
+  </svg>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-box" style="background:#d0ebff;border:2px solid #0077b6;"></div> B1 — NFS Ingestion</div>
+    <div class="legend-item"><div class="legend-box" style="background:#e8eaf6;border:2px solid #3949ab;"></div> B2 — Parsing &amp; Chunking</div>
+    <div class="legend-item"><div class="legend-box" style="background:#f1f8e9;border:2px solid #2e7d32;"></div> B3 — Tier 1 (Rule-Based)</div>
+    <div class="legend-item"><div class="legend-box" style="background:#fff8f0;border:2px solid #e65100;"></div> B4 — Tier 2 (NLP/ML)</div>
+    <div class="legend-item"><div class="legend-box" style="background:#fdf0f8;border:2px solid #880e4f;"></div> B5 — Tier 3 (LLM)</div>
+    <div class="legend-item"><div class="legend-box" style="background:#e0f2f1;border:2px solid #00695c;"></div> B5.1 — Auto-Fix &amp; PR</div>
+    <div class="legend-item"><div class="legend-box" style="background:#e3f2fd;border:2px solid #0d47a1;"></div> B6 — Structured Storage (Star Schema)</div>
+    <div class="legend-item"><div class="legend-box" style="background:#f3e5f5;border:2px solid #6a1b9a;"></div> B7 — MCP Tool Interface</div>
+    <div class="legend-item"><div class="legend-box" style="background:#fff9c4;border:1.4px solid #f9a825;"></div> Bazel Docs Scraper</div>
+    <div class="legend-item"><div class="legend-box" style="background:#eceff1;border:1.4px solid #455a64;"></div> External systems (MySQL · Git / GitHub)</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="section-title">Block-by-Block Notes</div>
+  <div class="notes-grid">
+    <div>
+      <h3>Block 1 — NFS Ingestion <span class="pending">decision pending</span></h3>
+      <p>Reads Bazel CI/CD logs from the NFS mount. Two viable modes: (a) scheduled batches every 15–30 min, simpler and predictable; (b) event-driven / realtime using a filesystem watcher or webhook, lower latency but more moving parts. Proposal: start with 15–30 min batching to match current build cadence, revisit once queue patterns and SLA targets are confirmed.</p>
+    </div>
+    <div>
+      <h3>Block 2 — Parsing &amp; Chunking</h3>
+      <p>Regex/structured parsing when log formats are uniform; NLP-based chunking where formats vary across job types. NLP summarisation reduces chunk size before any Tier 2/3 call to control token cost. Critical given 300K–500K line files. Final parsing strategy pending log-format verification across CI vs CD and composite vs individual files.</p>
+    </div>
+    <div>
+      <h3>Blocks 3 / 4 / 5 — Tiered Error Evaluation</h3>
+      <p>Tier 1 (B3): deterministic rule-based detection using the Bazel error-code registry and regex over error descriptions. Tier 2 (B4): a smaller specialised ML model classifies errors that Tier 1 cannot match. Tier 3 (B5): LLM performs root-cause investigation and fix suggestion only for novel / compound errors. Escalation is explicit; each tier records its confidence.</p>
+    </div>
+    <div>
+      <h3>Block 5.1 — LLM Code Change &amp; PR</h3>
+      <p>Consumes the root cause, fix suggestion and context from B3/B4/B5. LLM produces a code patch, the system branches and commits via Git, opens a PR with root-cause summary and proposed fix, and triggers build verification. A human review gate on the PR is mandatory; PR status (merged / rejected / build pass) flows back into B6 for traceability.</p>
+    </div>
+    <div>
+      <h3>Block 6 — Structured Storage (Star Schema)</h3>
+      <p>Fact table <code>build_analysis_facts</code> (one row per error per build) linked to dimensions <code>dim_builds</code>, <code>dim_errors</code>, <code>dim_repos</code>, <code>dim_branches</code>, and optionally <code>dim_log_files</code>. Persists summaries, suggested fixes, confidence scores, SHA hashes and PR numbers. Full commit diffs and PR comments are queried live, not persisted.</p>
+    </div>
+    <div>
+      <h3>Block 7 — MCP Tool Interface</h3>
+      <p>Exposes the schema to downstream agents and users via MCP tools: query analysis results, trace an error back to a commit/PR, fetch fix suggestions, pull build-failure summaries, and correlate with live Git/GitHub state. This is the primary consumption layer for agentic AI workflows.</p>
+    </div>
+  </div>
+</div>
+
+<p style="font-size:11px;color:#aaa;text-align:center;margin-top:10px;">
+  Initial thinking — pending: ingestion mode decision · log format verification · CI vs CD pipeline differentiation · architecture review
+</p>
+
+
+
+</body></html>

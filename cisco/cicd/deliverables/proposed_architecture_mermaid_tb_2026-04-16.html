@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposed Build Log Analysis Architecture · Top-to-Bottom</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --purple-darkest: #2e1065;
+            --purple-dark: #4c1d95;
+            --purple-mid: #5b21b6;
+            --purple-bright: #6d28d9;
+            --purple-accent: #a855f7;
+            --purple-glow: #e879f9;
+            --primary: #0f172a;
+            --text: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --bg-subtle: #f8fafc;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 15px;
+            background: #ffffff;
+        }
+
+        .doc-header {
+            padding: 56px 48px 40px;
+            background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .doc-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 200%;
+            background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+            transform: rotate(-12deg);
+        }
+
+        .doc-header-content { position: relative; z-index: 1; max-width: 1400px; margin: 0 auto; }
+
+        .doc-label {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--purple-glow);
+            margin-bottom: 16px;
+            padding: 4px 12px;
+            background: rgba(232,121,249,0.1);
+            border: 1px solid rgba(232,121,249,0.3);
+            border-radius: 4px;
+        }
+
+        .doc-header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .doc-subtitle {
+            font-size: 16px;
+            font-weight: 300;
+            color: rgba(255,255,255,0.82);
+            margin-bottom: 28px;
+            max-width: 900px;
+        }
+
+        .doc-meta {
+            display: flex;
+            gap: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .doc-meta-item label {
+            display: block;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 6px;
+        }
+
+        .doc-meta-item span {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .logo {
+            position: absolute;
+            bottom: 28px;
+            right: 48px;
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            z-index: 2;
+        }
+
+        .logo span { color: var(--purple-glow); }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 48px 48px;
+        }
+
+        .airflow-banner {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 22px;
+            background: linear-gradient(135deg, rgba(124,58,237,0.06) 0%, rgba(168,85,247,0.10) 100%);
+            border: 1px solid rgba(124,58,237,0.2);
+            border-bottom: none;
+            border-radius: 10px 10px 0 0;
+            margin: 0;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            position: relative;
+        }
+
+        .airflow-banner::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 20px;
+            right: 20px;
+            height: 1px;
+            background: rgba(124,58,237,0.15);
+        }
+
+        .airflow-banner i {
+            font-size: 22px;
+            color: var(--purple-mid);
+        }
+
+        .airflow-banner strong {
+            color: var(--purple-mid);
+            font-weight: 700;
+        }
+
+        .diagram-card {
+            background: #ffffff;
+            border: 1px solid rgba(124,58,237,0.2);
+            border-radius: 0 0 14px 14px;
+            padding: 20px 28px 28px;
+            margin-bottom: 32px;
+            box-shadow: 0 2px 8px rgba(124,58,237,0.06);
+            overflow: visible;
+        }
+
+        .diagram-group {
+            margin-bottom: 32px;
+            box-shadow: 0 4px 16px rgba(124,58,237,0.08);
+            border-radius: 14px;
+            overflow: visible;
+        }
+
+        .diagram-group .diagram-card {
+            box-shadow: none;
+            margin-bottom: 0;
+            border-top: none;
+        }
+
+        .diagram-card svg { overflow: visible !important; }
+
+        .mermaid-wrap {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: visible;
+            padding: 12px 0;
+        }
+
+        .mermaid {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin: 0;
+        }
+        .mermaid svg {
+            max-width: 100% !important;
+            width: 100% !important;
+            height: auto !important;
+            display: block;
+            margin: 0 auto;
+        }
+        .mermaid .node rect, .mermaid .node polygon { rx: 8 !important; ry: 8 !important; }
+        .mermaid .node foreignObject { overflow: visible !important; }
+        .mermaid .node foreignObject div { overflow: visible !important; }
+        .mermaid .node foreignObject div,
+        .mermaid .node foreignObject span,
+        .mermaid .node foreignObject p {
+            font-family: 'Inter', sans-serif !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            line-height: 1.35 !important;
+            color: inherit;
+        }
+        .mermaid .edgeLabel foreignObject div,
+        .mermaid .edgeLabel foreignObject span {
+            font-family: 'Inter', sans-serif !important;
+            font-size: 12px !important;
+            font-weight: 600 !important;
+        }
+        .mermaid .node foreignObject b {
+            font-weight: 600;
+            font-size: 13px !important;
+            line-height: 1.25 !important;
+            display: block;
+        }
+        .mermaid .node foreignObject br {
+            line-height: 1.35;
+        }
+        .mermaid .edgeLabel rect { fill: #ede9fe !important; fill-opacity: 1 !important; stroke: none !important; }
+        .mermaid .cluster rect { rx: 12 !important; ry: 12 !important; }
+        .mermaid .cluster-label foreignObject div,
+        .mermaid .cluster-label foreignObject span {
+            font-family: 'Inter', sans-serif !important;
+            font-size: 13px !important;
+            line-height: 1.4 !important;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px 22px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        .legend-item { display: flex; align-items: center; gap: 8px; }
+        .legend-box { width: 18px; height: 13px; border-radius: 3px; border: 2px solid; }
+
+        .section-number {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--purple-accent);
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            padding: 6px 14px;
+            background: linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(168,85,247,0.12) 100%);
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            letter-spacing: -0.3px;
+        }
+
+        .notes-section { margin-top: 32px; }
+
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px 28px;
+        }
+
+        .note-card {
+            background: var(--bg-subtle);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px 24px;
+        }
+
+        .note-card h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--purple-mid);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .note-card p {
+            font-size: 13.5px;
+            line-height: 1.65;
+            color: var(--text);
+        }
+
+        .pending-tag {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            background: #fff3e0;
+            color: #c2410c;
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid #fb923c;
+        }
+
+        .principle-strip {
+            margin: 28px 0 0;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(168,85,247,0.08) 100%);
+            border-left: 4px solid var(--purple-accent);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .principle-strip h3 {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--purple-accent);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+        }
+
+        .principle-strip p {
+            font-size: 13.5px;
+            color: var(--text);
+            margin: 0;
+            line-height: 1.65;
+        }
+
+        .variant-link {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 6px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--purple-mid);
+            background: rgba(124,58,237,0.08);
+            border: 1px solid rgba(124,58,237,0.2);
+            border-radius: 6px;
+            text-decoration: none;
+            letter-spacing: 0.3px;
+        }
+
+        .variant-link:hover {
+            background: rgba(124,58,237,0.15);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 40px 24px;
+            border-top: 1px solid var(--border);
+            margin-top: 48px;
+        }
+
+        .footer-logo {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .footer-logo span { color: var(--purple-accent); }
+        .footer p { font-size: 12px; color: var(--text-light); margin: 0; }
+
+        @media print {
+            @page { size: 8.5in 11in; margin: 0.35in; }
+            body { font-size: 9pt; }
+            .doc-header {
+                padding: 24px 32px;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                page-break-after: avoid;
+            }
+            .doc-header h1 { font-size: 20pt; }
+            .doc-subtitle { font-size: 10pt; }
+            .container { padding: 16px 24px; }
+            .diagram-card { padding: 12px; page-break-inside: avoid; }
+            .note-card { padding: 10px 14px; page-break-inside: avoid; }
+            .notes-grid { gap: 8px 16px; }
+            .note-card h3 { font-size: 11pt; }
+            .note-card p { font-size: 9pt; line-height: 1.4; }
+            h2 { font-size: 14pt; }
+            .logo { bottom: 16px; right: 32px; font-size: 14pt; }
+            .mermaid svg {
+                max-width: 100% !important;
+                height: auto !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .note-card, .legend, .diagram-card, .principle-strip {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .footer { margin-top: 16px; padding: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="doc-header">
+    <div class="doc-header-content">
+        <div class="doc-label">Proposed Architecture · Top-to-Bottom Layout</div>
+        <h1>Cisco Build Log Analysis Pipeline</h1>
+        <p class="doc-subtitle">Ingest → Parse → Three-Tier Classification Cascade → Auto-Fix with PR → Structured Storage → MCP Serving Layer. Orchestrated by Apache Airflow. Vertical layout variant.</p>
+        <div class="doc-meta">
+            <div class="doc-meta-item">
+                <label>Date</label>
+                <span>April 16, 2026</span>
+            </div>
+            <div class="doc-meta-item">
+                <label>Prepared For</label>
+                <span>Cisco CI / CD Team</span>
+            </div>
+            <div class="doc-meta-item">
+                <label>Author</label>
+                <span>BayOne AI Practice</span>
+            </div>
+        </div>
+        <a class="variant-link" href="proposed_architecture_mermaid_2026-04-16.html">← View Horizontal Layout Variant</a>
+    </div>
+    <div class="logo">Bay<span>One</span> Solutions</div>
+</div>
+
+<div class="container">
+
+    <div class="diagram-group">
+    <div class="airflow-banner">
+        <i class="fa-solid fa-gears"></i>
+        <span><strong>Apache Airflow</strong> wraps the full pipeline · Orchestration · Retries · Dead-Letter Queue · SLA monitoring · Observability</span>
+    </div>
+
+    <div class="diagram-card">
+        <div class="mermaid-wrap">
+<pre class="mermaid">
+graph TB
+    classDef ingest fill:#eff6ff,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    classDef parse fill:#dbeafe,stroke:#3b82f6,stroke-width:2px,color:#1e3a5f
+    classDef tier1 fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    classDef tier2 fill:#fed7aa,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+    classDef tier3 fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#3b0764
+    classDef remediate fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    classDef storage fill:#fce7f3,stroke:#be185d,stroke-width:2px,color:#831843
+    classDef serve fill:#e0e7ff,stroke:#4338ca,stroke-width:2px,color:#1e1b4b
+    classDef external fill:#f1f5f9,stroke:#64748b,stroke-width:1.5px,color:#334155
+    classDef pending stroke-dasharray:6 4
+
+    CATALOG["<b>fa:fa-book-open Error Catalog Service</b><br/>▸ Bazel release catalogs<br/>▸ Historical Cisco logs<br/>▸ Promoted approved fixes<br/> "]:::external
+    MYSQL[("<b>fa:fa-database MySQL Build Metadata</b><br/>▸ build id (primary key)<br/>▸ timestamp · started_at<br/>▸ build status · pass / fail<br/>▸ pipeline correlation<br/> ")]:::external
+    GIT["<b>fa:fa-code-branch Git / GitHub APIs</b><br/>▸ commits · SHA lookup<br/>▸ diffs · file changes<br/>▸ PR review state (live)<br/>▸ build verification hooks<br/> "]:::external
+
+    B1["<b>B1 · Ingest</b><br/>fa:fa-hard-drive NFS watch<br/>▸ Bazel CI + CD logs<br/>▸ Batched 15–30 min<br/>▸ Event-driven (future option)<br/>▸ Manifest + checksum<br/> "]:::ingest
+
+    B2["<b>B2 · Parse</b><br/>fa:fa-file-code Deterministic chunking<br/>▸ Timestamp · phase delimiters<br/>▸ Error prefix detection<br/>▸ 300K–500K line files<br/>▸ No NLP · no summarization<br/> "]:::parse
+
+    subgraph CLASSIFY["<b>B3 · Classification Cascade</b>"]
+        direction TB
+        T1["<b>fa:fa-list-check Tier 1 · Deterministic</b><br/>▸ Regex + catalog lookup<br/>▸ Bazel error code matching<br/>▸ Fast path · low cost<br/>▸ Handles majority of errors<br/> "]:::tier1
+        T2("<b>fa:fa-microchip Tier 2 · ML / NLP</b><br/>▸ Specialized small model<br/>▸ Semantic similarity matching<br/>▸ Confidence scoring<br/>▸ Contextual errors<br/> "):::tier2
+        T3("<b>fa:fa-brain Tier 3 · LLM</b><br/>▸ Root cause analysis<br/>▸ Fix suggestion generation<br/>▸ Novel · compound errors<br/> "):::tier3
+        T1 ==>|"if unresolved · escalate"| T2
+        T2 ==>|"if unresolved · escalate"| T3
+    end
+
+    style CLASSIFY fill:#faf5ff,stroke:#a855f7,stroke-width:3px,color:#3b0764
+
+    B4["<b>B4 · Remediate</b><br/>fa:fa-code-branch Auto-Fix + PR<br/>▸ Code patch (diff)<br/>▸ Branch + commit via Git<br/>▸ Open PR with root cause<br/>▸ Trigger build verification<br/>▸ fa:fa-user-check Human review gate<br/> "]:::remediate
+
+    B5[("<b>B5 · Storage</b><br/>fa:fa-database Star schema<br/>▸ Classification fact (1 row / error)<br/>▸ Remediation table (by error_id)<br/>▸ dim_builds · dim_errors<br/>▸ dim_repos · dim_branches<br/> ")]:::storage
+
+    B6{{"<b>B6 · Serve</b><br/>fa:fa-plug MCP + analytics hooks<br/>▸ Query analysis results<br/>▸ Trace error → commit · PR<br/>▸ Fetch fix suggestions<br/>▸ Build failure summaries<br/>▸ Live Git / GitHub lookups<br/>▸ Derived views for dashboards<br/>▸ Read-path separated from writes<br/> "}}:::serve
+
+    B1 --> B2
+    B2 --> CLASSIFY
+    CLASSIFY --> B4
+    B4 --> B5
+    B5 --> B6
+
+    CLASSIFY -.->|"one row per error"| B5
+
+    CATALOG --> CLASSIFY
+    MYSQL --> B1
+    GIT --> B4
+    GIT ---> B6
+
+    B5 ~~~ GIT
+
+    B4 -.->|"promote approved fix"| CATALOG
+
+    class B1 pending
+</pre>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item"><div class="legend-box" style="background:#eff6ff;border-color:#2563eb;"></div>B1 Ingest</div>
+            <div class="legend-item"><div class="legend-box" style="background:#dbeafe;border-color:#3b82f6;"></div>B2 Parse</div>
+            <div class="legend-item"><div class="legend-box" style="background:#dcfce7;border-color:#16a34a;"></div>Tier 1 Deterministic</div>
+            <div class="legend-item"><div class="legend-box" style="background:#fed7aa;border-color:#ea580c;"></div>Tier 2 ML / NLP</div>
+            <div class="legend-item"><div class="legend-box" style="background:#ede9fe;border-color:#7c3aed;"></div>Tier 3 LLM</div>
+            <div class="legend-item"><div class="legend-box" style="background:#fef9c3;border-color:#ca8a04;"></div>B4 Remediate</div>
+            <div class="legend-item"><div class="legend-box" style="background:#fce7f3;border-color:#be185d;"></div>B5 Storage</div>
+            <div class="legend-item"><div class="legend-box" style="background:#e0e7ff;border-color:#4338ca;"></div>B6 Serve</div>
+            <div class="legend-item"><div class="legend-box" style="background:#f1f5f9;border-color:#64748b;"></div>External</div>
+            <div class="legend-item"><div class="legend-box" style="background:#ffffff;border-color:#ca8a04;border-style:dashed;"></div>Pending decision</div>
+        </div>
+    </div>
+    </div>
+
+    <div class="principle-strip">
+        <h3>Architectural Principles</h3>
+        <p><strong>Simplest first, always.</strong> Deterministic regex (nanoseconds) precedes ML (tens of ms) precedes LLM (seconds + dollars). The inverted-pyramid cascade is mutually exclusive: each error is caught at exactly one tier. The bulk falls out at Tier 1; the remainder falls through to Tier 2; only novel or compound errors reach the LLM.</p>
+    </div>
+
+    <div class="notes-section">
+        <h2>Block-by-Block Notes</h2>
+        <div class="notes-grid">
+
+            <div class="note-card">
+                <h3>B1 · Ingest <span class="pending-tag">decision pending</span></h3>
+                <p>Reads Bazel CI and CD logs from the NFS mount. Recommended start: scheduled batches every 15–30 minutes to match current build cadence — simpler and predictable. Event-driven mode (filesystem watcher or webhook) is retained as a future option once queue patterns and SLA targets are confirmed. Manifest plus checksum on each batch for idempotency.</p>
+            </div>
+
+            <div class="note-card">
+                <h3>B2 · Parse</h3>
+                <p>Deterministic chunking only. Bazel logs have structural markers (timestamps, phase delimiters, error prefixes) that allow the pipeline to segment 300K–500K line files without NLP. NLP summarization is <em>not</em> performed here; it belongs inside the LLM tier and runs only when the LLM is actually invoked. This preserves the tiering cost gradient — cheap operations upstream, expensive operations only when needed.</p>
+            </div>
+
+            <div class="note-card">
+                <h3>B3 · Classify — Inverted Pyramid</h3>
+                <p>Every error enters Tier 1. Tier 1 (deterministic, regex plus catalog lookup) handles the bulk of errors at negligible cost. Unresolved errors escalate to Tier 2 (specialized ML model, semantic similarity, confidence scoring). Errors Tier 2 cannot classify escalate to Tier 3 (LLM, root cause analysis, fix suggestion). Each error is caught at exactly one tier; there is no situation where multiple tiers write for the same error.</p>
+            </div>
+
+            <div class="note-card">
+                <h3>B4 · Remediate</h3>
+                <p>Consumes classification and context from whichever tier caught the error. Generates a code patch, branches and commits via Git, opens a pull request with root cause plus proposed fix, and triggers build verification. A human review gate on the PR is mandatory — no auto-merge. PR outcome (merged / rejected / build pass) flows back to B5 for traceability and feeds the feedback loop into the Error Catalog Service.</p>
+            </div>
+
+            <div class="note-card">
+                <h3>B5 · Storage</h3>
+                <p>Star schema across two related tables. The <strong>classification fact table</strong> holds one row per error, written by whichever tier caught it. The <strong>remediation table</strong> is keyed by <code>error_id</code> and written by B4, joined to classification at read time. Dimensions: <code>dim_builds</code>, <code>dim_errors</code>, <code>dim_repos</code>, <code>dim_branches</code>, <code>dim_log_files</code>. Full commit diffs and PR comments are queried live, not persisted.</p>
+            </div>
+
+            <div class="note-card">
+                <h3>B6 · Serve</h3>
+                <p>Exposes the schema via MCP tools for downstream agents and users: query analysis results, trace errors to commits and PRs, fetch fix suggestions, and correlate with live Git / GitHub state. Analytics and alerting hooks attach at this layer without touching the fact table directly — MCP reads from derived views, keeping the write-path and read-path cleanly separated.</p>
+            </div>
+
+            <div class="note-card">
+                <h3>Error Catalog Service</h3>
+                <p>Replaces the brittle Bazel docs scraper. Sourced from Bazel release catalogs (version-locked, refreshed on Bazel upgrade — low frequency at Cisco) and historical Cisco build logs (what they actually hit). Grows via the feedback loop: every approved B4 fix is promoted into the catalog so the next occurrence of that error hits the cheap Tier 1 path. Catalog construction effort is scoped as a sub-project, not a flag to flip.</p>
+            </div>
+
+            <div class="note-card">
+                <h3>Cross-Cutting · Apache Airflow</h3>
+                <p>Airflow wraps the full pipeline end-to-end. Gives DAG topology, task retries with exponential backoff, dead-letter queue behavior on persistent failures, SLA monitoring, and observability hooks (logs, metrics, alerts) for every stage. Cisco already uses Airflow operationally, so orchestration and telemetry adopt the existing standard rather than introducing a new one.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-logo">Bay<span>One</span> Solutions</div>
+        <p>Confidential — Prepared for Cisco CI / CD · April 16, 2026</p>
+        <p style="margin-top: 6px; font-size: 11px; color: #94a3b8;">Initial thinking — pending: ingestion mode · CI vs CD differentiation · Error Catalog Service scoping</p>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+    mermaid.initialize({
+        startOnLoad: false,
+        theme: 'base',
+        themeVariables: {
+            primaryColor: '#ede9fe',
+            primaryTextColor: '#1e1b4b',
+            primaryBorderColor: '#7c3aed',
+            lineColor: '#7c3aed',
+            secondaryColor: '#e8f4fd',
+            secondaryTextColor: '#0c4a6e',
+            secondaryBorderColor: '#0078d4',
+            edgeLabelBackground: '#ede9fe',
+            clusterBkg: '#faf5ff',
+            clusterBorder: '#a855f7',
+            fontSize: '13px',
+            fontFamily: 'Inter, sans-serif'
+        },
+        flowchart: {
+            curve: 'basis',
+            nodeSpacing: 50,
+            rankSpacing: 60,
+            htmlLabels: true,
+            useMaxWidth: false,
+            padding: 20,
+            wrappingWidth: 600
+        }
+    });
+
+    async function renderDiagram() {
+        try {
+            await mermaid.run({ querySelector: '.mermaid' });
+        } catch (e) {
+            console.error('Mermaid render error:', e);
+            return;
+        }
+
+        const svg = document.querySelector('.mermaid svg');
+        if (!svg) return;
+
+        svg.querySelectorAll('.node').forEach(nodeGroup => {
+            const fo = nodeGroup.querySelector('foreignObject');
+            const rect = nodeGroup.querySelector('rect, polygon, path');
+            if (!fo) return;
+
+            let strokeColor = '#7c3aed';
+            if (rect && rect.getAttribute('stroke')) {
+                strokeColor = rect.getAttribute('stroke');
+            }
+
+            fo.querySelectorAll('b').forEach(b => {
+                b.style.display = 'block';
+                b.style.background = 'rgba(255,255,255,0.95)';
+                b.style.border = '1px solid ' + strokeColor;
+                b.style.borderRadius = '4px';
+                b.style.padding = '3px 10px';
+                b.style.marginBottom = '3px';
+                b.style.fontSize = '13px';
+                b.style.fontWeight = '600';
+                b.style.letterSpacing = '0.1px';
+                b.style.color = strokeColor;
+            });
+
+            if (rect && rect.tagName === 'rect') {
+                const h = parseFloat(rect.getAttribute('height'));
+                if (!isNaN(h)) {
+                    rect.setAttribute('height', h + 20);
+                    fo.setAttribute('height', h + 20);
+                }
+            }
+
+            const content = fo.textContent || '';
+            if (content.includes('MySQL Build Metadata') && rect) {
+                try {
+                    const bbox = rect.getBBox();
+                    const cx = bbox.x + bbox.width / 2;
+                    const sx = 1.4;
+                    const existing = rect.getAttribute('transform') || '';
+                    rect.setAttribute('transform',
+                        (existing ? existing + ' ' : '') +
+                        'translate(' + cx + ' 0) scale(' + sx + ' 1) translate(' + (-cx) + ' 0)'
+                    );
+                    rect.setAttribute('vector-effect', 'non-scaling-stroke');
+                } catch (e) {
+                    console.warn('MySQL widen failed:', e);
+                }
+            }
+
+            if (content.includes('B6 · Serve') && rect) {
+                try {
+                    const bbox = rect.getBBox();
+                    const cy = bbox.y + bbox.height / 2;
+                    const sy = 1.35;
+                    const existing = rect.getAttribute('transform') || '';
+                    rect.setAttribute('transform',
+                        (existing ? existing + ' ' : '') +
+                        'translate(0 ' + cy + ') scale(1 ' + sy + ') translate(0 ' + (-cy) + ')'
+                    );
+                    rect.setAttribute('vector-effect', 'non-scaling-stroke');
+                } catch (e) {
+                    console.warn('B6 tallen failed:', e);
+                }
+            }
+        });
+
+        document.querySelectorAll('.cluster-label').forEach(label => {
+            const cluster = label.closest('.cluster');
+            let strokeColor = '#7c3aed';
+            if (cluster) {
+                const clusterRect = cluster.querySelector('rect');
+                if (clusterRect) {
+                    strokeColor = clusterRect.getAttribute('stroke') || strokeColor;
+                }
+            }
+            label.querySelectorAll('b').forEach(b => {
+                b.style.color = strokeColor;
+                b.style.fontWeight = '700';
+            });
+            label.querySelectorAll('div, span').forEach(el => {
+                if (!el.querySelector('b')) {
+                    el.style.fontWeight = '600';
+                }
+            });
+        });
+
+        requestAnimationFrame(() => {
+            try {
+                const bbox = svg.getBBox();
+                const pad = 24;
+                svg.setAttribute('viewBox',
+                    (bbox.x - pad) + ' ' + (bbox.y - pad) + ' ' +
+                    (bbox.width + pad * 2) + ' ' + (bbox.height + pad * 2)
+                );
+                svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+                svg.style.maxWidth = 'none';
+                svg.style.width = '100%';
+                svg.setAttribute('width', '100%');
+                svg.removeAttribute('height');
+                svg.style.height = 'auto';
+            } catch (e) {
+                console.warn('viewBox recalculation failed:', e);
+            }
+        });
+    }
+
+    renderDiagram();
+</script>
+
+</body>
+</html>
