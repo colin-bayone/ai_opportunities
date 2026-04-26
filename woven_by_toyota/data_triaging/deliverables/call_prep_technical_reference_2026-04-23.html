@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Call Prep: Technical Reference - Woven by Toyota</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple-darkest: #2e1065;
+      --purple-dark: #4c1d95;
+      --purple-mid: #5b21b6;
+      --purple-bright: #6d28d9;
+      --purple-accent: #a855f7;
+      --purple-glow: #e879f9;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --white: #ffffff;
+      --teal-accent: #14b8a6;
+      --teal-dark: #0d9488;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #334155;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .section { margin-bottom: 64px; }
+
+    .section-number {
+      font-size: 12px;
+      font-weight: 600;
+      color: #a855f7;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #0f172a;
+      margin: 32px 0 16px;
+    }
+
+    p { margin-bottom: 16px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      padding: 14px 16px;
+      background: #5b21b6;
+      color: #fff;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+    th:last-child { border-right: none; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: #f8fafc; }
+
+    .idea-card {
+      background: #fff;
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px;
+      padding: 28px;
+      margin: 24px 0;
+    }
+
+    .idea-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #a855f7;
+      margin-bottom: 8px;
+    }
+
+    .idea-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 12px;
+    }
+
+    .idea-value {
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 16px;
+      padding-left: 16px;
+      border-left: 2px solid #e2e8f0;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 48px 40px;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 64px;
+    }
+
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 12px;
+    }
+    .footer-logo span { color: #a855f7; }
+
+    .footer p {
+      font-size: 13px;
+      color: #64748b;
+      margin: 0;
+    }
+
+    .footer-note {
+      font-style: italic;
+      margin-top: 8px;
+    }
+
+    @media print {
+      @page { size: 8.5in 11in; margin: 0.4in; }
+      body { font-size: 9pt; line-height: 1.4; }
+      .container { padding: 0; max-width: 100%; }
+      .section { margin-bottom: 20px; }
+      h2 { font-size: 18pt; margin-bottom: 12px; }
+      h3 { font-size: 12pt; margin: 16px 0 8px; }
+      p { margin-bottom: 8px; }
+      table { font-size: 8pt; margin: 12px 0; }
+      th, td { padding: 8px 10px; }
+      th, .idea-card { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .section-number { break-after: avoid; page-break-after: avoid; }
+      h1, h2, h3, h4, h5, h6 { break-after: avoid; page-break-after: avoid; break-inside: avoid; page-break-inside: avoid; }
+      table { break-inside: avoid; page-break-inside: avoid; }
+      tr { break-inside: avoid; page-break-inside: avoid; }
+      .idea-card { break-inside: avoid; page-break-inside: avoid; }
+      p { orphans: 3; widows: 3; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>Woven's Existing Technical Stack</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>What It Is</th>
+            <th>Public Signal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>AutoTriage</strong></td>
+            <td>In-house GenAI plus human-in-the-loop triage system</td>
+            <td>Absorbs ~50% of ADAS triage at 80% accuracy. 34,000 engineer-hours saved, $2.2M reported savings. Owned by Suigen Koide's DevBoost / GenAI / MLOps team.</td>
+          </tr>
+          <tr>
+            <td><strong>Union.ai</strong></td>
+            <td>Managed Flyte orchestration</td>
+            <td>Case study: 20x faster ML iteration, $1M+ annual savings across petabytes.</td>
+          </tr>
+          <tr>
+            <td><strong>Encord</strong></td>
+            <td>Annotation platform</td>
+            <td>Publicly named Woven customer.</td>
+          </tr>
+          <tr>
+            <td><strong>Internal labeling engineering</strong></td>
+            <td>Dedicated engineering team for labeling infrastructure</td>
+            <td>Public job postings confirm a specialized internal function.</td>
+          </tr>
+          <tr>
+            <td><strong>Applied Intuition</strong></td>
+            <td>Simulation partner</td>
+            <td>Public case reference; lists Toyota as a customer.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>AV Data Triaging in Production</h2>
+
+      <h3>Sensor Modalities and Volumes</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Modality</th>
+            <th>Typical Shape</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cameras (RGB, near-IR, surround)</td>
+            <td>High frame rate, high resolution, multiple per vehicle</td>
+          </tr>
+          <tr>
+            <td>LiDAR (spinning, solid-state, FMCW)</td>
+            <td>Dense point clouds</td>
+          </tr>
+          <tr>
+            <td>Radar (short, long, imaging)</td>
+            <td>Moderate data rate, important for adverse weather</td>
+          </tr>
+          <tr>
+            <td>IMU, GPS, odometry, CAN bus</td>
+            <td>Continuous vehicle state signals</td>
+          </tr>
+          <tr>
+            <td>Per-vehicle total (L4 test fleet)</td>
+            <td>Approximately 4 to 8 TB per hour of driving</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>What Triage Teams Do</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Activity</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Event identification and scenario tagging</td>
+            <td>Finding and categorizing events of interest in captured data</td>
+          </tr>
+          <tr>
+            <td>Edge case mining</td>
+            <td>Finding rare or valuable situations for training and evaluation</td>
+          </tr>
+          <tr>
+            <td>Anomaly detection</td>
+            <td>Spotting unusual sensor behavior, vehicle behavior, or traffic events</td>
+          </tr>
+          <tr>
+            <td>Disengagement review</td>
+            <td>Safety-critical event analysis and root cause</td>
+          </tr>
+          <tr>
+            <td>Routing</td>
+            <td>Sending cases to the correct engineering team (perception, prediction, planner, controls)</td>
+          </tr>
+          <tr>
+            <td>Prioritization</td>
+            <td>Deciding which cases go to humans and which go to automated systems</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>Acceleration vs Capacity</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Shape</th>
+            <th>What the Client Wants</th>
+            <th>BayOne Fit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Acceleration</strong></td>
+            <td>Make the existing work faster through AI, tooling, and instrumentation. Volume is going up; workforce cannot scale linearly.</td>
+            <td>Solutions engagement. Custom engineering work.</td>
+          </tr>
+          <tr>
+            <td><strong>Capacity</strong></td>
+            <td>More humans doing the work as it is done today. The shape of the work does not change.</td>
+            <td>Staffing engagement. Time and materials.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Signal</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Leans Capacity</th>
+            <th>Leans Acceleration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Throughput language: frames per hour, SLAs, headcount math</td>
+            <td>Quality inconsistency, rework, slow onboarding</td>
+          </tr>
+          <tr>
+            <td>Drafted job spec</td>
+            <td>Weak feedback loops between teams</td>
+          </tr>
+          <tr>
+            <td>"We know the work, we just need hands"</td>
+            <td>Specific tooling gaps</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Clarifying Questions About the Work</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Why We Ask</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>What is the deliverable at the end of a typical case this team handles?</td>
+            <td>Distinguishes labeling, correlation, and root cause analysis shapes</td>
+          </tr>
+          <tr>
+            <td>What do you count? Frames labeled, cases closed, hours billed?</td>
+            <td>Most reliable signal for capacity vs acceleration framing</td>
+          </tr>
+          <tr>
+            <td>What would make your team twice as productive if you could change one thing?</td>
+            <td>Surfaces the biggest perceived lever</td>
+          </tr>
+          <tr>
+            <td>Where does your team spend time that feels like rework?</td>
+            <td>Acceleration signal if present</td>
+          </tr>
+          <tr>
+            <td>How do you measure quality on the output today?</td>
+            <td>Quality measurement gap is a common acceleration opportunity</td>
+          </tr>
+          <tr>
+            <td>How long does it take to get a new person productive on this work?</td>
+            <td>Ramp time is a common acceleration opportunity</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Clarifying Questions About the Interface with the Rest of Woven</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Why We Ask</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>How does work flow between your team and the ML platform or training teams?</td>
+            <td>Feedback loop breakdowns are common acceleration opportunities</td>
+          </tr>
+          <tr>
+            <td>When automated systems get something wrong, how does the correction flow back?</td>
+            <td>AutoTriage is likely adjacent; probes the handoff</td>
+          </tr>
+          <tr>
+            <td>Where does your team's output feed into downstream?</td>
+            <td>Clarifies the downstream consumer and what success looks like to them</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Clarifying Questions About the Ask</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Why We Ask</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>What specifically will the three to four people do?</td>
+            <td>Distinguishes capacity from structured work</td>
+          </tr>
+          <tr>
+            <td>Is this replacing capacity you lost, handling new volume, or doing something different?</td>
+            <td>Framing signal</td>
+          </tr>
+          <tr>
+            <td>Is there a job spec drafted?</td>
+            <td>A drafted spec indicates advanced staffing framing</td>
+          </tr>
+          <tr>
+            <td>What would success look like twelve months from now?</td>
+            <td>Forward framing reveals whether Travis thinks in terms of change or continuity</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Acceleration Probes (If Signals Appear)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Why We Ask</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>If you could change one thing about how this work happens today, what would it be?</td>
+            <td>Invites Travis to name the biggest friction</td>
+          </tr>
+          <tr>
+            <td>Are there parts of the work where a tool or automated system should help more than it currently does?</td>
+            <td>Direct probe for acceleration interest</td>
+          </tr>
+          <tr>
+            <td>Is any of the work bottlenecked by something other than headcount?</td>
+            <td>If yes, solutions territory; if no, capacity territory</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">04</div>
+      <h2>Candidate Acceleration Solution Shapes</h2>
+
+      <div class="idea-card">
+        <div class="idea-label">Shape</div>
+        <div class="idea-title">Active Learning Harness over Existing Annotation</div>
+        <p>Decision layer that chooses which samples to route to humans based on model uncertainty, disagreement across model versions, and strategic data gaps. Lives on top of Encord or internal tooling rather than replacing it.</p>
+        <div class="idea-value"><strong>Fits when:</strong> Travis describes deciding what to label next as hard or inefficient, or mentions humans labeling things the model already knows.</div>
+      </div>
+
+      <div class="idea-card">
+        <div class="idea-label">Shape</div>
+        <div class="idea-title">Edit-Distance Telemetry on Pre-Labels</div>
+        <p>Instrumentation that measures how often humans accept AutoTriage or pre-labeled outputs as-is versus minor edit versus full redo. Ongoing signal about both model quality and reviewer calibration.</p>
+        <div class="idea-value"><strong>Fits when:</strong> Travis mentions rework, inconsistency across reviewers, or slow feedback loops to the automated system.</div>
+      </div>
+
+      <div class="idea-card">
+        <div class="idea-label">Shape</div>
+        <div class="idea-title">Multi-Workforce Quality Assurance</div>
+        <p>Golden sets, adjudication routing, and inter-rater reliability measurement across mixed workforces (internal, Encord-provided, contractors).</p>
+        <div class="idea-value"><strong>Fits when:</strong> Travis mentions vendor quality variance, or difficulty comparing outputs across groups.</div>
+      </div>
+
+      <div class="idea-card">
+        <div class="idea-label">Shape</div>
+        <div class="idea-title">Feedback Loops Between Workforce and ML Platform</div>
+        <p>Structured capture of corrections when AutoTriage produces wrong outputs. Error pattern analysis that benefits both the operational team and the ML platform team.</p>
+        <div class="idea-value"><strong>Fits when:</strong> Travis describes the correction path to the ML platform team as slow, informal, or broken.</div>
+      </div>
+
+      <div class="idea-card">
+        <div class="idea-label">Shape</div>
+        <div class="idea-title">Ontology Migration Tooling</div>
+        <p>Tools that compute minimal re-labeling footprint when a taxonomy changes (new class, retired class, merged classes) and route residuals to human reviewers.</p>
+        <div class="idea-value"><strong>Fits when:</strong> Travis mentions schema or taxonomy churn, or the cost of re-labeling historical data.</div>
+      </div>
+
+      <div class="idea-card">
+        <div class="idea-label">Shape</div>
+        <div class="idea-title">Faster Onboarding Instrumentation</div>
+        <p>Adaptive onboarding datasets, consistency measurement across new hires, training curriculum tied to measured gaps.</p>
+        <div class="idea-value"><strong>Fits when:</strong> Travis mentions ramp time as a bottleneck, or output quality variance from new hires.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-number">05</div>
+      <h2>Foundation Models and Auto-Labeling State of the Art (2026)</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Approach</th>
+            <th>Models or Techniques</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Pre-labeling</strong></td>
+            <td>SAM 2 / SAM 2.1, GroundingDINO 1.5, OWLv2</td>
+            <td>Reported speedup around 8x for segmentation workflows.</td>
+          </tr>
+          <tr>
+            <td><strong>Embedding retrieval</strong></td>
+            <td>DINOv2, DINOv3</td>
+            <td>Self-supervised vision foundation models for scene retrieval and edge case mining.</td>
+          </tr>
+          <tr>
+            <td><strong>Scene understanding</strong></td>
+            <td>Multimodal LLMs, vision-language models</td>
+            <td>Attribute extraction, caption-driven retrieval.</td>
+          </tr>
+          <tr>
+            <td><strong>Active learning</strong></td>
+            <td>Least-confidence, entropy, margin sampling, Bayesian ensemble disagreement</td>
+            <td>NVIDIA published A/B results with 3x to 4.4x efficiency gains.</td>
+          </tr>
+          <tr>
+            <td><strong>Auto-labeling</strong></td>
+            <td>Self-training, pseudo-labeling, teacher-student distillation</td>
+            <td>Tesla, Waymo, Motional public disclosures. Fails on long-tail, domain shift, calibration drift.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">06</div>
+      <h2>Vendor Landscape</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Vendor</th>
+            <th>Recent Signal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Scale AI</strong></td>
+            <td>Meta stake (~49%, $14.3B, June 2025) triggered regulatory and confidentiality pressure. Google, OpenAI, and xAI reduced engagement. 200 staff and 500 contractors cut.</td>
+          </tr>
+          <tr>
+            <td><strong>Encord</strong></td>
+            <td>$60M Series C in February 2026. Publicly lists Woven as a customer.</td>
+          </tr>
+          <tr>
+            <td><strong>Applied Intuition</strong></td>
+            <td>$600M Series F. Lists Toyota as a customer.</td>
+          </tr>
+          <tr>
+            <td><strong>Aquarium Learning</strong></td>
+            <td>Acquired by Notion in October 2024. Exited AV category.</td>
+          </tr>
+          <tr>
+            <td><strong>Segments.ai</strong></td>
+            <td>Acquired by Uber in October 2025.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-number">07</div>
+      <h2>Engagement Model Options</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Shape</th>
+            <th>When It Fits</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Full managed</strong></td>
+            <td>100% BayOne execution. Outcome priced. Client does not see headcount.</td>
+            <td>BayOne owns the outcome and the methodology.</td>
+          </tr>
+          <tr>
+            <td><strong>Hybrid collaboration</strong></td>
+            <td>Variable split (100/0, 75/25, 50/50, 25/75, 0/100). BayOne placements or existing client engineers intermingling with BayOne leadership.</td>
+            <td>Client wants involvement but needs technical leadership.</td>
+          </tr>
+          <tr>
+            <td><strong>Pure staffing</strong></td>
+            <td>Time and materials. BayOne not in the execution loop.</td>
+            <td>Client has strong internal AI leadership already.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="footer-logo">Bay<span>One</span> Solutions</div>
+    <p>Internal technical reference — Woven by Toyota data triaging engagement</p>
+    <p class="footer-note">Prepared for internal team reference. Not for external distribution.</p>
+  </div>
+
+</body>
+</html>

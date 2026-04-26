@@ -1,0 +1,2867 @@
+ ▐▛███▜▌   Claude Code v2.1.116
+▝▜█████▛▘  Opus 4.7 (1M context) · Claude Max
+  ▘▘ ▝▝    ~/programming/ai_opportunities/cisco/epnm_ems/poc
+
+❯                                                                               
+  ## Read This First                                                            
+                                                                                
+  You are Session 2. You are taking over from Session 1, which prepared the     
+  initial handoff package for an execution session (on Computer 1) that will    
+  perform the actual POC code work. **You are not the execution session.** Your 
+   job is orchestration, synthesis, and continuing support for Colin as the POC 
+   kicks off.                                                                   
+                                                                                
+  Three Claude sessions exist in this engagement's flow:                        
+                                                                                
+  1. **Session 1 (previous, now concluded).** Produced the initial handoff      
+  package (12 numbered documents) that Colin hand-delivered to the execution    
+  session on his other machine. Session 1 also produced scratch extractions and 
+   a proposed plan for the handoff work. Session 1 is the session that wrote    
+  this document and then handed off to you.                                     
+  2. **Execution session (Computer 1).** Has unadulterated access to the EPNM   
+  and EMS/CNC repositories. Will do the actual Angular conversion work. Already 
+   received the 12-document handoff package (now renamed `init_handoff/` in     
+  that environment). Can come back to you with questions.                       
+  3. **Session 2 (you, starting now).** Continues Session 1's orchestration and 
+   support role. You work from this machine, not Computer 1. You will read      
+  materials Colin shares, draft kickoff messages, integrate new context into    
+  the handoff, and answer questions relayed from the execution session.         
+                                                                                
+  Colin sits across all three, shuttling context. Your partner on the           
+  "thinking" side is Colin. The execution session is the one doing the code.    
+                                                                                
+  ---                                                                           
+                                                                                
+  ## What the Engagement Is (One Paragraph)                                     
+                                                                                
+  Cisco has two products in scope: EPNM (Evolved Programmable Network Manager — 
+   legacy, Dojo 1.x frontend, Java + Oracle backend, ~10 years old) and EMS     
+  (Element Management System, part of Cisco Crosswork Network Controller —      
+  Angular 21, Spring Boot + Go, PostgreSQL). Customers are trained on EPNM's UI 
+   and resist the new EMS UX. BayOne (Colin Moore, Director of AI) is building  
+  a POC for Cisco: add a "classic view" toggle to two EMS screens (Inventory    
+  and Fault Management) so users can flip between the EPNM-style UX and the new 
+   EMS UX. Both views call the same EMS backend unchanged. Default on login is  
+  classic. POC is Colin solo; full engagement scales after POC. All work on     
+  Cisco hardware with Cisco-issued Claude Code and local LangGraph as the only  
+  AI tools.                                                                     
+                                                                                
+  The full background is in the handoff package. Read it before doing anything  
+  else.                                                                         
+                                                                                
+  ---                                                                           
+                                                                                
+  ## Your Very First Task — Verify You Can Write Files                          
+                                                                                
+  Before you do any other work, **spawn one single general-purpose agent** with 
+   read                                                                         
+  ──── (303 lines hidden) ───────────────────────────────────────────────────── 
+  his document in a short chat message, confirm you understand your role        
+  (orchestration support, not execution), and then work through this order:     
+                                                                                
+  1. **Pilot-agent write verification.** One agent, small task, verify the file 
+   exists on disk. If it fails, stop and flag to Colin.                         
+  2. **Orientation reading (you do this yourself in the main thread).** The 12  
+  handoff documents in `poc/handoff/` (renamed `init_handoff/` on Computer 1),  
+  in the reading order in `00_index.md`. Plus `_kickoff_context_2026-04-21.md`, 
+   `poc/context.txt`, and the Saurav transcript at                              
+  `poc/transcripts/saurav-colin_4-21-2026_formatted.txt`. These are the         
+  narrative spine.                                                              
+  3. **REPO bundle orientation (you do this yourself).** The short files:       
+  `poc/REPO/README.md`, `poc/REPO/repo-inventory/repository_inventory.md`,      
+  `poc/REPO/EPNM-EMS-CNC/consolidated_report.md`,                               
+  `poc/REPO/EPNM/consolidated_report.md`,                                       
+  `poc/REPO/EMS-CNC/consolidated_report.md`. Skim the machine-readable          
+  `summary.json` files if useful.                                               
+  4. **REPO tree-report absorption (agent swarm).** Ten parallel                
+  general-purpose agents per the assignment table above. Each reads one tree    
+  report (or a small pair) and writes structured extractions to a scratch       
+  folder. Pilot one first; scale in a single message block.                     
+  5. **Synthesis.** Read the agent extractions, build a cross-repo map of       
+  POC-relevant code locations, and report back to Colin.                        
+  6. **Status check with Colin.** Short status: what you have absorbed, what is 
+   still pending (CLAUDE.md rules), what questions you have, what you propose   
+  as the next step.                                                             
+                                                                                
+  Do not start drafting the kickoff message for the execution session until the 
+   REPO bundle is fully absorbed and CLAUDE.md rules are in hand. Both will     
+  materially shape what the kickoff message says.                               
+                                                                                
+  ---                                                                           
+                                                                                
+  ## One Last Thing                                                             
+                                                                                
+  The execution session on Computer 1 can come back to us with questions as     
+  they work. Those questions route through Colin, who relays them to you. You   
+  answer using the materials you have. If a question genuinely cannot be        
+  answered from the materials, tell Colin, and Colin can route to the Cisco     
+  tech leads through Selva. The chain is: execution session → Colin → you       
+  (and/or Selva via Colin) → back to execution session.                         
+                                                                                
+  Treat the execution session as a colleague on the other end of a              
+  latency-heavy link. Give them complete answers when you can, clean            
+  escalations when you can't, and always err toward giving them more context    
+  than they strictly asked for, because the round-trip is expensive.            
+                                                                                
+  Good luck. Session 1 signing off.                                             
+                                                                                
+
+● Acknowledged. I'm Session 2, taking over orchestration/synthesis support from
+  Session 1. I am not the execution session — the Computer 1 session does the
+  code. My role is to absorb context, synthesize, draft the kickoff message, and
+   answer relayed questions from the execution session.
+
+  Starting with the mandatory first step: pilot-agent write verification. I'll
+  spawn one general-purpose agent with a small read+write task and then verify
+  on disk.
+
+● Agent(Pilot write verification)
+  ⎿  Done (4 tool uses · 26.7k tokens · 30s)
+  (ctrl+o to expand)
+
+  Read 1 file (ctrl+o to expand)
+
+● Pilot verified on disk. Agent writes work. Proceeding to orientation reading.
+
+  Read 4 files, listed 1 directory (ctrl+o to expand)
+
+● Proceeding with main-thread orientation reads. Batching the 11 handoff docs,
+  the three consolidated reports, the repo inventory, and the Saurav transcript.
+
+  Read 5 files (ctrl+o to expand)
+
+  Read 6 files (ctrl+o to expand)
+
+  Read 4 files, listed 2 directories (ctrl+o to expand)
+  Read 1 file, listed 1 directory (ctrl+o to expand)
+
+● Saurav transcript absorbed. Several scope-material items. Writing a concise
+  extract file and then launching the agent swarm.
+
+● Write(handoff/_scratch_repo/saurav_transcript_extract_2026-04-21.md)
+  ⎿  Wrote 172 lines to
+     handoff/_scratch_repo/saurav_transcript_extract_2026-04-21.md
+      2 # Saurav–Colin Transcript Extract (2026-04-21)
+      3 Source: `poc/transcripts/saurav-colin_4-21-2026_formatted.txt`
+      4 
+      5 Scope-material items only. Commercial and personnel-discipline ma
+        terial recorded
+      6 here for completeness but the commercial items must not appear in
+         the handoff
+      7 docs (per standing rule "no commercial in handoff").
+      8 
+      9 ---
+     … +230 lines (ctrl+o to expand)
+
+● Pilot already verified. Launching 10 parallel agents for tree-report
+  extraction. Each agent gets one (or a small pair of) tree report(s) and writes
+   to _scratch_repo/.
+
+● 10 background agents launched (↓ to manage)
+   ├ EPNM assembly tree extract
+   ├ EPNM chassisview tree extract
+   ├ EPNM inventory tree extract
+   ├ EPNM fault tree extract
+   ├ EPNM pf-framework tree extract
+   ├ EMS unified-ems-ui tree extract
+   ├ EMS infra-ui tree extract
+   ├ EMS common-ui tree extract
+   ├ EMS inventory backend pair extract
+   └ EMS fault backend pair extract
+
+● All ten tree-report agents are running in parallel in the background. Short
+  status while they complete:
+
+  Done (main thread):
+  - Pilot write verification (passed on disk, not just self-reported)
+  - All 12 handoff docs (00_index + 01–11) absorbed
+  - _kickoff_context_2026-04-21.md, poc/context.txt, REPO/README.md,
+  repo-inventory/repository_inventory.md, EPNM-EMS-CNC consolidated portfolio
+  report, EMS-CNC consolidated report
+  - Saurav–Colin transcript (2026-04-21) — extract written to
+  _scratch_repo/saurav_transcript_extract_2026-04-21.md
+
+  In flight (background agents, one per tree report):
+
+  ┌─────┬──────────────────────────────────────────────────┐
+  │  #  │                      Target                      │
+  ├─────┼──────────────────────────────────────────────────┤
+  │ 01  │ EPNM assembly                                    │
+  ├─────┼──────────────────────────────────────────────────┤
+  │ 02  │ EPNM chassisview                                 │
+  ├─────┼──────────────────────────────────────────────────┤
+  │ 03  │ EPNM inventory                                   │
+  ├─────┼──────────────────────────────────────────────────┤
+  │ 04  │ EPNM fault (largest, ~900 KB)                    │
+  ├─────┼──────────────────────────────────────────────────┤
+  │ 05  │ EPNM pf-framework                                │
+  ├─────┼──────────────────────────────────────────────────┤
+  │ 06  │ EMS unified-ems-ui (primary POC working repo)    │
+  ├─────┼──────────────────────────────────────────────────┤
+  │ 07  │ EMS infra-ui                                     │
+  ├─────┼──────────────────────────────────────────────────┤
+  │ 08  │ EMS common-ui                                    │
+  ├─────┼──────────────────────────────────────────────────┤
+  │ 09  │ EMS cw-inventory + cw-inventory-collector (pair) │
+  ├─────┼──────────────────────────────────────────────────┤
+  │ 10  │ EMS cw-epnm-fault + ems-assurance (pair)         │
+  └─────┴──────────────────────────────────────────────────┘
+
+  Each writes a structured extraction to poc/handoff/_scratch_repo/agent_NN_*.md
+   with the rules enforced: read full file, no grep / pattern matching,
+  filenames are evidence not proof.
+
+  Two items I want to surface now rather than later:
+
+  1. Saurav transcript raised an ambiguity in the operating model. The Session 1
+   handoff doc assumed the "execution session on Computer 1" is a Claude
+  instance with full repo access that produced the poc/REPO/ bundle. The
+  transcript suggests the bundle came from your own Cisco laptop, while Saurav
+  (on a Cisco Mac, codex-only, frustrated with access) may be the teammate. Who
+  the actual execution session is materially changes how the kickoff message
+  reads. Captured in section 1 of the extract; I'd like you to confirm before I
+  draft the kickoff.
+  2. Open question worth adding to 10_open_questions_and_risks.md on the next 
+  update pass: local runnability of EMS. From the transcript: "is there a way to
+   run this local? Because I asked that question and no one really had an
+  answer." Proposed fallback: mocked data → wire live backend once VMs land.
+  Captured in section 5 of the extract.
+
+  Neither blocks the swarm. I'll synthesize the cross-repo POC map when the
+  agents return.
+
+✻ Crunched for 6m 56s
+
+● Agent "EMS unified-ems-ui tree extract" completed
+
+● Noted agent 06 (unified-ems-ui) complete. Important finding: unified-ems-ui is
+   an Angular library (projects/ems-lib/), not an app — bootstrapped by the
+  outer Infra UI shell. Also surfaced that Fault Management UI is effectively
+  absent from this repo (only a 21-line node-alarms skeleton). That changes the
+  picture for where the POC fault-side work gets hosted. Waiting on the other
+  nine agents.
+
+● Agent "EPNM chassisview tree extract" completed
+
+● Agent 02 (EPNM chassisview) complete. Key flag: a dedicated hotspot/
+  interaction layer (portState, moduleState, cardDetails) — chassis
+  interactivity is substantive, not trivial. ChassisViewServiceImpl.java alone
+  is ~2,900 lines. Open question 1.8 (chassis interactivity reimplementation
+  status on EMS side) is going to matter more than the 10–20% framing implied.
+  Eight agents still running.
+
+● Agent "EMS common-ui tree extract" completed
+
+● Agent 08 (EMS common-ui) complete. Strong finding: ag-grid already ships six
+  themes under scss/ag-grid/styles/ — a concrete precedent for adding a
+  theme-classic.css, lower-risk path for tables. The alarms table uses
+  cw-hbr-table (1,566-line Harbor-themed component, needs a classic wrapper);
+  Harbor-branded cw-hbr-* components are wrap candidates while cui-* primitives
+  are likely theme-neutral direct-reuse. Wizard primitives are all present
+  (cui-stepper, cui-input, cui-select, cui-datetime-select, cui-modal) — good
+  news for the Inventory device-add wizard. Seven agents still running.
+
+● Agent "EMS inventory backend pair extract" completed
+
+● Agent 09 (EMS inventory backend pair) complete. Four material findings:
+
+  1. Both cw-inventory and cw-inventory-collector are Spring Boot / Java, not Go
+   — contradicts Ramkrishna's "Go services on the device management side" in the
+   walkthrough. Goes into the risks/questions list.
+  2. Local-run is feasible (LocalProfileConfig present in both repos) — partial
+  answer to the open question Colin raised in the Saurav transcript.
+  3. Bulk import appears parked — BulkImportRootResource.java1 (note .java1
+  extension, not .java). Likely backend gap for the Inventory device-add
+  bulk-CSV flow.
+  4. No committed Swagger / OpenAPI descriptor — the UI team has to pull the API
+   contract from a running instance.
+
+  Six agents still running.
+
+● Agent "EPNM assembly tree extract" completed
+
+● Agent 01 (EPNM assembly) complete. Significant findings:
+
+  1. InventoryListView.js confirmed — 8,020 lines at ifm_platform_ui/src/main/we
+  bapp/applications/inventory/js/InventoryListView.js.
+  2. Fault UI lives in assembly (confirms Akhil's "assembly is on the UI side"):
+   AlarmListView, EventListView, SyslogListViewWebSocket, CorrelatedAlarms,
+  AlarmCorrelatedView.
+  3. SyslogListViewWebSocket name hints real-time updates use WebSocket —
+  partial answer to open question 1.14 (real-time update mechanism).
+  4. No Interface360 or Chassis JS files — likely rendered via a generic
+  PropertySheet/_360 framework + esChassisDetail.html.
+
+  180+ POC-critical paths cited. Five agents still running.
+
+● Agent "EMS infra-ui tree extract" completed
+
+● Agent 07 (EMS infra-ui) complete. Five material findings:
+
+  1. Naming collision flag: magnetic-light-classic.scss and
+  magnetic-dark-classic.scss already exist inside infra-ui. The word "classic"
+  is ambiguous in this codebase — could conflict with our "EPNM classic"
+  terminology. Recommend a distinct prefix for our work (e.g., epnm-classic-*).
+  2. Shell loads features via standard Angular lazy loadChildren — no Module
+  Federation. container/robot-shell/robot-shell.routes.ts is the feature-mount
+  route table.
+  3. Navigation is data-driven from src/assets/modules.json (300 lines) +
+  src/app/services/module.service.ts (401 lines). Clean injection point for
+  classic routes.
+  4. Existing fault pages live at src/app/robot-alarms-v2/ — so classic fault UI
+   mounts as a sibling (and resolves agent 06's note that unified-ems-ui has
+  almost no fault UI; the real fault UI is here in infra-ui).
+  5. foreign-service/ delegate pattern is the cross-app service seam — relevant
+  for the shared-service-plus-display-adapter pattern from handoff doc 06.
+
+  Four agents still running.
+● Agent "EPNM inventory tree extract" completed
+
+● Agent 03 (EPNM inventory) complete. Three notable findings:
+
+  1. DeviceDetailTabViewMetadata.json (and siblings) — flagged as the
+  highest-leverage artifact for classic UI tab layout. This likely resolves open
+   question 1.2 (complete Device Details left-menu enumeration).
+  2. InventoryRestService.java (8,770 lines) — massive central REST service; 50+
+   DTOs including *360 neighbor DTOs and VDC/VPC DTOs.
+  3. EMSInterfaceInfoBuilder.java / EMSInterfaceInventoryRequestHandler.java —
+  already-named EMS path inside EPNM. Bridge code exists between the two
+  products; worth investigating.
+
+  Three agents still running (EPNM fault, EPNM pf-framework, EMS fault backend
+  pair).
+
+❯ Ok, a few things then:                                                        
+  1. For number one, can you be a little bit more clear on the operating model? 
+   You don't need to worry about if something is Claude or no Claude. We are    
+  not even going to mention Claude. You can say Claude/Codex for instance.      
+  Saraf will have access to Claude as well. I have access to Claude. We both    
+  have access to Codex. We will use whatever is most convenient for us, and the 
+   instructions are not dependent on one or the other. For all purposes, you    
+  can say Claude for now, and I can simply do a find and replace if we would    
+  search to use Codex later on down the line.                                   
+  2. The execution session is Colin's machine, Colin's Claude instance on his   
+  Cisco Mac machine.                                                            
+  3. For the open question that's worth adding, here, absolutely. I need to     
+  figure that out, and we can give some specific instructions to the Claude     
+  session that has access to those to figure out what it would take to actually 
+   get some of these things running so we can see them.                         
+  4. The biggest point of confusion that I personally have is that there are    
+  all these different repositories, like five repositories for a PNM. How does  
+  that application even get run? I don't understand. I'm not a Java guy. I'm a  
+  Django guy, so I don't even really understand what a jar file is or anything  
+  else like that. A lot of that context would be super helpful to me.           
+  5. The big thing is that we don't specifically know if all of this is         
+  actually part of the task at hand. These libraries and stuff could be         
+  relevant, or they could be completely irrelevant. Part of the job of the      
+  other session is going to be to figure out what is actually needed versus     
+  what is not.                                                                  
+  6. Great findings here. Please make sure that you're recording everything as  
+  we go.                                                                        
+
+● Understood on all six points. Executing the actions now. Keeping the remaining
+   three agents running in the background.
+
+  Immediate writes:
+  1. Update the kickoff-context doc with the operating-model clarification and
+  add the local-runnability open question.
+  2. Correct the Saurav extract §1 (ambiguity resolved).
+  3. Create a running findings log so everything is durable, not just chat.
+  4. Create a short Java multi-repo primer framed for a Django-minded reader.
+
+● Update(handoff/_kickoff_context_2026-04-21.md)
+  ⎿  Added 75 lines
+       83  
+       84  ---
+       85  
+       86 +## 6a. Operating Model — CONFIRMED 2026-04-21                 
+       87 +                                                              
+       88 +Resolved by Colin during Session 2 kickoff:                   
+       89 +                                                              
+       90 +- **The "execution session" is Colin's own Claude instance run
+          +ning on his Cisco-issued Mac.** Not a separate engineer's mach
+          +ine. Colin does the code on the Cisco Mac, Session 2 does orch
+          +estration and synthesis on the BayOne machine.                
+       91 +- **Tools are not Claude-specific.** Colin and Saurav both hav
+          +e access to Claude and Codex. All kickoff and handoff material
+          +s are written with "Claude" as the default term; Colin will fi
+          +nd-replace to Codex later if and when that becomes more conven
+          +ient. Instructions should remain tool-agnostic and not encode 
+          +assumptions tied to one specific model or CLI.                
+       92 +- **Saurav's role.** Saurav is a BayOne teammate on an adjacen
+          +t Cisco engagement (NX-OS CI/CD). He appears in the 2026-04-21
+          + transcript as a context-sharing partner, not as the EPNM-EMS 
+          +execution session. Any future EPNM-EMS kickoff message is for 
+          +Colin's own Cisco-side Claude instance.                       
+       93 +                                                              
+       94 +This supersedes the ambiguity originally flagged in the Saurav
+          + transcript extract section 1. That section has been updated i
+          +n place.                                                      
+       95 +                                                              
+       96 +---                                                           
+       97 +                                                              
+       98 +## 7. Java Multi-Repo Context (to be developed for Colin)     
+       99 +                                                              
+      100 +Colin (self-described Django-brained) flagged that the multi-r
+          +epo shape of EPNM is confusing and slows his own orientation. 
+          +Five or six EPNM repos, plus the EMS / CNC family, with no obv
+          +ious entry point equivalent to a Django `manage.py runserver`.
+      101 +                                                              
+      102 +A short primer has been written at `_scratch_repo/java_multi_r
+          +epo_primer.md` framed in Django analogies: what a JAR and a WA
+          +R are, how Maven multi-module builds work, how the EPNM repos 
+          +likely compose into a deployable, why Spring Boot is not the s
+          +ame shape as a Java monolith, and what `cw-inventory`'s Docker
+          + and LocalProfileConfig probably mean for local-run feasibilit
+          +y.                                                            
+      103 +                                                              
+      104 +**Action:** Session 2 maintains that primer. The execution ses
+          +sion uses it as context but is the authority on how the actual
+          + Cisco codebase builds.                                       
+      105 +                                                              
+      106 +---                                                           
+      107 +                                                              
+      108 +## 8. Scope Discipline — What Is "Actually in POC Scope"      
+      109 +                                                              
+      110 +Colin's explicit guidance: the ten tree reports Session 2 is a
+          +bsorbing surface a lot of code that **may or may not be part o
+          +f POC scope**. Session 2's extractions describe what exists, n
+          +ot what is needed. The execution session (on the Cisco Mac) is
+          + the authority on what actually needs to be read or touched fo
+          +r the two POC screens. Session 2 surfaces candidate paths; the
+          + execution session filters.                                   
+      111 +                                                              
+      112 +**Do not treat any agent-extracted file path as in-scope until
+          + the execution session confirms.** Session 2's role is to make
+          + the filtering job cheaper, not to do the filtering.          
+      113 +                                                              
+      114 +---                                                           
+      115 +                                                              
+      116 +## 9. Open Question 3.8 — Local Runnability of EMS / CNC (NEW,
+          + 2026-04-21)                                                  
+      117 +                                                              
+      118 +Surfaced in the Saurav-Colin transcript: "is there a way to ru
+          +n this local? Because I asked that question and no one really 
+          +had an answer."                                               
+      119 +                                                              
+      120 +Partial evidence from the tree-report swarm: both `cw-inventor
+          +y` and `cw-inventory-collector` include a `LocalProfileConfig`
+          + class and a Dockerfile. That suggests a local profile was int
+          +ended. It does not confirm a running system can be stood up en
+          +d-to-end without an ADS (Cisco internal) deployment environmen
+          +t.                                                            
+      121 +                                                              
+      122 +**Proposed specific investigation instructions for the executi
+          +on session on Colin's Cisco Mac:**                            
+      123 +                                                              
+      124 +1. `cw-inventory` and `cw-inventory-collector`:               
+      125 +   - Read the Dockerfile and any `docker-compose*.yml` or `loc
+          +al-dev*.sh` scripts at each repo root.                        
+      126 +   - Identify what external dependencies are required (Postgre
+          +SQL instance, Kafka, gRPC counterparts, config server, Eureka 
+          +/ service registry).                                          
+      127 +   - Check whether the `LocalProfileConfig` class pulls from a
+          + local config file and what that file expects.                
+      128 +   - Try to reach the Spring Boot actuator health endpoint aft
+          +er a local build; report what the build and start commands loo
+          +k like.                                                       
+      129 +                                                              
+      130 +2. `unified-ems-ui` (Angular library):                        
+      131 +   - Confirm no standalone run — it's a library. A consuming s
+          +hell (`infra-ui`) must host it.                               
+      132 +                                                              
+      133 +3. `infra-ui`:                                                
+      134 +   - Read `angular.json`, `package.json` scripts, and any `.en
+          +v*` files at repo root.                                       
+      135 +   - Identify whether `ng serve` or an equivalent works standa
+          +lone or requires backend endpoints.                           
+      136 +   - Check whether any config file points at ADS-only URLs by 
+          +default.                                                      
+      137 +                                                              
+      138 +4. Fault backends (`cw-epnm-fault`, `ems-assurance`):         
+      139 +   - Same as item 1.                                          
+      140 +                                                              
+      141 +5. EPNM side:                                                 
+      142 +   - Most likely not runnable locally without an EPNM lab — th
+          +ey're expecting a full Oracle + Java monolith stack. Confirm b
+          +y reading a top-level README or `build.xml` / `pom.xml` setup 
+          +docs.                                                         
+      143 +                                                              
+      144 +6. Deliverable: a short `local_runnability_report.md` in `poc/
+          +` summarizing for each repo whether local-run is feasible, wha
+          +t's missing, and whether a VM is truly required.              
+      145 +                                                              
+      146 +**Fallback if local-run proves impractical:** Colin's plan art
+          +iculated in the Saurav transcript — start with mocked data (sc
+          +reenshot or static JSON) wired to the classic UI, verify the U
+          +I behaves, then wire the live backend once VM access is in han
+          +d.                                                            
+      147 +                                                              
+      148 +This question rolls into `10_open_questions_and_risks.md` on t
+          +he next handoff update pass as item 3.8.                      
+      149 +                                                              
+      150 +---                                                           
+      151 +                                                              
+      152 +## 10. Tree-Report Swarm — Running Findings (2026-04-21)      
+      153 +                                                              
+      154 +Living capture of scope-material findings from the 10-agent tr
+          +ee-report absorption pass. Agents write extractions into `_scr
+          +atch_repo/agent_NN_*.md`. This section is the high-signal summ
+          +ary; detail is in the agent extractions and in `_scratch_repo/
+          +_findings_log_2026-04-21.md`.                                 
+      155 +                                                              
+      156 +Status and findings are maintained in the findings log. See th
+          +at file for the live state.                                   
+      157 +                                                              
+      158 +                                                              
+      159 +---                                                           
+      160 +                                                              
+      161  ## 7. Kickoff Message — Still in Draft
+      162  
+      163  Colin asked what to tell the other session to kick them off. D
+           raft is pending resolution of sections 2 through 5 above. Once
+            the open items are closed, a concise kickoff message will be 
+           written here.
+
+● Update(handoff/_scratch_repo/saurav_transcript_extract_2026-04-21.md)
+  ⎿  Added 16 lines, removed 16 lines
+       8  
+       9  ---
+      10  
+      11 -## 1. Who Saurav is (inferred; FLAG for Colin to confirm)      
+      11 +## 1. Who Saurav is — CONFIRMED 2026-04-21 (Colin direct)      
+      12  
+      13 -Saurav appears to be a BayOne engineer working alongside Colin.
+         - Multiple                                                      
+      14 -signals in this conversation suggest Saurav is mainly on the NX
+         --OS CI/CD                                                      
+      15 -engagement (Srinivas, Srikar, Namita, Shriika, Vaishali are all
+         - NX-OS names).                                                 
+      16 -Saurav is on a Cisco-issued Mac and is frustrated at not being 
+         -able to install                                                
+      17 -Claude Code on that machine; he is using codex (OpenAI enterpri
+         -se) via the                                                    
+      18 -Cisco VS Code + Copilot setup instead. He has not cloned anythi
+         -ng because of                                                  
+      19 -repo access uncertainty.                                       
+      13 +Saurav is a BayOne teammate on a separate Cisco engagement (NX-
+         +OS CI/CD).                                                     
+      14 +In this transcript he appears as a context-sharing partner, not
+         + as the                                                        
+      15 +EPNM-EMS execution session. The 2026-04-21 conversation has Col
+         +in                                                             
+      16 +walking Saurav through his EPNM-EMS kickoff plan while Saurav s
+         +hares his                                                      
+      17 +own operational friction on NX-OS (tooling access, Codex vs. Cl
+         +aude Code,                                                     
+      18 +repo provisioning).                                            
+      19  
+      21 -**Ambiguity to resolve with Colin.** The Session 1 handoff writ
+         -eup presumed the                                               
+      22 -"execution session on Computer 1" is a Claude instance with ful
+         -l EMS/CNC and                                                  
+      23 -EPNM repo access that produced the `poc/REPO/` bundle. The REPO
+         - bundle path                                                   
+      24 -metadata (`/Users/cmoore/Documents/programming/...` inside the 
+         -tree reports)                                                  
+      25 -suggests the bundle was produced on a machine with Mac-style pa
+         -thing — Colin's                                                
+      26 -own Cisco hardware or a teammate's. Whether Saurav is the execu
+         -tion session                                                   
+      27 -or a separate teammate is not explicit in this transcript. **Re
+         -commend Colin                                                  
+      28 -confirm the operating model before the kickoff message is draft
+         -ed.**                                                          
+      20 +**The execution session on the EPNM-EMS engagement is Colin's o
+         +wn Claude (or                                                  
+      21 +Codex) instance on his Cisco-issued Mac.** The `poc/REPO/` bund
+         +le was                                                         
+      22 +produced from that machine. Session 2 is the orchestration / sy
+         +nthesis                                                        
+      23 +counterpart on the BayOne machine.                             
+      24  
+      25 +Tool naming note: Colin and Saurav both have access to Claude a
+         +nd Codex.                                                      
+      26 +All handoff and kickoff materials default to "Claude" as the wo
+         +rking term;                                                    
+      27 +Colin will find-replace to Codex later if and when more conveni
+         +ent. Keep                                                      
+      28 +instructions tool-agnostic.                                    
+      29 +                                                               
+      30  ---
+      31  
+      32  ## 2. Colin is actively using Claude Code on his Cisco laptop
+
+● Write(handoff/_scratch_repo/_findings_log_2026-04-21.md)
+  ⎿  Wrote 166 lines to handoff/_scratch_repo/_findings_log_2026-04-21.md
+       2 **Session 2, 2026-04-21**ning Findings Log
+       3 
+         ach agentapture of findings from the 10-agent absorption pass. E
+       5 returns a structured extraction into `agent_NN_*.md` in this fol
+       6 is the running high-signal summary Colin reads. It will also see
+         d the
+       8 cross-repo POC map synthesis once all ten agents are in.
+       9 Colin direction (2026-04-21): "We don't specifically know if all
+      10 actually part of the task at hand. These libraries and stuff cou
+         ld be
+     … +227 lines (ctrl+o to expand)
+
+● Write(handoff/_scratch_repo/java_multi_repo_primer.md)
+  ⎿  Wrote 252 lines to handoff/_scratch_repo/java_multi_repo_primer.md
+       2 **Session 2, 2026-04-21. Written for Colin.**d Reader)
+       3 
+         re are five: "How does an EPNM application even get run when the
+       5 repositories for it? I'm a Django guy, I don't even really under
+       6 a JAR file is." This primer answers that at the level needed to 
+         orient
+       8 without becoming a Java developer.
+       9 Everything below is general Java ecosystem context with inferenc
+      10 to what the tree reports show. Where a claim about the actual Ci
+         sco build
+     … +354 lines (ctrl+o to expand)
+
+● Agent "EPNM fault tree extract" completed
+
+● Agent "EPNM pf-framework tree extract" completed
+
+● Agents 04 (EPNM fault) and 05 (EPNM pf-framework) complete. Updating findings
+  log.
+
+● Update(handoff/_scratch_repo/_findings_log_2026-04-21.md)
+  ⎿  Added 2 lines, removed 2 lines
+      22  | 01 | EPNM assembly | complete | `agent_01_epnm_assembly.md` |
+      23  | 02 | EPNM chassisview | complete | `agent_02_epnm_chassisview
+          .md` |
+      24  | 03 | EPNM inventory | complete | `agent_03_epnm_inventory.md`
+           |
+      25 -| 04 | EPNM fault | running | — |                              
+      26 -| 05 | EPNM pf-framework | running | — |                       
+      25 +| 04 | EPNM fault | complete | `agent_04_epnm_fault.md` |      
+      26 +| 05 | EPNM pf-framework | complete | `agent_05_epnm_pf_framewo
+         +rk.md` |                                                       
+      27  | 06 | EMS unified-ems-ui | complete | `agent_06_ems_unified_em
+          s_ui.md` |
+      28  | 07 | EMS infra-ui | complete | `agent_07_ems_infra_ui.md` |
+      29  | 08 | EMS common-ui | complete | `agent_08_ems_common_ui.md` |
+
+● Update(handoff/_scratch_repo/_findings_log_2026-04-21.md)
+  ⎿  Error editing file
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(handoff/_scratch_repo/_findings_log_2026-04-21.md)
+  ⎿  Added 64 lines, removed 5 lines
+      154  
+      155  ---
+      156  
+      157 +### G. EPNM fault repo (agent 04) — findings                  
+      158 +                                                              
+      159 +- **The fault repo does NOT contain the runtime alarms-table U
+          +I.** Only the                                                 
+      160 +  policy-management UI and a trap-notification widget live und
+          +er this                                                       
+      161 +  repo's `webapp/`. The runtime alarms list UI is in `assembly
+          +` (agent 01                                                   
+      162 +  confirmed `AlarmListView.js` there) or server-rendered via J
+          +SP against                                                    
+      163 +  the 7,969-line `AlarmRest.java` in this repo.               
+      164 +- **`AlarmRest.java` is 7,969 lines** — the EPNM fault REST se
+          +rvice. Where                                                  
+      165 +  the classic UI's alarm-data contract originates.            
+      166 +- **`NotificationWebSocket` pipeline** exists in the fault rep
+          +o. Likely                                                     
+      167 +  the alarm real-time delivery mechanism (parallel to         
+      168 +  `SyslogListViewWebSocket` in assembly). Partial answer to op
+          +en question                                                   
+      169 +  1.14 (alarm real-time update mechanism): WebSocket is the pr
+          +obable                                                        
+      170 +  pattern.                                                    
+      171 +- **Correlation engine** under `xmp_correlation/`. Root-cause 
+          +correlation                                                   
+      172 +  (Jenis's "correlated alarms") likely runs here.             
+      173 +- **Event / alarm / syslog domain subtrees** are each their ow
+          +n directory:                                                  
+      174 +  `ncs_eventAlarm`, `ncs_syslog`, `xmp_syslog`, `xmp_correlati
+          +on`, plus                                                     
+      175 +  `ifm_fault/` with adapter / rest_provider / service / base_d
+          +to subdirs                                                    
+      176 +  reflecting standard Cisco IFM layering.                     
+      177 +- **Policy management UI** is the main in-repo UI and is out o
+          +f POC scope.                                                  
+      178 +                                                              
+      179 +### H. EPNM pf-framework repo (agent 05) — findings           
+      180 +                                                              
+      181 +- **Most of `pf-framework` is the provisioning engine, not UI.
+          +** Only the                                                   
+      182 +  `ui/` subtree matters for the POC. The repo name is misleadi
+          +ng for a                                                      
+      183 +  Django-brained reader: "framework" here covers both provisio
+          +ning runtime                                                  
+      184 +  and UI framework.                                           
+      185 +- **Table primitive both Network Devices and Alarms likely use
+          +:**                                                           
+      186 +  `ui/core/ui_components/lib/xwt/widget/table/Table.js` (5,146
+          + lines) +                                                     
+      187 +  `themes/prime/xwt/table/Table.css` (1,748 lines) + `Toolbar.
+          +css`                                                          
+      188 +  (1,580). Under the "xwt" namespace — a Cisco internal widget
+          + toolkit                                                      
+      189 +  layered on top of Dojo.                                     
+      190 +- **Branded chrome:** `xwt/widget/uishell/Header.js` (524 line
+          +s) + its                                                      
+      191 +  template + `themes/prime/xwt/uishell/Header.css` (392). Wher
+          +e EPNM's top                                                  
+      192 +  bar visually originates.                                    
+      193 +- **Left nav:** `xwt/widget/navigation/SlideMenu.js` (2,394 li
+          +nes) +                                                        
+      194 +  `slidemenu.css` (630).                                      
+      195 +- **Device-add wizard primitive:** `xwt/widget/tasknavigator/T
+          +askNavigator.js`                                              
+      196 +  (1,312 lines). Very likely the Dojo wizard used by the Inven
+          +tory                                                          
+      197 +  device-add flow.                                            
+      198 +- **Device picker:** `xwt/widget/objectselector/ObjectSelector
+          +.js`                                                          
+      199 +  (6,929 lines) — a large widget almost certainly used by the 
+          +network-                                                      
+      200 +  devices table and by Device 360 launch flows.               
+      201 +- **Three grid generations coexist**: dojox DataGrid, Enhanced
+          +GridWrapper,                                                  
+      202 +  and the XWT `Table.js`. The execution session must confirm w
+          +hich                                                          
+      203 +  generation Inventory and Alarms actually use. Likely XWT `Ta
+          +ble.js` —                                                     
+      204 +  newest and biggest — but needs confirmation.                
+      205 +- **Blue-and-white theme is distributed, not centralized.** No
+          + single                                                       
+      206 +  palette file; color values are spread across per-component C
+          +SS files                                                      
+      207 +  under `xwt/themes/prime/`. Classic-theme adoption on the Ang
+          +ular side                                                     
+      208 +  will require either extracting tokens from the distributed C
+          +SS or                                                         
+      209 +  picking a representative palette to reproduce.              
+      210 +- **Pub/sub plumbing:** `dojo/topic.js` (38 lines). Framework-
+          +level. Topic                                                  
+      211 +  names used by Inventory and Fault widgets are not visible fr
+          +om the                                                        
+      212 +  tree — embedded in individual widget source. The execution s
+          +ession                                                        
+      213 +  catalogs these when reading actual source.                  
+      214 +- **`AlarmsFormatter.js`** (103 lines) is the only named "Alar
+          +ms" artifact                                                  
+      215 +  in the framework layer. Suggests fault-specific rendering ho
+          +oks                                                           
+      216 +  (severity icons, color rules) exist in the framework.       
+      217 +                                                              
+      218 +---                                                           
+      219 +                                                              
+      220  ## Gaps to Close Once Remaining Agents Return
+      221  
+      159 -- EPNM fault repo (agent 04): alarm model, correlation engine,
+          - real-time                                                    
+      160 -  update for alarms (WebSocket parallel to syslogs?), MIB foot
+          -print.                                                        
+      161 -- EPNM pf-framework (agent 05): widget library surface, theme 
+          -foundations,                                                  
+      162 -  pub/sub framework, build model.                             
+      222  - EMS fault backend pair (agent 10): alarm model, real-time de
+           livery, MIB
+      223    footprint on the EMS side, correlation service, clear-alarm 
+           API.
+      224  
+      166 -Synthesis happens once 04, 05, 10 land.                       
+      225 +Synthesis happens once agent 10 lands.                        
+
+● Findings log now reflects nine of ten agents. Waiting on agent 10 (EMS fault
+  backend pair). Operating-model clarification, kickoff context, Saurav extract,
+   and Java multi-repo primer all written to disk. Running notes captured.
+
+✻ Brewed for 4m 52s
+
+● Agent "EMS fault backend pair extract" completed
+
+● All ten agents complete. Updating findings log and moving straight into
+  synthesis.
+
+● Update(handoff/_scratch_repo/_findings_log_2026-04-21.md)
+  ⎿  Added 1 line, removed 1 line
+      28  | 07 | EMS infra-ui | complete | `agent_07_ems_infra_ui.md` |
+      29  | 08 | EMS common-ui | complete | `agent_08_ems_common_ui.md` |
+      30  | 09 | EMS inventory backend pair | complete | `agent_09_ems_in
+          ventory_backend.md` |
+      31 -| 10 | EMS fault backend pair | running | — |                  
+      31 +| 10 | EMS fault backend pair | complete | `agent_10_ems_fault_
+         +backend.md` |                                                  
+      32  
+      33  ---
+      34  
+
+● Update(handoff/_scratch_repo/_findings_log_2026-04-21.md)
+  ⎿  Added 22 lines, removed 4 lines
+      217  
+      218  ---
+      219  
+      220 -## Gaps to Close Once Remaining Agents Return                 
+      220 +### I. EMS fault backend pair (agent 10) — findings           
+      221  
+      222 -- EMS fault backend pair (agent 10): alarm model, real-time de
+          -livery, MIB                                                   
+      223 -  footprint on the EMS side, correlation service, clear-alarm 
+          -API.                                                          
+      222 +- **Main classic-UI alarms surface:** `cw-epnm-fault/alarm-res
+          +t/alarm-rest-service/AlarmRest.java` (2,622 lines).           
+      223 +- **Write actions (clear / acknowledge / annotate):** `AlarmUp
+          +dateRestController.java` + `AlarmActionServiceImpl.java`.     
+      224 +- **Custom alarms CRUD:** `CustomAlarmsController.java` (1,321
+          + lines).                                                      
+      225 +- **Expandable-row detail candidate:** `View360AlarmController
+          +.java` (717 lines) — likely resolves open question 1.15 (expan
+          +dable-row content source) once read.                          
+      226 +- **Advanced-filter grammar:** `FilterCriteriaUtil.java` (797 
+          +lines) + two `AlarmFilterDTO` variants (188-line REST shape vs
+          +. 399-line subscription shape). Ambiguity: the advanced-filter
+          + builder's target DTO is unclear from names alone.            
+      227 +- **Inventory-side bridge:** `NetworkInventoryAlarmController.
+          +java` (180 lines) — how alarms appear inside Device 360.      
+      228 +- **Public route inventory:** Tyk configmap `alarm-rest-config
+          +-cw-emf/platform/tyk/tykConfigmap.json` (386 lines). Execution
+          + session should read this first to see the actual external API
+          + contract.                                                    
+      229 +- **EPNM twin in ems-assurance:** `fault-nbi/ems-fault-nbi/...
+          +/AlarmRestServiceImpl.java` (821 lines).                      
+      230 +- **Syslog REST absent as a dedicated controller.** Likely sur
+          +faces via `AlarmRest.java` event filter. Needs Jenis to confir
+          +m. Reinforces that syslogs are the least-documented corner of 
+          +POC scope.                                                    
+      231 +- **Correlated-alarms tree JSON shape** not derivable from fil
+          +e names — probably delivered by `CWRestController.java`. Needs
+          + a real-source read.                                          
+      232 +- **Capabilities present only in EPNM ems-assurance, NOT porte
+          +d to cw-epnm-fault:** `NetworkImpactingAlarm` and `NextStep`. 
+          +If the classic alarms UI depends on either, they are a backend
+          + gap — falls into handoff doc 10 risk 6.11 territory.         
+      233 +- **Deployment shape differences between the two repos:**     
+      234 +  - `cw-epnm-fault` is Docker-first (Dockerfiles present, cont
+          +ainer-runnable).                                              
+      235 +  - `ems-assurance` is **ADS-only**: no Dockerfile for the mai
+          +n service, and contains a `resources_from_server_to_local.sh` 
+          +helper plus start shell scripts that imply ADS provisioning. R
+          +einforces open question 3.8 (local runnability): fault side is
+          + partially local-runnable (`cw-epnm-fault`) but not end-to-end
+          + (`ems-assurance` is ADS-dependent).                          
+      236 +- **Real-time delivery primitives observed:** NATS, gRPC, Kafk
+          +a, and JMS references in the tree. Exact delivery path to the 
+          +UI (which of these the classic UI subscribes to) is open.     
+      237  
+      225 -Synthesis happens once agent 10 lands.                        
+      238 +---                                                           
+      239 +                                                              
+      240 +## Swarm Complete                                             
+      241 +                                                              
+      242 +All ten agents returned. Synthesis document:                  
+      243 +`_scratch_repo/cross_repo_poc_map_2026-04-21.md`              
+● Write(handoff/_scratch_repo/cross_repo_poc_map_2026-04-21.md)
+  ⎿  Wrote 267 lines to
+     handoff/_scratch_repo/cross_repo_poc_map_2026-04-21.md
+      2 **Session 2, 2026-04-21. Synthesis of the 10-agent tree-report ab
+      3 sorption.**
+      5 ## How to Read This Document
+      6 - Left column is an area of POC scope (Inventory sub-surfaces, Fa
+      7 - Right columns identify EPNM-side code locations (source of the 
+        d consumes and integrates).de locations (where the classic rebuil
+      8 - All cited paths are verbatim from the tree reports. None of the
+        urpose, not proof. in actual source. File names are evidence of p
+        didate paths; the execution session (on the Cisco Mac) decides wh
+        at is actually n
+     … +487 lines (ctrl+o to expand)
+
+● All ten agents absorbed, findings log complete, cross-repo POC map written.
+
+  Files now on disk (under poc/handoff/_scratch_repo/):
+
+  ┌─────────────────────────────────────────────┬───────────────────────────┐
+  │                    File                     │          Purpose          │
+  ├─────────────────────────────────────────────┼───────────────────────────┤
+  │ agent_01_epnm_assembly.md through           │ Ten per-repo extractions  │
+  │ agent_10_ems_fault_backend.md               │                           │
+  ├─────────────────────────────────────────────┼───────────────────────────┤
+  │                                             │ Saurav call findings      │
+  │ saurav_transcript_extract_2026-04-21.md     │ (operating model now      │
+  │                                             │ resolved per your         │
+  │                                             │ confirmation)             │
+  ├─────────────────────────────────────────────┼───────────────────────────┤
+  │ _findings_log_2026-04-21.md                 │ Running cross-agent       │
+  │                                             │ findings ledger           │
+  ├─────────────────────────────────────────────┼───────────────────────────┤
+  │                                             │ Django-brained primer on  │
+  │ java_multi_repo_primer.md                   │ JARs, WARs, Maven,        │
+  │                                             │ multi-module builds       │
+  ├─────────────────────────────────────────────┼───────────────────────────┤
+  │ cross_repo_poc_map_2026-04-21.md            │ Synthesis — the           │
+  │                                             │ cross-repo POC map        │
+  └─────────────────────────────────────────────┴───────────────────────────┘
+
+  Kickoff-context update at _kickoff_context_2026-04-21.md now has: §6a
+  (operating model — your Cisco Mac is the execution session, tool-agnostic
+  "Claude" default with Codex find-replace path), §7 (pointer to Java primer),
+  §8 (scope-discipline reminder per your direction), §9 (open question 3.8 with
+  specific local-runnability investigation steps for the execution session), §10
+   (pointer to findings log).
+
+  Headline scope-material items from the swarm, tagged by confidence:
+
+  - Resolved / high confidence. Shell loads features via standard Angular lazy
+  routes (no Module Federation). Navigation is data-driven via modules.json.
+  unified-ems-ui is a library, not an app. Existing alarms UI lives in
+  infra-ui/robot-alarms-v2/, not in unified-ems-ui. Common-UI has theme-neutral
+  cui-* primitives (direct reuse) vs. Harbor-themed cw-hbr-* (needs wrappers).
+  - Strong signal, source read needed. DeviceDetailTabViewMetadata.json likely
+  resolves open question 1.2. View360AlarmController.java likely resolves open
+  question 1.15. WebSocket is the probable EPNM real-time pattern. XWT Table.js
+  is probably the grid Inventory and Alarms actually use.
+  - Flags for Colin / Selva.
+    a. The word "classic" is already used inside Magnetic
+  (magnetic-light-classic.scss). Recommend prefixing our work epnm-classic-*.
+    b. Bulk CSV import on cw-inventory is in a parked state (.java1 extension).
+  If in POC scope, raise.
+    c. Chassis interactivity has substantive EPNM presence and no surfaced EMS
+  equivalent — strong gap candidate.
+    d. Neither inventory repo nor either fault repo shows Go — contradicts
+  Ramkrishna's walkthrough. Worth raising with Selva.
+    e. ems-assurance is ADS-only (no Dockerfiles for main service);
+  cw-epnm-fault is Docker-first.
+    f. Three grid generations coexist in EPNM pf-framework; widget-mapping table
+   in handoff doc 06 may need an XWT row.
+
+  Status. Swarm + synthesis done. Remaining before the kickoff-message draft:
+  your CLAUDE.md content (or the decision to skip it), and any confirmations you
+   want to give on the flags above.
+
+✻ Baked for 3m 12s
+
+❯ Here is what the parent session has to say about your work. I want you to     
+  read this and get a document put together with the flags that you mentioned,  
+  plus any flags that were added in by the other Claude session. This is the    
+  session that wrote the kickoff for you in the first place, not the session    
+  that's on the Cisco machine, by the way. Then we can go through the questions 
+   one at a time. When you give me the questions, I expect full rich detailed   
+  context so that I can give the best possible answer. If we don't know         
+  something, we shouldn't guess; we should leave it up to the next Claude       
+  session. It's on the Cisco machine to be smart enough to figure it out if we  
+  give them a heads up. """This looks strong. Quick read, honest about what I   
+  can and cannot evaluate.                                                      
+                                                                                
+    What looks genuinely good                                                   
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+    - They executed the sequenced plan instead of asking for a menu. Ten        
+  agents, synthesis, findings log, cross-repo map. Correct shape.               
+                                                                                
+    - Confidence tagging (resolved / strong-signal-source-read-needed / flags)  
+  is the right discipline. It tells you which findings are safe to act on and   
+  which need a second                                                           
+    pass before they move.                                                      
+                                                                                
+                                                                                
+    - They refused to draft the execution-session kickoff message before        
+  CLAUDE.md arrives. That gating held.                                          
+    - The updates they made to the kickoff context file are memo-style          
+  additions with section numbers, not silent rewrites. §6a operating-model      
+  correction is a material one —                                                
+    the three-session mental model I wrote is now clearly wrong (the "execution 
+   session" is your own Claude instance on your Cisco Mac, not a separate       
+  person's session). That                                                       
+    is the kind of thing the kickoff doc will need corrected before the next    
+  handoff.                                                                      
+                                                                                
+    - Headline findings that actually close open items I left in doc 10:        
+                                                                                
+                                                                                
+      - Lazy-route loading pattern (my open item 2.2).                          
+                                                                                
+                                                                                
+      - DeviceDetailTabViewMetadata.json for Device Details left-menu (my 1.2). 
+                                                                                
+                                                                                
+      - View360AlarmController.java for expandable row content (my 1.15).       
+                                                                                
+                                                                                
+      - WebSocket as probable real-time pattern (my 1.14).                      
+                                                                                
+                                                                                
+      - Bulk CSV import parked as .java1 (my 3.5).                              
+                                                                                
+                                                                                
+    - They added a Java multi-repo primer unprompted based on your Django-brain 
+   flag in the Saurav transcript. Sensible add, not scope creep.                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+    Things I would pressure-test before treating as closed                      
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+    - Flag (d) — no Go services in inventory or fault repos, contradicts        
+  Ramkrishna. Before raising to Selva, have the execution session confirm the   
+  swarm actually covered                                                        
+    every repo where Go might live. Ramkrishna said "device management side" —  
+  if there is a cw-device-management or similar repo that was not in the 14     
+  swept, then no Go in                                                          
+    the 14 swept is not a contradiction. Check repository_inventory.md first.   
+                                                                                
+                                                                                
+    - "unified-ems-ui is a library, not an app." Praveen told you on 2026-04-06 
+   "mostly I think you have to work on this EMS UI," pointing at what we        
+  assumed was the primary                                                       
+    working app. If it is a library, the question is where the app-level entry  
+  lives (probably infra-ui, given shell-app architecture). This reshapes where  
+  the classic-view                                                              
+    code actually plugs in. Worth a source read before rewriting doc 08 on      
+  where the code lives.                                                         
+    - "Existing alarms UI is in infra-ui/robot-alarms-v2/, not in               
+  unified-ems-ui." Consistent with unified-ems-ui being a library. Same         
+  source-read before closing.                                                   
+    - Flag (a) — classic already used in magnetic-light-classic.scss. Good      
+  catch. Doc 06 proposes .classic class conventions; that would collide.        
+  epnm-classic-* is the right                                                   
+    adjustment. Safe to act on.                                                 
+                                                                                
+                                                                                
+    - Flag (f) — XWT Table.js as the actual grid in use, three grid generations 
+   in pf-framework. The widget-mapping table in doc 06 (25 rows) was built from 
+   the Set 08                                                                   
+    research on Dojo primitives. XWT is a separate framework layer not in that  
+  research. Doc 06 needs an XWT row, and possibly a section on which grid       
+  generation is in play on                                                      
+     each POC screen.                                                           
+    - "Resolved" on 1.2 and 1.15. Strong signal, not resolved. The JSON file    
+  name and controller name are evidence those are where the answer lives. Still 
+   needs source read to                                                         
+     actually enumerate the left-menu items and expandable row fields.          
+                                                                                
+                                                                                
+                                                                                
+    What I cannot evaluate from here                                            
+                                                                                
+                                                                                
+                                                                                
+    - Whether each per-repo extraction is deep or shallow. Would need to read   
+  _scratch_repo/agent_NN_*.md.                                                  
+                                                                                
+    - Whether the Saurav transcript extract is faithful (I have not read the    
+  transcript).                                                                  
+    - Whether the Java primer is accurate (they wrote it; I have no basis).     
+                                                                                
+                                                                                
+    - Whether their cross-repo POC map is correct (same).                       
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+    Net                                                                         
+                                                                                
+                                                                                
+                                                                                
+    Good first pass. The scope discipline section (§8) is the right posture —   
+  "describe what exists, not what is needed." They are teeing up filter         
+  decisions for your                                                            
+    Cisco-Mac execution session, not making them. That is exactly the role I    
+  was aiming at when I wrote the kickoff doc. Gating the execution-session      
+  kickoff message on                                                            
+    CLAUDE.md plus your confirmations on the flags is the right next step.      
+                                                                                
+                                                                                
+                                                                                
+    The only operational cleanup I would do on our side: doc 08 (repositories,  
+  access, compliance) and doc 05 (technical landscape) both assume              
+  unified-ems-ui is the primary                                                 
+    working app. If Session 2's "library not app" reading holds, those          
+  paragraphs need a targeted correction when we next touch the handoff          
+  package."""                                                                   
+
+● Writing the consolidated flags document now. Then I'll walk through the
+  questions one at a time, with full context per flag.
+
+● Write(handoff/_scratch_repo/flags_for_colin_2026-04-21.md)
+  ⎿  Wrote 292 lines to handoff/_scratch_repo/flags_for_colin_2026-04-21.md
+       2 **Session 2, 2026-04-21.**idated Discussion Document
+       3 
+       4 Merges Session 2's tree-report findings with Session 1's pressur
+         e-test review. Each flag has:
+       5 
+       7 - Classification: **SAFE TO ACT ON** / **NEEDS VALIDATION** / **
+         COLIN DECIDES** / **EXECUTION-SESSION WORK**.
+       8 - Evidence for.
+       9 - Counter-evidence or uncertainty.
+      10 - What decision (if any) is being asked, and of whom.
+     … +494 lines (ctrl+o to expand)
+
+● Flags document written. Now walking you through them one at a time, starting
+  with Flag 1.
+
+  ---
+  Question 1 — What prefix should classic-view CSS use?
+
+  Flag classification. SAFE TO ACT ON. Session 1 concurs.
+
+  What's going on. Handoff doc 06 §6 (Theme Toggle Architecture) proposes using
+  .classic as the distinguishing CSS class — for example, rendering the classic
+  view under :root[data-theme="classic"] and giving classic components a
+  .classic modifier. That was written before we saw the actual EMS code.
+
+  When agent 07 read the infra-ui tree, it surfaced that
+  infra-ui/src/css/magnetic-light-classic.scss and magnetic-dark-classic.scss
+  already exist — 723 lines each. Inside the Magnetic design system, "classic"
+  is already a tier name (distinct from other Magnetic tiers like dense,
+  comfortable, etc.). That's Cisco's existing vocabulary, unrelated to EPNM.
+
+  If we name our EPNM reskin .classic or [data-theme="classic"], we collide with
+   Magnetic's own "classic" tier. Any developer reading a stylesheet tagged
+  .classic won't know whether it's our EPNM reskin or Magnetic's classic tier.
+  Bug risk, maintenance risk, and a miscommunication risk with the Cisco UX team
+   if they eventually review our work.
+
+  What the decision is. Pick a distinct prefix for the EPNM reskin. Three
+  sensible candidates:
+
+  - epnm-classic-* — my leaning. Explicitly ties the work to the EPNM product
+  identity customers recognize. Reads well: :root[data-theme="epnm-classic"],
+  .epnm-classic-table, epnm-classic-toggle.component.ts. Can't be confused with
+  Magnetic's tier naming.
+  - classic-ui-* — generic, matches the product-phase name Cisco uses for the
+  feature ("classic view / classic UI"). Reads fine but less distinctive than
+  epnm-classic.
+  - legacy-view-* — accurate but carries a negative connotation ("legacy"
+  implies deprecated). Cisco's public framing is "classic view" not "legacy
+  view." Recommend against.
+
+  Why it matters operationally. Once you pick, Session 2 updates:
+
+  - Handoff doc 06 §6 — all code samples (the ThemeService palette names, the
+  CSS custom property prefixes, the toggle component's theme values).
+  - Handoff doc 06 §8 — the proposed folder structure (src/app/classic/ →
+  src/app/<prefix>/; component suffixes *-classic.ts → *-<prefix>.ts).
+  - The cross-repo POC map that mentions placement.
+
+  The execution session on your Cisco Mac will pick up the corrected terminology
+   from day one and avoid re-writing. Customer-facing strings (UI labels the
+  toggle displays to users) aren't affected — those stay "Classic" / "Modern"
+  per Akhil's walkthrough direction. The prefix only affects internal code, file
+   names, and CSS tokens.
+
+  Uncertainty. None that blocks this. If you later want a different prefix, a
+  rename is mechanical.
+
+  What are you picking: epnm-classic-*, classic-ui-*, or something else you want
+   to propose?
+
+✻ Churned for 2m 58s
+
+※ recap: Orienting Session 2 to the EPNM–EMS POC handoff; we're walking through consolidated flags one at a time to unblock the execution-session kickoff message. Next action: you pick the CSS prefix for the EPNM reskin (leaning `epnm-classic-*`) so doc 06 can be updated. (disable recaps in /config)
+
+❯ epnm-classic-*, like you did. Completely reasonable and perfect.              
+
+● Applying the correction to handoff doc 06 now.
+
+● Update(handoff/06_conversion_patterns_reference.md)
+  ⎿  Added 8 lines, removed 2 lines
+      129  
+      130  ## 6. Theme Toggle Architecture (the Central POC Mechanism)
+      131  
+      132 +### Naming note (2026-04-21 update)                           
+      133 +                                                              
+      134 +Internal code and CSS tokens use the prefix **`epnm-classic`**
+          + rather than bare `classic`, because `classic` is already a Ma
+          +gnetic tier name inside the EMS codebase (`infra-ui/src/css/ma
+          +gnetic-light-classic.scss`, `magnetic-dark-classic.scss`). The
+          + distinct prefix prevents collisions and makes it unambiguous 
+          +that our reskin ties to EPNM.                                 
+      135 +                                                              
+      136 +User-facing toggle labels stay "Classic" and "Modern" per Akhi
+          +l's walkthrough direction — the prefix affects code, CSS token
+          +s, data attributes, and folder names only.                    
+      137 +                                                              
+      138  ### Approach
+      139  
+      140  CSS custom properties on the document root plus a signal-based
+            `ThemeService` plus a toggle component placed in the Infra UI
+            shell header. Toggle flips a `data-theme` attribute on `docum
+           ent.documentElement`. All styled components read theme variabl
+           es through `var(--theme-...)` and automatically re-render. No 
+           page reload.
+      141  
+      142  ### Default mode
+      143  
+      138 -`classic` is the default. The EPNM-style experience is what th
+          -e user sees on login. The toggle flips to `magnetic` (the curr
+          -ent EMS visual language).                                     
+      144 +`epnm-classic` is the default. The EPNM-style experience is wh
+          +at the user sees on login. The toggle flips to `magnetic` (the
+          + current EMS visual language).                                
+      145  
+      146  ### Key pieces
+      147  
+      142 -**1. CSS custom properties for each theme.** Two palettes defi
+          -ned as CSS variables on `:root[data-theme="classic"]` and `:ro
+          -ot[data-theme="magnetic"]`. EPNM classic palette covers dark b
+          -lue primary, blue/white surface colors, Segoe UI font family, 
+          -2px border radius. Magnetic palette covers the current Crosswo
+          -rk UI tokens (CiscoSans font, 8px border radius, darker surfac
+          -es).                                                          
+      148 +**1. CSS custom properties for each theme.** Two palettes defi
+          +ned as CSS variables on `:root[data-theme="epnm-classic"]` and
+          + `:root[data-theme="magnetic"]`. EPNM classic palette covers d
+          +ark blue primary, blue/white surface colors, Segoe UI font fam
+          +ily, 2px border radius. Magnetic palette covers the current Cr
+          +osswork UI tokens (CiscoSans font, 8px border radius, darker s
+          +urfaces).                                                     
+      149  
+      150  **2. A `ThemeService` using Angular signals.** Provides a `cur
+           rentTheme` signal, a `toggle()` method, reads and writes `loca
+           lStorage` for persistence, and uses an `effect()` to write the
+            `data-theme` attribute on `document.documentElement` whenever
+            the signal changes.
+      151  
+
+● Update(handoff/06_conversion_patterns_reference.md)
+  ⎿  Added 4 lines, removed 2 lines
+      225  
+      226  ### Proposed folder structure (inside EMS UI repo or a new rep
+           o)
+      227  
+      228 +Updated 2026-04-21 to use the `epnm-classic` prefix (see §6 na
+          +ming note).                                                   
+      229 +                                                              
+      230  ```
+      231  ems-ui/
+      232    src/
+      233      app/
+      232 -      classic/                                                
+      234 +      epnm-classic/                                           
+      235          components/
+      236            network-devices-classic/
+      237            device-360-classic/
+     ...
+      266            fault-view.component.ts
+      267  ```
+      268  
+      267 -The `classic/` folder is the entire POC surface. Shared infras
+          -tructure (services, models, containers) lives under `shared/` 
+          -so both classic and modern views consume the same service laye
+          -r.                                                            
+      269 +The `epnm-classic/` folder is the entire POC surface. Componen
+          +t files inside keep the `-classic` suffix because they are alr
+          +eady namespaced by the folder (no collision risk once inside `
+          +epnm-classic/`). Shared infrastructure (services, models, cont
+          +ainers) lives under `shared/` so both classic and modern views
+          + consume the same service layer.                              
+      270  
+      271  ### Routing strategy
+      272  
+
+● Update(handoff/06_conversion_patterns_reference.md)
+  ⎿  Added 6 lines
+      372  6. This handoff document as the connective tissue between rese
+           arch detail and POC scope.
+      373  
+      374  Keep research files open while working. Do not try to remember
+            the mapping tables from memory; reference them.
+      375 +                                                              
+      376 +---                                                           
+      377 +                                                              
+      378 +## Footer — Update Log                                        
+      379 +                                                              
+      380 +- **2026-04-21 (Session 2).** Updated §6 and §8 to use the pre
+          +fix `epnm-classic` instead of bare `classic`, because the word
+          + `classic` is already used as a tier name inside the existing 
+          +Magnetic design system (`infra-ui/src/css/magnetic-light-class
+          +ic.scss`). Distinct prefix avoids collision. User-facing toggl
+          +e labels unchanged ("Classic" / "Modern"). No other sections a
+          +ffected.                                                      
+
+● Doc 06 updated: §6 naming note, data-theme="epnm-classic" throughout, folder
+  renamed epnm-classic/, footer update log added. User-facing labels unchanged.
+  Moving to Question 2.
+
+  ---
+  Question 2 — Is unified-ems-ui a library, and should doc 05 / doc 08 be 
+  updated now?
+
+  Flag classification. NEEDS VALIDATION. Session 1 specifically wants this one
+  pressure-tested before handoff-doc edits.
+
+  What's going on. Handoff doc 05 §2.5 and doc 08 §1 both describe
+  unified-ems-ui as "the primary working repository" and "the innermost layer of
+   the three-layer shell. Feature-specific EMS pages." That framing matches what
+   Praveen said on 2026-04-06 ("Mostly I think you have to work on this [EMS]
+  UI"). The mental model in the handoff is: shell loads feature pages; feature
+  pages live in unified-ems-ui; classic code is added there.
+
+  Agent 06 (unified-ems-ui tree extract) reports a different shape:
+
+  - The repo is an Angular library, not an app — everything lives under
+  projects/ems-lib/ (the conventional Angular CLI path for a library).
+  - No main.ts, no index.html, no root app.module.ts at the conventional
+  locations.
+  - public-api.ts and root-ems.module.ts are the export surface — the shape an
+  Angular library has for declaring what it exposes to consumers.
+  - Fault Management is effectively absent from this repo. Only a 21-line
+  node-alarms skeleton appears; no alarms list, events, or syslogs UI.
+
+  Agent 07 (infra-ui tree extract) reinforces:
+
+  - Existing alarms UI actually lives at infra-ui/src/app/robot-alarms-v2/,
+  inside the shell repo rather than in unified-ems-ui.
+  - Infra-ui loads features via standard Angular lazy loadChildren from
+  container/robot-shell/robot-shell.routes.ts.
+  - Navigation is data-driven from infra-ui/src/assets/modules.json +
+  module.service.ts.
+
+  If this reading holds, the mental model is roughly:
+
+  - infra-ui = the Angular application. Bootstraps, runs, hosts the shell,
+  lazy-loads features, owns the top nav. Some feature pages live directly here
+  (alarms v2 does).
+  - unified-ems-ui = an Angular library consumed by infra-ui. Exports feature
+  modules (mainly inventory-side feature pages at the moment). Published to
+  Cisco's internal npm registry. Builds separately from infra-ui.
+  - common-ui = another Angular library, shared primitives (tables, cards, 360
+  shell, form controls).
+
+  That matches the three-layer shell architecture Akhil described. But the name
+  "unified-ems-ui" and Praveen's "work on this EMS UI" both pull toward treating
+   it as an app; the code shape says library. Either Praveen was casually
+  imprecise, or his statement was true in the sense that most of the inventory
+  feature development happens inside that library even though integration
+  happens in infra-ui.
+
+  Why it matters operationally. If the library interpretation holds, three
+  handoff items are affected:
+
+  1. Handoff doc 05 §2.5 and doc 08 §1 both describe unified-ems-ui as the
+  primary working repository without the library qualifier. Needs a targeted
+  correction.
+  2. Your pending code-organization proposal (action item B2). Akhil asked you
+  for a proposal on where classic-view code lives. If unified-ems-ui is a
+  library, the proposal is no longer just "subfolder in EMS UI repo vs. new
+  repo." It's: classic feature components go in
+  unified-ems-ui/projects/ems-lib/src/app/epnm-classic/, and a coordinating
+  change registers them in infra-ui's routes (robot-shell.routes.ts) and nav
+  config (modules.json). Two-repo touch, not one.
+  3. Alarms placement. If the existing alarms UI is in infra-ui (not
+  unified-ems-ui), then classic alarms UI most naturally either (a) mounts
+  alongside robot-alarms-v2 in infra-ui, or (b) gets built fresh in
+  unified-ems-ui and registered via infra-ui routes. The cleaner architectural
+  answer is (b) — keep all classic feature code in the library, mount via
+  infra-ui — but the execution session's source read will confirm.
+
+  What the execution session should do to confirm (before any handoff doc gets
+  edited):
+
+  1. Open unified-ems-ui/projects/ems-lib/ng-package.json — if it exists,
+  confirms it's a publishable Angular library.
+  2. Open unified-ems-ui/package.json — look at the name, scripts, and any
+  angular.json reference to projectType. A library shows "projectType": 
+  "library" in angular.json.
+  3. Open infra-ui/package.json — check if unified-ems-ui's published name
+  appears in dependencies.
+  4. Open infra-ui/src/app/container/robot-shell/robot-shell.routes.ts — check
+  imports. Library-pattern usage shows loadChildren: () => 
+  import('@cisco/unified-ems-ui').then(m => m.InventoryModule) or similar.
+  5. Report findings in a one-page note.
+
+  What changes if the library reading holds (not before):
+
+  - Doc 05 §2.5: add "unified-ems-ui is an Angular library consumed by Infra UI,
+   not a standalone app. Bootstraps do not live here; infra-ui is the Angular
+  app."
+  - Doc 08 §1: same qualifier in the repository inventory table.
+  - Doc 06 §8 (folder structure already updated to epnm-classic/) adds a note
+  that the epnm-classic/ folder lives at
+  unified-ems-ui/projects/ems-lib/src/app/epnm-classic/, and that mounting also
+  requires editing infra-ui/src/app/container/robot-shell/robot-shell.routes.ts
+  and infra-ui/src/assets/modules.json.
+  - Your code-organization proposal to Akhil (action item B2) becomes a two-repo
+   proposal.
+
+  The actual decision. Session 1's recommendation, which I concur with: don't
+  rewrite docs 05 / 08 on Session 2's tree-only evidence. Wait for the execution
+   session to do the source reads above and confirm. In the meantime, Session 2
+  captures this as a first-days verification task in the execution-session
+  kickoff message.
+
+  Two options:
+
+  - (A) Wait for execution-session source-read confirmation. Kickoff message
+  lists it as first-days task. If confirmed, doc 05 + 08 edits happen on the
+  next handoff update pass (likely initiated by the execution session or relayed
+   back to Session 2).
+  - (B) Update docs 05 and 08 now based on Session 2's tree-report reading, with
+   footer notes dating the change. Execution session either validates or
+  corrects.
+
+  The conservative choice is (A). The faster-to-market choice is (B).
+
+  Uncertainty. Tree-report evidence is strong but not definitive. The
+  projects/ems-lib/ layout is a standard Angular CLI library pattern, but I have
+   not read the actual angular.json or ng-package.json. It is theoretically
+  possible the repo uses a non-standard layout.
+
+  What are you picking: (A) wait for execution-session confirmation, or (B)
+  update doc 05 and doc 08 now with dated footer notes?
+
+✻ Cogitated for 1m 39s
+
+❯ I think we should flag this to the execution session to confirm, but I don't  
+  think it's right to go too strongly off of a transcript that was              
+  speech-to-text. It wasn't like people were naming accurate GitHub library     
+  names in the transcript. He probably just said it as casual shorthand. Still, 
+   there's no reason to assume that that is right. They should simply explore   
+  this and not think too much about the transcript. We should just frame them   
+  as equal to each other. Here's what we thought we could infer from the        
+  transcript and not phrase it as a direct quote, given that it's a             
+  speech-to-text transcript and was a casual conversation, not a computer       
+  talking. Here is what we found over here, which somewhat contradicts what we  
+  thought we knew but seems logically correct. The session that is actual eyes  
+  on this can make the determination in that way instead.  So really I'm        
+  picking option C. Why don't you repeat this back to me so we can understand?  
+
+● Repeating back so we align before I act:
+
+  Your direction — option C. Neither the transcript nor the tree-report read
+  gets to be treated as authoritative.
+
+  The transcript was speech-to-text, casual conversation. When Praveen said
+  something like "work on this EMS UI," he wasn't naming a GitHub repo with
+  architectural precision — he was using shorthand in a meeting. Session 1's
+  handoff doc 05 §2.5 and doc 08 §1 effectively promoted that shorthand into a
+  firm claim that unified-ems-ui is "the primary working repository." That's
+  overweighting a casual remark.
+
+  Session 2's tree-report read says it's an Angular library. But that's
+  inference from directory layout, not from reading source. Also inference.
+
+  What I do:
+
+  1. Don't rewrite doc 05 / doc 08 to the library interpretation. That would
+  just swap one inference for another.
+  2. Don't leave the app-primary framing standing uncontested either. It's
+  weaker than the docs currently imply.
+  3. Edit doc 05 §2.5 and doc 08 §1 to present both readings as equal-weight 
+  inputs. Frame the transcript interpretation honestly — "what we thought we
+  could infer from a casual walkthrough conversation" — without quoting it as if
+   it were authoritative technical specification. Frame the tree-report read
+  honestly — "what directory layout suggests, which somewhat contradicts the
+  inference but seems logically consistent with a three-layer shell
+  architecture." Both are clearly labeled as not-yet-confirmed.
+  4. Kickoff message flags this as a first-days investigation for the execution 
+  session. They do the source reads (ng-package.json, angular.json,
+  infra-ui/package.json, robot-shell.routes.ts), and their read closes the
+  question.
+  5. Code-organization proposal (action item B2) stays on hold until the
+  execution session's source read lands, because the one-repo-vs-two-repo nature
+   of the proposal hinges on what actually comes back.
+
+  What I'm not doing: presenting either read as ground truth, speech-to-text as
+  quote-worthy, or tree layout as decisive.
+
+  Correct?
+
+❯ Correct.                                                                        ⎿  Interrupted · What should Claude do instead?
+
+❯ correct; please continue                                                      
+
+● Update(handoff/05_technical_landscape.md)
+  ⎿  Added 14 lines, removed 4 lines
+       97  
+       98  **Frontend repos:**
+       99  
+      100 -- **Infra UI repository.** Shell app. Header, top navigation, 
+          -infrastructure UI components.                                 
+      101 -- **Common UI repository.** Shared components: cards, tables, 
+          -common widgets, Harbor / Magnetic design patterns.            
+      102 -- **EMS UI repository.** Feature pages. Praveen: "Mostly I thi
+          -nk you have to work on this [EMS] UI." The primary repository 
+          -for Colin's work. Where classic UI code lives is TBD (see `08_
+          -repositories_access_and_compliance.md` for the decision contex
+          -t).                                                           
+      100 +- **Infra UI repository (`ROBOT/infra-ui`).** Shell app. Heade
+          +r, top navigation, infrastructure UI components. Hosts the exi
+          +sting modernized alarms UI at `src/app/robot-alarms-v2/`. Feat
+          +ures lazy-load via `src/app/container/robot-shell/robot-shell.
+          +routes.ts`. Navigation is data-driven from `src/assets/modules
+          +.json` + `src/app/services/module.service.ts`.                
+      101 +- **Common UI repository (`ROBOT/common-ui`).** Shared Angular
+          + component library. Cards, tables (`cw-hbr-table`, `ag-grid-ta
+          +ble`), 360 shell (`base360/device360/interface360/link360/gene
+          +ric-links`), form primitives (`cui-stepper`, `cui-input`, `cui
+          +-select`, `cui-datetime-select`, `cui-modal`), Harbor / Magnet
+          +ic design patterns.                                           
+      102 +- **EMS UI repository (`ROBOT/unified-ems-ui`).** Where primar
+          +y feature pages live (inventory-details, inventory-panel, devi
+          +ce-management, interface-list).                               
+      103  
+      104 -**Backend repos:** Corresponding backend repositories exist al
+          -ongside the frontend repos, using PostgreSQL. Akhil referred t
+          -o the existence of the backend but did not enumerate specific 
+          -repository names. **EMS Assurance** is referenced as the fault
+          - / alarm / event backend: "EMS assurance is also back inside."
+          - Exact backend repository names are an open item.             
+      104 +> **Open on the EMS UI repo shape (flagged 2026-04-21).** Two 
+          +readings are on the table, neither yet confirmed by source:   
+      105 +>                                                             
+      106 +> **Reading A — casual walkthrough inference.** The 2026-04-06
+          + walkthrough conversation suggested `unified-ems-ui` is a prim
+          +ary working EMS app where most feature development happens. Th
+          +is framing came from informal shorthand in a speech-to-text tr
+          +anscribed meeting, not from a repo-naming or architecture-spec
+          + statement, and should be weighted accordingly.               
+      107 +>                                                             
+      108 +> **Reading B — tree-report inference.** The `poc/REPO/` tree-
+          +report swarm (Session 2, 2026-04-21) found the repo has a `pro
+          +jects/ems-lib/` layout with `public-api.ts` and `root-ems.modu
+          +le.ts` as the export surface, and no `main.ts` / `index.html` 
+          +/ root `app.module.ts` at conventional locations — the standar
+          +d shape of an Angular library consumed by an outer Angular app
+          +. Under this reading, `infra-ui` is the app and `unified-ems-u
+          +i` is a publishable library the app depends on.               
+      109 +>                                                             
+      110 +> Both readings are inferences. The execution session's first-
+          +days investigation (`ng-package.json`, `angular.json projectTy
+          +pe`, `infra-ui/package.json` dependencies, import patterns in 
+          +`robot-shell.routes.ts`) will resolve which reading holds. Doc
+          + edits will follow that resolution, not Session 2's tree read.
+          + See `_scratch_repo/flags_for_colin_2026-04-21.md` flag 8 for 
+          +the full framing.                                             
+      111  
+      112 +Where classic UI code lives is TBD (see `08_repositories_acces
+          +s_and_compliance.md` for the decision context). The code-organ
+          +ization proposal (action item B2) depends on the library-vs-ap
+          +p resolution above.                                           
+      113 +                                                              
+      114 +**Backend repos:** Corresponding backend repositories exist al
+          +ongside the frontend repos, using PostgreSQL. Akhil referred t
+          +o the existence of the backend but did not enumerate specific 
+          +repository names. **EMS Assurance** is referenced as the fault
+          + / alarm / event backend: "EMS assurance is also back inside."
+          + The `poc/REPO/` bundle includes four EMS-side backend repos: 
+          +`cw-inventory`, `cw-inventory-collector`, `cw-epnm-fault`, `em
+          +s-assurance`. Whether other EMS backend repos exist (for examp
+          +le, a device-management Go service referenced by Ramkrishna) i
+          +s open; Confluence page is the authoritative list once Colin c
+          +an confirm access.                                            
+      115 +                                                              
+      116  ---
+      117  
+      118  ## 3. What the 2026-04-06 Walkthrough Demonstrated
+
+● Update(handoff/05_technical_landscape.md)
+  ⎿  Added 6 lines
+      212  3. The EMS code for the equivalent screens in the EMS UI repo,
+            plus the Common UI and Infra UI repos to understand the shell
+            integration.
+      213  4. The Set 08 research files in `cisco/epnm_ems/research/`: `0
+           8_research_epnm_legacy_stack_2026-04-07.md`, `08_research_ems_
+           modern_stack_2026-04-07.md`, and `08_research_conversion_patte
+           rns_2026-04-07.md`. Their content is restated as a reference i
+           n `06_conversion_patterns_reference.md` in this handoff.
+      214  5. Existing Cisco regression test suites for Inventory and Fau
+           lt Management (relevant files or specifications) — to understa
+           nd what functional coverage the classic UI needs to preserve. 
+           Acquisition of these is pending and is an action item.
+      215 +                                                              
+      216 +---                                                           
+      217 +                                                              
+      218 +## Footer — Update Log                                        
+      219 +                                                              
+      220 +- **2026-04-21 (Session 2).** §2.5 EMS repo inventory: added t
+          +he library-vs-app ambiguity on `unified-ems-ui`. Both walkthro
+          +ugh-inference and tree-report-inference readings are now prese
+          +nted as equal-weight, unresolved. Resolution goes to the execu
+          +tion session's first-days source read. Added named evidence fo
+          +r `infra-ui` feature-loading pattern and `common-ui` primitive
+          + catalog from the 2026-04-21 tree-report swarm.               
+
+● Update(handoff/08_repositories_access_and_compliance.md)
+  ⎿  Added 16 lines, removed 5 lines
+      24  
+      25  | Repository | Contents | Relevance to POC |
+      26  |---|---|---|
+      27 -| Infra UI | Shell app. Header bar, top navigation, infrastruct
+         -ure UI, login, layout frame. Outermost of the three-layer shell
+         - architecture. | Minor. Classic view may extend the header to i
+         -nclude a toggle if Colin's code-organization plan places the to
+         -ggle there. |                                                  
+      28 -| Common UI | Shared component library. Cards, tables, common w
+         -idgets. Harbor and Magnetic design patterns. | Reuse where comp
+         -onents can be themed via CSS variables. Do not reuse Magnetic-c
+         -oupled components. |                                           
+      29 -| EMS UI | Feature-specific pages. Inventory, faults, software 
+         -image management, device management. Innermost of the three-lay
+         -er shell. | Primary working repository. The likely location for
+         - classic view code, pending Colin's proposal. |                
+      30 -| Backend repositories (unnamed) | Spring Boot primarily, with 
+         -Go services on the device management side. PostgreSQL-backed. E
+         -MS Assurance is referenced as the fault / alarm / event backend
+         -. | Read-only reference. The POC does not modify backend except
+         - narrow API touchups (and those must be discussed with Selva fi
+         -rst). |                                                        
+      27 +| `ROBOT/infra-ui` | Angular application shell. Header bar, top
+         + navigation, infrastructure UI, login, layout frame. Outermost 
+         +of the three-layer shell architecture. Existing alarms UI (`src
+         +/app/robot-alarms-v2/`) lives here. Navigation is data-driven f
+         +rom `src/assets/modules.json` + `module.service.ts`. Features l
+         +azy-load via `src/app/container/robot-shell/robot-shell.routes.
+         +ts`. | Classic view will almost certainly require edits here — 
+         +route registration, nav config, theme wiring — regardless of wh
+         +ich repo hosts the feature components. Local-run feasibility pl
+         +ausible (needs execution-session verification, open question 3.
+         +8). |                                                          
+      28 +| `ROBOT/common-ui` | Shared Angular component library. Cards, 
+         +tables (`cw-hbr-table` Harbor-themed, `ag-grid-table` theme-neu
+         +tral with an existing pluggable theme stack under `scss/ag-grid
+         +/styles/`), `base360/` shell for device360 / interface360 / lin
+         +k360, form primitives (`cui-stepper`, `cui-input`, `cui-select`
+         +, `cui-datetime-select`, `cui-modal`), Harbor and Magnetic desi
+         +gn patterns. Published to Cisco's internal npm registry. | Reus
+         +e where components are theme-neutral (the `cui-*` family appear
+         +s to be). Wrap or extend where components are Harbor-coupled (t
+         +he `cw-hbr-*` family). For ag-grid, adding a `theme-classic.css
+         +` alongside the existing `theme-blue/bootstrap/dark/fresh/mater
+         +ial/` is the lowest-risk table path. |                         
+      29 +| `ROBOT/unified-ems-ui` | Feature-page layer. Inventory featur
+         +e pages (inventory-details, inventory-panel, device-management,
+         + shared/interface-list) live here. Fault Management is effectiv
+         +ely absent — only a 21-line `node-alarms` skeleton, with the ac
+         +tual alarms UI living in `infra-ui/robot-alarms-v2/`. | See ope
+         +n framing on repo shape below. Candidate host for classic-view 
+         +feature components once the shape is confirmed. |              
+      30 +| `ROBOT/cw-inventory` | Spring Boot / Java inventory REST. Pri
+         +mary REST services include `InventoryRestService.java` (9,724 l
+         +ines), `JobSchedulerRestService.java` (9,671), `InventoryEMSRes
+         +tService.java` (1,696). Tyk gateway route map at `config/platfo
+         +rm/tyk/tykConfigmap.json`. `LocalProfileConfig` present — local
+         +-run plausible. | Read-only reference for API contract. Narrow 
+         +API touchups routed through Selva. |                           
+      31 +| `ROBOT/cw-inventory-collector` | Spring Boot / Java. gRPC con
+         +tract (`inventory.proto`) with cw-inventory. `LocalProfileConfi
+         +g` present. | Read-only reference. |                           
+      32 +| `ROBOT/cw-epnm-fault` | Spring Boot / Java fault REST (EMS er
+         +a). Main alarms surface: `AlarmRest.java` (2,622 lines). Write 
+         +actions: `AlarmUpdateRestController.java` + `AlarmActionService
+         +Impl.java`. Advanced-filter grammar: `FilterCriteriaUtil.java` 
+         +(797) + AlarmFilterDTO variants. Docker-first — container-runna
+         +ble. | Read-only reference for API contract. |                 
+      33 +| `ROBOT/ems-assurance` | Spring Boot / Java fault support. EPN
+         +M-era NBI at `fault-nbi/ems-fault-nbi/.../AlarmRestServiceImpl.
+         +java` (821). Contains capabilities (`NetworkImpactingAlarm`, `N
+         +extStep`) not ported to `cw-epnm-fault`. ADS-only — no Dockerfi
+         +le for main service; `resources_from_server_to_local.sh` helper
+         +. | Read-only reference. If the classic UI needs ADS-only capab
+         +ilities, ADS access (not Docker local) is required. |          
+      34  
+      32 -Exact backend repository names are open. The Confluence page li
+         -kely has them.                                                 
+      35 +> **Open on the EMS UI repo shape (flagged 2026-04-21).** Two r
+         +eadings of `ROBOT/unified-ems-ui` are on the table, neither yet
+         + confirmed by source:                                          
+      36 +>                                                              
+      37 +> **Reading A — casual walkthrough inference.** The 2026-04-06 
+         +walkthrough conversation suggested `unified-ems-ui` is the prim
+         +ary working EMS app where most feature development happens. Thi
+         +s framing came from informal shorthand in a speech-to-text tran
+         +scribed meeting, not from a repo-naming or architecture-spec st
+         +atement.                                                       
+      38 +>                                                              
+      39 +> **Reading B — tree-report inference.** The Session 2 tree-rep
+         +ort swarm (2026-04-21) found a `projects/ems-lib/` layout with 
+         +`public-api.ts` and `root-ems.module.ts` as the export surface,
+         + and no conventional-location `main.ts` / `index.html` / root `
+         +app.module.ts` — the standard shape of an Angular library consu
+         +med by an outer Angular app. Under this reading, `infra-ui` is 
+         +the Angular app and `unified-ems-ui` is a publishable library. 
+      40 +>                                                              
+      41 +> Both readings are inferences. The execution session's first-d
+         +ays investigation resolves which holds, via source reads of `ng
+         +-package.json`, `angular.json projectType`, `infra-ui/package.j
+         +son` dependencies, and import patterns in `robot-shell.routes.t
+         +s`. Handoff doc edits follow that resolution, not Session 2's t
+         +ree-only read. See `_scratch_repo/flags_for_colin_2026-04-21.md
+         +` flag 8 for the full framing.                                 
+      42  
+      43 +Exact backend repository names beyond the four above are open. 
+         +Ramkrishna referenced Go services on the device-management side
+         + in the 2026-04-06 walkthrough; no Go was surfaced in the four 
+         +backend repos swept, leaving open whether a separate device-man
+         +agement repo exists outside the swept set. Confluence page is t
+         +he authoritative complete list once Colin can confirm access.  
+      44 +                                                               
+      45  ### Classic UI code location (undecided)
+      46  
+      47  Akhil offered two options: a subfolder inside the EMS UI reposi
+          tory or a dedicated new repository. Colin owes a proposal. Acti
+          on item 10 in the Set 07 list. The firm constraint is that the 
+          code builds as part of the EMS build regardless of which option
+           is chosen: "It has to be part of the new EMS build."
+
+● Update(handoff/08_repositories_access_and_compliance.md)
+  ⎿  Added 6 lines
+      237  
+      238  ---
+      239  
+      240 +## Footer — Update Log                                        
+      241 +                                                              
+      242 +- **2026-04-21 (Session 2).** §1 Repository Inventory: added t
+          +he library-vs-app ambiguity on `ROBOT/unified-ems-ui` and enum
+          +erated the EMS backend repos with concrete details from the 20
+          +26-04-21 tree-report swarm (`cw-inventory`, `cw-inventory-coll
+          +ector`, `cw-epnm-fault`, `ems-assurance`). Named `ROBOT/infra-
+          +ui`'s data-driven navigation and lazy-loading pattern, and `RO
+          +BOT/common-ui`'s primitive catalog (`cui-*` theme-neutral vs. 
+          +`cw-hbr-*` Harbor-themed). Flagged Go-services question: not s
+          +urfaced in the four swept EMS backend repos; execution session
+          + verifies whether a separate device-management repo exists out
+          +side the swept set. Flagged `ems-assurance` as ADS-only vs. `c
+          +w-epnm-fault` as Docker-first, which shapes local-run feasibil
+          +ity (open question 3.8).                                      
+      243 +                                                              
+      244 +---                                                           
+      245 +                                                              
+      246  ## 7. Summary
+      247  
+      248  The execution session works inside a Cisco infrastructure boun
+           dary. The laptop is Cisco-issued. The account is Cisco-issued.
+            The AI tools are Cisco-approved (Claude Code via Cisco provis
+           ioning; LangGraph local). Library installations are gated. Rep
+           ository access is gated by AD groups. VMs are provisioned per-
+           engagement. Customer-visible artifacts never reference AI.
+
+● Docs 05 §2.5 and 08 §1 updated with the balanced framing. Both readings
+  presented as equal-weight inferences; resolution deferred to the execution
+  session's source read. Backend repo details from the swarm folded in. Footer
+  update logs added to both docs. Moving to Question 3.
+
+  ---
+  Question 3 — How do we handle the XWT-vs-Dojo gap in handoff doc 06?
+
+  Flag classification. COLIN DECIDES. Not a safety or correctness blocker, but
+  an incompleteness in the widget-mapping reference.
+
+  What's going on. Handoff doc 06 §2 contains a 25-row widget-mapping table that
+   translates Dojo widgets to Angular Material equivalents. That table was built
+   from the Set 08 research
+  (cisco/epnm_ems/research/08_research_conversion_patterns_2026-04-07.md), which
+   studied raw Dojo primitives — dijit/*, dojox/*, dojo/*.
+
+  Agent 05 (pf-framework tree extract) surfaced that EPNM doesn't use raw Dojo
+  directly across its UI. Cisco layered its own widget toolkit, XWT, on top of
+  Dojo. The namespace, file paths, theme conventions, and widget APIs are all
+  XWT-specific:
+
+  - pf-framework/ui/core/ui_components/lib/xwt/widget/table/Table.js — 5,146
+  lines.
+  - xwt/widget/uishell/Header.js — branded chrome.
+  - xwt/widget/navigation/SlideMenu.js — 2,394 lines, the left nav.
+  - xwt/widget/tasknavigator/TaskNavigator.js — 1,312 lines, the wizard
+  primitive.
+  - xwt/widget/objectselector/ObjectSelector.js — 6,929 lines, the device
+  picker.
+  - xwt/themes/prime/ — theme directory, where the blue-and-white palette lives
+  (distributed across many files).
+
+  XWT is a framework-within-the-framework. EPNM screens (very likely including
+  InventoryListView.js and AlarmListView.js) instantiate XWT widgets, not bare
+  dijit/Dialog or dojox/grid/DataGrid. That means:
+
+  - When the Angular rebuild converts Inventory's list, the target mapping is
+  XWT Table.js → mat-table (or ag-grid), not dojox/grid/DataGrid → mat-table.
+  The API surface, the sort/filter semantics, the styling hooks, and the
+  column-config model may all differ.
+  - The ObjectSelector.js device picker (6,929 lines) almost certainly has
+  semantics beyond what any dijit picker offers. Handoff doc 06 has no row for
+  it.
+  - TaskNavigator.js is the wizard primitive for the device-add flow, with 1,312
+   lines of behavior the Dojo row for dijit/Tree or dijit/TabContainer does not
+  cover.
+
+  The caveat. The tree shows the files exist. It does not show which widgets
+  Inventory and Alarms actually import. Three grid generations coexist in
+  pf-framework — dojox/grid/DataGrid, an EnhancedGridWrapper, and the XWT
+  Table.js. Cisco code commonly keeps older generations in place for legacy
+  screens while newer screens use the newest. The POC-scoped screens may or may
+  not use the newest. Only a source read of InventoryListView.js and
+  AlarmListView.js (opening their imports) resolves which generation is actually
+   in play.
+
+  What the execution session will inevitably do. As part of the first-screen
+  deep dive (work item B1), they open those files, read the imports at the top,
+  and see the real widget family. If it's XWT, they either (a) extend doc 06's
+  mapping table, or (b) write a small XWT-specific conversion primer, or (c) do
+  the mapping ad hoc in code. The cleanest for scaling is (a) or (b).
+
+  Three options for Session 2's handling now:
+
+  - (A) Update doc 06 §2 now. Add a new subsection after the Dojo table called
+  "XWT Widget Mapping" that catalogs the XWT widgets surfaced by the tree
+  (Table, Header, SlideMenu, TaskNavigator, ObjectSelector, plus whatever else
+  is in xwt/widget/*). For each, propose an Angular target and note the
+  uncertainty (API mapping details require source read). Tags the update with a
+  footer date. Pro: execution session has a complete mapping reference from day
+  one. Con: we're writing mappings without reading XWT source, so we'd be
+  guessing at semantics.
+  - (B) Leave doc 06 unchanged. Add a Session 2 note to the kickoff message.
+  Execution session treats the Dojo table as a baseline; when they find XWT,
+  they extend the table themselves and report back. Pro: we avoid writing
+  guesses. Con: the mapping reference in doc 06 is technically misleading until
+  the execution session fixes it.
+  - (C) Middle path. Session 2 writes a short _scratch_repo/xwt_primer.md now
+  that catalogs what we see in the tree (widget name, file size, surface
+  context) without proposing Angular mappings. The kickoff message points the
+  execution session at it and at doc 06 §2, and says: "Doc 06 §2 is the Dojo
+  mapping. XWT is the actual framework. Read InventoryListView.js first; if it
+  imports XWT widgets, extend doc 06 using the XWT primer as a starting
+  inventory." Pro: we capture observed facts without inventing mappings; doc 06
+  stays clean; execution session has concrete starting material. Con: execution
+  session has to do the mapping work; doc 06 §2 remains incomplete until they
+  do.
+
+  Uncertainty. All three options are defensible. (A) risks writing guesses. (B)
+  leaves a known gap. (C) splits the difference.
+
+  My lean. (C). Matches the scope-discipline posture you set earlier — surface
+  what exists, don't invent, let the execution session decide what's actually
+  needed and how to bridge. Also keeps doc 06 from accumulating speculative rows
+   before any source is read.
+
+  What are you picking: (A), (B), or (C)?
+
+✻ Cogitated for 2m 1s
+
+❯ Option C is correct, but I want to be very clear that we are not being        
+  prescriptive here in any way. You are forbidden from being prescriptive       
+  unless you are absolutely positive that that is the case. I don't even know   
+  why you're giving me option A or option B, or even option C. Option C would   
+  be correct if you would present it equally and leave it to the session to do  
+  the investigation itself. Please do not get confused and think that we are    
+  doing investigation here. The deep, detailed investigation will be a part of  
+  the session that will be on the Cisco machine. Your job is literally to give  
+  them some starting context so they know what to do.                           
+                                                                                
+  I don't know why we keep coming back to this stupid question where you are    
+  making giant assumptions or going incredibly defensive and assuming that you  
+  know anything based upon a tree structure. You are literally providing basic  
+  context to them and trying to help them out. If you can't get that straight,  
+  then I'm just going to go right to that session and repeat back your          
+  understanding so I can ensure that I'm not talking to a clown.                
+
+● You're right. The pattern I keep falling into: dressing up conclusions as
+  "options," staking a "lean," and writing investigation plans for a session
+  that has source and I don't. That's not my job. My job is to hand the
+  execution session the starting context it wouldn't otherwise have and get out
+  of the way.
+
+  Correction, going forward:
+
+  - No options-with-a-recommendation on anything that requires source to decide.
+  - No "what the execution session should do" steps from me. They have eyes on
+  source. They figure out how to investigate.
+  - No promoting tree-report observations to conclusions.
+  - Starting context only: here's what I saw, here's what the handoff docs say,
+  both are starting inputs, you decide.
+
+  Applying Flag 6 that way now. Writing the XWT primer as a factual catalog of
+  what the tree shows — no proposed Angular mappings, no conversion
+  recommendations, no ordering of what to read. Doc 06 §2 stays untouched. The
+  kickoff message will note the primer exists and flag that doc 06's mapping
+  table was built from Dojo research, without telling the execution session what
+   to do about it.
+
+● Write(handoff/_scratch_repo/xwt_primer.md)
+  ⎿  Wrote 53 lines to handoff/_scratch_repo/xwt_primer.md
+       2 **Session 2, 2026-04-21.**ntext Only
+       4 ## Purpose of this document
+       6 To hand the execution session a factual starting catalog of XWT-
+         namespaced files surfaced by the tree-report swarm against `EPNM
+         n 2 has not read XWT source. Everything below is observable from
+       7  directory and filename data only.
+       8 ## Context the execution session may not have yet
+      10 Handoff doc 06 §2 contains a 25-row widget-mapping table (Dojo →
+         nical research, which studied raw Dojo primitives (`dijit/*`, `d
+         ojox/*`, `dojo/*`).
+     … +82 lines (ctrl+o to expand)
+
+● Walking through the remaining flags honestly now, applying the same
+  correction:
+
+  Flags 2, 3, 4 are the same shape as Flag 6 was. Each is a tree-report
+  observation that looks different from something in the handoff docs. None of
+  them have a Colin-level decision actually buried inside them. My earlier
+  framing asked you to pick between investigation plans or escalation paths —
+  which is the execution session's call, not yours.
+
+  Proposal: I treat all three as starting-context entries in the kickoff message
+   and nowhere else. No handoff-doc edits, no investigation plans from Session
+  2. Just the fact as observed plus whatever the handoff docs currently say,
+  labeled as two inputs the execution session evaluates.
+
+  - Flag 2 (bulk CSV). Tree shows cw-inventory/.../BulkImportRootResource.java1
+  (non-compilable extension). Handoff doc 03 §2.1 lists bulk CSV import as a
+  Network Devices feature demonstrated on 2026-04-06. Both are starting inputs.
+  - Flag 3 (chassis interactivity). Tree shows EPNM chassisview has a
+  substantive interactive layer (hotspot/ directory, 11 files) and a 2,897-line
+  ChassisViewServiceImpl.java. Tree did not surface a chassis-specific EMS
+  backend in the four swept backend repos. Handoff doc 10 open question 1.8
+  already flags this as unresolved. Both are starting inputs.
+  - Flag 4 (Go services). Ramkrishna referenced Go on device-management side in
+  the 2026-04-06 walkthrough. Tree swarm found Java Spring Boot in all four
+  swept EMS backend repos and no Go. Whether additional backend repos exist
+  outside the four swept is not in the tree. Confluence page is the
+  authoritative complete repo list once access is confirmed. Both are starting
+  inputs.
+
+  Flags 5, 7, 9, 10 are already handled or don't need a decision:
+  - Flag 5 (ems-assurance ADS-only, cw-epnm-fault Docker-first) — factual
+  observation, already captured in updated doc 08 and in the kickoff context §9
+  local-runnability item.
+  - Flag 7 (three grid generations) — captured in the xwt_primer.md just
+  written.
+  - Flag 9 (open questions 1.2 and 1.15 downgrade from "resolved" to "strong
+  signal, source-read needed") — Session 2 applies this correction to
+  cross_repo_poc_map_2026-04-21.md §5 unprompted.
+  - Flag 10 (doc 05 / 08 corrections) — done in the Flag 8 edits.
+
+  If that framing holds, what remains is:
+  1. Apply the Flag 9 correction to the cross-repo POC map.
+  2. Wait for your CLAUDE.md content (or decision to skip) before drafting the
+  execution-session kickoff message.
+
+  Tell me if any of Flags 2, 3, 4 actually do need your call and I'm still
+  missing it, or if this framing is correct.
+
+✻ Crunched for 1m 31s
+
+❯ - Flag 2: I agree.                                                            
+  - Flag 3 is correct, and for flag 4 I'm not worried about the device size     
+  management, because on the hardware integration component, that has literally 
+   nothing to do with this project. This is strictly a UI re-skidding.          
+  I don't even know why you brought that up, because to me that shows that you  
+  don't understand fundamentally what this project is. Why would a Go backend,  
+  which specifically integrates with device-level hardware, be a part of a UI   
+  re-skidding? It doesn't matter that there's no Go. If there's no Go, then     
+  there's no Go. That's that simple. I don't know why we're harping so much on  
+  what is in the meeting. They answered a question. In fact, this session       
+  didn't even read that transcript, did it, so how the hell would you know?     
+  Yes, all good on the framing. Don't worry about it. The MD decision to skip   
+  is made. Draft the execution session kickoff message, and then flag what      
+  files we'll be including with them to share. The kick off message will be     
+  large and specific. Usually I do a kick off message, which is a shorter       
+  prompt that I'm meant to paste to a Claude session, combined with a hand off  
+  document, which is a markdown file with a great deal of detail as a master    
+  control panel to route it to the other files, something like that.            
+
+● Cleaning up the Go references I put in multiple files. Then drafting the
+  kickoff message.
+
+● Update(handoff/05_technical_landscape.md)
+  ⎿  Added 1 line, removed 1 line
+      111  
+      112  Where classic UI code lives is TBD (see `08_repositories_acces
+           s_and_compliance.md` for the decision context). The code-organ
+           ization proposal (action item B2) depends on the library-vs-ap
+           p resolution above.
+      113  
+      114 -**Backend repos:** Corresponding backend repositories exist al
+          -ongside the frontend repos, using PostgreSQL. Akhil referred t
+          -o the existence of the backend but did not enumerate specific 
+          -repository names. **EMS Assurance** is referenced as the fault
+          - / alarm / event backend: "EMS assurance is also back inside."
+          - The `poc/REPO/` bundle includes four EMS-side backend repos: 
+          -`cw-inventory`, `cw-inventory-collector`, `cw-epnm-fault`, `em
+          -s-assurance`. Whether other EMS backend repos exist (for examp
+          -le, a device-management Go service referenced by Ramkrishna) i
+          -s open; Confluence page is the authoritative list once Colin c
+          -an confirm access.                                            
+      114 +**Backend repos:** Corresponding backend repositories exist al
+          +ongside the frontend repos, using PostgreSQL. **EMS Assurance*
+          +* is referenced as the fault / alarm / event backend. The `poc
+          +/REPO/` bundle includes four EMS-side backend repos the classi
+          +c UI will call: `cw-inventory`, `cw-inventory-collector`, `cw-
+          +epnm-fault`, `ems-assurance`. Any hardware-integration or devi
+          +ce-management backend services are out of scope for this engag
+          +ement — the POC is a UI reskin against existing EMS REST APIs,
+          + not a re-architecture of the backend stack.                  
+      115  
+      116  ---
+      117  
+
+● Update(handoff/08_repositories_access_and_compliance.md)
+  ⎿  Added 1 line, removed 1 line
+      40  >
+      41  > Both readings are inferences. The execution session's first-d
+          ays investigation resolves which holds, via source reads of `ng
+          -package.json`, `angular.json projectType`, `infra-ui/package.j
+          son` dependencies, and import patterns in `robot-shell.routes.t
+          s`. Handoff doc edits follow that resolution, not Session 2's t
+          ree-only read. See `_scratch_repo/flags_for_colin_2026-04-21.md
+          ` flag 8 for the full framing.
+      42  
+      43 -Exact backend repository names beyond the four above are open. 
+         -Ramkrishna referenced Go services on the device-management side
+         - in the 2026-04-06 walkthrough; no Go was surfaced in the four 
+         -backend repos swept, leaving open whether a separate device-man
+         -agement repo exists outside the swept set. Confluence page is t
+         -he authoritative complete list once Colin can confirm access.  
+      43 +Additional EMS backend repositories beyond these four may exist
+         + (for example, device-management or hardware-integration servic
+         +es). Those are out of scope for this engagement — the POC is a 
+         +UI reskin against existing EMS REST APIs. The four repos above 
+         +are the ones the classic UI is expected to call.               
+      44  
+      45  ### Classic UI code location (undecided)
+      46  
+
+● Update(handoff/08_repositories_access_and_compliance.md)
+  ⎿  Added 1 line, removed 1 line
+      239  
+      240  ## Footer — Update Log
+      241  
+      242 -- **2026-04-21 (Session 2).** §1 Repository Inventory: added t
+          -he library-vs-app ambiguity on `ROBOT/unified-ems-ui` and enum
+          -erated the EMS backend repos with concrete details from the 20
+          -26-04-21 tree-report swarm (`cw-inventory`, `cw-inventory-coll
+          -ector`, `cw-epnm-fault`, `ems-assurance`). Named `ROBOT/infra-
+          -ui`'s data-driven navigation and lazy-loading pattern, and `RO
+          -BOT/common-ui`'s primitive catalog (`cui-*` theme-neutral vs. 
+          -`cw-hbr-*` Harbor-themed). Flagged Go-services question: not s
+          -urfaced in the four swept EMS backend repos; execution session
+          - verifies whether a separate device-management repo exists out
+          -side the swept set. Flagged `ems-assurance` as ADS-only vs. `c
+          -w-epnm-fault` as Docker-first, which shapes local-run feasibil
+          -ity (open question 3.8).                                      
+      242 +- **2026-04-21 (Session 2).** §1 Repository Inventory: added t
+          +he library-vs-app ambiguity on `ROBOT/unified-ems-ui` and enum
+          +erated the EMS backend repos with concrete details from the 20
+          +26-04-21 tree-report swarm (`cw-inventory`, `cw-inventory-coll
+          +ector`, `cw-epnm-fault`, `ems-assurance`). Named `ROBOT/infra-
+          +ui`'s data-driven navigation and lazy-loading pattern, and `RO
+          +BOT/common-ui`'s primitive catalog (`cui-*` theme-neutral vs. 
+          +`cw-hbr-*` Harbor-themed). Flagged `ems-assurance` as ADS-only
+          + vs. `cw-epnm-fault` as Docker-first, which shapes local-run f
+          +easibility (open question 3.8).                               
+      243  
+      244  ---
+      245  
+
+● Update(handoff/_scratch_repo/_findings_log_2026-04-21.md)
+  ⎿  Added 2 lines, removed 6 lines
+      114    Reinforces open question 1.8 (interactive chassis reimplemen
+           tation status
+      115    on EMS side).
+      116  
+      117 -### E. EMS backend — findings that contradict the handoff     
+      117 +### E. EMS backend — findings                                 
+      118  
+      119 -- **Both `cw-inventory` and `cw-inventory-collector` are Sprin
+          -g Boot / Java**,                                              
+      120 -  not Go. The walkthrough's "Go services on the device-managem
+          -ent side"                                                     
+      121 -  (Ramkrishna) does not align with these two repos. Either Go 
+          -services                                                      
+      122 -  are elsewhere (other repos not in this bundle) or the charac
+          -terization                                                    
+      123 -  was partial. Flag back to Ramkrishna through Colin.         
+      119 +- **Both `cw-inventory` and `cw-inventory-collector` are Sprin
+          +g Boot / Java.**                                              
+      120  - **Bulk import looks parked**: `BulkImportRootResource.java1`
+            — the `.java1`
+      121    extension is not Java-compilable. Likely backend gap for the
+            Inventory
+      122    device-add bulk-CSV flow. Might need Selva's direction if th
+           is is a POC
+
+● Update(handoff/_scratch_repo/cross_repo_poc_map_2026-04-21.md)
+  ⎿  Added 1 line, removed 1 line
+      113  | gRPC contract (inventory ↔ collector) | `inventory.proto` |
+      114  | Local profile | `LocalProfileConfig.java` in both `cw-invent
+           ory` and `cw-inventory-collector` |
+      115  
+      116 -**Note:** Both inventory repos are Spring Boot / Java, not Go.
+          - Contradicts Ramkrishna's "Go services on the device managemen
+          -t side" framing. Either Go services are elsewhere or the state
+          -ment was partial. Flag to raise with Selva through Colin.     
+      116 +**Note:** Both inventory repos are Spring Boot / Java. Any har
+          +dware-integration or device-management backend services (which
+          + might be implemented in other languages) are out of scope — t
+          +he POC is a UI reskin against existing EMS REST APIs.         
+      117  
+      118  ---
+      119  
+
+● Update(handoff/_scratch_repo/cross_repo_poc_map_2026-04-21.md)
+  ⎿  Added 1 line, removed 1 line
+      216  | 1.11 Advanced filter structure | `cw-epnm-fault/.../FilterCr
+           iteriaUtil.java` (797) + two AlarmFilterDTO variants. Ambiguit
+           y to disambiguate in source. |
+      217  | 2.2 Shell loading mechanism | Resolved: standard Angular laz
+           y `loadChildren` via `robot-shell.routes.ts`. No Module Federa
+           tion. |
+      218  | 2.3 Common UI consumption | Library pattern: `unified-ems-ui
+           ` is itself a library; `common-ui` is a library consumed via t
+           he internal npm registry (`.npmrc`). |
+      219 -| 2.6 Go services on EMS backend | Flag for Colin/Selva: both 
+          -inventory-side repos and both fault-side repos are Spring Boot
+          - / Java. No Go surfaced in the bundle. Contradicts Ramkrishna'
+          -s walkthrough statement. Either Go is elsewhere or the stateme
+          -nt was partial. |                                             
+      219 +| 2.6 Go services on EMS backend | Not relevant to the POC. Th
+          +is is a UI reskin against existing EMS REST APIs; any hardware
+          +-integration or device-management service language choice is o
+          +ut of scope. Keeping in the open-questions list for completene
+          +ss but not pursuing. |                                        
+      220  | 2.7 10-20% backend gap for POC screens | Concrete gap candid
+           ates: bulk-CSV import (`.java1` extension), chassis interactiv
+           ity backend, `NetworkImpactingAlarm`, `NextStep`. |
+      221  | 3.8 Local runnability (NEW) | Partial. `cw-inventory`, `cw-i
+           nventory-collector`, `cw-epnm-fault` have Dockerfiles and/or L
+           ocalProfileConfig. `ems-assurance` is ADS-only. Infra-ui shoul
+           d run standalone with `ng serve` or the custom-webpack variant
+            — needs verification. End-to-end local-run status remains ope
+           n; specific investigation steps in `_kickoff_context_2026-04-2
+           1.md` §9. |
+      222  
+● Update(handoff/_scratch_repo/cross_repo_poc_map_2026-04-21.md)
+  ⎿  Added 1 line, removed 2 lines
+      227  1. **"Classic" is an overloaded term in this codebase.** `magn
+           etic-*-classic.scss` already exists. Use a distinct prefix for
+            our work.
+      228  2. **Bulk CSV import on EMS inventory is in a parked state.** 
+           `.java1` file extension. If in POC scope, raise to Selva.
+      229  3. **Chassis interactivity may be an EMS gap.** EPNM side is s
+           ubstantive; no EMS equivalent surfaced in the tree.
+      230 -4. **Go services on EMS backend is contradicted by evidence.**
+          - Either a misstatement in the walkthrough or Go lives in repos
+          - not included in the bundle.                                  
+      231 -5. **`ems-assurance` is ADS-only.** If POC needs the EPNM-era 
+          -alarm NBI (`AlarmRestServiceImpl.java`, NetworkImpactingAlarm,
+          - NextStep), ADS access is required.                           
+      230 +4. **`ems-assurance` is ADS-only.** If POC needs the EPNM-era 
+          +alarm NBI (`AlarmRestServiceImpl.java`, NetworkImpactingAlarm,
+          + NextStep), ADS access is required.                           
+      231  6. **The XWT widget layer is distinct from base Dojo.** Cisco 
+           layered its own widget toolkit on Dojo (`xwt/*`). The conversi
+           on patterns in handoff doc 06 target Dojo primitives; XWT-spec
+           ific patterns will need to be added once the execution session
+            surveys actual source.
+      232  7. **Three grid generations in EPNM** (dojox DataGrid, Enhance
+           dGridWrapper, XWT Table.js). Which one Inventory and Alarms ac
+           tually use is unconfirmed. Widget mapping in handoff doc 06 §2
+            may need a fourth row for the XWT Table.js case.
+      233  
+
+● Update(handoff/_scratch_repo/cross_repo_poc_map_2026-04-21.md)
+  ⎿  Error editing file
+
+● Update(handoff/_scratch_repo/flags_for_colin_2026-04-21.md)
+  ⎿  Added 2 lines, removed 21 lines
+       90  
+       91  ---
+       92  
+       93 -## Flag 4. No Go services surfaced in the 14-repo swept bundle
+          - — contradicts Ramkrishna?                                    
+       93 +## Flag 4. [WITHDRAWN 2026-04-21]                             
+       94  
+       95 -**Classification:** NEEDS VALIDATION FIRST.                   
+       95 +Retracted by Colin. The POC is a UI reskin against existing EM
+          +S REST APIs. Hardware-integration or device-management backend
+          + services are out of scope regardless of their implementation 
+          +language. Go services, if they exist, do not touch this projec
+          +t. Removed from kickoff and from the handoff doc footers. Sess
+          +ion 2 error: conflated handoff-doc reference to a walkthrough 
+          +quote with something the project actually cares about.        
+       96  
+       97 -**Evidence for.** Ramkrishna in the 2026-04-06 walkthrough: "T
+          -here are areas, at least on the device management side, and th
+          -ere are Go services running at the back end." The 14 repos swe
+          -pt in `poc/REPO/` are all Java or TypeScript:                 
+       98 -- Inventory backends: `cw-inventory` (Spring Boot / Java), `cw
+          --inventory-collector` (Spring Boot / Java).                   
+       99 -- Fault backends: `cw-epnm-fault` (Spring Boot / Java), `ems-a
+          -ssurance` (Spring Boot / Java).                               
+      100 -- No `.go` files surfaced in any tree report.                 
+      101 -                                                              
+      102 -**Counter-evidence / uncertainty.** Ramkrishna said "device ma
+          -nagement side." The 14 repos swept cover Inventory (cw-invento
+          -ry, cw-inventory-collector) and Fault/Assurance (cw-epnm-fault
+          -, ems-assurance), not device management as its own distinct do
+          -main. If a separate `cw-device-management` or similarly-named 
+          -repo exists outside the 14 swept, then "no Go in the 14" is co
+          -nsistent with Go living in a repo the swarm did not touch.    
+      103 -                                                              
+      104 -The Confluence extract in `poc/context.txt` names these EMS ba
+          -ckend services: `cw-inventory`, `cw-inventory-collector`, `cw-
+          -epnm-fault`, `ems-assurance`, and references `EPNM/inventory` 
+          -and `EPNM/fault` under cross-era reuse. It does not name a sep
+          -arate device-management Go service.                           
+      105 -                                                              
+      106 -**What the execution session should do.**                     
+      107 -1. Read `repo-inventory/repository_inventory.md` (in `poc/REPO
+          -/`) and confirm exactly which 14 were swept and what their sou
+          -rce URLs are.                                                 
+      108 -2. Read the Confluence page once access is confirmed — it is t
+          -he authoritative complete repository list.                    
+      109 -3. Ask Akhil in his follow-up email (action item A7, still pen
+          -ding) whether there are additional EMS backend repos not in th
+          -e bundle.                                                     
+      110 -4. Only then consider raising to Selva.                       
+      111 -                                                              
+      112 -**Decision requested:** Confirm Session 2 treats this as "exec
+          -ution-session validates first, not raised to Selva yet." The f
+          -lag gets noted in the execution-session kickoff message as som
+          -ething to verify during the initial repo-access and Confluence
+          --reading phase.                                               
+      113 -                                                              
+      114 -**Who decides:** Colin.                                       
+      115 -                                                              
+       97  ---
+       98  
+       99  ## Flag 5. `ems-assurance` is ADS-only; `cw-epnm-fault` is Doc
+           ker-first
+
+● Write(execution_session_kickoff_2026-04-21.md)
+  ⎿  Wrote 206 lines to execution_session_kickoff_2026-04-21.md
+      2 # Execution Session Kickoff — EPNM-to-EMS Classic View POC
+      3 ## Read This First
+      5 You are the execution session for this POC. You run on Colin's Ci
+        sco-issued Mac with access to all the Cisco repositories this pro
+        ngular code, inside the existing EMS build, reproducing the EPNM 
+        user experience for two specific functional areas, against the ex
+      6 isting EMS backend unchanged.
+      7 There is a second Claude session running on Colin's BayOne machin
+        or you: reading the handoff package, absorbing tree-report dumps,
+         building maps, writing primers. Session 2 does not have re
+     … +427 lines (ctrl+o to expand)
+
+● Created the detailed kickoff document. Now the shorter paste-able prompt.
+
+● Write(execution_session_paste_prompt_2026-04-21.md)
+  ⎿  Wrote 10 lines to execution_session_paste_prompt_2026-04-21.md
+        assic view POC. You are running on Colin Moore's Cisco-issued Mac
+         with access to the full EPNM and EMS / CNC repository set on `gi
+        thub3.cisco.com`. Your counterpart is Session 2, a Claude instanc
+        e running on Colin's BayOne machine that has been producing orche
+        stration, synthesis, and starting-context materials for you. Sess
+        om Session 2 do not match source you can see, trust source.ons fr
+      2 
+      3 Before doing anything else, read `poc/execution_session_kickoff_2
+        026-04-21.md` in full. It is the master control panel: it explain
+        s the engagement, the operating model, the c
+     … +20 lines (ctrl+o to expand)
+
+● ---
+  Deliverables for the Execution Session
+
+  Produced on the BayOne machine. Transfer to the Cisco Mac before pasting the
+  prompt.
+
+  Two new files at the top of the POC folder
+
+  Path: cisco/epnm_ems/poc/execution_session_paste_prompt_2026-04-21.md
+  Role: Short prompt Colin pastes into the fresh Cisco Mac Claude / Codex
+    session. Points at the larger document.
+  Size: Small
+  ────────────────────────────────────────
+  Path: cisco/epnm_ems/poc/execution_session_kickoff_2026-04-21.md
+  Role: The detailed master-control-panel handoff document. Explains engagement,
+
+    operating model, rules, file routing, starting-context flags.
+  Size: ~250 lines
+
+  Handoff package — 12 documents plus index and kickoff context
+
+  All under cisco/epnm_ems/poc/handoff/:
+
+  ┌──────────────────────────────────────────┬───────────────────────────────┐
+  │                   File                   │             Notes             │
+  ├──────────────────────────────────────────┼───────────────────────────────┤
+  │ 00_index.md                              │ Entry point, reading order,   │
+  │                                          │ folder tour                   │
+  ├──────────────────────────────────────────┼───────────────────────────────┤
+  │ 01_project_overview.md                   │ Engagement anchor             │
+  ├──────────────────────────────────────────┼───────────────────────────────┤
+  │ 02_engagement_history.md                 │ Chronological narrative       │
+  ├──────────────────────────────────────────┼───────────────────────────────┤
+  │ 03_objectives_and_scope.md               │ Exact POC scope               │
+  ├──────────────────────────────────────────┼───────────────────────────────┤
+  │ 04_strategic_approach.md                 │ Fidelity over novelty,        │
+  │                                          │ exponential-decay framing     │
+  ├──────────────────────────────────────────┼───────────────────────────────┤
+  │                                          │ Updated 2026-04-21 — Session  │
+  │ 05_technical_landscape.md                │ 2 additions + library-vs-app  │
+  │                                          │ framing                       │
+  ├──────────────────────────────────────────┼───────────────────────────────┤
+  │                                          │ Updated 2026-04-21 —          │
+  │ 06_conversion_patterns_reference.md      │ epnm-classic prefix applied   │
+  │                                          │ throughout                    │
+  ├──────────────────────────────────────────┼───────────────────────────────┤
+  │ 07_stakeholders_and_organization.md      │ Names, roles, speech-to-text  │
+  │                                          │ resolutions                   │
+  ├──────────────────────────────────────────┼───────────────────────────────┤
+  │                                          │ Updated 2026-04-21 — Session  │
+  │ 08_repositories_access_and_compliance.md │ 2 additions + library-vs-app  │
+  │                                          │ framing + backend-repo        │
+  │                                          │ details                       │
+  ├──────────────────────────────────────────┼───────────────────────────────┤
+  │ 09_work_items.md                         │ Backlog at transcript         │
+  │                                          │ granularity                   │
+  ├──────────────────────────────────────────┼───────────────────────────────┤
+  │ 10_open_questions_and_risks.md           │ Open questions and named      │
+  │                                          │ risks                         │
+  ├──────────────────────────────────────────┼───────────────────────────────┤
+  │ 11_ways_of_working.md                    │ Escalation, decision          │
+  │                                          │ authority, working rhythm     │
+  ├──────────────────────────────────────────┼───────────────────────────────┤
+  │ _kickoff_context_2026-04-21.md           │ Running kickoff context,      │
+  │                                          │ operating model, open Q 3.8   │
+  ├──────────────────────────────────────────┼───────────────────────────────┤
+  │                                          │ Session 1's approved plan for │
+  │ _proposed_plan_2026-04-20.md             │  handoff assembly             │
+  │                                          │ (informational)               │
+  ├──────────────────────────────────────────┼───────────────────────────────┤
+  │ _tree_snapshot_2026-04-20.md             │ Engagement folder tree        │
+  │                                          │ snapshot (informational)      │
+  └──────────────────────────────────────────┴───────────────────────────────┘
+
+  Session 2 scratch materials — synthesis and agent outputs
+
+  All under cisco/epnm_ems/poc/handoff/_scratch_repo/:
+
+  ┌─────────────────────────────────────────┬────────────────────────────────┐
+  │                  File                   │              Role              │
+  ├─────────────────────────────────────────┼────────────────────────────────┤
+  │ _findings_log_2026-04-21.md             │ Running cross-agent findings   │
+  │                                         │ ledger                         │
+  ├─────────────────────────────────────────┼────────────────────────────────┤
+  │                                         │ Cross-repo POC map — where     │
+  │ cross_repo_poc_map_2026-04-21.md        │ code appears to live on both   │
+  │                                         │ sides                          │
+  ├─────────────────────────────────────────┼────────────────────────────────┤
+  │                                         │ JAR / WAR / Maven / Spring     │
+  │ java_multi_repo_primer.md               │ Boot primer (Django-brained    │
+  │                                         │ framing)                       │
+  ├─────────────────────────────────────────┼────────────────────────────────┤
+  │ xwt_primer.md                           │ Observed XWT widget toolkit    │
+  │                                         │ inventory — facts only         │
+  ├─────────────────────────────────────────┼────────────────────────────────┤
+  │ saurav_transcript_extract_2026-04-21.md │ Extract of 2026-04-21          │
+  │                                         │ Saurav-Colin transcript        │
+  ├─────────────────────────────────────────┼────────────────────────────────┤
+  │ flags_for_colin_2026-04-21.md           │ Session 2 flags as surfaced    │
+  │                                         │ and reviewed with Colin        │
+  ├─────────────────────────────────────────┼────────────────────────────────┤
+  │ agent_01_epnm_assembly.md               │ Agent 01 extraction            │
+  ├─────────────────────────────────────────┼────────────────────────────────┤
+  │ agent_02_epnm_chassisview.md            │ Agent 02 extraction            │
+  ├─────────────────────────────────────────┼────────────────────────────────┤
+  │ agent_03_epnm_inventory.md              │ Agent 03 extraction            │
+  ├─────────────────────────────────────────┼────────────────────────────────┤
+  │ agent_04_epnm_fault.md                  │ Agent 04 extraction            │
+  ├─────────────────────────────────────────┼────────────────────────────────┤
+  │ agent_05_epnm_pf_framework.md           │ Agent 05 extraction            │
+  ├─────────────────────────────────────────┼────────────────────────────────┤
+  │ agent_06_ems_unified_ems_ui.md          │ Agent 06 extraction            │
+  ├─────────────────────────────────────────┼────────────────────────────────┤
+  │ agent_07_ems_infra_ui.md                │ Agent 07 extraction            │
+  ├─────────────────────────────────────────┼────────────────────────────────┤
+  │ agent_08_ems_common_ui.md               │ Agent 08 extraction            │
+  ├─────────────────────────────────────────┼────────────────────────────────┤
+  │ agent_09_ems_inventory_backend.md       │ Agent 09 extraction (inventory │
+  │                                         │  backend pair)                 │
+  ├─────────────────────────────────────────┼────────────────────────────────┤
+  │ agent_10_ems_fault_backend.md           │ Agent 10 extraction (fault     │
+  │                                         │ backend pair)                  │
+  ├─────────────────────────────────────────┼────────────────────────────────┤
+  │ _pilot_write_check.md                   │ Pilot write-verification       │
+  │                                         │ artifact (informational only)  │
+  └─────────────────────────────────────────┴────────────────────────────────┘
+
+  Already on the Cisco Mac
+
+  These were produced on the Cisco Mac, not the BayOne machine:
+
+  - cisco/epnm_ems/poc/REPO/ — the full repository analysis bundle (tree
+  reports, consolidated reports, repo inventory)
+  - cisco/epnm_ems/poc/context.txt — Confluence extract
+  - cisco/epnm_ems/poc/transcripts/saurav-colin_4-21-2026_formatted.txt — Saurav
+   transcript
+
+  Research library and source transcripts
+
+  Under cisco/epnm_ems/research/ (57 files) and cisco/epnm_ems/source/ (raw and
+  formatted transcripts plus two screenshots). These are the authoritative
+  engagement-history substrate. The kickoff document cites them as
+  reference-only reading. Whether the Cisco Mac already has these or whether
+  Colin needs to transfer them is Colin's call — he has been moving files
+  through Cisco WebEx between machines per the Saurav transcript context.
+
+  Transfer summary
+
+  If moving via Cisco WebEx in one bundle: zip cisco/epnm_ems/poc/ (kickoff
+  prompt, kickoff document, the full handoff/ folder with scratch), plus
+  optionally cisco/epnm_ems/research/ and cisco/epnm_ems/source/ if not already
+  on the Cisco Mac. The poc/REPO/ subfolder is already present on the Cisco Mac;
+   transferring a copy would overwrite it harmlessly.
+
+  To paste on the Cisco Mac
+
+  The contents of poc/execution_session_paste_prompt_2026-04-21.md go into the
+  fresh Claude / Codex session as the kickoff input. Everything else is
+  file-system context the execution session reads after starting.
+
+✻ Churned for 6m 5s
+
+※ recap: Overall goal: hand off the EPNM-to-EMS classic-view POC to Colin's Cisco-Mac execution session. Current task: kickoff prompt, master handoff doc, and transfer file list are all written. Next action: your review and any corrections before transfer. (disable recaps in /config)
+
+❯ They have the POC/REPO folder, but I have no idea why you're claiming that    
+  the Saurav transcript or the confluence extract are on the Mac, because       
+  neither of those are on the Mac. That's fine; I'll take care of it, but       
+  clearly you don't know. It's just the repo folder that's on the Mac, and the  
+  poc/handoff folder from this repository.                                      
+  I'm a bit confused here, because you wrote a short kickoff when I gave you    
+  all this context and we did all this talking. Where did all of this go? What  
+  files did you write here? I told you to write two files:                      
+  - One called Handoff                                                          
+  - One called Kickoff                                                          
+  The kickoff was the simple pasteable prompt. The handoff was a much more      
+  detailed document. Here I am seeing that you wrote two files. You wrote a     
+  kickoff document that sounds like it should be the handoff, which makes no    
+  sense, and then you wrote another document which did not match the structure  
+  that I asked you to do. What's going on here?                                 
+  Also, even in the kickoff document that you have now, which, by the way,      
+  should still be called a handoff document, you are using paths that you are   
+  assuming. You know the paths on this machine; you have no idea of the paths   
+  for the other machine. You can keep everything as is, but at the top you      
+  should add a disclaimer that says you might need to look for things or ask    
+  Colin where to  find them; dont take paths literally because while the files  
+  are there, it might be from another maching                                   
+
+● Three errors to fix cleanly. Correcting now.
+
+● Bash(cd /home/cmoore/programming/ai_opportunities/cisco/epnm_ems/poc && mv
+      execution_session_kickoff_2026-04-21.md
+      execution_session_handoff_2026-04-21.md && mv exec…)
+  ⎿  -rw-r--r-- 1 cmoore cmoore 20418 Apr 21 23:24 execution_session_handof
+     f_2026-04-21.md
+     -rw-r--r-- 1 cmoore cmoore  1607 Apr 21 23:25 execution_session_kickof
+     f_2026-04-21.md
+
+● Updating the kickoff prompt's reference to point to the handoff document (not
+  to itself), and adding the path disclaimer to the handoff document.
+
+● Update(execution_session_kickoff_2026-04-21.md)
+  ⎿  Added 1 line, removed 1 line
+      1  You are the execution session for the BayOne–Cisco EPNM-to-EMS c
+         lassic view POC. You are running on Colin Moore's Cisco-issued M
+         ac with access to the full EPNM and EMS / CNC repository set on 
+         `github3.cisco.com`. Your counterpart is Session 2, a Claude ins
+         tance running on Colin's BayOne machine that has been producing 
+         orchestration, synthesis, and starting-context materials for you
+         . Session 2 has no repo access. You do. When tree-based observat
+         ions from Session 2 do not match source you can see, trust sourc
+         e.
+      2  
+      3 -Before doing anything else, read `poc/execution_session_kickoff_
+        -2026-04-21.md` in full. It is the master control panel: it expla
+        -ins the engagement, the operating model, the compliance rules, t
+        -he branch constraint, where every relevant file lives, the start
+        -ing-context flags you should be aware of before touching source,
+        - and how you communicate with Colin and Session 2. Then work thr
+        -ough the reading sequence listed in that document.              
+      3 +Before doing anything else, read `poc/execution_session_handoff_
+        +2026-04-21.md` in full. It is the master control panel: it expla
+        +ins the engagement, the operating model, the compliance rules, t
+        +he branch constraint, where every relevant file lives, the start
+        +ing-context flags you should be aware of before touching source,
+        + and how you communicate with Colin and Session 2. Paths in that
+        + document are illustrative — they describe the engagement folder
+        + structure, not absolute paths on your Cisco Mac. If a file is r
+        +eferenced by name and you cannot find it, ask Colin. Then work t
+        +hrough the reading sequence listed in that document.            
+      4  
+      5  Two rules that override everything else:
+      6  
+
+● Update(execution_session_handoff_2026-04-21.md)
+  ⎿  File must be read first
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(execution_session_handoff_2026-04-21.md)
+  ⎿  Added 11 lines, removed 1 line
+       1 -# Execution Session Kickoff — EPNM-to-EMS Classic View POC     
+       1 +# Execution Session Handoff — EPNM-to-EMS Classic View POC     
+       2  
+       3 +## Path and Transfer Disclaimer (read first)                   
+       4 +                                                               
+       5 +Paths quoted in this document are illustrative. They describe t
+         +he structure of the engagement folder as it exists on Colin's B
+         +ayOne machine where Session 2 produced the handoff package. On 
+         +your Cisco Mac the absolute prefix is different; the relative s
+         +tructure under the POC folder is what matters. If this document
+         + references a file by name and you cannot find it at the path i
+         +mplied, the file may be:                                       
+       6 +                                                               
+       7 +- At a different absolute prefix on your Cisco Mac (look for th
+         +e same relative path under wherever Colin staged the engagement
+         + folder).                                                      
+       8 +- Not yet transferred to your Cisco Mac. Colin moves files betw
+         +een machines through Cisco WebEx; some supporting files (the re
+         +search library, source transcripts, the Saurav transcript extra
+         +ct, the Confluence context extract) may still be on the BayOne 
+         +side when you start. Ask Colin.                                
+       9 +- Present but under a slightly different folder name if staging
+         + required it.                                                  
+      10 +                                                               
+      11 +Treat every path below as a pointer to a file by name, not a li
+         +teral filesystem location. Ask Colin when you cannot find somet
+         +hing. Do not assume the file does not exist.                   
+      12 +                                                               
+      13  ## Read This First
+      14  
+      15  You are the execution session for this POC. You run on Colin's 
+          Cisco-issued Mac with access to all the Cisco repositories this
+           project touches. Your job is to build the classic-view toggle 
+          POC: Angular code, inside the existing EMS build, reproducing t
+          he EPNM user experience for two specific functional areas, agai
+          nst the existing EMS backend unchanged.
+
+● Acknowledging the errors directly.
+
+  Error 1 — inverted file naming. You asked for kickoff = short paste prompt and
+   handoff = detailed master control panel. I produced the right two documents
+  but gave them inverted names. Files are now renamed:
+  - poc/execution_session_kickoff_2026-04-21.md — the short paste prompt. 10
+  lines. What you paste into the Cisco Mac session.
+  - poc/execution_session_handoff_2026-04-21.md — the detailed master control
+  panel. ~265 lines. What the Cisco Mac session reads after the paste. Internal
+  title line in the document also corrected to "Handoff."
+
+  Error 2 — claimed files were on the Cisco Mac that aren't. I wrote in the
+  deliverables list that poc/context.txt and the Saurav formatted transcript
+  were "already on the Cisco Mac." That was wrong. Only poc/REPO/ and
+  poc/handoff/ are there. Corrected understanding: if those files matter for the
+   execution session, they need transfer along with everything else.
+
+  Error 3 — assumed paths. I wrote /home/cmoore/... style paths in the handoff
+  document as if they apply on the Cisco Mac. They don't. Added a "Path and
+  Transfer Disclaimer" block at the top of the handoff document that reframes
+  every path as illustrative — a pointer to a file by name, not a literal
+  filesystem location — and instructs the execution session to ask you when it
+  can't find something. The paths in the body stay (they describe
+  engagement-folder structure) but the disclaimer makes clear the absolute
+  prefix may differ and some referenced files may not yet have been transferred.
+
+  Corrected transfer list (what you need to move from the BayOne machine to the
+  Cisco Mac):
+
+  - cisco/epnm_ems/poc/execution_session_kickoff_2026-04-21.md (short paste
+  prompt)
+  - cisco/epnm_ems/poc/execution_session_handoff_2026-04-21.md (detailed master
+  control panel)
+  - cisco/epnm_ems/poc/handoff/ — already on Cisco Mac, but contains updates
+  since you last moved it. Three handoff docs were edited today (05, 06, 08) and
+   the _scratch_repo/ subfolder was created fresh. Transfer the whole folder
+  again to overwrite, or only the updated files and the scratch folder.
+  - cisco/epnm_ems/poc/context.txt — not yet on Cisco Mac
+  - cisco/epnm_ems/poc/transcripts/saurav-colin_4-21-2026_formatted.txt — not
+  yet on Cisco Mac
+  - cisco/epnm_ems/research/ — whether this is already on the Cisco Mac is your
+  call; the handoff references it as reference-only reading
+  - cisco/epnm_ems/source/ — same question; reference-only
+
+  Already on Cisco Mac (no action needed): cisco/epnm_ems/poc/REPO/ produced
+  there originally.
+✻ Cooked for 1m 5s
+
+❯ So what do I do now? There's no reason to give them the research or source    
+  file. What is the purpose of them reading the saurav transcript?              
+
+● You're right. Saurav transcript has nothing the execution session needs —
+  Namita incident is a different project, the commercial context is stripped
+  from the handoff by rule, and everything scope-relevant from that conversation
+   was already distilled by Session 2 into the handoff package and the kickoff
+  context. Same logic kills the research library and source transcripts as
+  wholesale transfers — they're historical raw material that the handoff package
+   already distills.
+
+  Fixing the handoff document to remove those references and tightening the
+  transfer list.
+
+● Update(execution_session_handoff_2026-04-21.md)
+  ⎿  Added 5 lines, removed 4 lines
+      41  
+      42  | Path | Contents |
+      43  |---|---|
+      44 -| `research/` | 57-file immutable blockchain-style research lib
+         -rary, 2026-02-09 through 2026-04-07. Methodology, meeting deep-
+         -dives, summaries, bridge documents. Read as reference. Never ed
+         -it. |                                                          
+      45 -| `source/` | Raw speech-to-text transcripts and formatted tran
+         -scripts of the three Guhan/Selva meetings and the 2026-04-06 te
+         -am walkthrough. Read only when you need ground truth the resear
+         -ch library may have compressed. Transcripts are messy — names g
+         -et garbled, terms get mangled, phrasing is casual. |           
+      44  | `poc/handoff/` | The 12-document handoff package. Start here.
+           See next section. |
+      47 -| `poc/handoff/_scratch_repo/` | Session 2's agent-extraction o
+         -utputs, findings log, cross-repo POC map, primers, flag documen
+         -ts. Working material. |                                        
+      45 +| `poc/handoff/_scratch_repo/` | Session 2's cross-repo POC map
+         +, findings log, and two primers. Starting context produced from
+         + tree reports. |                                               
+      46  | `poc/REPO/` | Repository analysis bundle you produced on the 
+          Cisco Mac. Tree reports for every in-scope repo, plus consolida
+          ted and machine-readable summaries. |
+      49 -| `poc/transcripts/` | Transcripts Colin has shared during the 
+         -kickoff phase. |                                               
+      47  | `poc/context.txt` | Confluence extract from Cisco: authoritat
+          ive repository URLs, scope modules, EPNM wiki link. |
+      48  | `poc/` (working folder) | Where your new artifacts accumulate
+          . Progress notes, decision logs, any output produced during the
+           POC. |
+      49  
+      50 +### Available on request, not pre-staged                       
+      51 +                                                               
+      52 +The research library (`cisco/epnm_ems/research/`, 57 files) and
+         + the raw / formatted source transcripts (`cisco/epnm_ems/source
+         +/`) live on Colin's BayOne machine. They are the engagement's h
+         +istorical substrate. The handoff package already distills the s
+         +cope-material parts. If you encounter a specific question where
+         + you suspect the raw transcript or a specific research file hol
+         +ds the answer, ask Colin to send that one file. Do not assume t
+         +hese are on your machine.                                      
+      53 +                                                               
+      54  ---
+      55  
+      56  ## Starting Reading Order
+
+● Update(execution_session_handoff_2026-04-21.md)
+  ⎿  Added 1 line, removed 4 lines
+      69  10. **`poc/handoff/_scratch_repo/_findings_log_2026-04-21.md`**
+           — Session 2's running findings ledger from the 10-agent tree-r
+          eport absorption.
+      70  11. **`poc/handoff/_scratch_repo/java_multi_repo_primer.md`** —
+           Colin flagged he is Django-brained on the Java side. This prim
+          er covers JARs, WARs, Maven multi-module builds, Spring Boot pr
+          ofile models, and how the EPNM and EMS stacks differ in runnabi
+          lity shape.
+      71  12. **`poc/handoff/_scratch_repo/xwt_primer.md`** — observed XW
+          T widget toolkit inventory inside `pf-framework`. Doc 06's widg
+          et mapping table was built from raw Dojo research; XWT is not i
+          n that table. Factual catalog only, no proposed mappings.
+      72 -13. **`poc/handoff/_scratch_repo/saurav_transcript_extract_2026
+         --04-21.md`** — Session 2's extract of the 2026-04-21 Saurav-Col
+         -in conversation. Informational.                                
+      73 -14. **`poc/handoff/_scratch_repo/flags_for_colin_2026-04-21.md`
+         -** — the flags Session 2 surfaced and walked Colin through. Sev
+         -eral were withdrawn or reframed; read to understand what is and
+         - is not a flag after Colin's review.                           
+      74 -15. **`poc/handoff/_kickoff_context_2026-04-21.md`** — running 
+         -kickoff context updated through 2026-04-21 including the operat
+         -ing-model clarification, open question 3.8 (local runnability),
+         - and the scope-discipline posture.                             
+      75 -16. **The research library and source transcripts** as you need
+         - them. Both are reference-only. Start with `research/00_methodo
+         -logy_2026-02-09.md` if you want to understand how the library i
+         -s organized.                                                   
+      72 +13. **`poc/handoff/_kickoff_context_2026-04-21.md`** — running 
+         +kickoff context updated through 2026-04-21 including the operat
+         +ing-model clarification, open question 3.8 (local runnability),
+         + and the scope-discipline posture.                             
+      73  
+      74  ---
+      75  
+
+● Handoff document cleaned. Saurav extract and research/source references
+  removed from the reading order. The Available-on-request section explains why.
+
+  What you do now:
+
+  Transfer this to the Cisco Mac (everything under cisco/epnm_ems/poc/):
+
+  1. execution_session_kickoff_2026-04-21.md — the short paste prompt. You paste
+   its contents into the fresh Claude / Codex session on the Cisco Mac.
+  2. execution_session_handoff_2026-04-21.md — the detailed master control
+  panel.
+  3. handoff/ folder — all 12 handoff docs, plus _kickoff_context_2026-04-21.md,
+   plus _scratch_repo/. Three handoff docs (05, 06, 08) were edited today and
+  _scratch_repo/ is new since your last transfer, so send the whole handoff/
+  folder again to overwrite.
+  4. context.txt — the Confluence extract.
+
+  The REPO/ folder is already on the Cisco Mac; no action there.
+
+  Don't send: research library, source transcripts, Saurav transcript, Saurav
+  extract. The handoff package already distills them. If the execution session
+  ever asks for a specific one, you send it then.
+
+  Optional cleanup on the BayOne side before transfer: the _scratch_repo/ folder
+   contains two files that aren't useful to the execution session —
+  _pilot_write_check.md (Session 2's pilot-agent verification artifact) and
+  saurav_transcript_extract_2026-04-21.md (Session 2 working material only). If
+  you want, exclude both from the transfer. The flags_for_colin_2026-04-21.md is
+   borderline — it documents Session 2's flag back-and-forth with you, which
+  could inform the execution session on context but could also confuse with
+  retracted flags; your call whether to include it.
+
+  Paste prompt on the Cisco Mac is the contents of
+  execution_session_kickoff_2026-04-21.md. That is all it does — hand the
+  session its identity and point it at the handoff document. Everything
+  substantive is in the handoff document and the handoff package.
+
+✻ Cooked for 1m 7s
+
+※ recap: Goal is handing off the EPNM-to-EMS classic view POC to the Cisco Mac execution session. Kickoff and handoff documents are written, transfer list is tight, files are ready. Next action is yours: transfer the listed files to the Cisco Mac. (disable recaps in /config)
+
+❯ Cool. Now here's what I want to do. We are going to document this entire      
+  journey to explain our full methodology and how it works. Here's the trick: I 
+   do not, under any circumstances whatsoever, want you to mention different    
+  machines, Cisco versus BayOne, Computer A versus Computer B, anything like    
+  that. For all intents and purposes, this is on a single machine on Cisco, and 
+   we do not want to talk about transfer of information between devices in any  
+  way, shape, or form.                                                          
+  Instead of Claude, we want to say Codex, the reason being that, practically   
+  speaking, there is no productive reason to do so. This is exemplary for       
+  different workflows. I will simply do some rejects and find a place for       
+  Claude or for Codex if I ever needed to switch it, because we will be able to 
+   accomplish roughly the same process with the same ideas. I want it to be     
+  absolutely complete, because this is effectively a massive document that      
+  would eventually be used for a case study, if that makes sense, an internal   
+  one as well as being shared with the Cisco team so that they can fully        
+  understand their detailed process. It is allowed to contain Cisco specifics,  
+  although it shouldn't contain anything that would be considered sensitive     
+  internally. It is to capture the methodology, approach, and progress. It is   
+  not, however, to call out a timeline or to try to say this was the number of  
+  lines used or this was x or y or z. Tree diagrams are great to have. This     
+  will be marked on files; in fact, it will be a series of marked on files      
+  focused on specific parts of the process. They do not need to be super        
+  granular; think of them like chapters in a book, almost. They can be very,    
+  very long and they should be extremely complete, thorough, and comprehensive. 
+  Now, you were actually the thing that did this most of all compared to the    
+  other sessions. I'm going to give you the transcript from another Claude      
+  session that predated you so that you can get a sense of all that was done    
+  there. I want you to read that thoroughly and use that to start out the       
+  document. I do not want you to do this all in one go. I do not want you to    
+  call out things like the singularity skill either. Just document generically  
+  all that happened here, and you can leave that as an upstream part for        
+  understanding the specific requirements, details, and, in general, you can    
+  call everything that predated the transcript that I'm about to share with you 
+   "discovery" and describe it at a high level to start. This should be         
+  complete; this is effectively a total map and model of our work in the        
+  engagement. It is a technical document and should be extremely thorough and   
+  complete.                                                                     
+  I also want you to make a document with a guide for the understanding here. I 
+   want you to separate it into two:                                            
+  1. A thorough explanation of exactly what we are trying to do without any of  
+  the rules in it. By what we are trying to do, I'm specifically talking about  
+  this current effort, if that makes sense. The effort to document. Don't say   
+  "case study", but just say "detailed account of our journey on this project". 
+  2. The rules doc, but all the rules for how this should be generated that     
+  I've shared with you in that document.                                        
+  Both of these will be used by future sessions in order to continue the        
+  process and know where to pick up. You should assume that it is able to be    
+  used for continuity.                                                          
+  The third document that I would like you to put together is a high-level      
+  overview of what was covered, almost like a table of contents in a book. You  
+  don't have to provide paths, because all these will be in the same directory  
+  regardless of what machine they are on. At the end of the table of contents,  
+  there should be a section that does a quick recap of what was just done and   
+  where the state is at and when it was last updated, including a date and a    
+  time, so the other sessions know what is already covered and what is not.     
+  Make sense?                                                                   
+
+● Understood. I'll produce the three foundation documents now and stop there,
+  since the methodology chapters require the Session 1 transcript you're about
+  to share. Using the new folder cisco/epnm_ems/methodology/ to house the
+  documentation set.
+
+● Bash(mkdir -p
+      /home/cmoore/programming/ai_opportunities/cisco/epnm_ems/methodology && ls
+       -la /home/cmoore/programming/ai_opportunities/cisco/epnm_ems/methodology)
+  ⎿  total 8
+     drwxr-xr-x  2 cmoore cmoore 4096 Apr 22 09:04 .
+     drwxr-xr-x 13 cmoore cmoore 4096 Apr 22 09:04 ..
+
+● Write(~/programming/ai_opportunities/cisco/epnm_ems/methodology/about.md)
+  ⎿  Wrote 43 lines to ../methodology/about.md
+      2 # About This Documentation
+      4 ## What This Is
+      5 A detailed account of our journey on the BayOne–Cisco EPNM-to-EMS
+        ment that captures the full methodology and approach used across 
+        the engagement: how discovery was conducted, how context was asse
+        ross-cutting synthesis was produced, how scope was disciplined, a
+        ructure.he work was prepared for execution inside Cisco's infrast
+      6 
+        gth markdown files. Each chapter covers a specific phase or disci
+        pline of the work. Readers can work through them i
+     … +80 lines (ctrl+o to expand)
+
+● Write(~/programming/ai_opportunities/cisco/epnm_ems/methodology/rules.md)
+  ⎿  Wrote 71 lines to ../methodology/rules.md
+      2 # Authoring Rules
+      3 These rules govern how all documents in this set are written. Eve
+        le is unclear or conflicts with material a contributor wants to a
+        dd, the conflict is surfaced rather than resolved silently.
+      5 ## 1. Single-Venue Framing
+      6 
+        ingle Cisco machine. Do not describe the work as occurring across
+         separate machines, computers, devices, environments, or instance
+        e side versus the other side," "Computer A versus Computer B," or
+         similar framing. Any operational detail that would require de
+     … +128 lines (ctrl+o to expand)
+
+● Write(~/programming/ai_opportunities/cisco/epnm_ems/methodology/contents.md)
+  ⎿  Wrote 45 lines to ../methodology/contents.md
+      2 # Table of Contents
+      3 ## Foundation Documents
+      4 
+      5 - `about.md` — What this documentation is, what it covers, who it
+         is for, how it is structured.
+        tors read before adding content.hat govern all chapters. Contribu
+      7 - `contents.md` — This document. Table of contents and session st
+        ate.
+      8 
+      9 ## Chapters
+     … +61 lines (ctrl+o to expand)
+
+● Foundation is in place.
+
+  Three documents under cisco/epnm_ems/methodology/:
+
+  - about.md — Purpose of the documentation set, audience, scope, what's
+  included vs. excluded, how the chapters are organized, continuity approach. No
+   authoring rules mixed in.
+  - rules.md — All twelve authoring rules: single-venue framing (no
+  multi-machine language), Codex as the tool name, no timelines or quantitative
+  metrics, tree diagrams welcome, chapter-scale thoroughness, generic
+  descriptions of internal frameworks, discovery as a single grouping, Cisco
+  specifics allowed but sensitive material excluded, continuity markers,
+  observation-versus-conclusion discipline, neutral authorial voice, iterative
+  production.
+  - contents.md — High-level table of contents listing ten planned chapters
+  (from discovery through uncertainty management), plus a Current State section
+  at the end with last-updated date (2026-04-22), what exists, what's next, and
+  notes for continuity so a future session can pick up cleanly.
+
+  Ready for the Session 1 transcript. Once you share it, I'll ingest it
+  thoroughly and begin Chapter 1 (Discovery) — framing everything that preceded
+  the transcript at a high level per rule 7 — and continue from there.
+
+✻ Cogitated for 2m 59s

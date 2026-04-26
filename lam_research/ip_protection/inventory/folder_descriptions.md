@@ -1,6 +1,6 @@
 # Folder Descriptions — lam_research/ip_protection
 
-Generated: 2026-04-20
+Generated: 2026-04-23
 
 lam_research/ip_protection/
 ├── archive/                            — Pre-restructure historical files (last updated: 2026-04-06)
@@ -18,14 +18,18 @@ lam_research/ip_protection/
 │       │   └── set_03_discussion/      — Contains 7 files (last updated: 2026-04-06)
 │       └── 2026-03-20_quality_review/  — Contains 3 files (last updated: 2026-04-06)
 ├── decisions/                          — Open questions and agreed decisions (empty)
-├── deliverables/                       — Client-facing documents (markdown + HTML) (last updated: 2026-04-09)
-├── planning/                           — Approach planning, session handoffs, notes (last updated: 2026-04-17)
+├── deliverables/                       — Client-facing documents (markdown + HTML) (empty)
+│   ├── 02_discovery_call_2026-03-12/   — Contains 8 files (last updated: 2026-04-20)
+│   ├── 05_second_meeting_2026-04-06/   — Contains 2 files (last updated: 2026-04-20)
+│   ├── 06_pricing_and_proposal_2026-04-09/— Contains 6 files (last updated: 2026-04-20)
+│   └── 09_execution_kickoff_2026-04-20/— Contains 5 files (last updated: 2026-04-20)
+├── planning/                           — Approach planning, session handoffs, notes (last updated: 2026-04-20)
 ├── presentations/                      — Slide decks, presentation materials (empty)
 │   └── discovery_2026-04-06/           — Contains 11 files (last updated: 2026-04-06)
 ├── pricing/                            — Pricing specs, corrections, cost models (last updated: 2026-04-09)
 ├── progress/                           — Running status tracking (empty)
 ├── research/                           — Blockchain-style research decomposition (append-only) (last updated: 2026-04-20)
-└── source/                             — Raw input files (never modified) (last updated: 2026-04-17)
+└── source/                             — Raw input files (never modified) (last updated: 2026-04-20)
     └── lam_sow/                        — Contains 2 files (last updated: 2026-04-17)
         ├── page_01/                    — Contains 5 files (last updated: 2026-04-17)
         ├── page_02/                    — Contains 5 files (last updated: 2026-04-17)

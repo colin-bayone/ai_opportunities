@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 06: Access Items Requiring Action</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-darkest: #0c1929;
+      --blue-dark: #15293e;
+      --blue-mid: #1e3a5f;
+      --blue-bright: #2563eb;
+      --blue-accent: #3b82f6;
+      --steel-light: #64748b;
+      --steel-glow: #94a3b8;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --amber: #f59e0b;
+      --amber-dark: #b45309;
+      --red-soft: #ef4444;
+      --red-soft-dark: #b91c1c;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e6e8eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fcfdff 60%, #f7f9fc 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--blue-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 14px 40px 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .definition-bar {
+      background: linear-gradient(135deg, var(--blue-darkest), var(--blue-mid));
+      border-radius: 10px;
+      padding: 12px 20px;
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+
+    .definition-bar .label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .definition-bar h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .definition-bar p {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.78);
+      line-height: 1.45;
+    }
+
+    .dependency-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      flex-shrink: 0;
+    }
+
+    .dependency-label .arrow-sep {
+      color: var(--blue-accent);
+      font-weight: 700;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .status-card {
+      background: #fff;
+      border: 1px solid rgba(37, 99, 235, 0.10);
+      border-radius: 10px;
+      padding: 12px 14px 12px;
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.05);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .status-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .status-card.sc1::before { background: linear-gradient(90deg, var(--red-soft-dark), var(--red-soft)); }
+    .status-card.sc2::before { background: linear-gradient(90deg, var(--amber-dark), var(--amber)); }
+    .status-card.sc3::before { background: linear-gradient(90deg, var(--amber-dark), var(--amber)); }
+
+    .dep-marker {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      background: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+      padding-right: 54px;
+    }
+
+    .card-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .status-card.sc1 .card-icon { background: linear-gradient(135deg, var(--red-soft-dark), var(--red-soft)); }
+    .status-card.sc2 .card-icon { background: linear-gradient(135deg, var(--amber-dark), var(--amber)); }
+    .status-card.sc3 .card-icon { background: linear-gradient(135deg, var(--amber-dark), var(--amber)); }
+
+    .card-title-block {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      line-height: 1.25;
+    }
+
+    .card-age {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+
+    .status-pill {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+
+    .status-card.sc1 .status-pill { background: #fee2e2; color: var(--red-soft-dark); border: 1px solid var(--red-soft); }
+    .status-card.sc2 .status-pill { background: #fef3c7; color: var(--amber-dark); border: 1px solid var(--amber); }
+    .status-card.sc3 .status-pill { background: #fef3c7; color: var(--amber-dark); border: 1px solid var(--amber); }
+
+    .card-items {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .card-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      font-size: 10.5px;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    .card-item i {
+      font-size: 5px;
+      color: var(--blue-accent);
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+
+    .card-item strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .card-ask {
+      margin-top: 8px;
+      padding: 7px 10px;
+      background: #eff6ff;
+      border: 1px solid rgba(37, 99, 235, 0.18);
+      border-radius: 7px;
+    }
+
+    .card-ask-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--blue-bright);
+      margin-bottom: 2px;
+    }
+
+    .card-ask-text {
+      font-size: 10.5px;
+      color: var(--primary);
+      line-height: 1.45;
+      font-weight: 500;
+    }
+
+    .takeaway {
+      margin-top: 10px;
+      padding: 9px 18px;
+      background: linear-gradient(135deg, var(--blue-darkest), var(--blue-mid));
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .takeaway p {
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.55;
+    }
+
+    .takeaway strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-darkest), var(--blue-mid), var(--blue-accent), var(--steel-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 2px;
+    }
+
+    .slide-nav { position: fixed; bottom: 18px; left: 18px; display: flex; gap: 6px; z-index: 100; }
+    .slide-nav a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: rgba(12,25,41,0.75); color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: background 0.2s, color 0.2s; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; }
+    .slide-nav a:hover { background: rgba(37,99,235,0.9); color: #fff; }
+    .slide-nav a.disabled { opacity: 0.25; pointer-events: none; }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">BayOne <span>Solutions</span></div>
+      <div class="header-title">Access Items</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="definition-bar">
+        <div class="label">Infrastructure Dependencies</div>
+        <h2>Access Items Requiring Action</h2>
+        <p>Three items arranged in dependency order. The permanent ADS machine is the root. DeepSight access depends on it. Pulse and Scribbler repositories are a separate track. All three have been pursued through standard channels for weeks.</p>
+      </div>
+
+      <div class="dependency-label">
+        <span>Permanent ADS Machine</span>
+        <span class="arrow-sep"><i class="fa-solid fa-arrow-right"></i></span>
+        <span>DeepSight Platform Access</span>
+        <span class="arrow-sep"><i class="fa-solid fa-arrow-right"></i></span>
+        <span>Pulse and Scribbler Repositories</span>
+      </div>
+
+      <div class="status-grid">
+
+        <div class="status-card sc2">
+          <div class="dep-marker">Root</div>
+          <div class="card-top">
+            <div class="card-icon"><i class="fa-solid fa-server"></i></div>
+            <div class="card-title-block">
+              <div class="card-title">Permanent ADS Machine</div>
+              <div class="card-age">Tenant April 3, bundle April 11</div>
+            </div>
+          </div>
+          <div class="status-pill">Tenant Approved, Portal Issue</div>
+          <div class="card-items">
+            <div class="card-item"><i class="fa-solid fa-circle"></i><span><strong>Mahaveer approved the tenant verbally</strong> but no email confirmation was received. All other Cisco access grants have come with email confirmation.</span></div>
+            <div class="card-item"><i class="fa-solid fa-circle"></i><span><strong>A new tenant ID request was submitted</strong> on April 16 via a separate Cisco application portal. Reply pending.</span></div>
+            <div class="card-item"><i class="fa-solid fa-circle"></i><span><strong>The bundle request is sequential,</strong> and can only proceed once the machine provisioning is reflected in the portal.</span></div>
+          </div>
+          <div class="card-ask">
+            <div class="card-ask-label">Needs</div>
+            <div class="card-ask-text">Follow-up on the tenant portal issue so the provisioning reflects approval, unblocking DeepSight.</div>
+          </div>
+        </div>
+
+        <div class="status-card sc1">
+          <div class="dep-marker">Dep</div>
+          <div class="card-top">
+            <div class="card-icon"><i class="fa-solid fa-satellite-dish"></i></div>
+            <div class="card-title-block">
+              <div class="card-title">DeepSight Platform Access</div>
+              <div class="card-age">Committed week of March 23</div>
+            </div>
+          </div>
+          <div class="status-pill">No Access, 4 Weeks</div>
+          <div class="card-items">
+            <div class="card-item"><i class="fa-solid fa-circle"></i><span><strong>Depends on the permanent ADS machine.</strong> Without the machine provisioned, DeepSight cannot be onboarded.</span></div>
+            <div class="card-item"><i class="fa-solid fa-circle"></i><span><strong>Direct follow-up three times this week</strong> via the WebEx space. Protocol has been followed on the BayOne side.</span></div>
+            <div class="card-item"><i class="fa-solid fa-circle"></i><span><strong>Without access there is no way to test or deploy</strong> anything the team builds on the DeepSight platform.</span></div>
+          </div>
+          <div class="card-ask">
+            <div class="card-ask-label">Needs</div>
+            <div class="card-ask-text">Either unblock the provisioning chain, or authorize an alternative deployment path so development can proceed in parallel.</div>
+          </div>
+        </div>
+
+        <div class="status-card sc3">
+          <div class="dep-marker">Indep</div>
+          <div class="card-top">
+            <div class="card-icon"><i class="fa-solid fa-code-branch"></i></div>
+            <div class="card-title-block">
+              <div class="card-title">Pulse and Scribbler Repositories</div>
+              <div class="card-age">First requested April 9</div>
+            </div>
+          </div>
+          <div class="status-pill">Links Not Shared</div>
+          <div class="card-items">
+            <div class="card-item"><i class="fa-solid fa-circle"></i><span><strong>Naga's two repositories</strong> (Pulse and Scribbler) have been requested since April 9.</span></div>
+            <div class="card-item"><i class="fa-solid fa-circle"></i><span><strong>Naming confusion in the GitHub teams index</strong> (Scribble, Scribbler, Scrubber) compounded identification effort.</span></div>
+            <div class="card-item"><i class="fa-solid fa-circle"></i><span><strong>Without repository visibility</strong> any build-on or integration-with decision cannot be evaluated.</span></div>
+          </div>
+          <div class="card-ask">
+            <div class="card-ask-label">Needs</div>
+            <div class="card-ask-text">Direction to the repository owner to share the exact links and grant access, or confirmation that the scope has shifted away from those tools.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="takeaway">
+        <p><strong>BayOne has a temporary ADS lease that enables current work.</strong> Every tooling configuration and environment setup done on that temporary machine has to be repeated when the lease expires. Permanent access and the dependent items above resolve this.</p>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">06</div>
+    </div>
+  </div>
+
+  <div class="slide-nav">
+    <a href="05_scope_alignment.html"><i class="fa-solid fa-chevron-left"></i></a>
+    <a href="07_decisions_requested.html"><i class="fa-solid fa-chevron-right"></i></a>
+    <a href="00_title.html" style="margin-left: 6px;"><i class="fa-solid fa-house"></i></a>
+  </div>
+
+</body>
+</html>

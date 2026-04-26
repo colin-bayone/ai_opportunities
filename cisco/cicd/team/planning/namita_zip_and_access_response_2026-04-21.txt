@@ -1,0 +1,33 @@
+Namita, thanks for the screenshots. A few things.
+
+First, clarification on what is in the zip. Looking at the structure, each
+CD and CI subdirectory is not just log files. Each one contains a full NXOS
+build output folder: error logs, debug logs, XML configs, fullbuild files,
+patch and pull logs, XML reports, and other build artifacts. With 3 CD
+builds and 4 CI builds packaged together, a 29 GB zip is consistent. Worth
+understanding the distinction, because when Cisco looks at that zip from
+their side they see Cisco build artifacts, not just log files. The framing
+difference matters for how they read the incident. I will handle that on
+their side.
+
+On the size: 28.74 GB is accurate for the zip itself. Cisco's 80 GB figure
+is almost certainly their total across all activity their monitoring logged
+during the session (AirDrop, the zip attempt, and possibly other file
+movements). Both numbers can be true because they measure different things.
+I will reconcile with Cisco when it comes up.
+
+One thing I do need to flag. You mentioned you checked whether you still
+have Cisco GitHub access. Please do not do that. During an active CSIRT
+investigation, every action on Cisco infrastructure — including passive
+checks like verifying whether you can still log in — gets logged and is
+visible to the investigators. A check like that shows up on their side as
+continued probing post-suspension, which is exactly the kind of activity
+that would weaken our position with GPS. If you are unsure whether
+something on the Cisco side is okay to do, please ask me first before
+trying it.
+
+We need to connect later today to go through procedure in more detail. I
+want to make sure you and I are aligned on what is and is not okay during
+the investigation, and for this engagement going forward. I will send you a
+time when I have a gap. No need to worry; we just need to get on the same
+page clearly.

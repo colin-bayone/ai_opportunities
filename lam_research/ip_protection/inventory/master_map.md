@@ -1,6 +1,6 @@
 # Master Map — lam_research/ip_protection
 
-Generated: 2026-04-20
+Generated: 2026-04-23
 
 lam_research/ip_protection/
 ├── archive/
@@ -63,21 +63,35 @@ lam_research/ip_protection/
 │   └── org_chart.md
 ├── decisions/
 ├── deliverables/
-│   ├── discovery_followup_2026-04-06.html
-│   ├── engagement_pricing_2026-04-09.html
-│   ├── followup_email_draft_2026-03-12.md
-│   ├── information_request_2026-03-12.html
-│   ├── information_request_2026-03-12.md
-│   ├── internal_cost_breakdown_2026-04-09.html
-│   ├── poc_proposal_2026-04-09.html
-│   ├── poc_proposal_2026-04-09.md
-│   ├── preliminary_approach_2026-03-12.html
-│   ├── preliminary_approach_2026-03-12.md
-│   ├── pricing_breakdown_2026-04-09.html
-│   ├── problem_restatement_2026-03-12.html
-│   └── problem_restatement_2026-03-12.md
+│   ├── 02_discovery_call_2026-03-12/
+│   │   ├── README.md
+│   │   ├── followup_email_draft_2026-03-12.md
+│   │   ├── information_request_2026-03-12.html
+│   │   ├── information_request_2026-03-12.md
+│   │   ├── preliminary_approach_2026-03-12.html
+│   │   ├── preliminary_approach_2026-03-12.md
+│   │   ├── problem_restatement_2026-03-12.html
+│   │   └── problem_restatement_2026-03-12.md
+│   ├── 05_second_meeting_2026-04-06/
+│   │   ├── README.md
+│   │   └── discovery_followup_2026-04-06.html
+│   ├── 06_pricing_and_proposal_2026-04-09/
+│   │   ├── README.md
+│   │   ├── engagement_pricing_2026-04-09.html
+│   │   ├── internal_cost_breakdown_2026-04-09.html
+│   │   ├── poc_proposal_2026-04-09.html
+│   │   ├── poc_proposal_2026-04-09.md
+│   │   └── pricing_breakdown_2026-04-09.html
+│   └── 09_execution_kickoff_2026-04-20/
+│       ├── README.md
+│       ├── email_daniel_tech_access_coordination_2026-04-20.md
+│       ├── email_daniel_tech_access_coordination_v2_2026-04-20.html
+│       ├── email_mikhail_tech_access_reply_2026-04-20.md
+│       └── email_mikhail_tech_access_reply_v2_2026-04-20.md
 ├── planning/
 │   ├── call_prep_2026-04-06.md
+│   ├── deliverables_cleanup_part1_march_2026-04-20.md
+│   ├── deliverables_cleanup_part2_april_2026-04-20.md
 │   ├── discovery_doc_outline_2026-04-06.md
 │   ├── meeting_summary_internal_2026-04-06.html
 │   ├── question_brainstorm_2026-04-06.md
@@ -90,6 +104,7 @@ lam_research/ip_protection/
 │   ├── sow_filling_instructions_word_claude_followup2_2026-04-17.md
 │   ├── sow_filling_instructions_word_claude_followup3_2026-04-17.md
 │   ├── sow_filling_instructions_word_claude_followup_2026-04-17.md
+│   ├── tech_access_request_list_2026-04-20.md
 │   └── technical_decomposition_2026-04-06.md
 ├── presentations/
 │   └── discovery_2026-04-06/
@@ -179,8 +194,11 @@ lam_research/ip_protection/
 │   ├── 09_execution_kickoff_sow_filling_strategy_2026-04-17.md
 │   ├── 09_execution_kickoff_sow_template_structure_2026-04-17.md
 │   ├── 09_execution_kickoff_summary_2026-04-17.md
+│   ├── 09a_tech_inventory_master_2026-04-20.md
 │   ├── 09a_tech_inventory_part1_march_2026-04-20.md
-│   └── 09a_tech_inventory_part2_internal_2026-04-20.md
+│   ├── 09a_tech_inventory_part2_internal_2026-04-20.md
+│   ├── 09a_tech_inventory_part3_april6_meeting_2026-04-20.md
+│   └── 09a_tech_inventory_part4_deliverables_2026-04-20.md
 ├── source/
 │   ├── lam_sow/
 │   │   ├── page_01/
@@ -208,6 +226,7 @@ lam_research/ip_protection/
 │   ├── anuj_amit_pratik_colin_internalsync2_4-9-2026.txt
 │   ├── anuj_amit_pratik_internal_4-6-2026_pre-call.txt
 │   ├── anuj_colin_debrief_2026-03-12.txt
+│   ├── colin_email_reply_mikhail_tech_access_sent_2026-04-20.txt
 │   ├── excel_cisco_POC.png
 │   ├── internal_anuj_amit_pratik_colin_04-01-2026.txt
 │   ├── lam_call_prep_2026-03-12.txt

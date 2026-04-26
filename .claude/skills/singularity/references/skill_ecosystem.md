@@ -122,7 +122,7 @@ The following assets move from `.claude/skills/sales-forge/` into `.claude/skill
 | `assets/templates/slide-content-template.html` | Slide skill (TBD) | Moves to the slide generation skill, not singularity |
 | `references/bayone-design-spec.md` | `.claude/skills/singularity/references/bayone_design_spec.md` | Own copy, to be updated with gold standards |
 | `references/slide-format.md` | Slide skill (TBD) | Moves to the slide generation skill |
-| `scripts/html_to_pdf.py` | `.claude/skills/singularity/scripts/html_to_pdf.py` | PDF conversion utility. Also copy to slide skill. |
+| `scripts/html_to_pdf.py` | `.claude/skills/singularity/scripts/html_to_pdf.py` | PDF conversion utility. Also copy to slide skill. Invoke with `--merge --landscape` for multi-slide decks; with no flags for single deliverables. See script docstring for the full flag selection guide. |
 
 ## Design System Update
 

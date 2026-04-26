@@ -1,0 +1,1382 @@
+WEBVTT
+
+00:01:48.046 --> 00:01:51.366
+<v Colin Moore>Miss Srikar and Namita, oh, Namita is still coming in.</v>
+
+00:01:53.766 --> 00:01:54.246
+<v Srikar Madarapu>Hey, Colin.</v>
+
+00:01:56.086 --> 00:01:58.326
+<v Srikar Madarapu>Yeah, this is on my other laptop.</v>
+
+00:01:58.966 --> 00:02:03.126
+<v Colin Moore>Okay, sorry, sorry, sorry. I keep on forgetting that there's two.</v>
+
+00:02:02.566 --> 00:02:02.686
+<v Srikar Madarapu>Yeah.</v>
+
+00:02:05.166 --> 00:02:05.846
+<v Namita Ravikiran Mane>Hi, Colin. Hi.</v>
+
+00:02:05.446 --> 00:02:06.006
+<v Colin Moore>All right.</v>
+
+00:02:08.726 --> 00:02:11.126
+<v Colin Moore>Wow, first of all, that is painful.</v>
+
+00:02:09.046 --> 00:02:22.646
+<v Srikar Madarapu>Yeah, sorry Colin. I once I saw the slide, like I saw the numbers, like I got like confused, like what numbers I have to say. Yeah, there are too many numbers on that slide.</v>
+
+00:02:24.086 --> 00:02:33.286
+<v Colin Moore>No, no, no, no problem. No problem. I think, you know, part of the problem is that they do not listen very well and they go off onto crazy side tangents all the time.</v>
+
+00:02:34.806 --> 00:02:35.206
+<v Namita Ravikiran Mane>Yeah.</v>
+
+00:02:34.966 --> 00:02:45.366
+<v Colin Moore>I'm probably going to just call Srinivas and tell him, you know, hey, like either Justin and Imperma, we need a meeting, one meeting with them because these are just not productive. We got through three slides.</v>
+
+00:02:46.886 --> 00:03:04.966
+<v Colin Moore>You know, like realistically, 3 slides in an hour. That's not great. And that really has nothing to do with us. Even just at the end, I'm going to be honest with you all. They have no idea what they're talking about. I have no idea why he thinks that a knowledge graph is a reasonable answer for a 500K log file.</v>
+
+00:02:47.446 --> 00:02:47.886
+<v Namita Ravikiran Mane>Sr.</v>
+
+00:02:47.606 --> 00:02:47.886
+<v Srikar Madarapu>Abhijeet.</v>
+
+00:03:06.806 --> 00:03:16.726
+<v Colin Moore>That doesn't make logical sense. That just isn't right. So I'll correct that with him. Because he just, they're a little bit hard-headed here, I'll be honest.</v>
+
+00:03:18.486 --> 00:03:38.126
+<v Srikar Madarapu>Yeah, when when you mentioned like knowledge graph, like what like do you want us to build like an XOS like full knowledge graph or like it's like only specific to like errors or just the like CD build part? There are a lot of knowledge graphs coming in and where we will be like.</v>
+
+00:03:18.886 --> 00:03:19.846
+<v Namita Ravikiran Mane>Also, I think.</v>
+
+00:03:38.566 --> 00:03:42.966
+<v Srikar Madarapu>Of where we have to, like, uh, especially, like, focused on, or like, um...</v>
+
+00:03:43.686 --> 00:03:44.166
+<v Namita Ravikiran Mane>Mhm.</v>
+
+00:03:44.486 --> 00:03:44.606
+<v Srikar Madarapu>Yeah.</v>
+
+00:03:45.046 --> 00:03:56.486
+<v Namita Ravikiran Mane>Also, I felt that this meeting was mainly about architecture, but not design, right? But he went into the design part, so that's where it was a bit off.</v>
+
+00:03:53.286 --> 00:03:54.086
+<v Srikar Madarapu>Yeah.</v>
+
+00:03:57.526 --> 00:03:58.006
+<v Colin Moore>Yeah.</v>
+
+00:03:57.686 --> 00:04:12.486
+<v Namita Ravikiran Mane>But I feel instead of designing first, we should understand the architecture, like how overall picture looks like. Then yes, definitely we can take various components and deep dive into it and see how it really works.</v>
+
+00:04:13.766 --> 00:04:37.966
+<v Colin Moore>Right, right. And I think from my end, like, there are some things like that I don't quite understand. Like, to me, it's very obvious that no one there has done it before. I don't care if they've been working on it for a long time. That doesn't change the fact that this is not that hard and they're making it harder than it needs to be. You know, like, for instance, like the ingestion stuff, they're like, I don't know where the data's coming from. And I'm like, it literally says right here, there are the basil.</v>
+
+00:04:38.046 --> 00:04:38.486
+<v Colin Moore>Lugs.</v>
+
+00:04:39.526 --> 00:04:40.006
+<v Srikar Madarapu>Yeah.</v>
+
+00:04:40.646 --> 00:04:42.726
+<v Colin Moore>You know, like, that's not...</v>
+
+00:04:42.006 --> 00:04:43.846
+<v Srikar Madarapu>Log files, yeah, basic logs.</v>
+
+00:04:44.246 --> 00:04:46.166
+<v Colin Moore>And he's like, well, which log files? And I'm like.</v>
+
+00:04:47.286 --> 00:05:07.046
+<v Colin Moore>But what do you mean? Like all the log files? It doesn't matter. It shouldn't matter. You know, that's my point. It should not matter. It's immaterial. If the logs are coming from Bazel, if the logs are coming from GitHub, if the logs are coming from, you know, a toaster oven, it doesn't matter. It's the same workflow across the board. And you know what he's saying for.</v>
+
+00:04:48.086 --> 00:04:48.206
+<v Srikar Madarapu>Yeah.</v>
+
+00:04:49.686 --> 00:04:49.766
+<v Srikar Madarapu>You.</v>
+
+00:05:07.486 --> 00:05:27.126
+<v Colin Moore>You need a knowledge graph to know where to chunk. No, you absolutely do not. That is way overkill. If you want to know what's going to cost more money than a language model, well, you found it. Because the big thing that I'll share with both of you, you know, I've done this before, and knowledge graphs are some of the most computationally complex ones to maintain.</v>
+
+00:05:27.366 --> 00:05:43.846
+<v Colin Moore>because they are stateful, right? He's talking about like this file or this library or this thing relates to this, this, this. Do it the deterministically, you're fine. Do it with a knowledge graph. There's A statefulness and you need to essentially re-index and regenerate the knowledge graph every single time the code changes.</v>
+
+00:05:44.046 --> 00:05:44.486
+<v Srikar Madarapu>Right.</v>
+
+00:05:45.126 --> 00:05:57.286
+<v Colin Moore>And even if you optimize that and say, I'm only going to optimize the subparts of where the knowledge graph is based upon the changes, that is a crazy amount of complexity for something that could be simple pattern matching.</v>
+
+00:05:58.246 --> 00:05:59.606
+<v Srikar Madarapu>It can be a never-ending loop.</v>
+
+00:06:00.486 --> 00:06:04.006
+<v Colin Moore>Right, right. I mean, by the time you regenerate, maybe there's another change.</v>
+
+00:06:04.646 --> 00:06:05.046
+<v Srikar Madarapu>Right.</v>
+
+00:06:05.766 --> 00:06:16.646
+<v Colin Moore>And, you know, that's also, you know, commits themselves are by definition code changes. The other problem is they don't seem to understand what CI and CD actually mean.</v>
+
+00:06:18.886 --> 00:06:36.846
+<v Colin Moore>I'm just going to be a little bit mean here. They are misusing those terms drastically. No, CI is not a subset of CD. CI stands for continuous integration. CD stands for continuous deployment. They are different. Basel is exclusively CD. There's no point, unless you're checking that a build works, that CI.</v>
+
+00:06:36.966 --> 00:06:38.326
+<v Colin Moore>Has Basel in the loop.</v>
+
+00:06:39.366 --> 00:06:52.566
+<v Colin Moore>That's not academically correct. I'm not going to die on that hill in a meeting, but just for the two of you, they're not using terminology correctly at all here. They would not pass an interview with me. So</v>
+
+00:06:46.086 --> 00:06:46.566
+<v Srikar Madarapu>Mhm.</v>
+
+00:06:46.406 --> 00:06:47.086
+<v Namita Ravikiran Mane>Mhm.</v>
+
+00:06:54.006 --> 00:07:02.966
+<v Colin Moore>But we can get through this. So the one big thing that I noticed is that they need things to be incredibly clear in order to even talk about it.</v>
+
+00:07:04.486 --> 00:07:12.966
+<v Colin Moore>We can do that on the graphs. We can do this in a kind of a silly way. And I'll say, okay, if we want to talk incredibly simplistically about this, fine.</v>
+
+00:07:15.846 --> 00:07:23.686
+<v Colin Moore>You know, there's a huge problems with the existing setup that we're being glossed over, you know, like, for instance, even this part over here with some of the, you know...</v>
+
+00:07:24.966 --> 00:07:25.606
+<v Colin Moore>Issues.</v>
+
+00:07:28.166 --> 00:07:38.566
+<v Colin Moore>I don't really know what to say there because I can tell you Justin seems like a smart guy, but it also seems to me like he's never done this before. I don't care if he's been working on it for a while. The difference between working on and having done.</v>
+
+00:07:40.726 --> 00:07:56.086
+<v Colin Moore>So I'm going to try to talk to him too and see if I can get a little bit there. I like even just the way that we're talking about, you know, Srinivas, that's the one thing that was good out of today. At least he realizes that you can't just check if a build passes to say that AI did its job.</v>
+
+00:07:58.806 --> 00:08:00.326
+<v Colin Moore>That's completely illegitimate.</v>
+
+00:08:03.286 --> 00:08:14.086
+<v Colin Moore>But, you know, they need to worry about the rest of this stuff, because even from that design perspective, they still don't have any kind of clarity here or consensus. It's just everything's up in the air all the time.</v>
+
+00:08:18.646 --> 00:08:18.966
+<v Colin Moore>So.</v>
+
+00:08:20.246 --> 00:08:36.646
+<v Colin Moore>We'll meet with him on Monday, but I'm going to ask him for if we can have more focus sessions that are limited to topics and that we don't talk about anything beyond the topic at that meeting, because otherwise this is going to be impossible. You know, we made it, like I said, through like 4 slides, 3 slides.</v>
+
+00:08:38.566 --> 00:08:47.846
+<v Colin Moore>And still, this did not capture, he doesn't get, like, I'm like, your current system itself does not do the two things it's supposed to do correctly, correctly.</v>
+
+00:08:48.726 --> 00:08:53.606
+<v Colin Moore>You know it and to his like kind of hand-waving about agents, I'm like, what are you talking about?</v>
+
+00:08:54.406 --> 00:08:59.846
+<v Colin Moore>I don't think we ever said anything about that. You know, the only agent step over here is this yellow box.</v>
+
+00:09:00.766 --> 00:09:03.366
+<v Srikar Madarapu>Yeah, we did not even go till there, the agents.</v>
+
+00:09:03.046 --> 00:09:03.766
+<v Namita Ravikiran Mane>Exactly.</v>
+
+00:09:04.806 --> 00:09:24.086
+<v Colin Moore>Right, and he's having like an allergic reaction to it. And I'm like, dude, calm down. First of all, just let people finish their sentence, number one. And #2, you have to realize how much more complicated you guys are making this than it actually is. Like for instance, I tried to say, you know, GitHub Enterprise already has that.</v>
+
+00:09:25.166 --> 00:09:33.926
+<v Colin Moore>And they're like, no, it doesn't. And I'm like, have you checked? Because I'm telling you right now, it does. You know, like that's been a thing for a long time.</v>
+
+00:09:32.646 --> 00:09:50.486
+<v Srikar Madarapu>Colin, one, sorry, one thing, I'm also not sure because I'm just like, so the one they're using is like on-prem GitHub Enterprise. This is it different from like the cloud GitHub Enterprise. So because the co-pilot feature.</v>
+
+00:09:51.046 --> 00:10:05.446
+<v Srikar Madarapu>for each like PR, like when you raise. So I think only available at the cloud level and not the on-prem, like the on-prem systems, they don't have these updated new features. I'm guessing that.</v>
+
+00:10:06.646 --> 00:10:09.286
+<v Colin Moore>So they do have it, they just have to be enabled.</v>
+
+00:10:09.846 --> 00:10:10.806
+<v Srikar Madarapu>Enable it, okay.</v>
+
+00:10:11.366 --> 00:10:18.086
+<v Colin Moore>So that's what I'm saying. I'm like, you guys are solving a problem that already exists because you didn't bother to look at the docs for GitHub Enterprise.</v>
+
+00:10:21.086 --> 00:10:21.286
+<v Srikar Madarapu>Mm.</v>
+
+00:10:21.606 --> 00:10:25.686
+<v Colin Moore>So if you look at the features, like they already have GitHub actions.</v>
+
+00:10:25.046 --> 00:10:25.286
+<v Namita Ravikiran Mane>Ohh.</v>
+
+00:10:26.766 --> 00:10:27.046
+<v Srikar Madarapu>Bent.</v>
+
+00:10:27.446 --> 00:10:39.126
+<v Colin Moore>You know, GitHub Connect, there's already, now I'm not saying that they have, like how GitHub Cloud has, for instance, for models or for agents here, I'm not saying that.</v>
+
+00:10:27.926 --> 00:10:28.326
+<v Namita Ravikiran Mane>No.</v>
+
+00:10:39.926 --> 00:10:40.406
+<v Srikar Madarapu>Mmh.</v>
+
+00:10:40.886 --> 00:10:42.166
+<v Colin Moore>But like for instance, this.</v>
+
+00:10:43.126 --> 00:10:54.966
+<v Colin Moore>Like you guys are literally reinventing the wheel here. This already has existed for a long time in GitHub, and it is in GitHub Enterprise. The trick is that if it doesn't exist, there's already a hook for it.</v>
+
+00:10:43.926 --> 00:10:44.326
+<v Srikar Madarapu>Right.</v>
+
+00:10:46.486 --> 00:10:46.806
+<v Srikar Madarapu>Yeah.</v>
+
+00:10:51.926 --> 00:10:52.166
+<v Srikar Madarapu>Good.</v>
+
+00:10:57.366 --> 00:11:05.286
+<v Colin Moore>So even if they like, for instance, don't have like a co-pilot integration, well, guess what? You just have to set up the AI model backend and that's it.</v>
+
+00:11:08.406 --> 00:11:22.166
+<v Colin Moore>So it's like they just don't really know what's there. So I'm going to do some digging on this myself to say, yes, this feature absolutely is there. Guys better look into that before we waste time here.</v>
+
+00:11:25.286 --> 00:11:40.406
+<v Colin Moore>Because there's definitely more to this. Like, there's so much that's here. Like, there's GitHub packages that you can have all these different things installed on. A lot of these, like, because I used to run on GitHub Enterprise, and it was...</v>
+
+00:11:41.406 --> 00:11:55.446
+<v Colin Moore>already having these things. I mean, these are definitely ones that exist. They might not be immediately available on the UI, but the hooks are all still there, because it's not like they develop a completely different version of GitHub for enterprise versus cloud.</v>
+
+00:11:50.726 --> 00:11:51.286
+<v Srikar Madarapu>Mhm.</v>
+
+00:11:56.806 --> 00:11:59.726
+<v Colin Moore>You know, it's some things are marginally different.</v>
+
+00:12:01.446 --> 00:12:11.526
+<v Colin Moore>But it's not a substantial gap. It's not like, you know, there's no AI features on GitHub Enterprise. Even on GitLab for the past, you know, four years there have been these features.</v>
+
+00:12:17.446 --> 00:12:20.966
+<v Colin Moore>So, I'll do some digging here because I want them to know, you know.</v>
+
+00:12:24.006 --> 00:12:24.966
+<v Colin Moore>That there are.</v>
+
+00:12:29.406 --> 00:12:40.486
+<v Colin Moore>so many things. This is GitHub Enterprise's official website. You know, they're not saying that we don't offer those things. They're saying that it's fine. You know, like this, you see.</v>
+
+00:12:42.006 --> 00:12:42.486
+<v Namita Ravikiran Mane>Mm.</v>
+
+00:12:42.566 --> 00:12:43.046
+<v Srikar Madarapu>Right.</v>
+
+00:12:42.886 --> 00:12:44.966
+<v Colin Moore>Literally the homepage of GitHub Enterprise.</v>
+
+00:12:47.926 --> 00:12:53.126
+<v Colin Moore>That's where I'm going. I'm like, you guys are, they're like just hand waving on a problem. They don't even know what they're talking about.</v>
+
+00:12:50.406 --> 00:12:50.726
+<v Namita Ravikiran Mane>Ohh.</v>
+
+00:12:56.886 --> 00:13:07.286
+<v Colin Moore>So, you know, if, and it's just a matter of, you know, what version are they running? They already have things like this, and if their IT team just hasn't enabled it.</v>
+
+00:13:08.886 --> 00:13:17.926
+<v Colin Moore>Um, that's also fine, you know, so I'm just like kind of shocked right now that they don't, uh, you know, understand.</v>
+
+00:13:19.806 --> 00:13:28.646
+<v Colin Moore>Like they already have pretty much everything they want here. It already exists out of the box. I think they're just trying to do it from scratch to feel good about it.</v>
+
+00:13:20.646 --> 00:13:20.766
+<v Srikar Madarapu>Yeah.</v>
+
+00:13:34.806 --> 00:13:47.766
+<v Namita Ravikiran Mane>So Colin, sorry if I missed this, but have you told them about this GitHub enterprise, which is already available and they can use, or we haven't communicated that to Srinivas and team?</v>
+
+00:13:48.646 --> 00:14:04.566
+<v Colin Moore>So I've tried to. I've tried to. They haven't really listened. Like even today, I tried to do it again. And they said, oh, no, that's not available. And I'm like, you're wrong. You just don't know what is there and what's not because you never bothered looking. At this point, I'm going to put together some formal research and share it with them.</v>
+
+00:14:02.086 --> 00:14:02.566
+<v Namita Ravikiran Mane>Okay.</v>
+
+00:14:06.806 --> 00:14:07.286
+<v Namita Ravikiran Mane>Mhm.</v>
+
+00:14:07.686 --> 00:14:20.806
+<v Colin Moore>And, and I'm not just to any of us, but also to Anand, 'cause you know they can like Handwave and say this doesn't exist or it does, and I'm gonna say, "Look, let's, you know, I can just call GitHub themselves, get a meeting set up with the sales team, and we can talk to them."</v>
+
+00:14:23.286 --> 00:14:23.526
+<v Colin Moore>No.</v>
+
+00:14:24.566 --> 00:14:25.046
+<v Namita Ravikiran Mane>Mhm.</v>
+
+00:14:26.086 --> 00:14:36.006
+<v Colin Moore>So it's just part of its ignorance. The only thing that could be true is if they are running on an old version of GitHub Enterprise, which they most likely are not doing.</v>
+
+00:14:34.646 --> 00:14:34.966
+<v Srikar Madarapu>No.</v>
+
+00:14:37.526 --> 00:14:43.846
+<v Srikar Madarapu>I just checked the version, Colin. It's 3.16.16.</v>
+
+00:14:44.726 --> 00:14:47.766
+<v Colin Moore>Okay, 3.1616. All right, I'll do that.</v>
+
+00:14:46.966 --> 00:14:52.686
+<v Srikar Madarapu>Yeah, it is the latest version or as far I see on the Google.</v>
+
+00:14:54.086 --> 00:14:54.486
+<v Colin Moore>Right.</v>
+
+00:14:56.166 --> 00:14:56.886
+<v Colin Moore>Yeah, see?</v>
+
+00:14:56.166 --> 00:15:08.326
+<v Srikar Madarapu>Yeah, when you were like, when I scroll, when I scroll down on the GitHub, one of the repo, I can see that in the bottom, like GitHub Enterprise Server 3.16.16.</v>
+
+00:15:10.406 --> 00:15:10.806
+<v Colin Moore>Mike.</v>
+
+00:15:12.726 --> 00:15:13.526
+<v Colin Moore>So, I'll...</v>
+
+00:15:16.406 --> 00:15:17.846
+<v Colin Moore>I'll pull in.</v>
+
+00:15:21.846 --> 00:15:22.886
+<v Colin Moore>Yeah, look at this.</v>
+
+00:15:22.086 --> 00:15:22.726
+<v Srikar Madarapu>Yeah, one.</v>
+
+00:15:25.766 --> 00:15:31.246
+<v Colin Moore>GitHub Enterprise, Enterprise Cloud. Let's go 3.1, which one was it? 3.13.</v>
+
+00:15:30.726 --> 00:15:35.126
+<v Srikar Madarapu>Ohh, 16161616. Ohh, I think there is a pretty...</v>
+
+00:15:32.326 --> 00:15:32.966
+<v Colin Moore>One, 6.</v>
+
+00:15:36.326 --> 00:15:37.046
+<v Srikar Madarapu>Okay, bye.</v>
+
+00:15:37.526 --> 00:15:39.446
+<v Colin Moore>So Enterprise Server 316.</v>
+
+00:15:40.086 --> 00:15:40.486
+<v Srikar Madarapu>So.</v>
+
+00:15:43.366 --> 00:15:51.286
+<v Colin Moore>So, I'll even show them, you know, what the features are for their specific version. It's literally a flag you flip for most of this.</v>
+
+00:15:53.926 --> 00:16:01.686
+<v Colin Moore>Anyway, I'll get that figured out with them. We don't have to get distracted by it, but I'm just going to show this to them so they can understand.</v>
+
+00:16:04.686 --> 00:16:14.206
+<v Colin Moore>Because I don't think they're looking at this right. I think that they're making assumptions that might have been true a couple years ago, but since then it's been completely, you know, changed.</v>
+
+00:16:22.486 --> 00:16:22.846
+<v Colin Moore>OK.</v>
+
+00:16:25.446 --> 00:16:44.206
+<v Colin Moore>So for next week, I know we'll have that Monday meet. I think for their standpoint, one thing that we can do, and I'll just kind of talk to both of you, you don't need to go too crazy on this today because I'm sure by Monday it'll have changed anyway. One thing is to try to do a classification for the specific</v>
+
+00:16:44.326 --> 00:16:46.806
+<v Colin Moore>things that are coming into that bug or error category.</v>
+
+00:16:48.126 --> 00:16:48.886
+<v Srikar Madarapu>Yeah, sure, Colin.</v>
+
+00:16:49.686 --> 00:16:49.846
+<v Namita Ravikiran Mane>Mm.</v>
+
+00:16:51.046 --> 00:16:51.686
+<v Namita Ravikiran Mane>Yes, Gordon.</v>
+
+00:16:51.366 --> 00:16:58.326
+<v Colin Moore>That's not going to be straightforward. That's what I was trying to tell them. I'm like, you guys, if I'm just reading some of these.</v>
+
+00:16:59.126 --> 00:16:59.606
+<v Srikar Madarapu>Mhm.</v>
+
+00:17:00.806 --> 00:17:05.126
+<v Colin Moore>you know, in the space and I'm like, there's no possible way without having some kind of...</v>
+
+00:17:07.046 --> 00:17:18.806
+<v Colin Moore>without having some kind of breakdown, it is guessing. I mean, they might not want to hear that and it doesn't change reality. You know, just read some of those messages yourself in that NXOSCI workflow space.</v>
+
+00:17:21.086 --> 00:17:33.366
+<v Colin Moore>Without having a connection back to GitHub, there is no context engineering. It has to be done with the context of the repository it's for. I mean, and we all know that there's multiple repos for everything at this point.</v>
+
+00:17:37.766 --> 00:17:42.486
+<v Colin Moore>So we'll try to win that. I mean, and I think he sent it in the chat as well.</v>
+
+00:17:46.126 --> 00:18:02.006
+<v Colin Moore>what they felt the impact graph was, but they did not actually ever do a study like I think they believed that they did to say that, let me share this, like what percentage of builds were failing for this reason.</v>
+
+00:18:04.086 --> 00:18:04.406
+<v Srikar Madarapu>Yeah.</v>
+
+00:18:04.406 --> 00:18:19.606
+<v Colin Moore>And I also don't think they're even thinking about that, right? Because that's just not how that works either. You know, typically speaking, if you're talking about build errors, those are related to some new feature development or deployment. They're not like all the time I'm going to have the same error all the time.</v>
+
+00:18:09.446 --> 00:18:09.926
+<v Srikar Madarapu>Mhm.</v>
+
+00:18:16.086 --> 00:18:16.566
+<v Srikar Madarapu>Mhm.</v>
+
+00:18:21.686 --> 00:18:28.006
+<v Colin Moore>You know, you probably have a spike in an error class, then you resolve it, and hopefully if you resolved it properly, you won't have it again.</v>
+
+00:18:23.046 --> 00:18:23.206
+<v Srikar Madarapu>No.</v>
+
+00:18:34.806 --> 00:18:54.366
+<v Colin Moore>So it's, I'm like, I don't even know that they're on the same page there. I'm like, yes, there's a factor of the general category of errors that you want the language model to be more specifically focused on, or if you want to identify easy targets. But it's not true to say that just because an error is the most common, that it's going to be.</v>
+
+00:18:46.806 --> 00:18:47.046
+<v Namita Ravikiran Mane>Be.</v>
+
+00:18:51.846 --> 00:18:51.926
+<v Namita Ravikiran Mane>The.</v>
+
+00:18:52.326 --> 00:18:52.726
+<v Srikar Madarapu>No.</v>
+
+00:18:57.526 --> 00:19:00.326
+<v Colin Moore>There is the most common that's not going to be the same.</v>
+
+00:19:02.166 --> 00:19:07.846
+<v Colin Moore>as what's going to come up in the future. That doesn't make sense. You fix an error, and that error should not be prevalent anymore.</v>
+
+00:19:04.366 --> 00:19:04.486
+<v Namita Ravikiran Mane>Yeah.</v>
+
+00:19:10.646 --> 00:19:10.766
+<v Srikar Madarapu>Yeah.</v>
+
+00:19:14.326 --> 00:19:21.766
+<v Colin Moore>There's plenty else on here though we could talk about, but I'll wait for Monday for him. Like for instance, like libraries, test binaries, I get it. But.</v>
+
+00:19:22.846 --> 00:19:24.406
+<v Colin Moore>Who's changing those things anyway?</v>
+
+00:19:25.686 --> 00:19:31.926
+<v Colin Moore>That should not be individual level developers deciding, you know, on another day that we're using a totally different library and package.</v>
+
+00:19:37.126 --> 00:19:42.006
+<v Colin Moore>So, anyway, we'll find it out for next week, and I saw Saurav, so let me dial him in.</v>
+
+00:19:47.686 --> 00:19:54.966
+<v Namita Ravikiran Mane>Also call in for Monday, shall we just look at the various files, Basel files that they have and...</v>
+
+00:19:56.406 --> 00:20:04.166
+<v Namita Ravikiran Mane>See how we can parse those and show him the chunks and create kind of like a structure of the log files.</v>
+
+00:20:27.446 --> 00:20:28.086
+<v Namita Ravikiran Mane>Yes.</v>
+
+00:20:28.246 --> 00:20:38.966
+<v Colin Moore>you can clearly see where there's some difference in there because there's headers, there's different things that identify this was a complete subsection that was added on to this much larger log.</v>
+
+00:20:41.926 --> 00:21:00.166
+<v Colin Moore>You know, so I think probably they're getting messed up on chunking. They're thinking that we're saying, oh, every 500 characters is a log, and that's not right. We don't even have to do semantic chunking. It can be strict pattern match chunking. And chunking is the right word. We're using the vocabulary properly.</v>
+
+00:21:00.206 --> 00:21:03.366
+<v Colin Moore>They just don't seem to understand basic AI terminology.</v>
+
+00:21:08.246 --> 00:21:08.726
+<v Namita Ravikiran Mane>Mhm.</v>
+
+00:21:10.566 --> 00:21:14.646
+<v Colin Moore>So, like, even do you have one of the log files, Namita? Do you have one of those handy?</v>
+
+00:21:15.766 --> 00:21:16.326
+<v Namita Ravikiran Mane>Yes.</v>
+
+00:21:17.366 --> 00:21:19.846
+<v Colin Moore>Because if you want, we can show that too.</v>
+
+00:21:21.606 --> 00:21:23.526
+<v Colin Moore>And I can, I can show you what I mean there.</v>
+
+00:21:25.366 --> 00:21:27.046
+<v Namita Ravikiran Mane>Okay, you want to see the log files?</v>
+
+00:21:27.366 --> 00:21:28.326
+<v Colin Moore>Sure, sure, sure.</v>
+
+00:21:29.926 --> 00:21:31.006
+<v Namita Ravikiran Mane>Just one second.</v>
+
+00:21:54.806 --> 00:21:55.206
+<v Namita Ravikiran Mane>Yeah.</v>
+
+00:21:56.806 --> 00:21:59.846
+<v Namita Ravikiran Mane>This is from CD, coming from CD.</v>
+
+00:21:58.886 --> 00:21:59.366
+<v Colin Moore>Mmh.</v>
+
+00:22:01.686 --> 00:22:04.486
+<v Namita Ravikiran Mane>Basil, no, this is not Basil, just one second.</v>
+
+00:22:08.486 --> 00:22:08.846
+<v Namita Ravikiran Mane>Yeah.</v>
+
+00:22:11.086 --> 00:22:12.326
+<v Namita Ravikiran Mane>If you can see, like, God.</v>
+
+00:22:13.366 --> 00:22:13.846
+<v Colin Moore>Mhm.</v>
+
+00:22:13.766 --> 00:22:16.566
+<v Namita Ravikiran Mane>So this is from CD for this tag.</v>
+
+00:22:22.086 --> 00:22:26.806
+<v Colin Moore>So you see where it says info and there's an a colon on line 3?</v>
+
+00:22:31.206 --> 00:22:32.006
+<v Namita Ravikiran Mane>293.</v>
+
+00:22:32.566 --> 00:22:33.046
+<v Colin Moore>Mhm.</v>
+
+00:22:35.286 --> 00:22:35.686
+<v Namita Ravikiran Mane>Yeah.</v>
+
+00:22:36.086 --> 00:22:41.686
+<v Colin Moore>So just highlight info and hit, yeah, hit control F. Yeah, just like I think you already have it.</v>
+
+00:22:37.446 --> 00:22:37.846
+<v Namita Ravikiran Mane>Thank you.</v>
+
+00:22:42.646 --> 00:22:42.966
+<v Namita Ravikiran Mane>Yeah.</v>
+
+00:22:43.886 --> 00:22:46.006
+<v Colin Moore>So then just click to the next example of it.</v>
+
+00:22:48.046 --> 00:22:51.846
+<v Colin Moore>And then let me let me request control and I'll show you what I.</v>
+
+00:23:04.286 --> 00:23:04.646
+<v Colin Moore>Shh.</v>
+
+00:23:05.566 --> 00:23:08.326
+<v Colin Moore>Just waiting for my cursor to show. Sure.</v>
+
+00:23:06.726 --> 00:23:07.606
+<v Namita Ravikiran Mane>Stop taking.</v>
+
+00:23:18.806 --> 00:23:20.086
+<v Namita Ravikiran Mane>Yeah, do you see now?</v>
+
+00:23:21.846 --> 00:23:22.326
+<v Colin Moore>Yeah.</v>
+
+00:23:22.246 --> 00:23:23.086
+<v Namita Ravikiran Mane>Do you have the control?</v>
+
+00:23:23.526 --> 00:23:32.966
+<v Colin Moore>Let me see, I don't see my cursor yet, but maybe I'm going to hit stop control and then I'll re-request in case, because sometimes Macs are a little bit strange with this.</v>
+
+00:23:36.886 --> 00:23:40.246
+<v Namita Ravikiran Mane>I think now you should be able to. I gave the access. Yeah.</v>
+
+00:23:40.246 --> 00:23:41.126
+<v Colin Moore>Okay, there we go.</v>
+
+00:23:45.766 --> 00:23:46.886
+<v Colin Moore>To match case.</v>
+
+00:23:52.086 --> 00:23:53.326
+<v Colin Moore>So this is what I mean.</v>
+
+00:23:55.526 --> 00:24:00.166
+<v Colin Moore>So you see that we can, there's only six times it says info in this file.</v>
+
+00:24:01.246 --> 00:24:04.806
+<v Colin Moore>Now, these things are basically noise over here.</v>
+
+00:24:08.166 --> 00:24:10.246
+<v Colin Moore>And you can say, like, analyzing this.</v>
+
+00:24:11.126 --> 00:24:11.846
+<v Colin Moore>This was found.</v>
+
+00:24:14.406 --> 00:24:15.846
+<v Colin Moore>So, for instance, like a...</v>
+
+00:24:26.806 --> 00:24:27.366
+<v Colin Moore>That.</v>
+
+00:24:33.206 --> 00:24:35.926
+<v Colin Moore>You know that my point is here that there's not much.</v>
+
+00:24:37.046 --> 00:24:43.446
+<v Colin Moore>that's useful here. This is essentially giving us the stack trace. This is just overly verbose error logging.</v>
+
+00:24:45.526 --> 00:25:01.366
+<v Colin Moore>You know, like there's not really any value in this. Like, that's why I'm saying like a knowledge graph makes no sense because of how Java and C programs are compiled. It's giving you every single thing that failed without any real rhyme or reason if that's actually necessary or not.</v>
+
+00:24:45.846 --> 00:24:46.486
+<v Namita Ravikiran Mane>Yes.</v>
+
+00:25:02.446 --> 00:25:23.566
+<v Colin Moore>And whenever we talk about chunking, you have to do that chunking. You can't not do that. Because if you don't, then it doesn't matter. It's not like this file is going to form a clean knowledge graph. It can form a call graph, which is also a point that I think that everyone on that call was confused on. They couldn't understand the distinction between a knowledge graph and a call graph.</v>
+
+00:25:23.646 --> 00:25:25.526
+<v Colin Moore>Those are two incredibly different things.</v>
+
+00:25:27.286 --> 00:25:31.126
+<v Colin Moore>But this is essentially just the equivalent of a stack trace through the code.</v>
+
+00:25:33.766 --> 00:25:34.726
+<v Colin Moore>That's not.</v>
+
+00:25:36.326 --> 00:25:37.766
+<v Colin Moore>Actionable, let's say.</v>
+
+00:25:40.166 --> 00:25:45.526
+<v Colin Moore>Like, you see what I mean? Like, I'm dragging through this file and there's not, you know, maybe there's a few chunks in the file.</v>
+
+00:25:42.326 --> 00:25:42.726
+<v Namita Ravikiran Mane>Play.</v>
+
+00:25:47.606 --> 00:25:57.206
+<v Colin Moore>But for the most part, it's just repetition. And probably you want the first one and you want the last one, like the first error and the last error, so you can see the entry and the exit.</v>
+
+00:25:51.286 --> 00:25:51.326
+<v Srikar Madarapu>I.</v>
+
+00:25:56.646 --> 00:25:57.126
+<v Namita Ravikiran Mane>Mmh.</v>
+
+00:25:58.326 --> 00:25:58.806
+<v Srikar Madarapu>Yeah.</v>
+
+00:25:59.406 --> 00:26:18.446
+<v Colin Moore>But it's basically failing to build all the same packages at the same time, which is obvious. It's like, you know, my car got blown up. Can I drive to work? No. Can I drive home? No. You know what I mean? Like, it's logically incoherent to try to analyze 18,000 lines when you know none of them are going to pass anyway.</v>
+
+00:25:59.766 --> 00:26:00.326
+<v Namita Ravikiran Mane>Right.</v>
+
+00:26:12.646 --> 00:26:13.126
+<v Namita Ravikiran Mane>Mhm.</v>
+
+00:26:21.446 --> 00:26:22.166
+<v Colin Moore>So, that's...</v>
+
+00:26:22.566 --> 00:26:40.726
+<v Saurav Kumar Mishra>Hi, yeah, hi Colin. Yeah, just joined in. So I was listening on and is this what they are asking us to build like a knowledge graph for the like build. So I did hear like when Srinivas was.</v>
+
+00:26:22.686 --> 00:26:23.046
+<v Namita Ravikiran Mane>Yeah.</v>
+
+00:26:24.886 --> 00:26:25.446
+<v Colin Moore>Yes, Sir.</v>
+
+00:26:40.966 --> 00:26:59.286
+<v Saurav Kumar Mishra>talking in the call about this that we have to at least build the knowledge graph and help like Justin with this. But is it for like the what do you call the app we saw that they have identically coded on for their triage?</v>
+
+00:27:00.166 --> 00:27:01.846
+<v Saurav Kumar Mishra>Is this continuation of that?</v>
+
+00:27:03.206 --> 00:27:08.406
+<v Colin Moore>So, kind of, so here's, let me show, let me explain what Srinivas was saying.</v>
+
+00:27:09.526 --> 00:27:09.606
+<v Colin Moore>Uh...</v>
+
+00:27:09.846 --> 00:27:10.086
+<v Saurav Kumar Mishra>Yes.</v>
+
+00:27:11.286 --> 00:27:15.446
+<v Colin Moore>And it doesn't make logical sense, by the way, just so you know that from the start.</v>
+
+00:27:17.366 --> 00:27:19.126
+<v Saurav Kumar Mishra>Yep, yep, too.</v>
+
+00:27:18.766 --> 00:27:22.406
+<v Colin Moore>So here's where he was at. There are logs just like the ones we were just looking at.</v>
+
+00:27:23.166 --> 00:27:23.646
+<v Saurav Kumar Mishra>Mhm.</v>
+
+00:27:24.566 --> 00:27:35.686
+<v Colin Moore>What we said and correctly said was that step one we ingest the logs. He went off on a wild tangent about what specific logs. My point was that it does not matter. Literally does not matter.</v>
+
+00:27:35.126 --> 00:27:35.486
+<v Saurav Kumar Mishra>Yes.</v>
+
+00:27:36.486 --> 00:27:37.126
+<v Saurav Kumar Mishra>Yep, good.</v>
+
+00:27:37.446 --> 00:27:38.726
+<v Colin Moore>You treat everything the same way.</v>
+
+00:27:39.926 --> 00:27:40.246
+<v Saurav Kumar Mishra>Yeah.</v>
+
+00:27:40.566 --> 00:27:47.566
+<v Colin Moore>comes from Jenkins, from Basil, from, you know, GitHub, from, you know, like I said earlier, they're called microwave oven. It doesn't matter.</v>
+
+00:27:48.446 --> 00:27:48.926
+<v Saurav Kumar Mishra>Mhm.</v>
+
+00:27:48.726 --> 00:27:50.406
+<v Colin Moore>You know, it's locks.</v>
+
+00:27:52.806 --> 00:28:06.966
+<v Colin Moore>after you have the logs, you want to break them up because those logs can be decomposed effectively. I think maybe that's probably the right way to say it. And because you can use that to kind of make it sound like a knowledge graph, even though that's way overkill.</v>
+
+00:28:08.406 --> 00:28:09.446
+<v Saurav Kumar Mishra>Yeah. Yeah.</v>
+
+00:28:08.886 --> 00:28:09.126
+<v Colin Moore>It.</v>
+
+00:28:10.406 --> 00:28:18.326
+<v Colin Moore>And then we feed it through this classification system. Here's where things went off the rails for him, and where he started talking about knowledge graphs completely incorrectly.</v>
+
+00:28:20.126 --> 00:28:20.646
+<v Saurav Kumar Mishra>Mhm.</v>
+
+00:28:20.246 --> 00:28:28.966
+<v Colin Moore>His point here is you can't possibly do chunking on a log file without knowing the entire code base.</v>
+
+00:28:30.526 --> 00:28:30.886
+<v Saurav Kumar Mishra>Right.</v>
+
+00:28:32.406 --> 00:28:33.606
+<v Colin Moore>Yeah, exactly.</v>
+
+00:28:36.566 --> 00:28:42.726
+<v Colin Moore>So in his mind, we should do a knowledge graph for a 500k log file.</v>
+
+00:28:44.006 --> 00:28:44.326
+<v Saurav Kumar Mishra>Uh-huh.</v>
+
+00:28:44.086 --> 00:28:47.686
+<v Colin Moore>times 40 times a 15 million line code base.</v>
+
+00:28:46.126 --> 00:28:46.726
+<v Saurav Kumar Mishra>Thank you.</v>
+
+00:28:48.566 --> 00:28:51.046
+<v Saurav Kumar Mishra>Uh, so is this the chunk size?</v>
+
+00:28:52.046 --> 00:28:54.646
+<v Colin Moore>No, no, no, no, so, no, no fixed.</v>
+
+00:28:53.686 --> 00:28:59.526
+<v Saurav Kumar Mishra>Okay, this is the whole file and we want chunks of this and then convert that to knowledge graph.</v>
+
+00:29:00.406 --> 00:29:07.366
+<v Colin Moore>So not even that. So this chunking, I think we're kind of really just means decompose a file into its composite parts.</v>
+
+00:29:09.206 --> 00:29:09.766
+<v Saurav Kumar Mishra>Okay.</v>
+
+00:29:09.366 --> 00:29:17.046
+<v Colin Moore>So that's so not chunking in terms of like semantic or in terms of, you know, character count, but just decomposition.</v>
+
+00:29:14.566 --> 00:29:15.286
+<v Saurav Kumar Mishra>Yeah, yeah.</v>
+
+00:29:18.166 --> 00:29:35.766
+<v Saurav Kumar Mishra>So from what I am understanding about decomposition, so it would be like this part is from the input or this particular function, and this part is the processing or pre-processing part of the logs, and this part is this kind of vertical grouping, okay?</v>
+
+00:29:36.486 --> 00:29:37.606
+<v Colin Moore>Right, right.</v>
+
+00:29:37.286 --> 00:29:40.086
+<v Saurav Kumar Mishra>Okay, yeah, okay, yeah.</v>
+
+00:29:41.526 --> 00:29:52.726
+<v Colin Moore>And so yeah, the problem is like, so we were saying that, and that is a requisite step no matter what, because even for a knowledge graph, you can't just hand it a 500,000 line log file.</v>
+
+00:29:54.086 --> 00:29:54.326
+<v Saurav Kumar Mishra>Yeah.</v>
+
+00:29:55.126 --> 00:30:09.286
+<v Colin Moore>You know, like that's not a thing you can do. You can try whatever you want, but you still need to give some tagging, you know, what are your notes, what are your edges for a knowledge graph? You cannot do that without parsing in some way, shape, or form.</v>
+
+00:30:10.926 --> 00:30:11.246
+<v Saurav Kumar Mishra>Abhijeet.</v>
+
+00:30:12.606 --> 00:30:27.366
+<v Colin Moore>And if you want to do it semantically, oh boy, wouldn't that be fun. That's when you do need to do the full indexing of everything. But the point is, you'd have to re-index everything upon any small code change because the knowledge graph would fail to be accurate otherwise. There's a statefulness to it.</v>
+
+00:30:16.886 --> 00:30:17.366
+<v Saurav Kumar Mishra>Mhm.</v>
+
+00:30:28.566 --> 00:30:48.006
+<v Saurav Kumar Mishra>Yeah, and even for like, yeah, even for like different repos also, we will have to like, what do you call it, kind of map and chunk all of the repos on which this has to like work, so it is not very good at scaling as well.</v>
+
+00:30:29.326 --> 00:30:30.646
+<v Colin Moore>That's why knowledge graphs are slow.</v>
+
+00:30:49.206 --> 00:30:55.126
+<v Saurav Kumar Mishra>Given the he wants this and we build this, this is not good for scaling, so yeah.</v>
+
+00:30:56.326 --> 00:30:58.806
+<v Colin Moore>Right, right. So I think from...</v>
+
+00:30:59.686 --> 00:31:11.286
+<v Colin Moore>There's so much to unpack here, but the trick is that we are going to have to figure out how to talk to him about this in a way that he's going to understand in some sense.</v>
+
+00:31:12.166 --> 00:31:12.646
+<v Saurav Kumar Mishra>Mhm.</v>
+
+00:31:12.566 --> 00:31:22.566
+<v Colin Moore>because he's just not really getting it. And I think the key to that is Justin. You know, one thing that I did get out of today is he has a, I would say, disproportionate.</v>
+
+00:31:25.766 --> 00:31:34.726
+<v Colin Moore>You know, not anything against Justin, but it's very clear to me that they've never actually done this. And like I said earlier on this call, I don't care if he's been doing it for a while, it doesn't mean you're doing it right.</v>
+
+00:31:35.526 --> 00:31:36.126
+<v Saurav Kumar Mishra>Mm-hmm.</v>
+
+00:31:36.406 --> 00:31:41.126
+<v Colin Moore>So, but I think Justin at least sounds like he's trying.</v>
+
+00:31:42.806 --> 00:31:46.326
+<v Colin Moore>So we can probably at least get out from him.</v>
+
+00:31:47.406 --> 00:31:51.206
+<v Colin Moore>you know, some confidence. If we can make him understand that it doesn't make sense.</v>
+
+00:31:52.326 --> 00:31:54.006
+<v Colin Moore>then I think we'll be in okay shape.</v>
+
+00:31:55.606 --> 00:31:56.726
+<v Saurav Kumar Mishra>Okay, yeah.</v>
+
+00:31:58.686 --> 00:32:00.006
+<v Namita Ravikiran Mane>Yeah, I agree with that, Colin.</v>
+
+00:31:59.046 --> 00:31:59.246
+<v Saurav Kumar Mishra>Yeah.</v>
+
+00:32:02.966 --> 00:32:15.206
+<v Colin Moore>So that means that we got to be good buddies. That also means that we got to become good buddies within Verma. So I'm telling all of you, if I put on your, you know, most likable face.</v>
+
+00:32:09.326 --> 00:32:09.446
+<v Saurav Kumar Mishra>And.</v>
+
+00:32:10.806 --> 00:32:11.046
+<v Namita Ravikiran Mane>Yeah.</v>
+
+00:32:13.446 --> 00:32:32.006
+<v Srikar Madarapu>Yeah, Colin today, like one when, like when we start like presenting this one and showing, I think, yeah, we should connect with Justin before, like, if he, if you are coming with any like architecture, we have to like meet Justin and like he, he is aware of like all these and like if there is any.</v>
+
+00:32:13.686 --> 00:32:13.966
+<v Namita Ravikiran Mane>Yeah.</v>
+
+00:32:32.326 --> 00:32:37.366
+<v Srikar Madarapu>changes our connections he can also suggest and we can keep him in the loop all the time.</v>
+
+00:32:39.086 --> 00:32:45.846
+<v Namita Ravikiran Mane>Correct. And it looked like he was interested, right, Srikar? When we met him last time, he was interested.</v>
+
+00:32:39.366 --> 00:32:39.606
+<v Colin Moore>Right.</v>
+
+00:32:42.886 --> 00:32:53.846
+<v Srikar Madarapu>Yeah, yeah, he's very interested. He's very interested and he wants to, yeah, like do with us, like along with us and learn more.</v>
+
+00:32:51.686 --> 00:32:52.086
+<v Namita Ravikiran Mane>Yeah.</v>
+
+00:32:55.206 --> 00:33:06.566
+<v Colin Moore>So one thing that you might have to do though is with him. Now, I don't know him well enough. I need to meet him at some point, because I'll be able to tell you probably in the 1st 5 minutes if he falls into type A or type B.</v>
+
+00:32:55.446 --> 00:32:56.006
+<v Saurav Kumar Mishra>I know.</v>
+
+00:33:07.126 --> 00:33:07.766
+<v Saurav Kumar Mishra>She.</v>
+
+00:33:08.726 --> 00:33:30.966
+<v Colin Moore>Type A is like the people that you need to kind of like pat them on the head every two seconds, right? They have to be the smartest person in the room. It's not uncommon, especially for solutions projects. You know, all of you are going to be on this. You'll be on far more than this too. So, you know, it's a good thing to know. Sometimes there's those engineers that like, as long as they feel like they're the smartest person.</v>
+
+00:33:31.766 --> 00:33:48.326
+<v Colin Moore>they will agree with whatever you say. It's just you cannot act like you know more than them, you know? He doesn't sound like he's in that mode, but that is one type. And then the type 2 is as long as he is in alignment, he's a logical person, he'll come to a logical conclusion.</v>
+
+00:33:34.646 --> 00:33:34.806
+<v Saurav Kumar Mishra>Yeah.</v>
+
+00:33:37.566 --> 00:33:38.246
+<v Saurav Kumar Mishra>Thank you.</v>
+
+00:33:50.486 --> 00:33:52.806
+<v Colin Moore>As long as there's good alignment there, then we'll be.</v>
+
+00:33:54.246 --> 00:34:05.686
+<v Colin Moore>in good shape. But yeah, it's just a question of, you know, for him, I think you're absolutely right. Get alignment with him so that whenever we're doing these meetings, he can kind of be almost like a part of our team.</v>
+
+00:33:56.086 --> 00:33:56.246
+<v Saurav Kumar Mishra>Mm.</v>
+
+00:34:06.486 --> 00:34:06.886
+<v Srikar Madarapu>Great.</v>
+
+00:34:07.606 --> 00:34:08.086
+<v Saurav Kumar Mishra>Mhm.</v>
+
+00:34:08.086 --> 00:34:09.926
+<v Colin Moore>And you know, likewise within Verma.</v>
+
+00:34:15.526 --> 00:34:21.046
+<v Colin Moore>And let me show you, I've actually got a perfect example of exactly this chunking that I'm going to share.</v>
+
+00:34:23.686 --> 00:34:27.206
+<v Colin Moore>In a few moments here, I'm just trying to figure out exactly where I put this thing.</v>
+
+00:34:30.806 --> 00:34:31.086
+<v Colin Moore>To.</v>
+
+00:34:35.126 --> 00:34:35.926
+<v Colin Moore>PDF file.</v>
+
+00:34:38.806 --> 00:34:45.606
+<v Colin Moore>But in any case, so I think another thing, Saurav, we did not get very far in the slides. We got through 4 slides in an hour.</v>
+
+00:34:46.726 --> 00:34:56.566
+<v Saurav Kumar Mishra>Oh yeah, we had like a lot of materials packed inside each of them. It can very well be like a session for each part.</v>
+
+00:34:48.166 --> 00:34:48.486
+<v Colin Moore>So.</v>
+
+00:34:57.846 --> 00:35:16.006
+<v Colin Moore>Well, I think that's something that will change going forward too. We're going to have to keep things incredibly simplistic because, you know, like they don't know what they don't know. You know, for instance, if you look at that WebEx chat, I mean, just look with your human eyes. Don't even, you know, use the...</v>
+
+00:35:09.326 --> 00:35:09.766
+<v Saurav Kumar Mishra>It is.</v>
+
+00:35:16.166 --> 00:35:27.046
+<v Colin Moore>use AI to do it. There's no possible way to say what category errors fall into for most of these. With attribution. Yeah.</v>
+
+00:35:25.366 --> 00:35:44.726
+<v Srikar Madarapu>Yeah, we like based on their, like, based on their knowledge or like based on their issues related ones, like which which category it belongs to is like, yeah, there's no clear indication, yeah, we were discussing about like Namita and I was discussing about this, so if they have, like, whenever they are putting a message, if they have like...</v>
+
+00:35:25.526 --> 00:35:25.926
+<v Saurav Kumar Mishra>Yep.</v>
+
+00:35:38.246 --> 00:35:39.046
+<v Saurav Kumar Mishra>More.</v>
+
+00:35:44.886 --> 00:35:58.646
+<v Srikar Madarapu>categorize and put like specific categories like error, issue, PR or some kind of indication. I think that way it will be like at least clear for other person to identify like what this belongs to.</v>
+
+00:36:00.886 --> 00:36:01.366
+<v Colin Moore>Right.</v>
+
+00:36:03.486 --> 00:36:22.246
+<v Colin Moore>And I mean, so the other things too, that they are lacking a process, right? Like, even if you look, there's one where people are putting comments on multiple, you know, they're writing multiple comments at the same time, all referring to the same thing. For instance, there's one from 327, this Mariupon Balraj says, my...</v>
+
+00:36:03.526 --> 00:36:03.926
+<v Saurav Kumar Mishra>Sure.</v>
+
+00:36:13.966 --> 00:36:14.166
+<v Srikar Madarapu>Mm.</v>
+
+00:36:18.246 --> 00:36:18.646
+<v Srikar Madarapu>Mm.</v>
+
+00:36:22.366 --> 00:36:26.166
+<v Colin Moore>PR is stuck, one message. Next message is, he posts the link.</v>
+
+00:36:24.846 --> 00:36:25.046
+<v Saurav Kumar Mishra>And.</v>
+
+00:36:27.846 --> 00:36:28.406
+<v Saurav Kumar Mishra>OK.</v>
+
+00:36:28.886 --> 00:36:30.006
+<v Srikar Madarapu>Right, structure.</v>
+
+00:36:29.206 --> 00:36:29.526
+<v Colin Moore>So.</v>
+
+00:36:30.686 --> 00:36:31.286
+<v Colin Moore>Right.</v>
+
+00:36:30.726 --> 00:36:37.046
+<v Saurav Kumar Mishra>Yeah, so not even the actual error was there or any other details. Yeah.</v>
+
+00:36:32.566 --> 00:36:32.686
+<v Colin Moore>The.</v>
+
+00:36:37.606 --> 00:36:41.926
+<v Colin Moore>Right, like your PR is stuck, like what PR? For what? About what?</v>
+
+00:36:42.966 --> 00:36:43.366
+<v Saurav Kumar Mishra>Yeah.</v>
+
+00:36:44.246 --> 00:37:02.566
+<v Colin Moore>Other people posting pictures, the ULS sanity race from my PR fails even before running. Rerun also has the same issue and then posts some lines in the chat. It has no link to anything. It's just a couple of lines from an error. There's no way to attribute that with certainty.</v>
+
+00:37:04.086 --> 00:37:17.446
+<v Colin Moore>So what I had said, I think the only way to do this, first of all, they're being very stupid, frankly, when they're trying to do this with WebEx. It's just not the right way to do it. Do it with GitHub issues like a normal person.</v>
+
+00:37:15.766 --> 00:37:16.166
+<v Saurav Kumar Mishra>No.</v>
+
+00:37:17.206 --> 00:37:18.006
+<v Srikar Madarapu>Yep, yeah.</v>
+
+00:37:18.406 --> 00:37:18.726
+<v Saurav Kumar Mishra>Okay.</v>
+
+00:37:18.606 --> 00:37:23.686
+<v Colin Moore>Right, like, that's I'm not gonna win that battle, but just to say it out loud.</v>
+
+00:37:27.366 --> 00:37:27.686
+<v Colin Moore>But...</v>
+
+00:37:28.006 --> 00:37:41.206
+<v Saurav Kumar Mishra>Have you like checked what do you call this like a new tool, not new, but it's pretty recent click up boards like the tool name is click up.</v>
+
+00:37:42.326 --> 00:37:42.646
+<v Colin Moore>No.</v>
+
+00:37:43.606 --> 00:38:04.726
+<v Saurav Kumar Mishra>No? So it does like, you can think of it as like Jira, GitHub, Skype, everything integrated into one. Okay? You can create your diagrams, it can track all your charts. So like the similar interface of Outlook you get, you get all of those things plus your project management, your GitHub.</v>
+
+00:37:44.326 --> 00:37:44.566
+<v Colin Moore>Yeah.</v>
+
+00:38:04.966 --> 00:38:26.046
+<v Saurav Kumar Mishra>Everything is present on that same single screen and it has like AI agent built in which like tracks everything of this one. So we might, we can also like have a look at that and if they are, if they want to use it, it's good or if they want something of.</v>
+
+00:38:08.166 --> 00:38:08.646
+<v Colin Moore>Mmh.</v>
+
+00:38:16.726 --> 00:38:16.886
+<v Srikar Madarapu>Yeah.</v>
+
+00:38:18.766 --> 00:38:18.886
+<v Srikar Madarapu>Yeah.</v>
+
+00:38:26.166 --> 00:38:45.606
+<v Saurav Kumar Mishra>that sort, what you call, built in-house, that is also like a great idea because that is something which brings like your whole development, what you call, workflow as well as different surfaces on which the developer, what you call, interact with everything into like a single app.</v>
+
+00:38:45.926 --> 00:39:04.886
+<v Saurav Kumar Mishra>or a single board you can say. So even like for your Claude code and those things, those can also be like directly run from ClickUp. You don't have to even like, what do you call, leave ClickUp. Or if you want to leave the ClickUp, they already have like a skill for Claude codec.</v>
+
+00:39:05.126 --> 00:39:23.606
+<v Saurav Kumar Mishra>And what do you call a co-pilot, etcetera, which can like use the click up to do all of those things, like create the issues or create like proper, what do you call Kanban boards and drag the whole sprint and plan out project management, even if like...</v>
+
+00:39:24.566 --> 00:39:36.486
+<v Saurav Kumar Mishra>The way we have built like suppose of singularity, we can plug that into the click up as well and that can also work. So if you want I can like write a whole what you call a.</v>
+
+00:39:38.086 --> 00:39:49.926
+<v Saurav Kumar Mishra>high level overview of ClickUp as well as links and some more things which we can look into or the features we can take out from like ClickUp to add to like our system.</v>
+
+00:39:50.326 --> 00:39:50.926
+<v Colin Moore>Mm-hmm.</v>
+
+00:39:51.006 --> 00:39:51.366
+<v Saurav Kumar Mishra>It.</v>
+
+00:39:51.766 --> 00:40:12.966
+<v Colin Moore>I think what I would do is do definitely for internal. For them, they just seem to want to reinvent the wheel at every possible turn. So what we can do is we can take all the good ideas from it and then share that back. You know, I'm not saying to plagiarize and act like it's ours, but at the same time, kind of where we're at with them at this point.</v>
+
+00:39:55.766 --> 00:39:56.166
+<v Saurav Kumar Mishra>And.</v>
+
+00:40:00.526 --> 00:40:00.806
+<v Saurav Kumar Mishra>Okay.</v>
+
+00:40:03.126 --> 00:40:03.606
+<v Saurav Kumar Mishra>Mhm.</v>
+
+00:40:08.246 --> 00:40:09.126
+<v Saurav Kumar Mishra>Yeah, yeah.</v>
+
+00:40:13.846 --> 00:40:14.006
+<v Colin Moore>Um...</v>
+
+00:40:15.246 --> 00:40:18.326
+<v Colin Moore>You know, like they just need to, how should I say?</v>
+
+00:40:33.446 --> 00:40:34.086
+<v Saurav Kumar Mishra>Okay.</v>
+
+00:40:34.246 --> 00:40:38.246
+<v Colin Moore>Like they think that GitHub Enterprise doesn't have any agents or any AI features.</v>
+
+00:40:38.966 --> 00:40:51.246
+<v Saurav Kumar Mishra>Oh, I think they have or like already have are planning to launch in the next month the whole agent space, not even like a single agent.</v>
+
+00:40:52.646 --> 00:40:56.486
+<v Colin Moore>Correct. They've had that for literal years at that point.</v>
+
+00:40:53.126 --> 00:40:53.526
+<v Saurav Kumar Mishra>Thanks.</v>
+
+00:40:57.926 --> 00:40:59.526
+<v Saurav Kumar Mishra>Wait, seriously.</v>
+
+00:40:59.046 --> 00:41:04.166
+<v Colin Moore>So, I mean, it's been actual years, um, that's where...</v>
+
+00:41:05.366 --> 00:41:16.646
+<v Colin Moore>Like, I'm like, they've had those integrations because it's GitHub. Like, GitHub is by far the most extensible platform. They've done that since the beginning. It was like always the design philosophy with GitHub.</v>
+
+00:41:06.646 --> 00:41:06.846
+<v Srikar Madarapu>Yeah.</v>
+
+00:41:18.886 --> 00:41:21.046
+<v Colin Moore>Let me show you one thing though, really quick here.</v>
+
+00:41:22.246 --> 00:41:29.366
+<v Colin Moore>So I want you all to look at this. This is a PDF. This is for another project with EPNM. So Saurav, this will look familiar for you.</v>
+
+00:41:31.606 --> 00:41:32.326
+<v Saurav Kumar Mishra>Yep, yep.</v>
+
+00:41:32.686 --> 00:41:36.726
+<v Colin Moore>Can you all read this number up here? How many pages this PDF is?</v>
+
+00:41:38.646 --> 00:41:39.766
+<v Saurav Kumar Mishra>Thousand sixty-four.</v>
+
+00:41:38.886 --> 00:41:39.846
+<v Srikar Madarapu>How do I close?</v>
+
+00:41:39.286 --> 00:41:41.206
+<v Namita Ravikiran Mane>Yes, 100 and sixty-four.</v>
+
+00:41:41.766 --> 00:41:42.086
+<v Colin Moore>Yeah.</v>
+
+00:41:43.606 --> 00:41:48.806
+<v Colin Moore>So, language model, and I'm using this as an equivalent to those log files.</v>
+
+00:41:51.166 --> 00:41:52.646
+<v Colin Moore>Do you give this to Chat GPT?</v>
+
+00:41:53.846 --> 00:41:55.286
+<v Colin Moore>Ask it to write a summary for you.</v>
+
+00:41:57.126 --> 00:42:02.086
+<v Colin Moore>You know, like this file itself is like 26 megabytes.</v>
+
+00:42:04.166 --> 00:42:04.566
+<v Saurav Kumar Mishra>Yeah.</v>
+
+00:42:04.286 --> 00:42:07.846
+<v Colin Moore>I wrote a simple thing here that takes that and converts the whole thing to markdown.</v>
+
+00:42:09.846 --> 00:42:10.246
+<v Colin Moore>Sim.</v>
+
+00:42:12.006 --> 00:42:18.726
+<v Colin Moore>Just extracts the page content out, preserves the structure. Actually, it will give it to you as XHTML if you want.</v>
+
+00:42:16.406 --> 00:42:16.486
+<v Saurav Kumar Mishra>The.</v>
+
+00:42:22.246 --> 00:42:32.406
+<v Colin Moore>I'll have to drop off in a moment, everyone, but you all can continue if you want. We'll meet next week too before we meet with Srinivas. He's always booked up in the morning anyway, so we'll be able to meet at our normal time.</v>
+
+00:42:33.726 --> 00:42:52.646
+<v Colin Moore>My point is, though, that you can take just about anything and you can decompose it into its requisite pieces so that it's easier to process with the language model. It doesn't matter how complicated, how long it is, it's irrelevant. It's a matter of if it has a logical breakdown, you know, like books have chapters, for instance.</v>
+
+00:42:33.766 --> 00:42:34.166
+<v Saurav Kumar Mishra>Okay.</v>
+
+00:42:46.806 --> 00:42:47.126
+<v Saurav Kumar Mishra>Yep.</v>
+
+00:42:53.206 --> 00:42:55.606
+<v Colin Moore>You can still have everything here.</v>
+
+00:42:53.686 --> 00:42:54.086
+<v Srikar Madarapu>Right.</v>
+
+00:42:59.046 --> 00:43:16.806
+<v Colin Moore>So, you know, for him, we're going to have to fight a little bit of a battle there. But we are able to decompose just about anything under the sun into its fundamental parts. That's not really that bad. And I don't know why they always act like it's a giant thing. But anyway.</v>
+
+00:43:07.526 --> 00:43:07.606
+<v Srikar Madarapu>The.</v>
+
+00:43:16.326 --> 00:43:16.726
+<v Saurav Kumar Mishra>Yeah.</v>
+
+00:43:19.246 --> 00:43:19.766
+<v Saurav Kumar Mishra>Mhm.</v>
+
+00:43:21.366 --> 00:43:39.206
+<v Colin Moore>Let me drop. I have to get on to the next call. But I think from my aspect today, and really everyone, great work this week. We did what we were supposed to. We'll come up with a plan for next week. I'm going to send out some action items just so that they're clear. And we'll see if he gets the meeting on the calendar.</v>
+
+00:43:39.286 --> 00:43:58.126
+<v Colin Moore>I can almost guarantee he's not going to put it on the calendar in time. But we'll see about that. I think it's good. So Saurav, if he wanted to meet three times a week, Monday, Wednesday, Friday, I think that's a good thing, actually. So we can at least get some clarity there as to what we're doing at Editing Point.</v>
+
+00:43:58.246 --> 00:44:02.726
+<v Colin Moore>time so we stop on jumping around because it's like he changes his mind every 3 seconds.</v>
+
+00:44:01.286 --> 00:44:01.846
+<v Saurav Kumar Mishra>Mhm.</v>
+
+00:44:04.126 --> 00:44:05.206
+<v Saurav Kumar Mishra>Yep, yep.</v>
+
+00:44:04.166 --> 00:44:04.446
+<v Srikar Madarapu>Yeah.</v>
+
+00:44:06.646 --> 00:44:06.966
+<v Saurav Kumar Mishra>Negi.</v>
+
+00:44:09.126 --> 00:44:10.086
+<v Namita Ravikiran Mane>Sounds good, Colin.</v>
+
+00:44:09.366 --> 00:44:09.686
+<v Colin Moore>All right.</v>
+
+00:44:09.446 --> 00:44:27.646
+<v Saurav Kumar Mishra>But like, for me, not so good. So you, maybe you can, not you can, even I can do it. So maybe I should start my shift hour later so that I have like a little bit of overlap.</v>
+
+00:44:10.966 --> 00:44:11.686
+<v Srikar Madarapu>So, Colin.</v>
+
+00:44:27.766 --> 00:44:35.526
+<v Saurav Kumar Mishra>with the meeting for Srikar. Oh, it's like, oh, I will be extending my time every three days. So, yeah.</v>
+
+00:44:35.686 --> 00:44:41.526
+<v Colin Moore>Right. Yes. We'll cover that, sir. So don't worry. We'll make it work for you. I can tell you that.</v>
+
+00:44:40.886 --> 00:44:41.206
+<v Srikar Madarapu>Yeah.</v>
+
+00:44:41.046 --> 00:44:41.526
+<v Saurav Kumar Mishra>Mhm.</v>
+
+00:44:42.446 --> 00:44:46.166
+<v Saurav Kumar Mishra>Yep, yep, sure. Totally works for me. Great.</v>
+
+00:44:43.126 --> 00:44:43.526
+<v Srikar Madarapu>Sure.</v>
+
+00:44:44.846 --> 00:44:45.046
+<v Colin Moore>Yeah.</v>
+
+00:44:47.246 --> 00:44:47.646
+<v Srikar Madarapu>Thank you.</v>
+
+00:44:48.326 --> 00:44:57.126
+<v Saurav Kumar Mishra>Like, for me, it's like the more he's in contact with us, the more he will love us. So, yeah.</v>
+
+00:44:49.286 --> 00:44:49.606
+<v Namita Ravikiran Mane>See.</v>
+
+00:44:55.766 --> 00:44:56.326
+<v Colin Moore>Yes.</v>
+
+00:44:57.526 --> 00:45:00.326
+<v Colin Moore>I think it's important. Absolutely. Absolutely.</v>
+
+00:44:59.446 --> 00:44:59.686
+<v Saurav Kumar Mishra>Sr.</v>
+
+00:45:00.406 --> 00:45:00.486
+<v Srikar Madarapu>I.</v>
+
+00:45:01.446 --> 00:45:01.566
+<v Saurav Kumar Mishra>Yeah.</v>
+
+00:45:02.406 --> 00:45:20.726
+<v Colin Moore>All right, let me let me drop, we'll catch up on on Monday and I'll send out, I have the transcript for the call too, so I'll share that with everyone as well, and we'll put it through Singularity so you can see the decomposition. We'll cover Singularity altogether. Namita Srikar, I'll try to get to that today with you.</v>
+
+00:45:02.646 --> 00:45:02.966
+<v Namita Ravikiran Mane>Yeah.</v>
+
+00:45:05.126 --> 00:45:05.686
+<v Namita Ravikiran Mane>Yes.</v>
+
+00:45:21.526 --> 00:45:31.846
+<v Colin Moore>Otherwise, we'll do that on Monday as well. Because once you see how this works, you're going to be like, OK, this project makes a lot more sense. It's clear. We have everything mapped properly, et cetera.</v>
+
+00:45:33.126 --> 00:45:34.966
+<v Namita Ravikiran Mane>Yeah, sure, Colin. Sounds good.</v>
+
+00:45:33.926 --> 00:45:36.766
+<v Srikar Madarapu>Yes. Okay. Sure. Thank you.</v>
+
+00:45:34.446 --> 00:45:34.726
+<v Saurav Kumar Mishra>Yep.</v>
+
+00:45:36.246 --> 00:45:37.606
+<v Namita Ravikiran Mane>Okay, thank you everyone.</v>
+
+00:45:38.566 --> 00:45:41.686
+<v Colin Moore>Have a great weekend, and sorry of that. Get some sleep, please.</v>
+
+00:45:39.446 --> 00:45:40.326
+<v Saurav Kumar Mishra>Thank you, everyone.</v>
+
+00:45:40.806 --> 00:45:42.126
+<v Namita Ravikiran Mane>You too have a nice weekend.</v>
+
+00:45:41.046 --> 00:45:41.446
+<v Srikar Madarapu>Thank you.</v>
+
+00:45:41.286 --> 00:45:41.526
+<v Saurav Kumar Mishra>Yeah.</v>
+
+00:45:43.446 --> 00:46:01.926
+<v Saurav Kumar Mishra>Sure, sure. Like, I was in a lot of tension because from the time I dropped off from like our call, it was like my phone just switched off and I was off the call and early I heard that there was like my part for the like PPT.</v>
+
+00:45:43.526 --> 00:45:43.726
+<v Namita Ravikiran Mane>Yeah.</v>
+
+00:45:45.526 --> 00:45:46.166
+<v Srikar Madarapu>Thank you.</v>
+
+00:46:02.326 --> 00:46:21.966
+<v Saurav Kumar Mishra>I tried to like send some messages that maybe you guys can see them and maybe not face some issues live on the project. But yeah, till like the power was back on, I was in constantly like what exactly is happening? Let me just try to open my WebEx some way or another.</v>
+
+00:46:02.726 --> 00:46:02.886
+<v Colin Moore>Yeah.</v>
+
+00:46:22.326 --> 00:46:22.846
+<v Saurav Kumar Mishra>Pick up.</v>
+
+00:46:22.766 --> 00:46:26.886
+<v Colin Moore>Yes, no, no, no problem. You're good, all good, all good.</v>
+
+00:46:23.846 --> 00:46:24.166
+<v Saurav Kumar Mishra>Big.</v>
+
+00:46:27.206 --> 00:46:29.006
+<v Saurav Kumar Mishra>Okay, cool, cool.</v>
+
+00:46:28.166 --> 00:46:31.286
+<v Colin Moore>Alright, yeah, have a good weekend.</v>
+
+00:46:30.486 --> 00:46:34.486
+<v Saurav Kumar Mishra>Okay, have a great day, Colin. Colin, yeah, see you on Monday.</v>
+
+00:46:32.486 --> 00:46:33.526
+<v Colin Moore>Yeah, take care.</v>
+
+00:46:35.366 --> 00:46:36.086
+<v Colin Moore>See you Monday.</v>
+

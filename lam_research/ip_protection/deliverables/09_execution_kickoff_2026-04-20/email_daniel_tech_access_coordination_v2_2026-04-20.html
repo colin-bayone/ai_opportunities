@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Email Draft — Daniel Harrison, Technology Access Coordination</title>
+</head>
+<body style="font-family: Calibri, Arial, sans-serif; font-size: 11pt; color: #000000; line-height: 1.5; max-width: 780px;">
+
+<p><strong>To:</strong> Daniel Harrison<br>
+<strong>Cc:</strong> Mikhail Krivenko (for visibility); optionally Anuj Sehgal, Pratik Sharda on the BayOne side<br>
+<strong>Subject:</strong> LAM IP Detection POC — Technology Access Coordination</p>
+
+<hr>
+
+<p>Hi Daniel,</p>
+
+<p>Mikhail asked me to reach out to work through technology access for the Confidential Information Detection POC. Looking forward to partnering on this with you.</p>
+
+<p>Mikhail and I are still converging on whether the work will happen in the LAM environment (Option A) or in a BayOne environment (Option B), so the hardware and environment side of things is pending that decision. That said, a fair amount of what we would need is the same regardless of path, and I wanted to start the conversation with you so that we can identify what already exists in LAM's environment, what would need to be provisioned, and where you might point me to the right person for each item.</p>
+
+<p>The POC is structured as a three-week engagement starting no earlier than the week of May 4. The three-week clock only starts once access is in place, so the earlier we can surface what is already available and what needs to be stood up, the better.</p>
+
+<p>A few categories, grounded in what came up during our April 6 meeting and prior discussions:</p>
+
+<p><strong>Azure artifacts from the prior effort.</strong> Mikhail mentioned that the prior 18-month detection effort's Azure environment is still partially up, with some of the hourly retrieval jobs disabled but other components still present. This is where you would have the most direct visibility. If any code, notebooks, labeled data, trained models, evaluation scripts, or retained outputs have survived from that effort, we would like to review and reuse what still applies. Beyond saving time in Phase 1, it grounds the benchmark commitment we have made to LAM against the prior baseline.</p>
+
+<p><strong>Data.</strong> The POC is scoped to the five free-text fields in Escalation Solver that Mikhail walked us through, plus the reference lists that were described (the approximately 3,000-item acronyms list, the customer name list, the fab and location identifier list, and the exclusion list derived from those). The existing thumbs-up/thumbs-down feedback data from the Escalation Solver UI, which Mikhail estimated at approximately 1,000 items, would also be useful as the closest thing we have to labeled evaluation data. We would also benefit from any documentation of the prior effort's results, target performance, and the baseline metrics (the 21% and 17% false-positive rates that Mikhail referenced). And if any captured false-positive examples from the prior testing survived, those directly inform our Layer 2 tuning.</p>
+
+<p><strong>Source control.</strong> We recommend persisting the POC codebase inside LAM's environment rather than externally. If LAM uses GitHub Enterprise or Azure DevOps for internal work, whichever is your preference would work for us. You likely know best what the standard is and what the onboarding path looks like for outside contributors.</p>
+
+<p><strong>Generative AI endpoint.</strong> The methodology includes a generative AI layer as the third stage of the detection pipeline. Ideally, that layer runs against an Azure AI Foundry instance in LAM's tenancy. If LAM already has Azure AI Foundry provisioned, that is the cleanest path. If not, BayOne can help stand one up, or can extend access to its own instance on a courtesy basis so the engagement is not held up. The proper home for this work is on LAM's systems either way, and the work would move there once an instance is in place. Any LAM-sanctioned language model endpoint would satisfy the methodology, not specifically Azure AI Foundry. A full model endpoint is what the work requires, as opposed to a packaged tool like Microsoft Copilot or GitHub Copilot.</p>
+
+<p><strong>Containerization.</strong> Whichever container tooling LAM standardizes on (Docker, Podman, or something else), we would adopt that on our side so the work fits your operational patterns.</p>
+
+<p><strong>Accounts.</strong> Two LAM ID accounts for BayOne consultants, one for me (Colin Moore, Director of AI) and one for a second onshore BayOne AI engineer. Confirmation on whether the existing BayOne and LAM NDA covers the POC scope, or if a supplemental is needed.</p>
+
+<p><strong>SME coverage.</strong> We need a designated person, or several collectively if the knowledge is distributed, who can define the detection targets, confirm true positives versus false positives during validation cycles, speak to the authoritative sources for the reference lists, and anchor the context of what the prior effort was trying to do. This needs to be sufficient coverage for the Phase 1 Detection Target Map deliverable and the Phase 2 validation cycles, not a partial fit.</p>
+
+<p><strong>Communication.</strong> LAM's preference for engagement communications, whichever your team uses (Slack, Teams, or something else).</p>
+
+<p>Could we set up a 30-minute working session to walk through these? I am flexible on timing and happy to work around your calendar. If any of the items above are already straightforward under LAM's standard contractor onboarding, we can move quickly past those. My main concern is making sure nothing becomes a surprise blocker once the three-week clock starts.</p>
+
+<p>All my best,<br>
+Colin</p>
+
+</body>
+</html>

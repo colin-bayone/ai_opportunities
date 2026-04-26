@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 07: Decisions Requested Today</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-darkest: #0c1929;
+      --blue-dark: #15293e;
+      --blue-mid: #1e3a5f;
+      --blue-bright: #2563eb;
+      --blue-accent: #3b82f6;
+      --steel-light: #64748b;
+      --steel-glow: #94a3b8;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e6e8eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fcfdff 60%, #f7f9fc 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--blue-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 14px 40px 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .definition-bar {
+      background: linear-gradient(135deg, var(--blue-darkest), var(--blue-mid));
+      border-radius: 10px;
+      padding: 12px 20px;
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+
+    .definition-bar .label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .definition-bar h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .definition-bar p {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.78);
+      line-height: 1.45;
+    }
+
+    .decisions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 12px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .decision-card {
+      background: #fff;
+      border: 1px solid rgba(37, 99, 235, 0.10);
+      border-radius: 10px;
+      padding: 10px 14px 12px;
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.05);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .decision-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .decision-card.d1::before { background: linear-gradient(90deg, #0c1929, #1e3a5f); }
+    .decision-card.d2::before { background: linear-gradient(90deg, #1e3a5f, #2563eb); }
+    .decision-card.d3::before { background: linear-gradient(90deg, #2563eb, #3b82f6); }
+    .decision-card.d4::before { background: linear-gradient(90deg, #3b82f6, #4f93f7); }
+
+    .decision-number {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .decision-card.d1 .decision-number { background: linear-gradient(135deg, #0c1929, #1e3a5f); }
+    .decision-card.d2 .decision-number { background: linear-gradient(135deg, #1e3a5f, #2563eb); }
+    .decision-card.d3 .decision-number { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+    .decision-card.d4 .decision-number { background: linear-gradient(135deg, #3b82f6, #4f93f7); }
+
+    .decision-body {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .decision-label {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--blue-accent);
+      margin-bottom: 1px;
+    }
+
+    .decision-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      line-height: 1.25;
+      margin-bottom: 5px;
+    }
+
+    .decision-context {
+      font-size: 10.5px;
+      color: var(--text-light);
+      line-height: 1.5;
+      margin-bottom: 5px;
+    }
+
+    .decision-context strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .decision-question {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--primary);
+      line-height: 1.45;
+      padding-top: 5px;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+
+    .decision-question i {
+      color: var(--blue-bright);
+      margin-right: 6px;
+      font-size: 10px;
+    }
+
+    .takeaway {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, var(--blue-darkest), var(--blue-mid));
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .takeaway p {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.88);
+      line-height: 1.55;
+      text-align: center;
+    }
+
+    .takeaway strong {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-darkest), var(--blue-mid), var(--blue-accent), var(--steel-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 2px;
+    }
+
+    .slide-nav { position: fixed; bottom: 18px; left: 18px; display: flex; gap: 6px; z-index: 100; }
+    .slide-nav a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: rgba(12,25,41,0.75); color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: background 0.2s, color 0.2s; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; }
+    .slide-nav a:hover { background: rgba(37,99,235,0.9); color: #fff; }
+    .slide-nav a.disabled { opacity: 0.25; pointer-events: none; }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">BayOne <span>Solutions</span></div>
+      <div class="header-title">Decisions Requested Today</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="definition-bar">
+        <div class="label">Closing Ask</div>
+        <h2>Decisions Requested Today</h2>
+        <p>Four directional decisions that will shape how the team sequences the next two weeks of work. Each comes with a recommendation; final direction sits with you.</p>
+      </div>
+
+      <div class="decisions-grid">
+
+        <div class="decision-card d1">
+          <div class="decision-number">1</div>
+          <div class="decision-body">
+            <div class="decision-label">Scope Model for Overlapping Tooling</div>
+            <div class="decision-title">Generalize As Separate, or Generalize In Place</div>
+            <div class="decision-context">When Cisco teams build tools that overlap with reusable infrastructure (Pulse and Scribbler as the live example), two patterns are available. Either extract the common capabilities into a separate, truly reusable project that serves multiple tracks, or require the standalone tool itself to be built as modular, reusable infrastructure from the start. <strong>Our recommendation is the separate project pattern</strong> because it respects the modularity directive without disrupting in-flight team ownership.</div>
+            <div class="decision-question"><i class="fa-solid fa-circle-question"></i>Which pattern do you want applied when team-owned tools overlap with the infrastructure we are building?</div>
+          </div>
+        </div>
+
+        <div class="decision-card d2">
+          <div class="decision-number">2</div>
+          <div class="decision-body">
+            <div class="decision-label">Error Catalog Service Scope</div>
+            <div class="decision-title">Scoping the Catalog Construction Effort</div>
+            <div class="decision-context">The Tier 1 deterministic classifier draws from an Error Catalog Service with three sources: Bazel release catalogs (version-locked, low frequency), historical NX-OS build logs (requires curation), and an approved-fix feedback loop from Tier 3 outputs. Construction effort is a sub-project, not a flag flip. <strong>Our recommendation is to scope an initial pass against Bazel catalogs plus a representative slice of recent historical logs,</strong> then grow from there.</div>
+            <div class="decision-question"><i class="fa-solid fa-circle-question"></i>What coverage target and timeline do you want for the initial catalog? Full historical corpus, a representative slice, or Bazel-only to start?</div>
+          </div>
+        </div>
+
+        <div class="decision-card d3">
+          <div class="decision-number">3</div>
+          <div class="decision-body">
+            <div class="decision-label">Log Ingestion Latency</div>
+            <div class="decision-title">CI Versus CD Pipeline Expectations</div>
+            <div class="decision-context">CI builds run with engineers actively waiting, so latency on that path translates directly to developer idle time. CD nightly builds run asynchronously and can tolerate batched processing with lower operational complexity. The real trade-off is engineer-wait latency against queue and resource overhead. <strong>Our recommendation is near-realtime ingestion for CI, scheduled batches every 15 to 30 minutes for CD,</strong> with a shared parse and classification pipeline.</div>
+            <div class="decision-question"><i class="fa-solid fa-circle-question"></i>Is near-realtime the expectation for CI, and does the batched cadence work for CD, or is there a unified target we should design to?</div>
+          </div>
+        </div>
+
+        <div class="decision-card d4">
+          <div class="decision-number">4</div>
+          <div class="decision-body">
+            <div class="decision-label">Alternative Deployment Path</div>
+            <div class="decision-title">Unblocking Development While Access Resolves</div>
+            <div class="decision-context">DeepSight access has been pending for approximately four weeks, gated on the permanent ADS machine. Even with Nexus T repository access, without a deployable environment there is no way to test or iterate. The options are continue waiting for DeepSight, stand up a local deployment path on the team's own infrastructure, or authorize deployment into an adjacent Cisco environment. <strong>Our recommendation is a local deployment path on the team's machines now,</strong> with migration to DeepSight once access clears.</div>
+            <div class="decision-question"><i class="fa-solid fa-circle-question"></i>Should the team proceed with a local deployment path in the meantime, wait for DeepSight, or deploy into an adjacent environment you can authorize today?</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="takeaway">
+        <p><strong>The team is ready to move on each of these as soon as direction is confirmed.</strong></p>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">07</div>
+    </div>
+  </div>
+
+  <div class="slide-nav">
+    <a href="06_access_items.html"><i class="fa-solid fa-chevron-left"></i></a>
+    <a class="disabled"><i class="fa-solid fa-chevron-right"></i></a>
+    <a href="00_title.html" style="margin-left: 6px;"><i class="fa-solid fa-house"></i></a>
+  </div>
+
+</body>
+</html>

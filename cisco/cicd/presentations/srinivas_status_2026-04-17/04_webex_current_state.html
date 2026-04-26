@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 04: WebEx Track - Current State</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-darkest: #0c1929;
+      --blue-dark: #15293e;
+      --blue-mid: #1e3a5f;
+      --blue-bright: #2563eb;
+      --blue-accent: #3b82f6;
+      --steel-light: #64748b;
+      --steel-glow: #94a3b8;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --amber: #d97706;
+      --amber-light: #fef3c7;
+      --green: #059669;
+      --green-light: #d1fae5;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e6e8eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fcfdff 60%, #f7f9fc 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--blue-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 14px 40px 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .definition-bar {
+      background: linear-gradient(135deg, var(--blue-darkest), var(--blue-mid));
+      border-radius: 10px;
+      padding: 12px 20px;
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+
+    .definition-bar .label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .definition-bar h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .definition-bar p {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.78);
+      line-height: 1.45;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .track-card {
+      background: #fff;
+      border: 1px solid rgba(37, 99, 235, 0.10);
+      border-radius: 10px;
+      padding: 12px 14px 12px;
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.05);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .track-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .track-card.bayone::before { background: linear-gradient(90deg, #0c1929, #1e3a5f); }
+    .track-card.bayone .card-icon { background: linear-gradient(135deg, #0c1929, #1e3a5f); }
+
+    .track-card.cisco::before { background: linear-gradient(90deg, #1e3a5f, #2563eb); }
+    .track-card.cisco .card-icon { background: linear-gradient(135deg, #1e3a5f, #2563eb); }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .card-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .card-header-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .card-badge {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--blue-bright);
+      margin-bottom: 1px;
+    }
+
+    .track-card.cisco .card-badge { color: #64748b; }
+
+    .card-header h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      line-height: 1.25;
+    }
+
+    .app-block {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+
+    .app-block:first-of-type {
+      margin-top: 6px;
+      padding-top: 0;
+      border-top: none;
+    }
+
+    .app-name-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .app-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .status-pill {
+      display: inline-block;
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 10px;
+      line-height: 1.2;
+    }
+
+    .status-pill.deployed {
+      background: var(--green-light);
+      color: var(--green);
+      border: 1px solid var(--green);
+    }
+
+    .status-pill.local {
+      background: var(--amber-light);
+      color: var(--amber);
+      border: 1px solid var(--amber);
+    }
+
+    .status-pill.not-deployed {
+      background: #fee2e2;
+      color: #b91c1c;
+      border: 1px solid #ef4444;
+    }
+
+    .status-pill.access-pending {
+      background: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #0ea5e9;
+    }
+
+    .app-items {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .app-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      font-size: 10.5px;
+      color: var(--text-light);
+      line-height: 1.45;
+    }
+
+    .app-item i {
+      font-size: 5px;
+      color: var(--blue-accent);
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+
+    .app-item strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .takeaway {
+      margin-top: 10px;
+      padding: 9px 18px;
+      background: linear-gradient(135deg, var(--blue-darkest), var(--blue-mid));
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .takeaway p {
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.55;
+    }
+
+    .takeaway strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-darkest), var(--blue-mid), var(--blue-accent), var(--steel-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 2px;
+    }
+
+    .slide-nav { position: fixed; bottom: 18px; left: 18px; display: flex; gap: 6px; z-index: 100; }
+    .slide-nav a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: rgba(12,25,41,0.75); color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: background 0.2s, color 0.2s; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; }
+    .slide-nav a:hover { background: rgba(37,99,235,0.9); color: #fff; }
+    .slide-nav a.disabled { opacity: 0.25; pointer-events: none; }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">BayOne <span>Solutions</span></div>
+      <div class="header-title">WebEx Track: Current State</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="definition-bar">
+        <div class="label">WebEx Track</div>
+        <h2>Capabilities Built and Internal Tooling Landscape</h2>
+        <p>BayOne has two working capabilities running locally. Cisco has two internal tools in the same space that are not yet deployed. Repository access to the internal tools has been outstanding since April 9.</p>
+      </div>
+
+      <div class="card-grid">
+
+        <div class="track-card bayone">
+          <div class="card-header">
+            <div class="card-icon"><i class="fa-solid fa-bolt"></i></div>
+            <div class="card-header-text">
+              <div class="card-badge">BayOne-Built</div>
+              <h3>Wall-E Bot and Meeting Extractor</h3>
+            </div>
+          </div>
+
+          <div class="app-block">
+            <div class="app-name-row">
+              <span class="app-name">Wall-E</span>
+              <span class="status-pill deployed">Running, BayOne Space</span>
+            </div>
+            <div class="app-items">
+              <div class="app-item"><i class="fa-solid fa-circle"></i><span><strong>WebEx chat scraper built using the WebEx SDK.</strong> Captures structured message history (timestamp, author, email, bot flag, text, files, thread parent) with per-room scoping and deduplication.</span></div>
+              <div class="app-item"><i class="fa-solid fa-circle"></i><span><strong>Deployed into a BayOne-controlled WebEx space</strong> for validation. Storage is PostgreSQL hosted in a Podman container on the local development machine. No direct database access from other systems, persistence scoped to the dev machine.</span></div>
+              <div class="app-item"><i class="fa-solid fa-circle"></i><span><strong>Wall-E was the instrument</strong> that produced the pain point evidence on the prior three slides.</span></div>
+            </div>
+          </div>
+
+          <div class="app-block">
+            <div class="app-name-row">
+              <span class="app-name">Meeting Recording Extractor</span>
+              <span class="status-pill local">Built Locally</span>
+            </div>
+            <div class="app-items">
+              <div class="app-item"><i class="fa-solid fa-circle"></i><span><strong>Built against the WebEx API.</strong> Retrieves transcripts, summaries, action items, and audio files for WebEx meetings.</span></div>
+              <div class="app-item"><i class="fa-solid fa-circle"></i><span><strong>API constraint discovered:</strong> recording and transcript access via the API requires the meeting owner's credentials. Limits broad automation across organizationally-owned meetings.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="track-card cisco">
+          <div class="card-header">
+            <div class="card-icon"><i class="fa-solid fa-puzzle-piece"></i></div>
+            <div class="card-header-text">
+              <div class="card-badge">Cisco Internal</div>
+              <h3>Pulse and Scribbler</h3>
+            </div>
+          </div>
+
+          <div class="app-block">
+            <div class="app-name-row">
+              <span class="app-name">Pulse</span>
+              <span class="status-pill not-deployed">Not Deployed in NX-OS</span>
+            </div>
+            <div class="app-items">
+              <div class="app-item"><i class="fa-solid fa-circle"></i><span><strong>WebEx chat scraper</strong> intended to extract messages from WebEx spaces into a database. Not deployed in the NX-OS environment. Service app deployment status unknown.</span></div>
+              <div class="app-item"><i class="fa-solid fa-circle"></i><span><strong>Repository access requested since April 9</strong> and remains outstanding. Naming confusion in the GitHub teams index has further slowed identification.</span></div>
+            </div>
+          </div>
+
+          <div class="app-block">
+            <div class="app-name-row">
+              <span class="app-name">Scribbler</span>
+              <span class="status-pill local">Local Only</span>
+            </div>
+            <div class="app-items">
+              <div class="app-item"><i class="fa-solid fa-circle"></i><span><strong>Audio transcription tool</strong> using Whisper and Pyannote. Runs locally with no database integration and no production deployment.</span></div>
+              <div class="app-item"><i class="fa-solid fa-circle"></i><span><strong>Referred to as "Scribble," "Scribbler," and "Scrubber"</strong> in different internal contexts. Scribbler is the final internal name, Scrubber is a GitHub team naming artifact.</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="takeaway">
+        <p><strong>Wall-E already produced the pain point evidence.</strong> Pulse and Scribbler cover similar ground but remain inaccessible and undeployed. The direction decisions about how these tools relate come up on slide 05.</p>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">04</div>
+    </div>
+  </div>
+
+  <div class="slide-nav">
+    <a href="03a_build_log_architecture.html"><i class="fa-solid fa-chevron-left"></i></a>
+    <a href="04a_webex_architecture.html"><i class="fa-solid fa-chevron-right"></i></a>
+    <a href="00_title.html" style="margin-left: 6px;"><i class="fa-solid fa-house"></i></a>
+  </div>
+
+</body>
+</html>

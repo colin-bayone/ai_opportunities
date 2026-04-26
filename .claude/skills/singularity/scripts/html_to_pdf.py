@@ -10,16 +10,47 @@ Usage:
     python html_to_pdf.py <input_dir> [output.pdf]  # Merge multiple slide files
 
 Options:
-    --engine chrome|weasyprint    Force specific rendering engine
-    --merge                       Merge multiple HTML files into single PDF
-    --landscape                   Use landscape orientation (for slides)
+    --engine chrome|weasyprint|auto    Force rendering engine (default: auto, prefers chrome)
+    --merge                            Merge multiple HTML files into single PDF
+    --landscape                        Inject 16:10 landscape page sizing for slides
 
-Examples:
-    # Single proposal
-    python html_to_pdf.py proposal.html
+Flag selection by use case (what callers should pass):
+    Single deliverable (proposal, problem restatement, info request, briefing):
+        python html_to_pdf.py deliverable.html
+        # No flags. Defaults to auto engine, portrait letter, the deliverable's
+        # own @page CSS controls layout.
 
-    # Slide deck (merges all HTML files)
-    python html_to_pdf.py slides/ deck.pdf --merge --landscape
+    Multi-slide presentation deck (BayOne 16:10 slides):
+        python html_to_pdf.py slides_dir/ deck.pdf --merge --landscape
+        # --merge combines every *.html in the directory in filename sort order.
+        # --landscape is REQUIRED for slide decks because Chrome's print-to-pdf
+        # has no native landscape flag and the slide HTML does not include @page
+        # CSS. Without --landscape the slides render on portrait letter paper
+        # with massive whitespace.
+
+    Single slide preview (one HTML file from a deck):
+        python html_to_pdf.py 03_architecture.html preview.pdf --landscape
+        # --landscape only. No --merge needed for a single file.
+
+    Force a specific engine:
+        Add --engine chrome or --engine weasyprint to any of the above.
+
+Implementation notes:
+    Chrome headless does not have a direct landscape flag for --print-to-pdf.
+    When --landscape is passed, this script injects an @page rule into a temp
+    copy of the HTML (sized 11.5in x 7.1875in to match the BayOne 16:10 slide
+    aspect ratio) and points Chrome at the temp file. Originals are not modified.
+    Slide navigation buttons (.slide-nav) are hidden in print via the same
+    injection so they do not appear in the PDF.
+
+    External fonts and icons (Inter via Google Fonts, Font Awesome via CDN) need
+    time to load before Chrome snapshots the page. The --virtual-time-budget and
+    --run-all-compositor-stages-before-draw Chrome flags are always passed (no
+    user-facing flag controls them) so icons and webfonts render in every PDF.
+
+    Merge uses pypdf.PdfWriter.append (current API). Falls back to PyPDF2
+    PdfMerger if only the older library is installed. PdfMerger was removed
+    from pypdf in 5.x, so do not rely on importing it from pypdf in new code.
 """
 
 import argparse
@@ -29,6 +60,21 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
+
+# CSS injected into temp HTML copies when --landscape is passed.
+# Sized to match the BayOne 16:10 slide aspect (1100px wide / 1.6 = 687.5px tall).
+# 11.5in x 7.1875in produces an exact 16:10 page that the slide fills edge to edge
+# with no whitespace. Slide navigation buttons are hidden in print.
+LANDSCAPE_PAGE_CSS = """
+<style id="bayone-pdf-page-sizing">
+@page { size: 11.5in 7.1875in; margin: 0; }
+@media print {
+  body { padding: 0 !important; min-height: 0 !important; background: transparent !important; }
+  .slide { width: 100% !important; max-width: none !important; }
+  .slide-nav { display: none !important; }
+}
+</style>
+"""
 
 
 def find_chrome():
@@ -58,15 +104,43 @@ def find_chrome():
     return None
 
 
+def _inject_landscape_css(src_html: Path) -> Path:
+    """Write a temp copy of src_html with the landscape page CSS injected.
+
+    The temp file is placed alongside the source so relative asset paths
+    (images/, charts/, etc.) continue to resolve. Caller is responsible
+    for unlinking the returned path when done.
+    """
+    content = src_html.read_text()
+    if "</head>" in content:
+        content = content.replace("</head>", LANDSCAPE_PAGE_CSS + "</head>", 1)
+    else:
+        content = LANDSCAPE_PAGE_CSS + content
+    dest = src_html.parent / f"_pdftmp_{src_html.name}"
+    dest.write_text(content)
+    return dest
+
+
 def chrome_to_pdf(html_path: str, pdf_path: str, landscape: bool = False):
-    """Convert HTML to PDF using Chrome headless."""
+    """Convert HTML to PDF using Chrome headless.
+
+    When landscape=True, the source HTML is copied to a temp file with an
+    injected @page rule sized to the BayOne 16:10 slide aspect. The original
+    HTML is not modified.
+    """
     chrome = find_chrome()
     if not chrome:
         raise RuntimeError("Chrome/Chromium not found. Install Chrome or use --engine weasyprint")
 
-    # Resolve to absolute path with file:// protocol
-    html_path = Path(html_path).resolve()
-    html_url = f"file://{html_path}"
+    src = Path(html_path).resolve()
+    tmp_html = None
+    if landscape:
+        tmp_html = _inject_landscape_css(src)
+        target = tmp_html
+    else:
+        target = src
+
+    html_url = f"file://{target}"
 
     cmd = [
         chrome,
@@ -74,22 +148,24 @@ def chrome_to_pdf(html_path: str, pdf_path: str, landscape: bool = False):
         "--disable-gpu",
         "--no-sandbox",
         "--disable-software-rasterizer",
+        # Allow time for CDN fonts (Google Fonts, Font Awesome) and other
+        # network assets to load before Chrome snapshots the page. Without
+        # these flags, Chrome prints before icons and webfonts render.
+        "--virtual-time-budget=15000",
+        "--run-all-compositor-stages-before-draw",
         f"--print-to-pdf={pdf_path}",
         "--print-to-pdf-no-header",
+        html_url,
     ]
 
-    if landscape:
-        # Chrome doesn't have a direct landscape flag for print-to-pdf
-        # The HTML should use @page { size: landscape } in CSS
-        pass
-
-    cmd.append(html_url)
-
-    result = subprocess.run(cmd, capture_output=True, text=True)
-
-    if result.returncode != 0:
-        print(f"Chrome error: {result.stderr}", file=sys.stderr)
-        raise RuntimeError(f"Chrome PDF conversion failed")
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        if result.returncode != 0:
+            print(f"Chrome error: {result.stderr}", file=sys.stderr)
+            raise RuntimeError(f"Chrome PDF conversion failed")
+    finally:
+        if tmp_html is not None:
+            tmp_html.unlink(missing_ok=True)
 
     return pdf_path
 
@@ -106,19 +182,36 @@ def weasyprint_to_pdf(html_path: str, pdf_path: str):
 
 
 def merge_pdfs(pdf_paths: list, output_path: str):
-    """Merge multiple PDFs into one."""
+    """Merge multiple PDFs into one.
+
+    Tries pypdf first (current API uses PdfWriter.append, since PdfMerger was
+    removed in pypdf 5.x). Falls back to PyPDF2 (which still ships PdfMerger
+    through 3.x) for older environments.
+    """
+    # pypdf >= 5.x: use PdfWriter, which has an append() method that accepts
+    # paths or file-like objects.
     try:
-        from pypdf import PdfMerger
+        from pypdf import PdfWriter
+        writer = PdfWriter()
+        for pdf_path in pdf_paths:
+            writer.append(str(pdf_path))
+        with open(output_path, "wb") as f:
+            writer.write(f)
+        return output_path
     except ImportError:
-        try:
-            from PyPDF2 import PdfMerger
-        except ImportError:
-            raise RuntimeError("PyPDF2/pypdf not installed. Run: pip install pypdf")
+        pass
+
+    # Older fallback path: PyPDF2's PdfMerger.
+    try:
+        from PyPDF2 import PdfMerger
+    except ImportError:
+        raise RuntimeError(
+            "Neither pypdf nor PyPDF2 is installed. Run: pip install pypdf"
+        )
 
     merger = PdfMerger()
     for pdf_path in pdf_paths:
-        merger.append(pdf_path)
-
+        merger.append(str(pdf_path))
     merger.write(output_path)
     merger.close()
     return output_path
@@ -223,7 +316,7 @@ def main():
     parser.add_argument(
         "--landscape",
         action="store_true",
-        help="Use landscape orientation"
+        help="Inject 16:10 landscape page sizing (required for slide decks)"
     )
 
     args = parser.parse_args()

@@ -1,0 +1,2537 @@
+# Repository Tree Report: assembly
+
+- Repository root: `/Users/cmoore/Documents/programming/EPNM/inventory/assembly`
+- Included text-like files: `2031`
+- Included directories: `355`
+- Total raw lines: `717492`
+- Skipped binary files: `20`
+- Skipped ignored-extension files: `392`
+
+```text
+assembly/
+├── epnm_tp/
+│   ├── assembly/
+│   │   ├── assembly.xml (1460 lines)
+│   │   └── root_priv_assembly.xml (63 lines)
+│   ├── src/
+│   │   └── main/
+│   │       └── resources/
+│   │           └── assembly_assembly_version.properties (2 lines)
+│   ├── .project (24 lines)
+│   └── pom.xml (171 lines)
+├── ifm_platform_ui/
+│   ├── docs/
+│   │   ├── src/
+│   │   │   └── docbkx/
+│   │   │       ├── book-ifm-platform-ui-ug.xml (20 lines)
+│   │   │       ├── chapter-getting-started.xml (12 lines)
+│   │   │       ├── chapter-inventory.xml (131 lines)
+│   │   │       ├── chapter-overview.xml (12 lines)
+│   │   │       └── chapter-references.xml (12 lines)
+│   │   └── pom.xml (57 lines)
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/
+│   │   │   │   └── com/
+│   │   │   │       └── cisco/
+│   │   │   │           └── ifm/
+│   │   │   │               ├── extended/
+│   │   │   │               │   └── wap/
+│   │   │   │               │       └── registry/
+│   │   │   │               │           ├── util/
+│   │   │   │               │           │   └── Utils.java (178 lines)
+│   │   │   │               │           └── IfmXMLRegistryProvider.java (207 lines)
+│   │   │   │               ├── search/
+│   │   │   │               │   └── rest/
+│   │   │   │               │       └── service/
+│   │   │   │               │           ├── AdminRestService.java (197 lines)
+│   │   │   │               │           ├── QueryRestService.java (261 lines)
+│   │   │   │               │           └── TermsRestService.java (88 lines)
+│   │   │   │               └── security/
+│   │   │   │                   ├── BufferOverflowFilter.java (130 lines)
+│   │   │   │                   ├── IfmLogoutFilter.java (88 lines)
+│   │   │   │                   ├── IfmXssFilter.java (105 lines)
+│   │   │   │                   ├── IfmXssRequestWrapper.java (349 lines)
+│   │   │   │                   └── SQLInjectionFilter.java (47 lines)
+│   │   │   ├── resources/
+│   │   │   │   ├── com/
+│   │   │   │   │   └── cisco/
+│   │   │   │   │       └── ifm/
+│   │   │   │   │           ├── discovery/
+│   │   │   │   │           │   └── castor/
+│   │   │   │   │           │       ├── castor-mapping.xml (57 lines)
+│   │   │   │   │           │       ├── discovery-conf-mapping.xml (756 lines)
+│   │   │   │   │           │       └── ifmDiscoverySchema.xsd (474 lines)
+│   │   │   │   │           ├── extended/
+│   │   │   │   │           │   └── wap/
+│   │   │   │   │           │       └── registry/
+│   │   │   │   │           │           ├── messages.properties (5 lines)
+│   │   │   │   │           │           └── messages.xml (46 lines)
+│   │   │   │   │           └── security/
+│   │   │   │   │               ├── IFMAdminSystemPreference.xml (22 lines)
+│   │   │   │   │               ├── ifm_system_data.xml (419 lines)
+│   │   │   │   │               └── ifm_system_data_testUsers.xml (19 lines)
+│   │   │   │   ├── wap/
+│   │   │   │   │   ├── registry/
+│   │   │   │   │   │   ├── data/
+│   │   │   │   │   │   │   └── dictionary.xml (143 lines)
+│   │   │   │   │   │   ├── xml/
+│   │   │   │   │   │   │   ├── actions.xml (85 lines)
+│   │   │   │   │   │   │   ├── application.xml (51 lines)
+│   │   │   │   │   │   │   ├── handlers.xml (8 lines)
+│   │   │   │   │   │   │   ├── navigation.xml (456 lines)
+│   │   │   │   │   │   │   ├── pageViews.xml (392 lines)
+│   │   │   │   │   │   │   ├── pages.xml (317 lines)
+│   │   │   │   │   │   │   ├── rbacTest.xml (20 lines)
+│   │   │   │   │   │   │   └── views.xml (458 lines)
+│   │   │   │   │   │   └── authorizations.xml (16 lines)
+│   │   │   │   │   └── schemas/
+│   │   │   │   │       └── data/
+│   │   │   │   │           └── Dictionary.xsd (73 lines)
+│   │   │   │   ├── castor.properties (6 lines)
+│   │   │   │   ├── commons-logging.properties (1 lines)
+│   │   │   │   ├── extended-registry.properties (8 lines)
+│   │   │   │   ├── log4j.xml (67 lines)
+│   │   │   │   ├── simplelog.properties (3 lines)
+│   │   │   │   ├── wap-data.xml (43 lines)
+│   │   │   │   └── wap-security.xml (89 lines)
+│   │   │   └── webapp/
+│   │   │       ├── META-INF/
+│   │   │       │   ├── spring/
+│   │   │       │   │   ├── admin-cxf-context.xml (5 lines)
+│   │   │       │   │   ├── ifm_platform_ui_context.xml (291 lines)
+│   │   │       │   │   └── osgi-context.xml (25 lines)
+│   │   │       │   └── MANIFEST.MF (3 lines)
+│   │   │       ├── WEB-INF/
+│   │   │       │   └── web.xml (69 lines)
+│   │   │       ├── applications/
+│   │   │       │   ├── AlarmManagement/
+│   │   │       │   │   ├── css/
+│   │   │       │   │   │   ├── EventListView.css (6 lines)
+│   │   │       │   │   │   ├── alarmEventBrowser.css (14 lines)
+│   │   │       │   │   │   ├── alarmList.css (11 lines)
+│   │   │       │   │   │   └── dashletChart.css (7 lines)
+│   │   │       │   │   ├── data/
+│   │   │       │   │   │   ├── AlarmList.json (269 lines)
+│   │   │       │   │   │   ├── AlarmListMetadata.json (167 lines)
+│   │   │       │   │   │   ├── AlarmNotes.json (79 lines)
+│   │   │       │   │   │   ├── Alarm_BGP.json (988 lines)
+│   │   │       │   │   │   ├── Alarm_ISIS.json (988 lines)
+│   │   │       │   │   │   ├── Alarm_MPLS-L3VPN.json (988 lines)
+│   │   │       │   │   │   ├── Alarm_MPLS.json (988 lines)
+│   │   │       │   │   │   ├── Alarm_NexusVPCSwitch.json (828 lines)
+│   │   │       │   │   │   ├── Alarm_OSPF.json (988 lines)
+│   │   │       │   │   │   ├── Alarm_OpticalNetworking.json (988 lines)
+│   │   │       │   │   │   ├── Alarm_OpticalTransport.json (1116 lines)
+│   │   │       │   │   │   ├── Alarm_SONET.json (988 lines)
+│   │   │       │   │   │   ├── Alarm_SwitchesandRouters.json (987 lines)
+│   │   │       │   │   │   ├── DerivedAlarmListMetadata.CoverageHole.json (53 lines)
+│   │   │       │   │   │   ├── DerivedAlarmListMetadata.Interference.json (50 lines)
+│   │   │       │   │   │   ├── DerivedAlarmListMetadata.PreCoverageHole.json (28 lines)
+│   │   │       │   │   │   ├── DerivedAlarmListMetadata.RogueAP.json (95 lines)
+│   │   │       │   │   │   ├── DerivedAlarmListMetadata.RogueAdhoc.json (95 lines)
+│   │   │       │   │   │   ├── DerivedAlarmListMetadata.SEDetectedInterference.json (59 lines)
+│   │   │       │   │   │   ├── DerivedAlarmListMetadata.json (61 lines)
+│   │   │       │   │   │   ├── DerivedEventListMetadata.AdhocRogue.json (63 lines)
+│   │   │       │   │   │   ├── DerivedEventListMetadata.CoverageHole.json (54 lines)
+│   │   │       │   │   │   ├── DerivedEventListMetadata.PreCoverageHole.json (28 lines)
+│   │   │       │   │   │   ├── DerivedEventListMetadata.RogueAP.json (63 lines)
+│   │   │       │   │   │   ├── DerivedEventListMetadata.RogueAdhoc.json (63 lines)
+│   │   │       │   │   │   ├── DerivedEventListMetadata.json (45 lines)
+│   │   │       │   │   │   ├── EventList.json (184 lines)
+│   │   │       │   │   │   ├── EventListMetadata.RogueAP.json (56 lines)
+│   │   │       │   │   │   ├── EventListMetadata.RogueAdhoc.json (61 lines)
+│   │   │       │   │   │   ├── EventListMetadata.Spectrum.json (56 lines)
+│   │   │       │   │   │   ├── EventListMetadata.json (141 lines)
+│   │   │       │   │   │   ├── FailureSourceDialogContent.json (68 lines)
+│   │   │       │   │   │   ├── FormatterData.json (295 lines)
+│   │   │       │   │   │   ├── InterfaceChartdata.json (1 lines)
+│   │   │       │   │   │   ├── InterfaceReceivedata.json (1 lines)
+│   │   │       │   │   │   ├── InterfaceSummarydata.json (2 lines)
+│   │   │       │   │   │   ├── Interfacedata.json (64 lines)
+│   │   │       │   │   │   ├── SyslogListMetadata.json (111 lines)
+│   │   │       │   │   │   ├── SyslogSummaryTemplates.xml (18 lines)
+│   │   │       │   │   │   ├── SyslogWatchTemplates.xml (51 lines)
+│   │   │       │   │   │   ├── SystemEventsMetadata.json (107 lines)
+│   │   │       │   │   │   ├── alarmTabs.json (44 lines)
+│   │   │       │   │   │   ├── allMetrics.json (235 lines)
+│   │   │       │   │   │   ├── clusterAlarmTabs.json (9 lines)
+│   │   │       │   │   │   ├── delimiter.json (8 lines)
+│   │   │       │   │   │   ├── devices.json (1612 lines)
+│   │   │       │   │   │   ├── epnmAlarmTabs.json (50 lines)
+│   │   │       │   │   │   ├── ifmAlarmMetadata.json (117 lines)
+│   │   │       │   │   │   ├── ifmalarms.json (114 lines)
+│   │   │       │   │   │   └── showCommands.json (14 lines)
+│   │   │       │   │   ├── html/
+│   │   │       │   │   │   ├── AlarmList.html (48 lines)
+│   │   │       │   │   │   ├── Chart.html (17 lines)
+│   │   │       │   │   │   ├── Location_impactedAlarmsDetails.html (28 lines)
+│   │   │       │   │   │   ├── Location_impactedAlarmsTree.html (14 lines)
+│   │   │       │   │   │   ├── MetricNavigator.html (65 lines)
+│   │   │       │   │   │   ├── MetricView.html (317 lines)
+│   │   │       │   │   │   ├── SelectOwnerDialogForm.html (33 lines)
+│   │   │       │   │   │   ├── SystemAlarm.html (16 lines)
+│   │   │       │   │   │   ├── alarmEventList.html (59 lines)
+│   │   │       │   │   │   ├── alarmEventObjSel.html (32 lines)
+│   │   │       │   │   │   └── sliderAlarmStatGT.html (117 lines)
+│   │   │       │   │   ├── i18n/
+│   │   │       │   │   │   └── nls/
+│   │   │       │   │   │       ├── en/
+│   │   │       │   │   │       │   ├── epnmAlarmManagementProperties.js (216 lines)
+│   │   │       │   │   │       │   └── epnmInventoryProperties.js (40 lines)
+│   │   │       │   │   │       ├── en-us/
+│   │   │       │   │   │       │   ├── epnmAlarmManagementProperties.js (212 lines)
+│   │   │       │   │   │       │   └── epnmInventoryProperties.js (40 lines)
+│   │   │       │   │   │       ├── ja/
+│   │   │       │   │   │       │   ├── epnmAlarmManagementProperties.js (223 lines)
+│   │   │       │   │   │       │   └── epnmInventoryProperties.js (41 lines)
+│   │   │       │   │   │       ├── ko/
+│   │   │       │   │   │       │   ├── epnmAlarmManagementProperties.js (220 lines)
+│   │   │       │   │   │       │   └── epnmInventoryProperties.js (44 lines)
+│   │   │       │   │   │       ├── epnmAlarmManagementProperties.js (215 lines)
+│   │   │       │   │   │       └── epnmInventoryProperties.js (40 lines)
+│   │   │       │   │   ├── js/
+│   │   │       │   │   │   ├── components/
+│   │   │       │   │   │   │   ├── EPNM/
+│   │   │       │   │   │   │   │   ├── EPNMAlarmEventGlobalToolbar.js (162 lines)
+│   │   │       │   │   │   │   │   ├── EPNMAlarmListView.js (80 lines)
+│   │   │       │   │   │   │   │   ├── EPNMAlarmTable.js (32 lines)
+│   │   │       │   │   │   │   │   ├── EPNMEnhancedAlarmListView.js (127 lines)
+│   │   │       │   │   │   │   │   ├── EPNMRealtimeAlarmTable.js (126 lines)
+│   │   │       │   │   │   │   │   └── EPNMRefreshIntervalWidget.js (236 lines)
+│   │   │       │   │   │   │   ├── deviceGroupTree/
+│   │   │       │   │   │   │   │   ├── autoRefresh/
+│   │   │       │   │   │   │   │   │   └── _AutoRefreshControllerMixin.js (103 lines)
+│   │   │       │   │   │   │   │   └── objectSelector/
+│   │   │       │   │   │   │   │       ├── AlarmEventDeviceGroupSelector.js (209 lines)
+│   │   │       │   │   │   │   │       ├── ClusterAlarmEventDeviceGroupSelector.js (94 lines)
+│   │   │       │   │   │   │   │       └── _AlarmEventDeviceGroupSelectorMixin.js (228 lines)
+│   │   │       │   │   │   │   ├── quickView/
+│   │   │       │   │   │   │   │   ├── templates/
+│   │   │       │   │   │   │   │   │   └── DeviceGroupAlarmSummary.html (32 lines)
+│   │   │       │   │   │   │   │   ├── AlarmQuickView.js (228 lines)
+│   │   │       │   │   │   │   │   └── DeviceGroupAlarmSummary.js (35 lines)
+│   │   │       │   │   │   │   ├── tab/
+│   │   │       │   │   │   │   │   ├── AlarmTabButton.js (182 lines)
+│   │   │       │   │   │   │   │   └── AlarmTabController.js (22 lines)
+│   │   │       │   │   │   │   ├── table/
+│   │   │       │   │   │   │   │   ├── detail/
+│   │   │       │   │   │   │   │   │   ├── cell/
+│   │   │       │   │   │   │   │   │   │   ├── labelValue/
+│   │   │       │   │   │   │   │   │   │   │   ├── field/
+│   │   │       │   │   │   │   │   │   │   │   │   ├── AuditLinkField.js (52 lines)
+│   │   │       │   │   │   │   │   │   │   │   │   ├── Field.js (60 lines)
+│   │   │       │   │   │   │   │   │   │   │   │   ├── ForensicFileLinkField.js (36 lines)
+│   │   │       │   │   │   │   │   │   │   │   │   ├── LinkField.js (86 lines)
+│   │   │       │   │   │   │   │   │   │   │   │   ├── WipsContainBlacklistLinkField.js (91 lines)
+│   │   │       │   │   │   │   │   │   │   │   │   ├── _FieldFactory.js (58 lines)
+│   │   │       │   │   │   │   │   │   │   │   │   └── _LinkActions.js (46 lines)
+│   │   │       │   │   │   │   │   │   │   │   └── LabelValueListDetailCell.js (191 lines)
+│   │   │       │   │   │   │   │   │   │   ├── AnnotationsTableCell.js (63 lines)
+│   │   │       │   │   │   │   │   │   │   ├── CellFactory.js (72 lines)
+│   │   │       │   │   │   │   │   │   │   ├── DeviceEventsTableCell.js (84 lines)
+│   │   │       │   │   │   │   │   │   │   ├── RelatedHistoryTableCell.js (82 lines)
+│   │   │       │   │   │   │   │   │   │   ├── SimpleTextDetailCell.js (85 lines)
+│   │   │       │   │   │   │   │   │   │   ├── TableDetailCell.js (213 lines)
+│   │   │       │   │   │   │   │   │   │   └── _TitlePaneCell.js (71 lines)
+│   │   │       │   │   │   │   │   │   ├── data/
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_AP.json (44 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_AdhocRogue.json (146 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_ApplicationPerformance.json (67 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_CarrierEthernet.json (65 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_Clients.json (37 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_ComputeServers.json (88 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_ContextAwareNotifications.json (37 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_Controller.json (65 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_CoverageHole.json (70 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_Default.json (65 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_MeshLinks.json (37 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_MobilityService.json (37 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_NexusVPCSwitch.json (65 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_Performance.json (37 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_RogueAP.json (224 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_SEDetectedInterferers.json (48 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_Security.json (37 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_Security_IDS_SHUN_CLIENT.json (37 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_Security_MFP_ANOMALY_DETECTED.json (40 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_Security_SIGNATURE_ATTACK.json (37 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_Security_SI_SECURITY_TRAPS.json (48 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_Security_WIPS_META_ALERT.json (109 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_Security_WIPS_TRAPS.json (80 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_Switch.json (65 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_SwitchesandRouters.json (65 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_System.json (49 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_System_AUDIT_STATUS_DIFFERENCE.json (69 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_ThirdPartyAP.json (44 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Alarm_ThirdPartyController.json (65 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_AP.json (26 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_AdhocRogue.json (31 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_ApplicationPerformance.json (88 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_CarrierEthernet.json (88 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_Clients.json (26 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_ComputeServers.json (89 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_ContextAwareNotifications.json (26 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_Controller.json (26 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_CoverageHole.json (57 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_CoverageHole_VOICE_COVERAGE_HOLE_ALARM.json (61 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_Default.json (93 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_INFORMATION.json (28 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_MeshLinks.json (26 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_MobilityService.json (26 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_Performance.json (26 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_RogueAP.json (33 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_SEDetectedInterferers.json (51 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_Security.json (26 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_Security_MFP_TIMEBASE_OUT_OF_SYNC.json (26 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_Security_SIGNATURE_ATTACK.json (28 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_Security_SWITCH_DETECTED_DUPLICATE_IP.json (26 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_Security_WIPS_META_ALERT.json (36 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_Security_WIPS_TRAPS.json (36 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_Switch.json (93 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_SwitchesandRouters.json (93 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_System.json (30 lines)
+│   │   │       │   │   │   │   │   │   │   ├── Event_ThirdPartyAP.json (26 lines)
+│   │   │       │   │   │   │   │   │   │   └── Event_ThirdPartyController.json (26 lines)
+│   │   │       │   │   │   │   │   │   ├── titlePane/
+│   │   │       │   │   │   │   │   │   │   ├── actionItems/
+│   │   │       │   │   │   │   │   │   │   │   ├── rogue/
+│   │   │       │   │   │   │   │   │   │   │   │   ├── RogueAPContainmentMenu.js (138 lines)
+│   │   │       │   │   │   │   │   │   │   │   │   ├── RogueViewMenu.js (71 lines)
+│   │   │       │   │   │   │   │   │   │   │   │   └── TraceSwitchPortButton.js (47 lines)
+│   │   │       │   │   │   │   │   │   │   │   ├── templates/
+│   │   │       │   │   │   │   │   │   │   │   │   ├── DeviceEventsDropDown.html (10 lines)
+│   │   │       │   │   │   │   │   │   │   │   │   └── RelatedHistoryDevicePicker.html (10 lines)
+│   │   │       │   │   │   │   │   │   │   │   ├── troubleshoot/
+│   │   │       │   │   │   │   │   │   │   │   │   ├── templates/
+│   │   │       │   │   │   │   │   │   │   │   │   │   └── PingTracerouteDialogContent.html (19 lines)
+│   │   │       │   │   │   │   │   │   │   │   │   ├── PingTracerouteDialogContent.js (70 lines)
+│   │   │       │   │   │   │   │   │   │   │   │   └── TroubleshootMenu.js (182 lines)
+│   │   │       │   │   │   │   │   │   │   │   ├── AddAnnotationButton.js (117 lines)
+│   │   │       │   │   │   │   │   │   │   │   ├── AssignMenu.js (126 lines)
+│   │   │       │   │   │   │   │   │   │   │   ├── ChangeStatusMenu.js (132 lines)
+│   │   │       │   │   │   │   │   │   │   │   ├── DeviceEventsDropDown.js (91 lines)
+│   │   │       │   │   │   │   │   │   │   │   ├── RefreshButton.js (41 lines)
+│   │   │       │   │   │   │   │   │   │   │   ├── RelatedHistoryDevicePicker.js (83 lines)
+│   │   │       │   │   │   │   │   │   │   │   └── RogueApChangeStatusMenu.js (94 lines)
+│   │   │       │   │   │   │   │   │   │   └── DetailTitlePane.js (238 lines)
+│   │   │       │   │   │   │   │   │   ├── AlarmDetailGrid.js (59 lines)
+│   │   │       │   │   │   │   │   │   ├── AlarmEventDetailGrid.js (179 lines)
+│   │   │       │   │   │   │   │   │   ├── DetailUtil.js (266 lines)
+│   │   │       │   │   │   │   │   │   ├── EventDetailGrid.js (65 lines)
+│   │   │       │   │   │   │   │   │   └── op-center.js (57 lines)
+│   │   │       │   │   │   │   │   ├── AlarmTable.js (524 lines)
+│   │   │       │   │   │   │   │   ├── EventPageTable.js (68 lines)
+│   │   │       │   │   │   │   │   ├── EventTable.js (126 lines)
+│   │   │       │   │   │   │   │   ├── SysLogTable.js (91 lines)
+│   │   │       │   │   │   │   │   ├── _AlarmEventTable.js (421 lines)
+│   │   │       │   │   │   │   │   └── _GenericPageTable.js (389 lines)
+│   │   │       │   │   │   │   └── toolbar/
+│   │   │       │   │   │   │       ├── button/
+│   │   │       │   │   │   │       │   ├── annotation/
+│   │   │       │   │   │   │       │   │   ├── templates/
+│   │   │       │   │   │   │       │   │   │   └── AddAnnotationForm.html (14 lines)
+│   │   │       │   │   │   │       │   │   ├── AddAnnotationForm.js (267 lines)
+│   │   │       │   │   │   │       │   │   ├── AnnotationButton.js (74 lines)
+│   │   │       │   │   │   │       │   │   ├── AnnotationMenuItem.js (57 lines)
+│   │   │       │   │   │   │       │   │   └── _AnnotationMixin.js (92 lines)
+│   │   │       │   │   │   │       │   ├── assign/
+│   │   │       │   │   │   │       │   │   ├── templates/
+│   │   │       │   │   │   │       │   │   │   └── SelectOwnerDialogForm.html (44 lines)
+│   │   │       │   │   │   │       │   │   ├── AssignButton.js (43 lines)
+│   │   │       │   │   │   │       │   │   ├── AssignPopupMenuItem.js (29 lines)
+│   │   │       │   │   │   │       │   │   ├── SelectOwnerDialogForm.js (264 lines)
+│   │   │       │   │   │   │       │   │   └── _AssignMixin.js (157 lines)
+│   │   │       │   │   │   │       │   ├── changeStatus/
+│   │   │       │   │   │   │       │   │   ├── AcknowledgeConfirmAlert.js (43 lines)
+│   │   │       │   │   │   │       │   │   ├── AcknowledgeMenuItem.js (80 lines)
+│   │   │       │   │   │   │       │   │   ├── ChangeStatusButton.js (43 lines)
+│   │   │       │   │   │   │       │   │   ├── ChangeStatusPopupMenuItem.js (28 lines)
+│   │   │       │   │   │   │       │   │   ├── ClearConditionMenuItem.js (279 lines)
+│   │   │       │   │   │   │       │   │   ├── ClearMenuItem.js (87 lines)
+│   │   │       │   │   │   │       │   │   ├── UnacknowledgeMenuItem.js (64 lines)
+│   │   │       │   │   │   │       │   │   ├── _ChangeStatusMixin.js (183 lines)
+│   │   │       │   │   │   │       │   │   └── acknowledge-utils.js (53 lines)
+│   │   │       │   │   │   │       │   ├── customEvents/
+│   │   │       │   │   │   │       │   │   ├── syslog/
+│   │   │       │   │   │   │       │   │   │   ├── templates/
+│   │   │       │   │   │   │       │   │   │   │   └── AddSyslogEventMappingForm.html (58 lines)
+│   │   │       │   │   │   │       │   │   │   ├── AddSyslogEventMappingForm.js (82 lines)
+│   │   │       │   │   │   │       │   │   │   ├── CustomSyslogEventsTable.js (29 lines)
+│   │   │       │   │   │   │       │   │   │   └── CustomSyslogEventsToolbar.js (32 lines)
+│   │   │       │   │   │   │       │   │   ├── trap/
+│   │   │       │   │   │   │       │   │   │   ├── templates/
+│   │   │       │   │   │   │       │   │   │   │   ├── AddTrapEventMappingForm.html (74 lines)
+│   │   │       │   │   │   │       │   │   │   │   └── UploadMibForm.html (14 lines)
+│   │   │       │   │   │   │       │   │   │   ├── AddTrapEventMappingForm.js (137 lines)
+│   │   │       │   │   │   │       │   │   │   ├── CustomTrapEventsButton.js (81 lines)
+│   │   │       │   │   │   │       │   │   │   ├── CustomTrapEventsTable.js (29 lines)
+│   │   │       │   │   │   │       │   │   │   ├── CustomTrapEventsToolbar.js (32 lines)
+│   │   │       │   │   │   │       │   │   │   ├── MibFilteringSelect.js (72 lines)
+│   │   │       │   │   │   │       │   │   │   ├── NotificationNameFilteringSelect.js (79 lines)
+│   │   │       │   │   │   │       │   │   │   └── UploadMibForm.js (191 lines)
+│   │   │       │   │   │   │       │   │   ├── NbiJsonRestStore.js (46 lines)
+│   │   │       │   │   │   │       │   │   ├── _CustomEventFormBase.js (198 lines)
+│   │   │       │   │   │   │       │   │   ├── _CustomEventsTable.js (89 lines)
+│   │   │       │   │   │   │       │   │   └── _CustomEventsToolbar.js (164 lines)
+│   │   │       │   │   │   │       │   ├── mixin/
+│   │   │       │   │   │   │       │   │   └── _OverflowMenuMixin.js (52 lines)
+│   │   │       │   │   │   │       │   ├── policy/
+│   │   │       │   │   │   │       │   │   ├── nls/
+│   │   │       │   │   │   │       │   │   │   ├── en/
+│   │   │       │   │   │   │       │   │   │   │   ├── ContextualAlarmPolicyButton.js (6 lines)
+│   │   │       │   │   │   │       │   │   │   │   └── ContextualSyslogPolicyButton.js (7 lines)
+│   │   │       │   │   │   │       │   │   │   ├── ja/
+│   │   │       │   │   │   │       │   │   │   │   ├── ContextualAlarmPolicyButton.js (6 lines)
+│   │   │       │   │   │   │       │   │   │   │   └── ContextualSyslogPolicyButton.js (7 lines)
+│   │   │       │   │   │   │       │   │   │   ├── ko/
+│   │   │       │   │   │   │       │   │   │   │   ├── ContextualAlarmPolicyButton.js (6 lines)
+│   │   │       │   │   │   │       │   │   │   │   └── ContextualSyslogPolicyButton.js (7 lines)
+│   │   │       │   │   │   │       │   │   │   ├── ContextualAlarmPolicyButton.js (11 lines)
+│   │   │       │   │   │   │       │   │   │   └── ContextualSyslogPolicyButton.js (12 lines)
+│   │   │       │   │   │   │       │   │   ├── ContextualAlarmPolicyButton.js (37 lines)
+│   │   │       │   │   │   │       │   │   ├── ContextualAlarmPolicyPopupMenuItem.js (28 lines)
+│   │   │       │   │   │   │       │   │   ├── ContextualSyslogPolicyButton.js (94 lines)
+│   │   │       │   │   │   │       │   │   └── _ContextualAlarmPolicyMixin.js (105 lines)
+│   │   │       │   │   │   │       │   ├── rogue/
+│   │   │       │   │   │   │       │   │   ├── RogueClassifyButton.js (41 lines)
+│   │   │       │   │   │   │       │   │   ├── RogueClassifyPopupMenuItem.js (30 lines)
+│   │   │       │   │   │   │       │   │   └── _RogueClassifyMixin.js (230 lines)
+│   │   │       │   │   │   │       │   ├── troubleshoot/
+│   │   │       │   │   │   │       │   │   ├── TroubleshootButton.js (41 lines)
+│   │   │       │   │   │   │       │   │   ├── TroubleshootPopupMenuItem.js (28 lines)
+│   │   │       │   │   │   │       │   │   └── _TroubleshootMixin.js (303 lines)
+│   │   │       │   │   │   │       │   ├── DeleteButton.js (133 lines)
+│   │   │       │   │   │   │       │   ├── EditButton.js (350 lines)
+│   │   │       │   │   │   │       │   ├── EmailConfigurationButton.js (59 lines)
+│   │   │       │   │   │   │       │   ├── PauseAutoRefreshButton.js (46 lines)
+│   │   │       │   │   │   │       │   ├── _AsyncOperationMixin.js (245 lines)
+│   │   │       │   │   │   │       │   ├── _ConfirmAlarmActionMixin.js (81 lines)
+│   │   │       │   │   │   │       │   └── _SelectionAwareMixin.js (26 lines)
+│   │   │       │   │   │   │       ├── AlarmContextualToolbar.js (286 lines)
+│   │   │       │   │   │   │       ├── AlarmEventGlobalToolbar.js (159 lines)
+│   │   │       │   │   │   │       ├── EventContextualToolbar.js (67 lines)
+│   │   │       │   │   │   │       └── _AlarmEventContextualToolbar.js (248 lines)
+│   │   │       │   │   │   ├── templates/
+│   │   │       │   │   │   │   ├── AlarmDialogContent.html (47 lines)
+│   │   │       │   │   │   │   ├── SelectOwnerDialogForm.html (44 lines)
+│   │   │       │   │   │   │   ├── _itemWidget.html (4 lines)
+│   │   │       │   │   │   │   └── genericMetricView.html (6 lines)
+│   │   │       │   │   │   ├── ABSAlarmListView.js (117 lines)
+│   │   │       │   │   │   ├── ActionHandlerOverride.js (1279 lines)
+│   │   │       │   │   │   ├── AddAnnotationForm.js (262 lines)
+│   │   │       │   │   │   ├── AlarmActionHandler.js (756 lines)
+│   │   │       │   │   │   ├── AlarmCorrelatedView.js (1269 lines)
+│   │   │       │   │   │   ├── AlarmDialogContent.js (240 lines)
+│   │   │       │   │   │   ├── AlarmEventBrowser.js (512 lines)
+│   │   │       │   │   │   ├── AlarmEventListView.js (655 lines)
+│   │   │       │   │   │   ├── AlarmEventObjSelFunctions.js (827 lines)
+│   │   │       │   │   │   ├── AlarmListView.js (536 lines)
+│   │   │       │   │   │   ├── AlarmLogView.js (1232 lines)
+│   │   │       │   │   │   ├── AlarmManagerEnablementTable.js (268 lines)
+│   │   │       │   │   │   ├── AlarmOAMHandler.js (911 lines)
+│   │   │       │   │   │   ├── AlarmQuickView.js (227 lines)
+│   │   │       │   │   │   ├── AlarmSummaryMetricView.js (85 lines)
+│   │   │       │   │   │   ├── AlarmTableRefreshMixin.js (113 lines)
+│   │   │       │   │   │   ├── AssuranceOverrides.js (1201 lines)
+│   │   │       │   │   │   ├── ChartUtils.js (146 lines)
+│   │   │       │   │   │   ├── CorrelatedAlarms.js (1086 lines)
+│   │   │       │   │   │   ├── DBHealthQuickView.js (93 lines)
+│   │   │       │   │   │   ├── DerivedAlarmListView.js (47 lines)
+│   │   │       │   │   │   ├── DerivedEventListView.js (27 lines)
+│   │   │       │   │   │   ├── DeviceGroupTreeContainer.js (181 lines)
+│   │   │       │   │   │   ├── DeviceOAMHandler.js (897 lines)
+│   │   │       │   │   │   ├── DeviceUnavailabilityListView.js (218 lines)
+│   │   │       │   │   │   ├── EPNMAlarmEventBrowser.js (202 lines)
+│   │   │       │   │   │   ├── EnhancedAlarmList.js (607 lines)
+│   │   │       │   │   │   ├── EventHistoryListView.js (110 lines)
+│   │   │       │   │   │   ├── EventListView.js (203 lines)
+│   │   │       │   │   │   ├── EventMetadataMgr.js (531 lines)
+│   │   │       │   │   │   ├── FaultExportDialog.js (334 lines)
+│   │   │       │   │   │   ├── FileMetadataAlarms.js (725 lines)
+│   │   │       │   │   │   ├── GenericAssuranceMetricView.js (194 lines)
+│   │   │       │   │   │   ├── IfmJsonRestStore.js (117 lines)
+│   │   │       │   │   │   ├── L2vpnCfmOamHandler.js (1240 lines)
+│   │   │       │   │   │   ├── LineSpark.js (71 lines)
+│   │   │       │   │   │   ├── MetricNavigator.js (56 lines)
+│   │   │       │   │   │   ├── MetricView.js (18 lines)
+│   │   │       │   │   │   ├── MplsLspCircuitOAMHandler.js (1453 lines)
+│   │   │       │   │   │   ├── MplsLspOAMHandler.js (868 lines)
+│   │   │       │   │   │   ├── OAMUtil.js (84 lines)
+│   │   │       │   │   │   ├── Panel.js (534 lines)
+│   │   │       │   │   │   ├── ProgressBar.js (36 lines)
+│   │   │       │   │   │   ├── PwOAMHandler.js (1019 lines)
+│   │   │       │   │   │   ├── RecommendedAction.js (127 lines)
+│   │   │       │   │   │   ├── SRTEOAMHandler.js (889 lines)
+│   │   │       │   │   │   ├── SampleTroubleshootView.js (39 lines)
+│   │   │       │   │   │   ├── SelectOwnerDialogForm.js (320 lines)
+│   │   │       │   │   │   ├── ServiceAffectingAlarmView.js (44 lines)
+│   │   │       │   │   │   ├── SparkLineColumns.js (66 lines)
+│   │   │       │   │   │   ├── SyslogListView.js (469 lines)
+│   │   │       │   │   │   ├── SyslogListViewWebSocket.js (647 lines)
+│   │   │       │   │   │   ├── SystemDBHealthTable.js (202 lines)
+│   │   │       │   │   │   ├── SystemEventsView.js (341 lines)
+│   │   │       │   │   │   ├── TableLayoutUpdaterMixin.js (113 lines)
+│   │   │       │   │   │   ├── Tooltipoverride.js (55 lines)
+│   │   │       │   │   │   ├── UniDirectionalOAMHandler.js (924 lines)
+│   │   │       │   │   │   ├── UserDefinedEventMappingForm.js (118 lines)
+│   │   │       │   │   │   ├── VRFOAMHandler.js (1132 lines)
+│   │   │       │   │   │   ├── WanOptUtil.js (156 lines)
+│   │   │       │   │   │   ├── _ExtendedAdvancedFilterPanel.js (157 lines)
+│   │   │       │   │   │   ├── _ExtendedContextualToolbar.js (530 lines)
+│   │   │       │   │   │   ├── _ExtendedFilterPopover.js (278 lines)
+│   │   │       │   │   │   ├── _ExtendedFilterWidget.js (170 lines)
+│   │   │       │   │   │   ├── _ItemWidget.js (92 lines)
+│   │   │       │   │   │   ├── alarmFailureSourceDialog.js (271 lines)
+│   │   │       │   │   │   ├── app.profile.js (30 lines)
+│   │   │       │   │   │   ├── conAlarm.js (1210 lines)
+│   │   │       │   │   │   ├── customMsgPanel.js (538 lines)
+│   │   │       │   │   │   ├── faultUtils.js (359 lines)
+│   │   │       │   │   │   ├── l3vpnTableStore.js (213 lines)
+│   │   │       │   │   │   ├── lspOamTableStore.js (181 lines)
+│   │   │       │   │   │   ├── package.json (17 lines)
+│   │   │       │   │   │   └── rashmi.js (1 lines)
+│   │   │       │   │   ├── jsp/
+│   │   │       │   │   │   ├── AlarmSummaryDashlet.jsp (121 lines)
+│   │   │       │   │   │   ├── CPUUtilizationSummary.jsp (98 lines)
+│   │   │       │   │   │   ├── DeviceAvailabilitySummary.jsp (155 lines)
+│   │   │       │   │   │   ├── DeviceHealthInfoDashlet.jsp (94 lines)
+│   │   │       │   │   │   ├── DeviceHealthSummary.jsp (139 lines)
+│   │   │       │   │   │   ├── DevicePortSummary.jsp (165 lines)
+│   │   │       │   │   │   ├── DeviceReachabilityStatus.jsp (157 lines)
+│   │   │       │   │   │   ├── DeviceUnavailabilitySummary.jsp (60 lines)
+│   │   │       │   │   │   ├── InterfaceDetailsDashlet.jsp (132 lines)
+│   │   │       │   │   │   ├── IntfAvailability.jsp (156 lines)
+│   │   │       │   │   │   ├── IntfAvailibilitySummary.jsp (152 lines)
+│   │   │       │   │   │   ├── IntfInOutDiscards.jsp (131 lines)
+│   │   │       │   │   │   ├── IntfInOutErrors.jsp (119 lines)
+│   │   │       │   │   │   ├── IntfStatusSummary.jsp (125 lines)
+│   │   │       │   │   │   ├── IntfTxRxUtilization.jsp (184 lines)
+│   │   │       │   │   │   ├── IntfUtilSummary.jsp (189 lines)
+│   │   │       │   │   │   ├── SysDBInfoDashlet.jsp (79 lines)
+│   │   │       │   │   │   ├── SysHighlevelDBInfoDashlet.jsp (36 lines)
+│   │   │       │   │   │   ├── SysInfoDashlet.jsp (67 lines)
+│   │   │       │   │   │   ├── SyslogSummaryDashlet.jsp (85 lines)
+│   │   │       │   │   │   ├── SyslogWatchDashlet.jsp (160 lines)
+│   │   │       │   │   │   ├── SystemAlarmsPortlet.jsp (69 lines)
+│   │   │       │   │   │   ├── SystemEventsPortlet.jsp (96 lines)
+│   │   │       │   │   │   ├── SystemHealthPortlet.jsp (119 lines)
+│   │   │       │   │   │   ├── TopNCpuUtil.jsp (478 lines)
+│   │   │       │   │   │   ├── TopNDeviceCache.jsp (439 lines)
+│   │   │       │   │   │   ├── TopNEnvTemp.jsp (226 lines)
+│   │   │       │   │   │   ├── TopNEvents.jsp (185 lines)
+│   │   │       │   │   │   ├── TopNMemUtil.jsp (448 lines)
+│   │   │       │   │   │   ├── TopNSyslogSender.jsp (149 lines)
+│   │   │       │   │   │   ├── WanInterfaceSummary.jsp (180 lines)
+│   │   │       │   │   │   ├── classMapStatistics.jsp (315 lines)
+│   │   │       │   │   │   ├── classMapTopNStatistics.jsp (255 lines)
+│   │   │       │   │   │   ├── deviceAvailabilityTrend.jsp (147 lines)
+│   │   │       │   │   │   ├── deviceCPUUtilization.jsp (86 lines)
+│   │   │       │   │   │   ├── deviceCacheEntry.jsp (76 lines)
+│   │   │       │   │   │   ├── deviceMemoryUtilization.jsp (89 lines)
+│   │   │       │   │   │   ├── jobInformation.jsp (210 lines)
+│   │   │       │   │   │   ├── softwareSummary.jsp (128 lines)
+│   │   │       │   │   │   ├── topNIntfErrorsDiscards.jsp (478 lines)
+│   │   │       │   │   │   ├── topNIntfUtilization.jsp (707 lines)
+│   │   │       │   │   │   ├── topNWanIntfIssues.jsp (157 lines)
+│   │   │       │   │   │   ├── topNalerts.jsp (146 lines)
+│   │   │       │   │   │   ├── topNbranches.jsp (115 lines)
+│   │   │       │   │   │   ├── topNdevices.jsp (117 lines)
+│   │   │       │   │   │   └── wanOptimByCandidates.jsp (449 lines)
+│   │   │       │   │   └── nls/
+│   │   │       │   │       ├── en/
+│   │   │       │   │       │   └── AlarmEventProperties.js (374 lines)
+│   │   │       │   │       ├── ja/
+│   │   │       │   │       │   └── AlarmEventProperties.js (390 lines)
+│   │   │       │   │       ├── ko/
+│   │   │       │   │       │   └── AlarmEventProperties.js (369 lines)
+│   │   │       │   │       └── AlarmEventProperties.js (378 lines)
+│   │   │       │   ├── InterfaceLicense/
+│   │   │       │   │   ├── css/
+│   │   │       │   │   │   └── inventory.css (25 lines)
+│   │   │       │   │   ├── data/
+│   │   │       │   │   │   ├── InterfaceLicenseListMetadata.json (48 lines)
+│   │   │       │   │   │   └── InterfaceListForUnlicensedDiscoveredMetadata.json (77 lines)
+│   │   │       │   │   ├── html/
+│   │   │       │   │   │   ├── InterfaceInventoryList.html (23 lines)
+│   │   │       │   │   │   └── InterfaceUnLicensedList.html (414 lines)
+│   │   │       │   │   └── js/
+│   │   │       │   │       ├── FileMetadata.js (94 lines)
+│   │   │       │   │       ├── InventoryListViewInterfaceLicense.js (756 lines)
+│   │   │       │   │       ├── MetadataMgr.js (179 lines)
+│   │   │       │   │       ├── PropertySheetWidget.js (64 lines)
+│   │   │       │   │       ├── Utils.js (185 lines)
+│   │   │       │   │       └── _QuickViewBasePane.js (65 lines)
+│   │   │       │   ├── Startup/
+│   │   │       │   │   ├── css/
+│   │   │       │   │   │   ├── app.profile.js (30 lines)
+│   │   │       │   │   │   ├── package.json (17 lines)
+│   │   │       │   │   │   └── startupWizard.css (298 lines)
+│   │   │       │   │   ├── js/
+│   │   │       │   │   │   ├── StartupTutorialWizard.js (41 lines)
+│   │   │       │   │   │   ├── StartupWizard.js (334 lines)
+│   │   │       │   │   │   ├── app.profile.js (30 lines)
+│   │   │       │   │   │   ├── initStartupWizard.js (185 lines)
+│   │   │       │   │   │   └── package.json (17 lines)
+│   │   │       │   │   ├── json/
+│   │   │       │   │   │   ├── clusterProperties.json (23 lines)
+│   │   │       │   │   │   ├── defaultProperties.json (31 lines)
+│   │   │       │   │   │   ├── samProperties.json (26 lines)
+│   │   │       │   │   │   └── wirelessProperties.json (30 lines)
+│   │   │       │   │   ├── templates/
+│   │   │       │   │   │   ├── _startupWizardColumn.html (8 lines)
+│   │   │       │   │   │   ├── _startupWizardContent.html (27 lines)
+│   │   │       │   │   │   ├── _startupWizardTutorialContent.html (14 lines)
+│   │   │       │   │   │   ├── app.profile.js (30 lines)
+│   │   │       │   │   │   └── package.json (17 lines)
+│   │   │       │   │   ├── app.profile.js (30 lines)
+│   │   │       │   │   └── package.json (17 lines)
+│   │   │       │   ├── TacService/
+│   │   │       │   │   └── html/
+│   │   │       │   │       ├── SupportSetting.html (7 lines)
+│   │   │       │   │       ├── SupportSetting.jsp (33 lines)
+│   │   │       │   │       └── TacService.html (57 lines)
+│   │   │       │   ├── UDF/
+│   │   │       │   │   ├── js/
+│   │   │       │   │   │   └── UDFRestStore.js (277 lines)
+│   │   │       │   │   └── UDF.jsp (546 lines)
+│   │   │       │   ├── assurance/
+│   │   │       │   │   └── StormPropertySheetColumn.js (1250 lines)
+│   │   │       │   ├── common/
+│   │   │       │   │   ├── conf/
+│   │   │       │   │   │   ├── CA_notification_settings.json (16 lines)
+│   │   │       │   │   │   ├── account_settings.json (25 lines)
+│   │   │       │   │   │   ├── config_archive_preferences.json (81 lines)
+│   │   │       │   │   │   ├── discovery_settings.json (28 lines)
+│   │   │       │   │   │   ├── ifm_config_preferences.json (54 lines)
+│   │   │       │   │   │   ├── inventory_preferences.json (110 lines)
+│   │   │       │   │   │   ├── network_appliance_settings.json (47 lines)
+│   │   │       │   │   │   ├── pnp_preferences.json (56 lines)
+│   │   │       │   │   │   ├── software_update_settings.json (58 lines)
+│   │   │       │   │   │   └── swim_preferences.json (165 lines)
+│   │   │       │   │   ├── css/
+│   │   │       │   │   │   ├── DeviceSelectorWidget.css (127 lines)
+│   │   │       │   │   │   ├── formGrid.css (242 lines)
+│   │   │       │   │   │   └── formGrid_3col.css (81 lines)
+│   │   │       │   │   ├── data/
+│   │   │       │   │   │   └── deviceData.json (100 lines)
+│   │   │       │   │   ├── js/
+│   │   │       │   │   │   ├── ifm/
+│   │   │       │   │   │   │   └── widgets/
+│   │   │       │   │   │   │       ├── templates/
+│   │   │       │   │   │   │       │   ├── IfmDeviceGridTemplate.html (5 lines)
+│   │   │       │   │   │   │       │   ├── IfmDeviceTreeTableLazyLoadedV2.html (5 lines)
+│   │   │       │   │   │   │       │   └── _TagAssociationContent.html (29 lines)
+│   │   │       │   │   │   │       ├── DeviceSelectionWidget.js (1534 lines)
+│   │   │       │   │   │   │       ├── DeviceTreeTable.js (8 lines)
+│   │   │       │   │   │   │       ├── FormBuilder.js (40 lines)
+│   │   │       │   │   │   │       ├── IfmCustomTitlePane.js (31 lines)
+│   │   │       │   │   │   │       ├── IfmDeviceSelector.js (104 lines)
+│   │   │       │   │   │   │       ├── IfmDeviceTreeGridTable.js (588 lines)
+│   │   │       │   │   │   │       ├── IfmDeviceTreeTable.js (254 lines)
+│   │   │       │   │   │   │       ├── IfmDeviceTreeTableLazyLoadedV2.js (839 lines)
+│   │   │       │   │   │   │       ├── IfmImageSelector.js (20 lines)
+│   │   │       │   │   │   │       ├── IfmLazyLoadedDeviceTreeTable.js (253 lines)
+│   │   │       │   │   │   │       ├── IfmPortTreeTable.js (188 lines)
+│   │   │       │   │   │   │       ├── IpAddressTextBox.js (83 lines)
+│   │   │       │   │   │   │       ├── SecuredIconButton.js (39 lines)
+│   │   │       │   │   │   │       ├── SecuredTextButton.js (30 lines)
+│   │   │       │   │   │   │       ├── SeparatorBuilder.js (28 lines)
+│   │   │       │   │   │   │       ├── TableQuickView.js (101 lines)
+│   │   │       │   │   │   │       ├── TagAssociationPopOver.js (281 lines)
+│   │   │       │   │   │   │       ├── app.profile.js (30 lines)
+│   │   │       │   │   │   │       └── package.json (17 lines)
+│   │   │       │   │   │   ├── IpAddressUtils.js (11 lines)
+│   │   │       │   │   │   ├── JsonRestStore.js (59 lines)
+│   │   │       │   │   │   ├── OrderSupportItemFileWriteStore.js (102 lines)
+│   │   │       │   │   │   ├── ScreenUtils.js (77 lines)
+│   │   │       │   │   │   ├── SystemPreferences.js (2992 lines)
+│   │   │       │   │   │   ├── SystemPreferences_AccountSettings.js (85 lines)
+│   │   │       │   │   │   ├── SystemPreferences_ConfigArchiveSettings.js (7 lines)
+│   │   │       │   │   │   ├── SystemPreferences_Swim.js (456 lines)
+│   │   │       │   │   │   ├── SystemPreferences_swimProtocolSettings.js (7 lines)
+│   │   │       │   │   │   ├── SystemSettings_SwimProtocol.js (918 lines)
+│   │   │       │   │   │   ├── SystemSettings_SwimSettings.js (7 lines)
+│   │   │       │   │   │   ├── WCSCustomStandardLayout.js (36 lines)
+│   │   │       │   │   │   ├── app.profile.js (30 lines)
+│   │   │       │   │   │   ├── dataManage.js (240 lines)
+│   │   │       │   │   │   └── package.json (17 lines)
+│   │   │       │   │   └── jsp/
+│   │   │       │   │       ├── DeviceCredentialsSummary.jsp (107 lines)
+│   │   │       │   │       ├── DeviceSelector.jsp (119 lines)
+│   │   │       │   │       ├── RealTimeMonitor.jsp (370 lines)
+│   │   │       │   │       ├── SystemPreferences_AccountSettings.jsp (13 lines)
+│   │   │       │   │       ├── SystemPreferences_AccountSettingsPre.jsp (16 lines)
+│   │   │       │   │       ├── SystemPreferences_ConfigArchiveSettings.jsp (13 lines)
+│   │   │       │   │       ├── SystemPreferences_Configurable.jsp (17 lines)
+│   │   │       │   │       ├── SystemPreferences_SoftwareUpdateSettings.jsp (27 lines)
+│   │   │       │   │       ├── SystemPreferences_swimProtocolSettings.jsp (17 lines)
+│   │   │       │   │       ├── SystemPreferences_swimSettings.jsp (11 lines)
+│   │   │       │   │       ├── c_FilterForQOS.jsp (115 lines)
+│   │   │       │   │       ├── c_IntfTrafficTypeWithBaseline.jsp (28 lines)
+│   │   │       │   │       ├── c_JobitemsPerPage.jsp (63 lines)
+│   │   │       │   │       ├── c_checkBox.jsp (17 lines)
+│   │   │       │   │       ├── c_cpuIndex.jsp (18 lines)
+│   │   │       │   │       ├── c_dashlet1yrTimeSelection.jsp (56 lines)
+│   │   │       │   │       ├── c_dashlet24hrTimeSelection.jsp (48 lines)
+│   │   │       │   │       ├── c_dashlettimeSelection.jsp (44 lines)
+│   │   │       │   │       ├── c_dataTypeSelection.jsp (52 lines)
+│   │   │       │   │       ├── c_deviceExcludeInstances.jsp (21 lines)
+│   │   │       │   │       ├── c_deviceFamilyFilter.jsp (44 lines)
+│   │   │       │   │       ├── c_deviceFamilyFilterCache.jsp (35 lines)
+│   │   │       │   │       ├── c_deviceHealth1yrTimeSelection.jsp (51 lines)
+│   │   │       │   │       ├── c_deviceReachablityTypeSelection.jsp (29 lines)
+│   │   │       │   │       ├── c_fabricUDGSelection.jsp (127 lines)
+│   │   │       │   │       ├── c_itemsPerDeviceReachableTableFilter.jsp (69 lines)
+│   │   │       │   │       ├── c_itemsPerPage.jsp (58 lines)
+│   │   │       │   │       ├── c_jobInformation.jsp (49 lines)
+│   │   │       │   │       ├── c_lockTimeFilterSettings.jsp (26 lines)
+│   │   │       │   │       ├── c_metricTypeSelection.jsp (38 lines)
+│   │   │       │   │       ├── c_pdsIdSelection.jsp (47 lines)
+│   │   │       │   │       ├── c_portGroupSelection.jsp (129 lines)
+│   │   │       │   │       ├── c_siteGroupSelection.jsp (95 lines)
+│   │   │       │   │       ├── c_taskTypeSelection.jsp (27 lines)
+│   │   │       │   │       ├── c_traffictypeSelection.jsp (29 lines)
+│   │   │       │   │       ├── c_util.jsp (43 lines)
+│   │   │       │   │       ├── c_vlanIdSelection.jsp (47 lines)
+│   │   │       │   │       ├── ifTxRxEdit.jsp (27 lines)
+│   │   │       │   │       ├── sam1yrCheckBoxCommonEdit.jsp (26 lines)
+│   │   │       │   │       ├── sam1yrCommonEdit.jsp (15 lines)
+│   │   │       │   │       ├── sam1yrDeviceHealthEdit.jsp (8 lines)
+│   │   │       │   │       ├── sam24hrCommonEdit.jsp (7 lines)
+│   │   │       │   │       ├── samAverageMOSDashletEdit.jsp (41 lines)
+│   │   │       │   │       ├── samCommonEdit.jsp (23 lines)
+│   │   │       │   │       ├── samDBHealthCommonEdit.jsp (8 lines)
+│   │   │       │   │       ├── samDeviceReachablityDashletEdit.jsp (10 lines)
+│   │   │       │   │       ├── samIntfStatusAvailSummaryEdit.jsp (22 lines)
+│   │   │       │   │       ├── samJobDashletEdit.jsp (21 lines)
+│   │   │       │   │       ├── samTopNCPUEdit.jsp (38 lines)
+│   │   │       │   │       ├── samTopNCPUMemEdit.jsp (19 lines)
+│   │   │       │   │       ├── samTopNDeviceCacheEdit.jsp (24 lines)
+│   │   │       │   │       ├── samTopNEdit.jsp (22 lines)
+│   │   │       │   │       ├── samTopNInterfaceEdit.jsp (29 lines)
+│   │   │       │   │       ├── samTopNIntfErrDisEdit.jsp (29 lines)
+│   │   │       │   │       ├── samTopNMemEdit.jsp (31 lines)
+│   │   │       │   │       ├── samTopNWANInterfaceEdit.jsp (26 lines)
+│   │   │       │   │       └── samWANOptimizationDashletEdit.jsp (43 lines)
+│   │   │       │   ├── configure/
+│   │   │       │   │   └── jsp/
+│   │   │       │   │       └── rawconfig.jsp (78 lines)
+│   │   │       │   ├── credentialProfile/
+│   │   │       │   │   ├── css/
+│   │   │       │   │   │   └── credentialProfile.css (156 lines)
+│   │   │       │   │   ├── data/
+│   │   │       │   │   │   └── bulk-import-profile-template.csv (46 lines)
+│   │   │       │   │   ├── html/
+│   │   │       │   │   │   ├── CredentialProfileImportJobResults.jsp (241 lines)
+│   │   │       │   │   │   └── credentialProfileTable.html (42 lines)
+│   │   │       │   │   └── js/
+│   │   │       │   │       ├── templates/
+│   │   │       │   │       │   └── AddCredentialProfile.html (589 lines)
+│   │   │       │   │       ├── AddEditCredentialProfileWidget.js (2236 lines)
+│   │   │       │   │       ├── CredentialProfileManager.js (1200 lines)
+│   │   │       │   │       ├── Utils.js (231 lines)
+│   │   │       │   │       └── deviceListTable.js (204 lines)
+│   │   │       │   ├── discovery/
+│   │   │       │   │   ├── data/
+│   │   │       │   │   │   ├── templates/
+│   │   │       │   │   │   │   ├── ARP_Template.csv (3 lines)
+│   │   │       │   │   │   │   ├── BGP_Template.csv (3 lines)
+│   │   │       │   │   │   │   ├── CDP_Template.csv (3 lines)
+│   │   │       │   │   │   │   ├── DNSFilter_Templater.csv (3 lines)
+│   │   │       │   │   │   │   ├── IPFilter_Template.csv (3 lines)
+│   │   │       │   │   │   │   ├── LLDP_Template.csv (3 lines)
+│   │   │       │   │   │   │   ├── OSPF_Template.csv (3 lines)
+│   │   │       │   │   │   │   ├── PI_Discovery_Settings_Sample.xml (72 lines)
+│   │   │       │   │   │   │   ├── PingSweep_Template.csv (3 lines)
+│   │   │       │   │   │   │   ├── RoutingTable_Template.csv (3 lines)
+│   │   │       │   │   │   │   ├── SYSLoc_Template.csv (3 lines)
+│   │   │       │   │   │   │   └── SYSObj_Template.csv (3 lines)
+│   │   │       │   │   │   ├── data.json (63 lines)
+│   │   │       │   │   │   ├── discarded.json (23 lines)
+│   │   │       │   │   │   ├── discovered.json (54 lines)
+│   │   │       │   │   │   ├── dnsNameFilterStore.json (5 lines)
+│   │   │       │   │   │   ├── dnsNameFilterStore_copy.json (46 lines)
+│   │   │       │   │   │   ├── ipFilterStore.json (5 lines)
+│   │   │       │   │   │   ├── ipFilterStore_copy.json (63 lines)
+│   │   │       │   │   │   ├── ipMethods.json (11 lines)
+│   │   │       │   │   │   ├── jobDevices.json (6 lines)
+│   │   │       │   │   │   ├── pingDeviceStore.json (53 lines)
+│   │   │       │   │   │   ├── seedDevice.json (6 lines)
+│   │   │       │   │   │   ├── seedDevice_copy.json (52 lines)
+│   │   │       │   │   │   ├── snmpv2CredStore.json (5 lines)
+│   │   │       │   │   │   ├── snmpv2cCredStore.json (76 lines)
+│   │   │       │   │   │   ├── snmpv3CredStore.json (5 lines)
+│   │   │       │   │   │   ├── snmpv3CredStore_copy.json (96 lines)
+│   │   │       │   │   │   ├── sshCredStore.json (5 lines)
+│   │   │       │   │   │   ├── sshCredStore_copy.json (83 lines)
+│   │   │       │   │   │   ├── status.json (23 lines)
+│   │   │       │   │   │   ├── sysLocationFilterStore.json (5 lines)
+│   │   │       │   │   │   ├── sysLocationFilterStore_copy.json (46 lines)
+│   │   │       │   │   │   ├── sysObjectFilterStore.json (5 lines)
+│   │   │       │   │   │   ├── sysObjectFilterStore_copy.json (46 lines)
+│   │   │       │   │   │   ├── telnetCredStore.json (5 lines)
+│   │   │       │   │   │   ├── telnetCredStore_copy.json (63 lines)
+│   │   │       │   │   │   ├── telnetCredStore_sh.json (63 lines)
+│   │   │       │   │   │   ├── unreachable.json (20 lines)
+│   │   │       │   │   │   └── users.json (89 lines)
+│   │   │       │   │   ├── html/
+│   │   │       │   │   │   ├── discoveryARPProtocol.html (228 lines)
+│   │   │       │   │   │   ├── discoveryBGPProtocol.html (228 lines)
+│   │   │       │   │   │   ├── discoveryCDPSeedDevice.html (239 lines)
+│   │   │       │   │   │   ├── discoveryConfiguration.html (163 lines)
+│   │   │       │   │   │   ├── discoveryCredentialSet.html (56 lines)
+│   │   │       │   │   │   ├── discoveryDNSFilter.html (195 lines)
+│   │   │       │   │   │   ├── discoveryHomePage.html (81 lines)
+│   │   │       │   │   │   ├── discoveryIPFilter.html (198 lines)
+│   │   │       │   │   │   ├── discoveryJobResults.html (260 lines)
+│   │   │       │   │   │   ├── discoveryJobScheduler.html (24 lines)
+│   │   │       │   │   │   ├── discoveryJobSpec.html (408 lines)
+│   │   │       │   │   │   ├── discoveryJobSpecDetail.html (721 lines)
+│   │   │       │   │   │   ├── discoveryLLDPSeedDevice.html (227 lines)
+│   │   │       │   │   │   ├── discoveryMenuOnInventory.html (2918 lines)
+│   │   │       │   │   │   ├── discoveryOSPFIProtocol.html (228 lines)
+│   │   │       │   │   │   ├── discoveryOutput.html (53 lines)
+│   │   │       │   │   │   ├── discoveryPingsweepSeedDevice.html (252 lines)
+│   │   │       │   │   │   ├── discoveryProtocolNeighbor.html (214 lines)
+│   │   │       │   │   │   ├── discoveryResultsDiscarded.html (107 lines)
+│   │   │       │   │   │   ├── discoveryResultsDiscovered.html (120 lines)
+│   │   │       │   │   │   ├── discoveryResultsUnreachable.html (108 lines)
+│   │   │       │   │   │   ├── discoveryRouterProtocol.html (222 lines)
+│   │   │       │   │   │   ├── discoverySSHCredentials.html (67 lines)
+│   │   │       │   │   │   ├── discoverySettings.html (587 lines)
+│   │   │       │   │   │   ├── discoverySettingsView.html (943 lines)
+│   │   │       │   │   │   ├── discoverySnmpV2Credentials.html (116 lines)
+│   │   │       │   │   │   ├── discoverySnmpV3Credentials.html (71 lines)
+│   │   │       │   │   │   ├── discoveryStatus.html (1731 lines)
+│   │   │       │   │   │   ├── discoverySysObjIdFilter.html (196 lines)
+│   │   │       │   │   │   ├── discoverySystemLocationFilter.html (219 lines)
+│   │   │       │   │   │   ├── discoveryTelnetCredentials.html (67 lines)
+│   │   │       │   │   │   ├── discoveryUploadConfiguration.html (336 lines)
+│   │   │       │   │   │   ├── newDiscoverySettingsView.html (67 lines)
+│   │   │       │   │   │   └── quickDiscoverySettings.html (181 lines)
+│   │   │       │   │   ├── i18n/
+│   │   │       │   │   │   └── nls/
+│   │   │       │   │   │       ├── en-us/
+│   │   │       │   │   │       │   └── DiscoveryProperties.js (71 lines)
+│   │   │       │   │   │       ├── ja/
+│   │   │       │   │   │       │   └── DiscoveryProperties.js (61 lines)
+│   │   │       │   │   │       ├── ko/
+│   │   │       │   │   │       │   └── DiscoveryProperties.js (61 lines)
+│   │   │       │   │   │       └── DiscoveryProperties.js (71 lines)
+│   │   │       │   │   ├── js/
+│   │   │       │   │   │   ├── ifm/
+│   │   │       │   │   │   │   └── discovery/
+│   │   │       │   │   │   │       ├── templates/
+│   │   │       │   │   │   │       │   ├── AuditLogPropertySheetEditWidget.html (19 lines)
+│   │   │       │   │   │   │       │   ├── IfmDiscoveryTasks.html (7 lines)
+│   │   │       │   │   │   │       │   ├── expandedRowContent.html (19 lines)
+│   │   │       │   │   │   │       │   └── expandedRowTabContent.html (4 lines)
+│   │   │       │   │   │   │       ├── AuditLogPropertySheetEditWidget.js (73 lines)
+│   │   │       │   │   │   │       ├── DesignViewJS.js (18 lines)
+│   │   │       │   │   │   │       ├── IfmDiscoveryTasks.js (107 lines)
+│   │   │       │   │   │   │       ├── IfmIPFilterTextBox.js (294 lines)
+│   │   │       │   │   │   │       ├── IfmIPv4RangeTextBox.js (89 lines)
+│   │   │       │   │   │   │       ├── IfmIPv4SubnetTextBox.js (82 lines)
+│   │   │       │   │   │   │       ├── IfmIPv4TextBox.js (45 lines)
+│   │   │       │   │   │   │       ├── IfmPasswordTextBox.js (61 lines)
+│   │   │       │   │   │   │       ├── IfmSnmpRangeTextBox.js (184 lines)
+│   │   │       │   │   │   │       ├── IfmTelnetRangeTextBox.js (108 lines)
+│   │   │       │   │   │   │       ├── app.profile.js (30 lines)
+│   │   │       │   │   │   │       └── package.json (17 lines)
+│   │   │       │   │   │   ├── DiscoverySettings.js (1565 lines)
+│   │   │       │   │   │   ├── InitDiscoverySettingsView.js (1406 lines)
+│   │   │       │   │   │   ├── discoveryCredentialSet.js (58 lines)
+│   │   │       │   │   │   ├── discoveryUtilVs.js (1681 lines)
+│   │   │       │   │   │   └── test1.js (172 lines)
+│   │   │       │   │   ├── jsp/
+│   │   │       │   │   │   └── discoveryJobResults.jsp (413 lines)
+│   │   │       │   │   └── .project (11 lines)
+│   │   │       │   ├── faultPolicy/
+│   │   │       │   │   └── util/
+│   │   │       │   │       └── event-types.js (186 lines)
+│   │   │       │   ├── inventory/
+│   │   │       │   │   ├── css/
+│   │   │       │   │   │   ├── app.profile.js (30 lines)
+│   │   │       │   │   │   ├── inventory.css (63 lines)
+│   │   │       │   │   │   ├── networkDevices.css (9 lines)
+│   │   │       │   │   │   ├── package.json (17 lines)
+│   │   │       │   │   │   └── vdcDetails.css (81 lines)
+│   │   │       │   │   ├── data/
+│   │   │       │   │   │   ├── ColumnMetaData.json (77 lines)
+│   │   │       │   │   │   ├── DeviceDetailTabViewMetadata.json (487 lines)
+│   │   │       │   │   │   ├── DeviceTypes.json (6 lines)
+│   │   │       │   │   │   ├── InitDesignViewLHS.js (3373 lines)
+│   │   │       │   │   │   ├── InventoryListMetadata.json (219 lines)
+│   │   │       │   │   │   ├── InventoryListMetadataForAutonomousAp.json (141 lines)
+│   │   │       │   │   │   ├── InventoryListMetadataForEdision.json (233 lines)
+│   │   │       │   │   │   ├── InventoryListMetadataForMerakiAccessPoint.json (125 lines)
+│   │   │       │   │   │   ├── InventoryListMetadataForMerakiDashboard.json (132 lines)
+│   │   │       │   │   │   ├── InventoryListMetadataForSwitches_and_Hubs.json (197 lines)
+│   │   │       │   │   │   ├── InventoryListMetadataForThirdpartyAp.json (114 lines)
+│   │   │       │   │   │   ├── InventoryListMetadataForThirdpartyWirelessController.json (181 lines)
+│   │   │       │   │   │   ├── InventoryListMetadataForUnifiedAp.json (625 lines)
+│   │   │       │   │   │   ├── InventoryListMetadataForUnmanagedAp.json (65 lines)
+│   │   │       │   │   │   ├── InventoryListMetadataForWirelessController.json (395 lines)
+│   │   │       │   │   │   ├── OAM_EventList.json (15 lines)
+│   │   │       │   │   │   ├── QuickViewMetadata.json (9 lines)
+│   │   │       │   │   │   ├── QuickView_DetailsMetadata.json (102 lines)
+│   │   │       │   │   │   ├── QuickView_DetailsSampleData.json (12 lines)
+│   │   │       │   │   │   ├── QuickView_StatusMetadata.json (131 lines)
+│   │   │       │   │   │   ├── QuickView_StatusSampleData.json (7 lines)
+│   │   │       │   │   │   ├── building.json (9 lines)
+│   │   │       │   │   │   ├── bulk-import-devices-template.csv (55 lines)
+│   │   │       │   │   │   ├── bulk-import-sites-template.csv (4 lines)
+│   │   │       │   │   │   ├── campus.json (9 lines)
+│   │   │       │   │   │   ├── floor.json (9 lines)
+│   │   │       │   │   │   └── vdc.json (363 lines)
+│   │   │       │   │   ├── html/
+│   │   │       │   │   │   ├── ApDeleteJobResults.jsp (88 lines)
+│   │   │       │   │   │   ├── AssetList.html (21 lines)
+│   │   │       │   │   │   ├── BulkDeviceEditJobResults.jsp (43 lines)
+│   │   │       │   │   │   ├── CopyReplaceJobResults.jsp (138 lines)
+│   │   │       │   │   │   ├── DeviceVDCDetails.html (18 lines)
+│   │   │       │   │   │   ├── EwlcDeployTaskServiceJobResults.jsp (114 lines)
+│   │   │       │   │   │   ├── ImportJobResults.jsp (285 lines)
+│   │   │       │   │   │   ├── InventoryDeviceMaintenanceJobScheduler.html (22 lines)
+│   │   │       │   │   │   ├── InventoryDeviceManagedJobScheduler.html (22 lines)
+│   │   │       │   │   │   ├── InventoryList.html (24 lines)
+│   │   │       │   │   │   ├── ScheduledDeviceMaintenanceOrManagedJobResults.jsp (82 lines)
+│   │   │       │   │   │   ├── WLCConfigAction.jsp (41 lines)
+│   │   │       │   │   │   ├── WirelessConfigGroupTask.jsp (95 lines)
+│   │   │       │   │   │   ├── blankDesign.html (32 lines)
+│   │   │       │   │   │   ├── cdpNeighborList.html (183 lines)
+│   │   │       │   │   │   ├── deviceInventoryDetails.html (138 lines)
+│   │   │       │   │   │   ├── esAllInterfaceDetails.html (318 lines)
+│   │   │       │   │   │   ├── esChassisDetail.html (228 lines)
+│   │   │       │   │   │   ├── esEtherChannelDetail.html (243 lines)
+│   │   │       │   │   │   ├── esEthernetInterfacesDetail.html (227 lines)
+│   │   │       │   │   │   ├── esIpInterfaceDetails.html (161 lines)
+│   │   │       │   │   │   ├── esModuleDetail.html (230 lines)
+│   │   │       │   │   │   ├── esPhysicalPort.html (170 lines)
+│   │   │       │   │   │   ├── esUdfDetail.html (384 lines)
+│   │   │       │   │   │   ├── smart.html (252 lines)
+│   │   │       │   │   │   └── vssRedundantData.html (171 lines)
+│   │   │       │   │   ├── i18n/
+│   │   │       │   │   │   └── nls/
+│   │   │       │   │   │       ├── en/
+│   │   │       │   │   │       │   └── InventoryProperties.js (1814 lines)
+│   │   │       │   │   │       ├── en-us/
+│   │   │       │   │   │       │   └── InventoryProperties.js (3 lines)
+│   │   │       │   │   │       ├── ja/
+│   │   │       │   │   │       │   └── InventoryProperties.js (1814 lines)
+│   │   │       │   │   │       ├── ko/
+│   │   │       │   │   │       │   └── InventoryProperties.js (1777 lines)
+│   │   │       │   │   │       └── InventoryProperties.js (1835 lines)
+│   │   │       │   │   ├── js/
+│   │   │       │   │   │   ├── details/
+│   │   │       │   │   │   │   └── DeviceSummaryPane.js (46 lines)
+│   │   │       │   │   │   ├── qv/
+│   │   │       │   │   │   │   ├── CDAQuickView.js (96 lines)
+│   │   │       │   │   │   │   ├── DeviceQuickView.js (218 lines)
+│   │   │       │   │   │   │   ├── ReachabilityQuickView.js (127 lines)
+│   │   │       │   │   │   │   └── StatusQuickView.js (310 lines)
+│   │   │       │   │   │   ├── templates/
+│   │   │       │   │   │   │   ├── AddCredentialProfile.html (585 lines)
+│   │   │       │   │   │   │   ├── AddDevice.html (968 lines)
+│   │   │       │   │   │   │   ├── PropertySheetWidget.html (6 lines)
+│   │   │       │   │   │   │   ├── bulkImportTemplate.html (33 lines)
+│   │   │       │   │   │   │   └── credentialProfileManager.html (38 lines)
+│   │   │       │   │   │   ├── AddDeviceToGroupWidget.js (47 lines)
+│   │   │       │   │   │   ├── AddDeviceToSiteWidget.js (404 lines)
+│   │   │       │   │   │   ├── AddEditCredentialProfileWidget.js (1181 lines)
+│   │   │       │   │   │   ├── AddEditDeviceWidget.js (6849 lines)
+│   │   │       │   │   │   ├── AddEditDeviceWidget_old_PI.js (6263 lines)
+│   │   │       │   │   │   ├── BulkImportWidget.js (295 lines)
+│   │   │       │   │   │   ├── CredentialProfileManager.js (546 lines)
+│   │   │       │   │   │   ├── DeviceDetailTabViewController.js (420 lines)
+│   │   │       │   │   │   ├── DeviceDetailsObjectSelector.js (91 lines)
+│   │   │       │   │   │   ├── DeviceDetailsPage.js (650 lines)
+│   │   │       │   │   │   ├── DeviceNotSupportedSummaryTabView.js (41 lines)
+│   │   │       │   │   │   ├── DeviceSummaryTabView.js (97 lines)
+│   │   │       │   │   │   ├── DeviceTemplatesView.js (12 lines)
+│   │   │       │   │   │   ├── EPNMFileMetadata.js (752 lines)
+│   │   │       │   │   │   ├── FileMetadata.js (704 lines)
+│   │   │       │   │   │   ├── InventoryListView.js (8020 lines)
+│   │   │       │   │   │   ├── InventoryMultiQuickView.js (131 lines)
+│   │   │       │   │   │   ├── MetadataMgr.js (227 lines)
+│   │   │       │   │   │   ├── MplsLspOAMHandler.js (868 lines)
+│   │   │       │   │   │   ├── PropertySheetWidget.js (64 lines)
+│   │   │       │   │   │   ├── QueryString.js (596 lines)
+│   │   │       │   │   │   ├── SPTDeviceSummaryTabView.js (97 lines)
+│   │   │       │   │   │   ├── Utils.js (234 lines)
+│   │   │       │   │   │   ├── Utils_old_PI.js (221 lines)
+│   │   │       │   │   │   ├── VdcDetails.js (862 lines)
+│   │   │       │   │   │   ├── WLCConfigActionHandler.js (43 lines)
+│   │   │       │   │   │   ├── _QuickViewBasePane.js (65 lines)
+│   │   │       │   │   │   ├── app.profile.js (30 lines)
+│   │   │       │   │   │   ├── bulkImportNetworkDevices.js (63 lines)
+│   │   │       │   │   │   ├── commonInterfaces.js (16 lines)
+│   │   │       │   │   │   ├── deviceInventoryViewCommonJs.js (518 lines)
+│   │   │       │   │   │   └── package.json (17 lines)
+│   │   │       │   │   ├── json/
+│   │   │       │   │   │   └── countries.json (244 lines)
+│   │   │       │   │   └── .project (11 lines)
+│   │   │       │   ├── nbi/
+│   │   │       │   │   └── jsp/
+│   │   │       │   │       ├── CliTemplateDeployIOSDevicesJobResult.jsp (320 lines)
+│   │   │       │   │       ├── DeleteDevicesJobResult.jsp (137 lines)
+│   │   │       │   │       ├── DeployMacFilterJobResult.jsp (221 lines)
+│   │   │       │   │       ├── ModifyUnifiedApJobResult.jsp (256 lines)
+│   │   │       │   │       └── WlanProvisioningJobResult.jsp (256 lines)
+│   │   │       │   ├── patches/
+│   │   │       │   │   └── FileMetadataAlarms.js (729 lines)
+│   │   │       │   ├── search/
+│   │   │       │   │   ├── config/
+│   │   │       │   │   │   └── docTemplates/
+│   │   │       │   │   │       ├── css/
+│   │   │       │   │   │       │   └── JOBTemplate.css (23 lines)
+│   │   │       │   │   │       ├── AUDITLOGTemplate.html (38 lines)
+│   │   │       │   │   │       ├── CONFIG_ARCHIVETemplate.html (21 lines)
+│   │   │       │   │   │       ├── CONFIG_ARCHIVE_EXCLUDE_COMMANDSTemplate.html (31 lines)
+│   │   │       │   │   │       ├── CONFIG_BRANCHTemplate.html (43 lines)
+│   │   │       │   │   │       ├── CONFIG_FILETemplate.html (41 lines)
+│   │   │       │   │   │       ├── CONFIG_LABEL.html (37 lines)
+│   │   │       │   │   │       ├── CONFIG_LABEL_FILE_MAPTemplate.html (21 lines)
+│   │   │       │   │   │       ├── CONFIG_VERSIONTemplate.html (37 lines)
+│   │   │       │   │   │       ├── IMAGEREPOSITORYTemplate.html (48 lines)
+│   │   │       │   │   │       ├── JOBSPECIFICATIONTemplate.html (59 lines)
+│   │   │       │   │   │       ├── JOBTemplate.html (67 lines)
+│   │   │       │   │   │       ├── MANAGEDELEMENTINTERFACETemplate.html (39 lines)
+│   │   │       │   │   │       ├── PARAMETERTemplate.html (31 lines)
+│   │   │       │   │   │       ├── ROLE_PRIVILEGETemplate.html (35 lines)
+│   │   │       │   │   │       ├── SEARCH_DEFAULT_TABLETemplate.html (15 lines)
+│   │   │       │   │   │       ├── SOFTWAREIMAGEINFOTemplate.html (68 lines)
+│   │   │       │   │   │       ├── USERSTemplate.html (60 lines)
+│   │   │       │   │   │       ├── XMPPRIVILEGETemplate.html (33 lines)
+│   │   │       │   │   │       ├── XMPROLETemplate.html (34 lines)
+│   │   │       │   │   │       ├── XMPTASKTemplate.html (44 lines)
+│   │   │       │   │   │       ├── XMPUSERDOMAINROLETemplate.html (43 lines)
+│   │   │       │   │   │       └── XMPUSERGROUPDOMAINROLETemplate.html (32 lines)
+│   │   │       │   │   ├── css/
+│   │   │       │   │   │   ├── common.css (240 lines)
+│   │   │       │   │   │   ├── primeFullSearch.css (21 lines)
+│   │   │       │   │   │   └── primeSearch.css (31 lines)
+│   │   │       │   │   ├── datasource/
+│   │   │       │   │   │   ├── BooleanOperators.json (14 lines)
+│   │   │       │   │   │   ├── Columns.json (39 lines)
+│   │   │       │   │   │   ├── NumericOperators.json (19 lines)
+│   │   │       │   │   │   ├── StringOperators.json (30 lines)
+│   │   │       │   │   │   ├── UpdateDataConfigForm.json (4 lines)
+│   │   │       │   │   │   ├── advancedQueryForm.json (39 lines)
+│   │   │       │   │   │   ├── allSavedComplexConditions.json (44 lines)
+│   │   │       │   │   │   ├── ice_cream.json (21 lines)
+│   │   │       │   │   │   ├── order.json (31 lines)
+│   │   │       │   │   │   ├── order_header.json (15 lines)
+│   │   │       │   │   │   ├── pagination.json (8 lines)
+│   │   │       │   │   │   ├── resultDocs.json (465 lines)
+│   │   │       │   │   │   ├── resultMetaData.json (27 lines)
+│   │   │       │   │   │   ├── searchContext.json (10 lines)
+│   │   │       │   │   │   ├── searchContextADVANCEDFORM.json (53 lines)
+│   │   │       │   │   │   ├── searchContextSIMPLEFORM.json (6 lines)
+│   │   │       │   │   │   ├── simpleQueryForm.json (4 lines)
+│   │   │       │   │   │   └── tableNames.json (100 lines)
+│   │   │       │   │   ├── html/
+│   │   │       │   │   │   ├── helpFiles/
+│   │   │       │   │   │   │   └── solr_documents_and_fields.html (68 lines)
+│   │   │       │   │   │   ├── advancedSearch.html (130 lines)
+│   │   │       │   │   │   ├── searchDialog.html (72 lines)
+│   │   │       │   │   │   ├── solrAdmin.html (174 lines)
+│   │   │       │   │   │   ├── solrHelp.html (60 lines)
+│   │   │       │   │   │   └── updateConfigForm.html (63 lines)
+│   │   │       │   │   ├── i18n/
+│   │   │       │   │   │   └── nls/
+│   │   │       │   │   │       ├── en/
+│   │   │       │   │   │       │   └── searchProperties.js (50 lines)
+│   │   │       │   │   │       ├── ja/
+│   │   │       │   │   │       │   └── searchProperties.js (51 lines)
+│   │   │       │   │   │       ├── ko/
+│   │   │       │   │   │       │   └── searchProperties.js (51 lines)
+│   │   │       │   │   │       └── searchProperties.js (56 lines)
+│   │   │       │   │   ├── js/
+│   │   │       │   │   │   ├── admin.js (0 lines)
+│   │   │       │   │   │   ├── advancedSearch.js (1463 lines)
+│   │   │       │   │   │   ├── autoCompletion.js (249 lines)
+│   │   │       │   │   │   ├── search.js (971 lines)
+│   │   │       │   │   │   └── searchUtil.js (135 lines)
+│   │   │       │   │   ├── jsp/
+│   │   │       │   │   │   ├── admin.jsp (174 lines)
+│   │   │       │   │   │   ├── advancedSearch.jsp (318 lines)
+│   │   │       │   │   │   ├── include.jsp (22 lines)
+│   │   │       │   │   │   ├── search.jsp (317 lines)
+│   │   │       │   │   │   └── updateConfigForm.jsp (63 lines)
+│   │   │       │   │   ├── AdvancedSearchActionHandler.js (13 lines)
+│   │   │       │   │   ├── JsonRestStoreServiceProvider.js (193 lines)
+│   │   │       │   │   ├── PrimeFullSearch.js (501 lines)
+│   │   │       │   │   ├── Search.js (286 lines)
+│   │   │       │   │   ├── SearchResultCategoryActionHandler.js (82 lines)
+│   │   │       │   │   ├── SearchResultItemActionHandler.js (55 lines)
+│   │   │       │   │   ├── SearchTrackingUtils.js (61 lines)
+│   │   │       │   │   ├── SearchUtils.js (174 lines)
+│   │   │       │   │   ├── ViewAllActionHandler.js (17 lines)
+│   │   │       │   │   └── search.html (10 lines)
+│   │   │       │   ├── softwareupdate/
+│   │   │       │   │   ├── css/
+│   │   │       │   │   │   ├── app.profile.js (30 lines)
+│   │   │       │   │   │   ├── package.json (17 lines)
+│   │   │       │   │   │   ├── softwareUpdate.css (329 lines)
+│   │   │       │   │   │   └── wcs-prime.css (6017 lines)
+│   │   │       │   │   ├── html/
+│   │   │       │   │   │   ├── lib/
+│   │   │       │   │   │   │   └── update.js (112 lines)
+│   │   │       │   │   │   ├── templates/
+│   │   │       │   │   │   │   ├── SoftwareUpdateActionQuickView.html (256 lines)
+│   │   │       │   │   │   │   └── SoftwareUpdateNotificationContent.html (23 lines)
+│   │   │       │   │   │   ├── envelope.jsp (190 lines)
+│   │   │       │   │   │   ├── error.html (53 lines)
+│   │   │       │   │   │   ├── getCsrfToken.jsp (8 lines)
+│   │   │       │   │   │   ├── haCounterpartUpdates.jsp (69 lines)
+│   │   │       │   │   │   ├── haMinDowntimeMessage.jsp (39 lines)
+│   │   │       │   │   │   ├── softwareAvailable.html (86 lines)
+│   │   │       │   │   │   ├── softwareCategory.html (61 lines)
+│   │   │       │   │   │   ├── softwareUpdate.js (3343 lines)
+│   │   │       │   │   │   ├── softwareUpdate.jsp (455 lines)
+│   │   │       │   │   │   ├── softwareUpdateContent.jsp (70 lines)
+│   │   │       │   │   │   ├── softwareUpdateStatuses.jsp (64 lines)
+│   │   │       │   │   │   ├── softwareUpdateTables.js (106 lines)
+│   │   │       │   │   │   ├── softwareUpdateUtils.js (76 lines)
+│   │   │       │   │   │   └── updateFileDetails.html (17 lines)
+│   │   │       │   │   └── lib/
+│   │   │       │   │       ├── AbstractDetailsPopover.js (61 lines)
+│   │   │       │   │       ├── FileDetailsPopover.js (48 lines)
+│   │   │       │   │       ├── SoftwareUpdateCategories.js (66 lines)
+│   │   │       │   │       ├── SoftwareUpdateChecker.js (44 lines)
+│   │   │       │   │       ├── SoftwareUpdateFilesTable.js (128 lines)
+│   │   │       │   │       ├── SoftwareUpdateLayer.js (3 lines)
+│   │   │       │   │       ├── SoftwareUpdateLocalDiskFilesTable.js (70 lines)
+│   │   │       │   │       ├── SoftwareUpdateManager.js (88 lines)
+│   │   │       │   │       ├── SoftwareUpdateTable.js (103 lines)
+│   │   │       │   │       ├── TemplateRenderHelper.js (75 lines)
+│   │   │       │   │       └── UpdateDetailsPopover.js (107 lines)
+│   │   │       │   ├── usermgmt/
+│   │   │       │   │   └── js/
+│   │   │       │   │       └── .EMPTY_FOLDER_IN_SVN (0 lines)
+│   │   │       │   ├── visualize/
+│   │   │       │   │   ├── css/
+│   │   │       │   │   │   ├── _D3Base.css (63 lines)
+│   │   │       │   │   │   └── tree.css (33 lines)
+│   │   │       │   │   └── js/
+│   │   │       │   │       ├── Tree.js (1454 lines)
+│   │   │       │   │       ├── _D3Base.js (647 lines)
+│   │   │       │   │       ├── d3.js (8811 lines)
+│   │   │       │   │       └── d3.v3.min.js (5 lines)
+│   │   │       │   ├── workflow/
+│   │   │       │   │   └── html/
+│   │   │       │   │       ├── console.html (30 lines)
+│   │   │       │   │       ├── designer.html (36 lines)
+│   │   │       │   │       └── guvnor.html (32 lines)
+│   │   │       │   ├── app.profile.js (29 lines)
+│   │   │       │   └── package.json (17 lines)
+│   │   │       ├── css/
+│   │   │       │   ├── fonts/
+│   │   │       │   │   ├── icon-font-ext.svg (165 lines)
+│   │   │       │   │   └── icon-font-pi.svg (64 lines)
+│   │   │       │   ├── app.profile.js (30 lines)
+│   │   │       │   ├── fonts.css (476 lines)
+│   │   │       │   ├── ncs-common.css (456 lines)
+│   │   │       │   ├── package.json (17 lines)
+│   │   │       │   ├── repeaterTest.css (56 lines)
+│   │   │       │   ├── wcs-prime-megamenu.css (149 lines)
+│   │   │       │   └── xmp-common.css (89 lines)
+│   │   │       ├── html/
+│   │   │       │   ├── xmp/
+│   │   │       │   │   └── data/
+│   │   │       │   │       ├── IfmRolesMetadata.json (53 lines)
+│   │   │       │   │       ├── UserGroupMetadata.json (48 lines)
+│   │   │       │   │       ├── UserMetadata.json (79 lines)
+│   │   │       │   │       ├── ifmPrivilegeMetadata.json (53 lines)
+│   │   │       │   │       └── ifmUserMetadata.json (53 lines)
+│   │   │       │   ├── AuditContent.html (48 lines)
+│   │   │       │   ├── AuditList.html (773 lines)
+│   │   │       │   ├── Blank.html (10 lines)
+│   │   │       │   ├── GenericTree.html (1064 lines)
+│   │   │       │   ├── NetworkAuditList.html (2588 lines)
+│   │   │       │   ├── domainList.html (159 lines)
+│   │   │       │   └── home.html (40 lines)
+│   │   │       ├── ifmoverlay/
+│   │   │       │   ├── cisco/
+│   │   │       │   │   └── dashboard/
+│   │   │       │   │       └── filter/
+│   │   │       │   │           └── FilterResource.js (28 lines)
+│   │   │       │   └── ifm/
+│   │   │       │       ├── themes/
+│   │   │       │       │   ├── ifm-monitoring.css (150 lines)
+│   │   │       │       │   └── propertySheet.css (412 lines)
+│   │   │       │       └── widget/
+│   │   │       │           ├── templates/
+│   │   │       │           │   ├── AlarmEditWidget.html (11 lines)
+│   │   │       │           │   ├── EventEditWidget.html (11 lines)
+│   │   │       │           │   ├── IfmPaginationToolbar.html (18 lines)
+│   │   │       │           │   ├── PropertySheet.html (5 lines)
+│   │   │       │           │   ├── PropertySheetEditWidget.html (6 lines)
+│   │   │       │           │   ├── SliderPanelGT.html (25 lines)
+│   │   │       │           │   └── SwitchPortTrace.html (137 lines)
+│   │   │       │           ├── ActionHandlers.js (1842 lines)
+│   │   │       │           ├── DataGridHandlers.js (228 lines)
+│   │   │       │           ├── DataPropertySheet.js (388 lines)
+│   │   │       │           ├── EventEditWidget.js (143 lines)
+│   │   │       │           ├── PropertySheetColumn.js (606 lines)
+│   │   │       │           ├── PropertySheetEditWidget.js (132 lines)
+│   │   │       │           ├── TableHandlers.js (233 lines)
+│   │   │       │           └── imageLoader.js (217 lines)
+│   │   │       ├── js/
+│   │   │       │   ├── config/
+│   │   │       │   │   ├── treedata.json (122 lines)
+│   │   │       │   │   └── xmp-configuration.json (46 lines)
+│   │   │       │   └── xmp/
+│   │   │       │       ├── action/
+│   │   │       │       │   ├── ChangeHomePageActionHandler.js (51 lines)
+│   │   │       │       │   ├── DomainActionHandlerDelegate.js (92 lines)
+│   │   │       │       │   ├── QuickGuideHandlerDelegate.js (35 lines)
+│   │   │       │       │   ├── SimpleActionHandlerDelegate.js (27 lines)
+│   │   │       │       │   ├── SupportCasesForProductsHandler.js (124 lines)
+│   │   │       │       │   ├── ToolbarOpenPageHandler.js (115 lines)
+│   │   │       │       │   └── WelcomeActionHandler.js (34 lines)
+│   │   │       │       ├── nls/
+│   │   │       │       │   ├── fr/
+│   │   │       │       │   │   └── xmp.js (150 lines)
+│   │   │       │       │   └── xmp.js (241 lines)
+│   │   │       │       └── page/
+│   │   │       │           ├── SystemAdminMDL.js (231 lines)
+│   │   │       │           ├── certificateMDL.js (190 lines)
+│   │   │       │           ├── jobsMasterDetailLayout.js (537 lines)
+│   │   │       │           └── jobsMasterDetailLayoutCalendar.js (415 lines)
+│   │   │       ├── lib/
+│   │   │       │   ├── cuecharts/
+│   │   │       │   │   ├── app.profile.js (30 lines)
+│   │   │       │   │   ├── cue_charts.js (36 lines)
+│   │   │       │   │   ├── package.json (17 lines)
+│   │   │       │   │   └── swfobject.js (8 lines)
+│   │   │       │   ├── dojo/
+│   │   │       │   │   ├── io/
+│   │   │       │   │   │   └── iframe.js (414 lines)
+│   │   │       │   │   └── request/
+│   │   │       │   │       ├── util.js (158 lines)
+│   │   │       │   │       └── util.js.uncompressed.js (158 lines)
+│   │   │       │   ├── dojox/
+│   │   │       │   │   ├── form/
+│   │   │       │   │   │   └── FileUploader.js (1437 lines)
+│   │   │       │   │   ├── grid/
+│   │   │       │   │   │   ├── cells/
+│   │   │       │   │   │   │   ├── _base.js (277 lines)
+│   │   │       │   │   │   │   └── _base.js.uncompressed.js (488 lines)
+│   │   │       │   │   │   ├── _Builder.js (531 lines)
+│   │   │       │   │   │   └── _Builder.js.uncompressed.js (765 lines)
+│   │   │       │   │   ├── jq.js (1289 lines)
+│   │   │       │   │   └── jq.js.uncompressed.js (1943 lines)
+│   │   │       │   ├── i18n/
+│   │   │       │   │   └── nls/
+│   │   │       │   │       ├── en/
+│   │   │       │   │       │   ├── RFMProperties.js (88 lines)
+│   │   │       │   │       │   ├── SmartLicenseProperties.js (56 lines)
+│   │   │       │   │       │   ├── dataCenter_localizationStrings.js (957 lines)
+│   │   │       │   │       │   └── messages.js (713 lines)
+│   │   │       │   │       ├── en-us/
+│   │   │       │   │       │   ├── IFMProperties.js (33 lines)
+│   │   │       │   │       │   ├── RFMProperties.js (87 lines)
+│   │   │       │   │       │   ├── SmartLicenseProperties.js (56 lines)
+│   │   │       │   │       │   └── messages.js (524 lines)
+│   │   │       │   │       ├── ja/
+│   │   │       │   │       │   ├── RFMProperties.js (94 lines)
+│   │   │       │   │       │   ├── SmartLicenseProperties.js (128 lines)
+│   │   │       │   │       │   ├── dataCenter_localizationStrings.js (955 lines)
+│   │   │       │   │       │   └── messages.js (701 lines)
+│   │   │       │   │       ├── ko/
+│   │   │       │   │       │   ├── RFMProperties.js (94 lines)
+│   │   │       │   │       │   ├── SmartLicenseProperties.js (129 lines)
+│   │   │       │   │       │   ├── dataCenter_localizationStrings.js (954 lines)
+│   │   │       │   │       │   └── messages.js (688 lines)
+│   │   │       │   │       ├── IFMProperties.js (33 lines)
+│   │   │       │   │       ├── RFMProperties.js (94 lines)
+│   │   │       │   │       ├── SmartLicenseProperties.js (62 lines)
+│   │   │       │   │       ├── dataCenter_localizationStrings.js (951 lines)
+│   │   │       │   │       ├── messages.js (715 lines)
+│   │   │       │   │       └── topologyProperties.js (14 lines)
+│   │   │       │   ├── ifm/
+│   │   │       │   │   ├── Actions/
+│   │   │       │   │   │   └── Monitoring/
+│   │   │       │   │   │       └── PropertySheet/
+│   │   │       │   │   │           └── AlarmAndEventBrowserActionHandlers.js (71 lines)
+│   │   │       │   │   ├── _360/
+│   │   │       │   │   │   └── modules/
+│   │   │       │   │   │       └── cards/
+│   │   │       │   │   │           └── tables/
+│   │   │       │   │   │               ├── IFM360VDCForm.js (321 lines)
+│   │   │       │   │   │               └── IFM360VDCTable.js (222 lines)
+│   │   │       │   │   ├── anchorviews/
+│   │   │       │   │   │   ├── configArchive/
+│   │   │       │   │   │   │   └── ListArchiveAnchorView.js (26 lines)
+│   │   │       │   │   │   └── swim/
+│   │   │       │   │   │       ├── ImagesByDeviceGroupAnchor.js (21 lines)
+│   │   │       │   │   │       └── SoftwareImagesBrowserAnchor.js (24 lines)
+│   │   │       │   │   ├── application/
+│   │   │       │   │   │   └── common/
+│   │   │       │   │   │       └── dataManage.js (214 lines)
+│   │   │       │   │   ├── dashboard/
+│   │   │       │   │   │   └── filter/
+│   │   │       │   │   │       ├── data/
+│   │   │       │   │   │       │   ├── filters.json (106 lines)
+│   │   │       │   │   │       │   ├── filters1.json (117 lines)
+│   │   │       │   │   │       │   ├── range.json (8 lines)
+│   │   │       │   │   │       │   ├── times.json (16 lines)
+│   │   │       │   │   │       │   ├── times6hrs.json (12 lines)
+│   │   │       │   │   │       │   └── timesNext6hrs.json (12 lines)
+│   │   │       │   │   │       ├── templates/
+│   │   │       │   │   │       │   ├── AdvancedAPFilter.html (10 lines)
+│   │   │       │   │   │       │   ├── AdvancedAPFilterAOContent.html (81 lines)
+│   │   │       │   │   │       │   ├── AdvancedDeviceFilter.html (11 lines)
+│   │   │       │   │   │       │   ├── AdvancedDeviceFilterAOContent.html (89 lines)
+│   │   │       │   │   │       │   ├── AdvancedTimeFrameFilter.html (7 lines)
+│   │   │       │   │   │       │   ├── ApplicationSelectorAOContent.html (102 lines)
+│   │   │       │   │   │       │   ├── ApplicationSelectorFilter.html (10 lines)
+│   │   │       │   │   │       │   ├── ClientFrameAOContent.html (120 lines)
+│   │   │       │   │   │       │   ├── ClientFrameFilter.html (10 lines)
+│   │   │       │   │   │       │   ├── ObjectSelectorFilter.html (4 lines)
+│   │   │       │   │   │       │   ├── SiteLabel.html (5 lines)
+│   │   │       │   │   │       │   ├── TimeFrameAOContent.html (53 lines)
+│   │   │       │   │   │       │   ├── TimeFrameAOContentForServiceHealth.html (53 lines)
+│   │   │       │   │   │       │   ├── TimeFrameFilter.html (7 lines)
+│   │   │       │   │   │       │   └── TimeFrameFilterForServiceHealth.html (7 lines)
+│   │   │       │   │   │       ├── themes/
+│   │   │       │   │   │       │   ├── filterIcons.css (218 lines)
+│   │   │       │   │   │       │   └── timeFrameFilter.css (54 lines)
+│   │   │       │   │   │       ├── AdvancedAPFilter.js (139 lines)
+│   │   │       │   │   │       ├── AdvancedAPFilterAOContent.js (313 lines)
+│   │   │       │   │   │       ├── AdvancedDeviceFilter.js (145 lines)
+│   │   │       │   │   │       ├── AdvancedDeviceFilterAOContent.js (523 lines)
+│   │   │       │   │   │       ├── AdvancedTimeFrameFilter.js (128 lines)
+│   │   │       │   │   │       ├── AnchoredOverlayWithValidation.js (30 lines)
+│   │   │       │   │   │       ├── ApplicationSelectorAOContent.js (610 lines)
+│   │   │       │   │   │       ├── ApplicationSelectorFilter.js (222 lines)
+│   │   │       │   │   │       ├── ClientAnchoredOverlayWithValidation.js (20 lines)
+│   │   │       │   │   │       ├── ClientFrameAOContent.js (605 lines)
+│   │   │       │   │   │       ├── ClientFrameAOContentWithValidation.js (28 lines)
+│   │   │       │   │   │       ├── ClientFrameFilter.js (141 lines)
+│   │   │       │   │   │       ├── ClientSiteSelectorFilter.js (27 lines)
+│   │   │       │   │   │       ├── DataCenterFilter.js (94 lines)
+│   │   │       │   │   │       ├── DeviceFilter.js (29 lines)
+│   │   │       │   │   │       ├── EndHostFilter.js (74 lines)
+│   │   │       │   │   │       ├── HostFilter.js (75 lines)
+│   │   │       │   │   │       ├── NetworkAwareFilter.js (61 lines)
+│   │   │       │   │   │       ├── ObjectSelectorFilter.js (149 lines)
+│   │   │       │   │   │       ├── ObjectSelectorFilterWithVS.js (33 lines)
+│   │   │       │   │   │       ├── ServerSiteSelectorFilter.js (29 lines)
+│   │   │       │   │   │       ├── SiteLabel.js (144 lines)
+│   │   │       │   │   │       ├── SiteSelectorFilter.js (138 lines)
+│   │   │       │   │   │       ├── TimeFrameAOContent.js (347 lines)
+│   │   │       │   │   │       ├── TimeFrameAOContentForServiceHealth.js (279 lines)
+│   │   │       │   │   │       ├── TimeFrameFilter.js (89 lines)
+│   │   │       │   │   │       ├── TimeFrameFilterForServiceHealth.js (117 lines)
+│   │   │       │   │   │       └── exportAll.js (215 lines)
+│   │   │       │   │   ├── day1/
+│   │   │       │   │   │   ├── NotificationSlider.js (1307 lines)
+│   │   │       │   │   │   ├── notificationMetaData.json (57 lines)
+│   │   │       │   │   │   ├── notificationStatus.js (314 lines)
+│   │   │       │   │   │   └── sliderNotificationStatusWrapper.js (3 lines)
+│   │   │       │   │   ├── inventory/
+│   │   │       │   │   │   └── nls/
+│   │   │       │   │   │       ├── de/
+│   │   │       │   │   │       │   └── ApplicationProperties.js (77 lines)
+│   │   │       │   │   │       ├── en/
+│   │   │       │   │   │       │   └── ApplicationProperties.js (106 lines)
+│   │   │       │   │   │       ├── en-us/
+│   │   │       │   │   │       │   └── ApplicationProperties.js (122 lines)
+│   │   │       │   │   │       ├── ja/
+│   │   │       │   │   │       │   └── ApplicationProperties.js (96 lines)
+│   │   │       │   │   │       ├── ko/
+│   │   │       │   │   │       │   └── ApplicationProperties.js (96 lines)
+│   │   │       │   │   │       └── ApplicationProperties.js (122 lines)
+│   │   │       │   │   ├── nls/
+│   │   │       │   │   │   ├── en/
+│   │   │       │   │   │   │   ├── 360Properties.js (415 lines)
+│   │   │       │   │   │   │   ├── AccessWorkFlowProperties.js (217 lines)
+│   │   │       │   │   │   │   ├── AlarmPolicesProperties.js (293 lines)
+│   │   │       │   │   │   │   ├── ComputeWorkCenterProperties.js (30 lines)
+│   │   │       │   │   │   │   ├── ConvergedAccessProperties.js (122 lines)
+│   │   │       │   │   │   │   ├── GVProperties.js (240 lines)
+│   │   │       │   │   │   │   ├── HAProperties.js (24 lines)
+│   │   │       │   │   │   │   ├── InstantAccessProperties.js (277 lines)
+│   │   │       │   │   │   │   ├── NotificationPolicesProperties.js (307 lines)
+│   │   │       │   │   │   │   ├── SmartLicenseProperties.js (148 lines)
+│   │   │       │   │   │   │   ├── TrustSecProperties.js (84 lines)
+│   │   │       │   │   │   │   └── softwareUpdateProperties.js (130 lines)
+│   │   │       │   │   │   ├── en-us/
+│   │   │       │   │   │   │   ├── AccessWorkFlowProperties.js (191 lines)
+│   │   │       │   │   │   │   ├── AlarmPolicesProperties.js (123 lines)
+│   │   │       │   │   │   │   ├── ComputeInventoryProperties.js (19 lines)
+│   │   │       │   │   │   │   ├── ComputeWorkCenterProperties.js (30 lines)
+│   │   │       │   │   │   │   ├── ConvergedAccessProperties.js (112 lines)
+│   │   │       │   │   │   │   ├── Day1Properties.js (628 lines)
+│   │   │       │   │   │   │   ├── GVProperties.js (15 lines)
+│   │   │       │   │   │   │   ├── HAProperties.js (24 lines)
+│   │   │       │   │   │   │   ├── IFMProperties.js (36 lines)
+│   │   │       │   │   │   │   ├── InstantAccessProperties.js (277 lines)
+│   │   │       │   │   │   │   ├── SmartLicenseProperties.js (77 lines)
+│   │   │       │   │   │   │   ├── TrustSecProperties.js (33 lines)
+│   │   │       │   │   │   │   └── designConfigurationBundle.js (7 lines)
+│   │   │       │   │   │   ├── ja/
+│   │   │       │   │   │   │   ├── 360Properties.js (418 lines)
+│   │   │       │   │   │   │   ├── AccessWorkFlowProperties.js (219 lines)
+│   │   │       │   │   │   │   ├── AlarmPolicesProperties.js (294 lines)
+│   │   │       │   │   │   │   ├── ConvergedAccessProperties.js (122 lines)
+│   │   │       │   │   │   │   ├── GVProperties.js (237 lines)
+│   │   │       │   │   │   │   ├── HAProperties.js (24 lines)
+│   │   │       │   │   │   │   ├── NotificationPolicesProperties.js (302 lines)
+│   │   │       │   │   │   │   ├── SmartLicenseProperties.js (143 lines)
+│   │   │       │   │   │   │   ├── TrustSecProperties.js (85 lines)
+│   │   │       │   │   │   │   └── softwareUpdateProperties.js (128 lines)
+│   │   │       │   │   │   ├── ko/
+│   │   │       │   │   │   │   ├── 360Properties.js (418 lines)
+│   │   │       │   │   │   │   ├── AccessWorkFlowProperties.js (219 lines)
+│   │   │       │   │   │   │   ├── AlarmPolicesProperties.js (294 lines)
+│   │   │       │   │   │   │   ├── ConvergedAccessProperties.js (127 lines)
+│   │   │       │   │   │   │   ├── GVProperties.js (237 lines)
+│   │   │       │   │   │   │   ├── HAProperties.js (24 lines)
+│   │   │       │   │   │   │   ├── NotificationPolicesProperties.js (301 lines)
+│   │   │       │   │   │   │   ├── SmartLicenseProperties.js (142 lines)
+│   │   │       │   │   │   │   ├── TrustSecProperties.js (85 lines)
+│   │   │       │   │   │   │   └── softwareUpdateProperties.js (127 lines)
+│   │   │       │   │   │   ├── 360Properties.js (422 lines)
+│   │   │       │   │   │   ├── AccessWorkFlowProperties.js (222 lines)
+│   │   │       │   │   │   ├── AlarmPolicesProperties.js (293 lines)
+│   │   │       │   │   │   ├── ComputeInventoryProperties.js (19 lines)
+│   │   │       │   │   │   ├── ComputeWorkCenterProperties.js (30 lines)
+│   │   │       │   │   │   ├── ConvergedAccessProperties.js (127 lines)
+│   │   │       │   │   │   ├── Day1Properties.js (628 lines)
+│   │   │       │   │   │   ├── GVProperties.js (247 lines)
+│   │   │       │   │   │   ├── HAProperties.js (26 lines)
+│   │   │       │   │   │   ├── IFMProperties.js (36 lines)
+│   │   │       │   │   │   ├── InstantAccessProperties.js (277 lines)
+│   │   │       │   │   │   ├── NotificationPolicesProperties.js (307 lines)
+│   │   │       │   │   │   ├── SmartLicenseProperties.js (148 lines)
+│   │   │       │   │   │   ├── TrustSecProperties.js (84 lines)
+│   │   │       │   │   │   ├── designConfigurationBundle.js (7 lines)
+│   │   │       │   │   │   └── softwareUpdateProperties.js (136 lines)
+│   │   │       │   │   ├── tests/
+│   │   │       │   │   │   └── alarmStatGT/
+│   │   │       │   │   │       ├── data/
+│   │   │       │   │   │       │   └── alarmStatGT.json (55 lines)
+│   │   │       │   │   │       └── testAlarmStatGT.html (92 lines)
+│   │   │       │   │   ├── themes/
+│   │   │       │   │   │   ├── formGrid.css (180 lines)
+│   │   │       │   │   │   ├── ifm-monitoring.css (150 lines)
+│   │   │       │   │   │   └── propertySheet.css (357 lines)
+│   │   │       │   │   ├── util/
+│   │   │       │   │   │   ├── ClientFilterTableSearchUtils.js (209 lines)
+│   │   │       │   │   │   ├── DeviceFilterSearchMeteData.json (30 lines)
+│   │   │       │   │   │   ├── IFMDomainSpecificSortingInterceptor.js (87 lines)
+│   │   │       │   │   │   ├── IFMFilterExtensionForTable.js (249 lines)
+│   │   │       │   │   │   ├── IFMFilterforInventory.js (33 lines)
+│   │   │       │   │   │   ├── IFMSamMsgList.json (31 lines)
+│   │   │       │   │   │   ├── IFMSamMsgView.js (45 lines)
+│   │   │       │   │   │   ├── MetadataManager.js (195 lines)
+│   │   │       │   │   │   ├── MetadataReader.js (140 lines)
+│   │   │       │   │   │   ├── ProgressBarUtil.js (72 lines)
+│   │   │       │   │   │   ├── SliderAlarmMetadata.json (57 lines)
+│   │   │       │   │   │   ├── SliderStats.js (333 lines)
+│   │   │       │   │   │   ├── applicationFilterSearchMeteData.json (71 lines)
+│   │   │       │   │   │   ├── clientFilterSearchMeteData.json (75 lines)
+│   │   │       │   │   │   ├── sliderAlarmStatUtilsView.js (1169 lines)
+│   │   │       │   │   │   └── sliderAlarmStatusWrapper.js (10 lines)
+│   │   │       │   │   ├── widget/
+│   │   │       │   │   │   ├── deviceConsole/
+│   │   │       │   │   │   │   ├── i18n/
+│   │   │       │   │   │   │   │   └── nls/
+│   │   │       │   │   │   │   │       ├── en/
+│   │   │       │   │   │   │   │       │   └── DeviceConsoleProperties.js (11 lines)
+│   │   │       │   │   │   │   │       ├── en-us/
+│   │   │       │   │   │   │   │       │   └── DeviceConsoleProperties.js (11 lines)
+│   │   │       │   │   │   │   │       ├── ko/
+│   │   │       │   │   │   │   │       │   └── DeviceConsoleProperties.js (11 lines)
+│   │   │       │   │   │   │   │       └── DeviceConsoleProperties.js (11 lines)
+│   │   │       │   │   │   │   └── DeviceConsole.js (239 lines)
+│   │   │       │   │   │   ├── templates/
+│   │   │       │   │   │   │   ├── AlarmEditWidget.html (11 lines)
+│   │   │       │   │   │   │   ├── EventEditWidget.html (11 lines)
+│   │   │       │   │   │   │   ├── IfmPaginationToolbar.html (18 lines)
+│   │   │       │   │   │   │   ├── PropertySheet.html (5 lines)
+│   │   │       │   │   │   │   ├── PropertySheetEditWidget.html (6 lines)
+│   │   │       │   │   │   │   ├── SliderPanelGT.html (25 lines)
+│   │   │       │   │   │   │   └── SwitchPortTrace.html (138 lines)
+│   │   │       │   │   │   ├── ActionHandlers.js (1876 lines)
+│   │   │       │   │   │   ├── AlarmEditWidget.js (42 lines)
+│   │   │       │   │   │   ├── DataGridHandlers.js (212 lines)
+│   │   │       │   │   │   ├── DataPropertySheet.js (367 lines)
+│   │   │       │   │   │   ├── EventEditWidget.js (121 lines)
+│   │   │       │   │   │   ├── GroupTreePanel.js (30 lines)
+│   │   │       │   │   │   ├── GroupTreePanelOld.js (19 lines)
+│   │   │       │   │   │   ├── IFMTitlePane.js (439 lines)
+│   │   │       │   │   │   ├── IFMTitlePaneAlarmToplology.js (411 lines)
+│   │   │       │   │   │   ├── IFMTooltip.js (35 lines)
+│   │   │       │   │   │   ├── IfmPaginationToolbar.js (369 lines)
+│   │   │       │   │   │   ├── PIEChart.js (310 lines)
+│   │   │       │   │   │   ├── PropertySheet.js (111 lines)
+│   │   │       │   │   │   ├── PropertySheetColumn.js (560 lines)
+│   │   │       │   │   │   ├── PropertySheetEditWidget.js (191 lines)
+│   │   │       │   │   │   ├── PropertySheetItem.js (127 lines)
+│   │   │       │   │   │   ├── RogueActionHandlers.js (42 lines)
+│   │   │       │   │   │   ├── TableContainer.js (151 lines)
+│   │   │       │   │   │   ├── TableHandlers.js (231 lines)
+│   │   │       │   │   │   ├── app.profile.js (30 lines)
+│   │   │       │   │   │   ├── imageLoader.js (217 lines)
+│   │   │       │   │   │   ├── package.json (17 lines)
+│   │   │       │   │   │   ├── paginatedToolBar.js (222 lines)
+│   │   │       │   │   │   └── sptDialog.js (990 lines)
+│   │   │       │   │   ├── app.profile.js (30 lines)
+│   │   │       │   │   └── package.json (17 lines)
+│   │   │       │   └── wap/
+│   │   │       │       └── application/
+│   │   │       │           └── nls/
+│   │   │       │               ├── en/
+│   │   │       │               │   └── ErrorMessages.js (31 lines)
+│   │   │       │               ├── en-us/
+│   │   │       │               │   └── ErrorMessages.js (31 lines)
+│   │   │       │               ├── fr/
+│   │   │       │               │   └── ErrorMessages.js (33 lines)
+│   │   │       │               └── ErrorMessages.js (31 lines)
+│   │   │       ├── index.html (448 lines)
+│   │   │       ├── login.jsp (74 lines)
+│   │   │       └── logout.jsp (16 lines)
+│   │   └── test/
+│   │       └── resources/
+│   │           ├── datasets/
+│   │           │   ├── com.cisco.ifm.admin.tests/
+│   │           │   │   └── SampleTest.xml (9 lines)
+│   │           │   └── com.cisco.ifm.jobscheduler.tests/
+│   │           │       └── TestJobSchedulerRestService.xml (11 lines)
+│   │           └── spring/
+│   │               └── jobSchedulerRestTest-context.xml (8 lines)
+│   ├── .classpath (10 lines)
+│   ├── .project (35 lines)
+│   ├── README-SVN-to-GIT (1 lines)
+│   ├── epnm_pom.xml (806 lines)
+│   ├── ifmdepscript.sh (2 lines)
+│   ├── pom.xml (1079 lines)
+│   ├── release-pom.xml.save (2201 lines)
+│   └── suite.xml (11 lines)
+├── ifm_rpm/
+│   ├── files/
+│   │   ├── cids/
+│   │   │   └── temp/
+│   │   │       └── .EMPTY_FOLDER_IN_SVN (0 lines)
+│   │   ├── compliance/
+│   │   │   ├── Example_Policies/
+│   │   │   │   ├── Example - All interfaces should restrict traffic.xml (154 lines)
+│   │   │   │   ├── Example - Block incoming telnets using un-authorized protocols.xml (134 lines)
+│   │   │   │   ├── Example - Check DNS Servers are configured.xml (57 lines)
+│   │   │   │   ├── Example - NTP Server redundancy.xml (59 lines)
+│   │   │   │   ├── Example - OSPF MD5 Check.xml (116 lines)
+│   │   │   │   ├── Example - SMU verification on ASR.xml (97 lines)
+│   │   │   │   ├── Example - SNMP prohibit well known community strings(1).xml (59 lines)
+│   │   │   │   └── Example - Trap Destination.xml (75 lines)
+│   │   │   ├── ComplianceMgr.xml (815 lines)
+│   │   │   ├── ComplianceMgrShowCommand.xml (1455 lines)
+│   │   │   ├── CustomPolicyImportDoubleQuoteRemover.xslt (37 lines)
+│   │   │   ├── CustomPolicyImportForPix.xslt (80 lines)
+│   │   │   ├── CustomPolicyImportSourceTypeTagRemover.xslt (12 lines)
+│   │   │   ├── DBConfigurator.sh (17 lines)
+│   │   │   ├── EmptyTagRemover.xslt (16 lines)
+│   │   │   ├── FixJobResult.vm (58 lines)
+│   │   │   ├── IgnoreDataSet.xml (251 lines)
+│   │   │   ├── IgnoreHeavyDataSet.xml (11 lines)
+│   │   │   ├── JobsViolationReport.vm (76 lines)
+│   │   │   ├── SuccessJobsViolationReport.vm (51 lines)
+│   │   │   ├── dataset.xml (1473 lines)
+│   │   │   ├── pari_server.sh (70 lines)
+│   │   │   ├── reinit_pasdb.sh (79 lines)
+│   │   │   ├── report.vm (291 lines)
+│   │   │   └── uicompiler-taglib.xml (298 lines)
+│   │   ├── conf/
+│   │   │   ├── swim/
+│   │   │   │   └── IssuConf.properties (19 lines)
+│   │   │   ├── Cmdsvc.properties (13 lines)
+│   │   │   ├── ifm_app_ui_wap_rs.xml (915 lines)
+│   │   │   ├── menuSearchLabels.properties (29 lines)
+│   │   │   ├── menuTags.properties (118 lines)
+│   │   │   └── telemetry.properties (133 lines)
+│   │   ├── config/
+│   │   │   └── framework/
+│   │   │       ├── deployservicebeans/
+│   │   │       │   └── deploy-service-metadata.xml (331 lines)
+│   │   │       └── metadata/
+│   │   │           ├── IFMSecurity.xml (18 lines)
+│   │   │           ├── Routing.xml (44 lines)
+│   │   │           ├── interfaces.xml (118 lines)
+│   │   │           └── sharedObjects.xml (80 lines)
+│   │   ├── config_archive/
+│   │   │   └── config_archive_configuration.xml (6 lines)
+│   │   ├── ddlmetadata/
+│   │   │   └── ifm_ddlmetadata.xml (64 lines)
+│   │   ├── jobmanager/
+│   │   │   └── job_settings.xml (791 lines)
+│   │   ├── licensing/
+│   │   │   └── call_home_ca (332 lines)
+│   │   ├── metadata/
+│   │   │   └── .EMPTY_FOLDER_IN_SVN (0 lines)
+│   │   ├── ootb/
+│   │   │   ├── CLI Templates/
+│   │   │   │   └── System Templates - CLI/
+│   │   │   │       ├── .project (17 lines)
+│   │   │   │       ├── 802.1X Change of Authorization-IOS.xml (156 lines)
+│   │   │   │       ├── AP Primary Sec Ter Controller Config.xml (122 lines)
+│   │   │   │       ├── APIC Bootstrap.xml (172 lines)
+│   │   │   │       ├── APIC-TS-Bootstrap.xml (127 lines)
+│   │   │   │       ├── Access Layer-IOS.xml (743 lines)
+│   │   │   │       ├── Access_Admin.xml (44 lines)
+│   │   │   │       ├── Add_MC_To_Mobility_Group.xml (68 lines)
+│   │   │   │       ├── Add_Vlan.xml (56 lines)
+│   │   │   │       ├── Authentication Priority.xml (79 lines)
+│   │   │   │       ├── Authentication Proxy-IOS For IOS Version above 15.xml (124 lines)
+│   │   │   │       ├── Authentication Proxy-IOS.xml (239 lines)
+│   │   │   │       ├── Backup_Config.xml (231 lines)
+│   │   │   │       ├── Banner Configuration-IOS.xml (216 lines)
+│   │   │   │       ├── Best_Practice_Access_2k.xml (191 lines)
+│   │   │   │       ├── Best_Practice_Access_3k.xml (242 lines)
+│   │   │   │       ├── Best_Practice_Access_4k.xml (209 lines)
+│   │   │   │       ├── Best_Practice_Global.xml (69 lines)
+│   │   │   │       ├── Boot Image-IOS.xml (51 lines)
+│   │   │   │       ├── CVD-DMVPN-BR-PKI.xml (462 lines)
+│   │   │   │       ├── CVD-DMVPN-BR.xml (469 lines)
+│   │   │   │       ├── CVD-DMVPN-Dual-Internet-BR-PKI.xml (319 lines)
+│   │   │   │       ├── CVD-DMVPN-Dual-Internet-BR.xml (317 lines)
+│   │   │   │       ├── CVD-DMVPN-Dual-MPLS-BR-PKI.xml (313 lines)
+│   │   │   │       ├── CVD-DMVPN-Dual-MPLS-BR.xml (314 lines)
+│   │   │   │       ├── CVD-DMVPN-Internet-HUB-PKI.xml (287 lines)
+│   │   │   │       ├── CVD-DMVPN-Internet-HUB.xml (290 lines)
+│   │   │   │       ├── CVD-DMVPN-MPLS-HUB-PKI.xml (293 lines)
+│   │   │   │       ├── CVD-DMVPN-MPLS-HUB.xml (296 lines)
+│   │   │   │       ├── Certification Authority-IOS.xml (276 lines)
+│   │   │   │       ├── Configure Device IP.xml (102 lines)
+│   │   │   │       ├── Configure FTP TFTP Source Interface.xml (98 lines)
+│   │   │   │       ├── Configure Interface.xml (230 lines)
+│   │   │   │       ├── Configure Logging.xml (121 lines)
+│   │   │   │       ├── Configure NTP.xml (264 lines)
+│   │   │   │       ├── Configure SNMP.xml (59 lines)
+│   │   │   │       ├── Configure SNMPv3.xml (202 lines)
+│   │   │   │       ├── Configure VLAN CUWN-IOS.xml (131 lines)
+│   │   │   │       ├── Configure VLAN.xml (155 lines)
+│   │   │   │       ├── Configure_AccessPort.xml (161 lines)
+│   │   │   │       ├── Configure_Access_Port.xml (194 lines)
+│   │   │   │       ├── Configure_Custom_Template.xml (144 lines)
+│   │   │   │       ├── Configure_Interface_Template.xml (285 lines)
+│   │   │   │       ├── Configure_Port_AutoQoS.xml (66 lines)
+│   │   │   │       ├── Configure_Template.xml (132 lines)
+│   │   │   │       ├── Convert_MA_To_MC.xml (89 lines)
+│   │   │   │       ├── CoreLayer-IOS.xml (541 lines)
+│   │   │   │       ├── Crypto Map Configuration-IOS.xml (586 lines)
+│   │   │   │       ├── DNS Configuration-IOS.xml (206 lines)
+│   │   │   │       ├── DNS Configuration-NAM.xml (91 lines)
+│   │   │   │       ├── DNS Configuration-Nexus.xml (153 lines)
+│   │   │   │       ├── Day-0 Bootstrap Configuration.xml (112 lines)
+│   │   │   │       ├── Day-0 CLI Configuration.xml (135 lines)
+│   │   │   │       ├── Day-1 Access Point Role Configuration.xml (87 lines)
+│   │   │   │       ├── Day-1 Adhoc Configuration.xml (38 lines)
+│   │   │   │       ├── Day-1 Authentication Method Configuration.xml (163 lines)
+│   │   │   │       ├── Day-1 Auto Smart Ports Configuration.xml (267 lines)
+│   │   │   │       ├── Day-1 Basic Services Configuration.xml (48 lines)
+│   │   │   │       ├── Day-1 Boot Images Configuration.xml (58 lines)
+│   │   │   │       ├── Day-1 Configure General Settings.xml (161 lines)
+│   │   │   │       ├── Day-1 Credentials Configuration.xml (70 lines)
+│   │   │   │       ├── Day-1 Data Role Configuration.xml (1709 lines)
+│   │   │   │       ├── Day-1 EtherChannel Configuration.xml (121 lines)
+│   │   │   │       ├── Day-1 NTP Configuration.xml (146 lines)
+│   │   │   │       ├── Day-1 Neighbor Discovery Protocol Configuration.xml (67 lines)
+│   │   │   │       ├── Day-1 Power Redundancy Configuration.xml (82 lines)
+│   │   │   │       ├── Day-1 RADIUS Configuration.xml (274 lines)
+│   │   │   │       ├── Day-1 Spanning Tree Configuration.xml (56 lines)
+│   │   │   │       ├── Day-1 Switch Access Configuration.xml (344 lines)
+│   │   │   │       ├── Day-1 System Redundancy Configuration.xml (87 lines)
+│   │   │   │       ├── Day-1 TACACS Configuration.xml (137 lines)
+│   │   │   │       ├── Day-1 Uplink Role Configuration.xml (165 lines)
+│   │   │   │       ├── Day-1 Uplink and General Configuration.xml (86 lines)
+│   │   │   │       ├── Day-1 VLAN Configuration.xml (618 lines)
+│   │   │   │       ├── Day-1 VTP Configuration.xml (110 lines)
+│   │   │   │       ├── Day-1 Voice Role Configuration.xml (218 lines)
+│   │   │   │       ├── Delete_Custom_Template.xml (56 lines)
+│   │   │   │       ├── Delete_Template.xml (42 lines)
+│   │   │   │       ├── Delete_Vlan.xml (45 lines)
+│   │   │   │       ├── Delete_ZBFW_Configuration-IOS.xml (448 lines)
+│   │   │   │       ├── Distribution Layer-IOS.xml (924 lines)
+│   │   │   │       ├── EEM Environmental Variables-IOS.xml (408 lines)
+│   │   │   │       ├── EEM Script For Nano Cellular Modem Configuration.xml (205 lines)
+│   │   │   │       ├── ERSPAN Source Session.xml (188 lines)
+│   │   │   │       ├── Embedded Event Manager Configuration-IOS.xml (187 lines)
+│   │   │   │       ├── Enable Password-IOS.xml (187 lines)
+│   │   │   │       ├── EtherChannel.xml (110 lines)
+│   │   │   │       ├── Fix Network Discrepancies.xml (141 lines)
+│   │   │   │       ├── GOLD Boot Level And Monitoring Test for Cat6k Devices-IOS.xml (309 lines)
+│   │   │   │       ├── GOLD Monitoring Test for Non Stack Devices-IOS.xml (243 lines)
+│   │   │   │       ├── GOLD Monitoring Test for Stack Enabled Devices-IOS.xml (239 lines)
+│   │   │   │       ├── GuestUser.xml (169 lines)
+│   │   │   │       ├── Guest_CAPWAP_Tunnel.xml (106 lines)
+│   │   │   │       ├── Guided_Workflow_Convert_MA_To_MC.xml (42 lines)
+│   │   │   │       ├── Guided_Workflow_Convert_MC_To_MA.xml (42 lines)
+│   │   │   │       ├── Guided_Workflow_GuestLAN.xml (365 lines)
+│   │   │   │       ├── Guided_Workflow_Mobility_Agent.xml (41 lines)
+│   │   │   │       ├── Guided_Workflow_Mobility_Controller.xml (73 lines)
+│   │   │   │       ├── Guided_Workflow_Mobility_Deletion.xml (225 lines)
+│   │   │   │       ├── Guided_Workflow_WLAN.xml (610 lines)
+│   │   │   │       ├── Guided_Workflow_WLAN_Deletion.xml (72 lines)
+│   │   │   │       ├── HTTP SWIM Image Upgrade Template.xml (46 lines)
+│   │   │   │       ├── HTTP Server Configuration-IOS.xml (185 lines)
+│   │   │   │       ├── IOS_XE_Centralized_Wireless_Network.xml (2621 lines)
+│   │   │   │       ├── IOS_XE_Controller_Large_Network.xml (2695 lines)
+│   │   │   │       ├── IOS_XE_Controller_Small_Network.xml (2612 lines)
+│   │   │   │       ├── Local Management User.xml (95 lines)
+│   │   │   │       ├── MAC Trap Configuration.xml (236 lines)
+│   │   │   │       ├── Mobility Express Day Zero Configuration.xml (383 lines)
+│   │   │   │       ├── Mobility_Agent.xml (104 lines)
+│   │   │   │       ├── Mobility_Controller.xml (139 lines)
+│   │   │   │       ├── Multicast Over GRE.xml (234 lines)
+│   │   │   │       ├── NGWC Ether Channel Configuration.xml (116 lines)
+│   │   │   │       ├── Nexus POAP Configurations.xml (104 lines)
+│   │   │   │       ├── Ngwc Radius Auth Server.xml (198 lines)
+│   │   │   │       ├── Plug And Play Bootstrap.xml (149 lines)
+│   │   │   │       ├── Preprovision.xml (183 lines)
+│   │   │   │       ├── Provision.xml (168 lines)
+│   │   │   │       ├── Provision_FEX_Ports.xml (136 lines)
+│   │   │   │       ├── RADIUS_AUTH.xml (159 lines)
+│   │   │   │       ├── Radius Acct. Servers.xml (191 lines)
+│   │   │   │       ├── Radius Configuration-IOS.xml (444 lines)
+│   │   │   │       ├── Reboot.xml (46 lines)
+│   │   │   │       ├── Redundancy Forced-Switchover.xml (93 lines)
+│   │   │   │       ├── Reload Configuration-IOS.xml (69 lines)
+│   │   │   │       ├── Reload Configuration-NAM.xml (43 lines)
+│   │   │   │       ├── Remove_Fex.xml (44 lines)
+│   │   │   │       ├── Remove_Fex_Port.xml (91 lines)
+│   │   │   │       ├── Sample_Config_Ethernet.xml (769 lines)
+│   │   │   │       ├── Sample_Config_Multilink.xml (756 lines)
+│   │   │   │       ├── Sample_Config_Serial.xml (766 lines)
+│   │   │   │       ├── Save_Running_Config.xml (29 lines)
+│   │   │   │       ├── Set_FEX_Fast_Boot.xml (63 lines)
+│   │   │   │       ├── Standalone_To_VSS.xml (260 lines)
+│   │   │   │       ├── SwitchPriority.xml (65 lines)
+│   │   │   │       ├── TACACS-POST-PNP.xml (98 lines)
+│   │   │   │       ├── TACACS.xml (77 lines)
+│   │   │   │       ├── TL1-EMS-SECURE.xml (25 lines)
+│   │   │   │       ├── Trap.xml (243 lines)
+│   │   │   │       ├── Turn_Off_FEX.xml (45 lines)
+│   │   │   │       ├── Turn_On_FEX.xml (45 lines)
+│   │   │   │       ├── Turn_Reset_FEX.xml (47 lines)
+│   │   │   │       ├── Update_FEX.xml (134 lines)
+│   │   │   │       ├── Update_Template.xml (96 lines)
+│   │   │   │       ├── User Defined Protocol-NAM for OS version above 5.xml (130 lines)
+│   │   │   │       ├── User Defined Protocol-NAM.xml (152 lines)
+│   │   │   │       ├── User Role Police Parameters.xml (212 lines)
+│   │   │   │       ├── VSS_AutoQOS_On.xml (289 lines)
+│   │   │   │       ├── VSS_Conversion.xml (88 lines)
+│   │   │   │       ├── VSS_Location.xml (64 lines)
+│   │   │   │       ├── WSMA Config Service-SSH.xml (58 lines)
+│   │   │   │       ├── Web User-NAM.xml (152 lines)
+│   │   │   │       ├── Wireless_Management_Interface.xml (87 lines)
+│   │   │   │       ├── mDNS Configuration for CUWN-IOS and UA devices.xml (43 lines)
+│   │   │   │       ├── stp.xml (106 lines)
+│   │   │   │       ├── wlan8021x.xml (91 lines)
+│   │   │   │       ├── wlanOpen.xml (77 lines)
+│   │   │   │       ├── wpa12CCKM.xml (96 lines)
+│   │   │   │       ├── wpa12Dot1x.xml (93 lines)
+│   │   │   │       └── wpa2PSK.xml (90 lines)
+│   │   │   ├── Composite Templates/
+│   │   │   │   └── System Templates - Composite/
+│   │   │   │       ├── .project (17 lines)
+│   │   │   │       ├── ASR 900 series PTP Configuration.xml (774 lines)
+│   │   │   │       ├── Day-1 Configuration Guided Flow.xml (4021 lines)
+│   │   │   │       ├── NCS 5500 series PTP Configuration.xml (1332 lines)
+│   │   │   │       ├── NGWC-Edison Composite Template.xml (2884 lines)
+│   │   │   │       ├── NGWC-Edison Convert MA To MC.xml (3217 lines)
+│   │   │   │       └── NGWC-Katana Composite Template.xml (3170 lines)
+│   │   │   ├── Feature Templates/
+│   │   │   │   ├── IWAN/
+│   │   │   │   │   ├── AVC/
+│   │   │   │   │   │   ├── AVC-InetMPLS.xml (480 lines)
+│   │   │   │   │   │   ├── AVC-Internet.xml (501 lines)
+│   │   │   │   │   │   └── AVC-MPLS.xml (501 lines)
+│   │   │   │   │   ├── DIA/
+│   │   │   │   │   │   ├── CVD-CWS-G2.xml (244 lines)
+│   │   │   │   │   │   ├── CVD-CWS-ISR4k.xml (527 lines)
+│   │   │   │   │   │   └── CVD-DIA-ZBFW.xml (255 lines)
+│   │   │   │   │   ├── Hub/
+│   │   │   │   │   │   ├── CVD-DMVPN-Internet-BGP.xml (468 lines)
+│   │   │   │   │   │   ├── CVD-DMVPN-Internet-DC1.xml (431 lines)
+│   │   │   │   │   │   ├── CVD-DMVPN-Internet-DC2.xml (431 lines)
+│   │   │   │   │   │   ├── CVD-DMVPN-MPLS-BGP.xml (467 lines)
+│   │   │   │   │   │   ├── CVD-DMVPN-MPLS-DC1.xml (425 lines)
+│   │   │   │   │   │   ├── CVD-DMVPN-MPLS-DC2.xml (424 lines)
+│   │   │   │   │   │   ├── CVD-Master-Controller-DC1.xml (242 lines)
+│   │   │   │   │   │   ├── CVD-PfR-Border-Internet-DC1.xml (70 lines)
+│   │   │   │   │   │   ├── CVD-PfR-Border-Internet-DC2.xml (71 lines)
+│   │   │   │   │   │   ├── CVD-PfR-Border-MPLS-DC1.xml (56 lines)
+│   │   │   │   │   │   ├── CVD-PfR-Border-MPLS-DC2.xml (57 lines)
+│   │   │   │   │   │   ├── CVD-QOS-Internet.xml (171 lines)
+│   │   │   │   │   │   ├── CVD-QOS-MPLS.xml (169 lines)
+│   │   │   │   │   │   └── CVD-Transit-Master-Controller-DC2.xml (183 lines)
+│   │   │   │   │   └── Spoke/
+│   │   │   │   │       ├── Dual-Router-Branch/
+│   │   │   │   │       │   ├── CVD-DMVPN-DHCP-Dual-Internet-Dual-DC-BGP.xml (331 lines)
+│   │   │   │   │       │   ├── CVD-DMVPN-DHCP-Dual-Internet-Dual-DC.xml (376 lines)
+│   │   │   │   │       │   ├── CVD-DMVPN-DHCP-Dual-Internet-Single-DC-BGP.xml (314 lines)
+│   │   │   │   │       │   ├── CVD-DMVPN-DHCP-Dual-Internet-Single-DC.xml (356 lines)
+│   │   │   │   │       │   ├── CVD-DMVPN-Dual-Internet-Dual-DC-BGP.xml (360 lines)
+│   │   │   │   │       │   ├── CVD-DMVPN-Dual-Internet-Dual-DC.xml (405 lines)
+│   │   │   │   │       │   ├── CVD-DMVPN-Dual-Internet-Single-DC-BGP.xml (342 lines)
+│   │   │   │   │       │   ├── CVD-DMVPN-Dual-Internet-Single-DC.xml (384 lines)
+│   │   │   │   │       │   ├── CVD-DMVPN-Dual-MPLS-Dual-DC-BGP.xml (347 lines)
+│   │   │   │   │       │   ├── CVD-DMVPN-Dual-MPLS-Dual-DC.xml (389 lines)
+│   │   │   │   │       │   ├── CVD-DMVPN-Dual-MPLS-Single-DC-BGP.xml (324 lines)
+│   │   │   │   │       │   ├── CVD-DMVPN-Dual-MPLS-Single-DC.xml (368 lines)
+│   │   │   │   │       │   ├── CVD-PfR-Dual-Internet.xml (153 lines)
+│   │   │   │   │       │   ├── CVD-PfR-Dual-MPLS.xml (134 lines)
+│   │   │   │   │       │   ├── CVD-QOS-Dual-Internet.xml (206 lines)
+│   │   │   │   │       │   └── CVD-QOS-Dual-MPLS.xml (206 lines)
+│   │   │   │   │       └── Single-Router-Branch/
+│   │   │   │   │           ├── CVD-DMVPN-DHCP-Dual-DC-BGP.xml (572 lines)
+│   │   │   │   │           ├── CVD-DMVPN-DHCP-Dual-DC.xml (586 lines)
+│   │   │   │   │           ├── CVD-DMVPN-DHCP-Single-DC-BGP.xml (520 lines)
+│   │   │   │   │           ├── CVD-DMVPN-DHCP-Single-DC.xml (545 lines)
+│   │   │   │   │           ├── CVD-DMVPN-Dual-DC-BGP.xml (581 lines)
+│   │   │   │   │           ├── CVD-DMVPN-Dual-DC.xml (596 lines)
+│   │   │   │   │           ├── CVD-DMVPN-Single-DC-BGP.xml (536 lines)
+│   │   │   │   │           ├── CVD-DMVPN-Single-DC.xml (552 lines)
+│   │   │   │   │           ├── CVD-PfR.xml (175 lines)
+│   │   │   │   │           └── CVD-QOS.xml (294 lines)
+│   │   │   │   ├── NFV/
+│   │   │   │   │   ├── Firewall/
+│   │   │   │   │   │   └── NFV ASAv Day0 Configuration 1.xml (174 lines)
+│   │   │   │   │   └── Router/
+│   │   │   │   │       ├── CSR Day0 VRF Configuration.xml (233 lines)
+│   │   │   │   │       └── NFV CSR Day0 Configuration 1.xml (204 lines)
+│   │   │   │   └── Router Security/
+│   │   │   │       ├── CWS/
+│   │   │   │       │   ├── CWS Cleanup.xml (137 lines)
+│   │   │   │       │   └── CWS.xml (523 lines)
+│   │   │   │       ├── OpenDNS/
+│   │   │   │       │   ├── OpenDNS Cleanup.xml (138 lines)
+│   │   │   │       │   └── OpenDNS.xml (239 lines)
+│   │   │   │       ├── Snort IPS/
+│   │   │   │       │   ├── Snort IPS - Copy OVA to Device.xml (138 lines)
+│   │   │   │       │   ├── Snort IPS - Delete OVA.xml (43 lines)
+│   │   │   │       │   ├── Snort IPS - Dynamic NAT Cleanup.xml (115 lines)
+│   │   │   │       │   ├── Snort IPS - Dynamic NAT.xml (518 lines)
+│   │   │   │       │   ├── Snort IPS - Dynamic PAT Cleanup.xml (115 lines)
+│   │   │   │       │   ├── Snort IPS - Dynamic PAT.xml (518 lines)
+│   │   │   │       │   ├── Snort IPS - IP Unnumbered Cleanup.xml (81 lines)
+│   │   │   │       │   ├── Snort IPS - IP Unnumbered.xml (506 lines)
+│   │   │   │       │   ├── Snort IPS - Management Interface Cleanup.xml (81 lines)
+│   │   │   │       │   ├── Snort IPS - Management Interface.xml (494 lines)
+│   │   │   │       │   ├── Snort IPS - Routable Subnet Cleanup.xml (81 lines)
+│   │   │   │       │   ├── Snort IPS - Routable Subnet.xml (569 lines)
+│   │   │   │       │   ├── Snort IPS - Static NAT Cleanup.xml (95 lines)
+│   │   │   │       │   ├── Snort IPS - Static NAT.xml (498 lines)
+│   │   │   │       │   └── Snort IPS - Upgrade OVA.xml (66 lines)
+│   │   │   │       └── ZBFW/
+│   │   │   │           ├── ZBFW Cleanup.xml (268 lines)
+│   │   │   │           └── ZBFW.xml (621 lines)
+│   │   │   ├── Global Objects/
+│   │   │   │   └── Interface Roles/
+│   │   │   │       ├── TunnelInterface100.xml (18 lines)
+│   │   │   │       ├── TunnelInterface100And200.xml (24 lines)
+│   │   │   │       └── TunnelInterface200.xml (18 lines)
+│   │   │   ├── .project (17 lines)
+│   │   │   └── Configure Device IP.xml (76 lines)
+│   │   ├── pces/
+│   │   │   ├── etc/
+│   │   │   │   ├── cis.policy (3 lines)
+│   │   │   │   └── init.properties (1 lines)
+│   │   │   └── properties/
+│   │   │       ├── app_jardirlist.properties (12 lines)
+│   │   │       └── pces_server.properties (8 lines)
+│   │   ├── pi/
+│   │   │   ├── TaskCategoryMapping.xml (105 lines)
+│   │   │   └── ThreadManagerConfig.xml (24 lines)
+│   │   ├── pnp/
+│   │   │   └── ActivationTemplates.xml (27 lines)
+│   │   ├── preferences/
+│   │   │   ├── system/
+│   │   │   │   ├── IfmAPICSystemPreferences.xml (16 lines)
+│   │   │   │   ├── IfmAdminSystemPreference.xml (36 lines)
+│   │   │   │   ├── IfmAlarmManagerPreferences.xml (95 lines)
+│   │   │   │   ├── IfmCANotificationPreferences.xml (15 lines)
+│   │   │   │   ├── IfmConfigSystemPrefernces.xml (23 lines)
+│   │   │   │   ├── IfmDiscoverySystemPreferences.xml (15 lines)
+│   │   │   │   ├── IfmGuidedWorkflowPreferences.xml (17 lines)
+│   │   │   │   ├── IfmInventorySystemPreferences.xml (25 lines)
+│   │   │   │   ├── IfmNetworkAppliancePreferences.xml (17 lines)
+│   │   │   │   ├── IfmPnPSystemPreferences.xml (21 lines)
+│   │   │   │   ├── IfmProxySystemPreferences.xml (20 lines)
+│   │   │   │   ├── IfmSwimSystemPreferences.xml (52 lines)
+│   │   │   │   └── WCSSystemPreference.xml (22 lines)
+│   │   │   ├── user/
+│   │   │   │   └── WCSUserPreference.xml (3369 lines)
+│   │   │   └── IFMPreference.properties (25 lines)
+│   │   ├── proxy/
+│   │   │   └── .EMPTY_FOLDER_IN_SVN (0 lines)
+│   │   ├── report/
+│   │   │   └── .EMPTY_FOLDER_IN_SVN (0 lines)
+│   │   ├── security/
+│   │   │   └── APICallsToChkXss.properties (1 lines)
+│   │   ├── swim/
+│   │   │   ├── analysis/
+│   │   │   │   └── Analysis.properties (38 lines)
+│   │   │   ├── eox/
+│   │   │   │   ├── data/
+│   │   │   │   │   ├── cco/
+│   │   │   │   │   │   └── temp/
+│   │   │   │   │   │       └── .EMPTY_FOLDER_IN_SVN (0 lines)
+│   │   │   │   │   └── localrepository/
+│   │   │   │   │       └── temp/
+│   │   │   │   │           └── .EMPTY_FOLDER_IN_SVN (0 lines)
+│   │   │   │   └── mappings/
+│   │   │   │       └── EOXSoftTemplateMap.xml (67 lines)
+│   │   │   ├── imageparser/
+│   │   │   │   ├── cidsmasterconfig.xml (78 lines)
+│   │   │   │   ├── masterconfig.xml (80 lines)
+│   │   │   │   └── myschema.xsd (179 lines)
+│   │   │   ├── images/
+│   │   │   │   ├── moduleInfo/
+│   │   │   │   │   ├── AXPModuleSoftwareInformation.xml (119 lines)
+│   │   │   │   │   ├── ArgusModuleSoftwareInformation.xml (77 lines)
+│   │   │   │   │   ├── CUEModuleSoftwareInformation.xml (3154 lines)
+│   │   │   │   │   ├── GalaticaModuleSoftwareInformation.xml (39 lines)
+│   │   │   │   │   ├── ISSModuleSoftwareInformation.xml (40 lines)
+│   │   │   │   │   ├── PanoModuleSoftwareInformation.xml (27 lines)
+│   │   │   │   │   ├── SRSVCUEModuleSoftwareInformation.xml (78 lines)
+│   │   │   │   │   └── WAASModuleSoftwareInformation.xml (123 lines)
+│   │   │   │   ├── DevicePlatforms-CCO-Mapping.xml (108 lines)
+│   │   │   │   ├── swim_image_device_mapping.xml (45 lines)
+│   │   │   │   └── swim_module_configuration.xml (107 lines)
+│   │   │   ├── jobs/
+│   │   │   │   └── .EMPTY_FOLDER_IN_SVN (0 lines)
+│   │   │   ├── psirt/
+│   │   │   │   ├── data/
+│   │   │   │   │   ├── cco/
+│   │   │   │   │   │   └── temp/
+│   │   │   │   │   │       └── .EMPTY_FOLDER_IN_SVN (0 lines)
+│   │   │   │   │   └── localrepository/
+│   │   │   │   │       └── temp/
+│   │   │   │   │           └── .EMPTY_FOLDER_IN_SVN (0 lines)
+│   │   │   │   └── mappings/
+│   │   │   │       ├── PIDTemplateMap.xml (27 lines)
+│   │   │   │       └── PSIRTTemplateMap.xml (30 lines)
+│   │   │   ├── recommendation/
+│   │   │   │   └── imagefamily-model.properties (5 lines)
+│   │   │   ├── multiImageKeyword.properties (47 lines)
+│   │   │   ├── swim.properties (15 lines)
+│   │   │   └── swim_configuration.xml (55 lines)
+│   │   ├── .project (17 lines)
+│   │   ├── AIRESPACE-REF-MIB.my (52 lines)
+│   │   ├── AIRESPACE-WIRELESS-MIB.my (17105 lines)
+│   │   ├── BRIDGE-MIB.my (1472 lines)
+│   │   ├── CISCO-CCME-MIB.my (4343 lines)
+│   │   ├── CISCO-CDP-MIB.my (991 lines)
+│   │   ├── CISCO-DOT11-ASSOCIATION-MIB.my (1759 lines)
+│   │   ├── CISCO-DOT11-HT-PHY-MIB.my (1204 lines)
+│   │   ├── CISCO-DOT11-IF-MIB.my (4482 lines)
+│   │   ├── CISCO-ENHANCED-MEMPOOL-MIB.my (1421 lines)
+│   │   ├── CISCO-ENTITY-ASSET-MIB.my (526 lines)
+│   │   ├── CISCO-ENTITY-EXT-MIB.my (814 lines)
+│   │   ├── CISCO-ENTITY-FRU-CONTROL-MIB.my (2723 lines)
+│   │   ├── CISCO-ENTITY-SENSOR-MIB.my (874 lines)
+│   │   ├── CISCO-ENTITY-VENDORTYPE-OID-MIB.my (11959 lines)
+│   │   ├── CISCO-ENVMON-MIB.my (938 lines)
+│   │   ├── CISCO-ETHER-CFM-MIB.my (693 lines)
+│   │   ├── CISCO-FLASH-MIB.my (3340 lines)
+│   │   ├── CISCO-IMAGE-MIB.my (136 lines)
+│   │   ├── CISCO-MEMORY-POOL-MIB.my (318 lines)
+│   │   ├── CISCO-PAGP-MIB.my (1005 lines)
+│   │   ├── CISCO-POWER-ETHERNET-EXT-MIB.my (1555 lines)
+│   │   ├── CISCO-PROCESS-MIB.my (1237 lines)
+│   │   ├── CISCO-PRODUCTS-MIB.my (1669 lines)
+│   │   ├── CISCO-QOS-PIB-MIB.my (2022 lines)
+│   │   ├── CISCO-RF-MIB.my (1527 lines)
+│   │   ├── CISCO-RTTMON-MIB.my (10604 lines)
+│   │   ├── CISCO-RTTMON-TC-MIB.my (756 lines)
+│   │   ├── CISCO-SMI.my (554 lines)
+│   │   ├── CISCO-STACK-MIB.my (13255 lines)
+│   │   ├── CISCO-STACKWISE-MIB.my (1441 lines)
+│   │   ├── CISCO-TC.my (2435 lines)
+│   │   ├── CISCO-UNIFIED-COMPUTING-ADAPTOR-MIB.my (24911 lines)
+│   │   ├── CISCO-UNIFIED-COMPUTING-COMPUTE-MIB.my (9373 lines)
+│   │   ├── CISCO-UNIFIED-COMPUTING-EQUIPMENT-MIB.my (18084 lines)
+│   │   ├── CISCO-UNIFIED-COMPUTING-ETHER-MIB.my (8008 lines)
+│   │   ├── CISCO-UNIFIED-COMPUTING-FC-MIB.my (2527 lines)
+│   │   ├── CISCO-UNIFIED-COMPUTING-MEMORY-MIB.my (2561 lines)
+│   │   ├── CISCO-UNIFIED-COMPUTING-MIB.my (4175 lines)
+│   │   ├── CISCO-UNIFIED-COMPUTING-NETWORK-MIB.my (371 lines)
+│   │   ├── CISCO-UNIFIED-COMPUTING-PROCESSOR-MIB.my (1796 lines)
+│   │   ├── CISCO-UNIFIED-COMPUTING-TC-MIB.my (27419 lines)
+│   │   ├── CISCO-VLAN-MEMBERSHIP-MIB.my (1222 lines)
+│   │   ├── CISCO-VTP-MIB.my (6521 lines)
+│   │   ├── CISCOME1200-MIB.mib (45 lines)
+│   │   ├── CISCOSB-DEVICEPARAMS-MIB.my (801 lines)
+│   │   ├── CISCOSB-HWENVIROMENT.my (333 lines)
+│   │   ├── CISCOSB-MIB.my (717 lines)
+│   │   ├── CISCOSB-Physicaldescription-MIB.my (1160 lines)
+│   │   ├── Categories.xml (108 lines)
+│   │   ├── Config_IWAN_Flow.properties (5 lines)
+│   │   ├── DeviceDetails.xml (165 lines)
+│   │   ├── DynamicGroupColumnMapping.xml (54 lines)
+│   │   ├── ENTITY-MIB.my (1429 lines)
+│   │   ├── ENTITY-STATE-MIB.my (337 lines)
+│   │   ├── ErrorRepository.xml (213 lines)
+│   │   ├── EventShowCommandsMapping.xml (155 lines)
+│   │   ├── GroupingAudit.properties (24 lines)
+│   │   ├── GroupingQueue.properties (6 lines)
+│   │   ├── IANAifType-MIB.my (508 lines)
+│   │   ├── IConfigDataGet_featureType_association.properties (13 lines)
+│   │   ├── IEEE8021-PAE-MIB.my (1920 lines)
+│   │   ├── IEEE8023-LAG-MIB.my (1399 lines)
+│   │   ├── IEEE802dot11-MIB.my (2977 lines)
+│   │   ├── IF-MIB.my (1828 lines)
+│   │   ├── Ifm_Compliance_Netshow.xml (215 lines)
+│   │   ├── Ifm_Config_Deploy_Error_Messages.properties (17 lines)
+│   │   ├── Ifm_Template_Deploy_Error_Messages.properties (1 lines)
+│   │   ├── LLDP-MIB.my (1987 lines)
+│   │   ├── LMS_Migration_Data_List.xml (31 lines)
+│   │   ├── ME1200-IP-MIB.mib (4700 lines)
+│   │   ├── ME1200-TC.mib (286 lines)
+│   │   ├── MailServer.properties (10 lines)
+│   │   ├── ModuleSessionCommands.properties (59 lines)
+│   │   ├── OLD-CISCO-CHASSIS-MIB.my (1760 lines)
+│   │   ├── OLD-CISCO-SYS-MIB.my (1043 lines)
+│   │   ├── OLD-CISCO-SYSTEM-MIB.my (224 lines)
+│   │   ├── P-BRIDGE-MIB.my (1153 lines)
+│   │   ├── POWER-ETHERNET-MIB.my (629 lines)
+│   │   ├── Q-BRIDGE-MIB.mib (2489 lines)
+│   │   ├── RFC1213-MIB.my (2618 lines)
+│   │   ├── SNMP-FRAMEWORK-MIB.my (538 lines)
+│   │   ├── SNMPv2-SMI.my (35 lines)
+│   │   ├── SNMPv2-TC.my (714 lines)
+│   │   ├── StatusDetails.xml (407 lines)
+│   │   ├── TacacsPrompts.ini (3 lines)
+│   │   ├── acl_association.properties (3 lines)
+│   │   ├── artifact_jars_list.txt (47 lines)
+│   │   ├── changeTFTPBootLocationAndRestart.sh (38 lines)
+│   │   ├── charon.logrotate (11 lines)
+│   │   ├── collect_coral_trace.sh (28 lines)
+│   │   ├── compliance-4-zip.zip.REMOVED.git-id (1 lines)
+│   │   ├── compliance.zip.REMOVED.git-id (1 lines)
+│   │   ├── compliance_engine_schema.sql (7736 lines)
+│   │   ├── complianceadmin.sh (40 lines)
+│   │   ├── config_csv_association.properties (3 lines)
+│   │   ├── config_list.txt (24 lines)
+│   │   ├── configureIPsec.sh (20 lines)
+│   │   ├── disableStats.sql (7 lines)
+│   │   ├── downloadlmsbkup.sh (9 lines)
+│   │   ├── executeForStrongswan.sh (7 lines)
+│   │   ├── grouping_MDFData.xml (4007 lines)
+│   │   ├── grouping_PortTypesList.xml (301 lines)
+│   │   ├── grouping_drpAttributesProperties.xml (50 lines)
+│   │   ├── grouping_properties.xml (90 lines)
+│   │   ├── ifm.env (11 lines)
+│   │   ├── ifm_bean_context.xml (214 lines)
+│   │   ├── ifm_ca_exclude_list.sql (89 lines)
+│   │   ├── ifm_ca_mainpage_view.sql (61 lines)
+│   │   ├── ifm_common.properties (13 lines)
+│   │   ├── ifm_config_archive.properties (2 lines)
+│   │   ├── ifm_disableEquipmentBK.sql (1 lines)
+│   │   ├── ifm_indexes.sql (3 lines)
+│   │   ├── ifm_inventory.properties (33 lines)
+│   │   ├── ifm_post_install.sh (138 lines)
+│   │   ├── ifm_sam_foundation_system_ddl.sql (38 lines)
+│   │   ├── ifm_sam_health_ddl.sql (25 lines)
+│   │   ├── ifm_sam_syslog_ddl.sql (5 lines)
+│   │   ├── ifm_swim_default_repo.sql (17 lines)
+│   │   ├── ifm_system_data.xml (419 lines)
+│   │   ├── ifm_toolmgr_allowed_commands.txt (129 lines)
+│   │   ├── ifm_topology_bean_context.xml (12 lines)
+│   │   ├── installReport.sh (13 lines)
+│   │   ├── installTFTPServer.sh (22 lines)
+│   │   ├── interfacedetails.properties (51 lines)
+│   │   ├── ipsec.conf (5 lines)
+│   │   ├── ipsec.secrets (4 lines)
+│   │   ├── licenseTokenInfo.sql (1863 lines)
+│   │   ├── linkXMPPkgs.sh (42 lines)
+│   │   ├── lmsmigrate.sh (6 lines)
+│   │   ├── lmsserver.properties (14 lines)
+│   │   ├── mdfdata.xml (8492 lines)
+│   │   ├── migrateconfigarchives.sh (5 lines)
+│   │   ├── migratedata.sh (29 lines)
+│   │   ├── migratedcrdevicelist.sh (11 lines)
+│   │   ├── migratelmsbkuptopi.sh (5 lines)
+│   │   ├── model_artifacts.txt (11 lines)
+│   │   ├── modules.properties (1 lines)
+│   │   ├── nam.properties (3 lines)
+│   │   ├── ncs_oracle.sql (2797 lines)
+│   │   ├── ncs_oracle_core.sql (758 lines)
+│   │   ├── nms_actions_bean_context.xml (10 lines)
+│   │   ├── nms_topology_bean_context.xml (16 lines)
+│   │   ├── pariServices.sh (171 lines)
+│   │   ├── pari_product_profile.sh (19 lines)
+│   │   ├── pas_package_bundle-9-zip.zip.REMOVED.git-id (1 lines)
+│   │   ├── poap-init.sh (44 lines)
+│   │   ├── poap_script.py (1463 lines)
+│   │   ├── restoreconfigarchives.sh (30 lines)
+│   │   ├── restoredcrdevicelist.sh (29 lines)
+│   │   ├── smartLicenseInserts.sql (184 lines)
+│   │   ├── start.sh (5 lines)
+│   │   ├── startTFTPServer.sh (55 lines)
+│   │   ├── stop.sh (4 lines)
+│   │   ├── stopPariServices.sh (14 lines)
+│   │   ├── strongswan.conf (28 lines)
+│   │   ├── system_defined_device_groups_critetia.xml (13 lines)
+│   │   ├── telemetryCronConfiguration.sh (95 lines)
+│   │   ├── telemetryScript.sh (48 lines)
+│   │   ├── thirdparty_jars_list.txt (26 lines)
+│   │   ├── topo_cache.properties (1 lines)
+│   │   ├── userJobCategories.xml (8 lines)
+│   │   ├── vCenterConnectionManager.properties (5 lines)
+│   │   ├── vspherePerfHandler.properties (3 lines)
+│   │   ├── xct.properties (102 lines)
+│   │   ├── xmp_default_dynamic_group.xml (51 lines)
+│   │   └── xmp_topology_ddl.sql (194 lines)
+│   ├── src/
+│   │   ├── main/
+│   │   │   └── scripts/
+│   │   │       └── .EMPTY_FOLDER_IN_SVN (0 lines)
+│   │   └── site/
+│   │       └── .EMPTY_FOLDER_IN_SVN (0 lines)
+│   ├── .gitignore (1 lines)
+│   ├── .project (23 lines)
+│   ├── README-SVN-to-GIT (1 lines)
+│   ├── assembly-dependencies.xml (14 lines)
+│   ├── epnm_pom.xml (3424 lines)
+│   ├── ifm_install_metadata.xml (1011 lines)
+│   ├── output.xml (2 lines)
+│   ├── pom.xml (3998 lines)
+│   └── svninfo.sh (5 lines)
+├── lumos_app_rpm/
+│   ├── files/
+│   │   ├── post_scripts.d/
+│   │   │   ├── setup_DnacMigration.sh (15 lines)
+│   │   │   ├── setup_primeca.sh (18 lines)
+│   │   │   └── setup_rshell.sh (47 lines)
+│   │   ├── war_overlay/
+│   │   │   └── webapps/
+│   │   │       ├── applications/
+│   │   │       │   ├── NetworkServices/
+│   │   │       │   │   └── TrustSec/
+│   │   │       │   │       └── js/
+│   │   │       │   │           └── Readiness.js (2094 lines)
+│   │   │       │   └── XMPTopology/
+│   │   │       │       └── css/
+│   │   │       │           └── XMPTopologyModule.css (1174 lines)
+│   │   │       └── lib/
+│   │   │           ├── cues/
+│   │   │           │   ├── charting/
+│   │   │           │   │   └── resources/
+│   │   │           │   │       └── themes/
+│   │   │           │   │           └── kubrick/
+│   │   │           │   │               └── charts.css (267 lines)
+│   │   │           │   ├── dialog/
+│   │   │           │   │   └── nls/
+│   │   │           │   │       ├── about_overlay.js (4 lines)
+│   │   │           │   │       └── alert_overlay.js (3 lines)
+│   │   │           │   ├── form/
+│   │   │           │   │   └── nls/
+│   │   │           │   │       ├── fr/
+│   │   │           │   │       │   ├── IPv4TextBox.js (10 lines)
+│   │   │           │   │       │   ├── IPv6TextBox.js (10 lines)
+│   │   │           │   │       │   ├── MacTextBox.js (4 lines)
+│   │   │           │   │       │   └── transferBox.js (17 lines)
+│   │   │           │   │       ├── DateTextBox.js (3 lines)
+│   │   │           │   │       ├── IPv4TextBox.js (7 lines)
+│   │   │           │   │       ├── IPv6TextBox.js (10 lines)
+│   │   │           │   │       ├── MacTextBox.js (4 lines)
+│   │   │           │   │       ├── selectionList.js (22 lines)
+│   │   │           │   │       └── transferBox.js (22 lines)
+│   │   │           │   ├── layout/
+│   │   │           │   │   └── dashboard/
+│   │   │           │   │       └── resources/
+│   │   │           │   │           └── themes/
+│   │   │           │   │               └── kubrick/
+│   │   │           │   │                   └── dashboardContainer.css (70 lines)
+│   │   │           │   ├── nls/
+│   │   │           │   │   └── CUESStrings.js (13 lines)
+│   │   │           │   ├── themes/
+│   │   │           │   │   └── kubrick/
+│   │   │           │   │       └── miniCharts.js (45 lines)
+│   │   │           │   ├── wizard/
+│   │   │           │   │   └── nls/
+│   │   │           │   │       └── InPageWizard.js (5 lines)
+│   │   │           │   ├── Tooltip.js (318 lines)
+│   │   │           │   ├── app.profile.js (30 lines)
+│   │   │           │   └── package.json (17 lines)
+│   │   │           ├── xct/
+│   │   │           │   ├── services/
+│   │   │           │   │   └── smart/
+│   │   │           │   │       └── ui/
+│   │   │           │   │           ├── tac/
+│   │   │           │   │           │   ├── templates/
+│   │   │           │   │           │   │   └── ContactInformation.html (28 lines)
+│   │   │           │   │           │   ├── ContactInformation.js (201 lines)
+│   │   │           │   │           │   ├── DeviceContractInformation.js (1532 lines)
+│   │   │           │   │           │   └── TACCreatePanelWizard.js (1410 lines)
+│   │   │           │   │           ├── templates/
+│   │   │           │   │           │   └── _SupportSettings.html (70 lines)
+│   │   │           │   │           └── SupportSettings.js (498 lines)
+│   │   │           │   └── xct.js (41 lines)
+│   │   │           ├── xct_uncompressed/
+│   │   │           │   ├── services/
+│   │   │           │   │   └── smart/
+│   │   │           │   │       └── ui/
+│   │   │           │   │           ├── tac/
+│   │   │           │   │           │   ├── templates/
+│   │   │           │   │           │   │   └── ContactInformation.html (28 lines)
+│   │   │           │   │           │   ├── ContactInformation.js (201 lines)
+│   │   │           │   │           │   ├── DeviceContractInformation.js (1531 lines)
+│   │   │           │   │           │   └── TACCreatePanelWizard.js (1410 lines)
+│   │   │           │   │           └── templates/
+│   │   │           │   │               └── _SupportSettings.html (70 lines)
+│   │   │           │   └── xct.js (41 lines)
+│   │   │           ├── xwt/
+│   │   │           │   ├── widget/
+│   │   │           │   │   ├── table/
+│   │   │           │   │   │   ├── templates/
+│   │   │           │   │   │   │   └── GlobalToolbar.html (30 lines)
+│   │   │           │   │   │   ├── GlobalToolbar.js (1063 lines)
+│   │   │           │   │   │   └── QuickViewIntegration.js (759 lines)
+│   │   │           │   │   └── treegrid/
+│   │   │           │   │       └── TreeGrid.js (2822 lines)
+│   │   │           │   └── xwt-treetable.js (22 lines)
+│   │   │           └── xwt_uncompressed/
+│   │   │               ├── widget/
+│   │   │               │   ├── table/
+│   │   │               │   │   ├── templates/
+│   │   │               │   │   │   └── GlobalToolbar.html (30 lines)
+│   │   │               │   │   ├── GlobalToolbar.js (1063 lines)
+│   │   │               │   │   └── QuickViewIntegration.js (759 lines)
+│   │   │               │   └── treegrid/
+│   │   │               │       └── TreeGrid.js (2822 lines)
+│   │   │               └── xwt-treetable.js (22 lines)
+│   │   ├── xmp_patches/
+│   │   │   ├── patchfiles/
+│   │   │   │   ├── aireosConfigTranslator/
+│   │   │   │   │   ├── aireos-to-ewlc-config-translator-c9800_1611/
+│   │   │   │   │   │   └── examples/
+│   │   │   │   │   │       └── pi_aireostranslator.sh (7 lines)
+│   │   │   │   │   └── aireos-to-ewlc-config-translator-master/
+│   │   │   │   │       └── examples/
+│   │   │   │   │           └── pi_aireostranslator.sh (7 lines)
+│   │   │   │   ├── bin/
+│   │   │   │   │   ├── db_scripts/
+│   │   │   │   │   │   └── oracle/
+│   │   │   │   │   │       ├── APGroupsHreapAddApView.sql (49 lines)
+│   │   │   │   │   │       ├── WlanControllersView.sql (25 lines)
+│   │   │   │   │   │       ├── control_parallel.sql (25 lines)
+│   │   │   │   │   │       ├── create_alarm_index.sql (20 lines)
+│   │   │   │   │   │       ├── create_column_index.sql (7 lines)
+│   │   │   │   │   │       ├── pi_maxLengthHardening_31_311.sql (812 lines)
+│   │   │   │   │   │       ├── prune_pkg.sql (324 lines)
+│   │   │   │   │   │       └── xmp_syslog_ddl.sql (91 lines)
+│   │   │   │   │   ├── create_xmp_data.ksh (51 lines)
+│   │   │   │   │   ├── dbclean.sh (97 lines)
+│   │   │   │   │   ├── getDatabaseParams.sh (36 lines)
+│   │   │   │   │   ├── ifm_swim_default_repo.sql (24 lines)
+│   │   │   │   │   ├── jarExtractor.sh (24 lines)
+│   │   │   │   │   ├── resetSyserr.sh (48 lines)
+│   │   │   │   │   ├── setup_xmp_existence_discovery.sh (36 lines)
+│   │   │   │   │   └── xmp_ddl_execution.sh (76 lines)
+│   │   │   │   ├── conf/
+│   │   │   │   │   ├── fault/
+│   │   │   │   │   │   ├── correlationEngine/
+│   │   │   │   │   │   │   └── EventBasedInventoryRules.xml (234 lines)
+│   │   │   │   │   │   └── datacenter/
+│   │   │   │   │   │       ├── ClusterEventTranslation.xml (112 lines)
+│   │   │   │   │   │       ├── DatastoreEventTranslation.xml (68 lines)
+│   │   │   │   │   │       ├── GeneralEventTranslation.xml (47 lines)
+│   │   │   │   │   │       ├── HostEventTranslation.xml (276 lines)
+│   │   │   │   │   │       ├── ResourcePoolEventTranslation.xml (104 lines)
+│   │   │   │   │   │       ├── VPCEventBase.xml (25 lines)
+│   │   │   │   │   │       ├── VPCEventTranslation.xml (71 lines)
+│   │   │   │   │   │       ├── VcenterEventBase.xml (29 lines)
+│   │   │   │   │   │       └── VmEventTranslation.xml (333 lines)
+│   │   │   │   │   ├── FeatureInfo.xml (1156 lines)
+│   │   │   │   │   ├── PollerThreadParameters.properties (12 lines)
+│   │   │   │   │   ├── TaskCategoryMapping.xml (116 lines)
+│   │   │   │   │   ├── ThreadManagerConfig.xml (16 lines)
+│   │   │   │   │   ├── application.properties (5 lines)
+│   │   │   │   │   ├── beanRefContext.xml (49 lines)
+│   │   │   │   │   ├── bootstrap.properties (121 lines)
+│   │   │   │   │   ├── credentialdictionary.txt (122 lines)
+│   │   │   │   │   ├── grouping_MDFData.xml (4007 lines)
+│   │   │   │   │   ├── inventory.properties (124 lines)
+│   │   │   │   │   ├── jdbc.properties (10 lines)
+│   │   │   │   │   ├── lockerscanlist.properties (4 lines)
+│   │   │   │   │   ├── log4j.xml (1195 lines)
+│   │   │   │   │   ├── log4j.xml.junk (1146 lines)
+│   │   │   │   │   ├── log4j2.xml (3 lines)
+│   │   │   │   │   ├── niceDiskStoreCache.properties (18 lines)
+│   │   │   │   │   ├── topology.properties (48 lines)
+│   │   │   │   │   ├── update.properties (19 lines)
+│   │   │   │   │   ├── usermgmt.properties (36 lines)
+│   │   │   │   │   ├── war_distribution (7 lines)
+│   │   │   │   │   ├── xmp-common-function-beans.xml (68 lines)
+│   │   │   │   │   └── xmp-server.properties (15 lines)
+│   │   │   │   ├── coralinstances/
+│   │   │   │   │   └── coral2.tar.gz.REMOVED.git-id (1 lines)
+│   │   │   │   ├── discovery/
+│   │   │   │   │   └── conf/
+│   │   │   │   │       └── discovery.properties (3 lines)
+│   │   │   │   ├── lib/
+│   │   │   │   │   ├── ifm/
+│   │   │   │   │   │   └── READ_ME (6 lines)
+│   │   │   │   │   └── .gitkeep (0 lines)
+│   │   │   │   └── xmp_inventory/
+│   │   │   │       ├── dar/
+│   │   │   │       │   └── version.readme.txt (1 lines)
+│   │   │   │       └── xde-home/
+│   │   │   │           ├── conf/
+│   │   │   │           │   ├── interfaceMappings.properties (33 lines)
+│   │   │   │           │   └── xdeEngine.properties (27 lines)
+│   │   │   │           └── inventoryDefaults/
+│   │   │   │               ├── XdeME1200.def (11 lines)
+│   │   │   │               └── ncsCIMC.def (19 lines)
+│   │   │   ├── applyPatch.sh (34 lines)
+│   │   │   ├── messaging.properties (15 lines)
+│   │   │   ├── readme_next_xmphandoff_generation.txt (16 lines)
+│   │   │   └── sqlnet.ora (7 lines)
+│   │   ├── .project (11 lines)
+│   │   ├── Uninstall (79 lines)
+│   │   ├── addIpFilterModules.sh (29 lines)
+│   │   ├── broker.xml (114 lines)
+│   │   ├── buildanddeploymergewar.sh (27 lines)
+│   │   ├── cns.xml (26 lines)
+│   │   ├── cv_post_install.sh (54 lines)
+│   │   ├── installlumosapp.sh (349 lines)
+│   │   ├── java_tzupdater.sh (33 lines)
+│   │   ├── lumos-application-wap-rs.xml (662 lines)
+│   │   ├── lumos-application-web.xml (1350 lines)
+│   │   ├── pnp-deployment-service.xml (26 lines)
+│   │   ├── postCarsInstallCheck.sh (21 lines)
+│   │   ├── post_install.sh (7 lines)
+│   │   ├── post_install_cleanup.sh (35 lines)
+│   │   ├── post_uninstall.sh (2 lines)
+│   │   ├── preStartInstall.sh (33 lines)
+│   │   ├── pre_install.sh (2 lines)
+│   │   ├── run_post_scripts.sh (17 lines)
+│   │   ├── springRestServlet-servlet.xml (6 lines)
+│   │   ├── svninfo_aggregater.sh (51 lines)
+│   │   ├── svninfo_aggregator.sh (63 lines)
+│   │   ├── svninfo_allprojects.sh (71 lines)
+│   │   ├── tomcat-global-web.xml (4723 lines)
+│   │   ├── xmp-configuration.json (228 lines)
+│   │   ├── xmp_patches.sh (59 lines)
+│   │   └── xmp_services_extract.sh (76 lines)
+│   ├── src/
+│   │   └── main/
+│   │       ├── assembly/
+│   │       │   ├── assembly.xml (16 lines)
+│   │       │   ├── jsp_precompile-webapp.xml (15 lines)
+│   │       │   ├── unoptimized-webapp.xml (15 lines)
+│   │       │   └── webacs-webapp.xml (15 lines)
+│   │       ├── externalWidget/
+│   │       │   ├── applications/
+│   │       │   │   └── actions/
+│   │       │   │       └── actionsFM.js (0 lines)
+│   │       │   ├── prime/
+│   │       │   │   └── widget/
+│   │       │   │       └── UiRuntimeOptical.js (0 lines)
+│   │       │   └── srrg/
+│   │       │       └── srrgLegendPopover/
+│   │       │           └── srrgLegendPopover.js (0 lines)
+│   │       └── tools/
+│   │           ├── dojo/
+│   │           │   ├── epnm_layers/
+│   │           │   │   └── assuranceDashboard.js (44 lines)
+│   │           │   ├── layers/
+│   │           │   │   ├── app.css (19 lines)
+│   │           │   │   ├── app.js (13 lines)
+│   │           │   │   ├── app_wcs.js (25 lines)
+│   │           │   │   ├── assuranceDashboard.js (44 lines)
+│   │           │   │   ├── cues.js (25 lines)
+│   │           │   │   ├── dashboard.js (48 lines)
+│   │           │   │   ├── ifm.js (72 lines)
+│   │           │   │   ├── ifm_360.js (48 lines)
+│   │           │   │   ├── login.js (30 lines)
+│   │           │   │   ├── sam.js (34 lines)
+│   │           │   │   ├── smartLicenseDashboard.js (6 lines)
+│   │           │   │   ├── wapdashboard.js (8 lines)
+│   │           │   │   ├── wapfr.js (90 lines)
+│   │           │   │   └── wapfr_abs.js (13 lines)
+│   │           │   ├── constructTree.xml (349 lines)
+│   │           │   ├── copyright-cisco.txt (1 lines)
+│   │           │   ├── epnm_wcs.profile.js (160 lines)
+│   │           │   ├── postBuildConstructTree.xml (82 lines)
+│   │           │   ├── preBuildConstructTree.xml (42 lines)
+│   │           │   ├── wcs-build.xml (90 lines)
+│   │           │   └── wcs.profile.js (195 lines)
+│   │           └── packages/
+│   │               ├── app.profile.js (33 lines)
+│   │               └── package.json (17 lines)
+│   ├── .classpath (26 lines)
+│   ├── .project (17 lines)
+│   ├── README-SVN-to-GIT (2 lines)
+│   ├── README_PI_VERSIONS.txt (7 lines)
+│   ├── cpwar_tostaging.sh (9 lines)
+│   ├── deploy-hudson.sh (1 lines)
+│   ├── deploy.sh (18 lines)
+│   ├── epnm_pom.xml (963 lines)
+│   ├── lumosapp_install_metadata.xml (31 lines)
+│   ├── lumosapp_version.txt (1 lines)
+│   ├── mergewar_fromrpm.sh (211 lines)
+│   ├── pom.xml (1018 lines)
+│   ├── pom_nogen.xml (935 lines)
+│   ├── readme_patchesfor_MilestoneBuilds.txt (60 lines)
+│   ├── settings.xml (52 lines)
+│   ├── svn_noinfo.sh (4 lines)
+│   ├── svninfo.sh (5 lines)
+│   └── updateapptopf.py (132 lines)
+├── repackage_xwt_services_jar/
+│   ├── cleanup.sh (7 lines)
+│   └── pom.xml (175 lines)
+├── srtg_rpm/
+│   ├── .settings/
+│   │   └── org.eclipse.jdt.core.prefs (5 lines)
+│   ├── files/
+│   │   ├── conf/
+│   │   │   └── srtg_app_ui_wap_rs.xml (96 lines)
+│   │   ├── AppNav.xml (67 lines)
+│   │   ├── Security.xml (174 lines)
+│   │   ├── pnp-ks-bean-context.xml (5 lines)
+│   │   └── srtg_bean_context.xml (33 lines)
+│   ├── .project (8 lines)
+│   ├── README-SVN-to-GIT (1 lines)
+│   ├── assembly-dependencies.xml (20 lines)
+│   ├── pom.xml (616 lines)
+│   ├── srtg_install_metadata.xml (103 lines)
+│   └── svninfo.sh (12 lines)
+├── xmp_assembly_installer/
+│   ├── xmp_assembly_base_services/
+│   │   └── pom.xml (974 lines)
+│   ├── xmp_assembly_datacenter/
+│   │   └── pom.xml (133 lines)
+│   ├── xmp_assembly_decap/
+│   │   └── pom.xml (63 lines)
+│   ├── xmp_assembly_helpers/
+│   │   └── pom.xml (40 lines)
+│   ├── xmp_assembly_inventory/
+│   │   └── pom.xml (193 lines)
+│   ├── xmp_assembly_model/
+│   │   └── pom.xml (186 lines)
+│   ├── xmp_assembly_platform/
+│   │   └── pom.xml (74 lines)
+│   └── pom.xml (514 lines)
+├── xmp_assembly_static_files/
+│   ├── src/
+│   │   └── main/
+│   │       └── resources/
+│   │           └── XMPInstaller/
+│   │               ├── bin/
+│   │               │   ├── db_scripts/
+│   │               │   │   └── oracle/
+│   │               │   │       └── disable_all_FKs.sql (131 lines)
+│   │               │   └── xmp_server_deploy.sh (49 lines)
+│   │               └── conf/
+│   │                   ├── epnm-services/
+│   │                   │   └── inventory-discovery-process.properties (8 lines)
+│   │                   ├── inventory_discovery_process/
+│   │                   │   ├── inventory-discovery-process-aems-aggregate-synchronizer-context.xml (26 lines)
+│   │                   │   ├── inventory-discovery-process-collection_hooks_context.xml (28 lines)
+│   │                   │   ├── inventory-discovery-process-context.xml (33 lines)
+│   │                   │   ├── inventory-discovery-process-epnm-backend-base-context.xml (11 lines)
+│   │                   │   ├── inventory-discovery-process-ifm-bean-context.xml (47 lines)
+│   │                   │   ├── inventory-discovery-process-ifm-grouping-service-context.xml (294 lines)
+│   │                   │   ├── inventory-discovery-process-ifm-inventory-service-context.xml (200 lines)
+│   │                   │   ├── inventory-discovery-process-life_cycle_target_context.xml (53 lines)
+│   │                   │   ├── inventory-discovery-process-optical-inventory-context.xml (131 lines)
+│   │                   │   ├── inventory-discovery-process-xmp-common-function-beans.xml (73 lines)
+│   │                   │   ├── inventory-discovery-process-xmp-grouping-spring-context.xml (69 lines)
+│   │                   │   ├── inventory-discovery-process-xmp-grt-spring-context.xml (89 lines)
+│   │                   │   ├── inventory-discovery-process-xmp-jobmanager-context.xml (60 lines)
+│   │                   │   ├── inventory-discovery-process-xmp-platform-context.xml (68 lines)
+│   │                   │   ├── inventory-discovery-process-xmp-usermgmt-context.xml (435 lines)
+│   │                   │   ├── inventory-discovery-process-xmp-xde-init-context.xml (37 lines)
+│   │                   │   ├── inventory-discovery-process_ems-extension-app-beans.xml (297 lines)
+│   │                   │   ├── inventory-discovery-process_ifm_ice_fragment_context.xml (84 lines)
+│   │                   │   ├── inventory-discovery-process_ifm_template_rest_context.xml (34 lines)
+│   │                   │   ├── inventory-discovery-process_ifm_template_service_impl_context.xml (52 lines)
+│   │                   │   ├── inventory-discovery-process_xmp-audit-components-context.xml (94 lines)
+│   │                   │   └── inventory-discovery-process_xmp-nice-context.xml (104 lines)
+│   │                   ├── FeatureInfo.xml (2164 lines)
+│   │                   ├── MgmtCapabilities.xml (375 lines)
+│   │                   ├── TaskCategoryMapping.xml (162 lines)
+│   │                   ├── ThreadManagerConfig.xml (40 lines)
+│   │                   ├── bootstrap.properties (120 lines)
+│   │                   ├── credentialdictionary.txt (118 lines)
+│   │                   ├── inventory-discovery-process.env (10 lines)
+│   │                   ├── inventory.properties (141 lines)
+│   │                   ├── mbc_config.properties (9 lines)
+│   │                   ├── niceDiskStoreCache.properties (18 lines)
+│   │                   ├── persistence_config.properties (21 lines)
+│   │                   ├── sampleTransportProperties.xml (72 lines)
+│   │                   ├── topologyUICustomisations.xml (217 lines)
+│   │                   └── xmp-common-function-beans.xml (68 lines)
+│   └── pom.xml (63 lines)
+├── xmp_assembly_third_party/
+│   └── pom.xml (1184 lines)
+├── xmp_parent_pom/
+│   └── pom.xml (3815 lines)
+├── xmp_parent_pom_epnm/
+│   ├── .gitignore (1 lines)
+│   ├── MVN_ENFORCER_SKIP.txt (0 lines)
+│   └── pom.xml (91 lines)
+├── xmp_rpm/
+│   ├── .settings/
+│   │   └── org.maven.ide.eclipse.prefs (9 lines)
+│   ├── src/
+│   │   └── main/
+│   │       ├── assembly/
+│   │       │   └── xmp-platform-assembly.xml (20 lines)
+│   │       └── resources/
+│   │           ├── POMCleanUp/
+│   │           │   ├── xml/
+│   │           │   │   └── xmp/
+│   │           │   │       └── ParentChildPomVersionsFix.java (472 lines)
+│   │           │   ├── HELP (11 lines)
+│   │           │   ├── childPom.MODIFIED.xml (287 lines)
+│   │           │   ├── childPom.xml (301 lines)
+│   │           │   ├── parentPom.MODIFIED.xml (2345 lines)
+│   │           │   ├── parentPom.xml (2321 lines)
+│   │           │   ├── pomCleanup.sh (4 lines)
+│   │           │   └── report.txt (83 lines)
+│   │           └── XMPIngeration/
+│   │               ├── XMPIngeration.java (365 lines)
+│   │               ├── credentialdictionary.txt (122 lines)
+│   │               ├── messaging.properties (13 lines)
+│   │               ├── new.xml (972 lines)
+│   │               ├── pom.xml (973 lines)
+│   │               ├── rashmi (70 lines)
+│   │               ├── readme.txt (0 lines)
+│   │               ├── resetSyserr.sh (40 lines)
+│   │               ├── sample_pom.xml (2225 lines)
+│   │               ├── sample_pom_new.xml (2225 lines)
+│   │               ├── sample_report (313 lines)
+│   │               ├── sample_versions (296 lines)
+│   │               ├── versions.txt (507 lines)
+│   │               ├── xmp-server.properties (18 lines)
+│   │               ├── xmp.env (158 lines)
+│   │               ├── xmpIntegration.sh (2 lines)
+│   │               └── xmpstart.ksh (680 lines)
+│   ├── .project (29 lines)
+│   ├── README-SVN-to-GIT (1 lines)
+│   ├── cleanup.sh (30 lines)
+│   ├── pom.xml (234 lines)
+│   ├── unsetXMP_HOME (1 lines)
+│   └── xmp_silent_installer_template.properties (47 lines)
+├── .gitattributes (55 lines)
+├── .gitignore (23 lines)
+├── .project (11 lines)
+├── CONFLICT_FILES.txt (6 lines)
+├── Jenkinsfile (98 lines)
+├── buid_break.txt (1 lines)
+├── ifm_assembly.txt (2 lines)
+├── lumosapp_assembly.txt (1 lines)
+├── precheckforrpm.py (130 lines)
+├── settings-rel.xml (160 lines)
+├── srtg_assembly.txt (1 lines)
+└── test.txt (1 lines)
+```

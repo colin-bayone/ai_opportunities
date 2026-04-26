@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Items and Access - Friday 2026-04-24</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-darkest: #0c1929;
+      --blue-dark: #15293e;
+      --blue-mid: #1e3a5f;
+      --blue-bright: #2563eb;
+      --blue-accent: #3b82f6;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --amber: #f59e0b;
+      --amber-dark: #b45309;
+      --red-soft: #ef4444;
+      --red-soft-dark: #b91c1c;
+      --green: #10b981;
+      --green-dark: #047857;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e6e8eb;
+      color: var(--text);
+      padding: 40px 20px;
+      line-height: 1.5;
+    }
+
+    .page {
+      max-width: 850px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    .page-header {
+      background: linear-gradient(135deg, var(--blue-darkest), var(--blue-mid));
+      padding: 28px 48px 24px;
+      color: #fff;
+    }
+
+    .page-header .meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .page-header .meta .brand { color: rgba(255, 255, 255, 0.75); font-weight: 600; }
+    .page-header .meta .brand span { color: var(--blue-accent); }
+    .page-header .meta .date { color: rgba(255, 255, 255, 0.6); font-weight: 500; }
+
+    .page-header h1 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: -0.2px;
+    }
+
+    .page-header .subtitle {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.78);
+      font-weight: 400;
+      line-height: 1.55;
+      max-width: 680px;
+    }
+
+    .page-body {
+      padding: 28px 48px 32px;
+    }
+
+    .section {
+      margin-bottom: 26px;
+    }
+
+    .section:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .section-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .section.open .section-icon { background: linear-gradient(135deg, var(--blue-mid), var(--blue-accent)); }
+    .section.access .section-icon { background: linear-gradient(135deg, var(--amber-dark), var(--amber)); }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0.2px;
+    }
+
+    .section-subtitle {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-light);
+      margin-left: auto;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .item {
+      padding: 14px 16px 14px 18px;
+      margin-bottom: 12px;
+      background: #fcfdff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .item:last-child { margin-bottom: 0; }
+
+    .item::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0; left: 0;
+      width: 3px;
+      border-radius: 8px 0 0 8px;
+    }
+
+    .item.advancing::before { background: linear-gradient(180deg, var(--green-dark), var(--green)); }
+    .item.in-progress::before { background: linear-gradient(180deg, var(--blue-mid), var(--blue-accent)); }
+    .item.blocked::before { background: linear-gradient(180deg, var(--red-soft-dark), var(--red-soft)); }
+    .item.waiting::before { background: linear-gradient(180deg, var(--amber-dark), var(--amber)); }
+
+    .item-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .item-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.35;
+    }
+
+    .item-pill {
+      display: inline-block;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 10px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .item.advancing .item-pill { background: #d1fae5; color: var(--green-dark); border: 1px solid var(--green); }
+    .item.in-progress .item-pill { background: #dbeafe; color: var(--blue-bright); border: 1px solid rgba(37, 99, 235, 0.35); }
+    .item.blocked .item-pill { background: #fee2e2; color: var(--red-soft-dark); border: 1px solid var(--red-soft); }
+    .item.waiting .item-pill { background: #fef3c7; color: var(--amber-dark); border: 1px solid var(--amber); }
+
+    .item-body {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .item-body strong { color: var(--primary); font-weight: 600; }
+
+    .item-body p {
+      margin-bottom: 6px;
+    }
+
+    .item-body p:last-child { margin-bottom: 0; }
+
+    .item-ask {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-top: 8px;
+      padding: 8px 12px;
+      background: #eff6ff;
+      border: 1px solid rgba(37, 99, 235, 0.18);
+      border-radius: 6px;
+      font-size: 11.5px;
+      line-height: 1.5;
+    }
+
+    .item-ask i {
+      font-size: 11px;
+      color: var(--blue-bright);
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .item-ask-label {
+      font-weight: 700;
+      color: var(--blue-bright);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 9.5px;
+    }
+
+    .item-ask-text {
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    .page-footer {
+      padding: 16px 48px 20px;
+      border-top: 1px solid var(--border);
+      background: #f8fafc;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10.5px;
+      color: var(--text-light);
+    }
+
+    .page-footer .left { font-weight: 500; }
+    .page-footer .right { font-weight: 600; color: var(--blue-accent); letter-spacing: 1.5px; text-transform: uppercase; }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .page { box-shadow: none; border-radius: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+    <div class="page-header">
+      <div class="meta">
+        <div class="brand">BayOne <span>Solutions</span></div>
+        <div class="date">Friday, April 24, 2026</div>
+      </div>
+      <h1>Open Items and Access Status</h1>
+      <div class="subtitle">Status for the Cisco CI/CD engagement covering this week's workstreams and the access items gating the end-of-next-week deployment target. Four open items are in motion. Four access items require Cisco-side unblocking before a DeepSight deployment can take place.</div>
+    </div>
+
+    <div class="page-body">
+
+      <div class="section open">
+        <div class="section-head">
+          <div class="section-icon"><i class="fa-solid fa-arrows-spin"></i></div>
+          <div class="section-title">Open Items</div>
+          <div class="section-subtitle">In Progress</div>
+        </div>
+
+        <div class="item advancing">
+          <div class="item-head">
+            <div class="item-title">Issue Categorization Skill and Dashboard</div>
+            <span class="item-pill">Advancing</span>
+          </div>
+          <div class="item-body">
+            <p>Three years of NX-OS CI workflow chat have been scraped and fully categorized into <strong>78 categories across 12 top-level groups and 66 sub-groups</strong>. The categorization runs through a deterministic keyword pass followed by a language-model pass for ambiguous messages, with full traceability back to the source message. All of this is backed by a SQLite database and surfaced through an Apache eCharts dashboard with weekly, monthly, and quarterly views, heat maps, treemaps, and click-through drill-down on every category. The skill itself has been pushed to the CI/CD repository so the categorization can be re-run as new messages arrive.</p>
+            <p>The <strong>gap today is that the dashboard is a one-time artifact</strong>. To be useful to a release manager it has to run continuously and feed live insights back into the CI/CD workflow. That requires a deployment target on the DeepSight platform, an ingestion loop for new WebEx messages, and an integration layer that maps each category to the appropriate response path (bot, MCP lookup, or human escalation).</p>
+          </div>
+          <div class="item-ask">
+            <i class="fa-solid fa-comment-dots"></i>
+            <div>
+              <div class="item-ask-label">Needs</div>
+              <div class="item-ask-text">Confirmation of the deployment target and the minimum viable form of real-time delivery for release managers so the live version can be scoped tightly.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="item in-progress">
+          <div class="item-head">
+            <div class="item-title">CAT MCP Integration</div>
+            <span class="item-pill">Tools Identified</span>
+          </div>
+          <div class="item-body">
+            <p>The CAT MCP has been installed from the DeepSight marketplace in VS Code and the <strong>four tools it exposes have been identified and documented</strong>. A gap analysis is underway between those four tools and the CAT category issues surfaced in the categorization work, so that the mapping between an issue and the right tool call is deterministic before the bot layer is wired.</p>
+            <p>End-to-end path defined: an incoming CAT-category issue in WebEx triggers a CAT MCP tool call, the response feeds an intermediate reply layer, and the WebEx bot posts the reply back into the channel. Execution of the full path is currently blocked because commit-approval-tracking access on the NX repository has not been granted; without that access the tools are visible but cannot be exercised against live data.</p>
+          </div>
+          <div class="item-ask">
+            <i class="fa-solid fa-comment-dots"></i>
+            <div>
+              <div class="item-ask-label">Needs</div>
+              <div class="item-ask-text">NX repository access so the four CAT MCP tools can be exercised end-to-end against live commit data this week.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="item advancing">
+          <div class="item-head">
+            <div class="item-title">Build Log Commit Attribution</div>
+            <span class="item-pill">Script Working</span>
+          </div>
+          <div class="item-body">
+            <p>A script that identifies <strong>which commit caused a given build failure</strong> is working today on the temporary Aurora Development Server. It consumes the build log and the commit metadata directory for a given build, isolates the failing target, and returns the implicated commit.</p>
+            <p>The Bazel per-build dependency graph is confirmed as a built-in command rather than custom work, and is being used as the on-demand substrate for localizing failures within a build. The next step is moving from commit attribution to <strong>PR-to-PR dependency mapping</strong>, so that when a release lead decides to back out a PR, the tool returns the other PRs that must be backed out with it. That requires either a full-job Bazel dependency graph (rather than per-step) or a GitHub-native dependency trace across merged PRs in the nightly build.</p>
+          </div>
+          <div class="item-ask">
+            <i class="fa-solid fa-comment-dots"></i>
+            <div>
+              <div class="item-ask-label">Needs</div>
+              <div class="item-ask-text">Availability of a full CI/CD job dependency graph, and confirmation that GitHub-side dependency information is accessible for PR-to-PR mapping.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="item advancing">
+          <div class="item-head">
+            <div class="item-title">WebEx Bot and eCharts Skills</div>
+            <span class="item-pill">On Repo</span>
+          </div>
+          <div class="item-body">
+            <p>Two skills are complete and checked into the CI/CD repository on the <strong>webex-skills branch</strong>. The WebEx bot skill covers bot scaffolding, registration, and the deployment-governance requirements already established on the Cisco side. The eCharts skill provides a Codex-compatible path for generating the same quality of dashboards the categorization work produced. Overview documentation and reference material describing how the CI/CD pipeline can leverage both skills is included in the branch.</p>
+            <p>A light review of the current CI/CD pipeline suggests there are several places where these skills can be plugged in to reduce manual effort. Those integration points will be proposed as a follow-on once the branch is merged.</p>
+          </div>
+          <div class="item-ask">
+            <i class="fa-solid fa-comment-dots"></i>
+            <div>
+              <div class="item-ask-label">Needs</div>
+              <div class="item-ask-text">Decision on the merge strategy for the webex-skills branch (direct to main, or feature-by-feature) and the deployment target for the bot once merged.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section access">
+        <div class="section-head">
+          <div class="section-icon"><i class="fa-solid fa-key"></i></div>
+          <div class="section-title">Access Items</div>
+          <div class="section-subtitle">Cisco-Side Unblocking Needed</div>
+        </div>
+
+        <div class="item blocked">
+          <div class="item-head">
+            <div class="item-title">Permanent Aurora Development Server</div>
+            <span class="item-pill">Three Weeks Blocked</span>
+          </div>
+          <div class="item-body">
+            <p>The tenant approval on the DCN Switching side was granted verbally during an in-person meeting on April 14, but the approval <strong>has not reflected in the provisioning portal</strong>. The tenant ID cannot be selected when requesting a permanent machine, and a secondary request through the Cisco application portal on April 16 has not produced a response either. A follow-up on <strong>Tuesday, April 21</strong> produced only links to standard documentation covering how to request a temporary server, a permanent server, and the relevant bundles; no action was taken to address the approval not reflecting in the portal.</p>
+            <p>A meeting is scheduled with the procurement owner later today to understand why the approval has not propagated. If the issue is not resolved by end of day today, it will be escalated to the executive sponsor immediately. <strong>Without a permanent Aurora Development Server, nothing beyond what can be built on the temporary machine can be delivered.</strong> No DeepSight onboarding can happen, no production deployment can happen, and every configuration already done on the temporary machine will have to be repeated once the permanent machine is provisioned.</p>
+          </div>
+          <div class="item-ask">
+            <i class="fa-solid fa-comment-dots"></i>
+            <div>
+              <div class="item-ask-label">Needs</div>
+              <div class="item-ask-text">Direct intervention on the tenant provisioning portal, or authorization of an alternative deployment path while the portal issue is resolved. This is the critical-path blocker for the end-of-next-week deployment target.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="item blocked">
+          <div class="item-head">
+            <div class="item-title">NX Repository Access</div>
+            <span class="item-pill">Execution Blocked</span>
+          </div>
+          <div class="item-body">
+            <p>The CAT MCP cannot be exercised end-to-end without <strong>commit approval tracking access on the NX repository</strong>. An initial setup attempt produced a Git LFS error. Without repository-level access, the four MCP tools are visible from the marketplace but cannot execute against live commit data, which blocks the end-to-end validation needed before the WebEx bot layer can be deployed.</p>
+          </div>
+          <div class="item-ask">
+            <i class="fa-solid fa-comment-dots"></i>
+            <div>
+              <div class="item-ask-label">Needs</div>
+              <div class="item-ask-text">NX repository access granted or routed to the appropriate owner so the CAT MCP end-to-end path can be validated this week.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="item waiting">
+          <div class="item-head">
+            <div class="item-title">CI/CD Repository Share</div>
+            <span class="item-pill">Pending Share</span>
+          </div>
+          <div class="item-body">
+            <p>A canonical GitHub repository was committed on April 22 as the <strong>single location for all documentation, design, architecture, and source code</strong> produced on this engagement. The repository link has not yet been shared. Skills, documentation, and design artifacts are staged locally and are ready to be committed on receipt of the link.</p>
+          </div>
+          <div class="item-ask">
+            <i class="fa-solid fa-comment-dots"></i>
+            <div>
+              <div class="item-ask-label">Needs</div>
+              <div class="item-ask-text">Repository link shared so all artifacts can be checked in and the engagement moves to a single source of truth for code and documentation.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="item waiting">
+          <div class="item-head">
+            <div class="item-title">Definition of "Deployed by Next Friday"</div>
+            <span class="item-pill">Needs Clarity</span>
+          </div>
+          <div class="item-body">
+            <p>The stated target is <strong>deployed on the DeepSight platform by end of next week</strong>. The team needs a one-sentence definition of the minimum viable form of that deployment so execution can converge. Candidate shapes include a live categorization dashboard with drill-down visible to release managers, a deployed WebEx bot responding to CAT-category issues via the MCP path, or a narrower artifact.</p>
+            <p>The answer shapes every other item on this page: which access items are truly critical this week, what gets merged from the webex-skills branch, and whether the real-time categorization loop needs to be fully wired or whether a scheduled run is acceptable.</p>
+          </div>
+          <div class="item-ask">
+            <i class="fa-solid fa-comment-dots"></i>
+            <div>
+              <div class="item-ask-label">Needs</div>
+              <div class="item-ask-text">One-sentence definition of the minimum viable "deployed" form so scope and sequencing for next week can be finalized today.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <div class="left">Cisco CI/CD Engagement &middot; Weekly Status</div>
+      <div class="right">BayOne Solutions</div>
+    </div>
+  </div>
+
+</body>
+</html>

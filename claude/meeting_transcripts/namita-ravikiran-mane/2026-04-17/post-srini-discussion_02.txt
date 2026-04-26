@@ -1,0 +1,613 @@
+[00:01:48] Colin Moore: Miss Srikar and Namita, oh, Namita is still coming in.
+
+[00:01:53] Srikar Madarapu: Hey, Colin. Yeah, this is on my other laptop.
+
+[00:01:58] Colin Moore: Okay, sorry, sorry, sorry. I keep on forgetting that there's two.
+
+[00:02:02] Srikar Madarapu: Yeah.
+
+[00:02:05] Namita Ravikiran Mane: Hi, Colin. Hi.
+
+[00:02:05] Colin Moore: All right. Wow, first of all, that is painful.
+
+[00:02:09] Srikar Madarapu: Yeah, sorry Colin. I once I saw the slide, like I saw the numbers, like I got like confused, like what numbers I have to say. Yeah, there are too many numbers on that slide.
+
+[00:02:24] Colin Moore: No, no, no, no problem. No problem. I think, you know, part of the problem is that they do not listen very well and they go off onto crazy side tangents all the time.
+
+[00:02:34] Namita Ravikiran Mane: Yeah.
+
+[00:02:34] Colin Moore: I'm probably going to just call Srinivas and tell him, you know, hey, like either Justin and Imperma, we need a meeting, one meeting with them because these are just not productive. We got through three slides. You know, like realistically, 3 slides in an hour. That's not great. And that really has nothing to do with us. Even just at the end, I'm going to be honest with you all. They have no idea what they're talking about. I have no idea why he thinks that a knowledge graph is a reasonable answer for a 500K log file.
+
+[00:02:47] Namita Ravikiran Mane: Sr.
+
+[00:02:47] Srikar Madarapu: Abhijeet.
+
+[00:03:06] Colin Moore: That doesn't make logical sense. That just isn't right. So I'll correct that with him. Because he just, they're a little bit hard-headed here, I'll be honest.
+
+[00:03:18] Srikar Madarapu: Yeah, when when you mentioned like knowledge graph, like what like do you want us to build like an XOS like full knowledge graph or like it's like only specific to like errors or just the like CD build part? There are a lot of knowledge graphs coming in and where we will be like.
+
+[00:03:18] Namita Ravikiran Mane: Also, I think.
+
+[00:03:38] Srikar Madarapu: Of where we have to, like, uh, especially, like, focused on, or like, um...
+
+[00:03:43] Namita Ravikiran Mane: Mhm.
+
+[00:03:44] Srikar Madarapu: Yeah.
+
+[00:03:45] Namita Ravikiran Mane: Also, I felt that this meeting was mainly about architecture, but not design, right? But he went into the design part, so that's where it was a bit off.
+
+[00:03:53] Srikar Madarapu: Yeah.
+
+[00:03:57] Colin Moore: Yeah.
+
+[00:03:57] Namita Ravikiran Mane: But I feel instead of designing first, we should understand the architecture, like how overall picture looks like. Then yes, definitely we can take various components and deep dive into it and see how it really works.
+
+[00:04:13] Colin Moore: Right, right. And I think from my end, like, there are some things like that I don't quite understand. Like, to me, it's very obvious that no one there has done it before. I don't care if they've been working on it for a long time. That doesn't change the fact that this is not that hard and they're making it harder than it needs to be. You know, like, for instance, like the ingestion stuff, they're like, I don't know where the data's coming from. And I'm like, it literally says right here, there are the basil. Lugs.
+
+[00:04:39] Srikar Madarapu: Yeah.
+
+[00:04:40] Colin Moore: You know, like, that's not...
+
+[00:04:42] Srikar Madarapu: Log files, yeah, basic logs.
+
+[00:04:44] Colin Moore: And he's like, well, which log files? And I'm like. But what do you mean? Like all the log files? It doesn't matter. It shouldn't matter. You know, that's my point. It should not matter. It's immaterial. If the logs are coming from Bazel, if the logs are coming from GitHub, if the logs are coming from, you know, a toaster oven, it doesn't matter. It's the same workflow across the board. And you know what he's saying for.
+
+[00:04:48] Srikar Madarapu: Yeah. You.
+
+[00:05:07] Colin Moore: You need a knowledge graph to know where to chunk. No, you absolutely do not. That is way overkill. If you want to know what's going to cost more money than a language model, well, you found it. Because the big thing that I'll share with both of you, you know, I've done this before, and knowledge graphs are some of the most computationally complex ones to maintain. because they are stateful, right? He's talking about like this file or this library or this thing relates to this, this, this. Do it the deterministically, you're fine. Do it with a knowledge graph. There's A statefulness and you need to essentially re-index and regenerate the knowledge graph every single time the code changes.
+
+[00:05:44] Srikar Madarapu: Right.
+
+[00:05:45] Colin Moore: And even if you optimize that and say, I'm only going to optimize the subparts of where the knowledge graph is based upon the changes, that is a crazy amount of complexity for something that could be simple pattern matching.
+
+[00:05:58] Srikar Madarapu: It can be a never-ending loop.
+
+[00:06:00] Colin Moore: Right, right. I mean, by the time you regenerate, maybe there's another change.
+
+[00:06:04] Srikar Madarapu: Right.
+
+[00:06:05] Colin Moore: And, you know, that's also, you know, commits themselves are by definition code changes. The other problem is they don't seem to understand what CI and CD actually mean. I'm just going to be a little bit mean here. They are misusing those terms drastically. No, CI is not a subset of CD. CI stands for continuous integration. CD stands for continuous deployment. They are different. Basel is exclusively CD. There's no point, unless you're checking that a build works, that CI. Has Basel in the loop. That's not academically correct. I'm not going to die on that hill in a meeting, but just for the two of you, they're not using terminology correctly at all here. They would not pass an interview with me. So
+
+[00:06:46] Srikar Madarapu: Mhm.
+
+[00:06:46] Namita Ravikiran Mane: Mhm.
+
+[00:06:54] Colin Moore: But we can get through this. So the one big thing that I noticed is that they need things to be incredibly clear in order to even talk about it. We can do that on the graphs. We can do this in a kind of a silly way. And I'll say, okay, if we want to talk incredibly simplistically about this, fine. You know, there's a huge problems with the existing setup that we're being glossed over, you know, like, for instance, even this part over here with some of the, you know... Issues. I don't really know what to say there because I can tell you Justin seems like a smart guy, but it also seems to me like he's never done this before. I don't care if he's been working on it for a while. The difference between working on and having done. So I'm going to try to talk to him too and see if I can get a little bit there. I like even just the way that we're talking about, you know, Srinivas, that's the one thing that was good out of today. At least he realizes that you can't just check if a build passes to say that AI did its job. That's completely illegitimate. But, you know, they need to worry about the rest of this stuff, because even from that design perspective, they still don't have any kind of clarity here or consensus. It's just everything's up in the air all the time. So. We'll meet with him on Monday, but I'm going to ask him for if we can have more focus sessions that are limited to topics and that we don't talk about anything beyond the topic at that meeting, because otherwise this is going to be impossible. You know, we made it, like I said, through like 4 slides, 3 slides. And still, this did not capture, he doesn't get, like, I'm like, your current system itself does not do the two things it's supposed to do correctly, correctly. You know it and to his like kind of hand-waving about agents, I'm like, what are you talking about? I don't think we ever said anything about that. You know, the only agent step over here is this yellow box.
+
+[00:09:00] Srikar Madarapu: Yeah, we did not even go till there, the agents.
+
+[00:09:03] Namita Ravikiran Mane: Exactly.
+
+[00:09:04] Colin Moore: Right, and he's having like an allergic reaction to it. And I'm like, dude, calm down. First of all, just let people finish their sentence, number one. And #2, you have to realize how much more complicated you guys are making this than it actually is. Like for instance, I tried to say, you know, GitHub Enterprise already has that. And they're like, no, it doesn't. And I'm like, have you checked? Because I'm telling you right now, it does. You know, like that's been a thing for a long time.
+
+[00:09:32] Srikar Madarapu: Colin, one, sorry, one thing, I'm also not sure because I'm just like, so the one they're using is like on-prem GitHub Enterprise. This is it different from like the cloud GitHub Enterprise. So because the co-pilot feature. for each like PR, like when you raise. So I think only available at the cloud level and not the on-prem, like the on-prem systems, they don't have these updated new features. I'm guessing that.
+
+[00:10:06] Colin Moore: So they do have it, they just have to be enabled.
+
+[00:10:09] Srikar Madarapu: Enable it, okay.
+
+[00:10:11] Colin Moore: So that's what I'm saying. I'm like, you guys are solving a problem that already exists because you didn't bother to look at the docs for GitHub Enterprise.
+
+[00:10:21] Srikar Madarapu: Mm.
+
+[00:10:21] Colin Moore: So if you look at the features, like they already have GitHub actions.
+
+[00:10:25] Namita Ravikiran Mane: Ohh.
+
+[00:10:26] Srikar Madarapu: Bent.
+
+[00:10:27] Colin Moore: You know, GitHub Connect, there's already, now I'm not saying that they have, like how GitHub Cloud has, for instance, for models or for agents here, I'm not saying that.
+
+[00:10:27] Namita Ravikiran Mane: No.
+
+[00:10:39] Srikar Madarapu: Mmh.
+
+[00:10:40] Colin Moore: But like for instance, this. Like you guys are literally reinventing the wheel here. This already has existed for a long time in GitHub, and it is in GitHub Enterprise. The trick is that if it doesn't exist, there's already a hook for it.
+
+[00:10:43] Srikar Madarapu: Right. Yeah. Good.
+
+[00:10:57] Colin Moore: So even if they like, for instance, don't have like a co-pilot integration, well, guess what? You just have to set up the AI model backend and that's it. So it's like they just don't really know what's there. So I'm going to do some digging on this myself to say, yes, this feature absolutely is there. Guys better look into that before we waste time here. Because there's definitely more to this. Like, there's so much that's here. Like, there's GitHub packages that you can have all these different things installed on. A lot of these, like, because I used to run on GitHub Enterprise, and it was... already having these things. I mean, these are definitely ones that exist. They might not be immediately available on the UI, but the hooks are all still there, because it's not like they develop a completely different version of GitHub for enterprise versus cloud.
+
+[00:11:50] Srikar Madarapu: Mhm.
+
+[00:11:56] Colin Moore: You know, it's some things are marginally different. But it's not a substantial gap. It's not like, you know, there's no AI features on GitHub Enterprise. Even on GitLab for the past, you know, four years there have been these features. So, I'll do some digging here because I want them to know, you know. That there are. so many things. This is GitHub Enterprise's official website. You know, they're not saying that we don't offer those things. They're saying that it's fine. You know, like this, you see.
+
+[00:12:42] Namita Ravikiran Mane: Mm.
+
+[00:12:42] Srikar Madarapu: Right.
+
+[00:12:42] Colin Moore: Literally the homepage of GitHub Enterprise. That's where I'm going. I'm like, you guys are, they're like just hand waving on a problem. They don't even know what they're talking about.
+
+[00:12:50] Namita Ravikiran Mane: Ohh.
+
+[00:12:56] Colin Moore: So, you know, if, and it's just a matter of, you know, what version are they running? They already have things like this, and if their IT team just hasn't enabled it. Um, that's also fine, you know, so I'm just like kind of shocked right now that they don't, uh, you know, understand. Like they already have pretty much everything they want here. It already exists out of the box. I think they're just trying to do it from scratch to feel good about it.
+
+[00:13:20] Srikar Madarapu: Yeah.
+
+[00:13:34] Namita Ravikiran Mane: So Colin, sorry if I missed this, but have you told them about this GitHub enterprise, which is already available and they can use, or we haven't communicated that to Srinivas and team?
+
+[00:13:48] Colin Moore: So I've tried to. I've tried to. They haven't really listened. Like even today, I tried to do it again. And they said, oh, no, that's not available. And I'm like, you're wrong. You just don't know what is there and what's not because you never bothered looking. At this point, I'm going to put together some formal research and share it with them.
+
+[00:14:02] Namita Ravikiran Mane: Okay. Mhm.
+
+[00:14:07] Colin Moore: And, and I'm not just to any of us, but also to Anand, 'cause you know they can like Handwave and say this doesn't exist or it does, and I'm gonna say, "Look, let's, you know, I can just call GitHub themselves, get a meeting set up with the sales team, and we can talk to them." No.
+
+[00:14:24] Namita Ravikiran Mane: Mhm.
+
+[00:14:26] Colin Moore: So it's just part of its ignorance. The only thing that could be true is if they are running on an old version of GitHub Enterprise, which they most likely are not doing.
+
+[00:14:34] Srikar Madarapu: No. I just checked the version, Colin. It's 3.16.16.
+
+[00:14:44] Colin Moore: Okay, 3.1616. All right, I'll do that.
+
+[00:14:46] Srikar Madarapu: Yeah, it is the latest version or as far I see on the Google.
+
+[00:14:54] Colin Moore: Right. Yeah, see?
+
+[00:14:56] Srikar Madarapu: Yeah, when you were like, when I scroll, when I scroll down on the GitHub, one of the repo, I can see that in the bottom, like GitHub Enterprise Server 3.16.16.
+
+[00:15:10] Colin Moore: Mike. So, I'll... I'll pull in. Yeah, look at this.
+
+[00:15:22] Srikar Madarapu: Yeah, one.
+
+[00:15:25] Colin Moore: GitHub Enterprise, Enterprise Cloud. Let's go 3.1, which one was it? 3.13.
+
+[00:15:30] Srikar Madarapu: Ohh, 16161616. Ohh, I think there is a pretty...
+
+[00:15:32] Colin Moore: One, 6.
+
+[00:15:36] Srikar Madarapu: Okay, bye.
+
+[00:15:37] Colin Moore: So Enterprise Server 316.
+
+[00:15:40] Srikar Madarapu: So.
+
+[00:15:43] Colin Moore: So, I'll even show them, you know, what the features are for their specific version. It's literally a flag you flip for most of this. Anyway, I'll get that figured out with them. We don't have to get distracted by it, but I'm just going to show this to them so they can understand. Because I don't think they're looking at this right. I think that they're making assumptions that might have been true a couple years ago, but since then it's been completely, you know, changed. OK. So for next week, I know we'll have that Monday meet. I think for their standpoint, one thing that we can do, and I'll just kind of talk to both of you, you don't need to go too crazy on this today because I'm sure by Monday it'll have changed anyway. One thing is to try to do a classification for the specific things that are coming into that bug or error category.
+
+[00:16:48] Srikar Madarapu: Yeah, sure, Colin.
+
+[00:16:49] Namita Ravikiran Mane: Mm. Yes, Gordon.
+
+[00:16:51] Colin Moore: That's not going to be straightforward. That's what I was trying to tell them. I'm like, you guys, if I'm just reading some of these.
+
+[00:16:59] Srikar Madarapu: Mhm.
+
+[00:17:00] Colin Moore: you know, in the space and I'm like, there's no possible way without having some kind of... without having some kind of breakdown, it is guessing. I mean, they might not want to hear that and it doesn't change reality. You know, just read some of those messages yourself in that NXOSCI workflow space. Without having a connection back to GitHub, there is no context engineering. It has to be done with the context of the repository it's for. I mean, and we all know that there's multiple repos for everything at this point. So we'll try to win that. I mean, and I think he sent it in the chat as well. what they felt the impact graph was, but they did not actually ever do a study like I think they believed that they did to say that, let me share this, like what percentage of builds were failing for this reason.
+
+[00:18:04] Srikar Madarapu: Yeah.
+
+[00:18:04] Colin Moore: And I also don't think they're even thinking about that, right? Because that's just not how that works either. You know, typically speaking, if you're talking about build errors, those are related to some new feature development or deployment. They're not like all the time I'm going to have the same error all the time.
+
+[00:18:09] Srikar Madarapu: Mhm. Mhm.
+
+[00:18:21] Colin Moore: You know, you probably have a spike in an error class, then you resolve it, and hopefully if you resolved it properly, you won't have it again.
+
+[00:18:23] Srikar Madarapu: No.
+
+[00:18:34] Colin Moore: So it's, I'm like, I don't even know that they're on the same page there. I'm like, yes, there's a factor of the general category of errors that you want the language model to be more specifically focused on, or if you want to identify easy targets. But it's not true to say that just because an error is the most common, that it's going to be.
+
+[00:18:46] Namita Ravikiran Mane: Be. The.
+
+[00:18:52] Srikar Madarapu: No.
+
+[00:18:57] Colin Moore: There is the most common that's not going to be the same. as what's going to come up in the future. That doesn't make sense. You fix an error, and that error should not be prevalent anymore.
+
+[00:19:04] Namita Ravikiran Mane: Yeah.
+
+[00:19:10] Srikar Madarapu: Yeah.
+
+[00:19:14] Colin Moore: There's plenty else on here though we could talk about, but I'll wait for Monday for him. Like for instance, like libraries, test binaries, I get it. But. Who's changing those things anyway? That should not be individual level developers deciding, you know, on another day that we're using a totally different library and package. So, anyway, we'll find it out for next week, and I saw Saurav, so let me dial him in.
+
+[00:19:47] Namita Ravikiran Mane: Also call in for Monday, shall we just look at the various files, Basel files that they have and... See how we can parse those and show him the chunks and create kind of like a structure of the log files. Yes.
+
+[00:20:28] Colin Moore: you can clearly see where there's some difference in there because there's headers, there's different things that identify this was a complete subsection that was added on to this much larger log. You know, so I think probably they're getting messed up on chunking. They're thinking that we're saying, oh, every 500 characters is a log, and that's not right. We don't even have to do semantic chunking. It can be strict pattern match chunking. And chunking is the right word. We're using the vocabulary properly. They just don't seem to understand basic AI terminology.
+
+[00:21:08] Namita Ravikiran Mane: Mhm.
+
+[00:21:10] Colin Moore: So, like, even do you have one of the log files, Namita? Do you have one of those handy?
+
+[00:21:15] Namita Ravikiran Mane: Yes.
+
+[00:21:17] Colin Moore: Because if you want, we can show that too. And I can, I can show you what I mean there.
+
+[00:21:25] Namita Ravikiran Mane: Okay, you want to see the log files?
+
+[00:21:27] Colin Moore: Sure, sure, sure.
+
+[00:21:29] Namita Ravikiran Mane: Just one second. Yeah. This is from CD, coming from CD.
+
+[00:21:58] Colin Moore: Mmh.
+
+[00:22:01] Namita Ravikiran Mane: Basil, no, this is not Basil, just one second. Yeah. If you can see, like, God.
+
+[00:22:13] Colin Moore: Mhm.
+
+[00:22:13] Namita Ravikiran Mane: So this is from CD for this tag.
+
+[00:22:22] Colin Moore: So you see where it says info and there's an a colon on line 3?
+
+[00:22:31] Namita Ravikiran Mane: 293.
+
+[00:22:32] Colin Moore: Mhm.
+
+[00:22:35] Namita Ravikiran Mane: Yeah.
+
+[00:22:36] Colin Moore: So just highlight info and hit, yeah, hit control F. Yeah, just like I think you already have it.
+
+[00:22:37] Namita Ravikiran Mane: Thank you. Yeah.
+
+[00:22:43] Colin Moore: So then just click to the next example of it. And then let me let me request control and I'll show you what I. Shh. Just waiting for my cursor to show. Sure.
+
+[00:23:06] Namita Ravikiran Mane: Stop taking. Yeah, do you see now?
+
+[00:23:21] Colin Moore: Yeah.
+
+[00:23:22] Namita Ravikiran Mane: Do you have the control?
+
+[00:23:23] Colin Moore: Let me see, I don't see my cursor yet, but maybe I'm going to hit stop control and then I'll re-request in case, because sometimes Macs are a little bit strange with this.
+
+[00:23:36] Namita Ravikiran Mane: I think now you should be able to. I gave the access. Yeah.
+
+[00:23:40] Colin Moore: Okay, there we go. To match case. So this is what I mean. So you see that we can, there's only six times it says info in this file. Now, these things are basically noise over here. And you can say, like, analyzing this. This was found. So, for instance, like a... That. You know that my point is here that there's not much. that's useful here. This is essentially giving us the stack trace. This is just overly verbose error logging. You know, like there's not really any value in this. Like, that's why I'm saying like a knowledge graph makes no sense because of how Java and C programs are compiled. It's giving you every single thing that failed without any real rhyme or reason if that's actually necessary or not.
+
+[00:24:45] Namita Ravikiran Mane: Yes.
+
+[00:25:02] Colin Moore: And whenever we talk about chunking, you have to do that chunking. You can't not do that. Because if you don't, then it doesn't matter. It's not like this file is going to form a clean knowledge graph. It can form a call graph, which is also a point that I think that everyone on that call was confused on. They couldn't understand the distinction between a knowledge graph and a call graph. Those are two incredibly different things. But this is essentially just the equivalent of a stack trace through the code. That's not. Actionable, let's say. Like, you see what I mean? Like, I'm dragging through this file and there's not, you know, maybe there's a few chunks in the file.
+
+[00:25:42] Namita Ravikiran Mane: Play.
+
+[00:25:47] Colin Moore: But for the most part, it's just repetition. And probably you want the first one and you want the last one, like the first error and the last error, so you can see the entry and the exit.
+
+[00:25:51] Srikar Madarapu: I.
+
+[00:25:56] Namita Ravikiran Mane: Mmh.
+
+[00:25:58] Srikar Madarapu: Yeah.
+
+[00:25:59] Colin Moore: But it's basically failing to build all the same packages at the same time, which is obvious. It's like, you know, my car got blown up. Can I drive to work? No. Can I drive home? No. You know what I mean? Like, it's logically incoherent to try to analyze 18,000 lines when you know none of them are going to pass anyway.
+
+[00:25:59] Namita Ravikiran Mane: Right. Mhm.
+
+[00:26:21] Colin Moore: So, that's...
+
+[00:26:22] Saurav Kumar Mishra: Hi, yeah, hi Colin. Yeah, just joined in. So I was listening on and is this what they are asking us to build like a knowledge graph for the like build. So I did hear like when Srinivas was.
+
+[00:26:22] Namita Ravikiran Mane: Yeah.
+
+[00:26:24] Colin Moore: Yes, Sir.
+
+[00:26:40] Saurav Kumar Mishra: talking in the call about this that we have to at least build the knowledge graph and help like Justin with this. But is it for like the what do you call the app we saw that they have identically coded on for their triage? Is this continuation of that?
+
+[00:27:03] Colin Moore: So, kind of, so here's, let me show, let me explain what Srinivas was saying. Uh...
+
+[00:27:09] Saurav Kumar Mishra: Yes.
+
+[00:27:11] Colin Moore: And it doesn't make logical sense, by the way, just so you know that from the start.
+
+[00:27:17] Saurav Kumar Mishra: Yep, yep, too.
+
+[00:27:18] Colin Moore: So here's where he was at. There are logs just like the ones we were just looking at.
+
+[00:27:23] Saurav Kumar Mishra: Mhm.
+
+[00:27:24] Colin Moore: What we said and correctly said was that step one we ingest the logs. He went off on a wild tangent about what specific logs. My point was that it does not matter. Literally does not matter.
+
+[00:27:35] Saurav Kumar Mishra: Yes. Yep, good.
+
+[00:27:37] Colin Moore: You treat everything the same way.
+
+[00:27:39] Saurav Kumar Mishra: Yeah.
+
+[00:27:40] Colin Moore: comes from Jenkins, from Basil, from, you know, GitHub, from, you know, like I said earlier, they're called microwave oven. It doesn't matter.
+
+[00:27:48] Saurav Kumar Mishra: Mhm.
+
+[00:27:48] Colin Moore: You know, it's locks. after you have the logs, you want to break them up because those logs can be decomposed effectively. I think maybe that's probably the right way to say it. And because you can use that to kind of make it sound like a knowledge graph, even though that's way overkill.
+
+[00:28:08] Saurav Kumar Mishra: Yeah. Yeah.
+
+[00:28:08] Colin Moore: It. And then we feed it through this classification system. Here's where things went off the rails for him, and where he started talking about knowledge graphs completely incorrectly.
+
+[00:28:20] Saurav Kumar Mishra: Mhm.
+
+[00:28:20] Colin Moore: His point here is you can't possibly do chunking on a log file without knowing the entire code base.
+
+[00:28:30] Saurav Kumar Mishra: Right.
+
+[00:28:32] Colin Moore: Yeah, exactly. So in his mind, we should do a knowledge graph for a 500k log file.
+
+[00:28:44] Saurav Kumar Mishra: Uh-huh.
+
+[00:28:44] Colin Moore: times 40 times a 15 million line code base.
+
+[00:28:46] Saurav Kumar Mishra: Thank you. Uh, so is this the chunk size?
+
+[00:28:52] Colin Moore: No, no, no, no, so, no, no fixed.
+
+[00:28:53] Saurav Kumar Mishra: Okay, this is the whole file and we want chunks of this and then convert that to knowledge graph.
+
+[00:29:00] Colin Moore: So not even that. So this chunking, I think we're kind of really just means decompose a file into its composite parts.
+
+[00:29:09] Saurav Kumar Mishra: Okay.
+
+[00:29:09] Colin Moore: So that's so not chunking in terms of like semantic or in terms of, you know, character count, but just decomposition.
+
+[00:29:14] Saurav Kumar Mishra: Yeah, yeah. So from what I am understanding about decomposition, so it would be like this part is from the input or this particular function, and this part is the processing or pre-processing part of the logs, and this part is this kind of vertical grouping, okay?
+
+[00:29:36] Colin Moore: Right, right.
+
+[00:29:37] Saurav Kumar Mishra: Okay, yeah, okay, yeah.
+
+[00:29:41] Colin Moore: And so yeah, the problem is like, so we were saying that, and that is a requisite step no matter what, because even for a knowledge graph, you can't just hand it a 500,000 line log file.
+
+[00:29:54] Saurav Kumar Mishra: Yeah.
+
+[00:29:55] Colin Moore: You know, like that's not a thing you can do. You can try whatever you want, but you still need to give some tagging, you know, what are your notes, what are your edges for a knowledge graph? You cannot do that without parsing in some way, shape, or form.
+
+[00:30:10] Saurav Kumar Mishra: Abhijeet.
+
+[00:30:12] Colin Moore: And if you want to do it semantically, oh boy, wouldn't that be fun. That's when you do need to do the full indexing of everything. But the point is, you'd have to re-index everything upon any small code change because the knowledge graph would fail to be accurate otherwise. There's a statefulness to it.
+
+[00:30:16] Saurav Kumar Mishra: Mhm. Yeah, and even for like, yeah, even for like different repos also, we will have to like, what do you call it, kind of map and chunk all of the repos on which this has to like work, so it is not very good at scaling as well.
+
+[00:30:29] Colin Moore: That's why knowledge graphs are slow.
+
+[00:30:49] Saurav Kumar Mishra: Given the he wants this and we build this, this is not good for scaling, so yeah.
+
+[00:30:56] Colin Moore: Right, right. So I think from... There's so much to unpack here, but the trick is that we are going to have to figure out how to talk to him about this in a way that he's going to understand in some sense.
+
+[00:31:12] Saurav Kumar Mishra: Mhm.
+
+[00:31:12] Colin Moore: because he's just not really getting it. And I think the key to that is Justin. You know, one thing that I did get out of today is he has a, I would say, disproportionate. You know, not anything against Justin, but it's very clear to me that they've never actually done this. And like I said earlier on this call, I don't care if he's been doing it for a while, it doesn't mean you're doing it right.
+
+[00:31:35] Saurav Kumar Mishra: Mm-hmm.
+
+[00:31:36] Colin Moore: So, but I think Justin at least sounds like he's trying. So we can probably at least get out from him. you know, some confidence. If we can make him understand that it doesn't make sense. then I think we'll be in okay shape.
+
+[00:31:55] Saurav Kumar Mishra: Okay, yeah.
+
+[00:31:58] Namita Ravikiran Mane: Yeah, I agree with that, Colin.
+
+[00:31:59] Saurav Kumar Mishra: Yeah.
+
+[00:32:02] Colin Moore: So that means that we got to be good buddies. That also means that we got to become good buddies within Verma. So I'm telling all of you, if I put on your, you know, most likable face.
+
+[00:32:09] Saurav Kumar Mishra: And.
+
+[00:32:10] Namita Ravikiran Mane: Yeah.
+
+[00:32:13] Srikar Madarapu: Yeah, Colin today, like one when, like when we start like presenting this one and showing, I think, yeah, we should connect with Justin before, like, if he, if you are coming with any like architecture, we have to like meet Justin and like he, he is aware of like all these and like if there is any.
+
+[00:32:13] Namita Ravikiran Mane: Yeah.
+
+[00:32:32] Srikar Madarapu: changes our connections he can also suggest and we can keep him in the loop all the time.
+
+[00:32:39] Namita Ravikiran Mane: Correct. And it looked like he was interested, right, Srikar? When we met him last time, he was interested.
+
+[00:32:39] Colin Moore: Right.
+
+[00:32:42] Srikar Madarapu: Yeah, yeah, he's very interested. He's very interested and he wants to, yeah, like do with us, like along with us and learn more.
+
+[00:32:51] Namita Ravikiran Mane: Yeah.
+
+[00:32:55] Colin Moore: So one thing that you might have to do though is with him. Now, I don't know him well enough. I need to meet him at some point, because I'll be able to tell you probably in the 1st 5 minutes if he falls into type A or type B.
+
+[00:32:55] Saurav Kumar Mishra: I know. She.
+
+[00:33:08] Colin Moore: Type A is like the people that you need to kind of like pat them on the head every two seconds, right? They have to be the smartest person in the room. It's not uncommon, especially for solutions projects. You know, all of you are going to be on this. You'll be on far more than this too. So, you know, it's a good thing to know. Sometimes there's those engineers that like, as long as they feel like they're the smartest person. they will agree with whatever you say. It's just you cannot act like you know more than them, you know? He doesn't sound like he's in that mode, but that is one type. And then the type 2 is as long as he is in alignment, he's a logical person, he'll come to a logical conclusion.
+
+[00:33:34] Saurav Kumar Mishra: Yeah. Thank you.
+
+[00:33:50] Colin Moore: As long as there's good alignment there, then we'll be. in good shape. But yeah, it's just a question of, you know, for him, I think you're absolutely right. Get alignment with him so that whenever we're doing these meetings, he can kind of be almost like a part of our team.
+
+[00:33:56] Saurav Kumar Mishra: Mm.
+
+[00:34:06] Srikar Madarapu: Great.
+
+[00:34:07] Saurav Kumar Mishra: Mhm.
+
+[00:34:08] Colin Moore: And you know, likewise within Verma. And let me show you, I've actually got a perfect example of exactly this chunking that I'm going to share. In a few moments here, I'm just trying to figure out exactly where I put this thing. To. PDF file. But in any case, so I think another thing, Saurav, we did not get very far in the slides. We got through 4 slides in an hour.
+
+[00:34:46] Saurav Kumar Mishra: Oh yeah, we had like a lot of materials packed inside each of them. It can very well be like a session for each part.
+
+[00:34:48] Colin Moore: So. Well, I think that's something that will change going forward too. We're going to have to keep things incredibly simplistic because, you know, like they don't know what they don't know. You know, for instance, if you look at that WebEx chat, I mean, just look with your human eyes. Don't even, you know, use the...
+
+[00:35:09] Saurav Kumar Mishra: It is.
+
+[00:35:16] Colin Moore: use AI to do it. There's no possible way to say what category errors fall into for most of these. With attribution. Yeah.
+
+[00:35:25] Srikar Madarapu: Yeah, we like based on their, like, based on their knowledge or like based on their issues related ones, like which which category it belongs to is like, yeah, there's no clear indication, yeah, we were discussing about like Namita and I was discussing about this, so if they have, like, whenever they are putting a message, if they have like...
+
+[00:35:25] Saurav Kumar Mishra: Yep. More.
+
+[00:35:44] Srikar Madarapu: categorize and put like specific categories like error, issue, PR or some kind of indication. I think that way it will be like at least clear for other person to identify like what this belongs to.
+
+[00:36:00] Colin Moore: Right. And I mean, so the other things too, that they are lacking a process, right? Like, even if you look, there's one where people are putting comments on multiple, you know, they're writing multiple comments at the same time, all referring to the same thing. For instance, there's one from 327, this Mariupon Balraj says, my...
+
+[00:36:03] Saurav Kumar Mishra: Sure.
+
+[00:36:13] Srikar Madarapu: Mm. Mm.
+
+[00:36:22] Colin Moore: PR is stuck, one message. Next message is, he posts the link.
+
+[00:36:24] Saurav Kumar Mishra: And. OK.
+
+[00:36:28] Srikar Madarapu: Right, structure.
+
+[00:36:29] Colin Moore: So. Right.
+
+[00:36:30] Saurav Kumar Mishra: Yeah, so not even the actual error was there or any other details. Yeah.
+
+[00:36:32] Colin Moore: The. Right, like your PR is stuck, like what PR? For what? About what?
+
+[00:36:42] Saurav Kumar Mishra: Yeah.
+
+[00:36:44] Colin Moore: Other people posting pictures, the ULS sanity race from my PR fails even before running. Rerun also has the same issue and then posts some lines in the chat. It has no link to anything. It's just a couple of lines from an error. There's no way to attribute that with certainty. So what I had said, I think the only way to do this, first of all, they're being very stupid, frankly, when they're trying to do this with WebEx. It's just not the right way to do it. Do it with GitHub issues like a normal person.
+
+[00:37:15] Saurav Kumar Mishra: No.
+
+[00:37:17] Srikar Madarapu: Yep, yeah.
+
+[00:37:18] Saurav Kumar Mishra: Okay.
+
+[00:37:18] Colin Moore: Right, like, that's I'm not gonna win that battle, but just to say it out loud. But...
+
+[00:37:28] Saurav Kumar Mishra: Have you like checked what do you call this like a new tool, not new, but it's pretty recent click up boards like the tool name is click up.
+
+[00:37:42] Colin Moore: No.
+
+[00:37:43] Saurav Kumar Mishra: No? So it does like, you can think of it as like Jira, GitHub, Skype, everything integrated into one. Okay? You can create your diagrams, it can track all your charts. So like the similar interface of Outlook you get, you get all of those things plus your project management, your GitHub.
+
+[00:37:44] Colin Moore: Yeah.
+
+[00:38:04] Saurav Kumar Mishra: Everything is present on that same single screen and it has like AI agent built in which like tracks everything of this one. So we might, we can also like have a look at that and if they are, if they want to use it, it's good or if they want something of.
+
+[00:38:08] Colin Moore: Mmh.
+
+[00:38:16] Srikar Madarapu: Yeah. Yeah.
+
+[00:38:26] Saurav Kumar Mishra: that sort, what you call, built in-house, that is also like a great idea because that is something which brings like your whole development, what you call, workflow as well as different surfaces on which the developer, what you call, interact with everything into like a single app. or a single board you can say. So even like for your Claude code and those things, those can also be like directly run from ClickUp. You don't have to even like, what do you call, leave ClickUp. Or if you want to leave the ClickUp, they already have like a skill for Claude codec. And what do you call a co-pilot, etcetera, which can like use the click up to do all of those things, like create the issues or create like proper, what do you call Kanban boards and drag the whole sprint and plan out project management, even if like... The way we have built like suppose of singularity, we can plug that into the click up as well and that can also work. So if you want I can like write a whole what you call a. high level overview of ClickUp as well as links and some more things which we can look into or the features we can take out from like ClickUp to add to like our system.
+
+[00:39:50] Colin Moore: Mm-hmm.
+
+[00:39:51] Saurav Kumar Mishra: It.
+
+[00:39:51] Colin Moore: I think what I would do is do definitely for internal. For them, they just seem to want to reinvent the wheel at every possible turn. So what we can do is we can take all the good ideas from it and then share that back. You know, I'm not saying to plagiarize and act like it's ours, but at the same time, kind of where we're at with them at this point.
+
+[00:39:55] Saurav Kumar Mishra: And. Okay. Mhm. Yeah, yeah.
+
+[00:40:13] Colin Moore: Um... You know, like they just need to, how should I say?
+
+[00:40:33] Saurav Kumar Mishra: Okay.
+
+[00:40:34] Colin Moore: Like they think that GitHub Enterprise doesn't have any agents or any AI features.
+
+[00:40:38] Saurav Kumar Mishra: Oh, I think they have or like already have are planning to launch in the next month the whole agent space, not even like a single agent.
+
+[00:40:52] Colin Moore: Correct. They've had that for literal years at that point.
+
+[00:40:53] Saurav Kumar Mishra: Thanks. Wait, seriously.
+
+[00:40:59] Colin Moore: So, I mean, it's been actual years, um, that's where... Like, I'm like, they've had those integrations because it's GitHub. Like, GitHub is by far the most extensible platform. They've done that since the beginning. It was like always the design philosophy with GitHub.
+
+[00:41:06] Srikar Madarapu: Yeah.
+
+[00:41:18] Colin Moore: Let me show you one thing though, really quick here. So I want you all to look at this. This is a PDF. This is for another project with EPNM. So Saurav, this will look familiar for you.
+
+[00:41:31] Saurav Kumar Mishra: Yep, yep.
+
+[00:41:32] Colin Moore: Can you all read this number up here? How many pages this PDF is?
+
+[00:41:38] Saurav Kumar Mishra: Thousand sixty-four.
+
+[00:41:38] Srikar Madarapu: How do I close?
+
+[00:41:39] Namita Ravikiran Mane: Yes, 100 and sixty-four.
+
+[00:41:41] Colin Moore: Yeah. So, language model, and I'm using this as an equivalent to those log files. Do you give this to Chat GPT? Ask it to write a summary for you. You know, like this file itself is like 26 megabytes.
+
+[00:42:04] Saurav Kumar Mishra: Yeah.
+
+[00:42:04] Colin Moore: I wrote a simple thing here that takes that and converts the whole thing to markdown. Sim. Just extracts the page content out, preserves the structure. Actually, it will give it to you as XHTML if you want.
+
+[00:42:16] Saurav Kumar Mishra: The.
+
+[00:42:22] Colin Moore: I'll have to drop off in a moment, everyone, but you all can continue if you want. We'll meet next week too before we meet with Srinivas. He's always booked up in the morning anyway, so we'll be able to meet at our normal time. My point is, though, that you can take just about anything and you can decompose it into its requisite pieces so that it's easier to process with the language model. It doesn't matter how complicated, how long it is, it's irrelevant. It's a matter of if it has a logical breakdown, you know, like books have chapters, for instance.
+
+[00:42:33] Saurav Kumar Mishra: Okay. Yep.
+
+[00:42:53] Colin Moore: You can still have everything here.
+
+[00:42:53] Srikar Madarapu: Right.
+
+[00:42:59] Colin Moore: So, you know, for him, we're going to have to fight a little bit of a battle there. But we are able to decompose just about anything under the sun into its fundamental parts. That's not really that bad. And I don't know why they always act like it's a giant thing. But anyway.
+
+[00:43:07] Srikar Madarapu: The.
+
+[00:43:16] Saurav Kumar Mishra: Yeah. Mhm.
+
+[00:43:21] Colin Moore: Let me drop. I have to get on to the next call. But I think from my aspect today, and really everyone, great work this week. We did what we were supposed to. We'll come up with a plan for next week. I'm going to send out some action items just so that they're clear. And we'll see if he gets the meeting on the calendar. I can almost guarantee he's not going to put it on the calendar in time. But we'll see about that. I think it's good. So Saurav, if he wanted to meet three times a week, Monday, Wednesday, Friday, I think that's a good thing, actually. So we can at least get some clarity there as to what we're doing at Editing Point. time so we stop on jumping around because it's like he changes his mind every 3 seconds.
+
+[00:44:01] Saurav Kumar Mishra: Mhm. Yep, yep.
+
+[00:44:04] Srikar Madarapu: Yeah.
+
+[00:44:06] Saurav Kumar Mishra: Negi.
+
+[00:44:09] Namita Ravikiran Mane: Sounds good, Colin.
+
+[00:44:09] Colin Moore: All right.
+
+[00:44:09] Saurav Kumar Mishra: But like, for me, not so good. So you, maybe you can, not you can, even I can do it. So maybe I should start my shift hour later so that I have like a little bit of overlap.
+
+[00:44:10] Srikar Madarapu: So, Colin.
+
+[00:44:27] Saurav Kumar Mishra: with the meeting for Srikar. Oh, it's like, oh, I will be extending my time every three days. So, yeah.
+
+[00:44:35] Colin Moore: Right. Yes. We'll cover that, sir. So don't worry. We'll make it work for you. I can tell you that.
+
+[00:44:40] Srikar Madarapu: Yeah.
+
+[00:44:41] Saurav Kumar Mishra: Mhm. Yep, yep, sure. Totally works for me. Great.
+
+[00:44:43] Srikar Madarapu: Sure.
+
+[00:44:44] Colin Moore: Yeah.
+
+[00:44:47] Srikar Madarapu: Thank you.
+
+[00:44:48] Saurav Kumar Mishra: Like, for me, it's like the more he's in contact with us, the more he will love us. So, yeah.
+
+[00:44:49] Namita Ravikiran Mane: See.
+
+[00:44:55] Colin Moore: Yes. I think it's important. Absolutely. Absolutely.
+
+[00:44:59] Saurav Kumar Mishra: Sr.
+
+[00:45:00] Srikar Madarapu: I.
+
+[00:45:01] Saurav Kumar Mishra: Yeah.
+
+[00:45:02] Colin Moore: All right, let me let me drop, we'll catch up on on Monday and I'll send out, I have the transcript for the call too, so I'll share that with everyone as well, and we'll put it through Singularity so you can see the decomposition. We'll cover Singularity altogether. Namita Srikar, I'll try to get to that today with you.
+
+[00:45:02] Namita Ravikiran Mane: Yeah. Yes.
+
+[00:45:21] Colin Moore: Otherwise, we'll do that on Monday as well. Because once you see how this works, you're going to be like, OK, this project makes a lot more sense. It's clear. We have everything mapped properly, et cetera.
+
+[00:45:33] Namita Ravikiran Mane: Yeah, sure, Colin. Sounds good.
+
+[00:45:33] Srikar Madarapu: Yes. Okay. Sure. Thank you.
+
+[00:45:34] Saurav Kumar Mishra: Yep.
+
+[00:45:36] Namita Ravikiran Mane: Okay, thank you everyone.
+
+[00:45:38] Colin Moore: Have a great weekend, and sorry of that. Get some sleep, please.
+
+[00:45:39] Saurav Kumar Mishra: Thank you, everyone.
+
+[00:45:40] Namita Ravikiran Mane: You too have a nice weekend.
+
+[00:45:41] Srikar Madarapu: Thank you.
+
+[00:45:41] Saurav Kumar Mishra: Yeah. Sure, sure. Like, I was in a lot of tension because from the time I dropped off from like our call, it was like my phone just switched off and I was off the call and early I heard that there was like my part for the like PPT.
+
+[00:45:43] Namita Ravikiran Mane: Yeah.
+
+[00:45:45] Srikar Madarapu: Thank you.
+
+[00:46:02] Saurav Kumar Mishra: I tried to like send some messages that maybe you guys can see them and maybe not face some issues live on the project. But yeah, till like the power was back on, I was in constantly like what exactly is happening? Let me just try to open my WebEx some way or another.
+
+[00:46:02] Colin Moore: Yeah.
+
+[00:46:22] Saurav Kumar Mishra: Pick up.
+
+[00:46:22] Colin Moore: Yes, no, no, no problem. You're good, all good, all good.
+
+[00:46:23] Saurav Kumar Mishra: Big. Okay, cool, cool.
+
+[00:46:28] Colin Moore: Alright, yeah, have a good weekend.
+
+[00:46:30] Saurav Kumar Mishra: Okay, have a great day, Colin. Colin, yeah, see you on Monday.
+
+[00:46:32] Colin Moore: Yeah, take care. See you Monday.

@@ -69,7 +69,7 @@ Sales-forge creates a glossary of key terms and definitions, with web research f
 |---|---|---|
 | Present deliverable for feedback | Same interaction pattern. | **Covered** |
 | Iterate based on input | Same interaction pattern. | **Covered** |
-| Convert to PDF via `html_to_pdf.py` | Script moves to `.claude/skills/singularity/scripts/html_to_pdf.py`. Same capability. | **Covered** |
+| Convert to PDF via `html_to_pdf.py` | Script moves to `.claude/skills/singularity/scripts/html_to_pdf.py`. Same capability. Invoke with `--merge --landscape` for slide decks; with no flags for single deliverables. Full flag selection guide is in the script docstring. | **Covered** |
 | No quality review step | Singularity can invoke the big4 skill for quality review before finalizing. | **Singularity is superior** |
 
 ---

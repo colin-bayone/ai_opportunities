@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 02: Pain Point Analysis - Findings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-darkest: #0c1929;
+      --blue-dark: #15293e;
+      --blue-mid: #1e3a5f;
+      --blue-bright: #2563eb;
+      --blue-accent: #3b82f6;
+      --steel-light: #64748b;
+      --steel-glow: #94a3b8;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e6e8eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fcfdff 60%, #f7f9fc 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--blue-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 14px 40px 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .definition-bar {
+      background: linear-gradient(135deg, var(--blue-darkest), var(--blue-mid));
+      border-radius: 10px;
+      padding: 12px 20px;
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+
+    .definition-bar .label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .definition-bar h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .definition-bar p {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.78);
+      line-height: 1.45;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 46% 54%;
+      gap: 14px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .chart-panel {
+      background: #fff;
+      border: 1px solid rgba(37, 99, 235, 0.10);
+      border-radius: 10px;
+      padding: 10px 12px;
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.05);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chart-panel .chart-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-light);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-align: center;
+    }
+
+    .chart-panel img {
+      flex: 1;
+      min-height: 0;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .findings-panel {
+      display: grid;
+      grid-template-rows: repeat(4, 1fr);
+      gap: 8px;
+      min-height: 0;
+    }
+
+    .finding-card {
+      background: #fff;
+      border: 1px solid rgba(37, 99, 235, 0.10);
+      border-radius: 10px;
+      padding: 8px 12px;
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.05);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .finding-card::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0; left: 0;
+      width: 3px;
+    }
+
+    .finding-card.c1::before { background: linear-gradient(180deg, #0c1929, #1e3a5f); }
+    .finding-card.c2::before { background: linear-gradient(180deg, #1e3a5f, #2563eb); }
+    .finding-card.c3::before { background: linear-gradient(180deg, #2563eb, #3b82f6); }
+    .finding-card.c4::before { background: linear-gradient(180deg, #3b82f6, #4f93f7); }
+
+    .finding-stat {
+      flex-shrink: 0;
+      width: 68px;
+      text-align: center;
+      padding-top: 2px;
+    }
+
+    .finding-stat .stat-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.05;
+      letter-spacing: -0.5px;
+    }
+
+    .finding-stat .stat-label {
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-top: 2px;
+      line-height: 1.25;
+    }
+
+    .finding-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .finding-text h3 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      line-height: 1.3;
+      margin-bottom: 2px;
+    }
+
+    .finding-text p {
+      font-size: 10.5px;
+      color: var(--text-light);
+      line-height: 1.45;
+    }
+
+    .takeaway {
+      margin-top: 10px;
+      padding: 9px 18px;
+      background: linear-gradient(135deg, var(--blue-darkest), var(--blue-mid));
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .takeaway p {
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.55;
+    }
+
+    .takeaway strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-darkest), var(--blue-mid), var(--blue-accent), var(--steel-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 2px;
+    }
+
+    .slide-nav { position: fixed; bottom: 18px; left: 18px; display: flex; gap: 6px; z-index: 100; }
+    .slide-nav a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: rgba(12,25,41,0.75); color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: background 0.2s, color 0.2s; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; }
+    .slide-nav a:hover { background: rgba(37,99,235,0.9); color: #fff; }
+    .slide-nav a.disabled { opacity: 0.25; pointer-events: none; }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">BayOne <span>Solutions</span></div>
+      <div class="header-title">Pain Point Analysis</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="definition-bar">
+        <div class="label">Evidence from the NX-OS CI Workflow</div>
+        <h2>Pain Point Analysis</h2>
+        <p>4,235 categorized messages spanning April 2023 through April 2026 across a 25-category taxonomy. Off-topic chatter was further subdivided by attachment and link presence, isolating approximately 3,300 actionable technical threads.</p>
+      </div>
+
+      <div class="content-grid">
+
+        <div class="chart-panel">
+          <div class="chart-label">Distribution by Category</div>
+          <img src="images/category_distribution.png" alt="Distribution of message categories across the NX-OS CI workflow channel">
+        </div>
+
+        <div class="findings-panel">
+
+          <div class="finding-card c1">
+            <div class="finding-stat">
+              <div class="stat-value">708</div>
+              <div class="stat-label">Bug/Error Threads</div>
+            </div>
+            <div class="finding-text">
+              <h3>Bug and error reports are the largest category</h3>
+              <p>Bug/Error threads account for 16.7 percent of traffic, with fewer than half receiving any response. Response coverage across the top five resolvable categories averages below 50 percent.</p>
+            </div>
+          </div>
+
+          <div class="finding-card c2">
+            <div class="finding-stat">
+              <div class="stat-value">~30%</div>
+              <div class="stat-label">Help Request Reply Rate</div>
+            </div>
+            <div class="finding-text">
+              <h3>Two-thirds of help requests receive no reply</h3>
+              <p>Question and help requests have 29.8 percent response coverage. Engineers are asking for help and receiving silence the majority of the time, despite the category being the fourth-largest by volume.</p>
+            </div>
+          </div>
+
+          <div class="finding-card c3">
+            <div class="finding-stat">
+              <div class="stat-value">~6h</div>
+              <div class="stat-label">Bug First Response</div>
+            </div>
+            <div class="finding-text">
+              <h3>Build failures wait hours for acknowledgment</h3>
+              <p>Bug/Error threads average 362 minutes to first reply, Test Failure 321 minutes, Infrastructure and Deployment 291 minutes. At the 90th percentile these stretch to 11 to 12 hours, which closely mirrors the PST to IST workday gap.</p>
+            </div>
+          </div>
+
+          <div class="finding-card c4">
+            <div class="finding-stat">
+              <div class="stat-value">12min</div>
+              <div class="stat-label">Blocker Response</div>
+            </div>
+            <div class="finding-text">
+              <h3>Explicit blockers resolve in minutes</h3>
+              <p>When an issue is flagged as a blocker, the average first response time drops to 12 minutes. The organization responds decisively when urgency is communicated. The gap is consistent identification of what should be escalated.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="takeaway">
+        <p><strong>Response coverage is the consistent weakness across every actionable category.</strong> Bug and error threads are the highest volume and receive responses less than half the time. The organization can respond fast when it needs to, as the blocker data shows. AI-driven triage has the most leverage in closing the identification and routing gap.</p>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">02</div>
+    </div>
+  </div>
+
+  <div class="slide-nav">
+    <a href="01_problem_and_agenda.html"><i class="fa-solid fa-chevron-left"></i></a>
+    <a href="02a_pain_point_charts.html"><i class="fa-solid fa-chevron-right"></i></a>
+    <a href="00_title.html" style="margin-left: 6px;"><i class="fa-solid fa-house"></i></a>
+  </div>
+
+</body>
+</html>

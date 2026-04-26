@@ -176,13 +176,22 @@ Before processing any source material, place it in the correct week/day folder s
 
 1. **Read prior context.** Latest summary in `/<client_name>/<opportunity_name>/research/` + `/<client_name>/<opportunity_name>/org_chart.md`. This ensures continuity and avoids re-discovery.
 2. **Pass 1: People file.** Read the full transcript. Write the people document to `/<client_name>/<opportunity_name>/research/<set>_<type>_people_<date>.md`. Always the first file for transcript sets.
-3. **Pass 1 continued: Topic map.** Identify major topics. Write topic map with proposed deep-dive files AND rationale for why each needs its own file. Present to user.
-4. **Ask user.** Get approval on the file list. User may adjust, add, or remove files.
-5. **Spawn parallel agents.** One agent per topic, ALL spawned in a single message for maximum parallelism. Each agent reads the full transcript with ONE topic focus and writes one file. See Agent Prompt Template below.
-6. **Update org chart.** After all agents complete, update `/<client_name>/<opportunity_name>/org_chart.md` with everything learned.
-7. **Bridge document.** If this is not the first set, write `/<client_name>/<opportunity_name>/research/<from>-<to>_changes_<date>.md`. See `.claude/skills/singularity/gold_standards/deliverables/bridge_document_example.md` for the gold standard format. Captures: hypotheses validated/invalidated/open, what we got wrong, what we got right, new information, questions answered.
-8. **Summary document.** Always last. Short overview referencing all files in the set.
-9. **Offer research.** If unfamiliar technologies or terms were encountered, offer to spawn research agents (see Web Research section).
+3. **Open the set (create in-progress marker).** Immediately after the people file is written, create an empty marker file at `/<client_name>/<opportunity_name>/research/.set_<NN>_in_progress` (e.g., `.set_01_in_progress`). This tells the stop hook that the set is mid-flight and exempts it from requiring a summary file until the set closes. Without this marker, the hook will flag the unfinished set as an incomplete document set.
+4. **Pass 1 continued: Topic map.** Identify major topics. Write topic map with proposed deep-dive files AND rationale for why each needs its own file. Present to user.
+5. **Ask user.** Get approval on the file list. User may adjust, add, or remove files.
+6. **Spawn parallel agents.** One agent per topic, ALL spawned in a single message for maximum parallelism. Each agent reads the full transcript with ONE topic focus and writes one file. See Agent Prompt Template below.
+7. **Update org chart.** After all agents complete, update `/<client_name>/<opportunity_name>/org_chart.md` with everything learned.
+8. **Bridge document.** If this is not the first set, write `/<client_name>/<opportunity_name>/research/<from>-<to>_changes_<date>.md`. See `.claude/skills/singularity/gold_standards/deliverables/bridge_document_example.md` for the gold standard format. Captures: hypotheses validated/invalidated/open, what we got wrong, what we got right, new information, questions answered.
+9. **Summary document.** Always last. Short overview referencing all files in the set. Must be at least 200 characters of real content (the stop hook enforces this).
+10. **Close the set (delete the marker).** After the summary is written, delete `/<client_name>/<opportunity_name>/research/.set_<NN>_in_progress`. The set is now closed.
+11. **Offer research.** If unfamiliar technologies or terms were encountered, offer to spawn research agents (see Web Research section).
+
+**Set lifecycle summary:**
+- Marker file exists + no summary = set is in progress (OK if most recent set)
+- Summary file exists + no marker = set is closed
+- No marker + no summary = unclosed set (stop hook will fail)
+- Letter-suffixed files (01a, 01b) are addenda to their parent set and inherit that set's summary. They do not need their own marker or summary.
+- Bridge documents (`01-02_changes_*.md`) are not sets and do not need markers or summaries.
 
 ### Agent Prompt Template
 

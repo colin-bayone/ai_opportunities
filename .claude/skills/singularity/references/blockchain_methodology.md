@@ -81,6 +81,21 @@ This keeps it clear that the supplementary material is event-adjacent, not a new
    - References the other files by name
    - Lets a new Claude session understand the set without reading every detail file
    - Critical because the number and type of detail files varies per set
+   - Must be at least 200 characters of real content (the stop hook enforces this)
+
+### In-Progress Marker (Ephemeral)
+
+Between opening a set (people file written) and closing it (summary written), a hidden marker file tracks that the set is mid-flight:
+
+- Path: `/<client_name>/<opportunity_name>/research/.set_<NN>_in_progress` (e.g., `.set_01_in_progress`)
+- Created: right after the people file is written for a new set
+- Deleted: right after the summary file is written and the set closes
+- Contents: empty. Existence is the entire signal.
+- Lifecycle: ephemeral. Not a blockchain entry. Not committed as content.
+
+The marker exempts the set from the stop hook's per-set summary check while the set is being processed. Without the marker, a set that has only a people file and topic map will be flagged by the hook as an unclosed set.
+
+Only the highest-numbered set may carry a marker. If a marker remains on an older set while a newer set is underway, the hook treats the older set as unclosed. Clean up orphan markers when encountered.
 
 ### Required for Sets Based on Meetings/Calls
 

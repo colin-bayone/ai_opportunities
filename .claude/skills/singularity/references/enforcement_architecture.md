@@ -45,9 +45,24 @@ The stop hook fires every time Claude finishes a response. It:
 |-------|----------|-----------|
 | Methodology exists | `research/00_methodology_*.md` | After engagement created |
 | Org chart exists | `org_chart.md` | After research has started (>1 research file) |
-| Summary exists | `research/*_summary_*.md` | After detail files exist |
+| Per-set summary completion | `research/<NN>_summary_*.md` (≥200 chars) per set | Every set except the most recent must be closed with a summary. The most recent set is exempt if `research/.set_<NN>_in_progress` marker exists. |
+| Hard rules file exists | `references/hard_rules.md` | Always |
 | Presentation spec exists | `references/presentation_design_language.md` | If presentation HTML exists |
 | Slide examples exist | `layout_examples/*.html` | If presentation HTML exists |
+| Gold standard deck exists | `gold_standards/presentations/team_status_update/` | If presentation HTML exists |
+| Sub-singularity reference exists | `references/nested_singularity.md` | If sub-singularity folders exist |
+| Chart back buttons | `class="back-btn"` in chart HTML | If `charts/` subfolder exists |
+
+### Set Completion Logic
+
+Research files are grouped by set prefix (`01`, `02`, `03`, ...). Letter suffixes (`01a`, `01b`) roll up to their parent set. Bridge documents (`01-02_changes_*.md`) and the methodology document (`00_methodology_*.md`) are excluded from set grouping.
+
+For each set:
+- **Closed:** a summary file `<NN>_summary_*.md` exists with ≥200 characters of content.
+- **In progress:** summary is missing AND a marker file `research/.set_<NN>_in_progress` exists AND the set is the highest-numbered one. Exempt from the check.
+- **Unclosed (violation):** summary missing AND either no marker OR not the most recent set. The hook fails.
+
+Markers are created at the start of a set (right after the people file is written) and deleted at the end (after the summary is written). This is documented in Flow 3 of `SKILL.md`.
 
 ### Planned Checks
 

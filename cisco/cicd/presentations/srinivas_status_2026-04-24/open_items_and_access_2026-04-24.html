@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Items and Access - Friday 2026-04-24</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-darkest: #0c1929;
+      --blue-dark: #15293e;
+      --blue-mid: #1e3a5f;
+      --blue-bright: #2563eb;
+      --blue-accent: #3b82f6;
+      --steel-light: #64748b;
+      --steel-glow: #94a3b8;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --amber: #f59e0b;
+      --amber-dark: #b45309;
+      --red-soft: #ef4444;
+      --red-soft-dark: #b91c1c;
+      --green: #10b981;
+      --green-dark: #047857;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e6e8eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1300px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fcfdff 60%, #f7f9fc 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--blue-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 14px 40px 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .definition-bar {
+      background: linear-gradient(135deg, var(--blue-darkest), var(--blue-mid));
+      border-radius: 10px;
+      padding: 12px 20px;
+      margin-bottom: 14px;
+      flex-shrink: 0;
+    }
+
+    .definition-bar .label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .definition-bar h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .definition-bar p {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.78);
+      line-height: 1.45;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    .column-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-shrink: 0;
+    }
+
+    .column-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #fff;
+    }
+
+    .column.open .column-icon { background: linear-gradient(135deg, var(--blue-mid), var(--blue-accent)); }
+    .column.access .column-icon { background: linear-gradient(135deg, var(--amber-dark), var(--amber)); }
+
+    .column-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0.3px;
+    }
+
+    .column-subtitle {
+      font-size: 10.5px;
+      font-weight: 500;
+      color: var(--text-light);
+      margin-left: auto;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .item-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .item-card {
+      background: #fff;
+      border: 1px solid rgba(37, 99, 235, 0.10);
+      border-radius: 9px;
+      padding: 10px 12px 10px 14px;
+      box-shadow: 0 1px 4px rgba(37, 99, 235, 0.04);
+      position: relative;
+    }
+
+    .item-card::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0; left: 0;
+      width: 3px;
+      border-radius: 9px 0 0 9px;
+    }
+
+    .item-card.in-progress::before { background: linear-gradient(180deg, var(--blue-mid), var(--blue-accent)); }
+    .item-card.advancing::before { background: linear-gradient(180deg, var(--green-dark), var(--green)); }
+    .item-card.blocked::before { background: linear-gradient(180deg, var(--red-soft-dark), var(--red-soft)); }
+    .item-card.waiting::before { background: linear-gradient(180deg, var(--amber-dark), var(--amber)); }
+
+    .item-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .item-title {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.3;
+    }
+
+    .item-pill {
+      display: inline-block;
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 10px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .item-card.in-progress .item-pill { background: #dbeafe; color: var(--blue-bright); border: 1px solid rgba(37, 99, 235, 0.35); }
+    .item-card.advancing .item-pill { background: #d1fae5; color: var(--green-dark); border: 1px solid var(--green); }
+    .item-card.blocked .item-pill { background: #fee2e2; color: var(--red-soft-dark); border: 1px solid var(--red-soft); }
+    .item-card.waiting .item-pill { background: #fef3c7; color: var(--amber-dark); border: 1px solid var(--amber); }
+
+    .item-body {
+      font-size: 10.5px;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+
+    .item-body strong { color: var(--primary); font-weight: 600; }
+
+    .item-ask {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 10px;
+      color: var(--blue-bright);
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .item-ask i { font-size: 10px; margin-top: 2px; flex-shrink: 0; }
+
+    .takeaway {
+      margin-top: 12px;
+      padding: 10px 18px;
+      background: linear-gradient(135deg, var(--blue-darkest), var(--blue-mid));
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .takeaway p {
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.88);
+      line-height: 1.5;
+    }
+
+    .takeaway strong { color: #fff; font-weight: 600; }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-darkest), var(--blue-mid), var(--blue-accent), var(--steel-glow));
+      border-radius: 2px;
+    }
+
+    .slide-footer-text {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      font-size: 10.5px;
+      color: var(--text-light);
+    }
+
+    .slide-footer-text .meta-date {
+      font-weight: 500;
+    }
+
+    .slide-footer-text .meta-number {
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">BayOne <span>Solutions</span></div>
+      <div class="header-title">Weekly Status and Access Items</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="definition-bar">
+        <div class="label">Week of April 21</div>
+        <h2>Open Items and Access Status</h2>
+        <p>Three workstreams advanced since Monday. Access items remain the critical-path constraint. The permanent Aurora Development Server tenant approval has not reflected in the portal for three weeks, which gates deployment on the DeepSight platform.</p>
+      </div>
+
+      <div class="two-column">
+
+        <div class="column open">
+          <div class="column-header">
+            <div class="column-icon"><i class="fa-solid fa-arrows-spin"></i></div>
+            <div class="column-title">Open Items</div>
+            <div class="column-subtitle">In Progress</div>
+          </div>
+          <div class="item-list">
+
+            <div class="item-card advancing">
+              <div class="item-head">
+                <div class="item-title">Issue Categorization Skill and Dashboard</div>
+                <span class="item-pill">Advancing</span>
+              </div>
+              <div class="item-body">
+                <strong>78 categories</strong> (12 top-level, 66 sub-level) classified from three years of NX-OS CI workflow chat. SQLite backend, Apache eCharts HTML dashboard with weekly, monthly, and quarterly views plus heat maps, treemaps, and drill-down. Skill pushed to the CI/CD repository.
+              </div>
+              <div class="item-ask"><i class="fa-solid fa-comment-dots"></i><span>Confirm target for real-time deployment so release managers can consume the dashboard continuously, not as a one-time report.</span></div>
+            </div>
+
+            <div class="item-card in-progress">
+              <div class="item-head">
+                <div class="item-title">CAT MCP Integration</div>
+                <span class="item-pill">Tools Identified</span>
+              </div>
+              <div class="item-body">
+                CAT MCP installed from the DeepSight marketplace in VS Code. <strong>Four tools identified</strong>. Gap analysis underway against the CAT category issues. End-to-end path: CAT issues, CAT MCP lookup, intermediate reply system, WebEx bot response.
+              </div>
+              <div class="item-ask"><i class="fa-solid fa-comment-dots"></i><span>Clarify the deployment form for the WebEx bot so the team can target the right integration surface.</span></div>
+            </div>
+
+            <div class="item-card advancing">
+              <div class="item-head">
+                <div class="item-title">Build Log Commit Attribution</div>
+                <span class="item-pill">Script Working</span>
+              </div>
+              <div class="item-body">
+                Script that identifies <strong>which commit caused a given build failure</strong> from log files and build metadata is working on the temporary ADS machine. Bazel per-build dependency graph confirmed available as a built-in command. Full CI/CD job dependency graph requested from Justin.
+              </div>
+              <div class="item-ask"><i class="fa-solid fa-comment-dots"></i><span>Availability of a full-job Bazel dependency graph, and confirmation that GitHub dependency information can be used for PR-to-PR mapping.</span></div>
+            </div>
+
+            <div class="item-card advancing">
+              <div class="item-head">
+                <div class="item-title">WebEx Bot and eCharts Skills</div>
+                <span class="item-pill">On Repo</span>
+              </div>
+              <div class="item-body">
+                <strong>WebEx bot skill and the eCharts skill for Codex</strong> both completed and pushed to the CI/CD repository on the webex-skills branch. Includes overview documentation and the reference on how the Cisco CI/CD pipeline can leverage these skills.
+              </div>
+              <div class="item-ask"><i class="fa-solid fa-comment-dots"></i><span>Branch merge strategy for the webex-skills branch, and the deployment target for the bot.</span></div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="column access">
+          <div class="column-header">
+            <div class="column-icon"><i class="fa-solid fa-key"></i></div>
+            <div class="column-title">Access Items</div>
+            <div class="column-subtitle">Srinivas Help Needed</div>
+          </div>
+          <div class="item-list">
+
+            <div class="item-card blocked">
+              <div class="item-head">
+                <div class="item-title">Permanent Aurora Development Server</div>
+                <span class="item-pill">3 Weeks Blocked</span>
+              </div>
+              <div class="item-body">
+                Tenant approval granted by Mahaveer in person on April 14 but <strong>not reflecting in the provisioning portal</strong>. Without the permanent server, the team cannot onboard DeepSight or deploy anything Srinivas asks for by end of next week.
+              </div>
+              <div class="item-ask"><i class="fa-solid fa-comment-dots"></i><span>Direct intervention to unblock the tenant portal or authorize an alternative deployment path.</span></div>
+            </div>
+
+            <div class="item-card blocked">
+              <div class="item-head">
+                <div class="item-title">NX Repository Access for CAT MCP</div>
+                <span class="item-pill">Execution Blocked</span>
+              </div>
+              <div class="item-body">
+                CAT MCP tools cannot be executed end-to-end without <strong>commit approval tracking access on the NX repository</strong>. Git LFS error on initial setup. Without repository-level access the four tools are visible but non-functional.
+              </div>
+              <div class="item-ask"><i class="fa-solid fa-comment-dots"></i><span>Grant or route NX repository access so the CAT MCP end-to-end path can be validated this week.</span></div>
+            </div>
+
+            <div class="item-card waiting">
+              <div class="item-head">
+                <div class="item-title">CI/CD Repository from Srinivas</div>
+                <span class="item-pill">Pending Share</span>
+              </div>
+              <div class="item-body">
+                Committed on April 22 as the <strong>canonical repository for all documentation, design, architecture, and source code</strong> from BayOne. Pending share. Skills and documents are staged locally and ready to commit on receipt.
+              </div>
+              <div class="item-ask"><i class="fa-solid fa-comment-dots"></i><span>Share the repository link so the team can begin checking in all artifacts.</span></div>
+            </div>
+
+            <div class="item-card waiting">
+              <div class="item-head">
+                <div class="item-title">Definition of "Deployed by Next Friday"</div>
+                <span class="item-pill">Needs Clarity</span>
+              </div>
+              <div class="item-body">
+                <strong>Target stated as deployed on the DeepSight platform for end of next week</strong>. Team needs clarity on the minimum acceptable form: feature-level demo on DeepSight, MCP-driven WebEx bot responding in the NX-OS CI group, or something narrower.
+              </div>
+              <div class="item-ask"><i class="fa-solid fa-comment-dots"></i><span>One sentence defining the minimum viable form of "deployed" so the team can converge on it.</span></div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-footer-text">
+        <span class="meta-date">Friday, April 24, 2026</span>
+        <span class="meta-number">01 / 01</span>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

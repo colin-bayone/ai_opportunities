@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 02a: Pain Point Analysis - Response Time and Volume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-darkest: #0c1929;
+      --blue-dark: #15293e;
+      --blue-mid: #1e3a5f;
+      --blue-bright: #2563eb;
+      --blue-accent: #3b82f6;
+      --steel-light: #64748b;
+      --steel-glow: #94a3b8;
+      --primary: #0f172a;
+      --text: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #e6e8eb;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #ffffff 0%, #fcfdff 60%, #f7f9fc 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .header-logo { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .header-logo span { color: var(--blue-accent); }
+    .header-title { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; }
+
+    .slide-content {
+      flex: 1;
+      min-height: 0;
+      padding: 14px 40px 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .definition-bar {
+      background: linear-gradient(135deg, var(--blue-darkest), var(--blue-mid));
+      border-radius: 10px;
+      padding: 12px 20px;
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+
+    .definition-bar .label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .definition-bar h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .definition-bar p {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.78);
+      line-height: 1.45;
+    }
+
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .chart-panel {
+      background: #fff;
+      border: 1px solid rgba(37, 99, 235, 0.10);
+      border-radius: 10px;
+      padding: 10px 14px 12px;
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.05);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .chart-panel::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .chart-panel.c1::before { background: linear-gradient(90deg, #1e3a5f, #2563eb); }
+    .chart-panel.c2::before { background: linear-gradient(90deg, #2563eb, #3b82f6); }
+
+    .chart-panel .chart-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .chart-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .chart-panel.c1 .chart-icon { background: linear-gradient(135deg, #1e3a5f, #2563eb); }
+    .chart-panel.c2 .chart-icon { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+
+    .chart-title-block {
+      flex: 1;
+    }
+
+    .chart-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+
+    .chart-subtitle {
+      font-size: 10px;
+      color: var(--text-light);
+      line-height: 1.3;
+      margin-top: 1px;
+    }
+
+    .chart-image-wrap {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .chart-image-wrap img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .chart-caption {
+      font-size: 10.5px;
+      color: var(--text-light);
+      line-height: 1.4;
+      margin-top: 6px;
+      padding-top: 6px;
+      border-top: 1px solid var(--border);
+    }
+
+    .chart-caption strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .connection-strip {
+      margin-top: 10px;
+      padding: 8px 18px;
+      background: linear-gradient(135deg, var(--blue-darkest), var(--blue-mid));
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .connection-strip p {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.5;
+    }
+
+    .connection-strip strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .slide-footer {
+      flex-shrink: 0;
+      padding: 8px 40px 12px;
+    }
+
+    .slide-footer-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-darkest), var(--blue-mid), var(--blue-accent), var(--steel-glow));
+      border-radius: 2px;
+    }
+
+    .slide-number {
+      text-align: right;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-accent);
+      letter-spacing: 2px;
+    }
+
+    .slide-nav { position: fixed; bottom: 18px; left: 18px; display: flex; gap: 6px; z-index: 100; }
+    .slide-nav a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: rgba(12,25,41,0.75); color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: background 0.2s, color 0.2s; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; }
+    .slide-nav a:hover { background: rgba(37,99,235,0.9); color: #fff; }
+    .slide-nav a.disabled { opacity: 0.25; pointer-events: none; }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-header">
+      <div class="header-logo">BayOne <span>Solutions</span></div>
+      <div class="header-title">Pain Point Analysis: Detail</div>
+    </div>
+
+    <div class="slide-content">
+      <div class="definition-bar">
+        <div class="label">Detail Views</div>
+        <h2>Response Time and Volume Over Time</h2>
+        <p>Two supporting views for the findings on the prior slide. Response time is shown only for categories where a technical response is the expected resolution path. Volume is shown for the top five categories by total count.</p>
+      </div>
+
+      <div class="charts-grid">
+
+        <div class="chart-panel c1">
+          <div class="chart-header">
+            <div class="chart-icon"><i class="fa-solid fa-clock"></i></div>
+            <div class="chart-title-block">
+              <div class="chart-title">Average First Response Time</div>
+              <div class="chart-subtitle">Actionable technical categories only. Minutes from post to first reply.</div>
+            </div>
+          </div>
+          <div class="chart-image-wrap">
+            <img src="images/avg_response_time.png" alt="Average first response time by actionable issue category">
+          </div>
+          <div class="chart-caption">
+            Range spans from <strong>12 minutes for explicit blockers</strong> to <strong>362 minutes for Bug and Error threads</strong>. The organization responds quickly when urgency is flagged. The gap is consistent identification of what should be escalated and routed.
+          </div>
+        </div>
+
+        <div class="chart-panel c2">
+          <div class="chart-header">
+            <div class="chart-icon"><i class="fa-solid fa-chart-line"></i></div>
+            <div class="chart-title-block">
+              <div class="chart-title">Weekly Message Volume Trend</div>
+              <div class="chart-subtitle">Top five categories, April 2023 through April 2026</div>
+            </div>
+          </div>
+          <div class="chart-image-wrap">
+            <img src="images/weekly_trend.png" alt="Weekly message volume trend for top 5 categories from April 2023 through April 2026">
+          </div>
+          <div class="chart-caption">
+            Weekly volume has roughly <strong>tripled over the measurement period</strong>. Early 2023 averaged 5 to 10 actionable messages per week; 2025 saw peaks above 80. Manual triage approaches do not scale with this growth.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="connection-strip">
+        <p>These patterns shaped the <strong>proposed build log architecture</strong> on the next slides: cheap automated triage for the bulk of actionable errors, with escalation reserved for novel or compound cases.</p>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="slide-footer-bar"></div>
+      <div class="slide-number">02a</div>
+    </div>
+  </div>
+
+  <div class="slide-nav">
+    <a href="02_pain_point_findings.html"><i class="fa-solid fa-chevron-left"></i></a>
+    <a href="02b_pain_point_additional.html"><i class="fa-solid fa-chevron-right"></i></a>
+    <a href="00_title.html" style="margin-left: 6px;"><i class="fa-solid fa-house"></i></a>
+  </div>
+
+</body>
+</html>
