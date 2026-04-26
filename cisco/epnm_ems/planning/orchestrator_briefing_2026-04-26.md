@@ -1,9 +1,26 @@
 # Orchestrator Briefing — Cisco EPNM-to-EMS POC
 
 **Audience:** Claude orchestrator session running on the Cisco-issued machine, currently coordinating the actual build work for the EPNM-to-EMS POC.
-**Author session:** Claude session running on Colin's BayOne laptop. Has full access to the engagement research library at `/home/cmoore/programming/ai_opportunities/cisco/epnm_ems/`.
+**Author session:** Claude session running on Colin's BayOne laptop. Has full access to the engagement research library on that machine.
 **Briefing date:** 2026-04-26 (Saturday)
 **Briefing purpose:** Operational handoff. Captures everything from the April 24 status check-in with Guhan and Selva that affects how the build, test, commit, and demo phases should proceed. Read this fully before continuing work. Companion file: `09_meeting_guhan_scope_signals_and_asks_2026-04-24.md` (people-focused; this file is action-focused).
+
+---
+
+## Important: paths in this document are from the originating machine
+
+Every absolute path in this briefing and in the `forge_pattern_for_cisco/` reference set was written from Colin's BayOne laptop, where the engagement files live at `/home/cmoore/programming/ai_opportunities/cisco/epnm_ems/`. When you receive these materials on the Cisco-issued machine, those exact paths will not exist.
+
+**Before relying on any path in this briefing, ask Colin directly:**
+
+- Where on the Cisco machine has he placed the `forge_pattern_for_cisco/` folder (files 01 through 07)?
+- Where on the Cisco machine has he placed this orchestrator briefing?
+- Which of the engagement files (research library, org chart, decisions log, progress log) are also on the Cisco machine, and at what paths?
+- Which files are NOT on the Cisco machine — for those, this briefing's content is the substitute, and you should not chase the path.
+
+Substitute the Cisco-machine paths for the BayOne-laptop paths throughout. The relative file relationships (e.g., "file 05 is in the same folder as file 06") still hold; only the absolute prefix changes.
+
+The Singularity skill referenced as the structural template is at `/home/cmoore/programming/ai_opportunities/.claude/skills/singularity/` on the BayOne laptop. Colin will let you know whether it is also on the Cisco machine and where; if it is not, file 05 in the forge_pattern_for_cisco/ folder is a complete enough extraction that the construction work can proceed without direct access to the original.
 
 ---
 
@@ -30,34 +47,58 @@ Colin told Guhan and Selva that the POC is "ready, conversion is done; we are ju
 
 ### Actual state as of the start of the weekend
 
-The conversion is in late-stage build. It is NOT done. Colin chose forward-leaning framing in the meeting deliberately (preserves Cisco confidence at a Friday-evening status check, multiple days of runway remain, on-track work). The orchestrator's job for the weekend and through Tuesday is to close the gap so the communicated state and the actual state align.
+The conversion is in late-stage build. It is NOT done. Colin chose forward-leaning framing in the meeting deliberately (preserves Cisco confidence at a Friday-evening status check, multiple days of runway remain, on-track work).
 
-This gap is the most important context for prioritization. Treat the Friday framing as a commitment to land by Tuesday, not as a description of current state.
+### The workflow has changed: forge pattern is now active
 
-### Demo timeline
+Per Saurav's direction (relayed Friday), the remaining work shifts from monolithic-build mode to issue-driven forge-pattern mode. Concretely:
 
-- **Mon Apr 27:** Cisco-side VM access provisioned (per Selva). Comparative validation testing can begin.
+- Each remaining piece of build work is shaped as a GitHub issue on the relevant repository.
+- Every in-scope issue carries the `agentic` label so the Cisco India team can filter to BayOne-driven work.
+- A new skill — the EPNM forge skill — processes one issue at a time: sets up a worktree on the `agentic UI conversion` branch, runs an 8-phase implementation flow with hook-enforced compliance, opens a draft PR linked to the issue, and Colin reviews/merges.
+- Issues are bite-sized with explicit dependency declarations. Smaller and more numerous beats larger and fewer — small issues are easier for the India team to review.
+
+This is not optional and not provisional. The forge pattern is active. If it adds unnecessary burden once we are running it, we will revisit. For now, all remaining build work flows through this pattern.
+
+The companion documentation set for constructing the skill lives at `cisco/epnm_ems/planning/forge_pattern_for_cisco/`. Files 01 through 07. The Singularity skill in this repository (`/home/cmoore/programming/ai_opportunities/.claude/skills/singularity/`) is the canonical structural template for self-containment, frontmatter hooks, folder layout, and agent dispatch — see file 05.
+
+### Demo timeline (unchanged)
+
+- **Mon Apr 27:** Cisco-side VM access provisioned (per Selva). Comparative validation testing can begin against live instances.
 - **Tue Apr 28:** Touch-base call between Colin and Selva. Demo slot locks. Code review window confirmed.
 - **Wed Apr 29:** India team code review (developer-to-developer; Guhan not required).
 - **Wed-Thu Apr 29-30:** Demo with Guhan, Selva, India team. Time-zone window: PST morning / EST midday / IST evening.
 
-The build needs to be demonstrably done by end-of-day Monday. The India team will be reading the commits Tuesday-Wednesday.
+The build needs to be demonstrably done by end-of-day Monday. The India team will be reading the commits Tuesday-Wednesday — and now those commits will be coming through forge-skill-produced PRs, which is favorable for the review.
 
 ---
 
 ## Build priorities through Tuesday
 
-In order:
+The priority order changes with the forge-pattern shift. In order:
 
-1. **Close out remaining conversion work on inventory and fault management screens.** Inventory: network devices, device 360, device details. Fault management: alarms, events, syslogs. Toggle behavior on each. Match EMS visual and behavioral parity in the toggle's classic-view mode.
+1. **Build the EPNM forge skill itself.** This is the highest-priority item this weekend. The downstream work (issue processing → PRs → review → merge) cannot start until the skill exists. Use SkillForge as the construction tool. Use the documentation set in `cisco/epnm_ems/planning/forge_pattern_for_cisco/` as the reference. Specifically:
+   - File 06 is the skill specification — what to build.
+   - File 05 is the structural template — how to shape it (Singularity pattern: frontmatter hooks, scripts/ folder, references/ folder, full self-containment).
+   - File 07 is the design references guide — the substantive technical references for Java Swing / Dojo / Spring Boot / Angular that you author by reading the actual codebases.
+   - Files 01-04 are the DjangoForge analytical reference set — mine as needed for workflow logic, scripts, and references patterns.
+   - Bundle worktree creation as a script inside the skill folder. Do NOT depend on a separate worktree skill.
 
-2. **Wire a local-staged comparative test harness.** The Playwright agentic test suite is built and waiting. Instead of waiting strictly on Monday VM provisioning, wire the tests against locally-staged data so testing is not gated on Cisco-side VMs. If Monday VMs are delayed, work continues. If they land on time, swap targets and run against live instances.
+2. **Author the four design references** (per file 07) by walking the actual EPNM and EMS codebases. Source stack reference, target stack reference, conversion patterns reference, best practices and anti-patterns reference. These are substantive — plan for real depth, not boilerplate. The other Claude session does not have repository access and cannot author these.
 
-3. **Self-review the generated output for memory and system load.** Guhan asked for an explicit code review with the Cisco EMS team that evaluates how much memory the converted UI consumes and how much additional load it puts on the system. Pre-empt this review. Walk through the generated code with resource impact in mind. Look for: bundle-size inflation, unnecessary runtime dependencies, redundant DOM traversal, memory leaks in toggle-state management, render-thrashing on switch. Document any findings in a short markdown note in `cisco/epnm_ems/planning/` so Colin can surface anything notable on his terms before the EMS team finds it.
+3. **Create issues for the remaining conversion work** with the `agentic` label. Inventory screens (network devices, device 360, device details) and fault management screens (alarms, events, syslogs). Bite-sized; one screen or one cohesive sub-screen per issue. Explicit dependency declarations between issues where one screen's work depends on another's. Coordinate with Colin and Saurav on issue shape before locking the set.
 
-4. **Maintain the audit-ready commit pattern across all remaining commits.** See "Audit-ready commit pattern" below for specifics. The India team is reviewing these commits, and the integrity of the audit pattern is itself part of the deliverable.
+4. **Run the forge skill on the first issue end-to-end.** The first run will surface deviations from the spec in file 06. Iterate on the skill based on what you learn. Once the first PR is merged, parallelize: run the skill on multiple independent issues concurrently if Anthropic credits and machine resources allow.
 
-5. **Update the gap analysis documentation if anything new is discovered during the close-out.** The 14-repo mapping is the strategic centerpiece of this engagement. Any discoveries during build close-out that refine the gap picture should be reflected in the mapping docs on the corresponding `agentic UI conversion` branches.
+5. **Pre-empt the memory and load review concern as Phase 5.5 of the forge skill.** Guhan's gating ask is now baked into the workflow. Each PR's Phase 5.5 artifact is the evidence Colin can surface to the EMS team before they review. Specific checks: bundle-size delta, initial-load impact, toggle-state memory behavior, render thrashing on switch, backend load profile, memory leaks in long sessions, dependency footprint deltas. Document findings in the per-issue Phase 5.5 artifact and aggregate across issues at the end.
+
+6. **Maintain the audit-ready commit pattern across all forge-produced commits.** This is now enforced by the skill itself (Phase 7.5 verifies it). The pattern: commit attribution conventions, in-line decision rationale (Colin's human-in-the-loop authorship), agent-generated content tagging distinct from human-authored content, branch consistency on `agentic UI conversion` off `develop`. The reference file inside the new skill (`audit_ready_commit_pattern.md`) is the spec.
+
+7. **Update the 14-repo mapping documentation** if anything new is discovered during issue processing. Each `agentic UI conversion` branch carries the mapping artifacts; refine as you go.
+
+### Local-staged comparative test harness (still valid)
+
+The Playwright agentic test suite is built and waiting. Wire it against locally-staged data as a fallback in case Monday VM provisioning slips. The forge skill's Phase 7 (verification) integrates with this — when VMs are available, swap targets to live instances; if not, run against staged data.
 
 ---
 
@@ -81,31 +122,33 @@ The orchestrator should not, under any circumstance, expand scope into these are
 
 ## Audit-ready commit pattern
 
-The Cisco India team will review these commits. The pattern is part of the deliverable. Apply consistently:
+The Cisco India team will review these commits. The pattern is part of the deliverable, and the forge skill enforces it (Phase 7.5). Apply consistently:
 
 ### Commit attribution
-Commits should be authored such that the Cisco team has clear ownership semantics. Colin established this in earlier work — preserve it. Each commit author and committer field, message metadata, and any `Co-authored-by` lines should reflect the established pattern in the existing commit history on the `agentic UI conversion` branches. Read recent commits on those branches before adding new ones to match the pattern exactly.
+Commits should be authored such that the Cisco team has clear ownership semantics. Colin established this in earlier work — preserve it. Each commit author and committer field, message metadata, and any `Co-authored-by` lines should reflect the established pattern in the existing commit history on the `agentic UI conversion` branches. Read recent commits on those branches before adding new ones to match the pattern exactly. The forge skill's Phase 7.5 compliance script verifies the pattern is intact before the PR is moved from draft to ready.
 
 ### In-line decision rationale (human-in-the-loop)
 Architectural and pattern decisions made during the conversion should be documented inline with explicit rationale, authored by Colin, and tagged distinctly from agent-generated content. The decision rationale is the human-in-the-loop part — it is not generated. It is Colin's judgment captured in commit messages or in adjacent markdown files within the branch.
 
-When the orchestrator encounters a decision point during the build (multiple valid implementation choices, ambiguity in the gap, behavioral differences requiring a call), the orchestrator does NOT make the call silently. The decision and its rationale are surfaced explicitly, attributable to Colin's stated direction, and committed with that rationale in plain prose.
+When the forge skill encounters a decision point during issue processing (multiple valid implementation choices, ambiguity in the gap, behavioral differences requiring a call), the skill does NOT make the call silently. The decision and its rationale are surfaced explicitly during Phase 5 (plan-mode user-approval gate), attributable to Colin's stated direction, and committed with that rationale in plain prose.
 
 ### Agent-generated content tagging
 Files produced by agentic processes (the ~250 mapping documentation files, generated code) should be distinguishable from human-authored content. The existing branch organization already separates these. Maintain that separation. Do not co-mingle generated documentation with human decision rationale.
 
 ### Branches and naming
-Each of the 14 repositories has a branch named `agentic UI conversion` based on the repo's `develop` branch (per Akhil's note in the Confluence page from Set 07). Continue committing to that branch. Do not create new branches. Do not rebase or squash without explicit instruction — the branch is the audit trail.
+Each of the 14 repositories has a branch named `agentic UI conversion` based on the repo's `develop` branch (per Akhil's note in the Confluence page from Set 07). Continue committing to that branch from each forge run's worktree. Do not create new branches. Do not rebase or squash without explicit instruction — the branch is the audit trail.
 
 ---
 
-## Memory and load self-review (concrete steps)
+## Memory and load self-review (Phase 5.5 of the forge skill)
 
 This is the highest-priority pre-emption ahead of the demo. Guhan's words: "What is getting generated? I mean, this is generated, but what is running on the system? Right? Let's look under the code with somebody in the EMS team and see because we want to be conscious of how much additional memory this is taking, how much additional load is putting on the system."
 
-Walk through the generated/converted code for each of inventory and fault management with these specific concerns:
+In the forge workflow, this becomes Phase 5.5 — runs after the plan is approved (Phase 5) and before implementation (Phase 6). Each issue's PR carries its Phase 5.5 artifact in the branch. Across issues, an aggregator script (`memory_load_aggregate.py` in the skill's `scripts/`) rolls up findings.
 
-1. **Bundle size impact.** What is the byte-size delta in the EMS UI bundle from adding the classic-view packages? If the toggle ships parallel packages, each adds bundle weight. Measure it. Note it.
+The Phase 5.5 checklist for each issue:
+
+1. **Bundle size impact.** What is the byte-size delta in the EMS UI bundle from adding the classic-view packages this issue introduces? If the toggle ships parallel packages, each adds bundle weight. Measure it. Note it.
 
 2. **Initial-load impact.** Does the classic UI lazy-load on toggle, or is it loaded up-front with the modern UI? Lazy is better. If up-front, justify or change.
 
@@ -119,7 +162,7 @@ Walk through the generated/converted code for each of inventory and fault manage
 
 7. **Dependency footprint.** What did the conversion add to the dependency tree? Are any dependencies redundant with what EMS already has? Deduplicate where possible.
 
-Document findings in `cisco/epnm_ems/planning/memory_load_self_review_2026-04-26.md` (or similar dated filename). Even a short note that says "no significant findings" is valuable — it tells Colin he can answer the EMS team's review with confidence.
+The skill's `references/memory_load_self_review.md` is the bundled spec for this checklist. The Stop hook verifies the Phase 5.5 artifact exists before allowing Phase 6 (implementation) to begin. Even a short artifact that says "no significant findings" is valuable — it tells Colin he can answer the EMS team's review with confidence.
 
 ---
 
@@ -173,8 +216,9 @@ For full technical research see `08_research_*.md` files. Conversion patterns re
 
 ## Anchor file paths for the orchestrator
 
-If the orchestrator needs to reference engagement state during the weekend:
+The paths shown below are the originating-machine (BayOne laptop) paths. Ask Colin where the equivalents live on the Cisco machine before using any of them. The relative relationships (e.g., "files 01-07 are siblings in the forge_pattern_for_cisco/ folder") hold; only the absolute prefix changes.
 
+### Engagement state (origin paths)
 - Engagement root: `cisco/epnm_ems/`
 - Research library: `cisco/epnm_ems/research/`
 - Latest summary: `cisco/epnm_ems/research/09_meeting_summary_2026-04-24.md`
@@ -183,4 +227,24 @@ If the orchestrator needs to reference engagement state during the weekend:
 - Progress (actual state): `cisco/epnm_ems/progress/progress_2026-04-24.md`
 - This briefing: `cisco/epnm_ems/planning/orchestrator_briefing_2026-04-26.md`
 
-If the orchestrator is on the Cisco machine and these paths are not accessible there directly, they will be transferred or referenced via the means Colin sets up.
+If any of these files are not on the Cisco machine, do not chase them. The summaries, decisions, and progress notes that matter for the forge construction are quoted or paraphrased in this briefing and in files 01-07. The originals are reference, not blocking.
+
+### Forge skill construction reference set (origin path)
+- Folder: `cisco/epnm_ems/planning/forge_pattern_for_cisco/`
+- File 01: DjangoForge anatomy and self-containment audit
+- File 02: DjangoForge workflow phases and orchestration
+- File 03: DjangoForge scripts and hooks deep-dive
+- File 04: DjangoForge references and standards
+- File 05: Singularity self-containment and structural pattern (the structural template)
+- File 06: EPNM forge skill specification (the build target)
+- File 07: Design references to author (Java Swing, Spring Boot, Angular, conversion patterns, best practices)
+
+This is the most important folder to locate on the Cisco machine. Ask Colin first.
+
+### Structural template skill (origin path)
+- Singularity skill: `/home/cmoore/programming/ai_opportunities/.claude/skills/singularity/`
+- Frontmatter hook pattern, folder layout, mandatory startup pattern, agent prompt template — model after this.
+- File 05 in the forge construction folder extracts the relevant patterns; if the original Singularity skill is not on the Cisco machine, file 05 is sufficient.
+
+### Codebases (Cisco machine — these you have)
+The 14 EPNM and EMS repositories live on the Cisco machine. You have direct access. Their paths and clone structure are something Colin will confirm if not already in the engagement records you receive. Walking these is part of the design-references authoring work in file 07.
