@@ -50,7 +50,7 @@ No new scope items being added by BayOne this week. The plan above reflects the 
 
 ## Future pipeline
 
-The CI/CD AI Assistant application is deployed on ADS with the CAT MCP plugged into the backend. Static FAQ entries cover environmental issues and recurring questions for which the answers are already known. Dynamic answers are handled by the CAT MCP, which queries the NX repository at request time. Both routes feed the same chat user interface. A WebEx bot deployed on the NX-OS CI pipeline shares the same backend so users can ask the same questions from either surface. Initial LLM access runs through the circuit API. DeepSight credentials migrate in once issued.
+The CI/CD AI Assistant application will be deployed on ADS with the CAT MCP plugged into the backend. Static FAQ entries will cover environmental issues and recurring questions for which the answers are already known. Dynamic answers will be handled by the CAT MCP, which will query the NX repository at request time. Both routes will feed the same chat user interface. A WebEx bot deployed on the NX-OS CI pipeline will share the same backend so users can ask the same questions from either surface. Initial LLM access will run through the circuit API. DeepSight credentials will migrate in once issued.
 
 ```mermaid
 flowchart LR
