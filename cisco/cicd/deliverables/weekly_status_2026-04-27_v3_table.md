@@ -39,7 +39,16 @@ Regression protection framework. UI automation (Playwright-based) plus backend v
 
 ## Friday May 1 deployment target
 
-The CI/CD application will run on ADS with a chat interface that handles both static and dynamic question paths. Static FAQ entries will cover environmental issues and recurring questions for which answers already exist. Dynamic answers will be handled by the CAT MCP, which will query the NX repository at request time. Both routes will feed the same chat interface. A WebEx bot deployed on the NX-OS CI pipeline will share the same backend so users can ask the same questions from either surface. LLM access will run through DeepSight credentials once issued.
+This is the first deployment of the chat-based assistance in the CI/CD application, with a paired WebEx bot on the NX-OS CI pipeline. The initial release is a static and dynamic FAQ. Static entries cover environmental issues and recurring questions for which answers already exist. Dynamic answers come through the CAT MCP, which queries the NX repository at request time. Both surfaces share the same backend so users can ask the same questions from either the chat in the application or the WebEx bot.
+
+This is a first pass, with incremental improvement to follow as the team uses it and as feedback from team usage and internal testing comes in.
+
+The deployment is gated by two Cisco-side dependencies:
+
+1. **ADS environment.** Deployment requires an ADS to run the application. If a Permanent ADS is not available in time, the first release will run on a Temp ADS as the interim path. ADS resource availability sits with the Cisco platform team.
+2. **Language model API credentials.** Language model features require a DeepSight-provided API key. If the DeepSight key is not yet issued, the first release will run on the existing Circuit API key as an interim path, with known limitations until the DeepSight key is available.
+
+Pre-deployment internal testing has been limited by these same access constraints. Validation will continue post-deployment as access is established and feedback comes in.
 
 ---
 
