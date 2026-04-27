@@ -29,7 +29,9 @@ The items below are on the critical path for Friday's first deployment. Each nee
    - **What is the language model access path for the Friday deployment, and is interim Circuit API use acceptable until the production path is in place?**
 3. **WebEx bot deployment infrastructure.** The bot backend is built. Going live requires meeting WebEx bot compliance criteria and completing IT audit and approval, which issues the bot name, ID, and access token. The current bot was flagged as non-compliant on April 27.
    - **Can you point us to the WebEx bot compliance criteria so the rebuild can meet them on resubmission?**
-   - **What is the Friday expectation for the WebEx bot, given that audit and approval timing is outside BayOne's control? Prior turnaround was more than a week. BayOne can resubmit on Wednesday once the criteria are in hand, but for the bot to be live on Friday the audit and approval must complete by then. Is the more-than-a-week turnaround the standard expectation, or is faster turnaround possible for this submission?**
+   - **What is the Friday expectation for the WebEx bot, given that audit and approval timing is outside BayOne's control?**
+     - Prior turnaround was more than a week.
+     - BayOne can resubmit on Wednesday once the criteria are in hand.
    - **Caveat on the deployment ID:** BayOne can deploy the bot under one of our Cisco-issued user IDs to meet the Friday timeline. The proper pattern would be a service account or centralized deployment ID if one is available, since deployment under a personal user account ties the bot's lifecycle to that individual. Flagging as a caveat, not a blocker.
 4. **CAT MCP querying mechanism.** Chat issues arrive with PR IDs. The CAT MCP requires CAT IDs to query. A PR-to-CAT mapping is required for the dynamic answer path to function end to end.
    - **Does this mapping exist on the Cisco side, or is BayOne expected to construct it as part of the integration?**
