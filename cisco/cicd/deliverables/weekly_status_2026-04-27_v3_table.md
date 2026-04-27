@@ -8,10 +8,9 @@
 
 | Workstream | Status | Dependencies |
 |---|---|---|
-| CI/CD application on ADS | Cisco-side deployment in flight per Friday's discussion. BayOne fallback on Temp ADS ready. | Cisco platform team deployment. Temp ADS provisioning if fallback path. |
 | Backend (Service Application Platform style, two pluggable frontends) | Architecture in flight. Backend designed to feed the chat in the CI/CD application and the WebEx bot on the NX-OS CI pipeline from one shared source. | None blocking. |
-| Static FAQ wiring | Source corpus identified. Extraction starts this week. | Backend availability. |
-| CAT MCP dynamic answer path | Installed. Four tools identified. OAuth resolved. Live execution begins after team sign-on completes. | Each BayOne team member completes first sign-on to the NX GitHub server. |
+| Static FAQ wiring | NxOS-Issue-Categorizer skill built. FAQ content already extracted and mapped automatically by the skill. Wiring the static answer path into the CI/CD application chat interface this week. | CI/CD application deployment. |
+| CAT MCP integration (dynamic answer path) | CAT MCP installed with four tools identified; OAuth resolved. Wiring the dynamic answer path into the CI/CD application chat interface this week, with live execution after team sign-on completes. | CI/CD application deployment. NX repository sign-on by each team member. |
 | WebEx bot deployment on the NX-OS CI pipeline | Bot built and validated locally. Cisco IT registration approved. Deployment to Temp ADS this week. Podman container build and LLM credential wiring are the remaining deployment steps. | ADS environment access. LLM credential path through DeepSight. |
 | Skills on main CI/CD repository | Three skills committed: NxOS-Issue-Categorizer, WebEx-Bot-Builder, WebEx-Solution-Architect. Inventory documentation and ds agent init pattern validation this week. | None blocking. |
 | Build dependency graph for commits and PRs | Current approach understood and documented from Justin last week. Deeper mapping framework being finalized and shared this week. | None blocking. |
@@ -29,8 +28,9 @@ Regression protection framework. UI automation (Playwright-based) plus backend v
 | Item | Status | Dependency or Unblock |
 |---|---|---|
 | NX repository lead-only access for the team | User identifiers posted last Friday. First sign-on to the NX GitHub server is the gating step before access can be granted. | Each BayOne team member completes first sign-on. |
-| Permanent ADS provisioning | Standard onboarding request submitted Friday April 24. Escalation in flight. | Cisco access provisioning workflow. |
-| CN-SJC-STANDALONE bundle membership | Submitted Friday April 24. In the standard provisioning window. | Cisco provisioning. |
+| Permanent ADS provisioning | Initial request April 14; follow-up April 21. On April 24, Permanent ADS resources noted as currently constrained on the Cisco side. Resolution path being aligned. | Clarification of ownership and machine availability. Temp ADS is the interim path for the Friday window if Permanent ADS does not resolve. |
+| CN-SJC-STANDALONE bundle membership (Temp ADS) | Submitted Friday April 24. In the standard provisioning window. | Cisco provisioning. |
+| Cisco-side CI/CD application deployment | Cisco platform team deployment in flight per Friday's discussion. BayOne plugs business logic in once it is live. BayOne is ready to stand up directly on Temp ADS as a fallback if needed. | Cisco platform team deployment. ADS environment available. |
 | MCP viewer playground | Coming soon per the Cisco team. Will be used for external MCP validation before integration. | Cisco platform team launch. |
 | DeepSight credentials | Issuance gated on the team operating from an ADS environment. | ADS environment access (Permanent or Temp). |
 | Asynchronous unblocking via the engagement chat | Active. Either side may post blockers between meetings. | None. |
