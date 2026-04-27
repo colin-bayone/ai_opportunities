@@ -22,25 +22,6 @@
 
 The CI/CD application will run on ADS with a chat interface that handles both static and dynamic question paths. Static FAQ entries will cover environmental issues and recurring questions for which answers already exist. Dynamic answers will be handled by the CAT MCP, which will query the NX repository at request time. Both routes will feed the same chat interface. A WebEx bot deployed on the NX-OS CI pipeline will share the same backend so users can ask the same questions from either surface. LLM access will run through DeepSight credentials once issued.
 
-```mermaid
-flowchart LR
-    User1[User in CI/CD App Chat]
-    User2[User in NX-OS CI WebEx]
-    Backend[Shared Backend]
-    Router{Routing}
-    Static[Static FAQ]
-    Dynamic[CAT MCP against NX repo]
-    LLM[LLM]
-
-    User1 --> Backend
-    User2 --> Backend
-    Backend --> Router
-    Router --> Static
-    Router --> Dynamic
-    Static --> LLM
-    Dynamic --> LLM
-```
-
 ---
 
 ## New items added this week
@@ -59,6 +40,29 @@ Regression protection framework. UI automation (Playwright-based) plus backend v
 | MCP viewer playground | Coming soon per the Cisco team. Will be used for external MCP validation before integration. | Cisco platform team launch. |
 | DeepSight credentials | Issuance gated on the team operating from an ADS environment. | ADS environment access (Permanent or Temp). |
 | Asynchronous unblocking via the engagement chat | Active. Either side may post blockers between meetings. | None. |
+
+---
+
+## Architecture overview
+
+```mermaid
+flowchart LR
+    User1[User in CI/CD App Chat]
+    User2[User in NX-OS CI WebEx]
+    Backend[Shared Backend]
+    Router{Routing}
+    Static[Static FAQ]
+    Dynamic[CAT MCP against NX repo]
+    LLM[LLM]
+
+    User1 --> Backend
+    User2 --> Backend
+    Backend --> Router
+    Router --> Static
+    Router --> Dynamic
+    Static --> LLM
+    Dynamic --> LLM
+```
 
 ---
 
