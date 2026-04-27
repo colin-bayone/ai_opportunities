@@ -12,7 +12,7 @@
 | Static FAQ wiring | NxOS-Issue-Categorizer skill built. FAQ content already extracted and mapped automatically by the skill. Wiring the static answer path into the CI/CD application chat interface this week. | CI/CD application deployment. |
 | CAT MCP integration (dynamic answer path) | CAT MCP installed with four tools identified; OAuth resolved. Wiring the dynamic answer path into the CI/CD application chat interface this week, with live execution after team sign-on completes. | CI/CD application deployment. NX repository sign-on by each team member. |
 | WebEx bot deployment on the NX-OS CI pipeline | Bot backend built and validated locally. Deployment requires a Cisco-side service account or centralized deployment ID, bot name and bot ID, access token, WebEx bot compliance criteria, and IT audit and approval (current bot was flagged as non-compliant April 27). See Critical path blockers and clarifications needed. | ADS environment access. LLM credential path. Cisco-side deployment infrastructure for the bot. |
-| Skills on main CI/CD repository | Four skills committed: NxOS-Issue-Categorizer, NxOS-Issue-Responder, WebEx-Bot-Builder, WebEx-Solution-Architect. Inventory documentation and ds agent init pattern validation this week. | None blocking. |
+| Skills on main CI/CD repository | Eight skills currently committed on the `skills/webex` branch of the DeepSight CI/CD repository (see Skills currently committed below). Documentation and ds agent init pattern validation this week. | None blocking. |
 | Build dependency graph for commits and PRs | Current approach understood and documented from Justin last week. Deeper mapping framework being finalized and shared this week. | None blocking. |
 
 ---
@@ -52,6 +52,23 @@ The items below are on the critical path for Friday's first deployment. Each nee
 | Asynchronous unblocking via the engagement chat | Active. Either side may post blockers between meetings. | None. |
 
 The major access blockers (Permanent ADS availability, language model credentials path) are tracked in Critical path blockers and clarifications needed above.
+
+---
+
+## Skills currently committed
+
+The following skills are currently committed on the `skills/webex` branch of the DeepSight CI/CD repository. Final repository destination is tracked in Critical path blockers and clarifications needed item 5.
+
+| Skill |
+|---|
+| build-issue-responder |
+| cat-issue-responder |
+| codenet-issue-responder |
+| issue-response-router |
+| nxos-issue-categorizer |
+| sanity-issue-responder |
+| webex-bot-builder |
+| webex-solution-architect |
 
 ---
 
