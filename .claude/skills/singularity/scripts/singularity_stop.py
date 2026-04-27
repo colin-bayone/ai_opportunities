@@ -25,7 +25,24 @@ SUMMARY_MIN_CHARS = 200
 
 SET_PREFIX = re.compile(r'^(\d{2})([a-z])?_')
 BRIDGE_PREFIX = re.compile(r'^\d{2}-\d{2}_')
-SUMMARY_NAME = re.compile(r'^(\d{2})_summary_')
+SUMMARY_NAME = re.compile(r'^(\d{2})_summary_\d{4}-\d{2}-\d{2}\.md$')
+
+# Anti-pattern: type-prefixed summary filenames such as
+# `03_briefing_summary_2026-04-07.md` or `06g_incident_summary_2026-04-20.md`.
+# These are NOT canonical and must be rejected. The canonical summary filename
+# is exactly `NN_summary_<date>.md` (or `NN<letter>_summary_<date>.md` for
+# letter-suffix addenda). No type token, no topic token.
+TYPE_PREFIXED_SUMMARY = re.compile(
+    r'^\d{2}[a-z]?_[a-z]+_summary_\d{4}-\d{2}-\d{2}\.md$'
+)
+
+CANONICAL_GUIDANCE = (
+    "Canonical summary filename pattern is `NN_summary_<date>.md` "
+    "(e.g. `03_summary_2026-04-07.md`). No meeting-type token, no topic token. "
+    "If unsure, read this hook script "
+    "(.claude/skills/singularity/scripts/singularity_stop.py) — the regex "
+    "SUMMARY_NAME is the source of truth for the convention."
+)
 
 
 def check_set_completion(research_dir: Path) -> list[str]:
@@ -47,6 +64,7 @@ def check_set_completion(research_dir: Path) -> list[str]:
         return issues
 
     sets: dict[str, dict] = {}
+    type_prefixed: list[Path] = []
     for entry in research_dir.iterdir():
         if not entry.is_file() or entry.suffix != ".md":
             continue
@@ -59,8 +77,17 @@ def check_set_completion(research_dir: Path) -> list[str]:
         if not m:
             continue
         prefix = m.group(1)
-        bucket = sets.setdefault(prefix, {"summary": None, "files": []})
+        bucket = sets.setdefault(
+            prefix, {"summaries": [], "files": []}
+        )
         bucket["files"].append(entry)
+        # Detect non-canonical type-prefixed summary filenames first.
+        if TYPE_PREFIXED_SUMMARY.match(name):
+            type_prefixed.append(entry)
+            continue
+        # Canonical summary filename only: NN_summary_<date>.md (no letter
+        # suffix for the summary itself; letter-suffix sets inherit the
+        # parent set's summary per the SKILL.md set lifecycle rules).
         summary_match = SUMMARY_NAME.match(name)
         if summary_match and summary_match.group(1) == prefix:
             try:
@@ -68,7 +95,20 @@ def check_set_completion(research_dir: Path) -> list[str]:
             except OSError:
                 size = 0
             if size >= SUMMARY_MIN_CHARS:
-                bucket["summary"] = entry
+                bucket["summaries"].append(entry)
+
+    # Anti-pattern: type-prefixed summary filenames must be renamed before
+    # the rest of the set-completion logic can be trusted (they otherwise
+    # mask both missing-summary and duplicate-set defects).
+    for entry in type_prefixed:
+        rel = entry.relative_to(research_dir.parent)
+        issues.append(
+            f"Non-canonical summary filename: `{rel}`. "
+            f"Filename uses the type-prefixed anti-pattern "
+            f"(`NN_<type>_summary_<date>.md`). Rename to `NN_summary_<date>.md`. "
+            f"Type tokens belong only on non-summary set files. "
+            f"{CANONICAL_GUIDANCE}"
+        )
 
     if not sets:
         return issues
@@ -77,17 +117,33 @@ def check_set_completion(research_dir: Path) -> list[str]:
     highest = ordered[-1]
     for prefix in ordered:
         bucket = sets[prefix]
-        if bucket["summary"] is not None:
+        # Set-number collision check: two or more canonical summary files
+        # for the same set prefix means two distinct events were numbered
+        # the same. This is a structural defect that the type-prefixed
+        # naming convention used to mask.
+        if len(bucket["summaries"]) > 1:
+            names = ", ".join(sorted(s.name for s in bucket["summaries"]))
+            issues.append(
+                f"Set {prefix} has multiple summary files ({names}). "
+                f"Set numbers must be unique. Resolve the duplication before "
+                f"continuing: archive the superseded files, renumber, or "
+                f"convert one to a letter-suffix addendum. "
+                f"{CANONICAL_GUIDANCE}"
+            )
+            continue
+        if bucket["summaries"]:
             continue
         marker = research_dir / f".set_{prefix}_in_progress"
         if prefix == highest and marker.exists():
             continue  # in-flight, exempt
         if prefix == highest:
             issues.append(
-                f"Set {prefix} has no summary file (research/{prefix}_summary_<date>.md). "
+                f"Set {prefix} has no summary file "
+                f"(research/{prefix}_summary_<date>.md). "
                 f"If this set is still being processed, create a marker at "
-                f"research/.set_{prefix}_in_progress and the hook will allow the "
-                f"in-flight state. Otherwise, write the summary to close the set."
+                f"research/.set_{prefix}_in_progress and the hook will allow "
+                f"the in-flight state. Otherwise, write the summary to close "
+                f"the set. {CANONICAL_GUIDANCE}"
             )
         else:
             issues.append(
@@ -95,7 +151,7 @@ def check_set_completion(research_dir: Path) -> list[str]:
                 f"(research/{prefix}_summary_<date>.md). "
                 f"Every set prior to the most recent must be closed with a "
                 f"summary of at least {SUMMARY_MIN_CHARS} characters before "
-                f"additional sets are started."
+                f"additional sets are started. {CANONICAL_GUIDANCE}"
             )
     return issues
 

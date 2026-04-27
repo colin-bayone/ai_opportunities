@@ -543,3 +543,58 @@ Three incidents in one session is not a trio of accidents. It is a structural fa
 - When `research/` and `deliverables/` are both involved in a single cleanup, I will treat them as separate concerns with separate rules. Research = blockchain immutable. Deliverables = whatever the worked example shows, which is currently "set-folder + README."
 - When I propose a reorganization, I will list every proposed action with its rationale before executing any of them, so Colin can veto specific actions before I act.
 - When I encounter a contradiction between reference docs and the worked example, I will document the contradiction in this skill-review file so that future sessions do not repeat the same investigation from scratch.
+
+---
+
+## Addendum 2026-04-27: Summary File Naming Failure
+
+**Triggered by:** Colin's correction during the Cisco team sub-singularity session today, when the stop hook flagged every set as missing a summary file.
+
+### What happened
+
+Across both engagements (`cisco/cicd/research/` and `cisco/cicd/team/research/`), every summary file was named with a meeting-type token between the set number and the word `summary`:
+
+- `01_standup_summary_2026-04-10.md`
+- `02_chat_summary_2026-04-16.md`
+- `06_incident_summary_2026-04-20.md`
+- `15_meeting_summary_2026-04-24.md`
+- And so on across 16 files in main and 22 files in team
+
+The canonical format is `NN_summary_<date>.md`. No type token. The stop hook's regex enforces this. Every summary file in both engagements was wrong.
+
+### How I made it worse when corrected
+
+When the stop hook fired and listed Sets 01 through 14 as missing summaries, my first response was to verify the files existed with the type-prefixed naming and then conclude the hook had a "false positive." I framed two options for Colin: ignore the hook noise, or fix the hook regex. Neither option was correct. The hook was right. The files were wrong.
+
+This is the same pattern as Failure 7 in the original document: when reference behavior contradicts what is on disk, my reflex is to defend what is on disk rather than read the spec and verify which is canonical. I did not look at the hook script. I did not check the SKILL.md document header format. I did not look at the worked example to see what canonical summary filenames look like there. I assumed the disk was right because the disk was what I had been generating across many prior sessions.
+
+### Why this is structurally serious
+
+Both engagements were already wrong. That means this naming pattern was not a today-mistake. It propagated across many prior sessions, including the gold-standard team sub-singularity that the skill points future sessions to as a worked example. The skill's own working examples were teaching the wrong convention to future invocations of the skill. Every sub-singularity Colin has ever produced with my help has this defect.
+
+The mechanical lesson: when a hook fires, the hook is the spec. When the disk and the spec disagree, the spec wins. The hook is not noise to route around. It is enforcement that fires precisely because I cannot be trusted to follow the convention without enforcement.
+
+### What got renamed
+
+All summary files in both engagements were renamed to the canonical `NN_summary_<date>.md` format. This is a metadata-only operation; the blockchain content is preserved. Renames are not edits to immutable research content.
+
+### Unresolved structural issue
+
+Team sub-singularity Set 03 has a name collision under the canonical format:
+
+- `03_briefing_summary_2026-04-07.md` (Apr 7 briefing, retroactively numbered as 03)
+- `03_sync_summary_2026-04-16.md` (Apr 16 team sync)
+
+Both cannot become `03_summary_<date>.md`. One of these is structurally not Set 03 and was given the 03 prefix as a workaround for the type-prefixed naming convention. The retroactive 04-07 briefing predates Set 01 (04-10) and Set 02 (04-16) chronologically, which means the original numbering was already non-monotonic. This needs Colin's decision: renumber the briefing to a letter suffix on a different set, renumber it as a new set entirely, or some other resolution. I am not making this decision unilaterally. Both files were left under their type-prefixed names pending direction.
+
+A similar non-monotonic pattern exists at Set 07 (dated 04-13, while 06 is 04-20) and possibly elsewhere. These do not produce name collisions under the canonical format, but they are evidence of the same underlying defect: when retroactively inserting a set, I picked the next free number rather than reordering, and used the type-prefix as a way to disambiguate. With the type-prefix gone, the chronological violations are now visible in the filenames themselves.
+
+### Skill-side gap
+
+The SKILL.md document header format specifies the in-document header (`# <Set Number> - <Source Type>: <Topic>`) but does not specify the filename pattern in any one place. The pattern is implicit in the agent prompt template (`<set>_<type>_<topic>_<date>.md`) and in the references to summaries elsewhere (`<set>_summary_<date>.md` is shown in the set lifecycle section). These two patterns coexist in the same document. A future session reading the agent prompt template first will conclude that summaries follow the `<set>_<type>_<topic>_<date>` shape, because that is what the prompt template explicitly demonstrates and the only place a filename pattern is laid out as a template.
+
+The fix on the skill side is a single explicit rule near the document header section: "Summary documents are named `<set>_summary_<date>.md`. No type token. No topic token. The summary is the canonical close of a set and uses a fixed name." The hook should also produce a more useful error message that names the canonical format, rather than just "missing summary file" which sent me down the wrong investigation path.
+
+### Mechanical counter-measure (additional)
+
+When a stop hook fires with a structural complaint and I have not personally read the script that generated the complaint, my next action will be to read that script before forming any hypothesis about whether the hook is right or wrong. The hook is a more reliable source of truth about the convention than my recollection of what the convention is.
