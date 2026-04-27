@@ -11,9 +11,21 @@
 | Backend (Service Application Platform style, two pluggable frontends) | Architecture in flight. Backend designed to feed the chat in the CI/CD application and the WebEx bot on the NX-OS CI pipeline from one shared source. | None blocking. |
 | Static FAQ wiring | NxOS-Issue-Categorizer skill built. FAQ content already extracted and mapped automatically by the skill. Wiring the static answer path into the CI/CD application chat interface this week. | CI/CD application deployment. |
 | CAT MCP integration (dynamic answer path) | CAT MCP installed with four tools identified; OAuth resolved. Wiring the dynamic answer path into the CI/CD application chat interface this week, with live execution after team sign-on completes. | CI/CD application deployment. NX repository sign-on by each team member. |
-| WebEx bot deployment on the NX-OS CI pipeline | Bot built and validated locally. Cisco IT registration approved. Deployment to Temp ADS this week. Podman container build and LLM credential wiring are the remaining deployment steps. | ADS environment access. LLM credential path through DeepSight. |
-| Skills on main CI/CD repository | Three skills committed: NxOS-Issue-Categorizer, WebEx-Bot-Builder, WebEx-Solution-Architect. Inventory documentation and ds agent init pattern validation this week. | None blocking. |
+| WebEx bot deployment on the NX-OS CI pipeline | Bot backend built and validated locally. Deployment requires a Cisco-side service account or centralized deployment ID, bot name and bot ID, access token, WebEx bot compliance criteria, and IT audit and approval (current bot was flagged as non-compliant April 27). See Critical path blockers and clarifications needed. | ADS environment access. LLM credential path. Cisco-side deployment infrastructure for the bot. |
+| Skills on main CI/CD repository | Four skills committed: NxOS-Issue-Categorizer, NxOS-Issue-Responder, WebEx-Bot-Builder, WebEx-Solution-Architect. Inventory documentation and ds agent init pattern validation this week. | None blocking. |
 | Build dependency graph for commits and PRs | Current approach understood and documented from Justin last week. Deeper mapping framework being finalized and shared this week. | None blocking. |
+
+---
+
+## Critical path blockers and clarifications needed
+
+The items below are on the critical path for Friday's first deployment. Each needs clarification or unblocking from the Cisco side so the team can complete the work in the available window.
+
+1. **Permanent ADS availability.** Permanent ADS resources were noted as currently constrained on the Cisco side on April 24. Clarification requested: will Permanent ADS be available within the Friday window, or does the first deployment land on Temp ADS with Permanent ADS migration as a follow-on?
+2. **Language model access path.** Language model features require credentials. Circuit API was indicated as not the appropriate production path. DeepSight credentials are gated on the team operating from an ADS environment. Even with ADS and DeepSight in place, the language model access path is not yet confirmed. Clarification requested: what is the language model access path for the Friday deployment, and is interim Circuit API use acceptable until the production path is in place?
+3. **WebEx bot deployment infrastructure.** The bot backend is built. Deployment requires items that sit with Cisco: a service account or centralized deployment ID (deployment under an individual user account creates continuity risk if a team member rolls off), the bot name and bot ID, the access token, the WebEx bot compliance criteria, and the IT audit and approval. An email this morning indicated the current bot is flagged as non-compliant. Clarification requested: the compliance criteria, the audit and approval timeline, and the Cisco-side ID under which the deployed bot will run.
+4. **CAT MCP querying mechanism.** Chat issues arrive with PR IDs. The CAT MCP requires CAT IDs to query. A PR-to-CAT mapping is required for the dynamic answer path to function end to end. Clarification requested: does this mapping exist on the Cisco side, or is BayOne expected to construct it as part of the integration?
+5. **Skills repository destination.** Earlier guidance pointed to two destinations (the main CI/CD repository and the master skills repository). Working approach is to keep skills on the CI/CD repository during development and promote to the master skills repository after testing and verification. Confirmation requested.
 
 ---
 

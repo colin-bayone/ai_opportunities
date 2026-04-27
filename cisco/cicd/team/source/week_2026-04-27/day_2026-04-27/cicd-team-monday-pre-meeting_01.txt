@@ -1,0 +1,211 @@
+[00:00:17] Saurav Kumar Mishra: Hi, Srikar. Good morning.
+
+[00:00:21] Srikar Madarapu: Hello, how are you?
+
+[00:00:24] Saurav Kumar Mishra: I'm great. How are you? How was your weekend?
+
+[00:00:28] Srikar Madarapu: Good. Little refreshing this week. Yeah. How's the weekend?
+
+[00:00:38] Saurav Kumar Mishra: Okay. I can see. Yeah, hi Colin. Good morning.
+
+[00:00:49] Colin Moore: Everyone, good morning, good evening.
+
+[00:00:49] Saurav Kumar Mishra: Namita. I stuck on all of that.
+
+[00:00:52] Srikar Madarapu: Hey, Colin, good morning.
+
+[00:00:54] Namita Ravikiran Mane: Good morning, everyone.
+
+[00:00:57] Colin Moore: All right, well, today will be a quicker one for us, just because it's been the weekend, so nothing too crazy has happened. I want to go through quick what we're going to talk about to Srinivas for today. We'll do that first, and then we are going to need to get some action planned for this week. So the first thing is, of course, nothing's happened over the weekend for Srinivas. What I've done is I've put together kind of the one-pager for him as to what we had to do. Um... for this coming week. So for this coming week, there's a couple of items. So I think I'll give them verbally here, but going forward, what I'm going to do for our team is I'm going to be putting those in a GitHub repository. So you will want to keep an eye out for that. I will put them both on BayOne GitHub as well as on Cisco GitHub. BayOne GitHub is just meant to be a read-only tracker. So that's where you can put in anything that, you know, it's not for code to go. Do not try to commit any code to it. It's just a way to communicate the issues to everyone and stay on track here. You can put in comments, you can put in questions on that one to the issues that you're assigned. The reason why I'm doing both is not to confuse everyone. but just so that there's a clear separation for Cisco. Because there's some things that obviously you don't want to have visible to them that you might have a question about from an issue perspective or feedback we might have. But just keep that in mind. Remember, don't access BayOne GitHub from the Cisco laptop. That's one of the rules. So you'll want to check it. You can check it on your phone, you can check it on your BayOne laptop, but just don't try to access it on Cisco. The equivalent issue will be there on the Cisco repo. I'll be setting up a repository for the team or using one of the existing ones so that we can assign the work. We'll do that so that we have a clear path as to what progress is being made throughout the week and clear deliverables and timelines for it. So, I'll be putting that on today. Right now, for this week, it's a pretty simple week for us. What we have ahead are a few things. So, number one is this CI/CD application deployment. What this is, is this is effectively a combination of... two different things. Number one is the what is run from Srikar from your perspective for the skill. So for instance, from that skill, we were able to get out a mapping of issues. And what Cerny Bus wants from this is an FAQ bot, effectively. So when someone asks a question in that chat, if that question has already been answered in the past, or if there's some deterministic easy answer for it. we would give that answer back. Now the static part, the mapping is right there. So we have to think about how we want to do this. And that's something that's going to be one of the assignment issues to have ready for tomorrow. Because we have to work kind of quick, because we only have until Friday to deliver this. The second part of it is the more dynamic mapping, so to query using that Cat MCP integration. And that's essentially the dynamic mapping. So if there's an issue and we need to retrieve something that's from the cat MCP server using one of the four tools, it would be expected that whatever bot we create for WebEx is able to do that too. So it would have the known mapping that we already come up with. as a kind of a static resource, and it would also have ability to access that cat MCP. So two sides, similar thing. That's the big deployment target for the week. So separate from that is the... Log **** log analysis stuff. So for the log analysis side of the house, in Namita, we talked for a while on Friday about how to do that mapping for PR commit attribution and how to trace through that. So the research for that should be finished up before the end of today so that we can move forward with that this week. We'll take some call on that because as of right now, there's not a deliverable item for that this week. It is an ongoing piece of work that will help to boost the rest of the project. Once we get that done, I want to switch over to your energy helping on with this Cat MCP and bot deployment. So with that, there's a couple of blockers that we'll cover on the call today. A couple of them are just logical blockers. The first thing is this business with the ADS machine. So I have a call set up with Mahavir later on today. We're going to get to the bottom of this one, and I'm going to just get it anand in the loop, whatever their outcome is. because we're getting 30 different directions from Srinivas and none of it makes sense. You know, for instance, on one hand, he said, you know, put in the request for the ADS machine and then you'll just need a tenant. Did that.
+
+[00:06:04] Saurav Kumar Mishra: Mhm.
+
+[00:06:06] Colin Moore: Never happened, right? And then we said, ah, Mahavir's to blame, which is technically true. He technically should have done that, or at least given clear direction. He just sends back the temp ADS instructions. After Friday, I think I understand why and how this is all coming to beat. What's happening right now is they don't have any permanent ADS machines available. That was said by Srinivas on Friday. So how the heck is Mahavir supposed to provision something of which he has none? So that's where I'm going to raise that today as, you know, that's on you guys. That's not on us anymore. Unless you are explicitly saying that that is something that we are able to resolve without actual intervention from Cisco IT. As far as that goes, there's no possible way for us to deploy on an ADS machine without.
+
+[00:06:34] Saurav Kumar Mishra: Mhm.
+
+[00:06:54] Colin Moore: Cisco itself provisioning one for us. And if they're out of servers, that's an impossible deliverable. So my fallback for that is to say we will. work to a temporary ADS machine. This is also where there's a little bit of a confusion that came from Srinivas. because for him... I asked the question of, you know, is there any limitation to those ADS machines, like for instance, their compute, et cetera. And he said, yes. That doesn't make sense, frankly, but because anyone can request any temp ADS at any time, and it doesn't seem like it's linked to anything. So I think what he was getting at is that each part of the organization is allocated some level of compute across all temp ADS machines. So for instance, when you're requesting a new machine and you go through those drop-downs, that probably is subtracting allocation from somewhere somehow. So I think that's what he meant, which means we can't do anything super heavy on those ADS, but in any case, I think that's where the current state is. So regardless, for this first item, my point here is that we are not able to do a permanent ADS without some intervention from Cisco. I'll meet with Mahavir today. I'm going to bring it up on the call with Srinivas just to clarify this and what our responsibility is and what Mahavir's and Srinivas's is. But in any case, my fallback for it is do it on the temp ADS. And if he says no, wait for the permanent, then I'm going to say. It has to be ready by tomorrow for the permanent ADS or else this is not possible to deliver this week. We can't even test it.
+
+[00:08:35] Saurav Kumar Mishra: Mhm. Yeah.
+
+[00:08:40] Colin Moore: So. The next contradiction is the same thing. If you want to deploy a WebEx bot, the other gating factor that was already flagged is this business with the language model. So if the language model itself, for instance, our view had used the circuit API credentials.
+
+[00:09:02] Saurav Kumar Mishra: Mhm.
+
+[00:09:03] Colin Moore: Srinivas had flagged that as being improper in some way, which I get. I think those credentials are really just for testing out different things. You know, they're probably very limited on how many tokens they have, et cetera. However, he's the one that has to grant the language model access, which you can see where this is going. In order to get the language model access, he needs a deep set instance. Deep set instance needs an EDS server. So it's a cascade.
+
+[00:09:22] Saurav Kumar Mishra: Yeah.
+
+[00:09:30] Colin Moore: So that's where we have to kind of go with him this week and say a concession we're going to have to make is to do this with either a temp ADS machine, if DeepSight can get deployed on that, or just continue to use Circuit API and plan to switch it out whenever the time comes. The biggest thing here that's a question mark that will have to get resolved today is the clarification as to...
+
+[00:10:17] Saurav Kumar Mishra: Mhm.
+
+[00:10:18] Colin Moore: The question remains, even if we spin up DeepSight, even if we get the ADS machine, do we then have language model access? Or what is the path to that? That is a critical thing because that gates pretty much every item on this sheet. How is the AI team supposed to work without language models?
+
+[00:10:27] Saurav Kumar Mishra: Yeah.
+
+[00:10:37] Colin Moore: Unless we're allowed to use the circuit API stuff in the meantime. Language models are a language model at the end of the day. So these are some clarifications we're definitely going to need to get from him today, because I don't want it to come to like Wednesday. And he's like, so where are you guys at? And I'm like, hey, man, there's still blockers that we surfaced that you haven't addressed. And he's like, no, you haven't. So these are things we need to understand the flow on and get some clarity from him on as well.
+
+[00:10:44] Saurav Kumar Mishra: Yep. Like just to add to this, like in the WebEx bot side as well, because I don't think they want us to deploy the bot from our ID. So we would want to have, we should have that what you call access token as well as bot deployment details. Like I can code the back end of the bot, but the details which will where the bot will be hosted most likely should come from them, or else it does not make sense. Suppose I deploy this model using my Cisco MI, sorry, Saurav MI at the rate Cisco. account and tomorrow I leave the organization or we are off to another project or somehow that account got suspended. I am on to a new account. That bot deployment is gone. So most likely they need some kind of like central bot deployment. they might also have it, but we would need like details of the access token as well as bot name and ID, those kind of things. Like back end we can code it like in our Podman container, but to deploy these things also like fall under their bed. Thank you.
+
+[00:12:23] Colin Moore: Yes, yes, and this is exactly what we should harp on today. Even if it ****** him off, at this point, it doesn't matter, because we're going to get dinged if we have a deliverable that we didn't speak up on. I completely agree with this. So this is something, you know, today on the call, I don't want to even get off that call until this is kind of clear and resolved by them. Because, you know, this is not just a small thing. If he wants us to do it in like POC mode with personal, that's fine. But if he's expecting something productionalized, you know, with a zero day run, you know, lead time on it, that's crazy. So for this, definitely don't feel... shy to raise it up on the call, even if it makes things uncomfortable. I'm going to be right there too. I'm going to be blowing on the same trumpet because he needs to be fair with that. It doesn't make sense to ask someone to deploy something if you haven't given them literally anything to deploy with.
+
+[00:13:19] Saurav Kumar Mishra: Yeah.
+
+[00:13:20] Colin Moore: So yeah, I absolutely agree on this. Likewise, and this is Srikar on your side for skills. Skills, I understand there is a way to deploy. It's not really that mature, but there is something on deep side at least for it. But the problem once again comes deployment. So for instance, for the skill categorizer, a skill that was built, that has run on all the historical stuff, but it does not cover any of the new stuff. Right, so if there's new issues that come in that aren't categorized, that can't work. And even if, you know, the issue comes in and you're trying to use Cat MCP, Cat MCP, if you, we're going to need to investigate that and really kind of put it through its paces here. And I recommend Codex to do that with a playbook.
+
+[00:13:53] Srikar Madarapu: Right. Mhm.
+
+[00:14:15] Colin Moore: Because are we even able to do the proper querying of cat using that MCP given how the issues come into the chat?
+
+[00:14:28] Srikar Madarapu: Yeah, Colin, I, I, I looked into that cat MCP on Friday, so I have to put a document on the chat. So, what I did is, like, I looked into like MCP and it has like four other tools, 4 tools total, and yeah, and usually in the chats we are getting like PR number.
+
+[00:14:28] Colin Moore: Right.
+
+[00:14:48] Srikar Madarapu: like PRID, we are not getting any cat ID for getting the details. So we have to have a like map mapping table where we have cat ID and PRID mapping and of where we can get the cat ID and we can ping the MCP using that and then we can. fetch the latest details of that particular PR and respond back. So I just like created a like skill for issue responder and like MCP or like the cat MCP. So if you can refer like a little bit on that document I think that way like.
+
+[00:15:21] Colin Moore: Mhm.
+
+[00:15:28] Srikar Madarapu: We can move forward like if that is the right option.
+
+[00:15:33] Colin Moore: Got it, got it, got it. So one thing for that, so did you push that one to the... This goes yet on the branch or where did that one land up?
+
+[00:15:42] Srikar Madarapu: No. So, I can I can push it to the branch, so I just like I kept a document on the chat BayOne IT CICD automation, so I added like a status, like what what all is happening in that on the process, like how how how it works, so just a small document referring to.
+
+[00:15:54] Colin Moore: Yeah.
+
+[00:16:01] Saurav Kumar Mishra: Hey.
+
+[00:16:06] Srikar Madarapu: On the entire flow.
+
+[00:16:08] Colin Moore: Got it, got it, got it. Okay, so then what you should do for today before the call is get that one uploaded. I think it's, and Saurav, correct me if I'm wrong, I think that there is also kind of a conflict there because he had us try to drop skills in two different places. You know, on one meeting he had said, put them in that CICD repository.
+
+[00:16:26] Saurav Kumar Mishra: No.
+
+[00:16:29] Colin Moore: And then...
+
+[00:16:30] Saurav Kumar Mishra: And they also have like one website where he said like share it on that repo.
+
+[00:16:36] Colin Moore: Okay, so let's put it on both and just call it a day. That's my thing right now. So that way, you know, because he's not being clear and you can tell that it's a little bit disorganized on his end. We can just take the exact same code. I know it's not correct to do.
+
+[00:16:37] Saurav Kumar Mishra: Yeah.
+
+[00:16:52] Colin Moore: But that's at least a clarification I can raise with him in the call. Where do you ultimately want skills to go? If skills are in one centralized place, fine by me. And it can be in that, I think what it is, like KDE skills or something, that branch. But if he wants it to be in part of CICD, I need to know what he wants there. For right now, put it on both. We can always take it down. I think there is a branch called skills slash WebEx. I think, Saurav, that's where all your skills are at.
+
+[00:17:22] Saurav Kumar Mishra: Yeah.
+
+[00:17:24] Colin Moore: So let me send that. I'll put that link in the WebEx chat right now so you can see where it is. Srikar. And then you can put your skills on there. So that way when I show him today, let me just do this, WebEx skills branch. That way, when I show him today, I can say, look, here's at least where they're at. They're on a branch. I don't know if we have push permissions or whatever on that. Likewise, the same with whatever that other repository is. For now, we'll just plan to put them on both. So I'll send that other repo link as well. So just make a branch, put them on there, and that way we can say we're all good to go. And so for yours, I think yours are just on CICD. Is that right? They're not on that other branch or that other repository?
+
+[00:18:13] Saurav Kumar Mishra: Ohh. Yeah, they are not on the other repository yet. I was also in the same thing, like I was thinking like for the current use, we should keep them on like CICD. And once we have finalized and like tested them enough, then we can go to that other repo and posted there.
+
+[00:18:18] Colin Moore: Okay.
+
+[00:18:34] Saurav Kumar Mishra: So that's why I did not add or else it would fall on our part to like maintain both of them.
+
+[00:18:35] Colin Moore: Yes. Yes, actually, I like that framing. Let's keep that framing. We'll only put them on that repository for CICD in that branch. We don't have to worry about two places. I'm going to frame it to him exactly like that today. That's good. The finished skills that have been tested and verified will go into that master skills repo whenever they are fully done.
+
+[00:19:01] Saurav Kumar Mishra: Yeah.
+
+[00:19:05] Colin Moore: Okay, so that's there. And the very last thing here is with the actual delivery mechanism itself. So we have a few final things. So let me just for everyone's clarity here, we have the ADS machine we need. We have the language model we need. right? We have the need to connect to the MCP. We have the need to have the static mapping of issues for the static FAQ. The final thing that makes all of this work is there has to be that WebEx integration. All those things working independently, it's still not an application. It has to be deployed somewhere somehow. So this is where the question, I guess, becomes, what do we need to do to deploy a Webex bot? Are we able to use something local? You know, whenever he says deployed, this is where I need kind of some... feedback from all of you as to, you know, if we wanted to deploy a WebEx bot on Podman.
+
+[00:20:08] Saurav Kumar Mishra: S. Mhm.
+
+[00:20:24] Colin Moore: When you did yours.
+
+[00:20:26] Saurav Kumar Mishra: Yeah, because I deployed that from like my sort of MI at the rate Cisco ID. That's what I was saying, correct to we need like their companies either they already have something sorted out with their ID that this board is like okay to be deployed and.
+
+[00:20:34] Colin Moore: Got it.
+
+[00:20:47] Saurav Kumar Mishra: Either someone from admin or maybe they have some kind of like a repository for bots where all the deployments are being tracked, but it should not be on me or else even for like anyone of our team, even if we want to deploy it. personally, it should either be like Srinivas's bot deployment or someone else. So it's like there is registration details on one end. Okay, that's on WebEx. Plus we have a container where we have, what do you call, deploying the bot. As in currently, when it was on my local, it was in a pod man container which I can host normally, but when we are going to deploy it, I think he needs that on a like permanent ADS machine, the back end one, but the for the front end part which is registered with WebEx, there we need to put in like the bot name.
+
+[00:21:39] Colin Moore: Okay.
+
+[00:21:46] Saurav Kumar Mishra: the bot, what do you call ID as well as the token. So these things are being put, after we have those, we put those into the.env file or however he wants to manage that. That's also like one of the things I think, if I remember correctly for the. API keys and all for the LLM as well. I don't think they have a proper way to deploy it right now.
+
+[00:22:14] Colin Moore: Okay, okay. This is exactly what we'll want to surface today. I understand now. So, number one is, let's say that if you're trying to put a bot on WebEx, regardless of the hosting, regardless, you need an ID.
+
+[00:22:25] Saurav Kumar Mishra: Yeah, yep, yep.
+
+[00:22:28] Colin Moore: And is there a known process, like a documented process with IT for that, or is that just us kind of shooting in the wind?
+
+[00:22:36] Saurav Kumar Mishra: Yeah, so it's not kind of like documented process, but when so everyone can deploy a bot. Yeah, whoever has like a Cisco ID as a and a VPN connected, he can go ahead and deploy his own bot. Okay. The only thing after deploying the bot is get that bot registered with like the Cisco bot registry.
+
+[00:22:38] Srikar Madarapu: And.
+
+[00:22:58] Saurav Kumar Mishra: We have a form over there. You have to fill in the form with the details like I am deploying this bot. These are like what the bot is going to do and this is from my ID, all of those details. Then they will audit and approve the whole bot. Okay.
+
+[00:23:14] Colin Moore: Mhm.
+
+[00:23:14] Saurav Kumar Mishra: Plus, you have to also like tell them on what channels and all of those details, like where exactly you want the bot to be deployed. And they will audit all those details, make sure that the bot is compliant. And then if everything passed, they will add you to that registry, means like your bot to that registry. But it is still deployed from my ID, not like from. Like my ID as in Cisco's my ID, but at a personal level, not like an org level. So if tomorrow sort of sort of am I at the rate Cisco is down for some reason, like they have disconnected that after we have done after we are done with the project, that whole thing like the bot. The registry itself will be gone, so that's the point.
+
+[00:23:59] Colin Moore: Okay, so one last point to clarify on. So whenever you say they audit and review that bot, are they just auditing and reviewing whatever your submissions were on that doc or are they trying to look at code or?
+
+[00:24:12] Saurav Kumar Mishra: That I'm not clear like, but yeah, because I did not submit for the audit yet. My that system got down and on this like I never ran the bot again. I was doing like research and other things. But if you want me to do it, I can like go through the process of audit and we can also.
+
+[00:24:14] Colin Moore: Okay. Okay.
+
+[00:24:32] Saurav Kumar Mishra: Had that ready by, like, the next meeting.
+
+[00:24:36] Colin Moore: No problem, no problem. So I think because what I want to do is I'm going to, do you have like wherever that form is, do you have that handy that you can share in the chat?
+
+[00:24:46] Saurav Kumar Mishra: Yep, actually I just got a mail today also that your bot is not compliant. Let me just check in that mail. It should be there. Like I will share that on the group.
+
+[00:24:55] Colin Moore: Okay. Yeah, yeah, and even that too, because if the bot's not compliant, there's no way for it to get deployed by Friday. And whenever we say compliant, there needs to be some kind of a, you know, some compliance to be compliant with. So they need to share that. So we can flag that as an item for Srinivas today.
+
+[00:25:10] Saurav Kumar Mishra: Yeah.
+
+[00:25:17] Colin Moore: because it's clear that he doesn't know this either. So for us, we need to say it's not gated on us, it's gated on IT review. So on our end, we can say that ours will be ready, but we can't say deployed because deployment depends on things beyond us, which is that IT audit, review, and acceptance.
+
+[00:25:32] Saurav Kumar Mishra: Mhm.
+
+[00:25:36] Colin Moore: And separately we can flag the whole user ID thing.
+
+[00:25:37] Saurav Kumar Mishra: Yep.
+
+[00:25:42] Colin Moore: Yeah, because effectively they need that service account. That's the best way to do that.
+
+[00:25:48] Saurav Kumar Mishra: Yep, so I've like forwarded the mail to you as well. Like I did not see like Mahavir was also in the CC for this mail. But yeah, they have like a bot registration portal. Let me ping that in the group as well.
+
+[00:26:05] Colin Moore: Okay. So I'll go through that. I'll at least say that I'm going to try to register a bot on the portal. I'll say that's one of the pending items today. And I will flag that we need to talk about the ID under which it's deployed when we go today. I'll put that as one of the blockers.
+
+[00:26:24] Saurav Kumar Mishra: Okay. Good lunch.
+
+[00:26:29] Colin Moore: All right. And then very last thing. that I would say today. This is good. Basically, I just want us to be as proactive as possible. At this point, my advice is to be annoying. Be annoying. So in the chat, I'm going to just keep on raising things. You know, he said repeatedly that, you know, if anything comes up as a blocker, surface it early and often in the chat. I'm going to do exactly that. Every start of the day, I'm going to flag these if they're not resolved. At the end of every day, I'm going to flag them again if they're not resolved. So at minimum, there will be 10 messages from me this week in that CICD WG chat that everyone can see. Because I want this to be clear that this is not on us for a lot of these. These are just things that Srinivas is asking kind of, you know, loaded cannon not aiming anywhere, any particular direction. So the big thing here is that with Rui, his own chat bot that he made for WebEx, they already have one. So clearly there is some process that can work. And the question then becomes, you know, how do we do the same?
+
+[00:27:43] Saurav Kumar Mishra: Mhm. Yep.
+
+[00:27:48] Colin Moore: So, okay. Now, just within the scope of these, I know we'll have a lot more discussion on specific items for the week. I will get those assigned shortly here. Any blockers here? Well, there's a meeting coming up in 15 minutes that I need to jump off for, but I want to at least make sure that these are all clear and good for the call if there's anything else anyone wants to add. as blockers or, you know, big, big questions like we've been talking here. Okay, then let's close up for today. I know we'll meet with him at one. So in the meantime, immediate actions, number one, Srikar, get yours, skill committed to that branch of that repository. Yep.
+
+[00:28:36] Srikar Madarapu: Yeah, I... I just did Colin, yeah. I just added all the an annex categorizer, as well as the issue responder scale, so which has like other four, like 3 placeholders, and with along with the one cat cat MCP.
+
+[00:28:39] Colin Moore: Ohh, great, great, great. Oh, great, great, great. Yep, I see all of them on there now. That's great. So I'm going to add those in as some of the deliverables that are completed. I'm just going to frame them as completed. It's fine. But we'll say that, are there any ones that are like explicitly just like stubs that aren't built at all? Because I can phrase those as things we'll deliver this week.
+
+[00:29:20] Saurav Kumar Mishra: Mhm. So in a way like we have to like code the whole back end to make sure that everything inside the CICD as well as the skills are also taken into account for the bot. So in a way that is kind of still a deliverable for us for the end of the week. And for them it's like getting the. Bot details for like the front end.
+
+[00:29:45] Colin Moore: Right.
+
+[00:29:46] Saurav Kumar Mishra: Like.
+
+[00:29:47] Colin Moore: Back. Yeah, so what I'm going to do is I'm going to update this sheet based upon everything we talked about now. I'll share this with everyone. I'm going to put it on the GitHub page itself. So these markdown files, just so that we can keep track of them, will be available on the GitHub page itself. I'll send you the link when that's ready.
+
+[00:29:59] Saurav Kumar Mishra: Yeah.
+
+[00:30:07] Colin Moore: That's what we'll go through on the call to keep it nice and simple.
+
+[00:30:11] Saurav Kumar Mishra: Yep.
+
+[00:30:13] Colin Moore: and then we'll go from there. So we'll wrap up now, and I'll see you all in just shy of an hour and 15 minutes.
+
+[00:30:23] Saurav Kumar Mishra: Yep.
+
+[00:30:24] Srikar Madarapu: Sure, thank you. Thank you, Colin.
+
+[00:30:25] Saurav Kumar Mishra: Yeah. Here again.
+
+[00:30:27] Namita Ravikiran Mane: Sure. Thank you.
+
+[00:30:27] Colin Moore: Thanks, everyone. Bye bye.
+
+[00:30:28] Srikar Madarapu: Thank you, everyone. Bye.
+
+[00:30:29] Saurav Kumar Mishra: Bye, everyone. Take care.
