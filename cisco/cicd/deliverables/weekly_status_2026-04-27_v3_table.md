@@ -35,8 +35,9 @@ The items below are on the critical path for Friday's first deployment. Each nee
    - **Caveat on the deployment ID:** BayOne can deploy the bot under one of our Cisco-issued user IDs to meet the Friday timeline. The proper pattern would be a service account or centralized deployment ID if one is available, since deployment under a personal user account ties the bot's lifecycle to that individual. Flagging as a caveat, not a blocker.
 4. **CAT MCP querying mechanism.** Chat issues arrive with PR IDs. The CAT MCP requires CAT IDs to query. A PR-to-CAT mapping is required for the dynamic answer path to function end to end.
    - **Does this mapping exist on the Cisco side, or is BayOne expected to construct it as part of the integration?**
-5. **Skills repository destination.** Earlier guidance pointed to two destinations (the main CI/CD repository and the master skills repository). Working approach is to keep skills on the CI/CD repository during development and promote to the master skills repository after testing and verification.
-   - **Will skills stay on the CI/CD repository during development, with promotion to the master skills repository after testing and verification?**
+5. **Skills repository destination.** Earlier guidance pointed to two destinations (the main CI/CD repository and the master skills repository).
+   - Working approach is to keep skills on the CI/CD repository during development and promote to the master skills repository after testing and verification.
+     - **Will skills stay on the CI/CD repository during development, with promotion to the master skills repository after testing and verification?**
 
 ---
 
