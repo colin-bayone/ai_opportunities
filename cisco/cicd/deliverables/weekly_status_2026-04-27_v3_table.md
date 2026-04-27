@@ -17,6 +17,19 @@
 
 ---
 
+## Open items and access
+
+| Item | Status | Dependency or Unblock |
+|---|---|---|
+| NX repository lead-only access for the team | User identifiers posted last Friday. First sign-on to the NX GitHub server is the gating step before access can be granted. | Each BayOne team member completes first sign-on. |
+| Cisco-side CI/CD application deployment | Cisco platform team deployment in flight per Friday's discussion. BayOne plugs business logic in once it is live. BayOne is ready to stand up directly on Temp ADS as a fallback if needed. | Cisco platform team deployment. ADS environment available. |
+| MCP viewer playground | Coming soon per the Cisco team. Will be used for external MCP validation before integration. | Cisco platform team launch. |
+| Asynchronous unblocking via the engagement chat | Active. Either side may post blockers between meetings. | None. |
+
+The major access blockers (Permanent ADS availability, language model credentials path) are tracked in Critical path blockers and clarifications needed below.
+
+---
+
 ## Critical path blockers and clarifications needed
 
 The items below are on the critical path for Friday's first deployment. Each needs clarification or unblocking from the Cisco side so the team can complete the work in the available window.
@@ -24,7 +37,7 @@ The items below are on the critical path for Friday's first deployment. Each nee
 1. **Permanent ADS availability.** The team has been requesting Permanent ADS access since April 14, with follow-up on April 21. On April 24, Permanent ADS resources were noted as currently constrained on the Cisco side.
    - **Who is responsible for Permanent ADS provisioning, and is that even possible given the current resource constraints?**
    - **If no Permanent ADS servers are currently available on the Cisco side, how could one be provisioned for this engagement?**
-   - **Caveat on the Friday deliverable:** If a Permanent ADS is not available, the only possible path forward for Friday is to deploy on a Temporary ADS server.
+   - **Caveat on the Friday deliverable:** If a Permanent ADS is not available, the only possible path forward for Friday is to deploy on the Temporary ADS server, which is now connected and ready.
 2. **Language model access path.** Language model features require credentials. Circuit API was indicated as not the appropriate production path. DeepSight credentials are gated on the team operating from an ADS environment. Even with ADS and DeepSight in place, the language model access path is not yet confirmed.
    - **What is the language model access path for the Friday deployment, and is interim Circuit API use acceptable until the production path is in place?**
 3. **WebEx bot deployment infrastructure.** The bot backend is built. Going live requires meeting WebEx bot compliance criteria and completing IT audit and approval, which issues the bot name, ID, and access token. The current bot was flagged as non-compliant on April 27.
@@ -38,20 +51,6 @@ The items below are on the critical path for Friday's first deployment. Each nee
 5. **Skills repository destination.** Earlier guidance pointed to two destinations (the main CI/CD repository and the master skills repository).
    - Working approach is to keep skills on the CI/CD repository during development and promote to the master skills repository after testing and verification.
      - **Will skills stay on the CI/CD repository during development, with promotion to the master skills repository after testing and verification?**
-
----
-
-## Open items and access
-
-| Item | Status | Dependency or Unblock |
-|---|---|---|
-| NX repository lead-only access for the team | User identifiers posted last Friday. First sign-on to the NX GitHub server is the gating step before access can be granted. | Each BayOne team member completes first sign-on. |
-| CN-SJC-STANDALONE bundle membership (Temp ADS) | Submitted Friday April 24. In the standard provisioning window. | Cisco provisioning. |
-| Cisco-side CI/CD application deployment | Cisco platform team deployment in flight per Friday's discussion. BayOne plugs business logic in once it is live. BayOne is ready to stand up directly on Temp ADS as a fallback if needed. | Cisco platform team deployment. ADS environment available. |
-| MCP viewer playground | Coming soon per the Cisco team. Will be used for external MCP validation before integration. | Cisco platform team launch. |
-| Asynchronous unblocking via the engagement chat | Active. Either side may post blockers between meetings. | None. |
-
-The major access blockers (Permanent ADS availability, language model credentials path) are tracked in Critical path blockers and clarifications needed above.
 
 ---
 
@@ -114,3 +113,4 @@ Items resolved between the Friday April 24 sync and this update.
 - ~~Deployment form decided~~
 - ~~Friday May 1 deployment target defined~~
 - ~~Monday weekly cadence and format decided~~
+- ~~CN-SJC-STANDALONE bundle membership granted; Temp ADS connected and ready~~
