@@ -8,15 +8,18 @@ woven_by_toyota/data_triaging/
 │   ├── call_prep_situational_context_2026-04-23.html
 │   └── call_prep_technical_reference_2026-04-23.html
 ├── planning/
-│   └── archive_set_08_direct_writes_2026-04-24/
-│       ├── 07-08_changes_2026-04-24.md
-│       ├── 08_meeting_people_2026-04-23.md
-│       ├── 08_summary_2026-04-23.md
-│       ├── 08a_meeting_problem_statement_2026-04-23.md
-│       ├── 08b_meeting_the_ask_2026-04-23.md
-│       ├── 08c_meeting_bayone_positioning_2026-04-23.md
-│       ├── 08d_meeting_travis_technical_presentation_2026-04-23.md
-│       └── 08e_source_hireart_jd_analysis_2026-04-23.md
+│   ├── archive_set_08_direct_writes_2026-04-24/
+│   │   ├── 07-08_changes_2026-04-24.md
+│   │   ├── 08_meeting_people_2026-04-23.md
+│   │   ├── 08_summary_2026-04-23.md
+│   │   ├── 08a_meeting_problem_statement_2026-04-23.md
+│   │   ├── 08b_meeting_the_ask_2026-04-23.md
+│   │   ├── 08c_meeting_bayone_positioning_2026-04-23.md
+│   │   ├── 08d_meeting_travis_technical_presentation_2026-04-23.md
+│   │   └── 08e_source_hireart_jd_analysis_2026-04-23.md
+│   ├── meeting_notes_differentiation_and_tools_2026-04-24.html
+│   ├── sourcing_strategy_woven_2026-04-24.html
+│   └── team_briefing_woven_data_triaging_2026-04-24.html
 ├── presentations/
 ├── pricing/
 ├── progress/

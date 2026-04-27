@@ -6,6 +6,10 @@ woven_by_toyota/data_triaging/
 ├── deliverables/
 │   ├── call_prep_situational_context_2026-04-23.html
 │   └── call_prep_technical_reference_2026-04-23.html
+├── planning/
+│   ├── meeting_notes_differentiation_and_tools_2026-04-24.html
+│   ├── sourcing_strategy_woven_2026-04-24.html
+│   └── team_briefing_woven_data_triaging_2026-04-24.html
 └── source/
     └── week_2026-04-20/
         ├── day_2026-04-23/
