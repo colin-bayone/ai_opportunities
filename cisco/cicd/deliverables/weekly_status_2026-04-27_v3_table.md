@@ -21,17 +21,16 @@
 
 The items below are on the critical path for Friday's first deployment. Each needs clarification or unblocking from the Cisco side so the team can complete the work in the available window.
 
-1. **Permanent ADS availability.** Permanent ADS resources were noted as currently constrained on the Cisco side on April 24. Clarification requested: will Permanent ADS be available within the Friday window, or does the first deployment land on Temp ADS with Permanent ADS migration as a follow-on?
-2. **Language model access path.** Language model features require credentials. Circuit API was indicated as not the appropriate production path. DeepSight credentials are gated on the team operating from an ADS environment. Even with ADS and DeepSight in place, the language model access path is not yet confirmed. Clarification requested: what is the language model access path for the Friday deployment, and is interim Circuit API use acceptable until the production path is in place?
-3. **WebEx bot deployment infrastructure.** The bot backend is built. Deployment requires items that sit with Cisco: a service account or centralized deployment ID (deployment under an individual user account creates continuity risk if a team member rolls off), the bot name and bot ID, the access token, the WebEx bot compliance criteria, and the IT audit and approval. An email this morning indicated the current bot is flagged as non-compliant. Clarification requested: the compliance criteria, the audit and approval timeline, and the Cisco-side ID under which the deployed bot will run.
-4. **CAT MCP querying mechanism.** Chat issues arrive with PR IDs. The CAT MCP requires CAT IDs to query. A PR-to-CAT mapping is required for the dynamic answer path to function end to end. Clarification requested: does this mapping exist on the Cisco side, or is BayOne expected to construct it as part of the integration?
-5. **Skills repository destination.** Earlier guidance pointed to two destinations (the main CI/CD repository and the master skills repository). Working approach is to keep skills on the CI/CD repository during development and promote to the master skills repository after testing and verification. Confirmation requested.
-
----
-
-## New items added this week
-
-Regression protection framework. UI automation (Playwright-based) plus backend validation of the pipeline and business logic. Modular and adapter-based so the core is reusable across other Cisco applications. Framework derived from prior BayOne work, with an adapter layer built specifically for the CI/CD application.
+1. **Permanent ADS availability.** Permanent ADS resources were noted as currently constrained on the Cisco side on April 24.
+   - **Will Permanent ADS be available within the Friday window, or does the first deployment land on Temp ADS with Permanent ADS migration as a follow-on?**
+2. **Language model access path.** Language model features require credentials. Circuit API was indicated as not the appropriate production path. DeepSight credentials are gated on the team operating from an ADS environment. Even with ADS and DeepSight in place, the language model access path is not yet confirmed.
+   - **What is the language model access path for the Friday deployment, and is interim Circuit API use acceptable until the production path is in place?**
+3. **WebEx bot deployment infrastructure.** The bot backend is built. Deployment requires items that sit with Cisco: a service account or centralized deployment ID (deployment under an individual user account creates continuity risk if a team member rolls off), the bot name and bot ID, the access token, the WebEx bot compliance criteria, and the IT audit and approval. An email this morning indicated the current bot is flagged as non-compliant.
+   - **What are the compliance criteria, the audit and approval timeline, and the Cisco-side ID under which the deployed bot will run?**
+4. **CAT MCP querying mechanism.** Chat issues arrive with PR IDs. The CAT MCP requires CAT IDs to query. A PR-to-CAT mapping is required for the dynamic answer path to function end to end.
+   - **Does this mapping exist on the Cisco side, or is BayOne expected to construct it as part of the integration?**
+5. **Skills repository destination.** Earlier guidance pointed to two destinations (the main CI/CD repository and the master skills repository). Working approach is to keep skills on the CI/CD repository during development and promote to the master skills repository after testing and verification.
+   - **Will skills stay on the CI/CD repository during development, with promotion to the master skills repository after testing and verification?**
 
 ---
 
@@ -40,12 +39,12 @@ Regression protection framework. UI automation (Playwright-based) plus backend v
 | Item | Status | Dependency or Unblock |
 |---|---|---|
 | NX repository lead-only access for the team | User identifiers posted last Friday. First sign-on to the NX GitHub server is the gating step before access can be granted. | Each BayOne team member completes first sign-on. |
-| Permanent ADS provisioning | Initial request April 14; follow-up April 21. On April 24, Permanent ADS resources noted as currently constrained on the Cisco side. Resolution path being aligned. | Clarification of ownership and machine availability. Temp ADS is the interim path for the Friday window if Permanent ADS does not resolve. |
 | CN-SJC-STANDALONE bundle membership (Temp ADS) | Submitted Friday April 24. In the standard provisioning window. | Cisco provisioning. |
 | Cisco-side CI/CD application deployment | Cisco platform team deployment in flight per Friday's discussion. BayOne plugs business logic in once it is live. BayOne is ready to stand up directly on Temp ADS as a fallback if needed. | Cisco platform team deployment. ADS environment available. |
 | MCP viewer playground | Coming soon per the Cisco team. Will be used for external MCP validation before integration. | Cisco platform team launch. |
-| DeepSight credentials | Issuance gated on the team operating from an ADS environment. | ADS environment access (Permanent or Temp). |
 | Asynchronous unblocking via the engagement chat | Active. Either side may post blockers between meetings. | None. |
+
+The major access blockers (Permanent ADS availability, language model credentials path) are tracked in Critical path blockers and clarifications needed above.
 
 ---
 
@@ -55,12 +54,7 @@ This is the first deployment of the chat-based assistance in the CI/CD applicati
 
 This is a first pass, with incremental improvement to follow as the team uses it and as feedback from team usage and internal testing comes in.
 
-The deployment is gated by two Cisco-side dependencies:
-
-1. **ADS environment.** Deployment requires an ADS to run the application. If a Permanent ADS is not available in time, the first release will run on a Temp ADS as the interim path. ADS resource availability sits with the Cisco platform team.
-2. **Language model API credentials.** Language model features require a DeepSight-provided API key. If the DeepSight key is not yet issued, the first release will run on the existing Circuit API key as an interim path, with known limitations until the DeepSight key is available.
-
-Pre-deployment internal testing has been limited by these same access constraints. Validation will continue post-deployment as access is established and feedback comes in.
+Pre-deployment internal testing has been limited by access constraints (see Critical path blockers and clarifications needed above). Validation will continue post-deployment as access is established and feedback comes in.
 
 ---
 
