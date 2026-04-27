@@ -21,8 +21,10 @@
 
 The items below are on the critical path for Friday's first deployment. Each needs clarification or unblocking from the Cisco side so the team can complete the work in the available window.
 
-1. **Permanent ADS availability.** Permanent ADS resources were noted as currently constrained on the Cisco side on April 24.
-   - **Will Permanent ADS be available within the Friday window, or does the first deployment land on Temp ADS with Permanent ADS migration as a follow-on?**
+1. **Permanent ADS availability.** The team has been requesting Permanent ADS access since April 14, with follow-up on April 21. On April 24, Permanent ADS resources were noted as currently constrained on the Cisco side.
+   - **Who is responsible for Permanent ADS provisioning, and is that even possible given the current resource constraints?**
+   - **If no Permanent ADS servers are currently available on the Cisco side, how could one be provisioned for this engagement?**
+   - **Caveat on the Friday deliverable:** If a Permanent ADS is not available, the only possible path forward for Friday is to deploy on a Temporary ADS server.
 2. **Language model access path.** Language model features require credentials. Circuit API was indicated as not the appropriate production path. DeepSight credentials are gated on the team operating from an ADS environment. Even with ADS and DeepSight in place, the language model access path is not yet confirmed.
    - **What is the language model access path for the Friday deployment, and is interim Circuit API use acceptable until the production path is in place?**
 3. **WebEx bot deployment infrastructure.** The bot backend is built. Going live requires meeting WebEx bot compliance criteria and completing IT audit and approval, which issues the bot name, ID, and access token. The current bot was flagged as non-compliant on April 27.
