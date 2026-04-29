@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rollback Analysis Flow</title>
+  <style>
+    :root {
+      --bg: #f4efe6;
+      --panel: #fffaf2;
+      --ink: #1f2933;
+      --muted: #52606d;
+      --line: #c8b99a;
+      --accent: #b85c38;
+      --accent-2: #2f6f6f;
+      --accent-3: #d9a441;
+      --ok: #3f7d20;
+      --warn: #8a5a00;
+      --shadow: 0 18px 40px rgba(64, 41, 14, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at top left, rgba(184, 92, 56, 0.10), transparent 30%),
+        radial-gradient(circle at top right, rgba(47, 111, 111, 0.12), transparent 28%),
+        linear-gradient(180deg, #f7f2ea 0%, var(--bg) 100%);
+      color: var(--ink);
+    }
+
+    .page {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 36px 24px 56px;
+    }
+
+    .hero {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .subtitle {
+      max-width: 880px;
+      font-size: 1.03rem;
+      line-height: 1.6;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 10px 0 30px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 250, 242, 0.88);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 999px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 260px 1fr 260px;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .column {
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 250, 242, 0.98));
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .card h2,
+    .card h3 {
+      margin: 0 0 10px;
+      line-height: 1.2;
+    }
+
+    .card h2 {
+      font-size: 1.1rem;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(184, 92, 56, 0.12);
+      color: var(--accent);
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    li + li {
+      margin-top: 6px;
+    }
+
+    .flow {
+      display: grid;
+      gap: 14px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .step:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      left: 26px;
+      bottom: -15px;
+      width: 2px;
+      height: 16px;
+      background: var(--line);
+    }
+
+    .num {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      background: var(--ink);
+      color: #fff;
+      font-size: 1rem;
+      margin-top: 2px;
+    }
+
+    .step h3 {
+      margin: 0 0 6px;
+      font-size: 1.02rem;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.96rem;
+    }
+
+    .step .mini {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill {
+      font-size: 0.82rem;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: rgba(47, 111, 111, 0.10);
+      color: var(--accent-2);
+      border: 1px solid rgba(47, 111, 111, 0.18);
+    }
+
+    .decision {
+      border-left: 6px solid var(--accent-3);
+    }
+
+    .output {
+      border-left: 6px solid var(--ok);
+    }
+
+    .warn {
+      border-left: 6px solid var(--warn);
+    }
+
+    .side-note {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .summary {
+      margin-top: 26px;
+      padding: 20px 22px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(184, 92, 56, 0.09), rgba(47, 111, 111, 0.10));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .summary strong {
+      color: var(--ink);
+    }
+
+    @media (max-width: 1100px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="eyebrow">Incident Analysis and Rollback</div>
+      <h1>Inputs, Mapping, Failure Detection, Dependency Check, Rollback</h1>
+      <p class="subtitle">
+        This flow shows how to move from PR commit data and build metadata to a safe rollback boundary.
+        The key idea is that the failing commit is only the starting point; the real rollback target may be
+        a connected set of PRs that depend on one another.
+      </p>
+    </section>
+
+    <section class="legend" aria-label="Legend">
+      <div class="chip"><span class="dot" style="background:#b85c38;"></span>Input sources</div>
+      <div class="chip"><span class="dot" style="background:#2f6f6f;"></span>Analysis and mapping</div>
+      <div class="chip"><span class="dot" style="background:#d9a441;"></span>Decision point</div>
+      <div class="chip"><span class="dot" style="background:#3f7d20;"></span>Rollback output</div>
+    </section>
+
+    <section class="grid">
+      <div class="column">
+        <article class="card">
+          <div class="tag">Input</div>
+          <h2>`diff`</h2>
+          <ul>
+            <li>PR number and branch details</li>
+            <li>Commit list per PR</li>
+            <li>Commit SHA, message, parents</li>
+            <li>Merge strategy clues</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="tag">Input</div>
+          <h2>`fullbuild`</h2>
+          <ul>
+            <li>Build id and build status</li>
+            <li>Branch being built</li>
+            <li>Commit range in the build</li>
+            <li>PRs included in the build</li>
+            <li>Last known good build reference</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="tag">Input</div>
+          <h2>Build Logs</h2>
+          <ul>
+            <li>Error signature</li>
+            <li>Failing stage or job</li>
+            <li>File, test, or module involved</li>
+            <li>Sometimes an explicit SHA or PR mention</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="column">
+        <div class="flow">
+          <article class="step">
+            <div class="num">1</div>
+            <div>
+              <h3>Read PR commits from `diff`</h3>
+              <p>
+                Gather all reviewed commits for each PR and preserve branch, merge, and parent metadata.
+                This answers: which commits were part of review history?
+              </p>
+              <div class="mini">
+                <span class="pill">PR -&gt; commits</span>
+                <span class="pill">reviewed history</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="num">2</div>
+            <div>
+              <h3>Read build data from `fullbuild`</h3>
+              <p>
+                Capture which commits and PRs actually entered a specific CI build. This gives the build
+                change set, not just the reviewed change set.
+              </p>
+              <div class="mini">
+                <span class="pill">build -&gt; commits</span>
+                <span class="pill">build -&gt; PRs</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="num">3</div>
+            <div>
+              <h3>Normalize into one model</h3>
+              <p>
+                Convert all sources into shared structures such as `commit -&gt; PR`, `PR -&gt; integrated commit`,
+                and `build -&gt; change set`.
+              </p>
+              <div class="mini">
+                <span class="pill">common schema</span>
+                <span class="pill">traceability</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="num">4</div>
+            <div>
+              <h3>Map PRs to integrated commits</h3>
+              <p>
+                Classify commit relationships as source, merge, squash, rebased, or promotion commits.
+                This is the core link between review history and repository history.
+              </p>
+              <div class="mini">
+                <span class="pill">merge commit</span>
+                <span class="pill">squash commit</span>
+                <span class="pill">rebased equivalent</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="num">5</div>
+            <div>
+              <h3>Parse failed build logs</h3>
+              <p>
+                Identify the first reliable failure signal: a bad SHA, a broken file, a failing stage, or
+                the first bad build range between last good and first bad builds.
+              </p>
+              <div class="mini">
+                <span class="pill">failure signal</span>
+                <span class="pill">candidate bad commit</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="num">6</div>
+            <div>
+              <h3>Map failing commit back to root PR</h3>
+              <p>
+                Use the normalized mapping to find which PR owns the failing integrated commit.
+                This becomes the root PR for rollback analysis.
+              </p>
+              <div class="mini">
+                <span class="pill">failing commit -&gt; PR</span>
+                <span class="pill">root PR</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="num">7</div>
+            <div>
+              <h3>Build the dependency graph</h3>
+              <p>
+                Inspect later PRs and commits for semantic dependencies such as shared files, changed
+                interfaces, config contracts, promoted changes, or downstream consumers.
+              </p>
+              <div class="mini">
+                <span class="pill">hard dependency</span>
+                <span class="pill">soft dependency</span>
+                <span class="pill">promotion flow</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="step decision">
+            <div class="num">8</div>
+            <div>
+              <h3>Choose rollback boundary</h3>
+              <p>
+                Decide whether to revert only the root PR, a connected PR cluster, or the entire range back
+                to the last known good build if the branch is too coupled or noisy.
+              </p>
+              <div class="mini">
+                <span class="pill">single PR</span>
+                <span class="pill">PR cluster</span>
+                <span class="pill">last good build boundary</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="step output">
+            <div class="num">9</div>
+            <div>
+              <h3>Create rollback recommendation</h3>
+              <p>
+                Produce a report with failed build, failing commit, root PR, dependent PRs, confidence,
+                recommended revert set, and rationale.
+              </p>
+              <div class="mini">
+                <span class="pill">rollback candidate set</span>
+                <span class="pill">explainable output</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="step output">
+            <div class="num">10</div>
+            <div>
+              <h3>Execute rollback and validate</h3>
+              <p>
+                Revert through a new rollback PR, rerun CI, verify the failed stage, and confirm no remaining
+                dependent change is left in a broken state.
+              </p>
+              <div class="mini">
+                <span class="pill">revert PR</span>
+                <span class="pill">CI validation</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="column">
+        <article class="card warn">
+          <div class="tag">Decision Rule</div>
+          <h2>Do not rollback only by timestamp</h2>
+          <p class="side-note">
+            Time proximity is weak evidence. Prefer semantic dependency: shared code paths, schema changes,
+            pipeline contract changes, feature enablement, or promotion from one branch to another.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="tag">Key Output</div>
+          <h2>Rollback Candidate Set</h2>
+          <ul>
+            <li>failed build id</li>
+            <li>first bad build range</li>
+            <li>root failing commit</li>
+            <li>mapped PR</li>
+            <li>dependent PRs</li>
+            <li>recommended rollback boundary</li>
+          </ul>
+        </article>
+
+        <article class="card output">
+          <div class="tag">Outcome</div>
+          <h2>Safe Rollback Goal</h2>
+          <p class="side-note">
+            The objective is the smallest safe revert set that restores a coherent branch state, not the
+            smallest possible number of commits.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="summary">
+      <strong>Core idea:</strong> PR commits tell you review history, `fullbuild` tells you what entered the
+      failing build, logs tell you what broke, mapping ties the failure to a root PR, and dependency analysis
+      tells you whether you can revert one PR or must roll back a larger connected change set.
+    </section>
+  </main>
+</body>
+</html>

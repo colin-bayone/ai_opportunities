@@ -1,0 +1,33 @@
+Issue 14 Srikar
+http://sjc-ads-20375:9000/db/chatbot_ai/github_pr_status?key=pr_number&value=88861&type=N
+
+This link has been shared by Justin for the MongoDbSource. It provides access to the status of PR with all Checks (42).
+
+Based on the information we require, they will be able to create an MCP server and make it available for our use.
+
+
+Issue 15 srikar
+colmoore assigned srmadara 2 days ago
+
+srmadara commented 18 hours ago
+For static responses, I created a new wiki-issue-responder skill and added it to the skill set.
+I added wiki-issue-responder with SKILL.md, auth notes, and three CLI scripts:
+•	sync_wiki.py to clone or refresh nx.wiki.git
+•	build_wiki_index.py to chunk wiki markdown and build a local SQLite FTS5 index
+•	query_wiki.py to query the indexed wiki content locally
+I also updated issue-response-router to support static documentation routing:
+•	updated SKILL.md to include wiki/static documentation signals
+•	updated route_message.py to add a wiki-issue-responder route
+•	added regex-based detection for PR/CAT/job identifiers
+•	added has_dynamic_identifiers() to separate static vs dynamic requests
+•	added routing logic to prefer the wiki responder for documentation/process/how-to questions
+•	added message_type and route_reason metadata in router output
+This now gives us a shared static documentation path through the wiki, while dynamic/live issues still route to the appropriate domain responder.
+
+Author
+colmoore commented 2 hours ago
+This is good progress, @srmadara! However, remember that we have an analysis deliverable for this issue, not a skill. The analysis deliverable is due today as specified above. The skills are definitely useful, but they don’t negate the specific deliverables listed in the issue. Please connect with me on this one ASAP.
+
+Author
+colmoore commented 2 hours ago
+That analysis is a chart, just like we did the HTML for Apache ECharts.
