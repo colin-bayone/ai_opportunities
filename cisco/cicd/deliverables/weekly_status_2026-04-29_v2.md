@@ -24,7 +24,7 @@
 |---|---|---|---|
 | **Friday May 1 integrated delivery: CI/CD application chat plus WebEx bot on the NX-OS pipeline** | | | |
 | | Backend (Service Application Platform style, two pluggable frontends) | Architecture in flight. Backend feeds both the chat in the CI/CD application and the WebEx bot from one shared source. | None blocking. |
-| | Static FAQ wiring | NX-OS wiki as source of truth. Wiki content extraction and bot wiring this week. | NX-OS wiki link from Divakar. |
+| | Static FAQ wiring | NX-OS wiki link received. Scraping and categorization are ongoing; wiki entries will expand the static-item set in the analysis. | None blocking. |
 | | CAT MCP integration (dynamic answer path) | Cache request data path identified Monday; mapping table not required. Justin's MongoDB endpoint also available as a parallel data source. Wiring this week. | ADS user-group access for live execution. |
 | | WebEx bot deployment on NX-OS CI pipeline | Bot backend built and validated locally. Deployment under `DSA Atlas` / `DSR Class` generic user ID confirmed Monday. | WebEx bot compliance criteria from Cisco IT. |
 | **Static-vs-dynamic intersection analysis (Srinivas request from Monday)** | | | |
@@ -44,8 +44,6 @@
 |---|---|---|---|
 | **ADS host access for the team** | | | |
 | | Machines provisioned and reachable | Hosts are gated by REALM user-group membership in `oneaccess.cisco.com` (`CN-ACI-HOSTBUNDLE-GROUP-ACCESS`) or `myid-groups.cisco.com` (`DEVXADS-GROUP`, `NGDEVX-DEV`, `WIT-REALM-GROUP`). Realm Request Access submitted Tuesday. | User-group owner names and approvals. |
-| **NX-OS wiki link for static FAQ extraction** | | | |
-| | Pending share in the engagement chat | Awaiting | Divakar to share the link. |
 | **WebEx bot compliance criteria** | | | |
 | | Non-compliance flag from Cisco IT did not include the criteria | Resubmission under `DSA Atlas` is ready when the criteria arrive | Cisco IT to share compliance criteria. |
 | **Asynchronous unblocking via the engagement chat** | | | |
@@ -59,15 +57,10 @@ The major access blockers (ADS user-group access, wiki link, bot compliance crit
 
 The items below are on the critical path for Friday's first deployment. Each needs clarification or unblocking from the Cisco side so the team can complete the work in the available window.
 
-1. **ADS user-group access ownership.** The team has been blocked from logging into the provisioned hosts since Tuesday morning despite submitting Realm requests.
-   - **Who owns the user groups `CN-ACI-HOSTBUNDLE-GROUP-ACCESS`, `DEVXADS-GROUP`, `NGDEVX-DEV`, and `WIT-REALM-GROUP`?**
-   - **Can those memberships be approved today so the team can use the ADS provisioned Monday?**
-2. **NX-OS wiki link.** The static FAQ wiring is the source-of-truth pivot from chat scraping to wiki scraping. The work is queued; the link unblocks it.
-   - **Can Divakar share the wiki link in the engagement chat?**
-3. **WebEx bot compliance criteria.** Resubmission under `DSA Atlas` is ready; the criteria are not.
-   - **Can Cisco IT share the compliance criteria so the rebuild can meet them on resubmission?**
-4. **PR Apollo and Builder Triaging scope alignment.** Justin's existing MongoDB and the Builder Triaging tool overlap with parts of BayOne's planned work.
-   - **Confirm BayOne builds the dynamic answer path on top of Justin's MongoDB plus the CAT MCP, rather than constructing a parallel system.**
+1. **ADS host access for the team.** Unresolvable as requests are not being delivered to the team when requests are being submitted on the Realm Portal.
+2. **NX-OS wiki link.** The wiki will be used going forward to expand the number of static items to be classified in the analysis. Scraping and categorization are ongoing.
+3. **WebEx bot compliance criteria.** The compliance policy is documented at https://cisco.service-now.com/policyhub?id=policy_kb_view&sysparm_article=KB0072087. Locating it required a separate request to IT and a follow-up meeting. The team is working to make the bot documentation compliant. The spec itself is contradictory and vague in places.
+4. **PR Apollo and Builder Triaging scope alignment.** Pending separate review.
 
 ---
 
@@ -91,11 +84,13 @@ The following skills are currently committed on the `skills/webex` branch of the
 
 ## Friday May 1 deployment target
 
+**Not possible due to ADS still being inaccessible as of 4/29/2026.**
+
 This is the first deployment of the chat-based assistance in the CI/CD application, with a paired WebEx bot on the NX-OS CI pipeline. The initial release is a static and dynamic FAQ. Static entries come from the NX-OS wiki via scrape and indexing. Dynamic answers come through the CAT MCP cache request data or Justin's MongoDB at request time. Both surfaces share the same backend so users can ask the same questions from either the chat in the application or the WebEx bot.
 
 This is a first pass, with incremental improvement to follow as the team uses it and as feedback from team usage and internal testing comes in.
 
-Pre-deployment internal testing is gated on ADS user-group access landing this week.
+Pre-deployment internal testing is gated on ADS access landing.
 
 ---
 
