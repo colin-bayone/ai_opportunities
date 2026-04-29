@@ -13,7 +13,8 @@
 - **WebEx bot deployment identity resolved.** Bot will deploy under the existing `DSA Atlas` / `DSR Class` generic user ID. Anupma to fill the form on BayOne's behalf using BayOne's prior submission as the template.
 - **Static FAQ source path agreed.** Bot will scrape the existing NX-OS wiki for static answers, with a chat-to-wiki feedback loop proposed and accepted for surfacing chat-resolved fixes back into the wiki.
 - **Justin's GitHub-event MongoDB endpoint shared.** A working endpoint that returns PR status with all checks. Concrete data source for the dynamic answer path; either complementary to or substitutable for direct CAT MCP queries.
-- **PR-to-commit mapping documentation, implementation, and rollback flow diagram delivered.** Generic documentation, working `pr_to_commit_mapping.py` against CI build logs and CD diffs with high-confidence mappings and evidence trails per commit, plus a 10-step rollback analysis flow diagram covering the release-lead PR backout use case.
+- **PR-to-commit mapping documentation, implementation, and rollback flow diagram delivered.** Generic documentation, working `pr_to_commit_mapping.py` against CI build logs and CD diffs, with five mapped PRs and one unmapped commit captured at evidence-trail level in the sample output. The 10-step rollback analysis flow diagram covers the release-lead PR backout use case.
+- **Static-vs-dynamic dashboard built on the existing `nxos-issue-categorizer`.** Three-month, six-month, and twelve-month filters on top-level. Drill-down on each item reveals whether each unanswered question is static or dynamic and why, with click-through links to the source chat thread.
 - **Nine skills committed on `skills/webex`** including the new `wiki-issue-responder` and updated `issue-response-router` (now supports static-vs-dynamic routing with regex-based PR/CAT/job identifier detection).
 
 ---
@@ -27,14 +28,17 @@
 | | Static FAQ wiring | NX-OS wiki link received. Scraping and categorization are ongoing; wiki entries will expand the static-item set in the analysis. | None blocking. |
 | | CAT MCP integration (dynamic answer path) | Cache request data path identified Monday; mapping table not required. Justin's MongoDB endpoint also available as a parallel data source. Wiring this week. | ADS user-group access for live execution. |
 | | WebEx bot deployment on NX-OS CI pipeline | Bot backend built and validated locally. Deployment under `DSA Atlas` / `DSR Class` generic user ID confirmed Monday. | WebEx bot compliance criteria from Cisco IT. |
-| **Static-vs-dynamic intersection analysis (Srinivas request from Monday)** | | | |
-| | Six-month classification of unanswered NX-OS chat questions on the existing `nxos-issue-categorizer` dashboard, with a six-month toggle | In flight, landing today. | None blocking. |
+| **Static-vs-dynamic analysis follow-on work** | | | |
+| | Answered-set chart counterpart to the unanswered chart | Stacked bar or second graph; natural counterpart to what was shown today. | None blocking. |
+| | Static-vs-dynamic classification methodology document | Standalone markdown explaining the classification rules and decision criteria, committed alongside the dashboard. | None blocking. |
 | **Skills on the main CI/CD repository** | | | |
 | | Nine skills committed on `skills/webex` (see Skills currently committed below) | Documentation and `ds agent init` pattern validation this week. | None blocking. |
 | **Build dependency graph and PR-to-commit mapping (Namita's track)** | | | |
 | | Generic PR-to-commit mapping documentation | Committed at `build-issue-responder/PR_to_commit_mapping_generic/`. | None blocking. |
 | | `pr_to_commit_mapping.py` working implementation | Reads CI build logs and CD diffs; produces structured JSON with high-confidence mappings and per-commit evidence trails. | None blocking. |
 | | Rollback flow diagram | 10-step incident-analysis-to-rollback flow capturing the release-lead PR backout use case. | None blocking. |
+| | PR-to-PR dependency mapping | Chronological mapping by date of last edit and merge; the recursion step that completes the diagram (single commit touches one PR; PR has upstream PRs). | None blocking. |
+| | Visual labeling on the rollback flow diagram | Deterministic boxes versus AI-driven boxes called out explicitly so the architecture reads at a glance. | None blocking. |
 
 ---
 
@@ -44,12 +48,17 @@
 |---|---|---|---|
 | **ADS host access for the team** | | | |
 | | Machines provisioned and reachable | Hosts are gated by REALM user-group membership in `oneaccess.cisco.com` (`CN-ACI-HOSTBUNDLE-GROUP-ACCESS`) or `myid-groups.cisco.com` (`DEVXADS-GROUP`, `NGDEVX-DEV`, `WIT-REALM-GROUP`). Realm Request Access submitted Tuesday. | User-group owner names and approvals. |
+| | Bundle access versus credentials conflation | Different team members are seeing different password prompts (AD password versus Unix password). Not yet clear whether the actual blocker is bundle approval or credential provisioning. | Cisco IT clarification. |
+| | IT support tickets in flight | We are following up with IT and have tickets in. | IT response. |
+| | SSH terminal walkthrough | If there is more process to follow for SSH access to the provisioned hosts, we would need documentation or a walkthrough. | Cisco-side procedure documentation. |
+| **NX-OS wiki currency and drift** | | | |
+| | Wiki contents need a validation process before integration | Process to validate wiki contents as the source of truth needs to be defined before integration, since most wiki entries are over a year old. | Validation process definition. |
 | **WebEx bot compliance criteria** | | | |
 | | Non-compliance flag from Cisco IT did not include the criteria | Resubmission under `DSA Atlas` is ready when the criteria arrive | Cisco IT to share compliance criteria. |
 | **Asynchronous unblocking via the engagement chat** | | | |
 | | Active. Either side may post blockers between meetings. | Active | None. |
 
-The major access blockers (ADS user-group access, wiki link, bot compliance criteria) are tracked in Critical path blockers and clarifications needed below.
+The major access blockers (ADS user-group access, bot compliance criteria) are tracked in Critical path blockers and clarifications needed below.
 
 ---
 
@@ -129,3 +138,4 @@ Items resolved between the Monday April 27 sync and this update.
 - ~~Justin's GitHub-event MongoDB endpoint shared~~
 - ~~PR-to-commit mapping documentation, implementation, and rollback flow diagram landed on `skills/webex`~~
 - ~~`wiki-issue-responder` skill added; `issue-response-router` extended with static-vs-dynamic routing~~
+- ~~Static-vs-dynamic dashboard built on `nxos-issue-categorizer` with three-month, six-month, and twelve-month filters and per-item drill-down~~
